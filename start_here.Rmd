@@ -14,8 +14,6 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 
 R is software which makes it easy to work and learn from with data. It also happens to be a complete programmming language, but if you're reading this book, that might not be of interest to you. That's OK — the goal here is *not* to teach you how to program in R^[This is a lie, but I'm hoping you won't notice until it's too late.] (there are plenty of other books for that).  The goal is to teach you *just enough R* to be confident to explore your data.
 
-![](media/arcane_bullshit_2x.png)
-
 We are going to use R the same way we use any other statistics software: To check and visualise your data, run statistical analyses, and share the results with colleagues.  To do that it's worth learning the *absolute basics* of the R language; this chapter walks you through the basics: what you need to know, and no more, to be productive in R and RStudio. By analogy: this will be no more complicated than learning enough French to introduce yourself, count from one to ten, and ask for a croissant.
 
 
