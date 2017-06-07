@@ -65,7 +65,7 @@ Once you have watched the video:
 
 You can type R commands directly into the console and see the result there too, but you should make a habit of working in an RMarkdown file. This keeps a record of everything you try, and makes it easy to edit/amend commands which don't work as you expect.
 
-Now would be a good time to open and RMarkdown document to see how it works. A good place to start would be to open the source to this document. The best way to do this is to download the source code for this project, and then open the file `first_steps.Rmd`. The source is available here: <https://github.com/benwhalley/just-enough-r/archive/master.zip> ^[If you wanted, you could view and download the source for just this document here: <https://github.com/benwhalley/just-enough-r/blob/master/first_steps.Rmd> but it will save time to download the whole project now.]
+Now would be a good time to open and RMarkdown document to see how it works. A good place to start would be to open the source to this document. The best way to do this is to download the source code for this project, and then open the file `first_steps.Rmd`. The source is available here: <https://github.com/benwhalley/just-enough-r/archive/master.zip> ^[If you wanted, you could view and download the source for just this document here: <https://github.com/benwhalley/just-enough-r/blob/master/start_here.Rmd> but it will save time to download the whole project now.]
 
 
 To run code in the RStudio interface put your cursor on a line within an R Block (or select the code you want to run), and press `Ctrl-Enter`. The result will appear below the code block.
