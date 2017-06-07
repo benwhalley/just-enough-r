@@ -11,9 +11,12 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 
 # Introduction
 
-R is software which makes it easy to work and learn from with data. It also happens to be a complete programmming language, but if you're reading this book, that might not be of interest to you. That's OK — the goal here is *not* to teach you how to program in R^[This is a lie, but hopefully you won't notice until it's too late.] (there are plenty of other books for that).  The goal is to teach you *just enough R* to be confident to explore your data.
 
-We are going to use R in the same way one would use any other statistics software: To check and visualise your data, run statistical analyses, and share the results with colleagues.  To do that it's worth learning the *absolute basics* of the R language; this chapter walks you through the basics: what you need to know, and no more, to be productive in R and RStudio. 
+R is software which makes it easy to work and learn from with data. It also happens to be a complete programmming language, but if you're reading this book, that might not be of interest to you. That's OK — the goal here is *not* to teach you how to program in R^[This is a lie, but I'm hoping you won't notice until it's too late.] (there are plenty of other books for that).  The goal is to teach you *just enough R* to be confident to explore your data.
+
+![](media/arcane_bullshit_2x.png)
+
+We are going to use R the same way we use any other statistics software: To check and visualise your data, run statistical analyses, and share the results with colleagues.  To do that it's worth learning the *absolute basics* of the R language; this chapter walks you through the basics: what you need to know, and no more, to be productive in R and RStudio. By analogy: this will be no more complicated than learning enough French to introduce yourself, count from one to ten, and ask for a croissant.
 
 
 ## Using RMarkdown to record and share work
@@ -37,7 +40,7 @@ To include R code within a document we write 3 backticks (`` ``` ``), followed b
     ```{r, echo=T}
      2 + 2
      ```
-
+     
 When a document including this chunk is run or 'knitted', the final result will include the the line `2+2` followed by the number `4` on the next line. This means we can use R-markdown to 'show our workings': our analysis can be interleaved with narrative text to explain or interpret the calculations.
 
 You can see how this works in practice in the next section.
@@ -76,11 +79,23 @@ The command in the R block below prints (shows) the first few rows of the `mtcar
 head(mtcars)
 ```
 
-If you are using RStudio, running the command above will have included an interactive table in the document which you can use this to view the `mtcars` dataset.
+If you are now reading this in RStudio, running the command above will have included an interactive table in the document which you can use this to view the `mtcars` dataset. If you are still reading the compiled html or pdf document you will see a table containing the same data, included in the body of the document.
 
-## Giving labels to things: *variable assignment*
+Hopefully at this point it's obvious that RStudio and RMarkdown give you:
 
-Using the `<-` symbol, we can assign labels to particular values. In other words, we create a *variable* and assign a value to it. For example:
+- A nice place to work with R and explore your data
+- A nice format to share your workings (e.g. with other researchers or your tutor)
+- A mechanism to save reports of your analysis, to share with other people who don't use RStudio
+
+
+
+# Naming things: *variable assignment*
+
+![](media/telescope_names_2x.png)
+
+One of the nice things about R is that we can assign labels to parts of our analysis to keep track of them. Using good, descriptive names is good practice and makes your code easier to read (e.g. when you or others need to revisit in future).
+
+To assign labels to particular values we use the `<-` symbol. That is, we have a *value* and use the `<-` symbol to point to the *variable* we want to assign it to. For example:
 
 ```{r}
 meaning.of.life <- 42
@@ -93,12 +108,12 @@ meaning.of.life <- 42
 meaning.of.life
 ```
 
-Helpfully, we can also do arithmetic as we assign to variables:
+Helpfully, we can also do simple calculations as we assign variables:
 
 ```{r}
 one.score <- 20
 four.score.years.and.ten <- one.score * 4 + 10
-four.score.years.and.ten
+print(four.score.years.and.ten)
 ```
 
 As you will see below, we can give anything a label by assigning it to a variable. It doesn't have to be simple numbers: we can also assign words, graphics and plots, the results of a statistical model, or lists of any of these things. More on this below.
