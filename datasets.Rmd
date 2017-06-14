@@ -1,0 +1,40 @@
+---
+title: 'Working with data'
+output: 
+  bookdown::tufte_html2
+---
+  
+```{r setup, include=FALSE}
+# ignore all this for the moment; it will be explained below
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+```
+
+
+So far we've created vectors (which contain only one type of thing), and lists (which can contain a mix of things). 
+
+In R, a `data.frame` is a special sort of list: it is a list of *vectors that are all the same length*. 
+
+If you think about it, this makes a `data.frame` much like a spreadsheet. Each vector is like a column. And if we select elements from the same position in each column (e.g. the 1st element in each column) then we have a row. 
+
+Typically, we assign each column in a dataframe a name, but we access each row by position.
+
+We can make a dataframe using the `data.frame()` function which is built into R. However, the `dplyr` library contains helper functions which make many common tasks more convenient[^1], so in the example below we load `dplyr` and then use it's `data_frame()` function (notice the `_` rather than `.` in the function name):
+  
+  
+[^1]: 
+In this example, we create a variable called `score` and then create a second variable called `position` which is the rank of `score`. Using old-style `data.frame` rather than `data_frame` this would have to be done in two steps rather than one. This might not seem like a bit deal, but keeping code as clean and as simple as posible helps prevent errors (which we all make) and makes it easier to revisit our analyses weeks or months after we write them.
+
+```{r, message=F}
+library(dplyr)
+
+data_frame(
+  person = 1:10,
+  group = rep(c("A", "B"), 5),
+  score = runif(10),
+  position = rank(score)
+)
+```
+
+
+In this section we do lots more work with dataframes...
+

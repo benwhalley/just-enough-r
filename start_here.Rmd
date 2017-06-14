@@ -1,21 +1,23 @@
 ---
-title: "'Just enough' R"
-output: tufte::tufte_html
+title: '''Just enough'' R'
+output: 
+  bookdown::tufte_html2
 ---
   
 ```{r setup, include=FALSE}
-# ignore all this for the moment; it will be explained below
+# ignore all this for the moment
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 ```
-
-
-# Introduction
 
 
 R is software which makes it easy to work and learn from with data. It also happens to be a complete programmming language, but if you're reading this book, that might not be of interest to you. That's OK — the goal here is *not* to teach you how to program in R^[This is a lie, but I'm hoping you won't notice until it's too late.] (there are plenty of other books for that).  The goal is to teach you *just enough R* to be confident to explore your data.
 
 We are going to use R the same way we use any other statistics software: To check and visualise your data, run statistical analyses, and share the results with colleagues.  To do that it's worth learning the *absolute basics* of the R language; this chapter walks you through the basics: what you need to know, and no more, to be productive in R and RStudio. By analogy: this will be no more complicated than learning enough French to introduce yourself, count from one to ten, and ask for a croissant.
 
+
+
+
+# The right environment
 
 ## Using RMarkdown to record and share work
 
@@ -35,7 +37,7 @@ R-Markdown is easily converted to other formats like HTML, Word, or PDF to share
 
 To include R code within a document we write 3 backticks (`` ``` ``), followed by `{r}`. We the include our R code, and close the block with 3 more backticks.
 
-    ```{r, echo=T}
+    ```{r, echo=T, eval=F}
      2 + 2
      ```
      
@@ -46,7 +48,7 @@ You can see how this works in practice in the next section.
 
 ## RStudio
 
-RStudio is a text editor which has been customised to make working with R easy. It can be installed on your own computer, or you can login to a shared RStudio server[^e.g. one run by your school] from a web browser. Either way the interface is largely the same.  
+RStudio is a text editor which has been customised to make working with R easy. It can be installed on your own computer, or you can login to a shared RStudio server^[e.g. one run by your university.] from a web browser. Either way the interface is largely the same.  
 
 You can see a short video demonstrating the RStudio interface here: XXX. The video:
 
@@ -65,18 +67,22 @@ Once you have watched the video:
 
 You can type R commands directly into the console and see the result there too, but you should make a habit of working in an RMarkdown file. This keeps a record of everything you try, and makes it easy to edit/amend commands which don't work as you expect.
 
-Now would be a good time to open and RMarkdown document to see how it works. A good place to start would be to open the source to this document. The best way to do this is to download the source code for this project, and then open the file `start_here.Rmd`. The source is available here: <https://github.com/benwhalley/just-enough-r/archive/master.zip> ^[If you wanted, you could view and download the source for just this document here: <https://github.com/benwhalley/just-enough-r/blob/master/start_here.Rmd> but it will save time to download the whole project now.]
+Now would be a good time to open and RMarkdown document to see how it works. A good place to start would be to open the source to this document. The best way to do this is to download the source code for *this* project, and then open the file `start_here.Rmd`.
+
+The source is available here: <https://github.com/benwhalley/just-enough-r/archive/master.zip> ^[If you wanted, you could view and download the source for just this document here: <https://github.com/benwhalley/just-enough-r/blob/master/start_here.Rmd> but it will save time to download the whole project now.]
 
 To run code in the RStudio interface put your cursor on a line within an R Block (or select the code you want to run), and press `Ctrl-Enter`. The result will appear below the code block.
 
-The command in the R block below prints (shows) the first few rows of the `mtcars` dataset, which is built in to R as an example. Place your cursor somewhere in the line the command is on and run it by typing `Ctrl-Enter`:
+The command in the R block below prints (shows on screen) the first few rows of the `mtcars` dataset, which is built in to R as an example. 
+
+Place your cursor somewhere in the line the command is on and run it by typing `Ctrl-Enter`:
 
 
 ```{r}
 head(mtcars)
 ```
 
-If you are now reading this in RStudio, running the command above will have included an interactive table in the document which you can use this to view the `mtcars` dataset. If you are still reading the compiled html or pdf document you will see a table containing the same data, included in the body of the document.
+If you are reading this from within RStudio, running `head(mtcars)` will have included an interactive table in the document, which you can use this to view the `mtcars` dataset. If you are still reading the compiled html or pdf document you will see a table containing the same data, included within the body of the document.
 
 Hopefully at this point it's obvious that RStudio and RMarkdown give you:
 
@@ -103,6 +109,15 @@ meaning.of.life <- 42
 meaning.of.life
 ```
 
+
+Or if we want to be explicit^[R often makes sensible assumptions about what we want. Here the default assumption is that if we type the *name* of a variable we want to see the *value* associated with it.]:
+
+```{r}
+print(meaning.of.life)
+```
+
+
+
 Helpfully, we can also do simple calculations as we assign variables:
 
 ```{r}
@@ -111,7 +126,7 @@ four.score.years.and.ten <- one.score * 4 + 10
 print(four.score.years.and.ten)
 ```
 
-As you will see below, we can give anything a label by assigning it to a variable. It doesn't have to be simple numbers: we can also assign words, graphics and plots, the results of a statistical model, or lists of any of these things. More on this below.
+As you will see below, we can give anything a label by assigning it to a variable. It doesn't have to be simple numbers: we can also assign words, graphics and plots, the results of a statistical model, or *lists* of any of these things.
 
 
 # Vectors and lists
@@ -121,17 +136,20 @@ When working with data, we often have lists of 'things': for example a list of m
 - When all the things are of the *same* 'type', then in R this is called a *vector*.
 - When the list contains a mix of *different* things, then R calls it a *list*
 
+In general we should avoid mixing up different types of 'thing', and so use vectors wherever possible.
 
-## Vectors
+
+
+# Vectors
 
 We can create a vector of numbers and display it like this:
 
 ```{r}
-# this is a vector of heights, in cm
-heights <- c(203, 148, 156, 158, 167, 162, 172, 164, 172, 187, 134, 182, 175)
-heights
+# this creates a vector of heights, in cm
+heights <- c(203, 148, 156, 158, 167, 
+             162, 172, 164, 172, 187, 
+             134, 182, 175)
 ```
-
 
 The `c()` command is shorthand for *combine*, so the example above *combines* the individual elements (numbers) into a new *vector*^[Note, you can include comments within your R code, to help others understand what your code does. Comments start with a `#` symbol and are not processed by R when the code runs].
 
@@ -139,20 +157,24 @@ We could create a vector of alphanumeric names instead:
 
 ```{r}
 names <- c("Ben", "Joe", "Sue", "Rosa")
-names
 ```
+
+We can check the values stored in these variables by printing them, e.g.:
+
+```{r}
+heights 
+```
+
 
 - Try creating your own vector of numbers in the code block below using the `c(...)` command.
 - Then change the name of the variable you assign it to.
 
-```{r, eval=F}
-my.new.vector <- ...
-```
 
 
-#### Accessing single elements within vectors
 
-Once we have created a vector, we sometimes want to access the individual elements from it again. We do this based on their *position* in the list. 
+## Accessing elements within vectors
+
+Once we have created a vector, we sometimes want to access the individual elements from it again. We do this based on their *position*. 
 
 Let's say we have created a vector:
   
@@ -160,13 +182,7 @@ Let's say we have created a vector:
 my.vector <- c(10, 20, 30, 40)
 ```
 
-We can display the whole vector by just typing it's name, which is the same as using the `print` function:
-  
-```{r}
-my.vector
-```
-
-If we want to show only the *first* element of this vector, we type:
+We can display the whole vector by just typing it's name. But if we want to show only the *first* element of this vector, we type:
   
 ```{r}
 my.vector[1]
@@ -178,11 +194,11 @@ Here, the square brackets specify a *subset* of the vector we want - in this cas
 - Try changing the command above to show the last element of the vector.
 
 
-#### Selecting more than one element at a time {-}
+## Selecting more than one vector element
 
 A neat feature of subsetting is that we can grab more than one element at a time. 
 
-To do this, we need to tell R the *positions* of the elements we want, and so we provide a *vector of the positions of the elements we want*. That is, we create a second vector which has the positions of the elements we want to extract. 
+To do this, we need to tell R the *positions* of the elements we want, and so we provide a *vector of the positions of the elements we want*. 
 
 It might seem obvious, but the first element has position `1`, the second has position `2`, and so on.  So, if we wanted to extract the 4th and 5th elements from the vector of heights we saw above we would type:
 
@@ -191,17 +207,17 @@ elements.to.grab <- c(4, 5)
 heights[elements.to.grab]
 ```
 
-We can also make subsets of the original vector and assig them to a new variable:
+We can also make subsets of the original vector and assign them to a *new* variable:
 
 ```{r}
 first.two.elements <- heights[c(1, 2)]
 first.two.elements
 ```
 
-There are lots of other neat tricks you can use when subsetting, but we don't need them right now. If you want to know more see http://XXX
+There are lots of other neat tricks you can use when subsetting, but we don't need them all right now. If you want to know more see <http://www.statmethods.net/management/subset.html>
 
 
-### Processing vectors
+## Processing vectors
 
 Many of R's most useful functions process *vectors of numbers* in some way. For example, if we want to calculate the average height in our vector we just type:
 
@@ -211,7 +227,7 @@ mean(heights)
 
 R contains *lots* of built in functions which we can use to summarise a vector of numbers. For example:
 
-```{r}
+```{r, echo=T}
 length(heights)
 median(heights)
 sd(heights)
@@ -224,20 +240,22 @@ IQR(heights)
 
 All of these functions accept a vector as input, do some proccesing, and then return a *single number* which gets displayed by RStudio. But not all functions return a single number in the way that `mean` did above. Some return a new vector, or some other type of object instead. 
 
-For example, the `quantile` function returns the values at the 0, 25th, 50th, 75th and 100th percentiles^[this is the default; it can return other specific percentiles if you ask for them].
+For example, the `quantile` function returns the values at the 0, 25th, 50th, 75th and 100th percentiles^[This is the default; it can return other specific percentiles if you ask for them].
 
 ```{r}
 height.quantiles <- quantile(heights)
 height.quantiles
 ```
 
-You might have noticed that each value in the result of the `quantile` function is printed with a label indicating which percentile it refers to. The `quantile` function actually returns a *named vector*, which can be helpful to make results more readable. If you wanted to do this in your own code look up the help file for the `names()` function.
+You might have noticed that each value in the result of the `quantile` function is printed with a label indicating which percentile it refers to. The `quantile` function actually returns a *named vector*, which can be helpful to make results more readable. If you wanted to do this in your own code see: <http://www.r-tutor.com/r-introduction/vector/named-vector-member>.
 
---------------------------------------------------------------------------------------------
+
 
 If a function returns a vector, we can use it just like any other vector:
 
 ```{r}
+height.quantiles <- quantile(heights)
+
 # grab the third element
 height.quantiles[3]
 
@@ -254,13 +272,14 @@ hist(heights)
 
 If you run the code you'll see that RStudio includes the plot within the document. We'll cover lots more plotting and visualisation later on.
 
-### Processing vectors to make new vectors
+## Processing vectors to make new vectors
 
-So far we've seen R functions which process a vector of numbers and produce a single number, a new vector of a different length (like `quantile` or `fivenum`), or some other object (list `hist`).
+So far we've seen R functions which process a vector of numbers and produce a single number, a new vector of a different length (like `quantile` or `fivenum`), or some other object (like `hist` which makes a plot).
+However many other functions accept a single input, do something to it, and return a single processed value. 
 
-However many other functions accept a single input, do something to it, and return a single processed value. For example, the square root function, `sqrt`, accepts a single value and returns a single value: running `sqrt(10)` will return `3.1623`. 
+For example, the square root function, `sqrt`, accepts a single value and returns a single value: running `sqrt(10)` will return `3.1623`. 
 
-In R, if a function accepts a single value as input and returns a single value as output (like `sqrt(10)`), then you can usually give a vector as input too. Some people find this surprising, but R assumes that if you're processing a vector of numbers, you probably want the function applied to each of them in the same way. 
+In R, if a function accepts a single value as input and returns a single value as output (like `sqrt(10)`), then you can usually give a vector as input too. Some people find this surprising^[Mostly people who already know other programming languages like C. It's not that surprising if you read the R code as you would English.], but R assumes that if you're processing a vector of numbers, you want the function applied to each of them in the same way. 
 
 This turns out to be very useful. For example, let's say we want the square root of each of the elements of our height data:
 
@@ -294,7 +313,7 @@ paste(bottles, "green bottles hanging on the wall")
 In other programming languages we might have had to write a 'loop' to create each line of the song, but R lets us write short statements to summarise *what* needs to be done; we don't need to worry worrying about *how* it gets done.
 
 
-### Making up data
+## Making up data
 
 Sometimes you'll need to create vectors containing regular sequences or randomly selected numbers.
 
@@ -337,7 +356,7 @@ hist(random.numbers)
 
 
 
-### Useful functions to learn now
+## Useful functions to learn now
 
 There are *thousands* of functions built into R. Below are a few examples which are likely to be useful as you work with your data:
 
@@ -382,7 +401,7 @@ Try and experiment with each of these functions. Check the output against what y
 
 
 
-## Lists
+# Lists
 
 Try running the code below:
 
@@ -393,11 +412,12 @@ sqrt(first.element)
 ```
 
 
-Take a minute to try and make a guess at what went wrong. Why does R complain `1` is non-numeric?
+Take a minute to try and make a guess at what went wrong. Why does R complain that '`1`' is non-numeric?
 
 When we built the vector we used `c` to combine the elements `1`, `2`, `3` and `"Wibble"`. Although our first and second elements are numbers, `"Wibble"` is not - it's made up of letters (this is called a character string).
+Remember that vectors can only contain one *type* of thing. And so R automatically converts all the elements to the same type, if it can. 
 
-Because vectors can only contain one *type* of thing, R automatically converts all the elements to the same type (if it can). Because R can't reliably convert `"Wibble"` to a number, everything in the vector was converted to the `character` type instead. We then get an error because R can't mutiply words together (only numbers).
+Because R can't reliably convert `"Wibble"` to a number, everything in the vector was converted to the `character` type instead. We get an error because R can't mutiply words together.
 
 If you're not sure what type of thing your vector contains, you can use the `typeof` command:
 
@@ -434,7 +454,9 @@ my.list[[1]] * my.list[[2]]
 Square brackets are ugly and can be confusing though, so we often give names to the elements of our list when we create it:
 
 ```{r}
-my.party <- list(number.guests=8, when="Friday", drinks = c("Juice", "Beer", "Whisky"))
+my.party <- list(number.guests=8, 
+                 when="Friday", 
+                 drinks = c("Juice", "Beer", "Whisky"))
 ```
 
 Which means we can then access the elements *by name* later on. To do this, you write the name of the vector, then a `$` sign, and then the name of the element you want to access:
@@ -469,7 +491,7 @@ sqrt(1:10) * 10
 
 
 
-#### Extended questions:
+## Extended questions:
 
 4. What is the average of the 9 times table, up to and including 9 x 12? 
 
@@ -477,232 +499,10 @@ sqrt(1:10) * 10
 
 
 
-# Teaching an old dog new tricks (loading packages)
 
-R has been around for a very long time, but has remained popular because it is easy for people to add new functions to it. You can run almost any statistical model and produce a wide variety of graphics in R because people have contributed new functions which extend the base language. These new features are distributed in bundles known as 'packages'. For now we'll assume someone has helped you install all the packages you need (if this isn't the case, see XXXSECTION ON INSTALLATIONXXX).
 
-To *access* the features in packages, you normally load the package with the `library` command. Running `library(packagename)` loads all the new functions and it is then possible to call them from your code. For example:
 
 
-```{r}
-library(ggplot2)
-```
+# What next?
 
-This will load the `ggplot2` package. After loading the package, you can then call the `qplot` function it provides:
-
-```{r}
-qplot(mtcars$mpg)
-```
-
-
-You don't strictly *need* to load packages to use the features within them though. If it is installed on your system you can call a function directly by telling R which package it is stored in. In the example below we call the `hist.data.frame` from the `Hmisc` package, and obtain histograms of all the variables in the `mtcars` dataset:
-
-```{r}
-Hmisc::hist.data.frame(mtcars)
-```
-
-The rule is to type `package::function(parameters)`, where `::` separates the package and function names. Parameters are just the inputs to the function. 
-
-
-There are two reasons not to load a package before using it: 
-
-1. Laziness: it can save typing if you just want to use one function from a package, and only once.
-
-2. Explicitness: It's an unfortunate fact that some function names are repeated across a number of packages. This can be confusing if they work differently, and if you don't know which package the version you are using comes from. Using `package_name:function_name` can help make things explicit.
-
-
-# Getting help 
-
-If you don't know or can't remember what a function does, R provides help files which explain how they work. 
-To access a help file for a function, just type `?command` in the console, or run `?command` command within an R block. For example, running `?mean` would bring up the documentation for the `mean` function.
-
-It's fair to say R documentation isn't always written for beginners. However the 'examples' sections are usually quite informative: you can normally see this by scrolling right to the end of the help file.
-
-
-# Datasets and `data.frame`s
-
-So far we've created vectors (which contain only one type of thing), and lists (which can contain a mix of things). 
-
-In R, a *data.frame* is a special sort of list: it is a list of *vectors that are all the same length*. 
-
-If you think about it, this makes a `data.frame` much like a spreadsheet. Each vector is like a column. And if we select elements from the same position in each column (e.g. the 1st element in each column) then we have a row. 
-
-Typically, we assign each column in a dataframe a name, but we access each row by position.
-
-We can make a dataframe using the `data.frame()` function which is built into R. However, the `dplyr` library contains helper functions which make many common tasks more convenient, so in the example below we load `dplyr` and then use it's `data_frame()` function (notice the `_` rather than `.` in the function name):
-
-```{r}
-library(dplyr)
-
-data_frame(
-  person = 1:10,
-  group = rep(c("A", "B"), 5),
-  score = runif(10),
-  position = rank(score)
-)
-```
-
-
-In this section we do lots more work with dataframes...
-
-
-
-# Descriptive statistics and graphs
-
-This section is crucial because we use descriptive statistics and graphs to explore a dataset and get a feel for the relationships within it.
-
-Sections to cover
-
-
-## Benefits of visualising data
-
-Psychology and human factors of graphics + Tufte. Importance of graphs to communicate. Motivating examples from RCTs.
-
-
-## Choosing a plot type
-
-Describe 2 strategies when plotting in R:
-
-- Quick an dirty (helper functions like `pairs`, `Hmisc::hist.data.frame` or `ggplot2::qplot`)
-- Doing it right (`ggplot` or careful use of `base` graphics)
-
-When exploring a dataset, often useful to use built in functions or helpers from other libraries. These help you quickly visualise relationships, but aren't always *exactly* what you need and can be hard to customise.
-
-The other approach is to build your plot from scratch using the layers approach in `ggplot` (you can also do this with base graphics, but it requires a detailed knowledge of R and can be fiddly). This enables you to construct a plot which exactly matches the aims of your communication, and can be tweaked to make it publication-ready.
-
-
-## Processing the data
-
-Not sure if this goes here, but depending on the example this might motivate the use of `dplyr` to group, split, summarise and combine data, and to reshape from wide to long.
-
-
-## Layering graphics
-
-ggplot - e.g. geom_point + geom_smooth
-
-
-
-# Simple linear models in R
-
-This section assumes most readers will have done an introductory statistics course and had practce running multiple regression and or Anova in SPSS or a similar package. If you haven't, don't rush out to do that though XXX what should they do instead? Recommend some MOOC? XXX?
-
-
-## Describing our models (formulas)
-
-R requires that you are explicit about the statistical model you want to run, but provides a neat, concise way of describing a model, called a `formula`.  For multiple regression and Anova, the formulas we write map closely onto the underlying *linear model*. The formula syntax provides shortcuts to quickly describe all the models you are likely to need.
-
-Formulas have two parts: the left hand side and the right hand side, which are separated by the tilde symbol: `~`. Here, the tilde just means 'is predicted by'. 
-
-For example, for formula `height ~ age + gender`  specifies a regression model where `height` is the outcome, and `age` and `gender` are the predictor variables.^[I avoid the terms dependent/independent variables because they are confusing to many students, and because they can be misleading when discussing non-experimental data. 'Outcome' and 'predictors' are preferred instead.]
-
-There are lots more useful tricks to learn when writing formulas, which are covered below. In the interests of instant gratification, let's run a model first:
-
-
-
-## Running a linear model
-
-Linear models (including Anova and multiple regression) are run using the `lm` function, short for 'linear model'.  We will use the `mtcars` dataset, which is built into R, for our first example. 
-
-First, we have a quick look at the data.
-
-```{r, fig.width=8, fig.cap="Pairs plot of the mtcars database"}
-pairs(mtcars)
-```
-
-Despite being (too) tiny, the pairs plot suggests that `mpg` might be related to a number of the other variables including `disp` (engine size) and `wt` (car weight). We might want to take a closer look by selecting just those variables:
-
-```{r}
-mtcars %>% select(mpg, disp, wt) %>% 
-  pairs
-```
-
-Before running any model, we should ask outselves what question we are trying to answer? In this instance, we can see that both weight and engine size are related to `mpg`, but they are also correlated with one another.
-
-We might want to know, "are weight and engine size independent predictors of `mpg`?" That is, if we know a car's weight, do we gain additional information about it's `mpg` by measuring engine size?
-
-To answer this, we might want to run a multiple regression including both `wt` and `disp` to predict `mpg`, and the formula for this would be `mpg ~ wt + disp`. The command below runs this model.
-
-```{r}
-lm(mpg ~ wt + disp, data=mtcars)
-```
-
-For readers used to wading through SPSS output, R might seem concise to the point of rudeness. By default, the `lm` commands displays very little, only repeating the formula and listing the coefficients for each predictor in the model.
-
-So what next? Unlike SPSS, we must be explicit and tell R exactly what we want. The most convenient way to do this is to first store the results of the `lm` function:
-
-
-```{r}
-m.1 <- lm(mpg ~ wt + disp, data=mtcars)
-```
-
-
-This stores the results of `lm` in a variable `m.1`. We can then use other functions to get more information about the model. For example:
-
-```{r}
-summary(m.1)
-```
-
-Although still compact, the `summary` function provides familiar output, including the estimate, SE, and p value for each parameter.
-
-Take a moment to find the following statistics in the output above:
-
-- The coefficients and p values for each predictor
-- The R^2 for the overall model. What % of variance in `mpg` is explained?
-
-Answer the original question: 'accounting for weight, does `disp` tell us anything extra about a car's `mpg`?'
-
-
-
-
-## More on formulas
-
-Above we briefly introduced R's formula syntax. Formulas for linear models have the following structure: `left_hand_side ~ right_hand_side`.  For linear models the left side is our outcome, which is must be a continous variable (i.e. not catrorical or binary). Other types of model (e.g. generalised linear models) can accept binary or categorical outcomes.
-
-The right hand side contains our predictors. In the example above we used the `+` symbol to separate the predictors `wt` and `disp`.  This told R to simply add each predictor to the model. However, many times we want to specify relationships *between* our predictors. 
-
-For example, we might want to run an Anova with 2 categorical predictors, each with 2 levels (e.g. a 2x2 between-subjects design).
-
-In this block we define and run the linear model with both `vs` and `am` as predictors, along with the interaction of `vs:am`. We save this model, and use the `anova` command to print the standard Anova table for the model.
-
-```{r}
-m.2 <- lm(mpg ~ vs + am + vs:am, data=mtcars)
-anova(m.2)
-```
-
-
-This might seem odd to some readers (running the linear model before the Anova), but it's important to understand that printing an Anova table is just one of the things you can do with a linear model — allbeit an important one for experimental psychologists.
-
-
-
-In addition to the `+` symbol, we can use other shortcuts to create linear models.
-
-As seen above, the colon (`:`) operator indicates the interaction between two terms. So `a:b` is equivalent to creating a new variable in the data frame where `a` is multiplied by `b`.
-
-The `*` symbol indicates the expansion of other terms in the model. So, `a*b` is the equivalent of `a + b + a:b`.
-
-Finally, it's good to know that other functions can be used within R formulas to save work. For example, if you wanted to transform your dependent variable then `log(y) ~ x` will do what you might expect, and saves creating temporary variables in your dataset.
-
-The formula syntax is very powerful, and the above only shows the basics, but you can read the `formulae` help pages in RStudio for more details.
-
-
-As an exercise, run the following models using the mtcars dataset:
-
-- With `mpg` as the outcome, and with `cyl` and `hp` as predictors
-- As above, but adding the interaction of `cyl` and `hp`.
-- Repeat the model above, but write the formula a different way (make the formula either more or less explicit, but retaining the same predictors in the model).
-
-
-
-
-# Anova for between subjects designs
-
-
-
-
-# Repeated measures 
-
-
-
-
-
-
+You probably want to actually start working with some data, so try the `datasets.Rmd` file, or [view the compiled version here](datasets.html).
