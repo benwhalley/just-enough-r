@@ -21,20 +21,22 @@ You are currently reading the output of an 'RMarkdown' document.
 - 'R' is a computer language for working with data.
 - Markdown is a simple text format which allows you to combine writing, images and code (see http://commonmark.org/help/).  
 
-An R-Markdown document mixes R code with markdown. This means you can combine your analysis with text explaining and interpreting the results.
+An RMarkdown document mixes R code with markdown. This means you can combine your analysis with text explaining and interpreting the results.
 
-R-Markdown is easily converted to other formats like HTML, Word, or PDF to share with other people. When you click the **Knit** button (in the Rstudio interface), a document will be generated that combines your text with the results of your R code.
+RMarkdown is easily converted to other formats like HTML, Word, or PDF to share with other people. When you click the **Knit** button (in the Rstudio interface), a document will be generated that combines your text with the results of your R code.
 
 
 ## Writing and 'knitting' RMarkdown
 
 To include R code within a document we write 3 backticks (`` ``` ``), followed by `{r}`. We the include our R code, and close the block with 3 more backticks.
 
-    ```{r, echo=T, eval=F}
-     2 + 2
-     ```
+<!-- ignore the fact that this has extra characters in the first line of the code block... this is to make the chunk display in the final compiled file as an example. You won't see this again. -->
+
+    ```{r}`r ''`
+    2 + 2
+    ```
      
-When a document including this chunk is run or 'knitted', the final result will include the the line `2+2` followed by the number `4` on the next line. This means we can use R-markdown to 'show our workings': our analysis can be interleaved with narrative text to explain or interpret the calculations.
+When a document including this chunk is run or 'knitted', the final result will include the the line `2+2` followed by the number `4` on the next line. This means we can use RMarkdown to 'show our workings': our analysis can be interleaved with narrative text to explain or interpret the calculations.
 
 You can see how this works in practice in the next section.
 
