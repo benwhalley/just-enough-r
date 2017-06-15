@@ -1,5 +1,5 @@
 ---
-title: '''Just enough'' R'
+title: 'Starting out'
 output: 
   bookdown::tufte_html2
 ---
@@ -7,19 +7,12 @@ output:
 ```{r setup, include=FALSE}
 # ignore all this for the moment
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+library(tufte)
 ```
 
 
-R is software which makes it easy to work and learn from with data. It also happens to be a complete programmming language, but if you're reading this book, that might not be of interest to you. That's OK — the goal here is *not* to teach you how to program in R^[This is a lie, but I'm hoping you won't notice until it's too late.] (there are plenty of other books for that).  The goal is to teach you *just enough R* to be confident to explore your data.
 
-We are going to use R the same way we use any other statistics software: To check and visualise your data, run statistical analyses, and share the results with colleagues.  To do that it's worth learning the *absolute basics* of the R language; this chapter walks you through the basics: what you need to know, and no more, to be productive in R and RStudio. By analogy: this will be no more complicated than learning enough French to introduce yourself, count from one to ten, and ask for a croissant.
-
-
-
-
-# The right environment
-
-## Using RMarkdown to record and share work
+# Using RMarkdown to record and share work
 
 This it might seem an odd place to start: we haven't got anything to share yet! But the RStudio editor (see below) includes important features which help us record and organise our work, and share it with colleagues. For many people this ability to keep a detailed record of your work, and revisit and review it later, turns out to be *the* major advantages of R over traditional statistics packages.
 
@@ -50,7 +43,11 @@ You can see how this works in practice in the next section.
 
 RStudio is a text editor which has been customised to make working with R easy. It can be installed on your own computer, or you can login to a shared RStudio server^[e.g. one run by your university.] from a web browser. Either way the interface is largely the same.  
 
-You can see a short video demonstrating the RStudio interface here: XXX. The video:
+You can see a short video demonstrating the RStudio interface here: 
+
+<div style="position:relative;height:0;padding-bottom:56.25%"><iframe src="https://www.youtube.com/embed/5YmcEYTSN7k?ecver=2" width="420" height="300" frameborder="0" style="position:absolute;width:100%;height:100%;left:0" allowfullscreen></iframe></div>  
+  
+The video^[Note: this isn't the final version and doesn't show everything below... it's just borrowed from youtube temporarily]:
 
 - Shows you how to type commands into the Console and view the results.
 - Run a plotting function, and see the result.
@@ -94,7 +91,8 @@ Hopefully at this point it's obvious that RStudio and RMarkdown give you:
 
 # Naming things: *variable assignment*
 
-One of the nice things about R is that we can assign labels to parts of our analysis to keep track of them. Using good, descriptive names is good practice and makes your code easier to read (e.g. when you or others need to revisit in future).
+One of the nice things about R is that we can assign labels to parts of our analysis to keep track of them.
+`r margin_note('Using good, descriptive names is good practice and makes your code easier to read (e.g. when you or others need to revisit in future)')`
 
 To assign labels to particular values we use the `<-` symbol. That is, we have a *value* and use the `<-` symbol to point to the *variable* we want to assign it to. For example:
 
@@ -110,7 +108,8 @@ meaning.of.life
 ```
 
 
-Or if we want to be explicit^[R often makes sensible assumptions about what we want. Here the default assumption is that if we type the *name* of a variable we want to see the *value* associated with it.]:
+Or if we want to be explicit:
+`r margin_note('R often makes sensible assumptions about what we want. Here the default assumption is that if we type the name of a variable we want to see the value associated with it')`
 
 ```{r}
 print(meaning.of.life)
@@ -151,22 +150,22 @@ heights <- c(203, 148, 156, 158, 167,
              134, 182, 175)
 ```
 
-The `c()` command is shorthand for *combine*, so the example above *combines* the individual elements (numbers) into a new *vector*^[Note, you can include comments within your R code, to help others understand what your code does. Comments start with a `#` symbol and are not processed by R when the code runs].
+The `c()` command is shorthand for *combine*, so the example above combines the individual elements (numbers) into a new vector.
 
-We could create a vector of alphanumeric names instead:
+We can create a vector of alphanumeric names just eas easily:
 
 ```{r}
 names <- c("Ben", "Joe", "Sue", "Rosa")
 ```
 
-We can check the values stored in these variables by printing them, e.g.:
+And we can check the values stored in these variables by printing them, e.g.:
 
 ```{r}
 heights 
 ```
 
 
-- Try creating your own vector of numbers in the code block below using the `c(...)` command.
+- Try creating your own vector of numbers in a new code block below^[i.e. edit the RMarkdown document] using the `c(...)` command.
 - Then change the name of the variable you assign it to.
 
 
@@ -174,7 +173,7 @@ heights
 
 ## Accessing elements within vectors
 
-Once we have created a vector, we sometimes want to access the individual elements from it again. We do this based on their *position*. 
+Once we have created a vector, we often want to access the individual elements again. We do this based on their *position*. 
 
 Let's say we have created a vector:
   
@@ -182,7 +181,7 @@ Let's say we have created a vector:
 my.vector <- c(10, 20, 30, 40)
 ```
 
-We can display the whole vector by just typing it's name. But if we want to show only the *first* element of this vector, we type:
+We can display the whole vector by just typing it's name, as we saw above. But if we want to show only the *first* element of this vector, we type:
   
 ```{r}
 my.vector[1]
@@ -191,35 +190,37 @@ my.vector[1]
 
 Here, the square brackets specify a *subset* of the vector we want - in this case, just the first element.
 
-- Try changing the command above to show the last element of the vector.
 
-
-## Selecting more than one vector element
+## Selecting more than one element in a vector
 
 A neat feature of subsetting is that we can grab more than one element at a time. 
 
 To do this, we need to tell R the *positions* of the elements we want, and so we provide a *vector of the positions of the elements we want*. 
 
-It might seem obvious, but the first element has position `1`, the second has position `2`, and so on.  So, if we wanted to extract the 4th and 5th elements from the vector of heights we saw above we would type:
+It might seem obvious, but the first element has position 1, the second has position 2, and so on.  So, if we wanted to extract the 4th and 5th elements from the vector of heights we saw above we would type:
 
 ```{r}
 elements.to.grab <- c(4, 5)
 heights[elements.to.grab]
 ```
 
-We can also make subsets of the original vector and assign them to a *new* variable:
+We can also make a subset of the original vector and assign it to a *new* variable:
 
 ```{r}
 first.two.elements <- heights[c(1, 2)]
 first.two.elements
 ```
 
-There are lots of other neat tricks you can use when subsetting, but we don't need them all right now. If you want to know more see <http://www.statmethods.net/management/subset.html>
+
+
+<!-- There are lots of other neat tricks you can use when subsetting, but we don't need them all right now.  -->
+
+<!-- If you want to know more see <http://www.statmethods.net/management/subset.html> -->
 
 
 ## Processing vectors
 
-Many of R's most useful functions process *vectors of numbers* in some way. For example, if we want to calculate the average height in our vector we just type:
+Many of R's most useful functions process *vectors of numbers* in some way. For example, if we want to calculate the average of our vector of heights we just type:
 
 ```{r}
 mean(heights)
@@ -228,27 +229,26 @@ mean(heights)
 R contains *lots* of built in functions which we can use to summarise a vector of numbers. For example:
 
 ```{r, echo=T}
-length(heights)
 median(heights)
 sd(heights)
 min(heights)
 max(heights)
 range(heights)
 IQR(heights)
+length(heights)
 ```
 
 
-All of these functions accept a vector as input, do some proccesing, and then return a *single number* which gets displayed by RStudio. But not all functions return a single number in the way that `mean` did above. Some return a new vector, or some other type of object instead. 
+All of these functions accept a vector as input, do some proccesing, and then return a *single number* which gets displayed by RStudio. 
 
-For example, the `quantile` function returns the values at the 0, 25th, 50th, 75th and 100th percentiles^[This is the default; it can return other specific percentiles if you ask for them].
+But not all functions return a single number in the way that `mean` did above. Some return a new vector, or some other type of object instead.  For example, the `quantile` function returns the values at the 0, 25th, 50th, 75th and 100th percentiles
+
+`r margin_note('These are just the defaults; it can return other specific percentiles if you ask for them')`
 
 ```{r}
 height.quantiles <- quantile(heights)
 height.quantiles
 ```
-
-You might have noticed that each value in the result of the `quantile` function is printed with a label indicating which percentile it refers to. The `quantile` function actually returns a *named vector*, which can be helpful to make results more readable. If you wanted to do this in your own code see: <http://www.r-tutor.com/r-introduction/vector/named-vector-member>.
-
 
 
 If a function returns a vector, we can use it just like any other vector:
@@ -256,7 +256,7 @@ If a function returns a vector, we can use it just like any other vector:
 ```{r}
 height.quantiles <- quantile(heights)
 
-# grab the third element
+# grab the third element, which is the median
 height.quantiles[3]
 
 # assign the first element to a variable
@@ -270,7 +270,9 @@ But other functions process a vector without returning any numbers. For example,
 hist(heights)
 ```
 
-If you run the code you'll see that RStudio includes the plot within the document. We'll cover lots more plotting and visualisation later on.
+We'll cover lots more plotting and visualisation later on.
+
+
 
 ## Processing vectors to make new vectors
 
@@ -506,3 +508,15 @@ sqrt(1:10) * 10
 # What next?
 
 You probably want to actually start working with some data, so try the `datasets.Rmd` file, or [view the compiled version here](datasets.html).
+
+
+
+<br><br><br><br><br>
+
+
+
+
+
+
+
+

@@ -1,40 +1,126 @@
 ---
-title: 'Working with data'
+title: 'Datasets and dataframes'
 output: 
   bookdown::tufte_html2
 ---
   
+
 ```{r setup, include=FALSE}
 # ignore all this for the moment; it will be explained below
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+library(tidyverse)
+library(tufte)
 ```
 
 
-So far we've created vectors (which contain only one type of thing), and lists (which can contain a mix of things). 
+A dataframe is an object which can store data as you might encounter it in SPSS, Stata or other statistics packages. It's much like a spreadsheet, but with some constraints applied 
+'Constraints' sounds bad, but are helpful here: they make dataframes more structured and predictable to work with.]:
 
-In R, a `data.frame` is a special sort of list: it is a list of *vectors that are all the same length*. 
+- Each column is a vector, and so can only store one type of data ^[Remember that in a [previous chapter](start_here.html) we created *vectors*, which are sequences that contain only one type of thing, and *lists* (which can contain a mix of different things.]
 
-If you think about it, this makes a `data.frame` much like a spreadsheet. Each vector is like a column. And if we select elements from the same position in each column (e.g. the 1st element in each column) then we have a row. 
+- Every column has to be the same length (although missing values are allowed).
 
-Typically, we assign each column in a dataframe a name, but we access each row by position.
+- Each column should have a name.
 
-We can make a dataframe using the `data.frame()` function which is built into R. However, the `dplyr` library contains helper functions which make many common tasks more convenient[^1], so in the example below we load `dplyr` and then use it's `data_frame()` function (notice the `_` rather than `.` in the function name):
-  
-  
-[^1]: 
-In this example, we create a variable called `score` and then create a second variable called `position` which is the rank of `score`. Using old-style `data.frame` rather than `data_frame` this would have to be done in two steps rather than one. This might not seem like a bit deal, but keeping code as clean and as simple as posible helps prevent errors (which we all make) and makes it easier to revisit our analyses weeks or months after we write them.
+
+Put another way, a dataframe behaves like a *list* of *vectors*, which means we can use a lot of the same rules to access elements within them (more on this below).
+
+
+# Using 'built in' data 
+
+
+
+The quickest way to see a dataframe in action is to use one that is built in[^builtin] to R. For example:
+
+[^builtin]:
+  To find a list of all the built in datasets you can type `help(datasets)`
+
+```{r}
+head(airquality)
+```
+
+Or we can use `dplyr::glimpse()` function to take a different look at the first few rows of the `mtcars` data. This flips the dataframe so the variables are listed in the first column of the output:
+
+```{r}
+glimpse(mtcars)
+```
+
+
+In both these examples the datasets (`airquality` and `mtcars`) are already loaded and available to be used in the `head()` or `glimpse()` functions.
+
+
+Other useful functions for looking at datasets include:
+
+```{r}
+summary(airquality)
+```
+
+
+Or the more compact and useful output from `describe()` which is in the `pysch` package:
+
+```{r}
+psych::describe(airquality)
+```
+
+
+There are also some helpful plotting functions which accept a dataframe:
+`r margin_note('These plots might not be worth including in a final write-up, but are very useful when exploring your data.')`
+
+```{r}
+boxplot(airquality)
+psych::cor.plot(airquality)
+```
+
+
+# Importing and exporting data
+
+
+If you have data outside of R, *the simplest way to import it is to first save it as a comma or tab-separated text file*, normally with the file extension `.csv` or `.txt`^[This is easy to achieve in Excel and most other stats packages using the `Save As...` menu item].
+
+Let's say we have file called `angry_moods.csv` in the same directory as our `.Rmd` file. We can read this data using the `read_csv()` function from the `readr` package[^readr]:
+
+
+[^readr]:
+  There are also standard functions built into R, such as `read.csv()` or `read.table()` for importing data. These are fine if you can't install the `readr` package for some reason, but they are quite old and the default behaviour is sometimes counterintuitive. I recommend using the `readr` equivalents: `readr::read_csv()` or `readr::read_tsv()`.
+
+
+```{r}
+angry.moods <- readr::read_csv('angry_moods.csv')
+head(angry.moods)
+```
+
+
+
+As you can see, when loading the `.csv` file the `read_csv()` makes some assumptions about the *type*  of data the file contains. In this case, all the columns contain integer values. It's worth checking this message to make sure that stray cells in the file you are importing don't cause problems when importing. 
+`r margin_note("Excel won't complain about this sort of thing, but R is more strict and won't mix text and numbers in the same column.")`
+A common error is for stray notes or text values in a spreadsheet to cause a column which should be numeric to be converted to the `character` type.
+
+
+
+
+Once it's loaded, you can use this new dataset like any other:
+
+
+```{r}
+pairs(angry.moods)
+```
+
+
+
+## Importing remote data
+
+One neat feature of the `readr` package is that you can import data from the web, using a URL rather than a filename on your local computer. This can be really helpful when sharing data and code with colleagues. For example, we can load the `angry_moods.csv` file from a URL:
+
 
 ```{r, message=F}
-library(dplyr)
-
-data_frame(
-  person = 1:10,
-  group = rep(c("A", "B"), 5),
-  score = runif(10),
-  position = rank(score)
-)
+angry.moods.from.url <- readr::read_csv(
+  "https://raw.githubusercontent.com/benwhalley/just-enough-r/master/angry_moods.csv")
+head(angry.moods.from.url)
 ```
 
 
-In this section we do lots more work with dataframes...
 
+
+# Importing from SPSS and other packages
+
+This is often more trouble than it's worth (just use a csv file!) but if you really must see <https://www.datacamp.com/community/tutorials/r-data-import-tutorial>.

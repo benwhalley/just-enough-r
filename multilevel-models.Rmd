@@ -1,0 +1,17 @@
+---
+title: 'Multilevel models'
+output:
+  bookdown::tufte_html2
+---
+
+```{r setup, include=FALSE}
+# ignore all this for the moment
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+```
+
+
+
+This chapter assumes:
+
+- You know what a multilevel model is
+- ...

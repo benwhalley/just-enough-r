@@ -1,0 +1,15 @@
+---
+title: 'Different types of data'
+output: 
+  bookdown::tufte_html2
+---
+
+
+
+# Different types of columns
+
+
+
+# Working with factors
+
+

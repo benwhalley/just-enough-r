@@ -1,0 +1,228 @@
+---
+title: 'Working with dataframes'
+output: 
+  bookdown::tufte_html2
+---
+
+```{r setup, include=FALSE}
+# ignore all this for the moment
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+library(tidyverse)
+library(tufte)
+```
+
+
+
+# Introducing the `tidyverse`
+
+R includes hundreds of built-in ways to select individual elements, rows or columns from a dataframe.  This guide isn't going to teach you many of them.
+
+The truth is that R can be overwhelming to new users, especially those new to programming. R is sometimes _too_ powerful and flexible: there are too many different to accomplish the same end, and this can lead to confusion.
+
+Recently, a suite of packages has been developed for R which tries to provide a simple, consistent set of tools for working with data and graphics.
+`r margin_note("This same problem of 'too many ways to do it' applies to graphics in R too — perhaps even more so.")`
+This suite of packages is called the *tidyverse*, and you can load all of these pacakges by calling:
+
+```{r, echo=T, message=F}
+library(tidyverse)
+```
+
+
+In this guide we make much use of two components from the tidyverse:
+
+- `dplyr`: to select, filter and summarise data
+- `ggplot2`: to make plots
+
+It's strongly recommended that you use these in your own code.
+
+
+
+
+
+# Selecting columns from a dataframe
+
+
+*Selecting a single column*:
+  Because dataframes act like lists of vectors, we can access columns from them using the `$` symbol. For example, here we select the `Ozone` column, which returns a vector of the observations made:
+
+  ```{r}
+airquality$Ozone
+```
+
+
+And we can pass this vector to functions, for example `summary()`:
+
+  ```{r}
+summary(airquality$Ozone)
+```
+
+
+
+*Selecting more than one column*:
+  To select multiple columns the `select()` function from `dplyr` is the simplest solution. You give `select()` a dataframe and the names of the columns you want, and it returns a new dataframe with just those columns, in the order you specified:
+
+
+  ```{r}
+head(
+  select(mtcars, cyl, hp)
+)
+```
+
+
+Because all the main `dplyr` functions tend to return a new dataframe, we can assign the results to a variable, and use that as normal:
+
+  ```{r}
+cylandweight <- select(mtcars, cyl, wt)
+summary(cylandweight)
+```
+
+
+You can also put a minus (`-`) sign in front of the column name to indicate which columns you don't want:
+
+
+```{r}
+head(
+select(airquality, -Ozone, -Solar.R, -Wind)
+)
+```
+
+
+
+You can use a patterns to match a subset of the columns you want. For example, here we select all thecolumns where the name contains the letter `d`:
+
+```{r}
+head(
+select(mtcars, contains("d"))
+)
+```
+
+
+And you can combine these techniques to make more complex selections:
+
+```{r}
+head(
+select(mtcars, contains("d"), -drat)
+)
+```
+
+
+
+As a quick reference, you can use the following 'verbs' to select columns in different ways:
+
+`r margin_note('There are other commands too, but these are probably the most useful to begin with. See the help files for more information.')`
+
+- `starts_with()`
+- `ends_with()`
+- `contains()`
+- `everything()`
+
+
+
+
+# Selecting rows of data
+
+To select particular rows from a dataframe, `dplyr` provides the very useful `select()` function. Let's say we just want the 6-cylindered cars from the `mtcars` dataframe:
+
+  ```{r}
+filter(mtcars, cyl==6)
+```
+
+Here we used the `filter` function to select rows matching a particular criteria: in this case, that `cyl==6`. We can match two criteria at once if needed[^notesonoperators]:
+
+  ```{r}
+filter(mtcars, cyl==6 & gear==3)
+```
+
+
+
+[^notesonoperators]:
+  Some notes on `==` and `&`: You might have noted above that I wrote `==` rather than just `=` to define the criteria. This is because most programming languages, including R, use two `=` symbols to distinguish: *comparison* from *assignment*.
+Here we are doing comparison, so we use `==`. In R normall use `<-` to assign variables,  which avoids any ambiguity.
+The `&` symbol does what you probably expect — it simply means 'AND'.
+
+
+
+
+
+
+# Combining column selections and filters with `dplyr`
+
+
+As you might have noticed above, we can 'nest' function calls in R. For example, we might want to both select some columns and filter rows.
+
+Taking the `mtcars` data, we might want to select the weights of only those cars with low `mpg`:
+
+  ```{r}
+gas.guzzlers <- select(filter(mtcars, mpg < 15), wt)
+summary(gas.guzzlers)
+```
+
+
+This is OK, but can get quite confusing to read, and the more deeply functions are nested the easier it is to make a mistake.
+
+<br><br><br>
+
+  ### Think of data 'flowing' down the page
+
+  `dplyr` provides an alternative to nested function calls, called the pipe.
+
+Imagine your dataframe as a big bucket containing data. From this bucket, you can 'pour' your data down through a series of tubes and filters, until at the bottom of your screen you have a smaller bucket containing just the data you want.
+
+To make data flow from one bucket to another, we use the 'pipe' operator: `%>%`
+
+```{r}
+big.bucket.of.data <- mtcars
+
+big.bucket.of.data %>%
+  filter(mpg <15) %>%
+  select(wt) %>%
+  summary
+```
+
+
+So we have achieved the same outcome, but the code reads as a series of operations which the data flows through, connected by our pipes (the `%>%`). At the end of the last pipe, our data gets dumped into the `summary()` function.
+
+We could just has well have saved this smaller 'bucket' of data so we can use it later on:
+
+  ```{r}
+smaller.bucket <- big.bucket.of.data %>%
+  filter(mpg <15) %>%
+  select(wt)
+```
+
+
+This turns out to be an incredibly useful pattern when processing and working with data. We can pour data through a series of filters and other operations, saving intermediate states where necessary.
+
+
+
+
+
+
+# Modifying and creating new columns
+
+
+Often when working with data we want to compute new values from columns we already have. Let's say we have some data on the PHQ-9, which measures depression:
+
+```{r}
+phq9.df <- readr::read_csv("phq.csv")
+glimpse(phq9.df)
+```
+
+
+We want to calculate the PHQ-9 score for each patient, at each month. This is easy with `dplyr::mutate()`:
+
+```{r}
+phq9.scored.df <- phq9.df %>%
+mutate(phq9 = phq9_01 + phq9_02 + phq9_03 + phq9_04 +
+phq9_05 + phq9_06 + phq9_07 + phq9_08 + phq9_09)
+
+phq9.scored.df %>%
+select(patient, group, month, phq9) %>%
+head
+```
+
+Notice that we first stored the computed scores in `phq9.scored.df` and then used `select()` to get rid of the raw data columns to display only what we needed.
+
+
+
+

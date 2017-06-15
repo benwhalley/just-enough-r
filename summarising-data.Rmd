@@ -1,0 +1,174 @@
+---
+title: 'Summarising data'
+output: 
+  bookdown::tufte_html2
+---
+
+
+```{r setup, include=FALSE, message=F}
+# ignore all this for the moment; it will be explained below
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+library(tidyverse)
+angry.moods <- readr::read_csv('angry_moods.csv')
+```
+
+
+Before you begin this section, make sure you have fully understood the section on [datasets and dataframes](datasets.html), and in particular that you are happy using the `%>%` symbol to describe a flow of data.
+
+
+# Summaries of dataframes
+
+So far you have seen a number of functions which provide summaries of a dataframe. For example:
+
+```{r}
+summary(angry.moods)
+```
+
+Or 
+
+```{r}
+psych::describe(angry.moods, skew=FALSE)
+```
+
+
+
+However, these functions operate on the dataset as a whole. What if we want to get summaries grouped by one of our variables, for example `Gender`? Or perhaps we want to use our summary data in a further analysis: for example, we might want to compute average reaction times in each block of an experiment to run an Anova or regression model.
+
+
+What we really want is a summary function *which gives us back a dataframe*. The  `dplyr::summarise()` does just that:
+
+
+```{r}
+angry.moods %>% 
+  summarise(mean.anger.out=mean(Anger.Out), sd.anger.out=sd(Anger.Out))
+```
+
+
+This has returned a dataframe, which we could store and use as before, although in this instance the dataframe only has one row. What if we want the numbers for men and women separately?
+
+
+
+# Split, apply, combine
+
+Let's think more about the case where we want to compute statistics on men and women separately.
+
+Although many packages would have functions with options to do this (for example, perhaps you would specify grouping variables in a summary function), there's a more general pattern at work. We want to:
+
+- *Split* our data (into men and women)
+- *Apply* some function to them (e.g. calculate the mean) and then
+- *Combine* it into a single table again (for more processing or analysis)
+
+
+It's helpful to think of this *split $\rightarrow$ apply $\rightarrow$ combine* pattern whenever we are processing data because it makes explicit what it is that we want to do.
+
+
+
+## Split: breaking the data into groups
+
+The first task is to organise our dataframe into the relevant groups. To do this we use `group_by()`:
+
+```{r}
+angry.moods %>% 
+  group_by(Gender) %>% 
+  head
+```
+
+Weirdly, this doesn't seem to have done anything. The data aren't sorted by `Gender`, and there is no visible sign of the grouping, but stick with it...
+
+
+## Apply and combine
+
+Continuing the example above, once we have grouped our data we can then *apply* a function to it — for exmaple, summarise:
+
+```{r}
+angry.moods %>% 
+  group_by(Gender) %>% 
+  summarise(mean.anger.out=mean(Anger.Out))
+```
+
+And R and `dplyr` have done as we asked:
+
+- *split* the data by `Gender`, using `group_by()`
+- *apply* the `summarise()` function
+- *combine* the results into a new data frame
+
+
+
+
+
+# Putting things together with a 'real' example
+
+In the previous section on datasets, we saw some found some raw data from a study which had measured depression with the PHQ-9. Patients were measured on numerous occasions (`month` is recorded) and were split into treatment and control groups:
+
+
+```{r, mesage=F}
+phq9.df <- readr::read_csv("phq.csv")
+glimpse(phq9.df)
+```
+
+
+
+If this were our data we might want to:
+
+- Calculate the sum of the PHQ-9 variables (the PHQ-9 *score*)
+- Calculate the average PHQ-9 score at each month, and in each group
+- Show these means by group for months 0, 7 and 12
+
+Using only the commands above[^sneaked]  we can write:
+
+[^sneaked]: You might have noticed I sneaked something new in here: the call to `pander()`. This is a weirdly named but useful function when writing RMarkdown documents. It converts any R object into more readable output: here it makes a nice table for us in the compiled document.  We cover more [tips and tricks for formatting RMarkdown documents here](rmarkdown-tricks.html). You might also want to check [this page on missing values](missing-values.html) to explain the filter which uses `!is.na()`, but you could leave it for later.
+
+
+```{r}
+phq9.summary.df <- phq9.df %>% 
+  mutate(phq9 = phq9_01 + phq9_02 + phq9_03 + 
+                    phq9_04 + phq9_05 + phq9_06 + 
+                    phq9_07 + phq9_08 + phq9_09
+  ) %>% 
+  select(patient, group, month, phq9) %>% 
+  # remove rows with missing values
+  filter(!is.na(phq9)) %>% 
+  # split
+  group_by(month, group) %>% 
+  # apply and combine
+  summarise(phq.mean = mean(phq9))
+
+
+phq9.summary.df %>% 
+  filter(month %in% c(0, 7, 12)) %>% 
+  pander::pander()
+```
+
+
+# Sorting data
+
+Sorting data is easy with `dplyr::arrange()`:
+
+```{r}
+airquality %>% 
+  arrange(Ozone) %>% 
+  head
+```
+
+
+By default sorting is ascending, but you can use a minus sign to reverse this:
+
+```{r}
+airquality %>% 
+  arrange(-Ozone) %>% 
+  head
+```
+
+
+
+You can sort on multiple columns too:
+
+```{r}
+airquality %>% 
+  select(Month, Ozone) %>% 
+  arrange(Month, -Ozone) %>% 
+  head
+```
+
+
+
