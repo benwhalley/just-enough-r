@@ -1,0 +1,129 @@
+---
+title: 'Confirmatory factor analysis'
+output:
+  bookdown::tufte_html2
+---
+
+
+```{r setup, include=FALSE}
+# ignore all this for the moment
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+library(tufte)
+library(tidyverse)
+```
+
+
+*This section adapted from a guide originally produced by Jon May*
+
+
+First make sure the `lavaan` package is installed^[see: [installing packages](packages.html)]; it stands for Latent Variable Analysis and is the most popular package for CFA in R.
+
+```{r, eval=F}
+install.packages(lavaan)
+```
+
+
+```{r}
+library(lavaan)
+```
+
+
+Open your data and check that all looks well:
+
+```{r}
+hz <- lavaan::HolzingerSwineford1939
+hz %>% glimpse()
+```
+
+
+Define the CFA model you want to run using 'lavaan model syntax'^[A full guide is here: <http://lavaan.ugent.be/tutorial/syntax1.html>]. For example:
+
+
+```{r}
+hz.model <- '
+visual =~ x1 + x2 + x3
+writing =~ x4 + x5 + x6
+maths =~ x7 + x8 + x9
+'
+```
+
+The model is defined in text, and can be broken over lines for clarity.  Here was save it in a variable named `hz.model`. 
+
+The model is defined by naming latent variables, and then specifying which observed variables measure them. The latent variable names are followed by =~ which means 'is manifested by'.
+
+
+To run the analysis:
+
+```{r}
+hz.fit <- cfa(hz.model, data=hz)
+```
+  
+
+To display the results:
+
+```{r}
+hz.fit.summary <- summary(hz.fit, standardized=TRUE)
+hz.fit.summary
+```
+
+
+The output has three parts:
+
+In the first, the values in the first column are the standardised weights from the observed variables to the latent factors.
+
+In the second, the values in the first column are the covariances between the latent factors.
+
+In the third table, the values in the first column are the estimates of each observed variable’s error variance.
+
+
+
+
+
+To examine the model fit:
+
+```{r}
+fitmeasures(hz.fit, c('cfi', 'rmsea', 'rmsea.ci.upper', 'bic')) 
+```
+
+
+This looks OK, but could be improved. To examine the modification indices (here sorted to see the largest first) we type:
+
+```{r}
+modificationindices(hz.fit) %>% 
+  as.data.frame() %>% 
+  arrange(-mi) %>% 
+  filter(mi > 10) %>% 
+  select(lhs, op, rhs, mi, epc) %>% 
+  pander::pander()
+```
+
+
+Latent factor to variable links have `=~` in the 'op' column. Error covariances for observed variables have `~~` as the op.
+
+
+
+If we add the largest MI path to our model it will look like this:
+
+```{r}
+hz.model.2 <- "
+visual =~ x1 + x2 + x3
+writing =~ x4 + x5 + x6 + x9
+maths =~ x7 + x8 + x9
+"
+hz.fit.2 <- cfa(hz.model.2, data=hz)
+fitmeasures(hz.fit.2, c('cfi', 'rmsea', 'rmsea.ci.upper', 'bic')) 
+```
+
+RMSEA has improved marginally, but we'd probably want to investigate this model further, and make additional improvements to it.
+
+
+# Missing data
+
+If you have missing data, add the argument `estimator='MLM'` to the `cfa()` function to use a robust method. There are no missing data in this dataset, but it would look like this:
+
+```{r}
+hz.fit.2.mlm <- cfa(hz.model.2, data=hz, estimator="MLM")
+hz.fit.2.mlm
+```
+
+
