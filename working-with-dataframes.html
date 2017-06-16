@@ -58,13 +58,41 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <div id="selecting-columns-from-a-dataframe" class="section level1">
 <h1>Selecting columns from a dataframe</h1>
 <p><em>Selecting a single column</em>: Because dataframes act like lists of vectors, we can access columns from them using the <code>$</code> symbol. For example, here we select the <code>Ozone</code> column, which returns a vector of the observations made:</p>
-<p><code>r   airquality$Ozone   ##   [1]  41  36  12  18  NA  28  23  19   8  NA   7  16  11  14  18  14  34   ##  [18]   6  30  11   1  11   4  32  NA  NA  NA  23  45 115  37  NA  NA  NA   ##  [35]  NA  NA  NA  29  NA  71  39  NA  NA  23  NA  NA  21  37  20  12  13   ##  [52]  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA 135  49  32  NA  64  40  77   ##  [69]  97  97  85  NA  10  27  NA   7  48  35  61  79  63  16  NA  NA  80   ##  [86] 108  20  52  82  50  64  59  39   9  16  78  35  66 122  89 110  NA   ## [103]  NA  44  28  65  NA  22  59  23  31  44  21   9  NA  45 168  73  NA   ## [120]  76 118  84  85  96  78  73  91  47  32  20  23  21  24  44  21  28   ## [137]   9  13  46  18  13  24  16  13  23  36   7  14  30  NA  14  18  20</code></p>
+<pre class="r"><code>airquality$Ozone
+##   [1]  41  36  12  18  NA  28  23  19   8  NA   7  16  11  14  18  14  34
+##  [18]   6  30  11   1  11   4  32  NA  NA  NA  23  45 115  37  NA  NA  NA
+##  [35]  NA  NA  NA  29  NA  71  39  NA  NA  23  NA  NA  21  37  20  12  13
+##  [52]  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA 135  49  32  NA  64  40  77
+##  [69]  97  97  85  NA  10  27  NA   7  48  35  61  79  63  16  NA  NA  80
+##  [86] 108  20  52  82  50  64  59  39   9  16  78  35  66 122  89 110  NA
+## [103]  NA  44  28  65  NA  22  59  23  31  44  21   9  NA  45 168  73  NA
+## [120]  76 118  84  85  96  78  73  91  47  32  20  23  21  24  44  21  28
+## [137]   9  13  46  18  13  24  16  13  23  36   7  14  30  NA  14  18  20</code></pre>
 <p>And we can pass this vector to functions, for example <code>summary()</code>:</p>
-<p><code>r   summary(airquality$Ozone)   ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's    ##    1.00   18.00   31.50   42.13   63.25  168.00      37</code></p>
+<pre class="r"><code>summary(airquality$Ozone)
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+##    1.00   18.00   31.50   42.13   63.25  168.00      37</code></pre>
 <p><em>Selecting more than one column</em>: To select multiple columns the <code>select()</code> function from <code>dplyr</code> is the simplest solution. You give <code>select()</code> a dataframe and the names of the columns you want, and it returns a new dataframe with just those columns, in the order you specified:</p>
-<p><code>r   head(   select(mtcars, cyl, hp)   )   ##                   cyl  hp   ## Mazda RX4           6 110   ## Mazda RX4 Wag       6 110   ## Datsun 710          4  93   ## Hornet 4 Drive      6 110   ## Hornet Sportabout   8 175   ## Valiant             6 105</code></p>
+<pre class="r"><code>head(
+  select(mtcars, cyl, hp)
+)
+##                   cyl  hp
+## Mazda RX4           6 110
+## Mazda RX4 Wag       6 110
+## Datsun 710          4  93
+## Hornet 4 Drive      6 110
+## Hornet Sportabout   8 175
+## Valiant             6 105</code></pre>
 <p>Because all the main <code>dplyr</code> functions tend to return a new dataframe, we can assign the results to a variable, and use that as normal:</p>
-<p><code>r   cylandweight &lt;- select(mtcars, cyl, wt)   summary(cylandweight)   ##       cyl              wt          ##  Min.   :4.000   Min.   :1.513     ##  1st Qu.:4.000   1st Qu.:2.581     ##  Median :6.000   Median :3.325     ##  Mean   :6.188   Mean   :3.217     ##  3rd Qu.:8.000   3rd Qu.:3.610     ##  Max.   :8.000   Max.   :5.424</code></p>
+<pre class="r"><code>cylandweight &lt;- select(mtcars, cyl, wt)
+summary(cylandweight)
+##       cyl              wt       
+##  Min.   :4.000   Min.   :1.513  
+##  1st Qu.:4.000   1st Qu.:2.581  
+##  Median :6.000   Median :3.325  
+##  Mean   :6.188   Mean   :3.217  
+##  3rd Qu.:8.000   3rd Qu.:3.610  
+##  Max.   :8.000   Max.   :5.424</code></pre>
 <p>You can also put a minus (<code>-</code>) sign in front of the column name to indicate which columns you don’t want:</p>
 <pre class="r"><code>head(
 select(airquality, -Ozone, -Solar.R, -Wind)
@@ -76,7 +104,7 @@ select(airquality, -Ozone, -Solar.R, -Wind)
 ## 4   62     5   4
 ## 5   56     5   5
 ## 6   66     5   6</code></pre>
-<p>You can use a patterns to match a subset of the columns you want. For example, here we select all thecolumns where the name contains the letter <code>d</code>:</p>
+<p>You can use a patterns to match a subset of the columns you want. For example, here we select all the columns where the name contains the letter <code>d</code>:</p>
 <pre class="r"><code>head(
 select(mtcars, contains(&quot;d&quot;))
 )
@@ -110,20 +138,39 @@ select(mtcars, contains(&quot;d&quot;), -drat)
 <div id="selecting-rows-of-data" class="section level1">
 <h1>Selecting rows of data</h1>
 <p>To select particular rows from a dataframe, <code>dplyr</code> provides the very useful <code>select()</code> function. Let’s say we just want the 6-cylindered cars from the <code>mtcars</code> dataframe:</p>
-<p><code>r   filter(mtcars, cyl==6)   ##    mpg cyl  disp  hp drat    wt  qsec vs am gear carb   ## 1 21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4   ## 2 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4   ## 3 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1   ## 4 18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1   ## 5 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4   ## 6 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4   ## 7 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6</code></p>
+<pre class="r"><code>filter(mtcars, cyl==6)
+##    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 1 21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## 2 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## 3 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## 4 18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## 5 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## 6 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## 7 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6</code></pre>
 <p>Here we used the <code>filter</code> function to select rows matching a particular criteria: in this case, that <code>cyl==6</code>. We can match two criteria at once if needed<label for="tufte-sn-1" class="margin-toggle sidenote-number">1</label><input type="checkbox" id="tufte-sn-1" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">1</span> Some notes on <code>==</code> and <code>&amp;</code>: You might have noted above that I wrote <code>==</code> rather than just <code>=</code> to define the criteria. This is because most programming languages, including R, use two <code>=</code> symbols to distinguish: <em>comparison</em> from <em>assignment</em>. Here we are doing comparison, so we use <code>==</code>. In R normall use <code>&lt;-</code> to assign variables, which avoids any ambiguity. The <code>&amp;</code> symbol does what you probably expect — it simply means ‘AND’.</span>:</p>
-<p><code>r   filter(mtcars, cyl==6 &amp; gear==3)   ##    mpg cyl disp  hp drat    wt  qsec vs am gear carb   ## 1 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1   ## 2 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></p>
+<pre class="r"><code>filter(mtcars, cyl==6 &amp; gear==3)
+##    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## 1 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## 2 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
 </div>
 <div id="combining-column-selections-and-filters-with-dplyr" class="section level1">
 <h1>Combining column selections and filters with <code>dplyr</code></h1>
 <p>As you might have noticed above, we can ‘nest’ function calls in R. For example, we might want to both select some columns and filter rows.</p>
 <p>Taking the <code>mtcars</code> data, we might want to select the weights of only those cars with low <code>mpg</code>:</p>
-<p><code>r   gas.guzzlers &lt;- select(filter(mtcars, mpg &lt; 15), wt)   summary(gas.guzzlers)   ##        wt          ##  Min.   :3.570     ##  1st Qu.:3.840     ##  Median :5.250     ##  Mean   :4.686     ##  3rd Qu.:5.345     ##  Max.   :5.424</code></p>
+<pre class="r"><code>gas.guzzlers &lt;- select(filter(mtcars, mpg &lt; 15), wt)
+summary(gas.guzzlers)
+##        wt       
+##  Min.   :3.570  
+##  1st Qu.:3.840  
+##  Median :5.250  
+##  Mean   :4.686  
+##  3rd Qu.:5.345  
+##  Max.   :5.424</code></pre>
 <p>This is OK, but can get quite confusing to read, and the more deeply functions are nested the easier it is to make a mistake.</p>
-<p><br><br><br></p>
-<p>### Think of data ‘flowing’ down the page</p>
+<p><br><br></p>
 <p><code>dplyr</code> provides an alternative to nested function calls, called the pipe.</p>
 <p>Imagine your dataframe as a big bucket containing data. From this bucket, you can ‘pour’ your data down through a series of tubes and filters, until at the bottom of your screen you have a smaller bucket containing just the data you want.</p>
+<p><label for="tufte-mn-3" class="margin-toggle">⊕</label><input type="checkbox" id="tufte-mn-3" class="margin-toggle"><span class="marginnote">Think of your data ‘flowing’ down the screen</span></p>
 <p>To make data flow from one bucket to another, we use the ‘pipe’ operator: <code>%&gt;%</code></p>
 <pre class="r"><code>big.bucket.of.data &lt;- mtcars
 
@@ -138,9 +185,11 @@ big.bucket.of.data %&gt;%
 ##  Mean   :4.686  
 ##  3rd Qu.:5.345  
 ##  Max.   :5.424</code></pre>
-<p>So we have achieved the same outcome, but the code reads as a series of operations which the data flows through, connected by our pipes (the <code>%&gt;%</code>). At the end of the last pipe, our data gets dumped into the <code>summary()</code> function.</p>
+<p>So we have achieved the same outcome, but the code reads as a series of operations which the data flows through, connected by our pipes (the <code>%&gt;%</code>). At the end of the last pipe, our data gets dumped into the <code>summary()</code> function<label for="tufte-sn-2" class="margin-toggle sidenote-number">2</label><input type="checkbox" id="tufte-sn-2" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">2</span> You might notice that when we write the <code>select</code> function we don’t explicitly name the dataframe to be used. This is because R <em>implicitly</em> passes the output of the pipe to the first argument of the function. So here, the output of <code>filter(mpg&lt;15)</code> is used as the dataframe in the <code>select</code> function.</span></p>
 <p>We could just has well have saved this smaller ‘bucket’ of data so we can use it later on:</p>
-<p><code>r   smaller.bucket &lt;- big.bucket.of.data %&gt;%   filter(mpg &lt;15) %&gt;%   select(wt)</code></p>
+<pre class="r"><code>smaller.bucket &lt;- big.bucket.of.data %&gt;%
+  filter(mpg &lt;15) %&gt;%
+  select(wt)</code></pre>
 <p>This turns out to be an incredibly useful pattern when processing and working with data. We can pour data through a series of filters and other operations, saving intermediate states where necessary.</p>
 </div>
 <div id="modifying-and-creating-new-columns" class="section level1">
@@ -180,11 +229,11 @@ glimpse(phq9.df)
 <p>We want to calculate the PHQ-9 score for each patient, at each month. This is easy with <code>dplyr::mutate()</code>:</p>
 <pre class="r"><code>phq9.scored.df &lt;- phq9.df %&gt;%
 mutate(phq9 = phq9_01 + phq9_02 + phq9_03 + phq9_04 +
-phq9_05 + phq9_06 + phq9_07 + phq9_08 + phq9_09)
+         phq9_05 + phq9_06 + phq9_07 + phq9_08 + phq9_09)
 
 phq9.scored.df %&gt;%
-select(patient, group, month, phq9) %&gt;%
-head
+  select(patient, group, month, phq9) %&gt;%
+  head
 ## # A tibble: 6 × 4
 ##   patient group month  phq9
 ##     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;

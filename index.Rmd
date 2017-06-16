@@ -26,7 +26,7 @@ What's important is that you follow the guide *just far enough to start getting 
 ### Part 1: Must read
 
 1. [Getting started](start_here.html) 
-2. [Datasets and dataframes](datasets.Rmd)
+2. [Datasets and dataframes](datasets.html)
 2. [Manipulating dataframes](working-with-dataframes.html) (select and filter)
 3. [Summarising data](summarising-data.html) (split, apply, combine)
 4. [Visualising data](graphics.html) (layering graphics with `ggplot2`)
@@ -35,6 +35,7 @@ What's important is that you follow the guide *just far enough to start getting 
 
 ### Part 2: Nice to know
 
+1. [Working with real data](real-data.html)
 1. [Understanding interactions](understanding-interactions.html)
 1. [Mediation](mediation.html)
 1. [Linear mixed models (multilevel models)](multilevel-models.html)
@@ -59,7 +60,7 @@ What's important is that you follow the guide *just far enough to start getting 
 
 In particular, lots of the base R functions are old, quirky, inconstently named, and hard to remember. This guide recommends that you use several new 'packages' that replicate and extend much of R's basic functionality. Sticking to this basic set of packages will help you form a more consistent mental model of how to work in R. You can learn the crufty old bits of R (which are often cleverer than is immediately apprent) later on.
 
-We also assume you are using the RStudio editor and working in an RMarkdown document (see the next section). This is important because this guide itself is written in RMarkdown, and editing it will be an important part of the learning process.
+We also assume you are using the RStudio editor and working in an RMarkdown document (see the next section). This is important because this guide itself is written in RMarkdown, and editing it will be an important part of the learning process. If you don't have access to RStudio yet, see the [installation guide](installation.html).
 
 
 # What next

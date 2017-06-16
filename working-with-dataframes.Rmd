@@ -45,14 +45,14 @@ It's strongly recommended that you use these in your own code.
 *Selecting a single column*:
   Because dataframes act like lists of vectors, we can access columns from them using the `$` symbol. For example, here we select the `Ozone` column, which returns a vector of the observations made:
 
-  ```{r}
+```{r}
 airquality$Ozone
 ```
 
 
 And we can pass this vector to functions, for example `summary()`:
 
-  ```{r}
+```{r}
 summary(airquality$Ozone)
 ```
 
@@ -62,7 +62,7 @@ summary(airquality$Ozone)
   To select multiple columns the `select()` function from `dplyr` is the simplest solution. You give `select()` a dataframe and the names of the columns you want, and it returns a new dataframe with just those columns, in the order you specified:
 
 
-  ```{r}
+```{r}
 head(
   select(mtcars, cyl, hp)
 )
@@ -71,7 +71,7 @@ head(
 
 Because all the main `dplyr` functions tend to return a new dataframe, we can assign the results to a variable, and use that as normal:
 
-  ```{r}
+```{r}
 cylandweight <- select(mtcars, cyl, wt)
 summary(cylandweight)
 ```
@@ -88,7 +88,7 @@ select(airquality, -Ozone, -Solar.R, -Wind)
 
 
 
-You can use a patterns to match a subset of the columns you want. For example, here we select all thecolumns where the name contains the letter `d`:
+You can use a patterns to match a subset of the columns you want. For example, here we select all the columns where the name contains the letter `d`:
 
 ```{r}
 head(
@@ -123,13 +123,13 @@ As a quick reference, you can use the following 'verbs' to select columns in dif
 
 To select particular rows from a dataframe, `dplyr` provides the very useful `select()` function. Let's say we just want the 6-cylindered cars from the `mtcars` dataframe:
 
-  ```{r}
+```{r}
 filter(mtcars, cyl==6)
 ```
 
 Here we used the `filter` function to select rows matching a particular criteria: in this case, that `cyl==6`. We can match two criteria at once if needed[^notesonoperators]:
 
-  ```{r}
+```{r}
 filter(mtcars, cyl==6 & gear==3)
 ```
 
@@ -152,7 +152,7 @@ As you might have noticed above, we can 'nest' function calls in R. For example,
 
 Taking the `mtcars` data, we might want to select the weights of only those cars with low `mpg`:
 
-  ```{r}
+```{r}
 gas.guzzlers <- select(filter(mtcars, mpg < 15), wt)
 summary(gas.guzzlers)
 ```
@@ -160,13 +160,13 @@ summary(gas.guzzlers)
 
 This is OK, but can get quite confusing to read, and the more deeply functions are nested the easier it is to make a mistake.
 
-<br><br><br>
+<br><br>
 
-  ### Think of data 'flowing' down the page
-
-  `dplyr` provides an alternative to nested function calls, called the pipe.
+`dplyr` provides an alternative to nested function calls, called the pipe.
 
 Imagine your dataframe as a big bucket containing data. From this bucket, you can 'pour' your data down through a series of tubes and filters, until at the bottom of your screen you have a smaller bucket containing just the data you want.
+
+`r margin_note("Think of your data 'flowing' down the screen")`
 
 To make data flow from one bucket to another, we use the 'pipe' operator: `%>%`
 
@@ -180,11 +180,11 @@ big.bucket.of.data %>%
 ```
 
 
-So we have achieved the same outcome, but the code reads as a series of operations which the data flows through, connected by our pipes (the `%>%`). At the end of the last pipe, our data gets dumped into the `summary()` function.
+So we have achieved the same outcome, but the code reads as a series of operations which the data flows through, connected by our pipes (the `%>%`). At the end of the last pipe, our data gets dumped into the `summary()` function^[You might notice that when we write the `select` function we don't explicitly name the dataframe to be used. This is because R *implicitly* passes the output of the pipe to the first argument of the function. So here, the output of `filter(mpg<15)` is used as the dataframe in the `select` function.]
 
 We could just has well have saved this smaller 'bucket' of data so we can use it later on:
 
-  ```{r}
+```{r}
 smaller.bucket <- big.bucket.of.data %>%
   filter(mpg <15) %>%
   select(wt)
@@ -214,11 +214,11 @@ We want to calculate the PHQ-9 score for each patient, at each month. This is ea
 ```{r}
 phq9.scored.df <- phq9.df %>%
 mutate(phq9 = phq9_01 + phq9_02 + phq9_03 + phq9_04 +
-phq9_05 + phq9_06 + phq9_07 + phq9_08 + phq9_09)
+         phq9_05 + phq9_06 + phq9_07 + phq9_08 + phq9_09)
 
 phq9.scored.df %>%
-select(patient, group, month, phq9) %>%
-head
+  select(patient, group, month, phq9) %>%
+  head
 ```
 
 Notice that we first stored the computed scores in `phq9.scored.df` and then used `select()` to get rid of the raw data columns to display only what we needed.

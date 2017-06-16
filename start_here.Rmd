@@ -45,11 +45,81 @@ You can see how this works in practice in the next section.
 
 RStudio is a text editor which has been customised to make working with R easy. It can be installed on your own computer, or you can login to a shared RStudio server^[e.g. one run by your university.] from a web browser. Either way the interface is largely the same.  
 
+
+
+```{r echo=FALSE, fig.fullwidth=T}
+knitr::include_graphics('media/rstudio-mainwindow.png')
+```
+
+
+
+The figure above shows the main RStudio interface, comprising:
+
+1. The main R-script or RMarkdown editor window
+1. The R console, into which you can type R commands, and see output from commands run in the script editor.
+1. The 'environment' panel, which lists all the variables you have defined and currently available to use.
+1. The files and help panel. Within this the files tab enables you to open files stored on the server, or in the current project on your disk.
+
+
+
+
+
+
 You can see a short video demonstrating the RStudio interface here: 
 
-<div style="position:relative;height:0;padding-bottom:56.25%"><iframe src="https://www.youtube.com/embed/5YmcEYTSN7k?ecver=2" width="420" height="300" frameborder="0" style="position:absolute;width:100%;height:100%;left:0" allowfullscreen></iframe></div>  
-  
-The video^[Note: this isn't the final version and doesn't show everything below... it's just borrowed from youtube temporarily]:
+<iframe src="https://player.vimeo.com/video/221888958" width="640" height="480" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+<!-- 
+
+When you first open RStudio (in this case, it's the server version, so loaded in a web page) it should look something like this. 
+
+There is a single window, intially split into three panels, which are:
+
+1. The console, where you can type R commands and see the output produced by them
+2. The help panel, which also has a bunch of other tabs for things like the Environment, your command history, packages you have installed, and some other stuff.
+3. In the lower right corner is a panel for your plots, which also has a tab called 'files', where you can view and open analysis and data files you save on the server.
+
+
+The first thing I'd suggest you do is to create a new RMarkdown file, by clicking on this icon here and selecting RMarkdown. The defaults are all fine, so just give it a name and click OK.
+
+You should now see a 4th panel appear in the top left of the main window, which is the Script editor. This is where you can edit and run your analyses. You can type R commands directly into the console, but it's much better to type them here first, and then run them.
+
+There is more information on RMarkdown in the guide, but you can think of it like a lab notebook: it lets you mix commands for analysis, graphs, tables and your explanatory notes all in the same document. This means it's really easy to keep track of your work, and collaborate with other people.
+
+When we're finished working, we can press 'Knit' which runs all the code, and creates a finished document containing both the results and our notes. If you are using the server edition you might see a little warning message about a popup blocker, but this is OK to ignore.
+
+In this example file we can see there is:
+
+- Some introductory text,
+- A summary of the 'cars' dataset and
+- An embedded plot
+
+This is all saved as a single html file which you can email to collaborators, put online, or submit to a journal to help reviewers understand your work.
+
+If I close this window, you can also see that if I click the arrow next to the 'knit' button we could also have created a pdf or word document, although I'd recommend sticking to HTML to begin with.
+
+
+At the top of the RMarkdown file itself, we have a title for the document, and a line which tells RStudio that we want to build and html file by default. 
+
+Moving down, we have a 'code chunk', which is denoted by these three backticks, the curly brackets and the letter "R". This tells Rstduio that we're about to include some R code which it will need to run. Ignore the code in this chunk for the moment, and I'll come back to that later.
+
+Next we have some text, which is formatted with Markdown. Markdown is a simple text format which makes it easy to create structured documents with some basic markup symbols. Here, the two ## symbols just mean that this is a "second level" heading. The double asterisk symbols here mean but this word in bold text... but again, don't worry too much about this for the moment. It's just text.
+
+Next we have another code block, this time with some of the analysis we saw in the html file after we hit 'knit'. This function just produces a summary of the 'cars' dataset, which is an example file built into R and is already loaded, as soon as we start RStudio.
+
+One of the nicest things about RMarkdown documents though is that we can write and run this code interactively. So if I put my cursor on this line here, and press run, then I can see the results dropped straight into the document. I could also have just pressed Ctrl-Enter and the same thing would happen.
+
+So, if I edit the code here, I can change the analysis and see the results straight away. For example, if I add the line `pairs(cars)` we immediately see a pairs plot, which is just a bunch of scatterplots. Working interactively like this is really nice when you first start exploring a dataset and trying to make sense of it.
+
+
+
+OK - so that's it for this video. Just quickly before I go though, it's worth knowing there are lots of keyboard shortcuts available, and you can see then all from this menu. Help is F-1!
+
+-->
+
+
+
+The video^[Note: this isn't the final version.. it will be more polished!]:
 
 - Shows you how to type commands into the Console and view the results.
 - Run a plotting function, and see the result.

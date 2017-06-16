@@ -13,3 +13,6 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 
 
 # Visualising linear models
+
+check this:
+https://strengejacke.wordpress.com/2013/10/31/visual-interpretation-of-interaction-terms-in-linear-models-with-ggplot-rstats/
