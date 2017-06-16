@@ -36,6 +36,8 @@ hz %>% glimpse()
 ```
 
 
+# Defining the model
+
 Define the CFA model you want to run using 'lavaan model syntax'^[A full guide is here: <http://lavaan.ugent.be/tutorial/syntax1.html>]. For example:
 
 
@@ -69,15 +71,15 @@ hz.fit.summary
 
 The output has three parts:
 
-In the first, the values in the first column are the standardised weights from the observed variables to the latent factors.
+1. Parameter estimates. The values in the first column are the standardised weights from the observed variables to the latent factors.
 
-In the second, the values in the first column are the covariances between the latent factors.
+2. Factor covariances. The values in the first column are the covariances between the latent factors.
 
-In the third table, the values in the first column are the estimates of each observed variable’s error variance.
-
-
+3. Error variances. The values in the first column are the estimates of each observed variable’s error variance.
 
 
+
+# Model fit
 
 To examine the model fit:
 
@@ -86,7 +88,12 @@ fitmeasures(hz.fit, c('cfi', 'rmsea', 'rmsea.ci.upper', 'bic'))
 ```
 
 
-This looks OK, but could be improved. To examine the modification indices (here sorted to see the largest first) we type:
+This looks OK, but could be improved. 
+
+
+# Modification indices
+
+To examine the modification indices (here sorted to see the largest first) we type:
 
 ```{r}
 modificationindices(hz.fit) %>% 
@@ -98,8 +105,7 @@ modificationindices(hz.fit) %>%
 ```
 
 
-Latent factor to variable links have `=~` in the 'op' column. Error covariances for observed variables have `~~` as the op.
-
+Latent factor to variable links have `=~` in the 'op' column. Error covariances for observed variables have `~~` as the op. These symbols match the symbols used to describe a path in the lavaan model syntax.
 
 
 If we add the largest MI path to our model it will look like this:

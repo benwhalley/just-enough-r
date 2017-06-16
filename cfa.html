@@ -66,6 +66,8 @@ hz %&gt;% glimpse()
 ## $ x7     &lt;dbl&gt; 3.391304, 3.782609, 3.260870, 3.000000, 3.695652, 4.347...
 ## $ x8     &lt;dbl&gt; 5.75, 6.25, 3.90, 5.30, 6.30, 6.65, 6.20, 5.15, 4.65, 4...
 ## $ x9     &lt;dbl&gt; 6.361111, 7.916667, 4.416667, 4.861111, 5.916667, 7.500...</code></pre>
+<div id="defining-the-model" class="section level1">
+<h1>Defining the model</h1>
 <p>Define the CFA model you want to run using ‘lavaan model syntax’<label for="tufte-sn-2" class="margin-toggle sidenote-number">2</label><input type="checkbox" id="tufte-sn-2" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">2</span> A full guide is here: <a href="http://lavaan.ugent.be/tutorial/syntax1.html" class="uri">http://lavaan.ugent.be/tutorial/syntax1.html</a></span>. For example:</p>
 <pre class="r"><code>hz.model &lt;- '
 visual =~ x1 + x2 + x3
@@ -132,14 +134,23 @@ maths =~ x7 + x8 + x9
 hz.fit.summary
 ## NULL</code></pre>
 <p>The output has three parts:</p>
-<p>In the first, the values in the first column are the standardised weights from the observed variables to the latent factors.</p>
-<p>In the second, the values in the first column are the covariances between the latent factors.</p>
-<p>In the third table, the values in the first column are the estimates of each observed variable’s error variance.</p>
+<ol style="list-style-type: decimal">
+<li><p>Parameter estimates. The values in the first column are the standardised weights from the observed variables to the latent factors.</p></li>
+<li><p>Factor covariances. The values in the first column are the covariances between the latent factors.</p></li>
+<li><p>Error variances. The values in the first column are the estimates of each observed variable’s error variance.</p></li>
+</ol>
+</div>
+<div id="model-fit" class="section level1">
+<h1>Model fit</h1>
 <p>To examine the model fit:</p>
 <pre class="r"><code>fitmeasures(hz.fit, c('cfi', 'rmsea', 'rmsea.ci.upper', 'bic')) 
 ##            cfi          rmsea rmsea.ci.upper            bic 
 ##          0.931          0.092          0.114       7595.339</code></pre>
-<p>This looks OK, but could be improved. To examine the modification indices (here sorted to see the largest first) we type:</p>
+<p>This looks OK, but could be improved.</p>
+</div>
+<div id="modification-indices" class="section level1">
+<h1>Modification indices</h1>
+<p>To examine the modification indices (here sorted to see the largest first) we type:</p>
 <pre class="r"><code>modificationindices(hz.fit) %&gt;% 
   as.data.frame() %&gt;% 
   arrange(-mi) %&gt;% 
@@ -194,7 +205,7 @@ hz.fit.summary
 </tr>
 </tbody>
 </table>
-<p>Latent factor to variable links have <code>=~</code> in the ‘op’ column. Error covariances for observed variables have <code>~~</code> as the op.</p>
+<p>Latent factor to variable links have <code>=~</code> in the ‘op’ column. Error covariances for observed variables have <code>~~</code> as the op. These symbols match the symbols used to describe a path in the lavaan model syntax.</p>
 <p>If we add the largest MI path to our model it will look like this:</p>
 <pre class="r"><code>hz.model.2 &lt;- &quot;
 visual =~ x1 + x2 + x3
@@ -206,6 +217,7 @@ fitmeasures(hz.fit.2, c('cfi', 'rmsea', 'rmsea.ci.upper', 'bic'))
 ##            cfi          rmsea rmsea.ci.upper            bic 
 ##          0.936          0.091          0.113       7595.660</code></pre>
 <p>RMSEA has improved marginally, but we’d probably want to investigate this model further, and make additional improvements to it.</p>
+</div>
 <div id="missing-data" class="section level1">
 <h1>Missing data</h1>
 <p>If you have missing data, add the argument <code>estimator='MLM'</code> to the <code>cfa()</code> function to use a robust method. There are no missing data in this dataset, but it would look like this:</p>
