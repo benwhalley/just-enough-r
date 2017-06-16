@@ -7,33 +7,37 @@ output:
 ```{r setup, include=FALSE}
 # ignore all this for the moment; it will be explained below
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+theme_set(theme_minimal())
 ```
 
 
 # Teaching an old dog new tricks
 
-R has been around for a very long time, but has remained popular because it is easy for people to add new functions to it. You can run almost any statistical model and produce a wide variety of graphics in R because people have contributed new functions which extend the base language. These new features are distributed in bundles known as 'packages'. For now we'll assume someone has helped you install all the packages you need (if this isn't the case, see XXXSECTION ON INSTALLATIONXXX).
+R has been around for a very long time, but has remained popular because it is easy for people to add new functions to it. 
 
-To *access* the features in packages, you normally load the package with the `library` command. Running `library(packagename)` loads all the new functions and it is then possible to call them from your code. For example:
+You can run almost any statistical model and produce a wide variety of graphics in R because people have contributed new functions and these extend the base language. These new features are distributed in bundles known as 'packages'. For now we'll assume someone has helped you install all the packages you need^[See the [installation guide](installation.html) if this isn't the case].
+
+To *access* the features in packages, you normally load the package with the `library()` function. Running `library(<packagename>)` loads all the new functions within it, and it is then possible to call them from your code. For example, typing:
 
 
 ```{r}
 library(ggplot2)
 ```
 
-This will load the `ggplot2` package. After loading the package, you can then call the `qplot` function it provides:
+Will load the `ggplot2` package. You can then call the `qplot` function it provides:
 
 ```{r}
-qplot(mtcars$mpg)
+qplot(mtcars$mpg, bins=7)
 ```
 
 
-You don't strictly *need* to load packages to use the features within them though. If it is installed on your system you can call a function directly by telling R which package it is stored in. In the example below we call the `hist.data.frame` from the `Hmisc` package, and obtain histograms of all the variables in the `mtcars` dataset:
+You don't strictly *need* to load packages to use the features within them though. If a package is installed on your system you can also call a function it provides directly. In the example below we call the `hist.data.frame` from the `Hmisc` package, and obtain histograms of all the variables in the `mtcars` dataset:
 
 
 ```{r}
 Hmisc::hist.data.frame(mtcars)
 ```
+
 
 The rule is to type `package::function(parameters)`, where `::` separates the package and function names. Parameters are just the inputs to the function.
 

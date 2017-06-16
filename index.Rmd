@@ -9,14 +9,14 @@ R is software which makes it easy to work with and learn from data.
 
 It also happens to be a complete programmming language, but if you're reading this guide then that might not be of interest to you. That's OK — the goal here is *not* to teach you how to program in R^[This is actually a lie, but I'm hoping you won't notice until it's too late.].  The goal is to teach you *just enough R* to be confident to explore your data.
 
-We are going to use R the same way we use any other statistics software: To check and visualise your data, run statistical analyses, and share the results with colleagues.  To do that it's worth learning the *absolute basics* of the R language. The next few chapters walk you through those basics: what you need to know, and no more, to be productive in R and RStudio. By analogy, imagine going on holiday and learning enough French to introduce yourself, count from one to ten, and order a baguette. You won't be fluent - but you won't starve, and your trip will be more fun.
+We are going to use R the same way we use any other statistics software: To check and visualise data, run statistical analyses, and share our results with others.  To do that it's worth learning the *absolute basics* of the R language. The next few chapters walk you through those basics: what you need to know to be productive in R and RStudio. By analogy, imagine going on holiday and learning enough French to introduce yourself, count from one to ten, and order a baguette. You won't be fluent - but you won't starve, and your trip will be more fun.
 
 
 # How the guide is structured
 
-Part 1 of the guide is meant to be read from beginning to end for those learning R from scratch. If you already know some R, it may still offer a way of structuring how you work, and approaches to problem solving with R that will still be useful. 
+Part 1 of the guide is meant to be read from beginning to end for those learning R from scratch. If you already know some R, it may still offer useful tips on structuring how you work, and approaches to problem solving with R. 
 
-Part 2 can be read sequentially, but these chapters are also designed to be used alone to learn particular techniques. 
+Part 2 can be read sequentially, but these chapters are also designed to work as standalone guides for specific techniques. 
 
 Part 3 should be used interactively to answer questions that arise along the way. 
 
@@ -39,13 +39,15 @@ What's important is that you follow the guide *just far enough to start getting 
 1. [Mediation](mediation.html)
 1. [Linear mixed models (multilevel models)](multilevel-models.html)
 1. Meta analysis
-1. Confirmatory factor analysis and Structural Equation Modelling
+1. [Confirmatory factor analysis](cfa.html) 
+1. Structural Equation Modelling
 1. Power analysis
 1. ... ^[It would also be lovely to have chapters on multiple imputation, power analysis, simulation, Bayesian modelling and much else. These aren't planned imminently, but contributions are welcome.]
 
 
 ### Part 3: Loose ends
 
+- [Installing packages](packages.html)
 - [Handling missing values in R](missing-values.html)
 - [Using RMarkdown effectively](rmarkdown-tricks.html)
 
