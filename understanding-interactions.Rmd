@@ -10,9 +10,140 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 ```
 
 
+# What is an interaction? 
+
+For an interaction to occur:
+
+- We have an outcome (severity of injury in a car crash, for example)
+- We have at least 2 predictors of that outcome (e.g. age and gender)
+
+
+Let's assume:
+
+- Women are likely to be more seriously injured than men in a crash (a +10 point increase in severity)
+- Drivers over 60 are more likely to injured than younger drivers (+10 point severity vs <60 years)
+
+For an interaction to occur we have to show that, for example:
+
+- If you ware old and also female then you are more severely injured than we would expect simply by adding the effects for being female (+10 points) and for being over 60 (+10 points). 
+
+That is, if an interaction occurs the risk of being older and female is > a 20 point increase in severity. This scenario is illustrated in the figure below:
+
+```{r}
+inter.df <- expand.grid(female=0:1, older=0:1, interaction=0:1) %>% 
+  as.data.frame() %>% 
+  mutate(severity.of.injury = 50 + 10 * female + 10* older + 20 * female*older*interaction) %>%
+  mutate(female=factor(female, labels=c("Male", "Female"))) %>% 
+  mutate(older=factor(older, labels=c("Young", "Old")))
+
+inter.df %>% 
+  ggplot(aes(older, severity.of.injury, fill=female)) + 
+    geom_bar(stat="identity", position="dodge")  + facet_wrap(~factor(interaction, labels=c("No Interaction", "Interaction"))) + scale_fill_discrete("") + ylab("Injury severity") + xlab("")
+```
+
+
+
+And this plot might be better re-drawn as a point and line plot:
+
+```{r}
+inter.df %>% 
+  ggplot(aes(older, severity.of.injury, group=female, color=female)) + 
+    geom_point()  + geom_line() + 
+  facet_wrap(~factor(interaction, labels=c("No Interaction", "Interaction"))) + scale_fill_discrete("") + ylab("Injury severity") + xlab("")
+```
+
+
+
+The reason this plot improves on the bar graph is because:
+
+- The main effects are easy to distinguish: just ask yourself if the lines are horizontal or not, and whether they are separated vertically. 
+- The interaction is easy to spot: Ask yourself if the lines are parallel. If they are parallel the *difference* between men and women is constant cross ages.
+
+
+In contrast, reading the bar graph requires that we average pairs of bars (sometimes not adjacent to one another) and compare them - a much more difficult mental operation. Here the line plot is capitalising on basic perceptual properties of visual perception to make the narrative clearer.
+
+
 
 
 # Visualising linear models
 
 check this:
 https://strengejacke.wordpress.com/2013/10/31/visual-interpretation-of-interaction-terms-in-linear-models-with-ggplot-rstats/
+
+
+Steps this page will work through:
+
+- Visualising the effect in the raw data.
+- Running the the model (first will be a 2x2 between Anova)
+- Using `predict()`.
+- Creating predictions at specific values
+- Binding predictions and the original data together. 
+- Using GGplot to layer points, lines and error bars.
+
+```{r}
+library('tidyverse')
+m <- lm(mpg~vs+wt, data=mtcars)
+m.predictions <- predict(m, interval='confidence')
+
+mtcars.plus.predictions <- bind_cols(
+  mtcars, 
+  m.predictions %>% as.data.frame()
+)
+
+prediction.frame <- expand.grid(vs=0:1, wt=2) %>% as.data.frame()
+prediction.frame.plus.predictions <- bind_cols(
+  prediction.frame, 
+  predict(m, newdata=prediction.frame, interval='confidence') %>% as.data.frame()
+)
+
+
+mtcars.plus.predictions %>% ggplot(aes(vs, fit, ymin=lwr, ymax=upr)) + 
+  stat_summary(geom="pointrange")
+```
+
+```{r}
+prediction.frame.plus.predictions %>% ggplot(aes(vs, fit, ymin=lwr, ymax=upr)) + geom_pointrange()
+```
+
+```{r}
+prediction.frame.plus.predictions 
+mtcars.plus.predictions %>% group_by(vs) %>% 
+  summarise_each(funs(mean), fit, lwr, upr)
+```
+
+
+# Marginal effects
+
+What is the effect of being black or female on the chance of you getting diabetes?
+
+Two ways of computing, depending on which of these two you hate least:
+
+- Calculate the effect of being black for someone who is 50% female (marginal effect at the means, MEM)
+- Calculate the effect first pretending someone is black, then pretending they are white, and taking the difference between these estimate (average marginal effect, AME)
+
+
+
+
+```{r}
+library(margins)
+margins(m, at = list(wt = 1:2))
+
+m2 <- lm(mpg~vs*wt, data=mtcars)
+summary(m2)
+m2.margins <- margins(m2, at = list(wt = 1.5:4.5))
+
+summary(m2.margins)
+
+summary(m2.margins) %>% as.data.frame() %>% 
+  filter(factor=="vs") %>% 
+  ggplot(aes(wt, AME)) + 
+    geom_point() + geom_line()
+  
+```
+# With continuous covariates
+
+- Run 2 x Continuous Anova
+- Predict at different levels of
+
+
+

@@ -10,9 +10,10 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 ```
 
 
-This section is crucial because we use descriptive statistics and graphs to explore a dataset and get a feel for the relationships within it.
+THIS SECTION INCOMPLETE - YOU MIGHT WANT TO SKIP TO THE NEXT ONE
 
-Sections to cover
+
+Sections to cover:
 
 
 ## Benefits of visualising data
