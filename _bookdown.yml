@@ -1,0 +1,51 @@
+book_filename: "Just enough R"
+new_session: yes
+output_dir: "docs"
+
+rmd_files:
+  [ "index.Rmd",
+    "start_here.Rmd",
+    "datasets.Rmd",
+    "working-with-dataframes.Rmd",
+    "summarising-data.Rmd",
+    "graphics.Rmd",
+    "linear-models-simple.Rmd",
+
+    "real-data.Rmd",
+    "correlations.Rmd",
+    "t-tests.Rmd",
+    "anova.Rmd",
+    "understanding-interactions.Rmd",
+    "predictions-and-margins.Rmd",
+    "mediation.Rmd",
+    "multilevel-models.Rmd",
+    "cfa.Rmd",
+
+    "installation.Rmd",
+    "packages.Rmd",
+    "help.Rmd",
+    "missing-values.Rmd",
+    "rmarkdown-tricks.Rmd",
+    "confidence-vs-prediction-intervals.Rmd"
+  ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

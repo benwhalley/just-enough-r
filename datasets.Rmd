@@ -5,13 +5,16 @@ output:
 ---
   
 
-```{r setup, include=FALSE}
-# ignore all this for the moment; it will be explained below
+```{r, include=FALSE}
+
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 library(tidyverse)
 library(tufte)
+
 ```
 
+
+# Datasets and dataframes
 
 A dataframe is an object which can store data as you might encounter it in SPSS, Stata or other statistics packages. It's much like a spreadsheet, but with some constraints applied 
 'Constraints' sounds bad, but are helpful here: they make dataframes more structured and predictable to work with:
@@ -26,7 +29,7 @@ A dataframe is an object which can store data as you might encounter it in SPSS,
 Put another way, a dataframe behaves like a *list* of *vectors*, which means we can use a lot of the same rules to access elements within them (more on this below).
 
 
-# Using 'built in' data 
+## Using 'built in' data 
 
 
 
@@ -72,7 +75,7 @@ psych::cor.plot(airquality)
 ```
 
 
-# Importing and exporting data
+## Importing and exporting data
 
 
 If you have data outside of R, *the simplest way to import it is to first save it as a comma or tab-separated text file*, normally with the file extension `.csv` or `.txt`^[This is easy to achieve in Excel and most other stats packages using the `Save As...` menu item].
@@ -91,8 +94,8 @@ head(angry.moods)
 
 
 
-As you can see, when loading the `.csv` file the `read_csv()` makes some assumptions about the *type*  of data the file contains. In this case, all the columns contain integer values. It's worth checking this message to make sure that stray cells in the file you are importing don't cause problems when importing. 
-`r margin_note("Excel won't complain about this sort of thing, but R is more strict and won't mix text and numbers in the same column.")`
+As you can see, when loading the `.csv` file the `read_csv()` makes some assumptions about the *type*  of data the file contains. In this case, all the columns contain integer values. It's worth checking this message to make sure that stray cells in the file you are importing don't cause problems when importing. Excel won't complain about this sort of thing, but R is more strict and won't mix text and numbers in the same column.
+
 A common error is for stray notes or text values in a spreadsheet to cause a column which should be numeric to be converted to the `character` type.
 
 
@@ -107,12 +110,12 @@ pairs(angry.moods)
 
 
 
-## Importing remote data
+## Importing data over the web
 
 One neat feature of the `readr` package is that you can import data from the web, using a URL rather than a filename on your local computer. This can be really helpful when sharing data and code with colleagues. For example, we can load the `angry_moods.csv` file from a URL:
 
 
-```{r, message=F}
+```{r, message=F, cache=T, eval=F}
 angry.moods.from.url <- readr::read_csv(
   "https://raw.githubusercontent.com/benwhalley/just-enough-r/master/angry_moods.csv")
 head(angry.moods.from.url)
@@ -121,6 +124,6 @@ head(angry.moods.from.url)
 
 
 
-# Importing from SPSS and other packages
+## Importing from SPSS and other packages
 
 This is often more trouble than it's worth (just use a csv file!) but if you really must see <https://www.datacamp.com/community/tutorials/r-data-import-tutorial>.

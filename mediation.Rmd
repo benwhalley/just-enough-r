@@ -1,14 +1,15 @@
 ---
-title: 'Mediation'
+title: 'Analysing mediation'
 output:
   bookdown::tufte_html2
 ---
 
-```{r setup, include=FALSE}
-# ignore all this for the moment
+```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 ```
 
+
+# Mediation
 
 
 This chapter will assume:

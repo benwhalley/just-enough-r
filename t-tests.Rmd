@@ -1,0 +1,137 @@
+---
+title: 't-tests'
+output:
+  bookdown::tufte_html2
+---
+
+```{r, include=F}
+library(tidyverse)
+library(pander)
+panderOptions('digits', 2)
+panderOptions('round', 3)
+panderOptions('keep.trailing.zeros', TRUE)
+```
+
+
+
+# t-tests
+
+Before you run any tests it's worth plotting your data. 
+
+Assuming you have a continuous outcome and categorical (binary) predictor (here we use a subset of the built in `chickwts` data), a boxplot can work well:
+
+```{r boxplot, fig.cap="The box in a boxplot indictes the IQR; the whisker indicates the min/max values or 1.5 * the IQR, whichever is the smaller. If there are outliers beyond 1.5 * the IQR then they are shown as points."}
+chicks.eating.beans <- chickwts %>% 
+  filter(feed %in% c("horsebean", "soybean"))
+
+chicks.eating.beans %>% 
+  ggplot(aes(feed, weight)) +
+  geom_boxplot()
+```
+
+Or a violin or bottle plot, which shows the distributions within each group:
+
+```{r}
+chicks.eating.beans %>% 
+  ggplot(aes(feed, weight)) +
+  geom_violin()
+```
+
+
+Layering boxes and bottles can work well too because it combines information about the distribution with key statistics like the median and IQR, and also because it scales reasonably well to multiple categories:
+
+
+```{r}
+chickwts %>% 
+  ggplot(aes(feed, weight)) +
+  geom_violin() +
+  geom_boxplot(width=.1) + 
+  xlab("")
+```
+
+
+Bottleplots are just density plots, turned 90 degrees. Density plots might be more familiar to some, but it's hard to show more than 2 or 3 categories:
+
+```{r}
+chicks.eating.beans %>% 
+  ggplot(aes(weight, fill=feed)) +
+  geom_density(alpha=.5)
+```
+
+
+
+And density plots are just smoothed histograms (which you might prefer if you're a fan of 80's computer games):
+
+```{r}
+chicks.eating.beans %>% 
+  ggplot(aes(weight)) +
+  geom_histogram(bins=7) + 
+  facet_grid(feed ~ .)
+```
+
+
+
+## Running t-tests
+
+Assuming you really do still want to run a null hypothesis test, the `t.test()` function performs most common variants:
+
+
+### 2 independent groups:
+
+```{r}
+with(chicks.eating.beans, t.test(weight ~ feed))
+```
+
+
+Or equivalently, if your data are untidy and each group has it's own column:
+
+```{r, eval=F, echo=T}
+untidy.chicks <- chicks.eating.beans %>% 
+  mutate(chick = row_number()) %>% 
+  reshape2::dcast(chick~feed, value.var = 'weight')
+
+with(untidy.chicks, t.test(horsebean, soybean))
+```
+
+
+### Unequal variances
+
+By default R assumes your groups have unequal variances and applies an appropriate correction. If you don't want this you can add `var.equal = TRUE` and get a vanilla t-test:
+
+```{r, eval=F, echo=T}
+with(untidy.chicks, t.test(horsebean, soybean, var.equal=TRUE))
+```
+
+
+
+
+### Paired samples
+
+```{r, eval=F, echo=T}
+a <- rnorm(50, 2.5, 1)
+b = a + rnorm(50, .5, 1)
+t.test(a, b, paired=TRUE)
+```
+
+
+
+### One-sample test 
+
+i.e. comparing sample mean with a specific value:
+
+```{r, eval=F, echo=T}
+# test if mean of `outcome` variable is different from 2
+somedata <- rnorm(50, 2.5, 1)
+t.test(somedata, mu=2)
+```
+
+
+
+
+
+
+
+
+
+
+

@@ -6,10 +6,9 @@ output:
 
 
 
-# Different types of columns
+# Different types of data
 
-
-
-# Working with factors
+- Different types of columns
+- Working with factors
 
 

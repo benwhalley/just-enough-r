@@ -1,0 +1,355 @@
+---
+title: 'Making predictions from models'
+output:
+  bookdown::tufte_html2
+bibliography: bibliography.bib
+---
+
+```{r, include=FALSE}
+# ignore all this for the moment
+knitr::opts_chunk$set(echo = TRUE, cache=T)
+library(tidyverse)
+library(tufte)
+library(ggthemes)
+
+theme_set(theme_tufte(base_size = 18))
+```
+
+
+
+# Making predictions
+
+
+
+Objectives of this section:
+
+- Distingish predicted means (predictions) from predicted effects ('margins')
+- Calculate both predictions and marginal effects for a `lm()`
+- Plot predictions and margins
+- Think about how to plot effects in meaningful ways
+
+
+
+## Predictions vs margins
+
+Before we start, let's consider what we're trying to achieve in making predictions from our models. We need to make a distinction between:
+
+- Predicted means
+- Predicted effects or *marginal effects*
+
+Consider the example used in a previous section where we measured `injury.severity` after road accidents, plus two predictor variables: `gender` and `age`.
+
+
+## Predicted means
+
+'Predicted means' (or predictions) refers to our best estimate for each category of person we're interested in. For example, if `age` were categorical (i.e. young vs. older people) then might have 4 predictions to calculate from our model:
+
+```{r, echo=F}
+expand.grid(Age=c("Young", "Old"), Gender=c("Male", "Female")) %>% as.data.frame() %>% 
+  mutate(mean="?") %>% pander::pander()
+```
+
+And as before, we might plot these data:
+
+```{r, fig.cap="Point and line plot of injury severity by age and gender.", echo=F}
+load('injury.Rdata')
+inter.df <- inter.df %>%  filter(interaction=="Interaction") 
+means.plot <- inter.df %>% 
+  ggplot(aes(older, severity.of.injury, group=female, color=female)) + 
+    geom_point() +
+    geom_line() + 
+    scale_color_discrete(name="") + 
+    ylab("Injury severity") + xlab("") 
+means.plot
+```
+
+
+
+This plot uses the raw data, but these points could equally have been estimated from a statistical model which adjusted for other predictors.
+
+
+
+## *Effects* (margins)
+
+Terms like: *predicted effects*, *margins* or *marginal effects* refer, instead, to the effect of one predictor.
+
+There may be more than one marginal effect because *the effect of one predictor can change across the range of another predictor*.
+
+Extending the example above, if we take the difference between men and women for each category of age, we can plot these differences. The steps we need to go through are:
+
+- Reshape the data to be wide, including a separate column for injury scores for men and women
+- Subtract the score for men from that of women, to calculate the effect of being female
+- Plot this difference score
+
+
+```{r, echo=T}
+margins.plot <- inter.df %>% 
+  # reshape the data to a wider format
+  reshape2::dcast(older~female) %>% 
+  # calculate the difference between men and women for each age
+  mutate(effect.of.female = Female - Male) %>% 
+  # plot the difference
+  ggplot(aes(older, effect.of.female, group=1)) + 
+    geom_point() +
+    geom_line() + 
+    ylab("Effect of being female")  + xlab("") +
+    geom_hline(yintercept = 0)
+margins.plot
+```
+
+
+
+
+As before, these differences use the raw data, but *could* have been calculated from a statistical model. In the section below we do this, making predictions for means and marginal effects from a `lm()`.
+
+
+
+
+
+## Continuous predictors
+
+In the examples above, our data were all categorical, which mean that it was straightforward to identify categories of people for whom we might want to make a prediction (i.e. young men, young women, older men, older women).
+
+However, `age` is typically measured as a continuous variable, and we would want to use a grouped scatter plot to see this:
+
+```{r, echo=F, include=F}
+# in this block we simulate some more data to illustrate the points below
+set.seed(1234)
+injuries <- expand.grid(female=0:1, age=30:50, person=1:100) %>% 
+  as.data.frame() %>% 
+  mutate(severity.of.injury = 50 + -10 * female + .2 * age + .4 * female*age +
+           rnorm(length(.$female), 0, 5),
+         age = age+rnorm(n(), 0, 1)) %>%
+  mutate(gender=factor(female, labels=c("Male", "Female"))) %>% 
+  mutate(age.category = cut(age, breaks=2, labels=c("young", "older"))) %>% 
+  sample_n(1000)
+```
+
+```{r}
+injuries %>% 
+  ggplot(aes(age, severity.of.injury, group=gender, color=gender)) + 
+  geom_point(size=1) + 
+  scale_color_discrete(name="")
+```
+
+
+But to make predictions from this continuous data we need to fit a line through the points (i.e. run a model). We can do this graphically by calling `geom_smooth()` which attempts to fit a smooth line through the data we observe:
+
+```{r, fig.cap="Scatter plot overlaid with smooth best-fit lines", message=F}
+injuries %>% 
+  ggplot(aes(age, severity.of.injury, group=gender, color=gender)) + 
+  geom_point(alpha=.2, size=1) + 
+  geom_smooth(se=F)+
+  scale_color_discrete(name="")
+```
+
+
+
+And if we are confident that the relationships between predictor and outcome are sufficiently *linear*, then we can ask ggplot to fit a straight line using linear regression:
+
+```{r, fig.cap="Scatter plot overlaid with smoothed lines (dotted) and linear predictions (coloured)",  message=F}
+injuries %>% 
+  ggplot(aes(age, severity.of.injury, group=gender, color=gender)) + 
+  geom_point(alpha = .1, size = 1) + 
+  geom_smooth(se = F, linetype="dashed") +
+  geom_smooth(method = "lm", se = F) +
+  scale_color_discrete(name="")
+```
+
+
+What these plots illustrate is the steps a researcher might take *before* fitting a regression model. The straight lines in the final plot represent our best guess for a person of a given age and gender, assuming a linear regression. 
+
+We can read from these lines to make a point prediction for men and women of a specific age, and use the information about our uncertainty in the prediction, captured by the model, to estimate the likely error.
+
+To make our findings simpler to communicate, we might want to make estimates at specific ages and plot these. These ages could be:
+
+- Values with biological or cultural meaning: for example 18 (new driver) v.s. 65 (retirement age)
+- Statistical convention (e.g. median, 25th, and 75th centile, or mean +/- 1 SD) 
+
+We'll see examples of both below.
+
+
+
+
+
+## Predicted means and margins using `lm()`
+
+The section above details two types of predictions: predictions for means, and predictions for margins (effects). We can use the figure below as a way of visualising the difference:
+
+```{r, fig.width=4, fig.height=1.5, fig.cap="Example of predicted means vs. margins. Note, the margin plotted in the second panel is the difference between the coloured lines in the first. A horizontal line is added at zero in panel 2 by convention."}
+gridExtra::grid.arrange(means.plot+ggtitle("Means"), margins.plot+ggtitle("Margins"), ncol=2)
+```
+
+
+
+
+### Running the model
+
+Lets say we want to run a linear model  predicts injury severity from gender and a categorical measurement of age (young v.s. old).
+
+Our model formula would be: `severity.of.injury ~ age.category * gender`. Here we fit it an request the Anova table which enables us to test the main effects and interaction^[Because this is simulated data, the main effects and interactions all have tiny p values.]:
+
+```{r}
+injurymodel <- lm(severity.of.injury ~ age.category * gender,  data=injuries)
+anova(injurymodel)
+```
+
+Having saved the regression model in the variable `injurymodel` we can use this to make predictions for means and estimate marginal effects:
+
+
+### Making predictions for means
+
+When making predictions, they key question to bear in mind is 'predictions for what?' That is, what values of the predictor variables are we going to use to estimate the outcome?
+
+It goes like this:
+
+1. Create a new dataframe which contains the values of the predictors we want to make predictions at
+2. Make the predictions using the `predict()` function.
+3. Convert the output of `predict()` to a dataframe and plot the numbers.
+
+
+
+
+
+### Step 1: Make a new dataframe
+
+```{r}
+prediction.data <- data_frame(
+  age.category = c("young", "older", "young", "older"),
+  gender = c("Male", "Male", "Female", "Female")
+)
+prediction.data
+```
+
+
+
+### Step 2: Make the predictions
+
+The R `predict()` function has two useful arguments:
+
+- `newdata`, which we set to our new data frame containing the predictor values of interest
+- `interval` which we here set to confidence^[This gives us the confidence interval for the prediction, which is the range within which we would expect the true value to fall, 95% of the time, if we replicated the study. We could ask instead for the `prediction` interval, which would be the range within which 95% of new observations with the same predictor values would fall. For more on this see the section on [confidence v.s. prediction intervals](confidence-vs-prediction-intervals.html)]
+
+
+```{r}
+injury.predictions <- predict(injurymodel, newdata=prediction.data, interval="confidence")
+injury.predictions
+```
+
+
+
+## Making prdictions for margins (*effects* of predictors)
+
+
+```{r}
+library('tidyverse')
+m <- lm(mpg~vs+wt, data=mtcars)
+m.predictions <- predict(m, interval='confidence')
+
+mtcars.plus.predictions <- bind_cols(
+  mtcars,
+  m.predictions %>% as.data.frame()
+)
+
+prediction.frame <- expand.grid(vs=0:1, wt=2) %>% as.data.frame()
+prediction.frame.plus.predictions <- bind_cols(
+  prediction.frame,
+  predict(m, newdata=prediction.frame, interval='confidence') %>% as.data.frame()
+)
+
+
+mtcars.plus.predictions %>% ggplot(aes(vs, fit, ymin=lwr, ymax=upr)) +
+  stat_summary(geom="pointrange")
+```
+
+```{r}
+prediction.frame.plus.predictions %>% ggplot(aes(vs, fit, ymin=lwr, ymax=upr)) + geom_pointrange()
+```
+
+```{r}
+prediction.frame.plus.predictions
+mtcars.plus.predictions %>% group_by(vs) %>%
+  summarise_each(funs(mean), fit, lwr, upr)
+```
+
+
+
+
+## Marginal effects
+
+What is the effect of being black or female on the chance of you getting diabetes?
+
+Two ways of computing, depending on which of these two you hate least:
+
+  - Calculate the effect of being black for someone who is 50% female (marginal effect at the means, MEM)
+- Calculate the effect first pretending someone is black, then pretending they are white, and taking the difference between these estimate (average marginal effect, AME)
+
+
+
+
+```{r}
+library(margins)
+margins(m, at = list(wt = 1:2))
+
+m2 <- lm(mpg~vs*wt, data=mtcars)
+summary(m2)
+m2.margins <- margins(m2, at = list(wt = 1.5:4.5))
+
+summary(m2.margins)
+
+summary(m2.margins) %>% as.data.frame() %>%
+  filter(factor=="vs") %>%
+  ggplot(aes(wt, AME)) +
+  geom_point() + geom_line()
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## With continuous covariates
+
+- Run 2 x Continuous Anova
+- Predict at different levels of
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Visualising interactions from linear models
+
+check this:
+  https://strengejacke.wordpress.com/2013/10/31/visual-interpretation-of-interaction-terms-in-linear-models-with-ggplot-rstats/
+
+
+Steps this page will work through:
+
+- Running the the model (first will be a 2x2 between Anova)
+- Using `predict()`.
+- Creating predictions at specific values
+- Binding predictions and the original data together.
+- Using GGplot to layer points, lines and error bars.
+
+
+

@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Just enough R</title>
+  <meta name="description" content="‘Just enough’ R">
+  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Just enough R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Just enough R" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="understanding-interactions.html">
+<link rel="next" href="mediation.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="https://hypothes.is/embed.js" async></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Just enough R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#how-the-guide-is-structured"><i class="fa fa-check"></i><b>1.1</b> How the guide is structured</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="index.html"><a href="index.html#part-1-must-read"><i class="fa fa-check"></i><b>1.1.1</b> Part 1: Must read</a></li>
+<li class="chapter" data-level="1.1.2" data-path="index.html"><a href="index.html#part-2-nice-to-know"><i class="fa fa-check"></i><b>1.1.2</b> Part 2: Nice to know</a></li>
+<li class="chapter" data-level="1.1.3" data-path="index.html"><a href="index.html#part-3-loose-ends"><i class="fa fa-check"></i><b>1.1.3</b> Part 3: Loose ends</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#a-warning"><i class="fa fa-check"></i><b>1.2</b> A warning</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="start_here.html"><a href="start_here.html"><i class="fa fa-check"></i><b>2</b> Getting started with R and RStudio</a><ul>
+<li class="chapter" data-level="2.1" data-path="start_here.html"><a href="start_here.html#using-rmarkdown-to-record-and-share-work"><i class="fa fa-check"></i><b>2.1</b> Using RMarkdown to record and share work</a></li>
+<li class="chapter" data-level="2.2" data-path="start_here.html"><a href="start_here.html#writing-and-knitting-rmarkdown"><i class="fa fa-check"></i><b>2.2</b> Writing and ‘knitting’ RMarkdown</a></li>
+<li class="chapter" data-level="2.3" data-path="start_here.html"><a href="start_here.html#rstudio"><i class="fa fa-check"></i><b>2.3</b> RStudio</a></li>
+<li class="chapter" data-level="2.4" data-path="start_here.html"><a href="start_here.html#your-first-r-commands"><i class="fa fa-check"></i><b>2.4</b> Your first R commands</a></li>
+<li class="chapter" data-level="2.5" data-path="start_here.html"><a href="start_here.html#naming-things-variable-assignment"><i class="fa fa-check"></i><b>2.5</b> Naming things: <em>variable assignment</em></a></li>
+<li class="chapter" data-level="2.6" data-path="start_here.html"><a href="start_here.html#vectors-and-lists"><i class="fa fa-check"></i><b>2.6</b> Vectors and lists</a></li>
+<li class="chapter" data-level="2.7" data-path="start_here.html"><a href="start_here.html#vectors"><i class="fa fa-check"></i><b>2.7</b> Vectors</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="start_here.html"><a href="start_here.html#accessing-elements-within-vectors"><i class="fa fa-check"></i><b>2.7.1</b> Accessing elements within vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="start_here.html"><a href="start_here.html#selecting-more-than-one-element-in-a-vector"><i class="fa fa-check"></i><b>2.8</b> Selecting more than one element in a vector</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="start_here.html"><a href="start_here.html#processing-vectors"><i class="fa fa-check"></i><b>2.8.1</b> Processing vectors</a></li>
+<li class="chapter" data-level="2.8.2" data-path="start_here.html"><a href="start_here.html#processing-vectors-to-make-new-vectors"><i class="fa fa-check"></i><b>2.8.2</b> Processing vectors to make new vectors</a></li>
+<li class="chapter" data-level="2.8.3" data-path="start_here.html"><a href="start_here.html#making-up-data-new-vectors"><i class="fa fa-check"></i><b>2.8.3</b> Making up data (new vectors)</a></li>
+<li class="chapter" data-level="2.8.4" data-path="start_here.html"><a href="start_here.html#useful-functions-to-learn-now"><i class="fa fa-check"></i><b>2.8.4</b> Useful functions to learn now</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="start_here.html"><a href="start_here.html#lists"><i class="fa fa-check"></i><b>2.9</b> Lists</a></li>
+<li class="chapter" data-level="2.10" data-path="start_here.html"><a href="start_here.html#questions-on-vectors-and-lists"><i class="fa fa-check"></i><b>2.10</b> Questions on vectors and lists</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="start_here.html"><a href="start_here.html#extended-questions"><i class="fa fa-check"></i><b>2.10.1</b> Extended questions:</a></li>
+</ul></li>
+<li class="chapter" data-level="2.11" data-path="start_here.html"><a href="start_here.html#what-next"><i class="fa fa-check"></i><b>2.11</b> What next?</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>3</b> Datasets and dataframes</a><ul>
+<li class="chapter" data-level="3.1" data-path="datasets.html"><a href="datasets.html#using-built-in-data"><i class="fa fa-check"></i><b>3.1</b> Using ‘built in’ data</a></li>
+<li class="chapter" data-level="3.2" data-path="datasets.html"><a href="datasets.html#importing-and-exporting-data"><i class="fa fa-check"></i><b>3.2</b> Importing and exporting data</a></li>
+<li class="chapter" data-level="3.3" data-path="datasets.html"><a href="datasets.html#importing-data-over-the-web"><i class="fa fa-check"></i><b>3.3</b> Importing data over the web</a></li>
+<li class="chapter" data-level="3.4" data-path="datasets.html"><a href="datasets.html#importing-from-spss-and-other-packages"><i class="fa fa-check"></i><b>3.4</b> Importing from SPSS and other packages</a></li>
+<li class="chapter" data-level="3.5" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html"><i class="fa fa-check"></i><b>3.5</b> Working with dataframes</a></li>
+<li class="chapter" data-level="3.6" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#introducing-the-tidyverse"><i class="fa fa-check"></i><b>3.6</b> Introducing the <code>tidyverse</code></a></li>
+<li class="chapter" data-level="3.7" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#selecting-columns-from-a-dataframe"><i class="fa fa-check"></i><b>3.7</b> Selecting columns from a dataframe</a></li>
+<li class="chapter" data-level="3.8" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#selecting-rows-of-data"><i class="fa fa-check"></i><b>3.8</b> Selecting rows of data</a></li>
+<li class="chapter" data-level="3.9" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#combining-column-selections-and-filters-with-dplyr"><i class="fa fa-check"></i><b>3.9</b> Combining column selections and filters with <code>dplyr</code></a></li>
+<li class="chapter" data-level="3.10" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#modifying-and-creating-new-columns"><i class="fa fa-check"></i><b>3.10</b> Modifying and creating new columns</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="summarising-data.html"><a href="summarising-data.html"><i class="fa fa-check"></i><b>4</b> Summarising data</a><ul>
+<li class="chapter" data-level="4.1" data-path="summarising-data.html"><a href="summarising-data.html#summaries-of-dataframes"><i class="fa fa-check"></i><b>4.1</b> Summaries of dataframes</a></li>
+<li class="chapter" data-level="4.2" data-path="summarising-data.html"><a href="summarising-data.html#split-apply-combine"><i class="fa fa-check"></i><b>4.2</b> Split, apply, combine</a></li>
+<li class="chapter" data-level="4.3" data-path="summarising-data.html"><a href="summarising-data.html#split-breaking-the-data-into-groups"><i class="fa fa-check"></i><b>4.3</b> Split: breaking the data into groups</a></li>
+<li class="chapter" data-level="4.4" data-path="summarising-data.html"><a href="summarising-data.html#apply-and-combine"><i class="fa fa-check"></i><b>4.4</b> Apply and combine</a></li>
+<li class="chapter" data-level="4.5" data-path="summarising-data.html"><a href="summarising-data.html#a-real-example"><i class="fa fa-check"></i><b>4.5</b> A ‘real’ example</a></li>
+<li class="chapter" data-level="4.6" data-path="summarising-data.html"><a href="summarising-data.html#sorting-data"><i class="fa fa-check"></i><b>4.6</b> Sorting data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>5</b> Graphics</a><ul>
+<li class="chapter" data-level="5.1" data-path="graphics.html"><a href="graphics.html#benefits-of-visualising-data"><i class="fa fa-check"></i><b>5.1</b> Benefits of visualising data</a></li>
+<li class="chapter" data-level="5.2" data-path="graphics.html"><a href="graphics.html#choosing-a-plot-type"><i class="fa fa-check"></i><b>5.2</b> Choosing a plot type</a></li>
+<li class="chapter" data-level="5.3" data-path="graphics.html"><a href="graphics.html#layering-graphics"><i class="fa fa-check"></i><b>5.3</b> Layering graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="linear-models-simple.html"><a href="linear-models-simple.html"><i class="fa fa-check"></i><b>6</b> Simple linear models</a><ul>
+<li class="chapter" data-level="6.1" data-path="linear-models-simple.html"><a href="linear-models-simple.html#describing-our-models-formulas"><i class="fa fa-check"></i><b>6.1</b> Describing our models (formulas)</a></li>
+<li class="chapter" data-level="6.2" data-path="linear-models-simple.html"><a href="linear-models-simple.html#running-a-linear-model"><i class="fa fa-check"></i><b>6.2</b> Running a linear model</a></li>
+<li class="chapter" data-level="6.3" data-path="linear-models-simple.html"><a href="linear-models-simple.html#more-on-formulas"><i class="fa fa-check"></i><b>6.3</b> More on formulas</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="linear-models-simple.html"><a href="linear-models-simple.html#other-formula-shortcuts"><i class="fa fa-check"></i><b>6.3.1</b>  Other formula shortcuts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="linear-models-simple.html"><a href="linear-models-simple.html#what-next-1"><i class="fa fa-check"></i><b>6.4</b> What next</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="real-data.html"><a href="real-data.html"><i class="fa fa-check"></i><b>7</b> Working with ‘real’ data</a><ul>
+<li class="chapter" data-level="7.1" data-path="real-data.html"><a href="real-data.html#tidy-data"><i class="fa fa-check"></i><b>7.1</b> ‘Tidy’ data</a></li>
+<li class="chapter" data-level="7.2" data-path="real-data.html"><a href="real-data.html#dealing-with-multiple-files"><i class="fa fa-check"></i><b>7.2</b> Dealing with multiple files</a></li>
+<li class="chapter" data-level="7.3" data-path="real-data.html"><a href="real-data.html#error-checking"><i class="fa fa-check"></i><b>7.3</b> Error checking</a></li>
+<li class="chapter" data-level="7.4" data-path="real-data.html"><a href="real-data.html#missing-values"><i class="fa fa-check"></i><b>7.4</b> Missing values</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="correlations.html"><a href="correlations.html"><i class="fa fa-check"></i><b>8</b> Correlations</a><ul>
+<li class="chapter" data-level="8.1" data-path="correlations.html"><a href="correlations.html#obtaining-a-correlation-matrix"><i class="fa fa-check"></i><b>8.1</b> Obtaining a correlation matrix</a></li>
+<li class="chapter" data-level="8.2" data-path="correlations.html"><a href="correlations.html#making-correlation-tables-for-publication"><i class="fa fa-check"></i><b>8.2</b> Making correlation tables for publication</a></li>
+<li class="chapter" data-level="8.3" data-path="correlations.html"><a href="correlations.html#other-types-of-correlation"><i class="fa fa-check"></i><b>8.3</b> Other types of correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="t-tests.html"><a href="t-tests.html"><i class="fa fa-check"></i><b>9</b> t-tests</a><ul>
+<li class="chapter" data-level="9.1" data-path="t-tests.html"><a href="t-tests.html#running-t-tests"><i class="fa fa-check"></i><b>9.1</b> Running t-tests</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="t-tests.html"><a href="t-tests.html#independent-groups"><i class="fa fa-check"></i><b>9.1.1</b> 2 independent groups:</a></li>
+<li class="chapter" data-level="9.1.2" data-path="t-tests.html"><a href="t-tests.html#unequal-variances"><i class="fa fa-check"></i><b>9.1.2</b> Unequal variances</a></li>
+<li class="chapter" data-level="9.1.3" data-path="t-tests.html"><a href="t-tests.html#paired-samples"><i class="fa fa-check"></i><b>9.1.3</b> Paired samples</a></li>
+<li class="chapter" data-level="9.1.4" data-path="t-tests.html"><a href="t-tests.html#one-sample-test"><i class="fa fa-check"></i><b>9.1.4</b> One-sample test</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>10</b> Anova</a><ul>
+<li class="chapter" data-level="10.1" data-path="anova.html"><a href="anova.html#anova-for-between-subjects-designs"><i class="fa fa-check"></i><b>10.1</b> Anova for between subjects designs</a></li>
+<li class="chapter" data-level="10.2" data-path="anova.html"><a href="anova.html#repeated-measures"><i class="fa fa-check"></i><b>10.2</b> Repeated measures</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="understanding-interactions.html"><a href="understanding-interactions.html"><i class="fa fa-check"></i><b>11</b> Understanding interactions (part 1)</a><ul>
+<li class="chapter" data-level="11.1" data-path="understanding-interactions.html"><a href="understanding-interactions.html#what-is-an-interaction"><i class="fa fa-check"></i><b>11.1</b> What is an interaction?</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="understanding-interactions.html"><a href="understanding-interactions.html#example-interaction-visualised"><i class="fa fa-check"></i><b>11.1.1</b> Example interaction visualised</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="understanding-interactions.html"><a href="understanding-interactions.html#visualising-interactions-in-raw-data"><i class="fa fa-check"></i><b>11.2</b> Visualising interactions in raw data</a></li>
+<li class="chapter" data-level="11.3" data-path="understanding-interactions.html"><a href="understanding-interactions.html#continuous-predictors"><i class="fa fa-check"></i><b>11.3</b> Continuous predictors</a></li>
+<li class="chapter" data-level="11.4" data-path="understanding-interactions.html"><a href="understanding-interactions.html#what-next-2"><i class="fa fa-check"></i><b>11.4</b> What next?</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html"><i class="fa fa-check"></i><b>12</b> Making predictions</a><ul>
+<li class="chapter" data-level="12.1" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predictions-vs-margins"><i class="fa fa-check"></i><b>12.1</b> Predictions vs margins</a></li>
+<li class="chapter" data-level="12.2" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predicted-means"><i class="fa fa-check"></i><b>12.2</b> Predicted means</a></li>
+<li class="chapter" data-level="12.3" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#effects-margins"><i class="fa fa-check"></i><b>12.3</b> <em>Effects</em> (margins)</a></li>
+<li class="chapter" data-level="12.4" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#continuous-predictors-1"><i class="fa fa-check"></i><b>12.4</b> Continuous predictors</a></li>
+<li class="chapter" data-level="12.5" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predicted-means-and-margins-using-lm"><i class="fa fa-check"></i><b>12.5</b> Predicted means and margins using <code>lm()</code></a><ul>
+<li class="chapter" data-level="12.5.1" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#running-the-model"><i class="fa fa-check"></i><b>12.5.1</b> Running the model</a></li>
+<li class="chapter" data-level="12.5.2" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#making-predictions-for-means"><i class="fa fa-check"></i><b>12.5.2</b> Making predictions for means</a></li>
+<li class="chapter" data-level="12.5.3" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#step-1-make-a-new-dataframe"><i class="fa fa-check"></i><b>12.5.3</b> Step 1: Make a new dataframe</a></li>
+<li class="chapter" data-level="12.5.4" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#step-2-make-the-predictions"><i class="fa fa-check"></i><b>12.5.4</b> Step 2: Make the predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="12.6" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#making-prdictions-for-margins-effects-of-predictors"><i class="fa fa-check"></i><b>12.6</b> Making prdictions for margins (<em>effects</em> of predictors)</a></li>
+<li class="chapter" data-level="12.7" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#marginal-effects"><i class="fa fa-check"></i><b>12.7</b> Marginal effects</a></li>
+<li class="chapter" data-level="12.8" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#with-continuous-covariates"><i class="fa fa-check"></i><b>12.8</b> With continuous covariates</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#visualising-interactions-from-linear-models"><i class="fa fa-check"></i><b>13</b> Visualising interactions from linear models</a></li>
+<li class="chapter" data-level="14" data-path="mediation.html"><a href="mediation.html"><i class="fa fa-check"></i><b>14</b> Mediation</a></li>
+<li class="chapter" data-level="15" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>15</b> Multilevel models</a></li>
+<li class="chapter" data-level="16" data-path="cfa.html"><a href="cfa.html"><i class="fa fa-check"></i><b>16</b> Confirmatory factor analysis</a><ul>
+<li class="chapter" data-level="16.1" data-path="cfa.html"><a href="cfa.html#defining-the-model"><i class="fa fa-check"></i><b>16.1</b> Defining the model</a></li>
+<li class="chapter" data-level="16.2" data-path="cfa.html"><a href="cfa.html#model-fit"><i class="fa fa-check"></i><b>16.2</b> Model fit</a></li>
+<li class="chapter" data-level="16.3" data-path="cfa.html"><a href="cfa.html#modification-indices"><i class="fa fa-check"></i><b>16.3</b> Modification indices</a></li>
+<li class="chapter" data-level="16.4" data-path="cfa.html"><a href="cfa.html#missing-data"><i class="fa fa-check"></i><b>16.4</b> Missing data</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>17</b> Installing R and RStudio</a></li>
+<li class="chapter" data-level="18" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>18</b> Loading packages</a></li>
+<li class="chapter" data-level="19" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>19</b> Getting help</a></li>
+<li class="chapter" data-level="20" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>20</b> Missing values</a></li>
+<li class="chapter" data-level="21" data-path="rmarkdown-tricks.html"><a href="rmarkdown-tricks.html"><i class="fa fa-check"></i><b>21</b> Tips and tricks with RMarkdown</a></li>
+<li class="chapter" data-level="22" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html"><i class="fa fa-check"></i><b>22</b> Confidence, credible and prediction intervals</a><ul>
+<li class="chapter" data-level="22.1" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html#the-problem-with-confidence-intervals"><i class="fa fa-check"></i><b>22.1</b> The problem with confidence intervals</a></li>
+<li class="chapter" data-level="22.2" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html#forgetting-that-the-ci-depends-on-sample-size."><i class="fa fa-check"></i><b>22.2</b> Forgetting that the CI depends on sample size.</a></li>
+<li class="chapter" data-level="22.3" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html#what-does-this-mean-for-my-work-on-insert-speciality-here"><i class="fa fa-check"></i><b>22.3</b> What does this mean for my work on [insert speciality here]?</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">‘Just enough’ R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="making-predictions" class="section level1">
+<h1><span class="header-section-number">12</span> Making predictions</h1>
+<p>Objectives of this section:</p>
+<ul>
+<li>Distingish predicted means (predictions) from predicted effects (‘margins’)</li>
+<li>Calculate both predictions and marginal effects for a <code>lm()</code></li>
+<li>Plot predictions and margins</li>
+<li>Think about how to plot effects in meaningful ways</li>
+</ul>
+<div id="predictions-vs-margins" class="section level2">
+<h2><span class="header-section-number">12.1</span> Predictions vs margins</h2>
+<p>Before we start, let’s consider what we’re trying to achieve in making predictions from our models. We need to make a distinction between:</p>
+<ul>
+<li>Predicted means</li>
+<li>Predicted effects or <em>marginal effects</em></li>
+</ul>
+<p>Consider the example used in a previous section where we measured <code>injury.severity</code> after road accidents, plus two predictor variables: <code>gender</code> and <code>age</code>.</p>
+</div>
+<div id="predicted-means" class="section level2">
+<h2><span class="header-section-number">12.2</span> Predicted means</h2>
+<p>‘Predicted means’ (or predictions) refers to our best estimate for each category of person we’re interested in. For example, if <code>age</code> were categorical (i.e. young vs. older people) then might have 4 predictions to calculate from our model:</p>
+<table style="width:29%;">
+<colgroup>
+<col width="8%" />
+<col width="12%" />
+<col width="8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Age</th>
+<th align="center">Gender</th>
+<th align="center">mean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Young</td>
+<td align="center">Male</td>
+<td align="center">?</td>
+</tr>
+<tr class="even">
+<td align="center">Old</td>
+<td align="center">Male</td>
+<td align="center">?</td>
+</tr>
+<tr class="odd">
+<td align="center">Young</td>
+<td align="center">Female</td>
+<td align="center">?</td>
+</tr>
+<tr class="even">
+<td align="center">Old</td>
+<td align="center">Female</td>
+<td align="center">?</td>
+</tr>
+</tbody>
+</table>
+<p>And as before, we might plot these data:</p>
+<div class="figure"><span id="fig:unnamed-chunk-118"></span>
+<img src="Just_enough_R_files/figure-html/unnamed-chunk-118-1.png" alt="Point and line plot of injury severity by age and gender." width="672" />
+<p class="caption">
+Figure 12.1: Point and line plot of injury severity by age and gender.
+</p>
+</div>
+<p>This plot uses the raw data, but these points could equally have been estimated from a statistical model which adjusted for other predictors.</p>
+</div>
+<div id="effects-margins" class="section level2">
+<h2><span class="header-section-number">12.3</span> <em>Effects</em> (margins)</h2>
+<p>Terms like: <em>predicted effects</em>, <em>margins</em> or <em>marginal effects</em> refer, instead, to the effect of one predictor.</p>
+<p>There may be more than one marginal effect because <em>the effect of one predictor can change across the range of another predictor</em>.</p>
+<p>Extending the example above, if we take the difference between men and women for each category of age, we can plot these differences. The steps we need to go through are:</p>
+<ul>
+<li>Reshape the data to be wide, including a separate column for injury scores for men and women</li>
+<li>Subtract the score for men from that of women, to calculate the effect of being female</li>
+<li>Plot this difference score</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">margins.plot &lt;-<span class="st"> </span>inter.df %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="co"># reshape the data to a wider format</span>
+<span class="st">  </span>reshape2::<span class="kw">dcast</span>(older~female) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="co"># calculate the difference between men and women for each age</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">effect.of.female =</span> Female -<span class="st"> </span>Male) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="co"># plot the difference</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(older, effect.of.female, <span class="dt">group=</span><span class="dv">1</span>)) +<span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_point</span>() +
+<span class="st">    </span><span class="kw">geom_line</span>() +<span class="st"> </span>
+<span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Effect of being female&quot;</span>)  +<span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>) +
+<span class="st">    </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>)
+## Using severity.of.injury as value column: use value.var to override.
+margins.plot</code></pre></div>
+<p><img src="Just_enough_R_files/figure-html/unnamed-chunk-119-1.png" width="672" /></p>
+<p>As before, these differences use the raw data, but <em>could</em> have been calculated from a statistical model. In the section below we do this, making predictions for means and marginal effects from a <code>lm()</code>.</p>
+</div>
+<div id="continuous-predictors-1" class="section level2">
+<h2><span class="header-section-number">12.4</span> Continuous predictors</h2>
+<p>In the examples above, our data were all categorical, which mean that it was straightforward to identify categories of people for whom we might want to make a prediction (i.e. young men, young women, older men, older women).</p>
+<p>However, <code>age</code> is typically measured as a continuous variable, and we would want to use a grouped scatter plot to see this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">injuries %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(age, severity.of.injury, <span class="dt">group=</span>gender, <span class="dt">color=</span>gender)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">1</span>) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name=</span><span class="st">&quot;&quot;</span>)</code></pre></div>
+<p><img src="Just_enough_R_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
+<p>But to make predictions from this continuous data we need to fit a line through the points (i.e. run a model). We can do this graphically by calling <code>geom_smooth()</code> which attempts to fit a smooth line through the data we observe:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">injuries %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(age, severity.of.injury, <span class="dt">group=</span>gender, <span class="dt">color=</span>gender)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span>.<span class="dv">2</span>, <span class="dt">size=</span><span class="dv">1</span>) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span>F)+
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name=</span><span class="st">&quot;&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-122"></span>
+<img src="Just_enough_R_files/figure-html/unnamed-chunk-122-1.png" alt="Scatter plot overlaid with smooth best-fit lines" width="672" />
+<p class="caption">
+Figure 12.2: Scatter plot overlaid with smooth best-fit lines
+</p>
+</div>
+<p>And if we are confident that the relationships between predictor and outcome are sufficiently <em>linear</em>, then we can ask ggplot to fit a straight line using linear regression:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">injuries %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(age, severity.of.injury, <span class="dt">group=</span>gender, <span class="dt">color=</span>gender)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> .<span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">1</span>) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> F, <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>) +
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F) +
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name=</span><span class="st">&quot;&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-123"></span>
+<img src="Just_enough_R_files/figure-html/unnamed-chunk-123-1.png" alt="Scatter plot overlaid with smoothed lines (dotted) and linear predictions (coloured)" width="672" />
+<p class="caption">
+Figure 12.3: Scatter plot overlaid with smoothed lines (dotted) and linear predictions (coloured)
+</p>
+</div>
+<p>What these plots illustrate is the steps a researcher might take <em>before</em> fitting a regression model. The straight lines in the final plot represent our best guess for a person of a given age and gender, assuming a linear regression.</p>
+<p>We can read from these lines to make a point prediction for men and women of a specific age, and use the information about our uncertainty in the prediction, captured by the model, to estimate the likely error.</p>
+<p>To make our findings simpler to communicate, we might want to make estimates at specific ages and plot these. These ages could be:</p>
+<ul>
+<li>Values with biological or cultural meaning: for example 18 (new driver) v.s. 65 (retirement age)</li>
+<li>Statistical convention (e.g. median, 25th, and 75th centile, or mean +/- 1 SD)</li>
+</ul>
+<p>We’ll see examples of both below.</p>
+</div>
+<div id="predicted-means-and-margins-using-lm" class="section level2">
+<h2><span class="header-section-number">12.5</span> Predicted means and margins using <code>lm()</code></h2>
+<p>The section above details two types of predictions: predictions for means, and predictions for margins (effects). We can use the figure below as a way of visualising the difference:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gridExtra::<span class="kw">grid.arrange</span>(means.plot+<span class="kw">ggtitle</span>(<span class="st">&quot;Means&quot;</span>), margins.plot+<span class="kw">ggtitle</span>(<span class="st">&quot;Margins&quot;</span>), <span class="dt">ncol=</span><span class="dv">2</span>)</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-124"></span>
+<img src="Just_enough_R_files/figure-html/unnamed-chunk-124-1.png" alt="Example of predicted means vs. margins. Note, the margin plotted in the second panel is the difference between the coloured lines in the first. A horizontal line is added at zero in panel 2 by convention." width="384" />
+<p class="caption">
+Figure 12.4: Example of predicted means vs. margins. Note, the margin plotted in the second panel is the difference between the coloured lines in the first. A horizontal line is added at zero in panel 2 by convention.
+</p>
+</div>
+<div id="running-the-model" class="section level3">
+<h3><span class="header-section-number">12.5.1</span> Running the model</h3>
+<p>Lets say we want to run a linear model predicts injury severity from gender and a categorical measurement of age (young v.s. old).</p>
+<p>Our model formula would be: <code>severity.of.injury ~ age.category * gender</code>. Here we fit it an request the Anova table which enables us to test the main effects and interaction<a href="#fn21" class="footnoteRef" id="fnref21"><sup>21</sup></a>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">injurymodel &lt;-<span class="st"> </span><span class="kw">lm</span>(severity.of.injury ~<span class="st"> </span>age.category *<span class="st"> </span>gender,  <span class="dt">data=</span>injuries)
+<span class="kw">anova</span>(injurymodel)
+## Analysis of Variance Table
+## 
+## Response: severity.of.injury
+##                      Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## age.category          1  4173.3  4173.3 154.573 &lt; 2.2e-16 ***
+## gender                1  8488.5  8488.5 314.404 &lt; 2.2e-16 ***
+## age.category:gender   1  1141.5  1141.5  42.279  1.25e-10 ***
+## Residuals           996 26890.8    27.0                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre></div>
+<p>Having saved the regression model in the variable <code>injurymodel</code> we can use this to make predictions for means and estimate marginal effects:</p>
+</div>
+<div id="making-predictions-for-means" class="section level3">
+<h3><span class="header-section-number">12.5.2</span> Making predictions for means</h3>
+<p>When making predictions, they key question to bear in mind is ‘predictions for what?’ That is, what values of the predictor variables are we going to use to estimate the outcome?</p>
+<p>It goes like this:</p>
+<ol style="list-style-type: decimal">
+<li>Create a new dataframe which contains the values of the predictors we want to make predictions at</li>
+<li>Make the predictions using the <code>predict()</code> function.</li>
+<li>Convert the output of <code>predict()</code> to a dataframe and plot the numbers.</li>
+</ol>
+</div>
+<div id="step-1-make-a-new-dataframe" class="section level3">
+<h3><span class="header-section-number">12.5.3</span> Step 1: Make a new dataframe</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prediction.data &lt;-<span class="st"> </span><span class="kw">data_frame</span>(
+  <span class="dt">age.category =</span> <span class="kw">c</span>(<span class="st">&quot;young&quot;</span>, <span class="st">&quot;older&quot;</span>, <span class="st">&quot;young&quot;</span>, <span class="st">&quot;older&quot;</span>),
+  <span class="dt">gender =</span> <span class="kw">c</span>(<span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Female&quot;</span>)
+)
+prediction.data
+## # A tibble: 4 × 2
+##   age.category gender
+##          &lt;chr&gt;  &lt;chr&gt;
+## 1        young   Male
+## 2        older   Male
+## 3        young Female
+## 4        older Female</code></pre></div>
+</div>
+<div id="step-2-make-the-predictions" class="section level3">
+<h3><span class="header-section-number">12.5.4</span> Step 2: Make the predictions</h3>
+<p>The R <code>predict()</code> function has two useful arguments:</p>
+<ul>
+<li><code>newdata</code>, which we set to our new data frame containing the predictor values of interest</li>
+<li><code>interval</code> which we here set to confidence<a href="#fn22" class="footnoteRef" id="fnref22"><sup>22</sup></a></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">injury.predictions &lt;-<span class="st"> </span><span class="kw">predict</span>(injurymodel, <span class="dt">newdata=</span>prediction.data, <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>)
+injury.predictions
+##        fit      lwr      upr
+## 1 57.14239 56.49360 57.79117
+## 2 59.19682 58.56688 59.82676
+## 3 60.79554 60.14278 61.44830
+## 4 67.12521 66.47642 67.77399</code></pre></div>
+</div>
+</div>
+<div id="making-prdictions-for-margins-effects-of-predictors" class="section level2">
+<h2><span class="header-section-number">12.6</span> Making prdictions for margins (<em>effects</em> of predictors)</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&#39;tidyverse&#39;</span>)
+m &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg~vs+wt, <span class="dt">data=</span>mtcars)
+m.predictions &lt;-<span class="st"> </span><span class="kw">predict</span>(m, <span class="dt">interval=</span><span class="st">&#39;confidence&#39;</span>)
+
+mtcars.plus.predictions &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(
+  mtcars,
+  m.predictions %&gt;%<span class="st"> </span><span class="kw">as.data.frame</span>()
+)
+
+prediction.frame &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">vs=</span><span class="dv">0</span>:<span class="dv">1</span>, <span class="dt">wt=</span><span class="dv">2</span>) %&gt;%<span class="st"> </span><span class="kw">as.data.frame</span>()
+prediction.frame.plus.predictions &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(
+  prediction.frame,
+  <span class="kw">predict</span>(m, <span class="dt">newdata=</span>prediction.frame, <span class="dt">interval=</span><span class="st">&#39;confidence&#39;</span>) %&gt;%<span class="st"> </span><span class="kw">as.data.frame</span>()
+)
+
+
+mtcars.plus.predictions %&gt;%<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(vs, fit, <span class="dt">ymin=</span>lwr, <span class="dt">ymax=</span>upr)) +
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">geom=</span><span class="st">&quot;pointrange&quot;</span>)
+## No summary function supplied, defaulting to `mean_se()</code></pre></div>
+<p><img src="Just_enough_R_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prediction.frame.plus.predictions %&gt;%<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(vs, fit, <span class="dt">ymin=</span>lwr, <span class="dt">ymax=</span>upr)) +<span class="st"> </span><span class="kw">geom_pointrange</span>()</code></pre></div>
+<p><img src="Just_enough_R_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prediction.frame.plus.predictions
+##   vs wt      fit      lwr      upr
+## 1  0  2 24.11860 21.61207 26.62514
+## 2  1  2 27.27297 25.57096 28.97499
+mtcars.plus.predictions %&gt;%<span class="st"> </span><span class="kw">group_by</span>(vs) %&gt;%
+<span class="st">  </span><span class="kw">summarise_each</span>(<span class="kw">funs</span>(mean), fit, lwr, upr)
+## # A tibble: 2 × 4
+##      vs      fit      lwr      upr
+##   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+## 1     0 16.61667 14.93766 18.29568
+## 2     1 24.55714 22.81586 26.29843</code></pre></div>
+</div>
+<div id="marginal-effects" class="section level2">
+<h2><span class="header-section-number">12.7</span> Marginal effects</h2>
+<p>What is the effect of being black or female on the chance of you getting diabetes?</p>
+<p>Two ways of computing, depending on which of these two you hate least:</p>
+<ul>
+<li>Calculate the effect of being black for someone who is 50% female (marginal effect at the means, MEM)</li>
+<li>Calculate the effect first pretending someone is black, then pretending they are white, and taking the difference between these estimate (average marginal effect, AME)</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(margins)
+<span class="kw">margins</span>(m, <span class="dt">at =</span> <span class="kw">list</span>(<span class="dt">wt =</span> <span class="dv">1</span>:<span class="dv">2</span>))
+## Warning in check_values(data, at): A &#39;at&#39; value for &#39;wt&#39; is outside
+## observed data range (1.513,5.424)!
+## Average marginal effects at specified values
+## lm(formula = mpg ~ vs + wt, data = mtcars)
+##  at(wt)    vs     wt
+##       1 3.154 -4.443
+##       2 3.154 -4.443
+
+m2 &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg~vs*wt, <span class="dt">data=</span>mtcars)
+<span class="kw">summary</span>(m2)
+## 
+## Call:
+## lm(formula = mpg ~ vs * wt, data = mtcars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.9950 -1.7881 -0.3423  1.2935  5.2061 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  29.5314     2.6221  11.263 6.55e-12 ***
+## vs           11.7667     3.7638   3.126   0.0041 ** 
+## wt           -3.5013     0.6915  -5.063 2.33e-05 ***
+## vs:wt        -2.9097     1.2157  -2.393   0.0236 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.578 on 28 degrees of freedom
+## Multiple R-squared:  0.8348, Adjusted R-squared:  0.8171 
+## F-statistic: 47.16 on 3 and 28 DF,  p-value: 4.497e-11
+m2.margins &lt;-<span class="st"> </span><span class="kw">margins</span>(m2, <span class="dt">at =</span> <span class="kw">list</span>(<span class="dt">wt =</span> <span class="fl">1.5</span>:<span class="fl">4.5</span>))
+## Warning in check_values(data, at): A &#39;at&#39; value for &#39;wt&#39; is outside
+## observed data range (1.513,5.424)!
+
+<span class="kw">summary</span>(m2.margins)
+##  factor  wt     AME     SE       z      p   lower   upper
+##      vs 1.5  7.4021 2.0902  3.5413 0.0004  3.3054 11.4989
+##      vs 2.5  4.4924 1.2376  3.6299 0.0003  2.0667  6.9181
+##      vs 3.5  1.5827 1.2848  1.2319 0.2180 -0.9353  4.1008
+##      vs 4.5 -1.3270 2.1737 -0.6105 0.5416 -5.5874  2.9334
+##      wt 1.5 -4.7743 0.5854 -8.1560 0.0000 -5.9216 -3.6270
+##      wt 2.5 -4.7743 0.5854 -8.1556 0.0000 -5.9217 -3.6269
+##      wt 3.5 -4.7743 0.5854 -8.1562 0.0000 -5.9216 -3.6270
+##      wt 4.5 -4.7743 0.5854 -8.1561 0.0000 -5.9216 -3.6270
+
+<span class="kw">summary</span>(m2.margins) %&gt;%<span class="st"> </span><span class="kw">as.data.frame</span>() %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(factor==<span class="st">&quot;vs&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(wt, AME)) +
+<span class="st">  </span><span class="kw">geom_point</span>() +<span class="st"> </span><span class="kw">geom_line</span>()</code></pre></div>
+<p><img src="Just_enough_R_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
+</div>
+<div id="with-continuous-covariates" class="section level2">
+<h2><span class="header-section-number">12.8</span> With continuous covariates</h2>
+<ul>
+<li>Run 2 x Continuous Anova</li>
+<li>Predict at different levels of</li>
+</ul>
+</div>
+</div>
+<div id="visualising-interactions-from-linear-models" class="section level1">
+<h1><span class="header-section-number">13</span> Visualising interactions from linear models</h1>
+<p>check this: <a href="https://strengejacke.wordpress.com/2013/10/31/visual-interpretation-of-interaction-terms-in-linear-models-with-ggplot-rstats/" class="uri">https://strengejacke.wordpress.com/2013/10/31/visual-interpretation-of-interaction-terms-in-linear-models-with-ggplot-rstats/</a></p>
+<p>Steps this page will work through:</p>
+<ul>
+<li>Running the the model (first will be a 2x2 between Anova)</li>
+<li>Using <code>predict()</code>.</li>
+<li>Creating predictions at specific values</li>
+<li>Binding predictions and the original data together.</li>
+<li>Using GGplot to layer points, lines and error bars.</li>
+</ul>
+
+</div>
+<div class="footnotes">
+<hr />
+<ol start="21">
+<li id="fn21"><p>Because this is simulated data, the main effects and interactions all have tiny p values.<a href="predictions-and-margins.html#fnref21">↩</a></p></li>
+<li id="fn22"><p>This gives us the confidence interval for the prediction, which is the range within which we would expect the true value to fall, 95% of the time, if we replicated the study. We could ask instead for the <code>prediction</code> interval, which would be the range within which 95% of new observations with the same predictor values would fall. For more on this see the section on <a href="confidence-vs-prediction-intervals.html">confidence v.s. prediction intervals</a><a href="predictions-and-margins.html#fnref22">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="understanding-interactions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mediation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["Just enough R.pdf", "Just enough R.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

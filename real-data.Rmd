@@ -4,12 +4,15 @@ output:
   bookdown::tufte_html2
 ---
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 # ignore all this for the moment
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 library(tufte)
 ```
 
+
+
+# Working with 'real' data
 
 
 
@@ -25,24 +28,24 @@ This chapter shows you how to address each of these problems.
 
 
 
-# 'Tidy' data
+## 'Tidy' data
 
 - Melt, spread
 - ...
 
 
-# Dealing with multiple files
+## Dealing with multiple files
 
 - File handling and import
 - Joins and merges
 
 
-#  Error checking
+##  Error checking
 
 - `999`, `666` and `*`: the marks of the beast!
 
 
-# Missing values
+## Missing values
 
 - `is.na()`
 - `expand()`

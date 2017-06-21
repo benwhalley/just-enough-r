@@ -4,23 +4,27 @@ output:
   bookdown::tufte_html2
 ---
 
-```{r setup, include=FALSE}
+
+## Working with dataframes
+
+```{r, include=FALSE}
 # ignore all this for the moment
+
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 library(tidyverse)
 library(tufte)
+
 ```
 
 
-
-# Introducing the `tidyverse`
+## Introducing the `tidyverse`
 
 R includes hundreds of built-in ways to select individual elements, rows or columns from a dataframe.  This guide isn't going to teach you many of them.
 
 The truth is that R can be overwhelming to new users, especially those new to programming. R is sometimes _too_ powerful and flexible: there are too many different to accomplish the same end, and this can lead to confusion.
 
 Recently, a suite of packages has been developed for R which tries to provide a simple, consistent set of tools for working with data and graphics.
-`r margin_note("This same problem of 'too many ways to do it' applies to graphics in R too — perhaps even more so.")`
+
 This suite of packages is called the *tidyverse*, and you can load all of these pacakges by calling:
 
 ```{r, echo=T, message=F}
@@ -39,7 +43,7 @@ It's strongly recommended that you use these in your own code.
 
 
 
-# Selecting columns from a dataframe
+## Selecting columns from a dataframe
 
 
 *Selecting a single column*:
@@ -109,7 +113,6 @@ select(mtcars, contains("d"), -drat)
 
 As a quick reference, you can use the following 'verbs' to select columns in different ways:
 
-`r margin_note('There are other commands too, but these are probably the most useful to begin with. See the help files for more information.')`
 
 - `starts_with()`
 - `ends_with()`
@@ -118,8 +121,10 @@ As a quick reference, you can use the following 'verbs' to select columns in dif
 
 
 
+There are other commands too, but these are probably the most useful to begin with. See the help files for more information.
 
-# Selecting rows of data
+
+## Selecting rows of data
 
 To select particular rows from a dataframe, `dplyr` provides the very useful `select()` function. Let's say we just want the 6-cylindered cars from the `mtcars` dataframe:
 
@@ -145,7 +150,7 @@ The `&` symbol does what you probably expect — it simply means 'AND'.
 
 
 
-# Combining column selections and filters with `dplyr`
+## Combining column selections and filters with `dplyr`
 
 
 As you might have noticed above, we can 'nest' function calls in R. For example, we might want to both select some columns and filter rows.
@@ -166,7 +171,8 @@ This is OK, but can get quite confusing to read, and the more deeply functions a
 
 Imagine your dataframe as a big bucket containing data. From this bucket, you can 'pour' your data down through a series of tubes and filters, until at the bottom of your screen you have a smaller bucket containing just the data you want.
 
-`r margin_note("Think of your data 'flowing' down the screen")`
+
+Think of your data 'flowing' down the screen.
 
 To make data flow from one bucket to another, we use the 'pipe' operator: `%>%`
 
@@ -198,7 +204,7 @@ This turns out to be an incredibly useful pattern when processing and working wi
 
 
 
-# Modifying and creating new columns
+## Modifying and creating new columns
 
 
 Often when working with data we want to compute new values from columns we already have. Let's say we have some data on the PHQ-9, which measures depression:

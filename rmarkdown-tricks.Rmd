@@ -6,6 +6,9 @@ output:
 
 
 
+
+# Tips and tricks with RMarkdown
+
 TODO, cover
 
 - Using `pander` to format tables nicely

@@ -1,0 +1,20 @@
+---
+title: 'Getting help'
+output:
+  bookdown::tufte_html2
+---
+
+```{r, include=FALSE}
+# ignore all this for the moment; it will be explained below
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+```
+
+
+# Getting help
+
+If you don't know or can't remember what a function does, R provides help files which explain how they work.
+To access a help file for a function, just type `?command` in the console, or run `?command` command within an R block. For example, running `?mean` would bring up the documentation for the `mean` function.
+
+You can also type `CRTL-Shift-H` while your cursor is over any R function in the RStudio interface.
+
+It's fair to say R documentation isn't always written for beginners. However the 'examples' sections are usually quite informative: you can normally see this by scrolling right to the end of the help file.

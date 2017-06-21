@@ -6,6 +6,9 @@ output:
 
 
 
+# Missing values
+
+
 TODO
 
 Explain about `NA` and `is.na()` and `is.finite()` here

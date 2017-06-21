@@ -1,0 +1,138 @@
+---
+title: 'Correlations'
+output:
+  bookdown::tufte_html2
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+library(tidyverse)
+library(pander)
+panderOptions('digits', 2)
+panderOptions('round', 3)
+panderOptions('keep.trailing.zeros', TRUE)
+
+```
+
+
+# Correlations
+
+
+The base R `cor()` function provides a simple way to get Pearson correlations, but to get a correlation matrix as you might expect from SPSS or Stata it's best to use the ``corr.test()`` function in the `psych` package.
+
+Before you start though, plotting the correlations might be the best way of getting to grips with the patterns of relationship in your data.  A pairs plot is a nice way of doing this:
+
+
+```{r}
+airquality %>% 
+  select(-Month, -Day) %>% 
+  pairs
+```
+
+
+If we were satisfied the relationships were (reasonably) linear, we could also visualise correlations themselves with a 'corrgram', using the `corrgram` library:
+
+
+```{r, fig.cap="A corrgram, showing pearson correlations (above the diagonal), variable distributions (on the diagonal) and ellipses and smoothed lines of best fit (below the diagnonal). Long, narrow ellipses denote large correlations; circular ellipses indicate small correlations."}
+library("corrgram")
+airquality %>% 
+  select(-Month, -Day) %>% 
+  corrgram(lower.panel=corrgram::panel.ellipse,
+         upper.panel=panel.cor,
+         diag.panel=panel.density)
+
+```
+
+
+The ggpairs function from the `GGally` package is also a nice way of plotting relationships between a combination of categorical and continuous data - it packs a lot of information into a limited space:
+
+
+```{r, message=F}
+mtcars %>% 
+  mutate(cyl = factor(cyl)) %>% 
+  select(mpg, wt, drat, cyl) %>% 
+  GGally::ggpairs()
+
+```
+
+
+
+## Obtaining a correlation matrix
+
+
+The `psych::corr.test()` function is a quick way to obtain a pairwise correlation matrix for an entire dataset, along with p values and confidence intervals which the base R `cor()` function will not provide:
+
+
+```{r}
+mycorrelations <- psych::corr.test(airquality)
+mycorrelations
+```
+
+
+One thing to be aware of is that by default `corr.test()` produces p values that are adjusted for multiple comparisons in the top right hand triangle (i.e. above the diagonal). If you want the uncorrected values use the values below the diagonal (or pass `adjust=FALSE` when calling the function). 
+
+
+## Making correlation tables for publication
+
+If you want to produce output tables for publication, you might find it useful to extract the *r* and *p* values as dataframes which can then be saved to a csv and opened in excel, or converted to a table. You can do this by sorting the `corr.test` output in a variable, and the accessing the `$r` and `$p` values within it:
+
+
+```{r}
+write.csv(mycorrelations$p, file="airquality-r-values.csv")
+mycorrelations$p 
+mycorrelations$r 
+```
+
+
+
+If you wanted to merge these and produce a table for publication, you could do something like this:
+
+```{r, echo=T}
+corr.table.with.p <- function(df, r.format="%+0.2f", p.format="%.3f"){
+  corrtests <- psych::corr.test(df)
+  m <- matrix(
+    paste(sprintf(r.format, corrtests$r), 
+          " (", 
+          sprintf(p.format, corrtests$p), 
+          ") ", 
+          sep=""
+    ),
+    ncol = length(rownames(corrtests$r)), 
+    nrow = length(rownames(corrtests$r))) %>% 
+    as.data.frame()
+  
+  names(m) <-  rownames(corrtests$r)
+  
+  m %>% mutate(` ` = rownames(corrtests$r)) %>% 
+    select(` `, everything()) 
+}  
+
+
+mtcars %>% select(wt, mpg, cyl, drat) %>% 
+  corr.table.with.p %>% 
+  pander()
+```
+
+
+
+You can also access the CI for each pariwise correlation as a table:
+
+```{r}
+mycorrelations$ci %>% 
+  head() %>% 
+  pander()
+```
+
+
+## Other types of correlation
+
+By default `corr.test` produces Pearson correlations, but You can pass the `method` argument `psych::corr.test()`:
+
+```{r, echo=T, eval=F}
+psych::corr.test(airquality, method="spearman")
+psych::corr.test(airquality, method="kendall")
+```
+
+
+
+

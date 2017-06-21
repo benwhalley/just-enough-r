@@ -4,13 +4,15 @@ output:
   bookdown::tufte_html2
 ---
   
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 # ignore all this for the moment; it will be explained below
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 ```
 
 
-THIS SECTION INCOMPLETE - YOU MIGHT WANT TO SKIP TO THE NEXT ONE
+# Graphics
+
+THIS SECTION IS INCOMPLETE - YOU MIGHT WANT TO SKIP TO THE NEXT ONE
 
 
 Sections to cover:

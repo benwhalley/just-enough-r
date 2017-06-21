@@ -5,13 +5,14 @@ output:
 ---
 
 
-```{r setup, include=FALSE}
-# ignore all this for the moment
+```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 library(tufte)
 library(tidyverse)
 ```
 
+
+# Confirmatory factor analysis
 
 *This section adapted from a guide originally produced by Jon May*
 
@@ -36,7 +37,7 @@ hz %>% glimpse()
 ```
 
 
-# Defining the model
+## Defining the model
 
 Define the CFA model you want to run using 'lavaan model syntax'^[A full guide is here: <http://lavaan.ugent.be/tutorial/syntax1.html>]. For example:
 
@@ -79,7 +80,7 @@ The output has three parts:
 
 
 
-# Model fit
+## Model fit
 
 To examine the model fit:
 
@@ -91,7 +92,7 @@ fitmeasures(hz.fit, c('cfi', 'rmsea', 'rmsea.ci.upper', 'bic'))
 This looks OK, but could be improved. 
 
 
-# Modification indices
+## Modification indices
 
 To examine the modification indices (here sorted to see the largest first) we type:
 
@@ -123,7 +124,7 @@ fitmeasures(hz.fit.2, c('cfi', 'rmsea', 'rmsea.ci.upper', 'bic'))
 RMSEA has improved marginally, but we'd probably want to investigate this model further, and make additional improvements to it.
 
 
-# Missing data
+## Missing data
 
 If you have missing data, add the argument `estimator='MLM'` to the `cfa()` function to use a robust method. There are no missing data in this dataset, but it would look like this:
 
