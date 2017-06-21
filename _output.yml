@@ -1,10 +1,14 @@
 bookdown::gitbook:
   css: style.css
+  in_header: hypothesis.html
   config:
     toc:
+      collapse: section
       before: |
         <li><a href="./">Just enough R</a></li>
     download: ["pdf", "epub"]
+  split_by: rmd
+
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex

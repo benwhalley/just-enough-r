@@ -4,11 +4,7 @@ output:
   bookdown::tufte_html2
 ---
   
-```{r, include=FALSE}
-# ignore all this for the moment
-knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
-library(tufte)
-```
+
 
 
 # Getting started with R and RStudio
@@ -33,7 +29,7 @@ To include R code within a document we write 3 backticks (`` ``` ``), followed b
 
 <!-- ignore the fact that this has extra characters in the first line of the code block... this is to make the chunk display in the final compiled file as an example. You won't see this again. -->
 
-    ```{r}`r ''`
+    ```{r}
     2 + 2
     ```
      
@@ -48,9 +44,7 @@ RStudio is a text editor which has been customised to make working with R easy. 
 
 
 
-```{r echo=FALSE, fig.fullwidth=T}
-knitr::include_graphics('media/rstudio-mainwindow.png')
-```
+![](media/rstudio-mainwindow.png)<!-- -->
 
 
 
@@ -147,8 +141,16 @@ The command in the R block below prints (shows on screen) the first few rows of 
 Place your cursor somewhere in the line the command is on and run it by typing `Ctrl-Enter`:
 
 
-```{r}
+
+```r
 head(mtcars)
+##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
 ```
 
 If you are reading this from within RStudio, running `head(mtcars)` will have included an interactive table in the document, which you can use this to view the `mtcars` dataset. If you are still reading the compiled html or pdf document you will see a table containing the same data, included within the body of the document.
@@ -167,33 +169,40 @@ One of the nice things about R is that we can assign labels to parts of our anal
 
 To assign labels to particular values we use the `<-` symbol. That is, we have a *value* and use the `<-` symbol to point to the *variable* we want to assign it to. For example:
 
-```{r}
+
+```r
 meaning.of.life <- 42
 ```
 
 This assigns the value `42` to the variable `meaning.of.life`. This block wouldn't display anything because assigning a variable doesn't create any output. To both assign a variable *and* display it we would type:
   
-```{r}
+
+```r
 meaning.of.life <- 42
 meaning.of.life
+## [1] 42
 ```
 
 
 Or if we want to be explicit:
 
 
-```{r}
+
+```r
 print(meaning.of.life)
+## [1] 42
 ```
 
 
 
 Helpfully, we can also do simple calculations as we assign variables:
 
-```{r}
+
+```r
 one.score <- 20
 four.score.years.and.ten <- one.score * 4 + 10
 print(four.score.years.and.ten)
+## [1] 90
 ```
 
 As you will see below, we can give anything a label by assigning it to a variable. It doesn't have to be simple numbers: we can also assign words, graphics and plots, the results of a statistical model, or *lists* of any of these things.
@@ -214,7 +223,8 @@ In general we should avoid mixing up different types of 'thing', and so use vect
 
 We can create a vector of numbers and display it like this:
 
-```{r}
+
+```r
 # this creates a vector of heights, in cm
 heights <- c(203, 148, 156, 158, 167, 
              162, 172, 164, 172, 187, 
@@ -225,14 +235,17 @@ The `c()` command is shorthand for *combine*, so the example above combines the 
 
 We can create a vector of alphanumeric names just eas easily:
 
-```{r}
+
+```r
 names <- c("Ben", "Joe", "Sue", "Rosa")
 ```
 
 And we can check the values stored in these variables by printing them, e.g.:
 
-```{r}
+
+```r
 heights 
+##  [1] 203 148 156 158 167 162 172 164 172 187 134 182 175
 ```
 
 
@@ -248,21 +261,24 @@ Once we have created a vector, we often want to access the individual elements a
 
 Let's say we have created a vector:
   
-```{r}
+
+```r
 my.vector <- c(10, 20, 30, 40)
 ```
 
 We can display the whole vector by just typing it's name, as we saw above. But if we want to show only the *first* element of this vector, we type:
   
-```{r}
+
+```r
 my.vector[1]
+## [1] 10
 ```
 
 
 Here, the square brackets specify a *subset* of the vector we want - in this case, just the first element.
 
 
-### Selecting more than one element in a vector
+## Selecting more than one element in a vector
 
 A neat feature of subsetting is that we can grab more than one element at a time. 
 
@@ -270,16 +286,20 @@ To do this, we need to tell R the *positions* of the elements we want, and so we
 
 It might seem obvious, but the first element has position 1, the second has position 2, and so on.  So, if we wanted to extract the 4th and 5th elements from the vector of heights we saw above we would type:
 
-```{r}
+
+```r
 elements.to.grab <- c(4, 5)
 heights[elements.to.grab]
+## [1] 158 167
 ```
 
 We can also make a subset of the original vector and assign it to a *new* variable:
 
-```{r}
+
+```r
 first.two.elements <- heights[c(1, 2)]
 first.two.elements
+## [1] 203 148
 ```
 
 
@@ -293,20 +313,30 @@ first.two.elements
 
 Many of R's most useful functions process *vectors of numbers* in some way. For example, if we want to calculate the average of our vector of heights we just type:
 
-```{r}
+
+```r
 mean(heights)
+## [1] 167.6923
 ```
 
 R contains *lots* of built in functions which we can use to summarise a vector of numbers. For example:
 
-```{r, echo=T}
+
+```r
 median(heights)
+## [1] 167
 sd(heights)
+## [1] 17.59443
 min(heights)
+## [1] 134
 max(heights)
+## [1] 203
 range(heights)
+## [1] 134 203
 IQR(heights)
+## [1] 17
 length(heights)
+## [1] 13
 ```
 
 
@@ -315,30 +345,41 @@ All of these functions accept a vector as input, do some proccesing, and then re
 But not all functions return a single number in the way that `mean` did above. Some return a new vector, or some other type of object instead.  For example, the `quantile` function returns the values at the 0, 25th, 50th, 75th and 100th percentiles (by default).
 
 
-```{r}
+
+```r
 height.quantiles <- quantile(heights)
 height.quantiles
+##   0%  25%  50%  75% 100% 
+##  134  158  167  175  203
 ```
 
 
 If a function returns a vector, we can use it just like any other vector:
 
-```{r}
+
+```r
 height.quantiles <- quantile(heights)
 
 # grab the third element, which is the median
 height.quantiles[3]
+## 50% 
+## 167
 
 # assign the first element to a variable
 min.height <- height.quantiles[1]
 min.height
+##  0% 
+## 134
 ```
 
 But other functions process a vector without returning any numbers. For example, the `hist` function returns a histogram:
 
-```{r}
+
+```r
 hist(heights)
 ```
+
+<img src="start_here_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
 We'll cover lots more plotting and visualisation later on.
 
@@ -355,31 +396,44 @@ In R, if a function accepts a single value as input and returns a single value a
 
 This turns out to be very useful. For example, let's say we want the square root of each of the elements of our height data:
 
-```{r}
+
+```r
 # these are the raw values
 heights
+##  [1] 203 148 156 158 167 162 172 164 172 187 134 182 175
 
 # takes the sqrt of each value and returns a vector of all the square roots
 sqrt(heights)
+##  [1] 14.24781 12.16553 12.49000 12.56981 12.92285 12.72792 13.11488
+##  [8] 12.80625 13.11488 13.67479 11.57584 13.49074 13.22876
 ```
 
 This also works with simple arithmetic So, if we wanted to convert all the heights from cm to meters we could just type:
 
-```{r}
+
+```r
 heights / 100
+##  [1] 2.03 1.48 1.56 1.58 1.67 1.62 1.72 1.64 1.72 1.87 1.34 1.82 1.75
 ```
 
 This trick also works with other functions like `paste`, which combines the inputs you send it to produce an alphanumeric string:
 
-```{r}
+
+```r
 paste("Once", "upon", "a", "time")
+## [1] "Once upon a time"
 ```
 
 If we send a vector to `paste` it assumes we want a vector of results, with each element in the vector pasted next to each other:
 
-```{r}
+
+```r
 bottles <- c(100, 99, 98, "...")
 paste(bottles, "green bottles hanging on the wall")
+## [1] "100 green bottles hanging on the wall"
+## [2] "99 green bottles hanging on the wall" 
+## [3] "98 green bottles hanging on the wall" 
+## [4] "... green bottles hanging on the wall"
 ```
 
 In other programming languages we might have had to write a 'loop' to create each line of the song, but R lets us write short statements to summarise *what* needs to be done; we don't need to worry worrying about *how* it gets done.
@@ -391,40 +445,55 @@ Sometimes you'll need to create vectors containing regular sequences or randomly
 
 To create regular sequences a convenient shortcut is the 'colon' operator. For example, if we type `1:10` then we get a vector of numbers from 1 to 10:
 
-```{r}
+
+```r
 1:10
+##  [1]  1  2  3  4  5  6  7  8  9 10
 ```
 
 The `seq` function allows you to create more specific sequences:
 
-```{r}
+
+```r
 # make a sequence, specifying the interval between them
 seq(from=0.1, to=2, by=.1)
+##  [1] 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7
+## [18] 1.8 1.9 2.0
 ```
 
 
 We can also use random number-generating functions built into R to create vectors:
 
-```{r}
+
+```r
 # 10 uniformly distributed random numbers between 0 and 1
 runif(10)
+##  [1] 0.02315374 0.03862412 0.68340757 0.59057499 0.21861662 0.98611333
+##  [7] 0.60367464 0.30426355 0.88933960 0.35285989
 
 # 1,000 uniformly distributed random numbers between 1 and 100
 my.numbers <- runif(1000, 1, 10)
 
 # 10 random-normal numbers with mean 10 and SD=1
 rnorm(10, mean=10)
+##  [1] 11.555879 10.937296 11.274370  9.582144  9.619570 10.047089  8.644861
+##  [8]  9.400595 12.748728 10.296794
 
 # 10 random-normal numbers with mean 10 and SD=5
 rnorm(10, 10, 5)
+##  [1] 11.750853  7.761015 17.518838  8.666787 16.711495 15.643151  4.219275
+##  [8]  8.140572  8.395004 10.046175
 ```
 
 We can then use these numbers in our code, for example plotting them:
 
-```{r}
+
+```r
 random.numbers <- rnorm(10000)
 hist(random.numbers)
 ```
+
+<img src="start_here_files/figure-html/unnamed-chunk-27-1.png" width="672" />
 
 
 
@@ -432,41 +501,64 @@ hist(random.numbers)
 
 There are *thousands* of functions built into R. Below are a few examples which are likely to be useful as you work with your data:
 
-```{r}
+
+```r
 # repeat something N times
 rep("Apple pie", 10)
+##  [1] "Apple pie" "Apple pie" "Apple pie" "Apple pie" "Apple pie"
+##  [6] "Apple pie" "Apple pie" "Apple pie" "Apple pie" "Apple pie"
 ```
 
-```{r}
+
+```r
 # repeat a short vector, combining into a single longer vector
 rep(c("Custard", "Gravy"), 5)
+##  [1] "Custard" "Gravy"   "Custard" "Gravy"   "Custard" "Gravy"   "Custard"
+##  [8] "Gravy"   "Custard" "Gravy"
 ```
 
-```{r}
+
+```r
 # make a sequence and then sort it
 countdown <- 100:1
 sort(countdown)
+##   [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
+##  [18]  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34
+##  [35]  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51
+##  [52]  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68
+##  [69]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85
+##  [86]  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100
 ```
 
-```{r}
+
+```r
 # generate some random data (here, ages in years)
 ages <- round(rnorm(10, mean=40, sd=10))
 
 # get the rank order of elements (i.e. what their positions would be if the vector was sorted)
 ages
+##  [1] 51 57 45 32 42 43 40 43 36 51
 rank(ages, ties.method="first")
+##  [1]  8 10  7  1  4  5  3  6  2  9
 ```
 
-```{r}
+
+```r
 # you could even label the vector of ages if you wanted
 labels <- paste("Position:", rank(ages, ties.method="first"))
 names(ages) <- labels
 ages
+##  Position: 8 Position: 10  Position: 7  Position: 1  Position: 4 
+##           51           57           45           32           42 
+##  Position: 5  Position: 3  Position: 6  Position: 2  Position: 9 
+##           43           40           43           36           51
 ```
 
-```{r}
+
+```r
 # return the unique values in a vector
 unique( rep(1:10, 100) )
+##  [1]  1  2  3  4  5  6  7  8  9 10
 ```
 
 Try and experiment with each of these functions. Check the output against what you expected to happen, and make sure you understand what they do.
@@ -477,10 +569,12 @@ Try and experiment with each of these functions. Check the output against what y
 
 Try running the code below:
 
-```{r, error=TRUE}
+
+```r
 confusing.vector <- c(1, 2, 3, "Wibble")
 first.element <- confusing.vector[1]
 sqrt(first.element)
+## Error in sqrt(first.element): non-numeric argument to mathematical function
 ```
 
 
@@ -493,10 +587,14 @@ Because R can't reliably convert `"Wibble"` to a number, everything in the vecto
 
 If you're not sure what type of thing your vector contains, you can use the `typeof` command:
 
-```{r}
+
+```r
 typeof(1:10)
+## [1] "integer"
 typeof(runif(10))
+## [1] "double"
 typeof(c(1, 2, "Wibble"))
+## [1] "character"
 ```
 
 Here the meaning of *integer* should be self explanatory. The vector `runif(10)` has type *double*, because it contains 'double-precision' floating point numbers. For our purposes you can just think of `double` as meaning any number with decimal places.
@@ -505,7 +603,8 @@ The last vector has the type `character` because it includes the character strin
 
 If we want to (safely) mix up different types of object without them being converted we need a proper `list`, rather than a vector. In R we would write:
 
-```{r}
+
+```r
 my.list <- list(2, 2, "Wibble")
 ```
 
@@ -513,19 +612,24 @@ my.list <- list(2, 2, "Wibble")
 We can still access elements from lists as we do for vectors, although now we need to use double square brackets, for example:
 
 
-```{r}
+
+```r
 my.list[[1]]
+## [1] 2
 ```
 
 But now our numbers haven't been converted to character strings, and we can still multiply them.
 
-```{r}
+
+```r
 my.list[[1]] * my.list[[2]]
+## [1] 4
 ```
 
 Square brackets are ugly and can be confusing though, so we often give names to the elements of our list when we create it:
 
-```{r}
+
+```r
 my.party <- list(number.guests=8, 
                  when="Friday", 
                  drinks = c("Juice", "Beer", "Whisky"))
@@ -533,14 +637,18 @@ my.party <- list(number.guests=8,
 
 Which means we can then access the elements *by name* later on. To do this, you write the name of the vector, then a `$` sign, and then the name of the element you want to access:
 
-```{r}
+
+```r
 my.party$when
+## [1] "Friday"
 ```
 
 You might have spotted that we included a vector inside the party list. This is not a problem, and we can still access individual elements of this vector too:
 
-```{r}
+
+```r
 my.party$drinks[1]
+## [1] "Juice"
 ```
 
 
@@ -557,8 +665,11 @@ my.party$drinks[1]
 
 3. Run the following R code and explain what has happened:
 
-```{r}
+
+```r
 sqrt(1:10) * 10
+##  [1] 10.00000 14.14214 17.32051 20.00000 22.36068 24.49490 26.45751
+##  [8] 28.28427 30.00000 31.62278
 ```
 
 
