@@ -1,5 +1,4 @@
 bookdown::gitbook:
-  css: style.css
   in_header: hypothesis.html
   self_contained: TRUE
   config:
