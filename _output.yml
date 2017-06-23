@@ -1,6 +1,6 @@
 bookdown::gitbook:
-  in_header: hypothesis.html
-  self_contained: TRUE
+  includes:
+    in_header: hypothesis.html
   config:
     toc:
       collapse: section

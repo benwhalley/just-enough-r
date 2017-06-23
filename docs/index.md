@@ -1,8 +1,7 @@
 ---
 title: '''Just enough'' R'
+output: tufte::tufte_html
 site: bookdown::bookdown_site
-documentclass: book
-output: bookdown::gitbook
 ---
 
 

@@ -85,10 +85,10 @@ chicks.eating.beans %>%
 
 ## Running t-tests
 
-Assuming you really do still want to run a null hypothesis test, the `t.test()` function performs most common variants:
+Assuming you really do still want to run a null hypothesis test on one or two means, the `t.test()` function performs most common variants, illustrated below.
 
 
-### 2 independent groups:
+## 2 independent groups:
 
 
 ```r
@@ -122,7 +122,7 @@ with(untidy.chicks, t.test(horsebean, soybean))
 ```
 
 
-### Unequal variances
+## Unequal variances
 
 By default R assumes your groups have unequal variances and applies an appropriate correction. If you don't want this you can add `var.equal = TRUE` and get a vanilla t-test:
 
@@ -132,9 +132,7 @@ with(untidy.chicks, t.test(horsebean, soybean, var.equal=TRUE))
 ```
 
 
-
-
-### Paired samples
+## Paired samples
 
 
 ```r
@@ -145,7 +143,7 @@ t.test(a, b, paired=TRUE)
 
 
 
-### One-sample test 
+## One-sample test 
 
 i.e. comparing sample mean with a specific value:
 
@@ -155,14 +153,4 @@ i.e. comparing sample mean with a specific value:
 somedata <- rnorm(50, 2.5, 1)
 t.test(somedata, mu=2)
 ```
-
-
-
-
-
-
-
-
-
-
 

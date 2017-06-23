@@ -76,7 +76,7 @@ One thing to be aware of is that by default `corr.test()` produces p values that
 
 
 ### `apaTables`
-If you want to produce output tables for publication the `apaTables` package might be useful. This block saves an APA formatted correlation table to an external Word document.
+If you want to produce output tables for publication the `apaTables` package might be useful. This block saves an APA formatted correlation table to an [external Word document like this](Table1_APA.doc).
 
 ```{r}
 library(apaTables)
