@@ -104,11 +104,49 @@ One thing to be aware of is that by default `corr.test()` produces p values that
 
 ## Making correlation tables for publication
 
-If you want to produce output tables for publication, you might find it useful to extract the *r* and *p* values as dataframes which can then be saved to a csv and opened in excel, or converted to a table. You can do this by sorting the `corr.test` output in a variable, and the accessing the `$r` and `$p` values within it:
+
+### `apaTables`
+If you want to produce output tables for publication the `apaTables` package might be useful. This block saves an APA formatted correlation table to an external Word document.
+
+
+```r
+library(apaTables)
+apa.cor.table(airquality, filename="Table1_APA.doc", show.conf.interval=F)
+## 
+## 
+## Means, standard deviations, and correlations
+##  
+## 
+##   Variable   M      SD    1      2     3      4     5   
+##   1. Ozone   42.13  32.99                               
+##                                                         
+##   2. Solar.R 185.93 90.06 .35**                         
+##                                                         
+##   3. Wind    9.96   3.52  -.60** -.06                   
+##                                                         
+##   4. Temp    77.88  9.47  .70**  .28** -.46**           
+##                                                         
+##   5. Month   6.99   1.42  .16    -.08  -.18*  .42**     
+##                                                         
+##   6. Day     15.80  8.86  -.01   -.15  .03    -.13  -.01
+##                                                         
+## 
+## Note. * indicates p < .05; ** indicates p < .01.
+## M and SD are used to represent mean and standard deviation, respectively.
+## 
+```
+
+
+### By hand
+
+If you're not bothered about strict APA foramt, you might still want to extract the *r* and *p* values as dataframes which can then be saved to a csv and opened in excel, or converted to a table by some other means. 
+
+You can do this by storing the `corr.test` output in a variable, and the accessing the `$r` and `$p` values within it:
 
 
 
 ```r
+mycorrelations <- psych::corr.test(airquality)
 write.csv(mycorrelations$p, file="airquality-r-values.csv")
 mycorrelations$p 
 ##                Ozone      Solar.R         Wind         Temp        Month
@@ -141,51 +179,6 @@ mycorrelations$r
 ## Month   -0.007961763
 ## Day      1.000000000
 ```
-
-
-
-If you wanted to merge these and produce a table for publication, you could do something like this:
-
-
-```r
-corr.table.with.p <- function(df, r.format="%+0.2f", p.format="%.3f"){
-  corrtests <- psych::corr.test(df)
-  m <- matrix(
-    paste(sprintf(r.format, corrtests$r), 
-          " (", 
-          sprintf(p.format, corrtests$p), 
-          ") ", 
-          sep=""
-    ),
-    ncol = length(rownames(corrtests$r)), 
-    nrow = length(rownames(corrtests$r))) %>% 
-    as.data.frame()
-  
-  names(m) <-  rownames(corrtests$r)
-  
-  m %>% mutate(` ` = rownames(corrtests$r)) %>% 
-    select(` `, everything()) 
-}  
-
-
-mtcars %>% select(wt, mpg, cyl, drat) %>% 
-  corr.table.with.p %>% 
-  pander()
-```
-
-
-------------------------------------------------------------
-          wt            mpg           cyl          drat     
----- ------------- ------------- ------------- -------------
- wt  +1.00 (0.000) -0.87 (0.000) +0.78 (0.000) -0.71 (0.000)
-
-mpg  -0.87 (0.000) +1.00 (0.000) -0.85 (0.000) +0.68 (0.000)
-
-cyl  +0.78 (0.000) -0.85 (0.000) +1.00 (0.000) -0.70 (0.000)
-
-drat -0.71 (0.000) +0.68 (0.000) -0.70 (0.000) +1.00 (0.000)
-------------------------------------------------------------
-
 
 
 You can also access the CI for each pariwise correlation as a table:

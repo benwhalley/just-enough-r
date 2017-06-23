@@ -208,7 +208,7 @@ print(four.score.years.and.ten)
 As you will see below, we can give anything a label by assigning it to a variable. It doesn't have to be simple numbers: we can also assign words, graphics and plots, the results of a statistical model, or *lists* of any of these things.
 
 
-## Vectors and lists
+# Vectors and lists
 
 When working with data, we often have lists of 'things': for example a list of measurements we have made.
 
@@ -278,7 +278,7 @@ my.vector[1]
 Here, the square brackets specify a *subset* of the vector we want - in this case, just the first element.
 
 
-## Selecting more than one element in a vector
+### Selecting more than one element in a vector
 
 A neat feature of subsetting is that we can grab more than one element at a time. 
 

@@ -5,7 +5,16 @@ documentclass: book
 output: bookdown::gitbook
 ---
 
+
 ![](media/keepcalm.png)
+
+<!-- 
+
+https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/
+
+-->
+
+
 
 # Introduction
 
@@ -17,9 +26,8 @@ It also happens to be a complete programmming language, but if you're reading th
 We are going to use R the same way we use any other statistics software: To check and visualise data, run statistical analyses, and share our results with others.  To do that it's worth learning the *absolute basics* of the R language. The next few chapters walk you through those basics: what you need to know to be productive in R and RStudio. By analogy, imagine going on holiday and learning enough French to introduce yourself, count from one to ten, and order a baguette. You won't be fluent - but you won't starve, and your trip will be more fun.
 
 
-## How the guide is structured {-}
 
-### Part 1: Must read {-}
+### Part 1: 'Must read' {-}
 
 Part 1 is meant to be read from beginning to end by those starting from scratch.
 
@@ -29,26 +37,27 @@ Part 1 is meant to be read from beginning to end by those starting from scratch.
 2. [Manipulating dataframes](working-with-dataframes.html) (select and filter)
 3. [Summarising data](summarising-data.html) (split, apply, combine)
 4. [Visualising data](graphics.html) (layering graphics with `ggplot2`)
-5. [Linear models](linear-models-simple.html)
 
 
 
 ### Part 2: Nice to know {-}
 
-Part 2 can be read sequentially, but these chapters are also designed to work as standalone guides for specific techniques. 
+Part 2 can be read sequentially, but the chapters are also designed to work as standalone guides for specific techniques. 
 
-1. [Working with real data](real-data.html)
-1. [Correlations](correlations.html)
-1. [t-tests](t-tests.html)
-1. [Understanding interactions](understanding-interactions.html) (visualising interactions in raw data)
-1. [Predictions and marginal effects](predictions-and-margins.html)
-1. [Mediation](mediation.html)
-1. [Linear mixed models (multilevel models)](multilevel-models.html)
-1. Meta analysis
-1. [Confirmatory factor analysis](cfa.html) 
-1. Structural Equation Modelling
-1. Power analysis
-1. ... ^[It would also be lovely to have chapters on multiple imputation, power analysis, simulation, Bayesian modelling and much else. These aren't planned imminently, but contributions are welcome.]
+- [Working with real data](real-data.html)
+- [Correlations](correlations.html)
+- [t-tests](t-tests.html)
+- [Linear models](linear-models-simple.html)
+- [Anova](Anova.html)
+- [Understanding interactions](understanding-interactions.html) (visualising interactions in raw data)
+- [Predictions and marginal effects](predictions-and-margins.html)
+- [Mediation](mediation.html)
+- [Linear mixed models (multilevel models)](multilevel-models.html)
+- Meta analysis
+- [Confirmatory factor analysis](cfa.html) 
+- Structural Equation Modelling
+- Power analysis
+- ... ^[It would also be lovely to have chapters on multiple imputation, power analysis, simulation, Bayesian modelling and much else. These aren't planned imminently, but contributions are welcome.]
 
 
 
