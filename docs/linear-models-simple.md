@@ -7,29 +7,47 @@ output:
 
 
 
-# Simple linear models
+# Introduction to linear models in R
 
 This section assumes most readers will have done an introductory statistics course and had practce running multiple regression and or Anova in SPSS or a similar package. 
+
+
+
+## Differences between R and other packages it's important to be aware of
+
+It's important to note up-front that R has *different defaults* to many other statistical packages. This is especially relevant for the `anova()` function: R's default settings will not match those of SPSS or Stata, and many researchers will want to change these defaults.
+
+Specifically, R will require that you think about:
+
+- How should factors be coded when calculating contrasts for categorical variables?
+- What type of sums of squares (I, II, or III) do you want when calculating the F test for an Anova?
+- How should the error term be specified for repeated measured Anova?
+
+These issues are covered later in detail in later sections. 
+
 
 
 <!-- If you haven't, don't rush out to do that though XXX what should they do instead? Recommend some MOOC? XXX? -->
 
 
-## Describing our models (formulas)
+## Describing statistical models using formulae
 
-R requires that you are explicit about the statistical model you want to run, but provides a neat, concise way of describing a model, called a `formula`.  For multiple regression and simple Anova, the formulas we write map closely onto the underlying *linear model*. The formula syntax provides shortcuts to quickly describe all the models you are likely to need.
+R requires that you are explicit about the statistical model you want to run but provides a neat, concise way of describing models, called a `formula`.  For multiple regression and simple Anova, the formulas we write map closely onto the underlying *linear model*. The formula syntax provides shortcuts to quickly describe all the models you are likely to need.
 
 Formulas have two parts: the left hand side and the right hand side, which are separated by the tilde symbol: `~`. Here, the tilde just means 'is predicted by'. 
 
-For example, for formula `height ~ age + gender`  specifies a regression model where `height` is the outcome, and `age` and `gender` are the predictor variables.^[I avoid the terms dependent/independent variables because they are confusing to many students, and because they can be misleading when discussing non-experimental data. 'Outcome' and 'predictors' are preferred instead.]
+For example, this formula specifies a regression model where `height` is the *outcome*, and `age` and `gender` are the *predictor* variables.^[I avoid the terms dependent/independent variables because they are confusing to many students, and because they are misleading when discussing non-experimental data.]
 
-There are lots more useful tricks to learn when writing formulas, which are covered below. In the interests of instant gratification, let's work through a simple example first:
+```
+height ~ age + gender
+```  
 
+There are lots more useful tricks to learn when writing formulas, which are covered below. But in the interests of instant gratification let's work through a simple example first:
 
 
 ## Running a linear model
 
-Linear models (including Anova and multiple regression) are run using the `lm` function, short for 'linear model'.  We will use the `mtcars` dataset, which is built into R, for our first example. 
+Linear models (including Anova and multiple regression) are run using the `lm(...)` function, short for 'linear model'.  We will use the `mtcars` dataset, which is built into R, for our first example.  
 
 First, we have a quick look at the data. The pairs plot suggests that `mpg` might be related to a number of the other variables including `disp` (engine size) and `wt` (car weight):
 
@@ -43,11 +61,11 @@ mtcars %>%
 
 <img src="linear-models-simple_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
-Before running any model, we should ask outselves what question we are trying to answer? In this instance, we can see that both weight and engine size are related to `mpg`, but they are also correlated with one another.
+Before running any model, we should ask outselves: "what question we are trying to answer?" 
 
-We might want to know, "are weight and engine size independent predictors of `mpg`?" That is, if we know a car's weight, do we gain additional information about it's `mpg` by measuring engine size?
+In this instance, we can see that both weight (`wt`) and engine size (`disp`) are related to `mpg`, but they are also correlated with one another. We might want to know, then, "are weight and engine size independent predictors of `mpg`?" That is, if we know a car's weight, do we gain additional information about it's `mpg` by measuring engine size?
 
-To answer this, we could use multiple regression, including both `wt` and `disp` as predictors of `mpg`. The formula for this would be `mpg ~ wt + disp`. The command below runs the model:
+To answer this, we could use multiple regression, including both `wt` and `disp` as predictors of `mpg`. The formula for this model would be `mpg ~ wt + disp`. The command below runs the model:
 
 
 ```r
@@ -61,9 +79,7 @@ lm(mpg ~ wt + disp, data=mtcars)
 ##    34.96055     -3.35083     -0.01772
 ```
 
-For readers used to wading through SPSS output, R might seem concise to the point of rudeness. 
-
-By default, the `lm` commands displays very little, only repeating the formula and listing the coefficients for each predictor in the model.
+For readers used to wading through reams of SPSS output R might seem concise to the point of rudeness. By default, the `lm` commands displays very little, only repeating the formula and listing the coefficients for each predictor in the model.
 
 So what next? Unlike SPSS, we must be explicit and tell R exactly what we want. The most convenient way to do this is to first store the results of the `lm()` function:
 
@@ -74,7 +90,9 @@ m.1 <- lm(mpg ~ wt + disp, data=mtcars)
 ```
 
 
-This stores the results of `lm` in a variable named `m.1`^[This is actually a pretty terrible variable name. Try to give descriptive names to variables you create in your code; this prevents errors and makes code easier to read.]. We can then use other functions to get more information about the model. For example:
+This stores the results of `lm` in a variable named `m.1`. As an aside, this is a pretty terrible variable name — try to give descriptive names to your variables because this will prevent errors and make your code easier to read.
+
+We can then use other functions to get more information about the model. For example:
 
 
 ```r
@@ -100,15 +118,14 @@ summary(m.1)
 ## F-statistic: 51.69 on 2 and 29 DF,  p-value: 2.744e-10
 ```
 
-Although still compact, the `summary` function provides familiar output, including the estimate, *SE*, and *p* value for each parameter.
+Although still compact, the `summary` function provides some familiar output, including the estimate, *SE*, and *p* value for each parameter.
 
 Take a moment to find the following statistics in the output above:
 
 - The coefficients and p values for each predictor
 - The *R*^2^ for the overall model. What % of variance in `mpg` is explained?
 
-Answer the original question: 'accounting for weight, does `disp` tell us anything extra about a car's `mpg`?'
-
+Answer the original question: 'accounting for weight (`wt`), does engine size (`disp`) tell us anything extra about a car's `mpg`?'
 
 
 
@@ -116,40 +133,50 @@ Answer the original question: 'accounting for weight, does `disp` tell us anythi
 
 Above we briefly introduced R's formula syntax. Formulas for linear models have the following structure:
 
-`left_hand_side ~ right_hand_side`
+```
+left_hand_side ~ right_hand_side
+```
 
-For linear models *the left side is our outcome*, which is must be a continous variable (i.e. not categorical or binary)^[Other types of model (e.g. generalised linear models using the `glm()` function) can accept binary or categorical outcomes.].
-
-*The right hand side lists our predictors*. In the example above we used the `+` symbol to separate the predictors `wt` and `disp`.  This told R to simply add each predictor to the model. However, many times we want to specify relationships *between* our predictors. 
-
-For example, we might want to run an Anova with 2 categorical predictors, each with 2 levels (e.g. a 2x2 between-subjects design).
+For linear models *the left side is our outcome*, which is must be a continous variable. For categorical or binary outcomes you need to use `glm()` function, rather than `lm()`. See the section on [generalised linear models](glm.html)) for more details.
 
 
-Below, we define and run a linear model with both `vs` and `am` as predictors, along with the interaction of `vs:am`. We save this model, and use the `anova` command to print the standard Anova table for the model.
+*The right hand side of the formula lists our predictors*. In the example above we used the `+` symbol to separate the predictors `wt` and `disp`.  This told R to simply add each predictor to the model. However, many times we want to specify relationships *between* our predictors, as well as between predictors and outcomes. 
+
+
+For example, we might want to run an Anova with 2 categorical predictors, each with 2 levels --- that is, a 2x2 between-subjects design.
+
+Below, we define and run a linear model with both `vs` and `am` as predictors, along with the interaction of `vs:am`. We save this model as `m.2`, and use the `summary` command to print the coefficients.
 
 
 
 ```r
 m.2 <- lm(mpg ~ vs + am + vs:am, data=mtcars)
-anova(m.2)
-## Analysis of Variance Table
+summary(m.2)
 ## 
-## Response: mpg
-##           Df Sum Sq Mean Sq F value    Pr(>F)    
-## vs         1 496.53  496.53 41.1963 5.981e-07 ***
-## am         1 276.03  276.03 22.9021 4.984e-05 ***
-## vs:am      1  16.01   16.01  1.3283    0.2589    
-## Residuals 28 337.48   12.05                      
+## Call:
+## lm(formula = mpg ~ vs + am + vs:am, data = mtcars)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -6.971 -1.973  0.300  2.036  6.250 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)   15.050      1.002  15.017 6.34e-15 ***
+## vs             5.693      1.651   3.448   0.0018 ** 
+## am             4.700      1.736   2.708   0.0114 *  
+## vs:am          2.929      2.541   1.153   0.2589    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 3.472 on 28 degrees of freedom
+## Multiple R-squared:  0.7003,	Adjusted R-squared:  0.6682 
+## F-statistic: 21.81 on 3 and 28 DF,  p-value: 1.735e-07
 ```
 
 
-This might seem odd to some readers (running the linear model before the Anova), but it's important to understand that printing an Anova table is just one of the things you can do with a linear model — allbeit an important one for experimental psychologists.
 
-
-
-### Other formula shortcuts
+### Other formula shortcuts
 
 In addition to the `+` symbol, we can use other shortcuts to create linear models.
 
@@ -174,8 +201,7 @@ As an exercise, run the following models using the mtcars dataset:
 
 ***It is strongly recommended that you read the [section on Anova](anova.html) before doing anything else.***
 
-R has a number of important differences in it's default settings, as compared to packages like Stata or SPSS, and these can make important differences to the way you interpret the output of Anova models.
-
+As noted above, R has a number of important differences in it's default settings, as compared with packages like Stata or SPSS. These can make important differences to the way you interpret the output of linear models, especially Anova-type models with categorical predictors.
 
 
 

@@ -468,21 +468,21 @@ We can also use random number-generating functions built into R to create vector
 ```r
 # 10 uniformly distributed random numbers between 0 and 1
 runif(10)
-##  [1] 0.02315374 0.03862412 0.68340757 0.59057499 0.21861662 0.98611333
-##  [7] 0.60367464 0.30426355 0.88933960 0.35285989
+##  [1] 0.1859517 0.1403806 0.6693456 0.8472666 0.2309495 0.2300545 0.8666919
+##  [8] 0.4884143 0.9654400 0.4645153
 
 # 1,000 uniformly distributed random numbers between 1 and 100
 my.numbers <- runif(1000, 1, 10)
 
 # 10 random-normal numbers with mean 10 and SD=1
 rnorm(10, mean=10)
-##  [1] 11.555879 10.937296 11.274370  9.582144  9.619570 10.047089  8.644861
-##  [8]  9.400595 12.748728 10.296794
+##  [1]  8.859302  9.779185 10.357482 10.937483  8.555067 10.594929 10.930529
+##  [8]  8.958609  9.831223  8.265265
 
 # 10 random-normal numbers with mean 10 and SD=5
 rnorm(10, 10, 5)
-##  [1] 11.750853  7.761015 17.518838  8.666787 16.711495 15.643151  4.219275
-##  [8]  8.140572  8.395004 10.046175
+##  [1] 10.8100825  8.9958930  2.7580386  7.4021015  7.5288401  0.1225604
+##  [7]  8.4658622  8.2993016 16.7534052  4.5453275
 ```
 
 We can then use these numbers in our code, for example plotting them:
@@ -537,9 +537,9 @@ ages <- round(rnorm(10, mean=40, sd=10))
 
 # get the rank order of elements (i.e. what their positions would be if the vector was sorted)
 ages
-##  [1] 51 57 45 32 42 43 40 43 36 51
+##  [1] 52 36 49 48 42 53 35 38 52 28
 rank(ages, ties.method="first")
-##  [1]  8 10  7  1  4  5  3  6  2  9
+##  [1]  8  3  7  6  5 10  2  4  9  1
 ```
 
 
@@ -548,10 +548,10 @@ rank(ages, ties.method="first")
 labels <- paste("Position:", rank(ages, ties.method="first"))
 names(ages) <- labels
 ages
-##  Position: 8 Position: 10  Position: 7  Position: 1  Position: 4 
-##           51           57           45           32           42 
-##  Position: 5  Position: 3  Position: 6  Position: 2  Position: 9 
-##           43           40           43           36           51
+##  Position: 8  Position: 3  Position: 7  Position: 6  Position: 5 
+##           52           36           49           48           42 
+## Position: 10  Position: 2  Position: 4  Position: 9  Position: 1 
+##           53           35           38           52           28
 ```
 
 

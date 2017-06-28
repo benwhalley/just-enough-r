@@ -24,6 +24,8 @@ install.packages(lavaan)
 
 ```r
 library(lavaan)
+## This is lavaan 0.5-23.1097
+## lavaan is BETA software! Please report any bugs.
 ```
 
 

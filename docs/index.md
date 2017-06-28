@@ -2,6 +2,9 @@
 title: '''Just enough'' R'
 output: tufte::tufte_html
 site: bookdown::bookdown_site
+bibliography: [bibliography.bib]
+biblio-style: apalike
+link-citations: yes
 ---
 
 

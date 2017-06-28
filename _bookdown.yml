@@ -9,11 +9,11 @@ rmd_files:
     "working-with-dataframes.Rmd",
     "summarising-data.Rmd",
     "graphics.Rmd",
-    "linear-models-simple.Rmd",
 
     "real-data.Rmd",
     "correlations.Rmd",
     "t-tests.Rmd",
+    "linear-models-simple.Rmd",
     "anova.Rmd",
     "understanding-interactions.Rmd",
     "predictions-and-margins.Rmd",
@@ -26,7 +26,9 @@ rmd_files:
     "help.Rmd",
     "missing-values.Rmd",
     "rmarkdown-tricks.Rmd",
-    "confidence-vs-prediction-intervals.Rmd"
+    "confidence-vs-prediction-intervals.Rmd",
+
+    "references.Rmd"
   ]
 
 

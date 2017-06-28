@@ -4,10 +4,36 @@ output:
   bookdown::tufte_html2
 ---
 
+
 ```{r, include=FALSE}
 # ignore all this for the moment
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+library(tidyverse)
+library(pander)
+library(lmerTest)
+
 ```
+
+```{r}
+disschecks <- statcheck::checkdir('~/Downloads/dissertations/')
+
+disschecks %>% 
+  group_by(Statistic) %>% 
+  reshape2::dcast(Statistic~Error)
+
+disschecks %>% 
+  group_by(Statistic) %>% 
+  reshape2::dcast(Statistic~DecisionError)
+  
+```
+
+<!-- XXX TODO 
+
+http://lme4.r-forge.r-project.org/lMMwR/lrgprt.pdf 
+
+http://www.stata.com/meeting/germany13/abstracts/materials/de13_jann.pdf
+
+-->
 
 
 # Multilevel models
@@ -17,3 +43,220 @@ This chapter assumes:
 
 - You know what a multilevel model is
 - ...
+
+
+
+
+
+## The `sleepstudy` data and traditional RM Anova
+
+XXX As noted in the [Anova cookbook section](anova-cookbook.html), repeated measures anova can be approximated using linear mixed models.
+
+For example, using the same `sleepstudy` example, this model approximates a repeat measures anova in which multiple measurments of `Reaction` time are taken on multiple `Days` for each `Subject`:
+
+<!-- 
+This post by the author of afex confirms these models are equivalent to RM anova:
+http://singmann.org/mixed-models-for-anova-designs-with-one-observation-per-unit-of-observation-and-cell-of-the-design/ 
+-->
+
+```{r}
+sleep.model <- lmer(Reaction ~ factor(Days) + (1|Subject), data=lme4::sleepstudy)
+lmerTest::anova(sleep.model)
+```
+
+
+If you really wanted to fit traditional RM Anova, this is the 'real thing':
+
+```{r}
+afex::aov_car(Reaction ~ Days + Error(Subject/(Days)), data=lme4::sleepstudy)
+```
+
+
+XXX ADD THESE EXAMPLES
+But see the [multilevel models section](multilevel-models.html) for details of more interesting models which:
+
+### Fit a simple slope for `Days`
+
+```{r}
+lme4::sleepstudy %>% 
+  ggplot(aes(Days, Reaction)) + 
+  geom_point() + geom_jitter() +
+  geom_smooth() 
+```
+
+```{r}
+slope.model <- lmer(Reaction ~ Days + (1|Subject),  data=lme4::sleepstudy)
+lmerTest::anova(slope.model)
+slope.model.summary <- summary(slope.model)
+slope.model.summary$coefficients
+```
+
+
+
+### Allow the effect of sleep deprivation to vary for different participants
+
+It looks like sleep deprivation hits some participants worse than others:
+
+```{r}
+set.seed(1234)
+lme4::sleepstudy %>% 
+  filter(Subject %in% sample(levels(Subject), 10)) %>% 
+  ggplot(aes(Days, Reaction, group=Subject, color=Subject)) +
+  geom_smooth(method="lm", se=F) + 
+  geom_jitter(size=1) +
+  theme_minimal()
+  
+```
+
+
+If we wanted to test whether there was significant variation in the effects of sleep deprivation between subjects, we could add a *random slope* to the model. 
+
+The random slope allows the effect of `Days` to vary between subjects. So we can think of an overall slope (i.e. RT goes up over the days), from which individuals deviate by some amount (e.g. a resiliant person will have a negative deviation or residual from the overall slope).
+
+Adding the random slope doesn't change the F test for `Days` that much:
+
+```{r}
+random.slope.model <- lmer(Reaction ~ Days + (Days|Subject),  data=lme4::sleepstudy)
+lmerTest::anova(random.slope.model)
+```
+
+Nor the overall slope coefficient:
+
+```{r}
+random.slope.model.summary <- summary(random.slope.model)
+slope.model.summary$coefficients
+```
+
+But we can use the `lmerTest::rand()` function to show that there is statistically significant variation in slopes between individuals, using the likelihood ratio test:
+
+```{r}
+lmerTest::rand(random.slope.model)
+```
+
+
+Because the random slope for `Days` is statistically significant, we know it improves the model.
+One way to see that improvement is to plot residuals (unexplained error for each datapoint) against predicted values. To extract residual and fitted values we use the `residuals()` and `predict()` functions. These are then combined in a data_frame, to enable us to use ggplot for the subsequent figures.
+
+```{r}
+# create data frames containing residuals and fitted
+# values for each model we ran above
+a <-  data_frame(
+    model = "random.slope",
+    fitted = predict(random.slope.model), 
+    residual = residuals(random.slope.model))
+b <- data_frame(
+    model = "random.intercept",
+    fitted = predict(slope.model), 
+    residual = residuals(slope.model)) 
+
+# join the two data frames together
+residual.fitted.data <- bind_rows(a,b)
+
+```
+
+
+We can see that the residuals from the random slope model are much more evenly distributed across the range of fitted values, which suggests that the assumption of homogeneity of variance is met in the random slope model:
+
+```{r}
+# plots residuals against fitted values for each model
+residual.fitted.data %>%
+  ggplot(aes(fitted, residual)) +
+  geom_point() + 
+  geom_smooth(se=F) +
+  facet_wrap(~model) 
+```
+
+
+
+
+We can plot both of the random effects from this model (intercept and slope) to see how much the model expects individuals to deviate from the overall (mean) slope.
+
+```{r}
+# extract the random effects from the model (intercept and slope)
+ranef(random.slope.model)$Subject %>% 
+  # implicitly convert them to a dataframe and add a column with the subject number
+  rownames_to_column(var="Subject") %>% 
+  # plot the intercept and slobe values with geom_abline()
+  ggplot(aes()) + 
+  geom_abline(aes(intercept=`(Intercept)`, slope=Days, color=Subject)) +
+  # add axis label
+  xlab("Day") + ylab("Residual RT") +
+  # set the scale of the plot to something sensible
+  scale_x_continuous(limits=c(0,10), expand=c(0,0)) + 
+  scale_y_continuous(limits=c(-100, 100)) 
+```
+
+
+
+Inspecting this plot, there doesn't seem to be any strong correlation between the RT value at which an individual starts (their intercept residual) and the slope describing how they change over the days compared with the average slope (their slope residual). 
+
+That is, we can't say that knowing whether a person has fast or slow RTs at the start of the study gives us a clue about what will happen to them after they are sleep deprived: some people start slow and get faster; other start fast but suffer and get slower. 
+
+However we can explicitly check this correlation (between individuals' intercept and slope residuals) using the `VarCorr()` function:
+
+```{r}
+VarCorr(random.slope.model)
+```
+
+
+The correlation between the random intercept and slopes is only 0.066, and so very low. We might, therefore, want to try fitting a model without this correlation.  `lmer` includes the correlation by default, so we need to change the model formula to make it clear we don't want it:
+
+```{r}
+uncorrelated.reffs.model <- lmer(
+  Reaction ~ Days + (1 | Subject) + (0 + Days|Subject),  
+  data=lme4::sleepstudy)
+
+VarCorr(uncorrelated.reffs.model)
+```
+
+The variance components don't change much when we constrain the *covariance* of intercepts and slopes to be zero, and we can explicitly compare these two models using the `anova()` function, which is somewhat confusingly named because in this instance it is performing a likelihood ratio test to compare the two models:
+
+```{r}
+anova(random.slope.model, uncorrelated.reffs.model)
+```
+
+Model fit is not significantly worse with the constrained model, so for parsimony's sake we prefer it to the more complex model.
+
+
+
+### Fitting a curve for the effect of `Days`
+
+In theory, we could also fit additional parameters for the effect of `Days`, although a combined smoothed line plot/scatterplot indicates that a linear function fits the data reasonably well.
+
+
+```{r}
+lme4::sleepstudy %>% 
+  ggplot(aes(Days, Reaction)) + 
+  geom_point() + geom_jitter() + 
+  geom_smooth() 
+```
+
+
+If we insisted on testing a curved (quadratic) function of `Days`, we could:
+
+```{r}
+quad.model <- lmer(Reaction ~ Days + I(Days^2) + (1|Subject),  data=lme4::sleepstudy)
+quad.model.summary <- summary(quad.model)
+quad.model.summary$coefficients
+```
+
+
+
+Here, the *p* value for `I(Days^2)` is not significant, suggesting (as does the plot) that a simple slope model is sufficient.
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ## Arguments for bayesian model fitting -->
+
+<!-- See  -->
+
+<!-- https://arxiv.org/pdf/1701.04858.pdf -->
