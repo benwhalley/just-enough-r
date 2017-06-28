@@ -40,13 +40,13 @@ eysenck <- read.table('howell-data/Tab13-2.dat', header=T) %>%
     Condition=factor(Condition, 
                      labels=c("Counting", "Rhyming", "Adjective", "Imagery", "Intention")),
     Age = factor(Age, labels=c("Young", "Older")))
-saveRDS(eysenck, file="eysenck.Rdata")
+saveRDS(eysenck, file="data/eysenck.Rdata")
 ```
 
 This data would commonly be plotted something like this:
 
 ```{r}
-eysenck <- readRDS("eysenck.Rdata")
+eysenck <- readRDS("data/eysenck.Rdata")
 eysenck %>% 
   ggplot(aes(Condition, Recall, group=Age, color=Age)) + 
   stat_summary(geom="pointrange", fun.data = mean_cl_boot) +

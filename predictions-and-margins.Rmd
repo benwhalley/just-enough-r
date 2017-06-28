@@ -52,7 +52,7 @@ expand.grid(Age=c("Young", "Old"), Gender=c("Male", "Female")) %>% as.data.frame
 And as before, we might plot these data:
 
 ```{r, fig.cap="Point and line plot of injury severity by age and gender.", echo=F}
-load('injury.Rdata')
+load('data/injury.Rdata')
 inter.df <- inter.df %>%  filter(interaction=="Interaction") 
 means.plot <- inter.df %>% 
   ggplot(aes(older, severity.of.injury, group=female, color=female)) + 

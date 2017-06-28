@@ -79,6 +79,9 @@ Assuming you really do still want to run a null hypothesis test on one or two me
 ## 2 independent groups:
 
 ```{r}
+# the t.test function is a bit crufty and won't accept a data= parameter
+# for all types of test. Instead we use the with(...) function to make
+# the variables available
 with(chicks.eating.beans, t.test(weight ~ feed))
 ```
 

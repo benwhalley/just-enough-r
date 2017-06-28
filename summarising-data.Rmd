@@ -13,7 +13,7 @@ output:
 # ignore all this for the moment; it will be explained below
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 library(tidyverse)
-angry.moods <- readr::read_csv('angry_moods.csv')
+angry.moods <- readr::read_csv('data/angry_moods.csv')
 ```
 
 

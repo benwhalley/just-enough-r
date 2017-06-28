@@ -61,7 +61,7 @@ inter.df <- expand.grid(female=0:1, older=0:1, interaction=0:1) %>%
   mutate(older=factor(older, labels=c("Young", "Old"))) %>% 
   mutate(interaction=factor(interaction, labels=c("No Interaction", "Interaction")))
 
-save(inter.df, file='injury.Rdata')
+save(inter.df, file='data/injury.Rdata')
 ```
 
 
@@ -116,9 +116,9 @@ A student dissertation project investigated the analgesic quality of music durin
 #   select(liked, familiar, contains("intensity.vas")) %>% 
 #   rename(no.music=intensity.vas.baseline, with.music=intensity.vas.experimental) 
 # 
-# save(painmusic, file='painmusic.Rdata')
+# save(painmusic, file='data/painmusic.Rdata')
 
-load('painmusic.Rdata')
+load('data/painmusic.Rdata')
 painmusic %>% glimpse
 ```
 
