@@ -74,6 +74,7 @@ Some of the content here is not specific to R, but may be useful in interpreting
 - [Installing packages](packages.html)
 - [Handling missing values in R](missing-values.html)
 - [Using RMarkdown effectively](rmarkdown-tricks.html) (e.g. using `pander` and `knitr`)
+- [Dealing with multiple comparisons](multiple-comparisons.html)
 - [Confidence intervals vs. prediction intervals](confidence-vs-prediction-intervals.html)
 
 

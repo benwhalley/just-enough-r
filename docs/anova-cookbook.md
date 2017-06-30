@@ -209,13 +209,16 @@ lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition)
 ## P value adjustment: tukey method for comparing a family of 10 estimates
 ```
 
-By default Tukey correction is applied for multiple comparisons which is a reasonable default. If you want to use other methods (e.g. to use false discovery rate adjustment) you can use the `adjust` argument. In the code below we use the `broom::tidy()` function to convert the table into a dataframe, and then show only the first 6 rows as a table in RMarkdown: 
+By default Tukey correction is applied for multiple comparisons which is a reasonable default. If you want to use other methods (e.g. to use false discovery rate adjustment, see the section on [multiple comparisons](multiple-comparisons.html)) you can use the `adjust` argument. 
+
+In the code below we request FDR-adjusted p values, and then use the `broom::tidy()` function to convert the table into a dataframe, and then show only the first 6 rows as a table in RMarkdown: 
 
 
 ```r
 # calculate pairwise contrasts
 eysenck.fdr <- lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition, adjust="fdr")
-# show first 6 rows from this long table
+
+# show the first 6 rows from this long table
 eysenck.fdr$contrasts %>% 
   broom::tidy() %>% 
   head(6) %>% 
@@ -242,47 +245,9 @@ Young,Counting  Young,Imagery     -6.4       1.267     90    -5.052    5.698e-06
 Table: First 6 rows of the pairwise contrasts with FDR-adjusted p values
 
 
-You should note that the FDR adjusted p values do not represent probabilities in the normal sense. Instead, the p value now indicates the *false discovery rate at which the p value should be considered statistically significant*. So, for example, if the adjusted p value  0.09, then this indicates the contrast *would* be significant if the acceptable false discovery rate is 10% (people often set their acceptable false discover rate to be 5% out of habit, but this is not always appropriate).
 
 
-```r
-# Set our acceptable false discovery rate to 10%
-FDR <- .1
-lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition, adjust="none")$contrast %>% 
-  broom::tidy() %>% 
-  select(level1, level2, p.value) %>% 
-  arrange(p.value) %>% 
-  mutate(`q (10% FDR)` = (rank(p.value)/length(p.value))*FDR) %>% 
-  mutate(p.fdr.adjust=p.adjust(p.value, method="BH")) %>% 
-  mutate(significant = as.numeric(p.value < `q (10% FDR)`)) %>%
-  # just show some of the results, at the break between sig and ns contrast
-  filter(p.fdr.adjust > .01 & p.fdr.adjust < .4) %>%
-  pander(caption="Subset of contrasts, showing the break between significant and ns results, as determined by an FDR of 10%.", split.tables=Inf)
-```
 
-
-------------------------------------------------------------------------------------
-    level1          level2       p.value   q (10% FDR)   p.fdr.adjust   significant 
---------------- --------------- --------- ------------- -------------- -------------
- Older,Rhyming  Young,Adjective 0.008667     0.07111       0.01219           1      
-
-Older,Adjective Young,Intention  0.02964     0.07333       0.03923           1      
-
-Older,Adjective  Older,Imagery   0.02964     0.07556       0.03923           1      
-
-Young,Adjective  Young,Imagery   0.06139     0.07778       0.07893           1      
-
- Older,Imagery  Older,Intention   0.183       0.08          0.2288           0      
-
-Older,Adjective  Young,Imagery   0.2721      0.08222        0.3222           0      
-
- Young,Imagery  Young,Intention  0.2721      0.08444        0.3222           0      
-------------------------------------------------------------------------------------
-
-Table: Subset of contrasts, showing the break between significant and ns results, as determined by an FDR of 10%.
-
-Note, that when you use `adjust='fdr'` then the p values returned are 
-The [Biostat Handbook](http://www.biostathandbook.com/multiplecomparisons.html) has a good 
 
 
 
@@ -350,7 +315,7 @@ lme4::sleepstudy %>%
   geom_label(aes(y=450, x=9, label="imagine how bad\nyou feel by this point"), color="red") 
 ```
 
-<img src="anova-cookbook_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="anova-cookbook_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 
 If we want to test whether there are significant differences in RTs between `Days`, we could fit something very similar to a traditional repeat measures Anova using the `lme4::lmer()` function, and obtain an Anova table for the model using the special `lmerTest::anova()` function:

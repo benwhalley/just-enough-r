@@ -1,7 +1,6 @@
 ---
 title: 'Simple linear models'
-output: 
-  bookdown::tufte_html2
+output: bookdown::tufte_html2
 ---
   
 
@@ -10,20 +9,6 @@ output:
 # Introduction to linear models in R
 
 This section assumes most readers will have done an introductory statistics course and had practce running multiple regression and or Anova in SPSS or a similar package. 
-
-
-
-## Differences between R and other packages it's important to be aware of
-
-It's important to note up-front that R has *different defaults* to many other statistical packages. This is especially relevant for the `anova()` function: R's default settings will not match those of SPSS or Stata, and many researchers will want to change these defaults.
-
-Specifically, R will require that you think about:
-
-- How should factors be coded when calculating contrasts for categorical variables?
-- What type of sums of squares (I, II, or III) do you want when calculating the F test for an Anova?
-- How should the error term be specified for repeated measured Anova?
-
-These issues are covered later in detail in later sections. 
 
 
 
@@ -90,7 +75,7 @@ m.1 <- lm(mpg ~ wt + disp, data=mtcars)
 ```
 
 
-This stores the results of `lm` in a variable named `m.1`. As an aside, this is a pretty terrible variable name — try to give descriptive names to your variables because this will prevent errors and make your code easier to read.
+This stores the results of the `lm()` function in a variable named `m.1`. As an aside, this is a pretty terrible variable name — try to give descriptive names to your variables because this will prevent errors and make your code easier to read.
 
 We can then use other functions to get more information about the model. For example:
 
@@ -143,7 +128,7 @@ For linear models *the left side is our outcome*, which is must be a continous v
 *The right hand side of the formula lists our predictors*. In the example above we used the `+` symbol to separate the predictors `wt` and `disp`.  This told R to simply add each predictor to the model. However, many times we want to specify relationships *between* our predictors, as well as between predictors and outcomes. 
 
 
-For example, we might want to run an Anova with 2 categorical predictors, each with 2 levels --- that is, a 2x2 between-subjects design.
+For example, we might have an experiment with 2 categorical predictors, each with 2 levels --- that is, a 2x2 between-subjects design.
 
 Below, we define and run a linear model with both `vs` and `am` as predictors, along with the interaction of `vs:am`. We save this model as `m.2`, and use the `summary` command to print the coefficients.
 
@@ -175,6 +160,29 @@ summary(m.2)
 ```
 
 
+We'd normally want to see the Anova table for this model, including the F-tests:
+
+
+
+```r
+car::Anova(m.2)
+## Anova Table (Type II tests)
+## 
+## Response: mpg
+##           Sum Sq Df F value    Pr(>F)    
+## vs        367.41  1 30.4836 6.687e-06 ***
+## am        276.03  1 22.9021 4.984e-05 ***
+## vs:am      16.01  1  1.3283    0.2589    
+## Residuals 337.48 28                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
+But before you do too much with Anova in R [read this section](anova.html).
+
+
+
 
 ### Other formula shortcuts
 
@@ -194,6 +202,7 @@ As an exercise, run the following models using the mtcars dataset:
 - With `mpg` as the outcome, and with `cyl` and `hp` as predictors
 - As above, but adding the interaction of `cyl` and `hp`.
 - Repeat the model above, but write the formula a different way (make the formula either more or less explicit, but retaining the same predictors in the model).
+
 
 
 

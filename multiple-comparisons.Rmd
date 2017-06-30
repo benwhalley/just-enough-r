@@ -3,6 +3,14 @@ title: 'Multiple comparisons'
 output: bookdown::tufte_html2
 ---
 
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+library(tidyverse)
+library(pander)
+library(lmerTest)
+```
+
+
 XXX THIS JUST copied from previous anova section. Needs more on problem of multiple comparisons
 
 
