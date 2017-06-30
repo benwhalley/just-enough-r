@@ -92,6 +92,10 @@ Assuming you really do still want to run a null hypothesis test on one or two me
 
 
 ```r
+# the t.test function is a bit crufty and won't accept a data= parameter
+# for all types of test. Instead we use the with(...) function to make
+# the variables in the chicks.eating.beans datafram available to the
+# t.test function.
 with(chicks.eating.beans, t.test(weight ~ feed))
 ```
 
@@ -121,6 +125,20 @@ untidy.chicks <- chicks.eating.beans %>%
 with(untidy.chicks, t.test(horsebean, soybean))
 ```
 
+```
+## 
+## 	Welch Two Sample t-test
+## 
+## data:  horsebean and soybean
+## t = -4.5543, df = 21.995, p-value = 0.0001559
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -125.49476  -46.96238
+## sample estimates:
+## mean of x mean of y 
+##  160.2000  246.4286
+```
+
 
 ## Unequal variances
 
@@ -131,6 +149,20 @@ By default R assumes your groups have unequal variances and applies an appropria
 with(untidy.chicks, t.test(horsebean, soybean, var.equal=TRUE))
 ```
 
+```
+## 
+## 	Two Sample t-test
+## 
+## data:  horsebean and soybean
+## t = -4.3037, df = 22, p-value = 0.0002873
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -127.78018  -44.67696
+## sample estimates:
+## mean of x mean of y 
+##  160.2000  246.4286
+```
+
 
 ## Paired samples
 
@@ -139,6 +171,45 @@ with(untidy.chicks, t.test(horsebean, soybean, var.equal=TRUE))
 a <- rnorm(50, 2.5, 1)
 b = a + rnorm(50, .5, 1)
 t.test(a, b, paired=TRUE)
+```
+
+```
+## 
+## 	Paired t-test
+## 
+## data:  a and b
+## t = -3.9526, df = 49, p-value = 0.0002481
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.7844081 -0.2556303
+## sample estimates:
+## mean of the differences 
+##              -0.5200192
+```
+
+
+Note that we could also 'melt' the data into long  format and use the `paired=TRUE` argument with a formula:
+
+
+```r
+long.form.data <- data_frame(a=a, b=b) %>% 
+  tidyr::gather()
+
+with(long.form.data, t.test(value~key, paired=TRUE))
+```
+
+```
+## 
+## 	Paired t-test
+## 
+## data:  value by key
+## t = -3.9526, df = 49, p-value = 0.0002481
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.7844081 -0.2556303
+## sample estimates:
+## mean of the differences 
+##              -0.5200192
 ```
 
 
@@ -152,5 +223,19 @@ i.e. comparing sample mean with a specific value:
 # test if mean of `outcome` variable is different from 2
 somedata <- rnorm(50, 2.5, 1)
 t.test(somedata, mu=2)
+```
+
+```
+## 
+## 	One Sample t-test
+## 
+## data:  somedata
+## t = 4.4114, df = 49, p-value = 5.623e-05
+## alternative hypothesis: true mean is not equal to 2
+## 95 percent confidence interval:
+##  2.313335 2.837658
+## sample estimates:
+## mean of x 
+##  2.575496
 ```
 

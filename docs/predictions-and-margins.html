@@ -149,9 +149,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.6" data-path="summarising-data.html"><a href="summarising-data.html#sorting-data"><i class="fa fa-check"></i><b>5.6</b> Sorting data</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>6</b> Graphics</a><ul>
+<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#the-r-graphics-cookbook"><i class="fa fa-check"></i>The R Graphics Cookbook</a></li>
 <li class="chapter" data-level="6.1" data-path="graphics.html"><a href="graphics.html#benefits-of-visualising-data"><i class="fa fa-check"></i><b>6.1</b> Benefits of visualising data</a></li>
 <li class="chapter" data-level="6.2" data-path="graphics.html"><a href="graphics.html#choosing-a-plot-type"><i class="fa fa-check"></i><b>6.2</b> Choosing a plot type</a></li>
-<li class="chapter" data-level="6.3" data-path="graphics.html"><a href="graphics.html#layering-graphics"><i class="fa fa-check"></i><b>6.3</b> Layering graphics</a></li>
+<li class="chapter" data-level="6.3" data-path="graphics.html"><a href="graphics.html#choosing-layering-and-facetting-graphics"><i class="fa fa-check"></i><b>6.3</b> Choosing, layering and facetting graphics</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="graphics.html"><a href="graphics.html#using-ggplot"><i class="fa fa-check"></i><b>6.3.1</b> Using ggplot</a></li>
+<li class="chapter" data-level="6.3.2" data-path="graphics.html"><a href="graphics.html#relationships"><i class="fa fa-check"></i><b>6.3.2</b> Relationships</a></li>
+<li class="chapter" data-level="6.3.3" data-path="graphics.html"><a href="graphics.html#distributions"><i class="fa fa-check"></i><b>6.3.3</b> Distributions</a></li>
+<li class="chapter" data-level="6.3.4" data-path="graphics.html"><a href="graphics.html#comparisons"><i class="fa fa-check"></i><b>6.3.4</b> Comparisons</a></li>
+<li class="chapter" data-level="6.3.5" data-path="graphics.html"><a href="graphics.html#composition"><i class="fa fa-check"></i><b>6.3.5</b> Composition</a></li>
+<li class="chapter" data-level="6.3.6" data-path="graphics.html"><a href="graphics.html#combining-plots-in-a-grid"><i class="fa fa-check"></i><b>6.3.6</b> Combining plots in a grid</a></li>
+<li class="chapter" data-level="6.3.7" data-path="graphics.html"><a href="graphics.html#exporting-high-quality-ggplots-for-print"><i class="fa fa-check"></i><b>6.3.7</b> Exporting high quality ggplots for print</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="graphics.html"><a href="graphics.html#quick-and-dirty-plotting"><i class="fa fa-check"></i><b>6.4</b> ‘Quick and dirty’ plotting</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="graphics.html"><a href="graphics.html#distributions-1"><i class="fa fa-check"></i><b>6.4.1</b> Distributions</a></li>
+<li class="chapter" data-level="6.4.2" data-path="graphics.html"><a href="graphics.html#relationships-1"><i class="fa fa-check"></i><b>6.4.2</b> Relationships</a></li>
+<li class="chapter" data-level="6.4.3" data-path="graphics.html"><a href="graphics.html#quantities"><i class="fa fa-check"></i><b>6.4.3</b> Quantities</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="real-data.html"><a href="real-data.html"><i class="fa fa-check"></i><b>7</b> Working with ‘real’ data</a><ul>
 <li class="chapter" data-level="7.1" data-path="real-data.html"><a href="real-data.html#how-to-tidy-data"><i class="fa fa-check"></i><b>7.1</b> How to ‘tidy’ data</a></li>
@@ -183,65 +197,72 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="linear-models-simple.html"><a href="linear-models-simple.html#what-next"><i class="fa fa-check"></i><b>10.5</b> What next</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>11</b> Anova principles</a><ul>
+<li class="chapter" data-level="11" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>11</b> Anova in R</a><ul>
 <li class="chapter" data-level="11.1" data-path="anova.html"><a href="anova.html#differences-between-anova-in-r-v.s.-spss-or-stata"><i class="fa fa-check"></i><b>11.1</b> Differences between Anova in R v.s. SPSS or Stata</a></li>
 <li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#important-difference-1-variable-codings-and-contrasts"><i class="fa fa-check"></i>Important difference 1: Variable codings and contrasts</a></li>
 <li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#important-difference-2-which-sums-of-squares"><i class="fa fa-check"></i>Important difference 2: Which sums of squares?</a></li>
 <li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#anova-in-r-for-spss-users"><i class="fa fa-check"></i>Anova in R for SPSS users</a></li>
 <li><a href="anova.html#whats-wrong-with-the-base-r-anova-function">What’s wrong with the base R <code>anova()</code> function?</a></li>
 <li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#whats-wrong-with-the-spss-defaults"><i class="fa fa-check"></i>What’s wrong with the SPSS defaults?</a></li>
-<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#important-difference-3-r-works-on-long-format-data-so-be-careful-with-repeated-measures-models"><i class="fa fa-check"></i>Important difference 3: R works on long-format data (so be careful with repeated measures models)</a></li>
+<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#important-difference-3-r-works-on-long-format-data-so-you-must-be-careful-with-repeated-measures-models"><i class="fa fa-check"></i>Important difference 3: R works on long-format data (so you must be careful with repeated measures models)</a></li>
 <li class="chapter" data-level="11.2" data-path="anova.html"><a href="anova.html#general-anova-recommendations"><i class="fa fa-check"></i><b>11.2</b> General Anova recommendations</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="understanding-interactions.html"><a href="understanding-interactions.html"><i class="fa fa-check"></i><b>12</b> Understanding interactions (part 1)</a><ul>
-<li class="chapter" data-level="12.1" data-path="understanding-interactions.html"><a href="understanding-interactions.html#what-is-an-interaction"><i class="fa fa-check"></i><b>12.1</b> What is an interaction?</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="understanding-interactions.html"><a href="understanding-interactions.html#example-interaction-visualised"><i class="fa fa-check"></i><b>12.1.1</b> Example interaction visualised</a></li>
+<li class="chapter" data-level="12" data-path="anova-cookbook.html"><a href="anova-cookbook.html"><i class="fa fa-check"></i><b>12</b> Anova ‘Cookbook’</a><ul>
+<li class="chapter" data-level="12.1" data-path="anova-cookbook.html"><a href="anova-cookbook.html#between-subjects-designs"><i class="fa fa-check"></i><b>12.1</b> Between subjects designs</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="anova-cookbook.html"><a href="anova-cookbook.html#factorial-anova-no-bigger-than-2x2"><i class="fa fa-check"></i><b>12.1.1</b> Factorial anova, no bigger than 2x2</a></li>
+<li class="chapter" data-level="12.1.2" data-path="anova-cookbook.html"><a href="anova-cookbook.html#factorial-anova-where-one-factor-has-2-levels."><i class="fa fa-check"></i><b>12.1.2</b> Factorial anova, where one factor has &gt; 2 levels.</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="understanding-interactions.html"><a href="understanding-interactions.html#visualising-interactions-in-raw-data"><i class="fa fa-check"></i><b>12.2</b> Visualising interactions in raw data</a></li>
-<li class="chapter" data-level="12.3" data-path="understanding-interactions.html"><a href="understanding-interactions.html#continuous-predictors"><i class="fa fa-check"></i><b>12.3</b> Continuous predictors</a></li>
-<li class="chapter" data-level="12.4" data-path="understanding-interactions.html"><a href="understanding-interactions.html#what-next-1"><i class="fa fa-check"></i><b>12.4</b> What next?</a></li>
+<li class="chapter" data-level="12.2" data-path="anova-cookbook.html"><a href="anova-cookbook.html#repeated-measures-or-split-plot-designs"><i class="fa fa-check"></i><b>12.2</b> Repeated measures or ‘split plot’ designs</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html"><i class="fa fa-check"></i><b>13</b> Making predictions</a><ul>
-<li class="chapter" data-level="13.1" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predictions-vs-margins"><i class="fa fa-check"></i><b>13.1</b> Predictions vs margins</a></li>
-<li class="chapter" data-level="13.2" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predicted-means"><i class="fa fa-check"></i><b>13.2</b> Predicted means</a></li>
-<li class="chapter" data-level="13.3" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#effects-margins"><i class="fa fa-check"></i><b>13.3</b> <em>Effects</em> (margins)</a></li>
-<li class="chapter" data-level="13.4" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#continuous-predictors-1"><i class="fa fa-check"></i><b>13.4</b> Continuous predictors</a></li>
-<li class="chapter" data-level="13.5" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predicted-means-and-margins-using-lm"><i class="fa fa-check"></i><b>13.5</b> Predicted means and margins using <code>lm()</code></a><ul>
-<li class="chapter" data-level="13.5.1" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#running-the-model"><i class="fa fa-check"></i><b>13.5.1</b> Running the model</a></li>
-<li class="chapter" data-level="13.5.2" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#making-predictions-for-means"><i class="fa fa-check"></i><b>13.5.2</b> Making predictions for means</a></li>
-<li class="chapter" data-level="13.5.3" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#step-1-make-a-new-dataframe"><i class="fa fa-check"></i><b>13.5.3</b> Step 1: Make a new dataframe</a></li>
-<li class="chapter" data-level="13.5.4" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#step-2-make-the-predictions"><i class="fa fa-check"></i><b>13.5.4</b> Step 2: Make the predictions</a></li>
+<li class="chapter" data-level="13" data-path="understanding-interactions.html"><a href="understanding-interactions.html"><i class="fa fa-check"></i><b>13</b> Understanding interactions (part 1)</a><ul>
+<li class="chapter" data-level="13.1" data-path="understanding-interactions.html"><a href="understanding-interactions.html#what-is-an-interaction"><i class="fa fa-check"></i><b>13.1</b> What is an interaction?</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="understanding-interactions.html"><a href="understanding-interactions.html#example-interaction-visualised"><i class="fa fa-check"></i><b>13.1.1</b> Example interaction visualised</a></li>
 </ul></li>
-<li class="chapter" data-level="13.6" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#making-prdictions-for-margins-effects-of-predictors"><i class="fa fa-check"></i><b>13.6</b> Making prdictions for margins (<em>effects</em> of predictors)</a></li>
-<li class="chapter" data-level="13.7" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#marginal-effects"><i class="fa fa-check"></i><b>13.7</b> Marginal effects</a></li>
-<li class="chapter" data-level="13.8" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#with-continuous-covariates"><i class="fa fa-check"></i><b>13.8</b> With continuous covariates</a></li>
+<li class="chapter" data-level="13.2" data-path="understanding-interactions.html"><a href="understanding-interactions.html#visualising-interactions-in-raw-data"><i class="fa fa-check"></i><b>13.2</b> Visualising interactions in raw data</a></li>
+<li class="chapter" data-level="13.3" data-path="understanding-interactions.html"><a href="understanding-interactions.html#continuous-predictors"><i class="fa fa-check"></i><b>13.3</b> Continuous predictors</a></li>
+<li class="chapter" data-level="13.4" data-path="understanding-interactions.html"><a href="understanding-interactions.html#what-next-1"><i class="fa fa-check"></i><b>13.4</b> What next?</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#visualising-interactions-from-linear-models"><i class="fa fa-check"></i><b>14</b> Visualising interactions from linear models</a></li>
-<li class="chapter" data-level="15" data-path="mediation.html"><a href="mediation.html"><i class="fa fa-check"></i><b>15</b> Mediation</a></li>
-<li class="chapter" data-level="16" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>16</b> Multilevel models</a><ul>
-<li class="chapter" data-level="16.1" data-path="multilevel-models.html"><a href="multilevel-models.html#the-sleepstudy-data-and-traditional-rm-anova"><i class="fa fa-check"></i><b>16.1</b> The <code>sleepstudy</code> data and traditional RM Anova</a><ul>
-<li class="chapter" data-level="16.1.1" data-path="multilevel-models.html"><a href="multilevel-models.html#fit-a-simple-slope-for-days"><i class="fa fa-check"></i><b>16.1.1</b> Fit a simple slope for <code>Days</code></a></li>
-<li class="chapter" data-level="16.1.2" data-path="multilevel-models.html"><a href="multilevel-models.html#allow-the-effect-of-sleep-deprivation-to-vary-for-different-participants"><i class="fa fa-check"></i><b>16.1.2</b> Allow the effect of sleep deprivation to vary for different participants</a></li>
-<li class="chapter" data-level="16.1.3" data-path="multilevel-models.html"><a href="multilevel-models.html#fitting-a-curve-for-the-effect-of-days"><i class="fa fa-check"></i><b>16.1.3</b> Fitting a curve for the effect of <code>Days</code></a></li>
+<li class="chapter" data-level="14" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html"><i class="fa fa-check"></i><b>14</b> Making predictions</a><ul>
+<li class="chapter" data-level="14.1" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predictions-vs-margins"><i class="fa fa-check"></i><b>14.1</b> Predictions vs margins</a></li>
+<li class="chapter" data-level="14.2" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predicted-means"><i class="fa fa-check"></i><b>14.2</b> Predicted means</a></li>
+<li class="chapter" data-level="14.3" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#effects-margins"><i class="fa fa-check"></i><b>14.3</b> <em>Effects</em> (margins)</a></li>
+<li class="chapter" data-level="14.4" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#continuous-predictors-1"><i class="fa fa-check"></i><b>14.4</b> Continuous predictors</a></li>
+<li class="chapter" data-level="14.5" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predicted-means-and-margins-using-lm"><i class="fa fa-check"></i><b>14.5</b> Predicted means and margins using <code>lm()</code></a><ul>
+<li class="chapter" data-level="14.5.1" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#running-the-model"><i class="fa fa-check"></i><b>14.5.1</b> Running the model</a></li>
+<li class="chapter" data-level="14.5.2" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#making-predictions-for-means"><i class="fa fa-check"></i><b>14.5.2</b> Making predictions for means</a></li>
+<li class="chapter" data-level="14.5.3" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#step-1-make-a-new-dataframe"><i class="fa fa-check"></i><b>14.5.3</b> Step 1: Make a new dataframe</a></li>
+<li class="chapter" data-level="14.5.4" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#step-2-make-the-predictions"><i class="fa fa-check"></i><b>14.5.4</b> Step 2: Make the predictions</a></li>
+</ul></li>
+<li class="chapter" data-level="14.6" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#making-prdictions-for-margins-effects-of-predictors"><i class="fa fa-check"></i><b>14.6</b> Making prdictions for margins (<em>effects</em> of predictors)</a></li>
+<li class="chapter" data-level="14.7" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#marginal-effects"><i class="fa fa-check"></i><b>14.7</b> Marginal effects</a></li>
+<li class="chapter" data-level="14.8" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#with-continuous-covariates"><i class="fa fa-check"></i><b>14.8</b> With continuous covariates</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#visualising-interactions-from-linear-models"><i class="fa fa-check"></i><b>15</b> Visualising interactions from linear models</a></li>
+<li class="chapter" data-level="16" data-path="mediation.html"><a href="mediation.html"><i class="fa fa-check"></i><b>16</b> Mediation</a></li>
+<li class="chapter" data-level="17" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>17</b> Multilevel models</a><ul>
+<li class="chapter" data-level="17.1" data-path="multilevel-models.html"><a href="multilevel-models.html#the-sleepstudy-data-and-traditional-rm-anova"><i class="fa fa-check"></i><b>17.1</b> The <code>sleepstudy</code> data and traditional RM Anova</a><ul>
+<li class="chapter" data-level="17.1.1" data-path="multilevel-models.html"><a href="multilevel-models.html#fit-a-simple-slope-for-days"><i class="fa fa-check"></i><b>17.1.1</b> Fit a simple slope for <code>Days</code></a></li>
+<li class="chapter" data-level="17.1.2" data-path="multilevel-models.html"><a href="multilevel-models.html#allow-the-effect-of-sleep-deprivation-to-vary-for-different-participants"><i class="fa fa-check"></i><b>17.1.2</b> Allow the effect of sleep deprivation to vary for different participants</a></li>
+<li class="chapter" data-level="17.1.3" data-path="multilevel-models.html"><a href="multilevel-models.html#fitting-a-curve-for-the-effect-of-days"><i class="fa fa-check"></i><b>17.1.3</b> Fitting a curve for the effect of <code>Days</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="cfa.html"><a href="cfa.html"><i class="fa fa-check"></i><b>17</b> Confirmatory factor analysis</a><ul>
-<li class="chapter" data-level="17.1" data-path="cfa.html"><a href="cfa.html#defining-the-model"><i class="fa fa-check"></i><b>17.1</b> Defining the model</a></li>
-<li class="chapter" data-level="17.2" data-path="cfa.html"><a href="cfa.html#model-fit"><i class="fa fa-check"></i><b>17.2</b> Model fit</a></li>
-<li class="chapter" data-level="17.3" data-path="cfa.html"><a href="cfa.html#modification-indices"><i class="fa fa-check"></i><b>17.3</b> Modification indices</a></li>
-<li class="chapter" data-level="17.4" data-path="cfa.html"><a href="cfa.html#missing-data"><i class="fa fa-check"></i><b>17.4</b> Missing data</a></li>
+<li class="chapter" data-level="18" data-path="cfa.html"><a href="cfa.html"><i class="fa fa-check"></i><b>18</b> Confirmatory factor analysis</a><ul>
+<li class="chapter" data-level="18.1" data-path="cfa.html"><a href="cfa.html#defining-the-model"><i class="fa fa-check"></i><b>18.1</b> Defining the model</a></li>
+<li class="chapter" data-level="18.2" data-path="cfa.html"><a href="cfa.html#model-fit"><i class="fa fa-check"></i><b>18.2</b> Model fit</a></li>
+<li class="chapter" data-level="18.3" data-path="cfa.html"><a href="cfa.html#modification-indices"><i class="fa fa-check"></i><b>18.3</b> Modification indices</a></li>
+<li class="chapter" data-level="18.4" data-path="cfa.html"><a href="cfa.html#missing-data"><i class="fa fa-check"></i><b>18.4</b> Missing data</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>18</b> Installing R and RStudio</a></li>
-<li class="chapter" data-level="19" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>19</b> Loading packages</a></li>
-<li class="chapter" data-level="20" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>20</b> Getting help</a></li>
-<li class="chapter" data-level="21" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>21</b> Missing values</a></li>
-<li class="chapter" data-level="22" data-path="rmarkdown-tricks.html"><a href="rmarkdown-tricks.html"><i class="fa fa-check"></i><b>22</b> Tips and tricks with RMarkdown</a></li>
-<li class="chapter" data-level="23" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html"><i class="fa fa-check"></i><b>23</b> Confidence, credible and prediction intervals</a><ul>
-<li class="chapter" data-level="23.1" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html#the-problem-with-confidence-intervals"><i class="fa fa-check"></i><b>23.1</b> The problem with confidence intervals</a></li>
-<li class="chapter" data-level="23.2" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html#forgetting-that-the-ci-depends-on-sample-size."><i class="fa fa-check"></i><b>23.2</b> Forgetting that the CI depends on sample size.</a></li>
-<li class="chapter" data-level="23.3" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html#what-does-this-mean-for-my-work-on-insert-speciality-here"><i class="fa fa-check"></i><b>23.3</b> What does this mean for my work on [insert speciality here]?</a></li>
+<li class="chapter" data-level="19" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>19</b> Installing R and RStudio</a></li>
+<li class="chapter" data-level="20" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>20</b> Loading packages</a></li>
+<li class="chapter" data-level="21" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>21</b> Getting help</a></li>
+<li class="chapter" data-level="22" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>22</b> Missing values</a></li>
+<li class="chapter" data-level="23" data-path="rmarkdown-tricks.html"><a href="rmarkdown-tricks.html"><i class="fa fa-check"></i><b>23</b> Tips and tricks with RMarkdown</a></li>
+<li class="chapter" data-level="24" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html"><i class="fa fa-check"></i><b>24</b> Confidence, credible and prediction intervals</a><ul>
+<li class="chapter" data-level="24.1" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html#the-problem-with-confidence-intervals"><i class="fa fa-check"></i><b>24.1</b> The problem with confidence intervals</a></li>
+<li class="chapter" data-level="24.2" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html#forgetting-that-the-ci-depends-on-sample-size."><i class="fa fa-check"></i><b>24.2</b> Forgetting that the CI depends on sample size.</a></li>
+<li class="chapter" data-level="24.3" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html#what-does-this-mean-for-my-work-on-insert-speciality-here"><i class="fa fa-check"></i><b>24.3</b> What does this mean for my work on [insert speciality here]?</a></li>
 </ul></li>
-<li class="chapter" data-level="24" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>24</b> References</a></li>
+<li class="chapter" data-level="25" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>25</b> References</a></li>
 </ul>
 
       </nav>
@@ -260,7 +281,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="making-predictions" class="section level1">
-<h1><span class="header-section-number">13</span> Making predictions</h1>
+<h1><span class="header-section-number">14</span> Making predictions</h1>
 <p>Objectives of this section:</p>
 <ul>
 <li>Distingish predicted means (predictions) from predicted effects (‘margins’)</li>
@@ -269,7 +290,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Think about how to plot effects in meaningful ways</li>
 </ul>
 <div id="predictions-vs-margins" class="section level2">
-<h2><span class="header-section-number">13.1</span> Predictions vs margins</h2>
+<h2><span class="header-section-number">14.1</span> Predictions vs margins</h2>
 <p>Before we start, let’s consider what we’re trying to achieve in making predictions from our models. We need to make a distinction between:</p>
 <ul>
 <li>Predicted means</li>
@@ -278,7 +299,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Consider the example used in a previous section where we measured <code>injury.severity</code> after road accidents, plus two predictor variables: <code>gender</code> and <code>age</code>.</p>
 </div>
 <div id="predicted-means" class="section level2">
-<h2><span class="header-section-number">13.2</span> Predicted means</h2>
+<h2><span class="header-section-number">14.2</span> Predicted means</h2>
 <p>‘Predicted means’ (or predictions) refers to our best estimate for each category of person we’re interested in. For example, if <code>age</code> were categorical (i.e. young vs. older people) then might have 4 predictions to calculate from our model:</p>
 <table style="width:29%;">
 <colgroup>
@@ -320,13 +341,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="figure"><span id="fig:unnamed-chunk-3"></span>
 <img src="predictions-and-margins_files/figure-html/unnamed-chunk-3-1.png" alt="Point and line plot of injury severity by age and gender." width="672" />
 <p class="caption">
-Figure 8.1: Point and line plot of injury severity by age and gender.
+Figure 6.1: Point and line plot of injury severity by age and gender.
 </p>
 </div>
 <p>This plot uses the raw data, but these points could equally have been estimated from a statistical model which adjusted for other predictors.</p>
 </div>
 <div id="effects-margins" class="section level2">
-<h2><span class="header-section-number">13.3</span> <em>Effects</em> (margins)</h2>
+<h2><span class="header-section-number">14.3</span> <em>Effects</em> (margins)</h2>
 <p>Terms like: <em>predicted effects</em>, <em>margins</em> or <em>marginal effects</em> refer, instead, to the effect of one predictor.</p>
 <p>There may be more than one marginal effect because <em>the effect of one predictor can change across the range of another predictor</em>.</p>
 <p>Extending the example above, if we take the difference between men and women for each category of age, we can plot these differences. The steps we need to go through are:</p>
@@ -352,7 +373,7 @@ Figure 8.1: Point and line plot of injury severity by age and gender.
 <p>As before, these differences use the raw data, but <em>could</em> have been calculated from a statistical model. In the section below we do this, making predictions for means and marginal effects from a <code>lm()</code>.</p>
 </div>
 <div id="continuous-predictors-1" class="section level2">
-<h2><span class="header-section-number">13.4</span> Continuous predictors</h2>
+<h2><span class="header-section-number">14.4</span> Continuous predictors</h2>
 <p>In the examples above, our data were all categorical, which mean that it was straightforward to identify categories of people for whom we might want to make a prediction (i.e. young men, young women, older men, older women).</p>
 <p>However, <code>age</code> is typically measured as a continuous variable, and we would want to use a grouped scatter plot to see this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">injuries <span class="op">%&gt;%</span><span class="st"> </span>
@@ -369,7 +390,7 @@ Figure 8.1: Point and line plot of injury severity by age and gender.
 <div class="figure"><span id="fig:unnamed-chunk-7"></span>
 <img src="predictions-and-margins_files/figure-html/unnamed-chunk-7-1.png" alt="Scatter plot overlaid with smooth best-fit lines" width="672" />
 <p class="caption">
-Figure 13.1: Scatter plot overlaid with smooth best-fit lines
+Figure 14.1: Scatter plot overlaid with smooth best-fit lines
 </p>
 </div>
 <p>And if we are confident that the relationships between predictor and outcome are sufficiently <em>linear</em>, then we can ask ggplot to fit a straight line using linear regression:</p>
@@ -382,7 +403,7 @@ Figure 13.1: Scatter plot overlaid with smooth best-fit lines
 <div class="figure"><span id="fig:unnamed-chunk-8"></span>
 <img src="predictions-and-margins_files/figure-html/unnamed-chunk-8-1.png" alt="Scatter plot overlaid with smoothed lines (dotted) and linear predictions (coloured)" width="672" />
 <p class="caption">
-Figure 13.2: Scatter plot overlaid with smoothed lines (dotted) and linear predictions (coloured)
+Figure 12.2: Scatter plot overlaid with smoothed lines (dotted) and linear predictions (coloured)
 </p>
 </div>
 <p>What these plots illustrate is the steps a researcher might take <em>before</em> fitting a regression model. The straight lines in the final plot represent our best guess for a person of a given age and gender, assuming a linear regression.</p>
@@ -395,17 +416,17 @@ Figure 13.2: Scatter plot overlaid with smoothed lines (dotted) and linear predi
 <p>We’ll see examples of both below.</p>
 </div>
 <div id="predicted-means-and-margins-using-lm" class="section level2">
-<h2><span class="header-section-number">13.5</span> Predicted means and margins using <code>lm()</code></h2>
+<h2><span class="header-section-number">14.5</span> Predicted means and margins using <code>lm()</code></h2>
 <p>The section above details two types of predictions: predictions for means, and predictions for margins (effects). We can use the figure below as a way of visualising the difference:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gridExtra<span class="op">::</span><span class="kw">grid.arrange</span>(means.plot<span class="op">+</span><span class="kw">ggtitle</span>(<span class="st">&quot;Means&quot;</span>), margins.plot<span class="op">+</span><span class="kw">ggtitle</span>(<span class="st">&quot;Margins&quot;</span>), <span class="dt">ncol=</span><span class="dv">2</span>)</code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-9"></span>
 <img src="predictions-and-margins_files/figure-html/unnamed-chunk-9-1.png" alt="Example of predicted means vs. margins. Note, the margin plotted in the second panel is the difference between the coloured lines in the first. A horizontal line is added at zero in panel 2 by convention." width="384" />
 <p class="caption">
-Figure 13.3: Example of predicted means vs. margins. Note, the margin plotted in the second panel is the difference between the coloured lines in the first. A horizontal line is added at zero in panel 2 by convention.
+Figure 12.3: Example of predicted means vs. margins. Note, the margin plotted in the second panel is the difference between the coloured lines in the first. A horizontal line is added at zero in panel 2 by convention.
 </p>
 </div>
 <div id="running-the-model" class="section level3">
-<h3><span class="header-section-number">13.5.1</span> Running the model</h3>
+<h3><span class="header-section-number">14.5.1</span> Running the model</h3>
 <p>Lets say we want to run a linear model predicts injury severity from gender and a categorical measurement of age (young v.s. old).</p>
 <p>Our model formula would be: <code>severity.of.injury ~ age.category * gender</code>. Here we fit it an request the Anova table which enables us to test the main effects and interaction<a href="#fn19" class="footnoteRef" id="fnref19"><sup>19</sup></a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">injurymodel &lt;-<span class="st"> </span><span class="kw">lm</span>(severity.of.injury <span class="op">~</span><span class="st"> </span>age.category <span class="op">*</span><span class="st"> </span>gender,  <span class="dt">data=</span>injuries)
@@ -423,7 +444,7 @@ Figure 13.3: Example of predicted means vs. margins. Note, the margin plotted i
 <p>Having saved the regression model in the variable <code>injurymodel</code> we can use this to make predictions for means and estimate marginal effects:</p>
 </div>
 <div id="making-predictions-for-means" class="section level3">
-<h3><span class="header-section-number">13.5.2</span> Making predictions for means</h3>
+<h3><span class="header-section-number">14.5.2</span> Making predictions for means</h3>
 <p>When making predictions, they key question to bear in mind is ‘predictions for what?’ That is, what values of the predictor variables are we going to use to estimate the outcome?</p>
 <p>It goes like this:</p>
 <ol style="list-style-type: decimal">
@@ -433,7 +454,7 @@ Figure 13.3: Example of predicted means vs. margins. Note, the margin plotted i
 </ol>
 </div>
 <div id="step-1-make-a-new-dataframe" class="section level3">
-<h3><span class="header-section-number">13.5.3</span> Step 1: Make a new dataframe</h3>
+<h3><span class="header-section-number">14.5.3</span> Step 1: Make a new dataframe</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prediction.data &lt;-<span class="st"> </span><span class="kw">data_frame</span>(
   <span class="dt">age.category =</span> <span class="kw">c</span>(<span class="st">&quot;young&quot;</span>, <span class="st">&quot;older&quot;</span>, <span class="st">&quot;young&quot;</span>, <span class="st">&quot;older&quot;</span>),
   <span class="dt">gender =</span> <span class="kw">c</span>(<span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Female&quot;</span>)
@@ -448,7 +469,7 @@ prediction.data</code></pre></div>
 ## 4        older Female</code></pre>
 </div>
 <div id="step-2-make-the-predictions" class="section level3">
-<h3><span class="header-section-number">13.5.4</span> Step 2: Make the predictions</h3>
+<h3><span class="header-section-number">14.5.4</span> Step 2: Make the predictions</h3>
 <p>The R <code>predict()</code> function has two useful arguments:</p>
 <ul>
 <li><code>newdata</code>, which we set to our new data frame containing the predictor values of interest</li>
@@ -464,7 +485,7 @@ injury.predictions</code></pre></div>
 </div>
 </div>
 <div id="making-prdictions-for-margins-effects-of-predictors" class="section level2">
-<h2><span class="header-section-number">13.6</span> Making prdictions for margins (<em>effects</em> of predictors)</h2>
+<h2><span class="header-section-number">14.6</span> Making prdictions for margins (<em>effects</em> of predictors)</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&#39;tidyverse&#39;</span>)
 m &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg<span class="op">~</span>vs<span class="op">+</span>wt, <span class="dt">data=</span>mtcars)
 m.predictions &lt;-<span class="st"> </span><span class="kw">predict</span>(m, <span class="dt">interval=</span><span class="st">&#39;confidence&#39;</span>)
@@ -500,7 +521,7 @@ mtcars.plus.predictions <span class="op">%&gt;%</span><span class="st"> </span><
 ## 2     1 24.55714 22.81586 26.29843</code></pre>
 </div>
 <div id="marginal-effects" class="section level2">
-<h2><span class="header-section-number">13.7</span> Marginal effects</h2>
+<h2><span class="header-section-number">14.7</span> Marginal effects</h2>
 <p>What is the effect of being black or female on the chance of you getting diabetes?</p>
 <p>Two ways of computing, depending on which of these two you hate least:</p>
 <ul>
@@ -558,7 +579,7 @@ mtcars.plus.predictions <span class="op">%&gt;%</span><span class="st"> </span><
 <p><img src="predictions-and-margins_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 </div>
 <div id="with-continuous-covariates" class="section level2">
-<h2><span class="header-section-number">13.8</span> With continuous covariates</h2>
+<h2><span class="header-section-number">14.8</span> With continuous covariates</h2>
 <ul>
 <li>Run 2 x Continuous Anova</li>
 <li>Predict at different levels of</li>
@@ -566,7 +587,7 @@ mtcars.plus.predictions <span class="op">%&gt;%</span><span class="st"> </span><
 </div>
 </div>
 <div id="visualising-interactions-from-linear-models" class="section level1">
-<h1><span class="header-section-number">14</span> Visualising interactions from linear models</h1>
+<h1><span class="header-section-number">15</span> Visualising interactions from linear models</h1>
 <p>check this: <a href="https://strengejacke.wordpress.com/2013/10/31/visual-interpretation-of-interaction-terms-in-linear-models-with-ggplot-rstats/" class="uri">https://strengejacke.wordpress.com/2013/10/31/visual-interpretation-of-interaction-terms-in-linear-models-with-ggplot-rstats/</a></p>
 <p>Steps this page will work through:</p>
 <ul>

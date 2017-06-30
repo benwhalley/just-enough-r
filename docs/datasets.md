@@ -145,7 +145,7 @@ Let's say we have file called `angry_moods.csv` in the same directory as our `.R
 
 
 ```r
-angry.moods <- readr::read_csv('angry_moods.csv')
+angry.moods <- readr::read_csv('data/angry_moods.csv')
 ## Parsed with column specification:
 ## cols(
 ##   Gender = col_integer(),

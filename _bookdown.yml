@@ -15,6 +15,7 @@ rmd_files:
     "t-tests.Rmd",
     "linear-models-simple.Rmd",
     "anova.Rmd",
+    "anova-cookbook.Rmd",
     "understanding-interactions.Rmd",
     "predictions-and-margins.Rmd",
     "mediation.Rmd",

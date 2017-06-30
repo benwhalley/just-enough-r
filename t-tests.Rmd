@@ -81,14 +81,15 @@ Assuming you really do still want to run a null hypothesis test on one or two me
 ```{r}
 # the t.test function is a bit crufty and won't accept a data= parameter
 # for all types of test. Instead we use the with(...) function to make
-# the variables available
+# the variables in the chicks.eating.beans datafram available to the
+# t.test function.
 with(chicks.eating.beans, t.test(weight ~ feed))
 ```
 
 
 Or equivalently, if your data are untidy and each group has it's own column:
 
-```{r, eval=F, echo=T}
+```{r}
 untidy.chicks <- chicks.eating.beans %>% 
   mutate(chick = row_number()) %>% 
   reshape2::dcast(chick~feed, value.var = 'weight')
@@ -101,17 +102,27 @@ with(untidy.chicks, t.test(horsebean, soybean))
 
 By default R assumes your groups have unequal variances and applies an appropriate correction. If you don't want this you can add `var.equal = TRUE` and get a vanilla t-test:
 
-```{r, eval=F, echo=T}
+```{r}
 with(untidy.chicks, t.test(horsebean, soybean, var.equal=TRUE))
 ```
 
 
 ## Paired samples
 
-```{r, eval=F, echo=T}
+```{r}
 a <- rnorm(50, 2.5, 1)
 b = a + rnorm(50, .5, 1)
 t.test(a, b, paired=TRUE)
+```
+
+
+Note that we could also 'melt' the data into long  format and use the `paired=TRUE` argument with a formula:
+
+```{r}
+long.form.data <- data_frame(a=a, b=b) %>% 
+  tidyr::gather()
+
+with(long.form.data, t.test(value~key, paired=TRUE))
 ```
 
 
@@ -120,7 +131,7 @@ t.test(a, b, paired=TRUE)
 
 i.e. comparing sample mean with a specific value:
 
-```{r, eval=F, echo=T}
+```{r}
 # test if mean of `outcome` variable is different from 2
 somedata <- rnorm(50, 2.5, 1)
 t.test(somedata, mu=2)

@@ -7,7 +7,7 @@ output:
 
 
 
-# Anova principles
+# Anova in R
   
 
 
@@ -147,6 +147,21 @@ fake.experiment.unbalanced <- fake.experiment %>%
 ```
 
 
+To check that the data really are unbalanced now, we can use the `table()` function which builds a contingency table:
+
+
+```r
+fake.experiment.unbalanced %>% 
+  select(A, B) %>% 
+  table
+##       B
+## A      low high
+##   low   20   20
+##   high  20   11
+```
+
+
+
 We can plot these data and see that the (large) interaction we specified is obvious:
 
 
@@ -157,7 +172,7 @@ fake.experiment.unbalanced %>%
   stat_summary(geom="line", fun.data=mean_se)
 ```
 
-<img src="anova_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="anova_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 
 After plotting the data, we might want to run a 2x2 Anova to test whether this interaction is statistically significant. This call to `lm()` specifies the model, and `summary()` shows that the `lm()` model included:
@@ -198,15 +213,13 @@ summary(fake.expt.model)
 
 The problem with this regression output (i.e. from the `summary()` function) is that we can only see what are often called the *simple contrasts*. The parameters represent pairwise contrasts between two cells of the design, and don't test the *overall* effect of `A` or `B`.
 
-Rather than using multiple, pairwise comparisons, Anova is useful to provide a test of the combined effect of `A`, `B`, and the interaction of `A` and `B`.
-
-
+Rather than using multiple, pairwise comparisons, we use Anova to provide a test of the combined effect of `A`, `B`, and the interaction of `A` and `B`.
 
 
 
 ## Anova in R for SPSS users {-}
 
-At this point, I will show you how to achieve the output SPSS would give you by default. The code below uses the `Anova()` function from the `car::` package. This function replicates the built in `anova()` function (note lowercase 'a') and adds some additional features, including the ability to specify the type of sums of squares used for the F tests reported:
+At this point I recognise SPSS users' main concern will be to reproduce the output SPSS would give by default. The code below uses the `Anova()` function from the `car::` package. This function is a replacement for the built in `anova()` function (note lowercase 'a') but adds some additional features, including the ability to specify the type of sums of squares used for the F tests reported:
 
 
 
@@ -225,10 +238,7 @@ car::Anova(fake.expt.model, type=3)
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-This table should match exactly the result obtained from a 2x2 Anova in SPSS.
-
-
-If, however, we had instead used the base `anova()` function we would see this output:
+This table should match exactly the result obtained from a 2x2 Anova in SPSS. If, however, we had instead used the base `anova()` function we would see this output:
 
 
 ```r
@@ -244,7 +254,6 @@ anova(fake.expt.model)
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
 
 Here the 'main effects' are not significant, and the interaction has a different *p* value from that SPSS would produce.
 
@@ -316,9 +325,9 @@ anova(lm(outcome ~ B * A, data=fake.experiment.unbalanced))
 ```
 
 
-In the first example, `car::Anova()` provides the same output as SPSS. This is probably what you want, at least in the first instance.  In examples 2 and 3, the main effects are 'not significant', even though in our simulated data we did create 'main effects' of `A` and `B`. This can lead to confusion (although see the discussion below for why interpreting main effects in the presence of interactions might be a bad idea). 
+In the first example, `car::Anova()` provides the same output as SPSS. This is probably what you want, at least in the first instance.  In examples 2 and 3, the main effects are 'not significant', even though in our simulated data we did create 'main effects' of `A` and `B`. 
 
-To make matters worse,  in examples 2 and 3, the *order* in which we included the predictors `A` and `B` changes the F statistics for the main effects.
+To make matters worse,in examples 2 and 3, the *order* in which we included the predictors `A` and `B` changes the F statistics for the main effects. Using a method where our results depend on the order in which we include the factors can lead to confusion, and is best avoided (although see the discussion below for why interpreting main effects in the presence of interactions might be a bad idea anyway). 
 
 
 ## What's wrong with the SPSS defaults? {-}
@@ -336,10 +345,10 @@ fake.experiment.unbalanced %>%
   ylab("Outcome (95% CI)")
 ```
 
-<img src="anova_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="anova_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 
-But if we draw the same plot for each level of B, it becomes clear that it doesn't seem to make much sense to argue there is a 'main effect' of A, because the direction of the effect is different for each level of B:
+But if we draw the same plot for each level of B, it becomes clear that it wouldn't make sense to argue there is a 'main effect' of A anyway, because the direction of the effect is different for each level of B:
 
 
 ```r
@@ -351,21 +360,22 @@ fake.experiment.unbalanced %>%
   facet_grid(~paste("B", B))
 ```
 
-<img src="anova_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="anova_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 
 
-Where there is an interaction, the meaning of the main effects changes. All the main effect does in this case is tell us that one of the other pairwise contrasts is also significant.
-
-*The moral of the story is that plotting your data and restating the effect in substantive terms are always crucial.*
+Where there is an interaction, the meaning of the main effects changes. *The moral of the story is that plotting your data and restating the effect in substantive terms are always crucial.*
 
 
-## Important difference 3: R works on long-format data (so be careful with repeated measures models) {-}
+
+
+## Important difference 3: R works on long-format data (so you must be careful with repeated measures models) {-}
 
 In R, data tend to be most useful in long format where:
 
 - each row of the dataframe corresponds to a single measurement occasion
 - each column corresponds to a variable which is measured
+
 
 
 
@@ -433,6 +443,7 @@ If you are running a model where individuals are sampled more than once --- for 
 For example, in the `lme4::sleepstudy` data, `Reaction` time is measuresd for each `Subject` on 10 `Day`'s:
 
 
+
 ```r
 lme4::sleepstudy %>% head(12) %>% pander
 ```
@@ -476,7 +487,7 @@ lme4::sleepstudy %>%
   xlab("Days") + ylab("RT (ms)")
 ```
 
-<img src="anova_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+<img src="anova_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
 Let's say we want to test whether there were differences in `distance` at different ages. The following model is inappropriate because it *ignores that `distance` is measured repeatedly from the same subject*:
 
