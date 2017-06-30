@@ -28,6 +28,7 @@ rmd_files:
     "missing-values.Rmd",
     "rmarkdown-tricks.Rmd",
     "confidence-vs-prediction-intervals.Rmd",
+    "multiple-comparisons.Rmd",
 
     "references.Rmd"
   ]

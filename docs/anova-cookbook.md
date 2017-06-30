@@ -49,13 +49,13 @@ Or alternatively if we wanted to provde a better summary of the distribution of 
 ```r
 eysenck %>% 
   ggplot(aes(Age, Recall)) + 
-  geom_violin() + geom_boxplot(width=.33) + facet_grid(~Condition) +
+  geom_boxplot(width=.33) + facet_grid(~Condition) +
   ylab("Recall (95% CI)") + xlab("")
 ```
 
 <div class="figure">
-<img src="anova-cookbook_files/figure-html/unnamed-chunk-5-1.png" alt="Combined box and density plot for recall in older and young adults, by condition." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-5)Combined box and density plot for recall in older and young adults, by condition.</p>
+<img src="anova-cookbook_files/figure-html/unnamed-chunk-5-1.png" alt="Boxplot for recall in older and young adults, by condition." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-5)Boxplot for recall in older and young adults, by condition.</p>
 </div>
 
 
@@ -79,7 +79,9 @@ car::Anova(eysenck.model, type=3)
 ```
 
 
-If we want to check assumptions of the model are met, these tables and plots would be a reasonable place to start:
+### Checking assumptions {-}
+
+If we want to check assumptions of the model are met, these tables and plots would be a reasonable place to start. First running Levene's test:
 
 
 ```r
@@ -99,6 +101,9 @@ car::leveneTest(eysenck.model) %>%
 Table: Levene's Test for Homogeneity of Variance (center = median)
 
 
+Then a QQ-plot of the model residuals to assess normality:
+
+
 
 ```r
 car::qqPlot(eysenck.model)
@@ -109,6 +114,8 @@ car::qqPlot(eysenck.model)
 <p class="caption">(\#fig:unnamed-chunk-8)QQ plot to assess normality of model residuals</p>
 </div>
 
+
+And finally a residual-vs-fitted plot:
 
 
 ```r
@@ -128,6 +135,8 @@ data_frame(
 <p class="caption">(\#fig:unnamed-chunk-9)Residual vs fitted (spread vs. level) plot to check homogeneity of variance.</p>
 </div>
 
+
+### Post hoc tests {-}
 
 If we want to look at post-hoc pairwise tests we can use the the `lsmeans()` function from the `lsmeans::` package:
 

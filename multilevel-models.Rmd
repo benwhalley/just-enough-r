@@ -1,7 +1,6 @@
 ---
 title: 'Multilevel models'
-output:
-  bookdown::tufte_html2
+output: bookdown::tufte_html2
 ---
 
 

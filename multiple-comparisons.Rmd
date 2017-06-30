@@ -1,0 +1,70 @@
+---
+title: 'Multiple comparisons'
+output: bookdown::tufte_html2
+---
+
+XXX THIS JUST copied from previous anova section. Needs more on problem of multiple comparisons
+
+
+### Post hoc (pairwise) tests {-}
+
+As in the Anova cookbook, we use a dataset from Howell (REF), chapter 13 which recorded `Recall` among young v.s. older adults (`Age`) for each of 5 conditions:
+
+```{r}
+eysenck <- readRDS("data/eysenck.Rdata")
+eysenck %>% 
+  ggplot(aes(Condition, Recall, group=Age, color=Age)) + 
+  stat_summary(geom="pointrange", fun.data = mean_cl_boot) +
+  ylab("Recall (95% CI)") + xlab("")
+```
+
+
+We might run an Anova on this dataset:
+
+```{r}
+eysenck.model <- lm(Recall~Age*Condition, data=eysenck)
+car::Anova(eysenck.model, type=3)
+```
+
+
+We can see there is a significant interaction for `Age:Condition`.  If we want to look at post-hoc pairwise tests we can use the the `lsmeans()` function from the `lsmeans::` package:
+
+```{r}
+lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition)
+```
+
+By default Tukey correction is applied for multiple comparisons which is a reasonable default. If you want to use other methods (e.g. to use false discovery rate adjustment, see the section on [multiple comparisons](multiple-comparisons.html)) you can use the `adjust` argument. 
+
+In the code below we request FDR-adjusted p values, and then use the `broom::tidy()` function to convert the table into a dataframe, and then show only the first 6 rows as a table in RMarkdown: 
+
+```{r}
+# calculate pairwise contrasts
+eysenck.fdr <- lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition, adjust="fdr")
+
+# show the first 6 rows from this long table
+eysenck.fdr$contrasts %>% 
+  broom::tidy() %>% 
+  head(6) %>% 
+  pander(caption="First 6 rows of the pairwise contrasts with FDR-adjusted p values")
+```
+
+
+You should note that the FDR adjusted p values do not represent probabilities in the normal sense. Instead, the p value now indicates the *false discovery rate at which the p value should be considered statistically significant*. So, for example, if the adjusted p value  0.09, then this indicates the contrast *would* be significant if the acceptable false discovery rate is 10% (people often set their acceptable false discover rate to be 5% out of habit, but this is not always appropriate).
+
+```{r}
+# Set our acceptable false discovery rate to 10%
+FDR <- .1
+lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition, adjust="none")$contrast %>%
+  broom::tidy() %>%
+  select(level1, level2, p.value) %>%
+  arrange(p.value) %>%
+  mutate(`q (10% FDR)` = (rank(p.value)/length(p.value))*FDR) %>%
+  mutate(p.fdr.adjust=p.adjust(p.value, method="BH")) %>%
+  mutate(significant = as.numeric(p.value < `q (10% FDR)`)) %>%
+  # just show some of the results, at the break between sig and ns contrast
+  filter(p.fdr.adjust > .01 & p.fdr.adjust < .4) %>%
+  pander(caption="Subset of contrasts, showing the break between significant and ns results, as determined by an FDR of 10%.", split.tables=Inf)
+```
+
+Note, that when you use `adjust='fdr'` then the p values returned are
+The [Biostat Handbook](http://www.biostathandbook.com/multiplecomparisons.html) has a good
