@@ -102,10 +102,10 @@ mycorrelations
 One thing to be aware of is that by default `corr.test()` produces p values that are adjusted for multiple comparisons in the top right hand triangle (i.e. above the diagonal). If you want the uncorrected values use the values below the diagonal (or pass `adjust=FALSE` when calling the function). 
 
 
-## Making correlation tables for publication
+## Tables for publication
 
 
-### `apaTables`
+### Using `apaTables` {-}
 If you want to produce output tables for publication the `apaTables` package might be useful. This block saves an APA formatted correlation table to an [external Word document like this](Table1_APA.doc).
 
 
@@ -137,7 +137,7 @@ apa.cor.table(airquality, filename="Table1_APA.doc", show.conf.interval=F)
 ```
 
 
-### By hand
+### By hand {-}
 
 If you're not bothered about strict APA foramt, you might still want to extract the *r* and *p* values as dataframes which can then be saved to a csv and opened in excel, or converted to a table by some other means. 
 
@@ -208,7 +208,7 @@ mycorrelations$ci %>%
 ----------------------------------------------
 
 
-## Other types of correlation
+## Other correlation methods
 
 By default `corr.test` produces Pearson correlations, but You can pass the `method` argument `psych::corr.test()`:
 

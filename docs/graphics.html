@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="summarising-data.html">
-<link rel="next" href="real-data.html">
+<link rel="prev" href="sorting-data.html">
+<link rel="next" href="benefits-of-visualising-data.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -86,6 +86,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -105,163 +106,166 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#part-1-must-read"><i class="fa fa-check"></i>Part 1: ‘Must read’</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#part-2-nice-to-know"><i class="fa fa-check"></i>Part 2: Nice to know</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#part-3-loose-ends"><i class="fa fa-check"></i>Part 3: Loose ends</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#a-warning"><i class="fa fa-check"></i>A warning</a></li>
+<li class="chapter" data-level="" data-path="a-warning.html"><a href="a-warning.html"><i class="fa fa-check"></i>A warning</a></li>
+<li class="chapter" data-level="1.1" data-path="license.html"><a href="license.html"><i class="fa fa-check"></i><b>1.1</b> License</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="start_here.html"><a href="start_here.html"><i class="fa fa-check"></i><b>2</b> Getting started with R and RStudio</a><ul>
-<li class="chapter" data-level="2.1" data-path="start_here.html"><a href="start_here.html#using-rmarkdown-to-record-and-share-work"><i class="fa fa-check"></i><b>2.1</b> Using RMarkdown to record and share work</a></li>
-<li class="chapter" data-level="2.2" data-path="start_here.html"><a href="start_here.html#writing-and-knitting-rmarkdown"><i class="fa fa-check"></i><b>2.2</b> Writing and ‘knitting’ RMarkdown</a></li>
-<li class="chapter" data-level="2.3" data-path="start_here.html"><a href="start_here.html#rstudio"><i class="fa fa-check"></i><b>2.3</b> RStudio</a></li>
-<li class="chapter" data-level="2.4" data-path="start_here.html"><a href="start_here.html#your-first-r-commands"><i class="fa fa-check"></i><b>2.4</b> Your first R commands</a></li>
-<li class="chapter" data-level="2.5" data-path="start_here.html"><a href="start_here.html#naming-things-variable-assignment"><i class="fa fa-check"></i><b>2.5</b> Naming things: <em>variable assignment</em></a></li>
+<li class="chapter" data-level="2" data-path="getting-started-with-r-and-rstudio.html"><a href="getting-started-with-r-and-rstudio.html"><i class="fa fa-check"></i><b>2</b> Getting started with R and RStudio</a><ul>
+<li class="chapter" data-level="2.1" data-path="using-rmarkdown-to-record-and-share-work.html"><a href="using-rmarkdown-to-record-and-share-work.html"><i class="fa fa-check"></i><b>2.1</b> Using RMarkdown to record and share work</a></li>
+<li class="chapter" data-level="2.2" data-path="writing-and-knitting-rmarkdown.html"><a href="writing-and-knitting-rmarkdown.html"><i class="fa fa-check"></i><b>2.2</b> Writing and ‘knitting’ RMarkdown</a></li>
+<li class="chapter" data-level="2.3" data-path="rstudio.html"><a href="rstudio.html"><i class="fa fa-check"></i><b>2.3</b> RStudio</a></li>
+<li class="chapter" data-level="2.4" data-path="your-first-r-commands.html"><a href="your-first-r-commands.html"><i class="fa fa-check"></i><b>2.4</b> Your first R commands</a></li>
+<li class="chapter" data-level="2.5" data-path="naming-things-variable-assignment.html"><a href="naming-things-variable-assignment.html"><i class="fa fa-check"></i><b>2.5</b> Naming things: <em>variable assignment</em></a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="start_here.html"><a href="start_here.html#vectors-and-lists"><i class="fa fa-check"></i><b>3</b> Vectors and lists</a><ul>
-<li class="chapter" data-level="3.1" data-path="start_here.html"><a href="start_here.html#vectors"><i class="fa fa-check"></i><b>3.1</b> Vectors</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="start_here.html"><a href="start_here.html#accessing-elements-within-vectors"><i class="fa fa-check"></i><b>3.1.1</b> Accessing elements within vectors</a></li>
-<li class="chapter" data-level="3.1.2" data-path="start_here.html"><a href="start_here.html#selecting-more-than-one-element-in-a-vector"><i class="fa fa-check"></i><b>3.1.2</b> Selecting more than one element in a vector</a></li>
-<li class="chapter" data-level="3.1.3" data-path="start_here.html"><a href="start_here.html#processing-vectors"><i class="fa fa-check"></i><b>3.1.3</b> Processing vectors</a></li>
-<li class="chapter" data-level="3.1.4" data-path="start_here.html"><a href="start_here.html#processing-vectors-to-make-new-vectors"><i class="fa fa-check"></i><b>3.1.4</b> Processing vectors to make new vectors</a></li>
-<li class="chapter" data-level="3.1.5" data-path="start_here.html"><a href="start_here.html#making-up-data-new-vectors"><i class="fa fa-check"></i><b>3.1.5</b> Making up data (new vectors)</a></li>
-<li class="chapter" data-level="3.1.6" data-path="start_here.html"><a href="start_here.html#useful-functions-to-learn-now"><i class="fa fa-check"></i><b>3.1.6</b> Useful functions to learn now</a></li>
+<li class="chapter" data-level="3" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html"><i class="fa fa-check"></i><b>3</b> Vectors and lists</a><ul>
+<li class="chapter" data-level="3.1" data-path="vectors.html"><a href="vectors.html"><i class="fa fa-check"></i><b>3.1</b> Vectors</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="vectors.html"><a href="vectors.html#accessing-elements-within-vectors"><i class="fa fa-check"></i><b>3.1.1</b> Accessing elements within vectors</a></li>
+<li class="chapter" data-level="3.1.2" data-path="vectors.html"><a href="vectors.html#selecting-more-than-one-element-in-a-vector"><i class="fa fa-check"></i><b>3.1.2</b> Selecting more than one element in a vector</a></li>
+<li class="chapter" data-level="3.1.3" data-path="vectors.html"><a href="vectors.html#processing-vectors"><i class="fa fa-check"></i><b>3.1.3</b> Processing vectors</a></li>
+<li class="chapter" data-level="3.1.4" data-path="vectors.html"><a href="vectors.html#processing-vectors-to-make-new-vectors"><i class="fa fa-check"></i><b>3.1.4</b> Processing vectors to make new vectors</a></li>
+<li class="chapter" data-level="3.1.5" data-path="vectors.html"><a href="vectors.html#making-up-data-new-vectors"><i class="fa fa-check"></i><b>3.1.5</b> Making up data (new vectors)</a></li>
+<li class="chapter" data-level="3.1.6" data-path="vectors.html"><a href="vectors.html#useful-functions-to-learn-now"><i class="fa fa-check"></i><b>3.1.6</b> Useful functions to learn now</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="start_here.html"><a href="start_here.html#lists"><i class="fa fa-check"></i><b>3.2</b> Lists</a></li>
-<li class="chapter" data-level="3.3" data-path="start_here.html"><a href="start_here.html#questions-on-vectors-and-lists"><i class="fa fa-check"></i><b>3.3</b> Questions on vectors and lists</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="start_here.html"><a href="start_here.html#extended-questions"><i class="fa fa-check"></i><b>3.3.1</b> Extended questions:</a></li>
+<li class="chapter" data-level="3.2" data-path="lists.html"><a href="lists.html"><i class="fa fa-check"></i><b>3.2</b> Lists</a></li>
+<li class="chapter" data-level="3.3" data-path="questions-on-vectors-and-lists.html"><a href="questions-on-vectors-and-lists.html"><i class="fa fa-check"></i><b>3.3</b> Questions on vectors and lists</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="questions-on-vectors-and-lists.html"><a href="questions-on-vectors-and-lists.html#extended-questions"><i class="fa fa-check"></i><b>3.3.1</b> Extended questions:</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>4</b> Datasets and dataframes</a><ul>
-<li class="chapter" data-level="4.1" data-path="datasets.html"><a href="datasets.html#using-built-in-data"><i class="fa fa-check"></i><b>4.1</b> Using ‘built in’ data</a></li>
-<li class="chapter" data-level="4.2" data-path="datasets.html"><a href="datasets.html#importing-and-exporting-data"><i class="fa fa-check"></i><b>4.2</b> Importing and exporting data</a></li>
-<li class="chapter" data-level="4.3" data-path="datasets.html"><a href="datasets.html#importing-data-over-the-web"><i class="fa fa-check"></i><b>4.3</b> Importing data over the web</a></li>
-<li class="chapter" data-level="4.4" data-path="datasets.html"><a href="datasets.html#importing-from-spss-and-other-packages"><i class="fa fa-check"></i><b>4.4</b> Importing from SPSS and other packages</a></li>
+<li class="chapter" data-level="4" data-path="datasets-and-dataframes.html"><a href="datasets-and-dataframes.html"><i class="fa fa-check"></i><b>4</b> Datasets and dataframes</a><ul>
+<li class="chapter" data-level="4.1" data-path="using-built-in-data.html"><a href="using-built-in-data.html"><i class="fa fa-check"></i><b>4.1</b> Using ‘built in’ data</a></li>
+<li class="chapter" data-level="4.2" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html"><i class="fa fa-check"></i><b>4.2</b> Importing and exporting data</a></li>
+<li class="chapter" data-level="4.3" data-path="importing-data-over-the-web.html"><a href="importing-data-over-the-web.html"><i class="fa fa-check"></i><b>4.3</b> Importing data over the web</a></li>
+<li class="chapter" data-level="4.4" data-path="importing-from-spss-and-other-packages.html"><a href="importing-from-spss-and-other-packages.html"><i class="fa fa-check"></i><b>4.4</b> Importing from SPSS and other packages</a></li>
 <li class="chapter" data-level="4.5" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html"><i class="fa fa-check"></i><b>4.5</b> Working with dataframes</a></li>
-<li class="chapter" data-level="4.6" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#introducing-the-tidyverse"><i class="fa fa-check"></i><b>4.6</b> Introducing the <code>tidyverse</code></a></li>
-<li class="chapter" data-level="4.7" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#selecting-columns-from-a-dataframe"><i class="fa fa-check"></i><b>4.7</b> Selecting columns from a dataframe</a></li>
-<li class="chapter" data-level="4.8" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#selecting-rows-of-data"><i class="fa fa-check"></i><b>4.8</b> Selecting rows of data</a></li>
-<li class="chapter" data-level="4.9" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#combining-column-selections-and-filters-with-dplyr"><i class="fa fa-check"></i><b>4.9</b> Combining column selections and filters with <code>dplyr</code></a></li>
-<li class="chapter" data-level="4.10" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#modifying-and-creating-new-columns"><i class="fa fa-check"></i><b>4.10</b> Modifying and creating new columns</a></li>
+<li class="chapter" data-level="4.6" data-path="introducing-the-tidyverse.html"><a href="introducing-the-tidyverse.html"><i class="fa fa-check"></i><b>4.6</b> Introducing the <code>tidyverse</code></a></li>
+<li class="chapter" data-level="4.7" data-path="selecting-columns-from-a-dataframe.html"><a href="selecting-columns-from-a-dataframe.html"><i class="fa fa-check"></i><b>4.7</b> Selecting columns from a dataframe</a></li>
+<li class="chapter" data-level="4.8" data-path="selecting-rows-of-data.html"><a href="selecting-rows-of-data.html"><i class="fa fa-check"></i><b>4.8</b> Selecting rows of data</a></li>
+<li class="chapter" data-level="4.9" data-path="combining-column-selections-and-filters-with-dplyr.html"><a href="combining-column-selections-and-filters-with-dplyr.html"><i class="fa fa-check"></i><b>4.9</b> Combining column selections and filters with <code>dplyr</code></a></li>
+<li class="chapter" data-level="4.10" data-path="modifying-and-creating-new-columns.html"><a href="modifying-and-creating-new-columns.html"><i class="fa fa-check"></i><b>4.10</b> Modifying and creating new columns</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="summarising-data.html"><a href="summarising-data.html"><i class="fa fa-check"></i><b>5</b> Summarising data</a><ul>
-<li class="chapter" data-level="5.1" data-path="summarising-data.html"><a href="summarising-data.html#summaries-of-dataframes"><i class="fa fa-check"></i><b>5.1</b> Summaries of dataframes</a></li>
-<li class="chapter" data-level="5.2" data-path="summarising-data.html"><a href="summarising-data.html#split-apply-combine"><i class="fa fa-check"></i><b>5.2</b> Split, apply, combine</a></li>
-<li class="chapter" data-level="5.3" data-path="summarising-data.html"><a href="summarising-data.html#split-breaking-the-data-into-groups"><i class="fa fa-check"></i><b>5.3</b> Split: breaking the data into groups</a></li>
-<li class="chapter" data-level="5.4" data-path="summarising-data.html"><a href="summarising-data.html#apply-and-combine"><i class="fa fa-check"></i><b>5.4</b> Apply and combine</a></li>
-<li class="chapter" data-level="5.5" data-path="summarising-data.html"><a href="summarising-data.html#a-real-example"><i class="fa fa-check"></i><b>5.5</b> A ‘real’ example</a></li>
-<li class="chapter" data-level="5.6" data-path="summarising-data.html"><a href="summarising-data.html#sorting-data"><i class="fa fa-check"></i><b>5.6</b> Sorting data</a></li>
+<li class="chapter" data-level="5.1" data-path="summaries-of-dataframes.html"><a href="summaries-of-dataframes.html"><i class="fa fa-check"></i><b>5.1</b> Summaries of dataframes</a></li>
+<li class="chapter" data-level="5.2" data-path="split-apply-combine.html"><a href="split-apply-combine.html"><i class="fa fa-check"></i><b>5.2</b> Split, apply, combine</a></li>
+<li class="chapter" data-level="5.3" data-path="split-breaking-the-data-into-groups.html"><a href="split-breaking-the-data-into-groups.html"><i class="fa fa-check"></i><b>5.3</b> Split: breaking the data into groups</a></li>
+<li class="chapter" data-level="5.4" data-path="apply-and-combine.html"><a href="apply-and-combine.html"><i class="fa fa-check"></i><b>5.4</b> Apply and combine</a></li>
+<li class="chapter" data-level="5.5" data-path="a-real-example.html"><a href="a-real-example.html"><i class="fa fa-check"></i><b>5.5</b> A ‘real’ example</a></li>
+<li class="chapter" data-level="5.6" data-path="sorting-data.html"><a href="sorting-data.html"><i class="fa fa-check"></i><b>5.6</b> Sorting data</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>6</b> Graphics</a><ul>
 <li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#the-r-graphics-cookbook"><i class="fa fa-check"></i>The R Graphics Cookbook</a></li>
-<li class="chapter" data-level="6.1" data-path="graphics.html"><a href="graphics.html#benefits-of-visualising-data"><i class="fa fa-check"></i><b>6.1</b> Benefits of visualising data</a></li>
-<li class="chapter" data-level="6.2" data-path="graphics.html"><a href="graphics.html#choosing-a-plot-type"><i class="fa fa-check"></i><b>6.2</b> Choosing a plot type</a></li>
-<li class="chapter" data-level="6.3" data-path="graphics.html"><a href="graphics.html#choosing-layering-and-facetting-graphics"><i class="fa fa-check"></i><b>6.3</b> Choosing, layering and facetting graphics</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="graphics.html"><a href="graphics.html#using-ggplot"><i class="fa fa-check"></i><b>6.3.1</b> Using ggplot</a></li>
-<li class="chapter" data-level="6.3.2" data-path="graphics.html"><a href="graphics.html#relationships"><i class="fa fa-check"></i><b>6.3.2</b> Relationships</a></li>
-<li class="chapter" data-level="6.3.3" data-path="graphics.html"><a href="graphics.html#distributions"><i class="fa fa-check"></i><b>6.3.3</b> Distributions</a></li>
-<li class="chapter" data-level="6.3.4" data-path="graphics.html"><a href="graphics.html#comparisons"><i class="fa fa-check"></i><b>6.3.4</b> Comparisons</a></li>
-<li class="chapter" data-level="6.3.5" data-path="graphics.html"><a href="graphics.html#composition"><i class="fa fa-check"></i><b>6.3.5</b> Composition</a></li>
-<li class="chapter" data-level="6.3.6" data-path="graphics.html"><a href="graphics.html#combining-plots-in-a-grid"><i class="fa fa-check"></i><b>6.3.6</b> Combining plots in a grid</a></li>
-<li class="chapter" data-level="6.3.7" data-path="graphics.html"><a href="graphics.html#exporting-high-quality-ggplots-for-print"><i class="fa fa-check"></i><b>6.3.7</b> Exporting high quality ggplots for print</a></li>
+<li class="chapter" data-level="6.1" data-path="benefits-of-visualising-data.html"><a href="benefits-of-visualising-data.html"><i class="fa fa-check"></i><b>6.1</b> Benefits of visualising data</a></li>
+<li class="chapter" data-level="6.2" data-path="choosing-a-plot-type.html"><a href="choosing-a-plot-type.html"><i class="fa fa-check"></i><b>6.2</b> Choosing a plot type</a></li>
+<li class="chapter" data-level="6.3" data-path="choosing-layering-and-facetting-graphics.html"><a href="choosing-layering-and-facetting-graphics.html"><i class="fa fa-check"></i><b>6.3</b> Choosing, layering and facetting graphics</a><ul>
+<li class="chapter" data-level="" data-path="choosing-layering-and-facetting-graphics.html"><a href="choosing-layering-and-facetting-graphics.html#chart-choosers"><i class="fa fa-check"></i>‘Chart choosers’</a></li>
+<li class="chapter" data-level="6.3.1" data-path="choosing-layering-and-facetting-graphics.html"><a href="choosing-layering-and-facetting-graphics.html#thinking-like-ggplot"><i class="fa fa-check"></i><b>6.3.1</b> Thinking like <code>ggplot</code></a></li>
+<li class="chapter" data-level="6.3.2" data-path="choosing-layering-and-facetting-graphics.html"><a href="choosing-layering-and-facetting-graphics.html#relationships"><i class="fa fa-check"></i><b>6.3.2</b> Relationships</a></li>
+<li class="chapter" data-level="6.3.3" data-path="choosing-layering-and-facetting-graphics.html"><a href="choosing-layering-and-facetting-graphics.html#distributions"><i class="fa fa-check"></i><b>6.3.3</b> Distributions</a></li>
+<li class="chapter" data-level="6.3.4" data-path="choosing-layering-and-facetting-graphics.html"><a href="choosing-layering-and-facetting-graphics.html#comparisons"><i class="fa fa-check"></i><b>6.3.4</b> Comparisons</a></li>
+<li class="chapter" data-level="6.3.5" data-path="choosing-layering-and-facetting-graphics.html"><a href="choosing-layering-and-facetting-graphics.html#composition"><i class="fa fa-check"></i><b>6.3.5</b> Composition</a></li>
+<li class="chapter" data-level="6.3.6" data-path="choosing-layering-and-facetting-graphics.html"><a href="choosing-layering-and-facetting-graphics.html#combining-plots-in-a-grid"><i class="fa fa-check"></i><b>6.3.6</b> Combining plots in a grid</a></li>
+<li class="chapter" data-level="6.3.7" data-path="choosing-layering-and-facetting-graphics.html"><a href="choosing-layering-and-facetting-graphics.html#exporting-high-quality-ggplots-for-print"><i class="fa fa-check"></i><b>6.3.7</b> Exporting high quality ggplots for print</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="graphics.html"><a href="graphics.html#quick-and-dirty-plotting"><i class="fa fa-check"></i><b>6.4</b> ‘Quick and dirty’ plotting</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="graphics.html"><a href="graphics.html#distributions-1"><i class="fa fa-check"></i><b>6.4.1</b> Distributions</a></li>
-<li class="chapter" data-level="6.4.2" data-path="graphics.html"><a href="graphics.html#relationships-1"><i class="fa fa-check"></i><b>6.4.2</b> Relationships</a></li>
-<li class="chapter" data-level="6.4.3" data-path="graphics.html"><a href="graphics.html#quantities"><i class="fa fa-check"></i><b>6.4.3</b> Quantities</a></li>
+<li class="chapter" data-level="6.4" data-path="quick-and-dirty-plotting.html"><a href="quick-and-dirty-plotting.html"><i class="fa fa-check"></i><b>6.4</b> ‘Quick and dirty’ plotting</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="quick-and-dirty-plotting.html"><a href="quick-and-dirty-plotting.html#distributions-1"><i class="fa fa-check"></i><b>6.4.1</b> Distributions</a></li>
+<li class="chapter" data-level="6.4.2" data-path="quick-and-dirty-plotting.html"><a href="quick-and-dirty-plotting.html#relationships-1"><i class="fa fa-check"></i><b>6.4.2</b> Relationships</a></li>
+<li class="chapter" data-level="6.4.3" data-path="quick-and-dirty-plotting.html"><a href="quick-and-dirty-plotting.html#quantities"><i class="fa fa-check"></i><b>6.4.3</b> Quantities</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="real-data.html"><a href="real-data.html"><i class="fa fa-check"></i><b>7</b> Working with ‘real’ data</a><ul>
-<li class="chapter" data-level="7.1" data-path="real-data.html"><a href="real-data.html#how-to-tidy-data"><i class="fa fa-check"></i><b>7.1</b> How to ‘tidy’ data</a></li>
-<li class="chapter" data-level="7.2" data-path="real-data.html"><a href="real-data.html#deal-with-multiple-files"><i class="fa fa-check"></i><b>7.2</b> Deal with multiple files</a></li>
-<li class="chapter" data-level="7.3" data-path="real-data.html"><a href="real-data.html#error-checking"><i class="fa fa-check"></i><b>7.3</b> Error checking</a></li>
-<li class="chapter" data-level="7.4" data-path="real-data.html"><a href="real-data.html#missing-values"><i class="fa fa-check"></i><b>7.4</b> Missing values</a></li>
+<li class="chapter" data-level="7" data-path="working-with-real-data.html"><a href="working-with-real-data.html"><i class="fa fa-check"></i><b>7</b> Working with ‘real’ data</a><ul>
+<li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html"><i class="fa fa-check"></i>Types of variable: factor, character and numeric</a></li>
+<li class="chapter" data-level="" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i>Missing values</a></li>
+<li class="chapter" data-level="" data-path="tidying-data.html"><a href="tidying-data.html"><i class="fa fa-check"></i>Tidying data</a></li>
+<li class="chapter" data-level="" data-path="deal-with-multiple-files.html"><a href="deal-with-multiple-files.html"><i class="fa fa-check"></i>Deal with multiple files</a></li>
+<li class="chapter" data-level="" data-path="error-checking.html"><a href="error-checking.html"><i class="fa fa-check"></i>Error checking</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="correlations.html"><a href="correlations.html"><i class="fa fa-check"></i><b>8</b> Correlations</a><ul>
-<li class="chapter" data-level="8.1" data-path="correlations.html"><a href="correlations.html#obtaining-a-correlation-matrix"><i class="fa fa-check"></i><b>8.1</b> Obtaining a correlation matrix</a></li>
-<li class="chapter" data-level="8.2" data-path="correlations.html"><a href="correlations.html#making-correlation-tables-for-publication"><i class="fa fa-check"></i><b>8.2</b> Making correlation tables for publication</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="correlations.html"><a href="correlations.html#apatables"><i class="fa fa-check"></i><b>8.2.1</b> <code>apaTables</code></a></li>
-<li class="chapter" data-level="8.2.2" data-path="correlations.html"><a href="correlations.html#by-hand"><i class="fa fa-check"></i><b>8.2.2</b> By hand</a></li>
+<li class="chapter" data-level="8.1" data-path="obtaining-a-correlation-matrix.html"><a href="obtaining-a-correlation-matrix.html"><i class="fa fa-check"></i><b>8.1</b> Obtaining a correlation matrix</a></li>
+<li class="chapter" data-level="8.2" data-path="tables-for-publication.html"><a href="tables-for-publication.html"><i class="fa fa-check"></i><b>8.2</b> Tables for publication</a><ul>
+<li><a href="tables-for-publication.html#using-apatables">Using <code>apaTables</code></a></li>
+<li class="chapter" data-level="" data-path="tables-for-publication.html"><a href="tables-for-publication.html#by-hand"><i class="fa fa-check"></i>By hand</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="correlations.html"><a href="correlations.html#other-types-of-correlation"><i class="fa fa-check"></i><b>8.3</b> Other types of correlation</a></li>
+<li class="chapter" data-level="8.3" data-path="other-correlation-methods.html"><a href="other-correlation-methods.html"><i class="fa fa-check"></i><b>8.3</b> Other correlation methods</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="t-tests.html"><a href="t-tests.html"><i class="fa fa-check"></i><b>9</b> t-tests</a><ul>
-<li class="chapter" data-level="9.1" data-path="t-tests.html"><a href="t-tests.html#running-t-tests"><i class="fa fa-check"></i><b>9.1</b> Running t-tests</a></li>
-<li class="chapter" data-level="9.2" data-path="t-tests.html"><a href="t-tests.html#independent-groups"><i class="fa fa-check"></i><b>9.2</b> 2 independent groups:</a></li>
-<li class="chapter" data-level="9.3" data-path="t-tests.html"><a href="t-tests.html#unequal-variances"><i class="fa fa-check"></i><b>9.3</b> Unequal variances</a></li>
-<li class="chapter" data-level="9.4" data-path="t-tests.html"><a href="t-tests.html#paired-samples"><i class="fa fa-check"></i><b>9.4</b> Paired samples</a></li>
-<li class="chapter" data-level="9.5" data-path="t-tests.html"><a href="t-tests.html#one-sample-test"><i class="fa fa-check"></i><b>9.5</b> One-sample test</a></li>
+<li class="chapter" data-level="9.1" data-path="running-t-tests.html"><a href="running-t-tests.html"><i class="fa fa-check"></i><b>9.1</b> Running t-tests</a></li>
+<li class="chapter" data-level="9.2" data-path="independent-groups.html"><a href="independent-groups.html"><i class="fa fa-check"></i><b>9.2</b> 2 independent groups:</a></li>
+<li class="chapter" data-level="9.3" data-path="unequal-variances.html"><a href="unequal-variances.html"><i class="fa fa-check"></i><b>9.3</b> Unequal variances</a></li>
+<li class="chapter" data-level="9.4" data-path="paired-samples.html"><a href="paired-samples.html"><i class="fa fa-check"></i><b>9.4</b> Paired samples</a></li>
+<li class="chapter" data-level="9.5" data-path="one-sample-test.html"><a href="one-sample-test.html"><i class="fa fa-check"></i><b>9.5</b> One-sample test</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="linear-models-simple.html"><a href="linear-models-simple.html"><i class="fa fa-check"></i><b>10</b> Introduction to linear models in R</a><ul>
-<li class="chapter" data-level="10.1" data-path="linear-models-simple.html"><a href="linear-models-simple.html#describing-statistical-models-using-formulae"><i class="fa fa-check"></i><b>10.1</b> Describing statistical models using formulae</a></li>
-<li class="chapter" data-level="10.2" data-path="linear-models-simple.html"><a href="linear-models-simple.html#running-a-linear-model"><i class="fa fa-check"></i><b>10.2</b> Running a linear model</a></li>
-<li class="chapter" data-level="10.3" data-path="linear-models-simple.html"><a href="linear-models-simple.html#more-on-formulas"><i class="fa fa-check"></i><b>10.3</b> More on formulas</a><ul>
-<li class="chapter" data-level="10.3.1" data-path="linear-models-simple.html"><a href="linear-models-simple.html#other-formula-shortcuts"><i class="fa fa-check"></i><b>10.3.1</b> Other formula shortcuts</a></li>
+<li class="chapter" data-level="10" data-path="introduction-to-linear-models-in-r.html"><a href="introduction-to-linear-models-in-r.html"><i class="fa fa-check"></i><b>10</b> Introduction to linear models in R</a><ul>
+<li class="chapter" data-level="10.1" data-path="describing-statistical-models-using-formulae.html"><a href="describing-statistical-models-using-formulae.html"><i class="fa fa-check"></i><b>10.1</b> Describing statistical models using formulae</a></li>
+<li class="chapter" data-level="10.2" data-path="running-a-linear-model.html"><a href="running-a-linear-model.html"><i class="fa fa-check"></i><b>10.2</b> Running a linear model</a></li>
+<li class="chapter" data-level="10.3" data-path="more-on-formulas.html"><a href="more-on-formulas.html"><i class="fa fa-check"></i><b>10.3</b> More on formulas</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="more-on-formulas.html"><a href="more-on-formulas.html#other-formula-shortcuts"><i class="fa fa-check"></i><b>10.3.1</b> Other formula shortcuts</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="linear-models-simple.html"><a href="linear-models-simple.html#what-next"><i class="fa fa-check"></i><b>10.4</b> What next</a></li>
+<li class="chapter" data-level="10.4" data-path="what-next.html"><a href="what-next.html"><i class="fa fa-check"></i><b>10.4</b> What next</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>11</b> Anova in R</a><ul>
-<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#rule-1-use-long-format-data"><i class="fa fa-check"></i>Rule 1: Use long format data</a></li>
-<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#rule-2-know-your-variables"><i class="fa fa-check"></i>Rule 2: Know your variables</a></li>
-<li><a href="anova.html#rule-3-dont-use-aov-or-anova">Rule 3: Don’t use <code>aov()</code> or <code>anova()</code></a><ul>
-<li class="chapter" data-level="11.0.1" data-path="anova.html"><a href="anova.html#but-what-about-insert-favourite-r-package-for-anova"><i class="fa fa-check"></i><b>11.0.1</b> But what about [insert favourite R package for Anova]?</a></li>
+<li class="chapter" data-level="11" data-path="anova-in-r.html"><a href="anova-in-r.html"><i class="fa fa-check"></i><b>11</b> Anova in R</a><ul>
+<li class="chapter" data-level="" data-path="rule-1-use-long-format-data.html"><a href="rule-1-use-long-format-data.html"><i class="fa fa-check"></i>Rule 1: Use long format data</a></li>
+<li class="chapter" data-level="" data-path="rule-2-know-your-variables.html"><a href="rule-2-know-your-variables.html"><i class="fa fa-check"></i>Rule 2: Know your variables</a></li>
+<li><a href="rule-3-dont-use-aov-or-anova.html#rule-3-dont-use-aov-or-anova">Rule 3: Don’t use <code>aov()</code> or <code>anova()</code></a><ul>
+<li class="chapter" data-level="11.0.1" data-path="rule-3-dont-use-aov-or-anova.html"><a href="rule-3-dont-use-aov-or-anova.html"><i class="fa fa-check"></i><b>11.0.1</b> But what about [insert favourite R package for Anova]?</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#rule-4-use-type-3-sums-of-squares-and-learn-about-why"><i class="fa fa-check"></i>Rule 4: Use type 3 sums of squares (and learn about why)</a></li>
-<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#general-anova-recommendations"><i class="fa fa-check"></i>General Anova recommendations</a></li>
+<li class="chapter" data-level="" data-path="rule-4-use-type-3-sums-of-squares-and-learn-about-why.html"><a href="rule-4-use-type-3-sums-of-squares-and-learn-about-why.html"><i class="fa fa-check"></i>Rule 4: Use type 3 sums of squares (and learn about why)</a></li>
+<li class="chapter" data-level="" data-path="general-anova-recommendations.html"><a href="general-anova-recommendations.html"><i class="fa fa-check"></i>General Anova recommendations</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="anova-cookbook.html"><a href="anova-cookbook.html"><i class="fa fa-check"></i><b>12</b> Anova ‘Cookbook’</a><ul>
-<li class="chapter" data-level="12.1" data-path="anova-cookbook.html"><a href="anova-cookbook.html#between-subjects-designs"><i class="fa fa-check"></i><b>12.1</b> Between subjects designs</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="anova-cookbook.html"><a href="anova-cookbook.html#factorial-anova-no-bigger-than-2x2"><i class="fa fa-check"></i><b>12.1.1</b> Factorial anova, no bigger than 2x2</a></li>
-<li class="chapter" data-level="12.1.2" data-path="anova-cookbook.html"><a href="anova-cookbook.html#factorial-anova-where-one-factor-has-2-levels."><i class="fa fa-check"></i><b>12.1.2</b> Factorial anova, where one factor has &gt; 2 levels.</a></li>
-<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#checking-assumptions"><i class="fa fa-check"></i>Checking assumptions</a></li>
-<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#post-hoc-tests"><i class="fa fa-check"></i>Post hoc tests</a></li>
+<li class="chapter" data-level="12.1" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html"><i class="fa fa-check"></i><b>12.1</b> Between subjects designs</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#factorial-anova-no-bigger-than-2x2"><i class="fa fa-check"></i><b>12.1.1</b> Factorial anova, no bigger than 2x2</a></li>
+<li class="chapter" data-level="12.1.2" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#factorial-anova-where-one-factor-has-2-levels."><i class="fa fa-check"></i><b>12.1.2</b> Factorial anova, where one factor has &gt; 2 levels.</a></li>
+<li class="chapter" data-level="" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#checking-assumptions"><i class="fa fa-check"></i>Checking assumptions</a></li>
+<li class="chapter" data-level="" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#post-hoc-tests"><i class="fa fa-check"></i>Post hoc tests</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="anova-cookbook.html"><a href="anova-cookbook.html#repeated-measures-or-split-plot-designs"><i class="fa fa-check"></i><b>12.2</b> Repeated measures or ‘split plot’ designs</a></li>
+<li class="chapter" data-level="12.2" data-path="repeated-measures-or-split-plot-designs.html"><a href="repeated-measures-or-split-plot-designs.html"><i class="fa fa-check"></i><b>12.2</b> Repeated measures or ‘split plot’ designs</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="understanding-interactions.html"><a href="understanding-interactions.html"><i class="fa fa-check"></i><b>13</b> Understanding interactions (part 1)</a><ul>
-<li class="chapter" data-level="13.1" data-path="understanding-interactions.html"><a href="understanding-interactions.html#what-is-an-interaction"><i class="fa fa-check"></i><b>13.1</b> What is an interaction?</a><ul>
-<li class="chapter" data-level="13.1.1" data-path="understanding-interactions.html"><a href="understanding-interactions.html#example-interaction-visualised"><i class="fa fa-check"></i><b>13.1.1</b> Example interaction visualised</a></li>
+<li class="chapter" data-level="13" data-path="understanding-interactions-part-1.html"><a href="understanding-interactions-part-1.html"><i class="fa fa-check"></i><b>13</b> Understanding interactions (part 1)</a><ul>
+<li class="chapter" data-level="13.1" data-path="what-is-an-interaction.html"><a href="what-is-an-interaction.html"><i class="fa fa-check"></i><b>13.1</b> What is an interaction?</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="what-is-an-interaction.html"><a href="what-is-an-interaction.html#example-interaction-visualised"><i class="fa fa-check"></i><b>13.1.1</b> Example interaction visualised</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="understanding-interactions.html"><a href="understanding-interactions.html#visualising-interactions-in-raw-data"><i class="fa fa-check"></i><b>13.2</b> Visualising interactions in raw data</a></li>
-<li class="chapter" data-level="13.3" data-path="understanding-interactions.html"><a href="understanding-interactions.html#continuous-predictors"><i class="fa fa-check"></i><b>13.3</b> Continuous predictors</a></li>
-<li class="chapter" data-level="13.4" data-path="understanding-interactions.html"><a href="understanding-interactions.html#what-next-1"><i class="fa fa-check"></i><b>13.4</b> What next?</a></li>
+<li class="chapter" data-level="13.2" data-path="visualising-interactions-in-raw-data.html"><a href="visualising-interactions-in-raw-data.html"><i class="fa fa-check"></i><b>13.2</b> Visualising interactions in raw data</a></li>
+<li class="chapter" data-level="13.3" data-path="continuous-predictors.html"><a href="continuous-predictors.html"><i class="fa fa-check"></i><b>13.3</b> Continuous predictors</a></li>
+<li class="chapter" data-level="13.4" data-path="what-next-1.html"><a href="what-next-1.html"><i class="fa fa-check"></i><b>13.4</b> What next?</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html"><i class="fa fa-check"></i><b>14</b> Making predictions</a><ul>
-<li class="chapter" data-level="14.1" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predictions-vs-margins"><i class="fa fa-check"></i><b>14.1</b> Predictions vs margins</a></li>
-<li class="chapter" data-level="14.2" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predicted-means"><i class="fa fa-check"></i><b>14.2</b> Predicted means</a></li>
-<li class="chapter" data-level="14.3" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#effects-margins"><i class="fa fa-check"></i><b>14.3</b> <em>Effects</em> (margins)</a></li>
-<li class="chapter" data-level="14.4" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#continuous-predictors-1"><i class="fa fa-check"></i><b>14.4</b> Continuous predictors</a></li>
-<li class="chapter" data-level="14.5" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predicted-means-and-margins-using-lm"><i class="fa fa-check"></i><b>14.5</b> Predicted means and margins using <code>lm()</code></a><ul>
-<li class="chapter" data-level="14.5.1" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#running-the-model"><i class="fa fa-check"></i><b>14.5.1</b> Running the model</a></li>
-<li class="chapter" data-level="14.5.2" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#making-predictions-for-means"><i class="fa fa-check"></i><b>14.5.2</b> Making predictions for means</a></li>
-<li class="chapter" data-level="14.5.3" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#step-1-make-a-new-dataframe"><i class="fa fa-check"></i><b>14.5.3</b> Step 1: Make a new dataframe</a></li>
-<li class="chapter" data-level="14.5.4" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#step-2-make-the-predictions"><i class="fa fa-check"></i><b>14.5.4</b> Step 2: Make the predictions</a></li>
+<li class="chapter" data-level="14" data-path="making-predictions.html"><a href="making-predictions.html"><i class="fa fa-check"></i><b>14</b> Making predictions</a><ul>
+<li class="chapter" data-level="14.1" data-path="predictions-vs-margins.html"><a href="predictions-vs-margins.html"><i class="fa fa-check"></i><b>14.1</b> Predictions vs margins</a></li>
+<li class="chapter" data-level="14.2" data-path="predicted-means.html"><a href="predicted-means.html"><i class="fa fa-check"></i><b>14.2</b> Predicted means</a></li>
+<li class="chapter" data-level="14.3" data-path="effects-margins.html"><a href="effects-margins.html"><i class="fa fa-check"></i><b>14.3</b> <em>Effects</em> (margins)</a></li>
+<li class="chapter" data-level="14.4" data-path="continuous-predictors-1.html"><a href="continuous-predictors-1.html"><i class="fa fa-check"></i><b>14.4</b> Continuous predictors</a></li>
+<li class="chapter" data-level="14.5" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html"><i class="fa fa-check"></i><b>14.5</b> Predicted means and margins using <code>lm()</code></a><ul>
+<li class="chapter" data-level="14.5.1" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html#running-the-model"><i class="fa fa-check"></i><b>14.5.1</b> Running the model</a></li>
+<li class="chapter" data-level="14.5.2" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html#making-predictions-for-means"><i class="fa fa-check"></i><b>14.5.2</b> Making predictions for means</a></li>
+<li class="chapter" data-level="14.5.3" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html#step-1-make-a-new-dataframe"><i class="fa fa-check"></i><b>14.5.3</b> Step 1: Make a new dataframe</a></li>
+<li class="chapter" data-level="14.5.4" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html#step-2-make-the-predictions"><i class="fa fa-check"></i><b>14.5.4</b> Step 2: Make the predictions</a></li>
 </ul></li>
-<li class="chapter" data-level="14.6" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#making-prdictions-for-margins-effects-of-predictors"><i class="fa fa-check"></i><b>14.6</b> Making prdictions for margins (<em>effects</em> of predictors)</a></li>
-<li class="chapter" data-level="14.7" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#marginal-effects"><i class="fa fa-check"></i><b>14.7</b> Marginal effects</a></li>
-<li class="chapter" data-level="14.8" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#with-continuous-covariates"><i class="fa fa-check"></i><b>14.8</b> With continuous covariates</a></li>
+<li class="chapter" data-level="14.6" data-path="making-prdictions-for-margins-effects-of-predictors.html"><a href="making-prdictions-for-margins-effects-of-predictors.html"><i class="fa fa-check"></i><b>14.6</b> Making prdictions for margins (<em>effects</em> of predictors)</a></li>
+<li class="chapter" data-level="14.7" data-path="marginal-effects.html"><a href="marginal-effects.html"><i class="fa fa-check"></i><b>14.7</b> Marginal effects</a></li>
+<li class="chapter" data-level="14.8" data-path="with-continuous-covariates.html"><a href="with-continuous-covariates.html"><i class="fa fa-check"></i><b>14.8</b> With continuous covariates</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#visualising-interactions-from-linear-models"><i class="fa fa-check"></i><b>15</b> Visualising interactions from linear models</a></li>
+<li class="chapter" data-level="15" data-path="visualising-interactions-from-linear-models.html"><a href="visualising-interactions-from-linear-models.html"><i class="fa fa-check"></i><b>15</b> Visualising interactions from linear models</a></li>
 <li class="chapter" data-level="16" data-path="mediation.html"><a href="mediation.html"><i class="fa fa-check"></i><b>16</b> Mediation</a></li>
 <li class="chapter" data-level="17" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>17</b> Multilevel models</a><ul>
-<li class="chapter" data-level="17.1" data-path="multilevel-models.html"><a href="multilevel-models.html#the-sleepstudy-data-and-traditional-rm-anova"><i class="fa fa-check"></i><b>17.1</b> The <code>sleepstudy</code> data and traditional RM Anova</a><ul>
-<li class="chapter" data-level="17.1.1" data-path="multilevel-models.html"><a href="multilevel-models.html#fit-a-simple-slope-for-days"><i class="fa fa-check"></i><b>17.1.1</b> Fit a simple slope for <code>Days</code></a></li>
-<li class="chapter" data-level="17.1.2" data-path="multilevel-models.html"><a href="multilevel-models.html#allow-the-effect-of-sleep-deprivation-to-vary-for-different-participants"><i class="fa fa-check"></i><b>17.1.2</b> Allow the effect of sleep deprivation to vary for different participants</a></li>
-<li class="chapter" data-level="17.1.3" data-path="multilevel-models.html"><a href="multilevel-models.html#fitting-a-curve-for-the-effect-of-days"><i class="fa fa-check"></i><b>17.1.3</b> Fitting a curve for the effect of <code>Days</code></a></li>
+<li class="chapter" data-level="17.1" data-path="the-sleepstudy-data-and-traditional-rm-anova.html"><a href="the-sleepstudy-data-and-traditional-rm-anova.html"><i class="fa fa-check"></i><b>17.1</b> The <code>sleepstudy</code> data and traditional RM Anova</a><ul>
+<li class="chapter" data-level="17.1.1" data-path="the-sleepstudy-data-and-traditional-rm-anova.html"><a href="the-sleepstudy-data-and-traditional-rm-anova.html#fit-a-simple-slope-for-days"><i class="fa fa-check"></i><b>17.1.1</b> Fit a simple slope for <code>Days</code></a></li>
+<li class="chapter" data-level="17.1.2" data-path="the-sleepstudy-data-and-traditional-rm-anova.html"><a href="the-sleepstudy-data-and-traditional-rm-anova.html#allow-the-effect-of-sleep-deprivation-to-vary-for-different-participants"><i class="fa fa-check"></i><b>17.1.2</b> Allow the effect of sleep deprivation to vary for different participants</a></li>
+<li class="chapter" data-level="17.1.3" data-path="the-sleepstudy-data-and-traditional-rm-anova.html"><a href="the-sleepstudy-data-and-traditional-rm-anova.html#fitting-a-curve-for-the-effect-of-days"><i class="fa fa-check"></i><b>17.1.3</b> Fitting a curve for the effect of <code>Days</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="cfa.html"><a href="cfa.html"><i class="fa fa-check"></i><b>18</b> Confirmatory factor analysis</a><ul>
-<li class="chapter" data-level="18.1" data-path="cfa.html"><a href="cfa.html#defining-the-model"><i class="fa fa-check"></i><b>18.1</b> Defining the model</a></li>
-<li class="chapter" data-level="18.2" data-path="cfa.html"><a href="cfa.html#model-fit"><i class="fa fa-check"></i><b>18.2</b> Model fit</a></li>
-<li class="chapter" data-level="18.3" data-path="cfa.html"><a href="cfa.html#modification-indices"><i class="fa fa-check"></i><b>18.3</b> Modification indices</a></li>
-<li class="chapter" data-level="18.4" data-path="cfa.html"><a href="cfa.html#missing-data"><i class="fa fa-check"></i><b>18.4</b> Missing data</a></li>
+<li class="chapter" data-level="18" data-path="confirmatory-factor-analysis.html"><a href="confirmatory-factor-analysis.html"><i class="fa fa-check"></i><b>18</b> Confirmatory factor analysis</a><ul>
+<li class="chapter" data-level="18.1" data-path="defining-the-model.html"><a href="defining-the-model.html"><i class="fa fa-check"></i><b>18.1</b> Defining the model</a></li>
+<li class="chapter" data-level="18.2" data-path="model-fit.html"><a href="model-fit.html"><i class="fa fa-check"></i><b>18.2</b> Model fit</a></li>
+<li class="chapter" data-level="18.3" data-path="modification-indices.html"><a href="modification-indices.html"><i class="fa fa-check"></i><b>18.3</b> Modification indices</a></li>
+<li class="chapter" data-level="18.4" data-path="missing-data.html"><a href="missing-data.html"><i class="fa fa-check"></i><b>18.4</b> Missing data</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>19</b> Installing R and RStudio</a></li>
-<li class="chapter" data-level="20" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>20</b> Loading packages</a></li>
-<li class="chapter" data-level="21" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>21</b> Getting help</a></li>
-<li class="chapter" data-level="22" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>22</b> Missing values</a></li>
-<li class="chapter" data-level="23" data-path="rmarkdown-tricks.html"><a href="rmarkdown-tricks.html"><i class="fa fa-check"></i><b>23</b> Tips and tricks with RMarkdown</a></li>
-<li class="chapter" data-level="24" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html"><i class="fa fa-check"></i><b>24</b> Confidence, credible and prediction intervals</a><ul>
-<li class="chapter" data-level="24.1" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html#the-problem-with-confidence-intervals"><i class="fa fa-check"></i><b>24.1</b> The problem with confidence intervals</a></li>
-<li class="chapter" data-level="24.2" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html#forgetting-that-the-ci-depends-on-sample-size."><i class="fa fa-check"></i><b>24.2</b> Forgetting that the CI depends on sample size.</a></li>
-<li class="chapter" data-level="24.3" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html#what-does-this-mean-for-my-work-on-insert-speciality-here"><i class="fa fa-check"></i><b>24.3</b> What does this mean for my work on [insert speciality here]?</a><ul>
-<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html"><i class="fa fa-check"></i>Post hoc (pairwise) tests</a></li>
+<li class="chapter" data-level="19" data-path="installing-r-and-rstudio.html"><a href="installing-r-and-rstudio.html"><i class="fa fa-check"></i><b>19</b> Installing R and RStudio</a></li>
+<li class="chapter" data-level="20" data-path="loading-packages.html"><a href="loading-packages.html"><i class="fa fa-check"></i><b>20</b> Loading packages</a></li>
+<li class="chapter" data-level="21" data-path="getting-help.html"><a href="getting-help.html"><i class="fa fa-check"></i><b>21</b> Getting help</a></li>
+<li class="chapter" data-level="22" data-path="missing-values-1.html"><a href="missing-values-1.html"><i class="fa fa-check"></i><b>22</b> Missing values</a></li>
+<li class="chapter" data-level="23" data-path="tips-and-tricks-with-rmarkdown.html"><a href="tips-and-tricks-with-rmarkdown.html"><i class="fa fa-check"></i><b>23</b> Tips and tricks with RMarkdown</a></li>
+<li class="chapter" data-level="24" data-path="confidence-credible-and-prediction-intervals.html"><a href="confidence-credible-and-prediction-intervals.html"><i class="fa fa-check"></i><b>24</b> Confidence, credible and prediction intervals</a><ul>
+<li class="chapter" data-level="24.1" data-path="the-problem-with-confidence-intervals.html"><a href="the-problem-with-confidence-intervals.html"><i class="fa fa-check"></i><b>24.1</b> The problem with confidence intervals</a></li>
+<li class="chapter" data-level="24.2" data-path="forgetting-that-the-ci-depends-on-sample-size-.html"><a href="forgetting-that-the-ci-depends-on-sample-size-.html"><i class="fa fa-check"></i><b>24.2</b> Forgetting that the CI depends on sample size.</a></li>
+<li class="chapter" data-level="24.3" data-path="what-does-this-mean-for-my-work-on-insert-speciality-here.html"><a href="what-does-this-mean-for-my-work-on-insert-speciality-here.html"><i class="fa fa-check"></i><b>24.3</b> What does this mean for my work on [insert speciality here]?</a><ul>
+<li class="chapter" data-level="" data-path="what-does-this-mean-for-my-work-on-insert-speciality-here.html"><a href="what-does-this-mean-for-my-work-on-insert-speciality-here.html#post-hoc-pairwise-tests"><i class="fa fa-check"></i>Post hoc (pairwise) tests</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="25" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>25</b> References</a></li>
@@ -289,237 +293,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3>The R Graphics Cookbook</h3>
 <p>It’s worth pointing out that the O’Reilly <a href="https://ase.tufts.edu/bugs/guide/assets/R%20Graphics%20Cookbook.pdf">R Graphics cookbook is available as a pdf download here</a> and is a much more comprehensive source than this page. Below are just some pointers to get you started.</p>
 <p><img src="media/graphics-cookbook.png" width="200" /></p>
-</div>
-<div id="benefits-of-visualising-data" class="section level2">
-<h2><span class="header-section-number">6.1</span> Benefits of visualising data</h2>
-<p>XXX TODO</p>
-<ul>
-<li>Psychology and human factors of graphics + Tufte.</li>
-<li>Importance of graphs to communicate.</li>
-<li>Motivating examples from RCTs.</li>
-</ul>
-</div>
-<div id="choosing-a-plot-type" class="section level2">
-<h2><span class="header-section-number">6.2</span> Choosing a plot type</h2>
-<p>Typically when setting out to plot data in R it pays to ask yourself whether you need:</p>
-<ol style="list-style-type: decimal">
-<li><p>A quick way to visualise something specific – for example to check some feature of your data before you continue your analysis – without worrying <em>too</em> much about the detail of the graphic.</p></li>
-<li><p>A plot that is specifically designed to communicate your data effectively, and where you do care about the details of the final output.</p></li>
-</ol>
-<p>For the first case, where you already know what you want — for example to visualise a distribution of a single variable or to check diagnostics from a linear model — there are many useful built-in functions in base-R.</p>
-<p>For the second case — for example where you want to visualise the main outcomes of your study, or draw attention to specific aspects of your data — there is <code>ggplot2</code>. We’ll deal with the second case first, because using ggplot highlights many important aspects of plotting in general.</p>
-</div>
-<div id="choosing-layering-and-facetting-graphics" class="section level2">
-<h2><span class="header-section-number">6.3</span> Choosing, layering and facetting graphics</h2>
-<p>If you’ve never given much thought to data visualisation before, you might be surprised at the sheer variety of graphs types available.</p>
-<p>One way to cut through the multituyde of options is to determine what the purpose of your plot is. It your goal to show:</p>
-<ul>
-<li>Relationships</li>
-<li>Distributions</li>
-<li>Comparison</li>
-<li>Composition</li>
-</ul>
-<div class="figure"><span id="fig:unnamed-chunk-3"></span>
-<img src="graphics_files/figure-html/unnamed-chunk-3-1.png" alt="Examples of charts showing comaprisons, relationships, distribution and composition. The comparison, distribution and composition plots show 2 variables, but the relationship plot includes 3, increasing the density of the information displayed. " width="768" />
-<p class="caption">
-Figure 6.1: Examples of charts showing comaprisons, relationships, distribution and composition. The comparison, distribution and composition plots show 2 variables, but the relationship plot includes 3, increasing the density of the information displayed.
-</p>
-</div>
-<p>There are various simple chart selection guides available online, of which these are quite nice examples:</p>
-<ul>
-<li><a href="http://extremepresentation.typepad.com/blog/2006/09/choosing_a_good.html">Chart selection guide (pdf)</a>]</li>
-<li><a href="https://www.perceptualedge.com/articles/misc/Graph_Selection_Matrix.pdf">‘Show me the numbers’ chart guide (pdf)</a></li>
-</ul>
-<div class="figure">
-<img src="media/choosing_a_good_chart.jpg" />
-
-</div>
-<p><em>However</em>, guides which attempt to be comprehensive and show you a full range of plot types are perhaps not as useful as those which reflect our knowledge of which plots are the most effective forms of communication.</p>
-<p>For example, almost all guides to plotting, and especially R textbooks, will show you how to plot a simple bar graph. But bar graphs have numerous disadvantages over other plots which can show the same information. Specifically, they are: low in information density (and so inefficient in use of space); they make comparisons between multiple series very difficult (for example in <a href="understanding-interactions.html">interacion plots</a>); and, perhaps most importantly, even when they include error bars, readers consistently misinterpret the quantitative information in bar graphs (specifically, when bar graphs are used to display estimates which contain error, readers assume points above the bar are less likely than points within the bar, even though this is typically not the case).</p>
-<p>You should be guided in choosing plots not simply by mechanical rules based on the number or type of variables you want to display. Instead, you should be guided by the evidence from basic studies of human perception, and applied data on how different types of infromation displays are really used by readers.</p>
-<p>This guide is restricted to examples likely to be useful to experiemental and applied psychologists.</p>
-<div id="using-ggplot" class="section level3">
-<h3><span class="header-section-number">6.3.1</span> Using ggplot</h3>
-<p>When using <code>ggplot</code> it helps to think of five separate steps, of which 2 are optional</p>
-<ol style="list-style-type: decimal">
-<li>Choose the data you want to plot.</li>
-<li>Map variables to axes or other features on the plot.</li>
-<li>(Optionally) use <code>ggplot</code> functions to summarise your data before the plot is drawn (e.g. to calulate means and standard errors for point-range plots).</li>
-<li>Add visual display layers.</li>
-<li>(Optionally) Split the plot up (repeat it) into multiple panels.</li>
-</ol>
-<p>You can then customise the plot labels and title, and tweak other presentation parameters, although this often isn’t necessary unless sending a graphic for publication. You can also export graphics in multiple high quality formats.</p>
-<p>The simplest way to demonstrate these steps is with an example, and we begin with a plot showing the relationship betwen variables:</p>
-</div>
-<div id="relationships" class="section level3">
-<h3><span class="header-section-number">6.3.2</span> Relationships</h3>
-<p>Problem to be solved: You want to check/show whether variables are related in a linear fashion before running linear regression:</p>
-<p><em>Step 1</em> is to select our data. As is typical in R, <code>ggplot</code> works best with long-format data. In the examples below we will use the <code>mtcars</code> dataset for convenience, so our first line of code is to use the <code>dplyr</code> pipe symbol (operator) to send the <code>mtcars</code> dataset to the next line of code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>...</code></pre></div>
-<p><em>Step 2</em> is to map the variables we want to axes or other features of the plot (e.g. the colours of points, or the linetypes used in line plots). Here we tell <code>ggplot</code> to use <code>disp</code> (engine size) on the x axis, and <code>mpg</code> on the y axis. We also tell it to colour the points differently depending on the value of <code>hp</code> (engine horsepower). At this point <code>ggplot</code> will create and label the axes and plot area, but doesn’t yet display any of our data. For this we need to add visual display layers (we skip step 3 in this example, but will cover it in other examples below):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> disp, <span class="dt">y =</span> mpg, <span class="dt">colour=</span>hp))</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<p><em>Step 4</em></p>
-<p>To display data, we have to add a visual layer to the plot. For example, let’s say we want to make a scatter plot, and so draw points for each row of data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> disp, <span class="dt">y =</span> mpg, <span class="dt">colour=</span>hp)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p>And we have a pretty slick graph: <code>ggplot</code> has now added points for each pair of <code>disp</code> and <code>mpg</code> values, and coloured them according to the value of <code>hp</code> (see choosing colours below XXX).</p>
-<p>What’s even neater about <code>ggplot</code> though is how easy it is to <em>layer</em> different visualisations of the same data. These visual layers are called <code>geom</code>’s and the functions which add them are all prefixed with <code>geom_</code>, so <code>geom_point()</code> for scatter plots, or <code>geom_line()</code> for line plots, or <code>geom_smooth()</code> for a smoothed line plot. We can add this to the scatter plot like so:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> disp, <span class="dt">y =</span> mpg, <span class="dt">colour=</span>hp)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span>F, <span class="dt">colour=</span><span class="st">&quot;grey&quot;</span>) 
-## `geom_smooth()` using method = &#39;loess&#39;</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>In the example above, I have also customised the smoothed line, making it grey to avoid over-intrusion into our perception of the points. Often less is more when plotting graphs: not everything can be emphasised at once, and <em>it’s important to make decisions about what should be given visual priority</em>.</p>
-<p><em>Step 5</em> ‘Splitting up’ or repeating the plot. Very often, you will have drawn plot and think things like <em>I wonder what that would look like if I drew it for men and women separately?</em>. In <code>ggplot</code> this is called facetting, and is easy to achieve, provided your data are in a long format.</p>
-<p>Using the same <code>mtcars</code> example, let’s say we wanted separate panels for American vs. Foreign cars (information held in the <code>am</code> variable). We simply add the <code>facet_wrap()</code>, and specify the <code>&quot;am&quot;</code> variable:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> disp, <span class="dt">y =</span> mpg, <span class="dt">colour=</span>hp)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span>F, <span class="dt">colour=</span><span class="st">&quot;grey&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="st">&quot;am&quot;</span>)
-## `geom_smooth()` using method = &#39;loess&#39;</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<p>One trick is to make sure factors are labelled nicely, because these labels appear on the final plot. Here the <code>mutate()</code> call <a href="XXX.html">relabels the factor</a> which makes the plot easier to read:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">american =</span> <span class="kw">factor</span>(am, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;American&quot;</span>, <span class="st">&quot;Foreign&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> disp, <span class="dt">y =</span> mpg, <span class="dt">colour=</span>hp)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span>F, <span class="dt">colour=</span><span class="st">&quot;grey&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="st">&quot;american&quot;</span>)
-## `geom_smooth()` using method = &#39;loess&#39;</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-</div>
-<div id="distributions" class="section level3">
-<h3><span class="header-section-number">6.3.3</span> Distributions</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Reaction)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>()</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<p>Imagine we wanted to compare distributions for individuals. Simply overlaying the lines is confusing:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Reaction, <span class="dt">group=</span>Subject)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>()</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<p>Facetting produces a nicer result:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Reaction)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="st">&quot;Subject&quot;</span>)</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<p>But we could present the same information more compactly, and with better facility to compare between subjects, if we use a bottleplot:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Subject, Reaction)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_violin</span>() </code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<p>We might want to plot our Subjects in order of their mean RT:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mean.ranked.sleep &lt;-<span class="st"> </span>lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(Subject) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="co"># calculate mean RT</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">RTm =</span> <span class="kw">mean</span>(Reaction)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="co"># sort by mean RT</span>
-<span class="st">  </span><span class="kw">arrange</span>(RTm, Days) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="co"># create a rank score but conert to factor right away </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">SubjectRank =</span> <span class="kw">factor</span>(<span class="kw">dense_rank</span>(RTm)))
-
-mean.ranked.sleep <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(SubjectRank, Reaction)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_violin</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">aspect.ratio =</span> .<span class="dv">33</span>)  <span class="co"># change the aspect ratio to make long and wide</span></code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
-<p>Or we might want to compare individuals against the combined distribution:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># duplicate all the data, assigning one-replication to a single subject, &quot;All&quot;</span>
-sleep.repeat &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(lme4<span class="op">::</span>sleepstudy,
-                          lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Subject=</span><span class="st">&quot;All&quot;</span>))
-## Warning in bind_rows_(x, .id): binding factor and character vector,
-## coercing into character vector
-
-sleep.repeat <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">all =</span> Subject<span class="op">==</span><span class="st">&quot;All&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Subject, Reaction, <span class="dt">color=</span>all)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_violin</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">guides</span>(<span class="dt">colour=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="co"># turn off he legend because we don&#39;t really need it</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">aspect.ratio =</span> .<span class="dv">25</span>)  <span class="co"># change the aspect ratio to make long and wide</span></code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
-<p>Boxplots can also work well to show distributions, and have the advantage of showing the median explicitly:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mean.ranked.sleep <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(SubjectRank, Reaction)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_boxplot</span>() </code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
-<p>If we plot the same data by-day, we can clearly see the effect of sleep deprivation, and the increase in variability between subjects as sime goes on: the lack of sleeps seems to be affecting some subjects more than others</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">factor</span>(Days), Reaction)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_boxplot</span>() </code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-</div>
-<div id="comparisons" class="section level3">
-<h3><span class="header-section-number">6.3.4</span> Comparisons</h3>
-</div>
-<div id="composition" class="section level3">
-<h3><span class="header-section-number">6.3.5</span> Composition</h3>
-</div>
-<div id="combining-plots-in-a-grid" class="section level3">
-<h3><span class="header-section-number">6.3.6</span> Combining plots in a grid</h3>
-</div>
-<div id="exporting-high-quality-ggplots-for-print" class="section level3">
-<h3><span class="header-section-number">6.3.7</span> Exporting high quality ggplots for print</h3>
-<p>See page <a href="https://ase.tufts.edu/bugs/guide/assets/R%20Graphics%20Cookbook.pdf">323 of the R Graphics Cookbook</a></p>
-</div>
-</div>
-<div id="quick-and-dirty-plotting" class="section level2">
-<h2><span class="header-section-number">6.4</span> ‘Quick and dirty’ plotting</h2>
-<p>When exploring a dataset, often useful to use built in functions or helpers from other libraries. These help you quickly visualise relationships, but aren’t always <em>exactly</em> what you need and can be hard to customise.</p>
-<div id="distributions-1" class="section level3">
-<h3><span class="header-section-number">6.4.1</span> Distributions</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(mtcars<span class="op">$</span>mpg)</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">density</span>(mtcars<span class="op">$</span>mpg))</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-18-2.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(mpg<span class="op">~</span>cyl, <span class="dt">data=</span>mtcars)</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-18-3.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Hmisc<span class="op">::</span><span class="kw">hist.data.frame</span>(mtcars)</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-18-4.png" width="672" /></p>
-<p>Even for simple plots, ggplot has some useful helper functions though:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(mpg, <span class="dt">data=</span>mtcars, <span class="dt">geom=</span><span class="st">&quot;density&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Miles per gallon&quot;</span>)</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(<span class="dt">x=</span><span class="kw">factor</span>(cyl), <span class="dt">y=</span>mpg, <span class="dt">data=</span>mtcars, <span class="dt">geom=</span><span class="st">&quot;boxplot&quot;</span>) </code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-19-2.png" width="672" /></p>
-</div>
-<div id="relationships-1" class="section level3">
-<h3><span class="header-section-number">6.4.2</span> Relationships</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(mtcars, <span class="kw">plot</span>(mpg, wt))</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(<span class="kw">select</span>(mtcars, wt, disp, mpg))</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-20-2.png" width="672" /></p>
-<p>Again, for quick plots ggplot also has useful shortcut functions:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(mpg, wt, <span class="dt">color=</span><span class="kw">factor</span>(cyl), <span class="dt">data =</span> mtcars)</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
-</div>
-<div id="quantities" class="section level3">
-<h3><span class="header-section-number">6.4.3</span> Quantities</h3>
-<p>I don’t think the base R plots are that convenient here. <code>ggplot2::</code> and the <code>stat_summary()</code> function makes life much simpler:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(<span class="kw">factor</span>(cyl), mpg)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">geom=</span><span class="st">&quot;bar&quot;</span>)
-## No summary function supplied, defaulting to `mean_se()</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
-<p>And if you are plotting quantities, as disussed above, showing a range is sensible (a boxplot would also fill both definitions):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(<span class="kw">factor</span>(cyl), mpg)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">geom=</span><span class="st">&quot;pointrange&quot;</span>)
-## No summary function supplied, defaulting to `mean_se()</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
-
-</div>
-</div>
+</div> 
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="summarising-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="real-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="sorting-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="benefits-of-visualising-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

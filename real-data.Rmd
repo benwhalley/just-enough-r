@@ -8,6 +8,8 @@ output:
 # ignore all this for the moment
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 library(tufte)
+library(tidyverse)
+library(broom)
 ```
 
 
@@ -30,14 +32,65 @@ This chapter shows you how to address each of these problems.
 
 
 
-##  How to 'tidy' data
+
+
+
+## Types of variable: factor, character and numeric {- #factors-and-numerics}
+
+When working with data in Excel or other packages like SPSS you've probably become aware that different types of data get treated differently. For example, in Excel you can't set up a formula like `=SUM(...)` on cells which include letters (rather than just numbers). It does't make sense. However, Excel and many other programmes will sometimes make guesses about what to do if you combine different types of data. For example, if you add `28` to `1 Feb 2017` the result is `1 March 2017`. This is sometimes what you want, but can often lead to unexpected results and errors in data analyses.
+
+R is much more strict about not mixing types of data. Vectord (and columns in dataframes) can only contain one type of thing. In general, there are probably 4 types of data you will encounter in data analysis problems:
+
+- Numeric variables
+- Character variables
+- Factors
+- Dates
+
+```{r, echo=F, include=F}
+# process the lakers data from lubridate to illustrate some points
+lakers <- lubridate::lakers %>% 
+  select(date, opponent, team, points) %>% 
+  mutate(date=lubridate::ymd(date), team=factor(team)) 
+saveRDS(lakers, file="lakers.RDS")
+```
+
+
+The `lakers.RDS` (adapted from the `lubridate::lakers` dataset) contains four variables to illustrate these points. From the original dataset which provides scores from  each Los Angeles Lakers basketball game in the 2008-2009 season. We have selected the `date`, `opponent`, `team`, and the `points` variables.
+
+```{r}
+lakers <- readRDS("lakers.RDS")
+lakers %>% 
+  glimpse
+```
+
+
+```{r}
+hist(lakers$date, breaks=10)
+```
+
+
+
+
+## Missing values {-}
+
+- `is.na()` and `is.finite`
+- `expand()`
+
+
+
+
+
+
+
+
+## Tidying data {- #tidying-data}
 
 - Melt, spread
 - ...
 
 
 
-## Deal with multiple files
+## Deal with multiple files {-}
 
 - File handling and import
 - Writing a function for `do()` which returns a dataframe
@@ -45,16 +98,10 @@ This chapter shows you how to address each of these problems.
 
 
 
-##  Error checking
+##  Error checking {-}
 
 - `999`, `666` and `*`: the marks of the beast!
 
-
-
-## Missing values
-
-- `is.na()` and `is.finite`
-- `expand()`
 
 
 

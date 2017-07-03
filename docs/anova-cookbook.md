@@ -8,7 +8,6 @@ output:
 
 
 
-
 # Anova 'Cookbook'
 
 This section is intended as a shortcut to running Anova for a variety of common types of model. If you want to understand more about what you are doing, read the section on [principles of Anova in R](anova.html).
@@ -21,6 +20,7 @@ This section is intended as a shortcut to running Anova for a variety of common 
 ### Factorial anova, no bigger than 2x2
 
 
+TODO
 
 
 ### Factorial anova, where one factor has > 2 levels.
@@ -40,7 +40,10 @@ eysenck %>%
   ylab("Recall (95% CI)") + xlab("")
 ```
 
-<img src="anova-cookbook_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="anova-cookbook_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+
+
+[Visual inspection of the data (see Figure X) suggested that older adults recalled more words than younger adults, and that this difference was greatest for the intention, imagery, and adjective conditions. Recall peformance was worst in the counting and rhyming conditions.]{.apa-example}
 
 
 Or alternatively if we wanted to provde a better summary of the distribution of the raw data we could use a boxplot:
@@ -54,8 +57,8 @@ eysenck %>%
 ```
 
 <div class="figure">
-<img src="anova-cookbook_files/figure-html/unnamed-chunk-5-1.png" alt="Boxplot for recall in older and young adults, by condition." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-5)Boxplot for recall in older and young adults, by condition.</p>
+<img src="anova-cookbook_files/figure-html/unnamed-chunk-4-1.png" alt="Boxplot for recall in older and young adults, by condition." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-4)Boxplot for recall in older and young adults, by condition.</p>
 </div>
 
 
@@ -110,8 +113,8 @@ car::qqPlot(eysenck.model)
 ```
 
 <div class="figure">
-<img src="anova-cookbook_files/figure-html/unnamed-chunk-8-1.png" alt="QQ plot to assess normality of model residuals" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-8)QQ plot to assess normality of model residuals</p>
+<img src="anova-cookbook_files/figure-html/unnamed-chunk-7-1.png" alt="QQ plot to assess normality of model residuals" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-7)QQ plot to assess normality of model residuals</p>
 </div>
 
 
@@ -131,8 +134,8 @@ data_frame(
 ```
 
 <div class="figure">
-<img src="anova-cookbook_files/figure-html/unnamed-chunk-9-1.png" alt="Residual vs fitted (spread vs. level) plot to check homogeneity of variance." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-9)Residual vs fitted (spread vs. level) plot to check homogeneity of variance.</p>
+<img src="anova-cookbook_files/figure-html/unnamed-chunk-8-1.png" alt="Residual vs fitted (spread vs. level) plot to check homogeneity of variance." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-8)Residual vs fitted (spread vs. level) plot to check homogeneity of variance.</p>
 </div>
 
 
@@ -315,7 +318,7 @@ lme4::sleepstudy %>%
   geom_label(aes(y=450, x=9, label="imagine how bad\nyou feel by this point"), color="red") 
 ```
 
-<img src="anova-cookbook_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="anova-cookbook_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 
 If we want to test whether there are significant differences in RTs between `Days`, we could fit something very similar to a traditional repeat measures Anova using the `lme4::lmer()` function, and obtain an Anova table for the model using the special `lmerTest::anova()` function:

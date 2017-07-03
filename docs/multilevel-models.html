@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="mediation.html">
-<link rel="next" href="cfa.html">
+<link rel="next" href="the-sleepstudy-data-and-traditional-rm-anova.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -86,6 +86,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -105,163 +106,166 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#part-1-must-read"><i class="fa fa-check"></i>Part 1: ‘Must read’</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#part-2-nice-to-know"><i class="fa fa-check"></i>Part 2: Nice to know</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#part-3-loose-ends"><i class="fa fa-check"></i>Part 3: Loose ends</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#a-warning"><i class="fa fa-check"></i>A warning</a></li>
+<li class="chapter" data-level="" data-path="a-warning.html"><a href="a-warning.html"><i class="fa fa-check"></i>A warning</a></li>
+<li class="chapter" data-level="1.1" data-path="license.html"><a href="license.html"><i class="fa fa-check"></i><b>1.1</b> License</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="start_here.html"><a href="start_here.html"><i class="fa fa-check"></i><b>2</b> Getting started with R and RStudio</a><ul>
-<li class="chapter" data-level="2.1" data-path="start_here.html"><a href="start_here.html#using-rmarkdown-to-record-and-share-work"><i class="fa fa-check"></i><b>2.1</b> Using RMarkdown to record and share work</a></li>
-<li class="chapter" data-level="2.2" data-path="start_here.html"><a href="start_here.html#writing-and-knitting-rmarkdown"><i class="fa fa-check"></i><b>2.2</b> Writing and ‘knitting’ RMarkdown</a></li>
-<li class="chapter" data-level="2.3" data-path="start_here.html"><a href="start_here.html#rstudio"><i class="fa fa-check"></i><b>2.3</b> RStudio</a></li>
-<li class="chapter" data-level="2.4" data-path="start_here.html"><a href="start_here.html#your-first-r-commands"><i class="fa fa-check"></i><b>2.4</b> Your first R commands</a></li>
-<li class="chapter" data-level="2.5" data-path="start_here.html"><a href="start_here.html#naming-things-variable-assignment"><i class="fa fa-check"></i><b>2.5</b> Naming things: <em>variable assignment</em></a></li>
+<li class="chapter" data-level="2" data-path="getting-started-with-r-and-rstudio.html"><a href="getting-started-with-r-and-rstudio.html"><i class="fa fa-check"></i><b>2</b> Getting started with R and RStudio</a><ul>
+<li class="chapter" data-level="2.1" data-path="using-rmarkdown-to-record-and-share-work.html"><a href="using-rmarkdown-to-record-and-share-work.html"><i class="fa fa-check"></i><b>2.1</b> Using RMarkdown to record and share work</a></li>
+<li class="chapter" data-level="2.2" data-path="writing-and-knitting-rmarkdown.html"><a href="writing-and-knitting-rmarkdown.html"><i class="fa fa-check"></i><b>2.2</b> Writing and ‘knitting’ RMarkdown</a></li>
+<li class="chapter" data-level="2.3" data-path="rstudio.html"><a href="rstudio.html"><i class="fa fa-check"></i><b>2.3</b> RStudio</a></li>
+<li class="chapter" data-level="2.4" data-path="your-first-r-commands.html"><a href="your-first-r-commands.html"><i class="fa fa-check"></i><b>2.4</b> Your first R commands</a></li>
+<li class="chapter" data-level="2.5" data-path="naming-things-variable-assignment.html"><a href="naming-things-variable-assignment.html"><i class="fa fa-check"></i><b>2.5</b> Naming things: <em>variable assignment</em></a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="start_here.html"><a href="start_here.html#vectors-and-lists"><i class="fa fa-check"></i><b>3</b> Vectors and lists</a><ul>
-<li class="chapter" data-level="3.1" data-path="start_here.html"><a href="start_here.html#vectors"><i class="fa fa-check"></i><b>3.1</b> Vectors</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="start_here.html"><a href="start_here.html#accessing-elements-within-vectors"><i class="fa fa-check"></i><b>3.1.1</b> Accessing elements within vectors</a></li>
-<li class="chapter" data-level="3.1.2" data-path="start_here.html"><a href="start_here.html#selecting-more-than-one-element-in-a-vector"><i class="fa fa-check"></i><b>3.1.2</b> Selecting more than one element in a vector</a></li>
-<li class="chapter" data-level="3.1.3" data-path="start_here.html"><a href="start_here.html#processing-vectors"><i class="fa fa-check"></i><b>3.1.3</b> Processing vectors</a></li>
-<li class="chapter" data-level="3.1.4" data-path="start_here.html"><a href="start_here.html#processing-vectors-to-make-new-vectors"><i class="fa fa-check"></i><b>3.1.4</b> Processing vectors to make new vectors</a></li>
-<li class="chapter" data-level="3.1.5" data-path="start_here.html"><a href="start_here.html#making-up-data-new-vectors"><i class="fa fa-check"></i><b>3.1.5</b> Making up data (new vectors)</a></li>
-<li class="chapter" data-level="3.1.6" data-path="start_here.html"><a href="start_here.html#useful-functions-to-learn-now"><i class="fa fa-check"></i><b>3.1.6</b> Useful functions to learn now</a></li>
+<li class="chapter" data-level="3" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html"><i class="fa fa-check"></i><b>3</b> Vectors and lists</a><ul>
+<li class="chapter" data-level="3.1" data-path="vectors.html"><a href="vectors.html"><i class="fa fa-check"></i><b>3.1</b> Vectors</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="vectors.html"><a href="vectors.html#accessing-elements-within-vectors"><i class="fa fa-check"></i><b>3.1.1</b> Accessing elements within vectors</a></li>
+<li class="chapter" data-level="3.1.2" data-path="vectors.html"><a href="vectors.html#selecting-more-than-one-element-in-a-vector"><i class="fa fa-check"></i><b>3.1.2</b> Selecting more than one element in a vector</a></li>
+<li class="chapter" data-level="3.1.3" data-path="vectors.html"><a href="vectors.html#processing-vectors"><i class="fa fa-check"></i><b>3.1.3</b> Processing vectors</a></li>
+<li class="chapter" data-level="3.1.4" data-path="vectors.html"><a href="vectors.html#processing-vectors-to-make-new-vectors"><i class="fa fa-check"></i><b>3.1.4</b> Processing vectors to make new vectors</a></li>
+<li class="chapter" data-level="3.1.5" data-path="vectors.html"><a href="vectors.html#making-up-data-new-vectors"><i class="fa fa-check"></i><b>3.1.5</b> Making up data (new vectors)</a></li>
+<li class="chapter" data-level="3.1.6" data-path="vectors.html"><a href="vectors.html#useful-functions-to-learn-now"><i class="fa fa-check"></i><b>3.1.6</b> Useful functions to learn now</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="start_here.html"><a href="start_here.html#lists"><i class="fa fa-check"></i><b>3.2</b> Lists</a></li>
-<li class="chapter" data-level="3.3" data-path="start_here.html"><a href="start_here.html#questions-on-vectors-and-lists"><i class="fa fa-check"></i><b>3.3</b> Questions on vectors and lists</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="start_here.html"><a href="start_here.html#extended-questions"><i class="fa fa-check"></i><b>3.3.1</b> Extended questions:</a></li>
+<li class="chapter" data-level="3.2" data-path="lists.html"><a href="lists.html"><i class="fa fa-check"></i><b>3.2</b> Lists</a></li>
+<li class="chapter" data-level="3.3" data-path="questions-on-vectors-and-lists.html"><a href="questions-on-vectors-and-lists.html"><i class="fa fa-check"></i><b>3.3</b> Questions on vectors and lists</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="questions-on-vectors-and-lists.html"><a href="questions-on-vectors-and-lists.html#extended-questions"><i class="fa fa-check"></i><b>3.3.1</b> Extended questions:</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>4</b> Datasets and dataframes</a><ul>
-<li class="chapter" data-level="4.1" data-path="datasets.html"><a href="datasets.html#using-built-in-data"><i class="fa fa-check"></i><b>4.1</b> Using ‘built in’ data</a></li>
-<li class="chapter" data-level="4.2" data-path="datasets.html"><a href="datasets.html#importing-and-exporting-data"><i class="fa fa-check"></i><b>4.2</b> Importing and exporting data</a></li>
-<li class="chapter" data-level="4.3" data-path="datasets.html"><a href="datasets.html#importing-data-over-the-web"><i class="fa fa-check"></i><b>4.3</b> Importing data over the web</a></li>
-<li class="chapter" data-level="4.4" data-path="datasets.html"><a href="datasets.html#importing-from-spss-and-other-packages"><i class="fa fa-check"></i><b>4.4</b> Importing from SPSS and other packages</a></li>
+<li class="chapter" data-level="4" data-path="datasets-and-dataframes.html"><a href="datasets-and-dataframes.html"><i class="fa fa-check"></i><b>4</b> Datasets and dataframes</a><ul>
+<li class="chapter" data-level="4.1" data-path="using-built-in-data.html"><a href="using-built-in-data.html"><i class="fa fa-check"></i><b>4.1</b> Using ‘built in’ data</a></li>
+<li class="chapter" data-level="4.2" data-path="importing-and-exporting-data.html"><a href="importing-and-exporting-data.html"><i class="fa fa-check"></i><b>4.2</b> Importing and exporting data</a></li>
+<li class="chapter" data-level="4.3" data-path="importing-data-over-the-web.html"><a href="importing-data-over-the-web.html"><i class="fa fa-check"></i><b>4.3</b> Importing data over the web</a></li>
+<li class="chapter" data-level="4.4" data-path="importing-from-spss-and-other-packages.html"><a href="importing-from-spss-and-other-packages.html"><i class="fa fa-check"></i><b>4.4</b> Importing from SPSS and other packages</a></li>
 <li class="chapter" data-level="4.5" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html"><i class="fa fa-check"></i><b>4.5</b> Working with dataframes</a></li>
-<li class="chapter" data-level="4.6" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#introducing-the-tidyverse"><i class="fa fa-check"></i><b>4.6</b> Introducing the <code>tidyverse</code></a></li>
-<li class="chapter" data-level="4.7" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#selecting-columns-from-a-dataframe"><i class="fa fa-check"></i><b>4.7</b> Selecting columns from a dataframe</a></li>
-<li class="chapter" data-level="4.8" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#selecting-rows-of-data"><i class="fa fa-check"></i><b>4.8</b> Selecting rows of data</a></li>
-<li class="chapter" data-level="4.9" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#combining-column-selections-and-filters-with-dplyr"><i class="fa fa-check"></i><b>4.9</b> Combining column selections and filters with <code>dplyr</code></a></li>
-<li class="chapter" data-level="4.10" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#modifying-and-creating-new-columns"><i class="fa fa-check"></i><b>4.10</b> Modifying and creating new columns</a></li>
+<li class="chapter" data-level="4.6" data-path="introducing-the-tidyverse.html"><a href="introducing-the-tidyverse.html"><i class="fa fa-check"></i><b>4.6</b> Introducing the <code>tidyverse</code></a></li>
+<li class="chapter" data-level="4.7" data-path="selecting-columns-from-a-dataframe.html"><a href="selecting-columns-from-a-dataframe.html"><i class="fa fa-check"></i><b>4.7</b> Selecting columns from a dataframe</a></li>
+<li class="chapter" data-level="4.8" data-path="selecting-rows-of-data.html"><a href="selecting-rows-of-data.html"><i class="fa fa-check"></i><b>4.8</b> Selecting rows of data</a></li>
+<li class="chapter" data-level="4.9" data-path="combining-column-selections-and-filters-with-dplyr.html"><a href="combining-column-selections-and-filters-with-dplyr.html"><i class="fa fa-check"></i><b>4.9</b> Combining column selections and filters with <code>dplyr</code></a></li>
+<li class="chapter" data-level="4.10" data-path="modifying-and-creating-new-columns.html"><a href="modifying-and-creating-new-columns.html"><i class="fa fa-check"></i><b>4.10</b> Modifying and creating new columns</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="summarising-data.html"><a href="summarising-data.html"><i class="fa fa-check"></i><b>5</b> Summarising data</a><ul>
-<li class="chapter" data-level="5.1" data-path="summarising-data.html"><a href="summarising-data.html#summaries-of-dataframes"><i class="fa fa-check"></i><b>5.1</b> Summaries of dataframes</a></li>
-<li class="chapter" data-level="5.2" data-path="summarising-data.html"><a href="summarising-data.html#split-apply-combine"><i class="fa fa-check"></i><b>5.2</b> Split, apply, combine</a></li>
-<li class="chapter" data-level="5.3" data-path="summarising-data.html"><a href="summarising-data.html#split-breaking-the-data-into-groups"><i class="fa fa-check"></i><b>5.3</b> Split: breaking the data into groups</a></li>
-<li class="chapter" data-level="5.4" data-path="summarising-data.html"><a href="summarising-data.html#apply-and-combine"><i class="fa fa-check"></i><b>5.4</b> Apply and combine</a></li>
-<li class="chapter" data-level="5.5" data-path="summarising-data.html"><a href="summarising-data.html#a-real-example"><i class="fa fa-check"></i><b>5.5</b> A ‘real’ example</a></li>
-<li class="chapter" data-level="5.6" data-path="summarising-data.html"><a href="summarising-data.html#sorting-data"><i class="fa fa-check"></i><b>5.6</b> Sorting data</a></li>
+<li class="chapter" data-level="5.1" data-path="summaries-of-dataframes.html"><a href="summaries-of-dataframes.html"><i class="fa fa-check"></i><b>5.1</b> Summaries of dataframes</a></li>
+<li class="chapter" data-level="5.2" data-path="split-apply-combine.html"><a href="split-apply-combine.html"><i class="fa fa-check"></i><b>5.2</b> Split, apply, combine</a></li>
+<li class="chapter" data-level="5.3" data-path="split-breaking-the-data-into-groups.html"><a href="split-breaking-the-data-into-groups.html"><i class="fa fa-check"></i><b>5.3</b> Split: breaking the data into groups</a></li>
+<li class="chapter" data-level="5.4" data-path="apply-and-combine.html"><a href="apply-and-combine.html"><i class="fa fa-check"></i><b>5.4</b> Apply and combine</a></li>
+<li class="chapter" data-level="5.5" data-path="a-real-example.html"><a href="a-real-example.html"><i class="fa fa-check"></i><b>5.5</b> A ‘real’ example</a></li>
+<li class="chapter" data-level="5.6" data-path="sorting-data.html"><a href="sorting-data.html"><i class="fa fa-check"></i><b>5.6</b> Sorting data</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>6</b> Graphics</a><ul>
 <li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#the-r-graphics-cookbook"><i class="fa fa-check"></i>The R Graphics Cookbook</a></li>
-<li class="chapter" data-level="6.1" data-path="graphics.html"><a href="graphics.html#benefits-of-visualising-data"><i class="fa fa-check"></i><b>6.1</b> Benefits of visualising data</a></li>
-<li class="chapter" data-level="6.2" data-path="graphics.html"><a href="graphics.html#choosing-a-plot-type"><i class="fa fa-check"></i><b>6.2</b> Choosing a plot type</a></li>
-<li class="chapter" data-level="6.3" data-path="graphics.html"><a href="graphics.html#choosing-layering-and-facetting-graphics"><i class="fa fa-check"></i><b>6.3</b> Choosing, layering and facetting graphics</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="graphics.html"><a href="graphics.html#using-ggplot"><i class="fa fa-check"></i><b>6.3.1</b> Using ggplot</a></li>
-<li class="chapter" data-level="6.3.2" data-path="graphics.html"><a href="graphics.html#relationships"><i class="fa fa-check"></i><b>6.3.2</b> Relationships</a></li>
-<li class="chapter" data-level="6.3.3" data-path="graphics.html"><a href="graphics.html#distributions"><i class="fa fa-check"></i><b>6.3.3</b> Distributions</a></li>
-<li class="chapter" data-level="6.3.4" data-path="graphics.html"><a href="graphics.html#comparisons"><i class="fa fa-check"></i><b>6.3.4</b> Comparisons</a></li>
-<li class="chapter" data-level="6.3.5" data-path="graphics.html"><a href="graphics.html#composition"><i class="fa fa-check"></i><b>6.3.5</b> Composition</a></li>
-<li class="chapter" data-level="6.3.6" data-path="graphics.html"><a href="graphics.html#combining-plots-in-a-grid"><i class="fa fa-check"></i><b>6.3.6</b> Combining plots in a grid</a></li>
-<li class="chapter" data-level="6.3.7" data-path="graphics.html"><a href="graphics.html#exporting-high-quality-ggplots-for-print"><i class="fa fa-check"></i><b>6.3.7</b> Exporting high quality ggplots for print</a></li>
+<li class="chapter" data-level="6.1" data-path="benefits-of-visualising-data.html"><a href="benefits-of-visualising-data.html"><i class="fa fa-check"></i><b>6.1</b> Benefits of visualising data</a></li>
+<li class="chapter" data-level="6.2" data-path="choosing-a-plot-type.html"><a href="choosing-a-plot-type.html"><i class="fa fa-check"></i><b>6.2</b> Choosing a plot type</a></li>
+<li class="chapter" data-level="6.3" data-path="choosing-layering-and-facetting-graphics.html"><a href="choosing-layering-and-facetting-graphics.html"><i class="fa fa-check"></i><b>6.3</b> Choosing, layering and facetting graphics</a><ul>
+<li class="chapter" data-level="" data-path="choosing-layering-and-facetting-graphics.html"><a href="choosing-layering-and-facetting-graphics.html#chart-choosers"><i class="fa fa-check"></i>‘Chart choosers’</a></li>
+<li class="chapter" data-level="6.3.1" data-path="choosing-layering-and-facetting-graphics.html"><a href="choosing-layering-and-facetting-graphics.html#thinking-like-ggplot"><i class="fa fa-check"></i><b>6.3.1</b> Thinking like <code>ggplot</code></a></li>
+<li class="chapter" data-level="6.3.2" data-path="choosing-layering-and-facetting-graphics.html"><a href="choosing-layering-and-facetting-graphics.html#relationships"><i class="fa fa-check"></i><b>6.3.2</b> Relationships</a></li>
+<li class="chapter" data-level="6.3.3" data-path="choosing-layering-and-facetting-graphics.html"><a href="choosing-layering-and-facetting-graphics.html#distributions"><i class="fa fa-check"></i><b>6.3.3</b> Distributions</a></li>
+<li class="chapter" data-level="6.3.4" data-path="choosing-layering-and-facetting-graphics.html"><a href="choosing-layering-and-facetting-graphics.html#comparisons"><i class="fa fa-check"></i><b>6.3.4</b> Comparisons</a></li>
+<li class="chapter" data-level="6.3.5" data-path="choosing-layering-and-facetting-graphics.html"><a href="choosing-layering-and-facetting-graphics.html#composition"><i class="fa fa-check"></i><b>6.3.5</b> Composition</a></li>
+<li class="chapter" data-level="6.3.6" data-path="choosing-layering-and-facetting-graphics.html"><a href="choosing-layering-and-facetting-graphics.html#combining-plots-in-a-grid"><i class="fa fa-check"></i><b>6.3.6</b> Combining plots in a grid</a></li>
+<li class="chapter" data-level="6.3.7" data-path="choosing-layering-and-facetting-graphics.html"><a href="choosing-layering-and-facetting-graphics.html#exporting-high-quality-ggplots-for-print"><i class="fa fa-check"></i><b>6.3.7</b> Exporting high quality ggplots for print</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="graphics.html"><a href="graphics.html#quick-and-dirty-plotting"><i class="fa fa-check"></i><b>6.4</b> ‘Quick and dirty’ plotting</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="graphics.html"><a href="graphics.html#distributions-1"><i class="fa fa-check"></i><b>6.4.1</b> Distributions</a></li>
-<li class="chapter" data-level="6.4.2" data-path="graphics.html"><a href="graphics.html#relationships-1"><i class="fa fa-check"></i><b>6.4.2</b> Relationships</a></li>
-<li class="chapter" data-level="6.4.3" data-path="graphics.html"><a href="graphics.html#quantities"><i class="fa fa-check"></i><b>6.4.3</b> Quantities</a></li>
+<li class="chapter" data-level="6.4" data-path="quick-and-dirty-plotting.html"><a href="quick-and-dirty-plotting.html"><i class="fa fa-check"></i><b>6.4</b> ‘Quick and dirty’ plotting</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="quick-and-dirty-plotting.html"><a href="quick-and-dirty-plotting.html#distributions-1"><i class="fa fa-check"></i><b>6.4.1</b> Distributions</a></li>
+<li class="chapter" data-level="6.4.2" data-path="quick-and-dirty-plotting.html"><a href="quick-and-dirty-plotting.html#relationships-1"><i class="fa fa-check"></i><b>6.4.2</b> Relationships</a></li>
+<li class="chapter" data-level="6.4.3" data-path="quick-and-dirty-plotting.html"><a href="quick-and-dirty-plotting.html#quantities"><i class="fa fa-check"></i><b>6.4.3</b> Quantities</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="real-data.html"><a href="real-data.html"><i class="fa fa-check"></i><b>7</b> Working with ‘real’ data</a><ul>
-<li class="chapter" data-level="7.1" data-path="real-data.html"><a href="real-data.html#how-to-tidy-data"><i class="fa fa-check"></i><b>7.1</b> How to ‘tidy’ data</a></li>
-<li class="chapter" data-level="7.2" data-path="real-data.html"><a href="real-data.html#deal-with-multiple-files"><i class="fa fa-check"></i><b>7.2</b> Deal with multiple files</a></li>
-<li class="chapter" data-level="7.3" data-path="real-data.html"><a href="real-data.html#error-checking"><i class="fa fa-check"></i><b>7.3</b> Error checking</a></li>
-<li class="chapter" data-level="7.4" data-path="real-data.html"><a href="real-data.html#missing-values"><i class="fa fa-check"></i><b>7.4</b> Missing values</a></li>
+<li class="chapter" data-level="7" data-path="working-with-real-data.html"><a href="working-with-real-data.html"><i class="fa fa-check"></i><b>7</b> Working with ‘real’ data</a><ul>
+<li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html"><i class="fa fa-check"></i>Types of variable: factor, character and numeric</a></li>
+<li class="chapter" data-level="" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i>Missing values</a></li>
+<li class="chapter" data-level="" data-path="tidying-data.html"><a href="tidying-data.html"><i class="fa fa-check"></i>Tidying data</a></li>
+<li class="chapter" data-level="" data-path="deal-with-multiple-files.html"><a href="deal-with-multiple-files.html"><i class="fa fa-check"></i>Deal with multiple files</a></li>
+<li class="chapter" data-level="" data-path="error-checking.html"><a href="error-checking.html"><i class="fa fa-check"></i>Error checking</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="correlations.html"><a href="correlations.html"><i class="fa fa-check"></i><b>8</b> Correlations</a><ul>
-<li class="chapter" data-level="8.1" data-path="correlations.html"><a href="correlations.html#obtaining-a-correlation-matrix"><i class="fa fa-check"></i><b>8.1</b> Obtaining a correlation matrix</a></li>
-<li class="chapter" data-level="8.2" data-path="correlations.html"><a href="correlations.html#making-correlation-tables-for-publication"><i class="fa fa-check"></i><b>8.2</b> Making correlation tables for publication</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="correlations.html"><a href="correlations.html#apatables"><i class="fa fa-check"></i><b>8.2.1</b> <code>apaTables</code></a></li>
-<li class="chapter" data-level="8.2.2" data-path="correlations.html"><a href="correlations.html#by-hand"><i class="fa fa-check"></i><b>8.2.2</b> By hand</a></li>
+<li class="chapter" data-level="8.1" data-path="obtaining-a-correlation-matrix.html"><a href="obtaining-a-correlation-matrix.html"><i class="fa fa-check"></i><b>8.1</b> Obtaining a correlation matrix</a></li>
+<li class="chapter" data-level="8.2" data-path="tables-for-publication.html"><a href="tables-for-publication.html"><i class="fa fa-check"></i><b>8.2</b> Tables for publication</a><ul>
+<li><a href="tables-for-publication.html#using-apatables">Using <code>apaTables</code></a></li>
+<li class="chapter" data-level="" data-path="tables-for-publication.html"><a href="tables-for-publication.html#by-hand"><i class="fa fa-check"></i>By hand</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="correlations.html"><a href="correlations.html#other-types-of-correlation"><i class="fa fa-check"></i><b>8.3</b> Other types of correlation</a></li>
+<li class="chapter" data-level="8.3" data-path="other-correlation-methods.html"><a href="other-correlation-methods.html"><i class="fa fa-check"></i><b>8.3</b> Other correlation methods</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="t-tests.html"><a href="t-tests.html"><i class="fa fa-check"></i><b>9</b> t-tests</a><ul>
-<li class="chapter" data-level="9.1" data-path="t-tests.html"><a href="t-tests.html#running-t-tests"><i class="fa fa-check"></i><b>9.1</b> Running t-tests</a></li>
-<li class="chapter" data-level="9.2" data-path="t-tests.html"><a href="t-tests.html#independent-groups"><i class="fa fa-check"></i><b>9.2</b> 2 independent groups:</a></li>
-<li class="chapter" data-level="9.3" data-path="t-tests.html"><a href="t-tests.html#unequal-variances"><i class="fa fa-check"></i><b>9.3</b> Unequal variances</a></li>
-<li class="chapter" data-level="9.4" data-path="t-tests.html"><a href="t-tests.html#paired-samples"><i class="fa fa-check"></i><b>9.4</b> Paired samples</a></li>
-<li class="chapter" data-level="9.5" data-path="t-tests.html"><a href="t-tests.html#one-sample-test"><i class="fa fa-check"></i><b>9.5</b> One-sample test</a></li>
+<li class="chapter" data-level="9.1" data-path="running-t-tests.html"><a href="running-t-tests.html"><i class="fa fa-check"></i><b>9.1</b> Running t-tests</a></li>
+<li class="chapter" data-level="9.2" data-path="independent-groups.html"><a href="independent-groups.html"><i class="fa fa-check"></i><b>9.2</b> 2 independent groups:</a></li>
+<li class="chapter" data-level="9.3" data-path="unequal-variances.html"><a href="unequal-variances.html"><i class="fa fa-check"></i><b>9.3</b> Unequal variances</a></li>
+<li class="chapter" data-level="9.4" data-path="paired-samples.html"><a href="paired-samples.html"><i class="fa fa-check"></i><b>9.4</b> Paired samples</a></li>
+<li class="chapter" data-level="9.5" data-path="one-sample-test.html"><a href="one-sample-test.html"><i class="fa fa-check"></i><b>9.5</b> One-sample test</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="linear-models-simple.html"><a href="linear-models-simple.html"><i class="fa fa-check"></i><b>10</b> Introduction to linear models in R</a><ul>
-<li class="chapter" data-level="10.1" data-path="linear-models-simple.html"><a href="linear-models-simple.html#describing-statistical-models-using-formulae"><i class="fa fa-check"></i><b>10.1</b> Describing statistical models using formulae</a></li>
-<li class="chapter" data-level="10.2" data-path="linear-models-simple.html"><a href="linear-models-simple.html#running-a-linear-model"><i class="fa fa-check"></i><b>10.2</b> Running a linear model</a></li>
-<li class="chapter" data-level="10.3" data-path="linear-models-simple.html"><a href="linear-models-simple.html#more-on-formulas"><i class="fa fa-check"></i><b>10.3</b> More on formulas</a><ul>
-<li class="chapter" data-level="10.3.1" data-path="linear-models-simple.html"><a href="linear-models-simple.html#other-formula-shortcuts"><i class="fa fa-check"></i><b>10.3.1</b> Other formula shortcuts</a></li>
+<li class="chapter" data-level="10" data-path="introduction-to-linear-models-in-r.html"><a href="introduction-to-linear-models-in-r.html"><i class="fa fa-check"></i><b>10</b> Introduction to linear models in R</a><ul>
+<li class="chapter" data-level="10.1" data-path="describing-statistical-models-using-formulae.html"><a href="describing-statistical-models-using-formulae.html"><i class="fa fa-check"></i><b>10.1</b> Describing statistical models using formulae</a></li>
+<li class="chapter" data-level="10.2" data-path="running-a-linear-model.html"><a href="running-a-linear-model.html"><i class="fa fa-check"></i><b>10.2</b> Running a linear model</a></li>
+<li class="chapter" data-level="10.3" data-path="more-on-formulas.html"><a href="more-on-formulas.html"><i class="fa fa-check"></i><b>10.3</b> More on formulas</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="more-on-formulas.html"><a href="more-on-formulas.html#other-formula-shortcuts"><i class="fa fa-check"></i><b>10.3.1</b> Other formula shortcuts</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="linear-models-simple.html"><a href="linear-models-simple.html#what-next"><i class="fa fa-check"></i><b>10.4</b> What next</a></li>
+<li class="chapter" data-level="10.4" data-path="what-next.html"><a href="what-next.html"><i class="fa fa-check"></i><b>10.4</b> What next</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>11</b> Anova in R</a><ul>
-<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#rule-1-use-long-format-data"><i class="fa fa-check"></i>Rule 1: Use long format data</a></li>
-<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#rule-2-know-your-variables"><i class="fa fa-check"></i>Rule 2: Know your variables</a></li>
-<li><a href="anova.html#rule-3-dont-use-aov-or-anova">Rule 3: Don’t use <code>aov()</code> or <code>anova()</code></a><ul>
-<li class="chapter" data-level="11.0.1" data-path="anova.html"><a href="anova.html#but-what-about-insert-favourite-r-package-for-anova"><i class="fa fa-check"></i><b>11.0.1</b> But what about [insert favourite R package for Anova]?</a></li>
+<li class="chapter" data-level="11" data-path="anova-in-r.html"><a href="anova-in-r.html"><i class="fa fa-check"></i><b>11</b> Anova in R</a><ul>
+<li class="chapter" data-level="" data-path="rule-1-use-long-format-data.html"><a href="rule-1-use-long-format-data.html"><i class="fa fa-check"></i>Rule 1: Use long format data</a></li>
+<li class="chapter" data-level="" data-path="rule-2-know-your-variables.html"><a href="rule-2-know-your-variables.html"><i class="fa fa-check"></i>Rule 2: Know your variables</a></li>
+<li><a href="rule-3-dont-use-aov-or-anova.html#rule-3-dont-use-aov-or-anova">Rule 3: Don’t use <code>aov()</code> or <code>anova()</code></a><ul>
+<li class="chapter" data-level="11.0.1" data-path="rule-3-dont-use-aov-or-anova.html"><a href="rule-3-dont-use-aov-or-anova.html"><i class="fa fa-check"></i><b>11.0.1</b> But what about [insert favourite R package for Anova]?</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#rule-4-use-type-3-sums-of-squares-and-learn-about-why"><i class="fa fa-check"></i>Rule 4: Use type 3 sums of squares (and learn about why)</a></li>
-<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#general-anova-recommendations"><i class="fa fa-check"></i>General Anova recommendations</a></li>
+<li class="chapter" data-level="" data-path="rule-4-use-type-3-sums-of-squares-and-learn-about-why.html"><a href="rule-4-use-type-3-sums-of-squares-and-learn-about-why.html"><i class="fa fa-check"></i>Rule 4: Use type 3 sums of squares (and learn about why)</a></li>
+<li class="chapter" data-level="" data-path="general-anova-recommendations.html"><a href="general-anova-recommendations.html"><i class="fa fa-check"></i>General Anova recommendations</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="anova-cookbook.html"><a href="anova-cookbook.html"><i class="fa fa-check"></i><b>12</b> Anova ‘Cookbook’</a><ul>
-<li class="chapter" data-level="12.1" data-path="anova-cookbook.html"><a href="anova-cookbook.html#between-subjects-designs"><i class="fa fa-check"></i><b>12.1</b> Between subjects designs</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="anova-cookbook.html"><a href="anova-cookbook.html#factorial-anova-no-bigger-than-2x2"><i class="fa fa-check"></i><b>12.1.1</b> Factorial anova, no bigger than 2x2</a></li>
-<li class="chapter" data-level="12.1.2" data-path="anova-cookbook.html"><a href="anova-cookbook.html#factorial-anova-where-one-factor-has-2-levels."><i class="fa fa-check"></i><b>12.1.2</b> Factorial anova, where one factor has &gt; 2 levels.</a></li>
-<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#checking-assumptions"><i class="fa fa-check"></i>Checking assumptions</a></li>
-<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#post-hoc-tests"><i class="fa fa-check"></i>Post hoc tests</a></li>
+<li class="chapter" data-level="12.1" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html"><i class="fa fa-check"></i><b>12.1</b> Between subjects designs</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#factorial-anova-no-bigger-than-2x2"><i class="fa fa-check"></i><b>12.1.1</b> Factorial anova, no bigger than 2x2</a></li>
+<li class="chapter" data-level="12.1.2" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#factorial-anova-where-one-factor-has-2-levels."><i class="fa fa-check"></i><b>12.1.2</b> Factorial anova, where one factor has &gt; 2 levels.</a></li>
+<li class="chapter" data-level="" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#checking-assumptions"><i class="fa fa-check"></i>Checking assumptions</a></li>
+<li class="chapter" data-level="" data-path="between-subjects-designs.html"><a href="between-subjects-designs.html#post-hoc-tests"><i class="fa fa-check"></i>Post hoc tests</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="anova-cookbook.html"><a href="anova-cookbook.html#repeated-measures-or-split-plot-designs"><i class="fa fa-check"></i><b>12.2</b> Repeated measures or ‘split plot’ designs</a></li>
+<li class="chapter" data-level="12.2" data-path="repeated-measures-or-split-plot-designs.html"><a href="repeated-measures-or-split-plot-designs.html"><i class="fa fa-check"></i><b>12.2</b> Repeated measures or ‘split plot’ designs</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="understanding-interactions.html"><a href="understanding-interactions.html"><i class="fa fa-check"></i><b>13</b> Understanding interactions (part 1)</a><ul>
-<li class="chapter" data-level="13.1" data-path="understanding-interactions.html"><a href="understanding-interactions.html#what-is-an-interaction"><i class="fa fa-check"></i><b>13.1</b> What is an interaction?</a><ul>
-<li class="chapter" data-level="13.1.1" data-path="understanding-interactions.html"><a href="understanding-interactions.html#example-interaction-visualised"><i class="fa fa-check"></i><b>13.1.1</b> Example interaction visualised</a></li>
+<li class="chapter" data-level="13" data-path="understanding-interactions-part-1.html"><a href="understanding-interactions-part-1.html"><i class="fa fa-check"></i><b>13</b> Understanding interactions (part 1)</a><ul>
+<li class="chapter" data-level="13.1" data-path="what-is-an-interaction.html"><a href="what-is-an-interaction.html"><i class="fa fa-check"></i><b>13.1</b> What is an interaction?</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="what-is-an-interaction.html"><a href="what-is-an-interaction.html#example-interaction-visualised"><i class="fa fa-check"></i><b>13.1.1</b> Example interaction visualised</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="understanding-interactions.html"><a href="understanding-interactions.html#visualising-interactions-in-raw-data"><i class="fa fa-check"></i><b>13.2</b> Visualising interactions in raw data</a></li>
-<li class="chapter" data-level="13.3" data-path="understanding-interactions.html"><a href="understanding-interactions.html#continuous-predictors"><i class="fa fa-check"></i><b>13.3</b> Continuous predictors</a></li>
-<li class="chapter" data-level="13.4" data-path="understanding-interactions.html"><a href="understanding-interactions.html#what-next-1"><i class="fa fa-check"></i><b>13.4</b> What next?</a></li>
+<li class="chapter" data-level="13.2" data-path="visualising-interactions-in-raw-data.html"><a href="visualising-interactions-in-raw-data.html"><i class="fa fa-check"></i><b>13.2</b> Visualising interactions in raw data</a></li>
+<li class="chapter" data-level="13.3" data-path="continuous-predictors.html"><a href="continuous-predictors.html"><i class="fa fa-check"></i><b>13.3</b> Continuous predictors</a></li>
+<li class="chapter" data-level="13.4" data-path="what-next-1.html"><a href="what-next-1.html"><i class="fa fa-check"></i><b>13.4</b> What next?</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html"><i class="fa fa-check"></i><b>14</b> Making predictions</a><ul>
-<li class="chapter" data-level="14.1" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predictions-vs-margins"><i class="fa fa-check"></i><b>14.1</b> Predictions vs margins</a></li>
-<li class="chapter" data-level="14.2" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predicted-means"><i class="fa fa-check"></i><b>14.2</b> Predicted means</a></li>
-<li class="chapter" data-level="14.3" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#effects-margins"><i class="fa fa-check"></i><b>14.3</b> <em>Effects</em> (margins)</a></li>
-<li class="chapter" data-level="14.4" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#continuous-predictors-1"><i class="fa fa-check"></i><b>14.4</b> Continuous predictors</a></li>
-<li class="chapter" data-level="14.5" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predicted-means-and-margins-using-lm"><i class="fa fa-check"></i><b>14.5</b> Predicted means and margins using <code>lm()</code></a><ul>
-<li class="chapter" data-level="14.5.1" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#running-the-model"><i class="fa fa-check"></i><b>14.5.1</b> Running the model</a></li>
-<li class="chapter" data-level="14.5.2" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#making-predictions-for-means"><i class="fa fa-check"></i><b>14.5.2</b> Making predictions for means</a></li>
-<li class="chapter" data-level="14.5.3" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#step-1-make-a-new-dataframe"><i class="fa fa-check"></i><b>14.5.3</b> Step 1: Make a new dataframe</a></li>
-<li class="chapter" data-level="14.5.4" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#step-2-make-the-predictions"><i class="fa fa-check"></i><b>14.5.4</b> Step 2: Make the predictions</a></li>
+<li class="chapter" data-level="14" data-path="making-predictions.html"><a href="making-predictions.html"><i class="fa fa-check"></i><b>14</b> Making predictions</a><ul>
+<li class="chapter" data-level="14.1" data-path="predictions-vs-margins.html"><a href="predictions-vs-margins.html"><i class="fa fa-check"></i><b>14.1</b> Predictions vs margins</a></li>
+<li class="chapter" data-level="14.2" data-path="predicted-means.html"><a href="predicted-means.html"><i class="fa fa-check"></i><b>14.2</b> Predicted means</a></li>
+<li class="chapter" data-level="14.3" data-path="effects-margins.html"><a href="effects-margins.html"><i class="fa fa-check"></i><b>14.3</b> <em>Effects</em> (margins)</a></li>
+<li class="chapter" data-level="14.4" data-path="continuous-predictors-1.html"><a href="continuous-predictors-1.html"><i class="fa fa-check"></i><b>14.4</b> Continuous predictors</a></li>
+<li class="chapter" data-level="14.5" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html"><i class="fa fa-check"></i><b>14.5</b> Predicted means and margins using <code>lm()</code></a><ul>
+<li class="chapter" data-level="14.5.1" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html#running-the-model"><i class="fa fa-check"></i><b>14.5.1</b> Running the model</a></li>
+<li class="chapter" data-level="14.5.2" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html#making-predictions-for-means"><i class="fa fa-check"></i><b>14.5.2</b> Making predictions for means</a></li>
+<li class="chapter" data-level="14.5.3" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html#step-1-make-a-new-dataframe"><i class="fa fa-check"></i><b>14.5.3</b> Step 1: Make a new dataframe</a></li>
+<li class="chapter" data-level="14.5.4" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html#step-2-make-the-predictions"><i class="fa fa-check"></i><b>14.5.4</b> Step 2: Make the predictions</a></li>
 </ul></li>
-<li class="chapter" data-level="14.6" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#making-prdictions-for-margins-effects-of-predictors"><i class="fa fa-check"></i><b>14.6</b> Making prdictions for margins (<em>effects</em> of predictors)</a></li>
-<li class="chapter" data-level="14.7" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#marginal-effects"><i class="fa fa-check"></i><b>14.7</b> Marginal effects</a></li>
-<li class="chapter" data-level="14.8" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#with-continuous-covariates"><i class="fa fa-check"></i><b>14.8</b> With continuous covariates</a></li>
+<li class="chapter" data-level="14.6" data-path="making-prdictions-for-margins-effects-of-predictors.html"><a href="making-prdictions-for-margins-effects-of-predictors.html"><i class="fa fa-check"></i><b>14.6</b> Making prdictions for margins (<em>effects</em> of predictors)</a></li>
+<li class="chapter" data-level="14.7" data-path="marginal-effects.html"><a href="marginal-effects.html"><i class="fa fa-check"></i><b>14.7</b> Marginal effects</a></li>
+<li class="chapter" data-level="14.8" data-path="with-continuous-covariates.html"><a href="with-continuous-covariates.html"><i class="fa fa-check"></i><b>14.8</b> With continuous covariates</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#visualising-interactions-from-linear-models"><i class="fa fa-check"></i><b>15</b> Visualising interactions from linear models</a></li>
+<li class="chapter" data-level="15" data-path="visualising-interactions-from-linear-models.html"><a href="visualising-interactions-from-linear-models.html"><i class="fa fa-check"></i><b>15</b> Visualising interactions from linear models</a></li>
 <li class="chapter" data-level="16" data-path="mediation.html"><a href="mediation.html"><i class="fa fa-check"></i><b>16</b> Mediation</a></li>
 <li class="chapter" data-level="17" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>17</b> Multilevel models</a><ul>
-<li class="chapter" data-level="17.1" data-path="multilevel-models.html"><a href="multilevel-models.html#the-sleepstudy-data-and-traditional-rm-anova"><i class="fa fa-check"></i><b>17.1</b> The <code>sleepstudy</code> data and traditional RM Anova</a><ul>
-<li class="chapter" data-level="17.1.1" data-path="multilevel-models.html"><a href="multilevel-models.html#fit-a-simple-slope-for-days"><i class="fa fa-check"></i><b>17.1.1</b> Fit a simple slope for <code>Days</code></a></li>
-<li class="chapter" data-level="17.1.2" data-path="multilevel-models.html"><a href="multilevel-models.html#allow-the-effect-of-sleep-deprivation-to-vary-for-different-participants"><i class="fa fa-check"></i><b>17.1.2</b> Allow the effect of sleep deprivation to vary for different participants</a></li>
-<li class="chapter" data-level="17.1.3" data-path="multilevel-models.html"><a href="multilevel-models.html#fitting-a-curve-for-the-effect-of-days"><i class="fa fa-check"></i><b>17.1.3</b> Fitting a curve for the effect of <code>Days</code></a></li>
+<li class="chapter" data-level="17.1" data-path="the-sleepstudy-data-and-traditional-rm-anova.html"><a href="the-sleepstudy-data-and-traditional-rm-anova.html"><i class="fa fa-check"></i><b>17.1</b> The <code>sleepstudy</code> data and traditional RM Anova</a><ul>
+<li class="chapter" data-level="17.1.1" data-path="the-sleepstudy-data-and-traditional-rm-anova.html"><a href="the-sleepstudy-data-and-traditional-rm-anova.html#fit-a-simple-slope-for-days"><i class="fa fa-check"></i><b>17.1.1</b> Fit a simple slope for <code>Days</code></a></li>
+<li class="chapter" data-level="17.1.2" data-path="the-sleepstudy-data-and-traditional-rm-anova.html"><a href="the-sleepstudy-data-and-traditional-rm-anova.html#allow-the-effect-of-sleep-deprivation-to-vary-for-different-participants"><i class="fa fa-check"></i><b>17.1.2</b> Allow the effect of sleep deprivation to vary for different participants</a></li>
+<li class="chapter" data-level="17.1.3" data-path="the-sleepstudy-data-and-traditional-rm-anova.html"><a href="the-sleepstudy-data-and-traditional-rm-anova.html#fitting-a-curve-for-the-effect-of-days"><i class="fa fa-check"></i><b>17.1.3</b> Fitting a curve for the effect of <code>Days</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="cfa.html"><a href="cfa.html"><i class="fa fa-check"></i><b>18</b> Confirmatory factor analysis</a><ul>
-<li class="chapter" data-level="18.1" data-path="cfa.html"><a href="cfa.html#defining-the-model"><i class="fa fa-check"></i><b>18.1</b> Defining the model</a></li>
-<li class="chapter" data-level="18.2" data-path="cfa.html"><a href="cfa.html#model-fit"><i class="fa fa-check"></i><b>18.2</b> Model fit</a></li>
-<li class="chapter" data-level="18.3" data-path="cfa.html"><a href="cfa.html#modification-indices"><i class="fa fa-check"></i><b>18.3</b> Modification indices</a></li>
-<li class="chapter" data-level="18.4" data-path="cfa.html"><a href="cfa.html#missing-data"><i class="fa fa-check"></i><b>18.4</b> Missing data</a></li>
+<li class="chapter" data-level="18" data-path="confirmatory-factor-analysis.html"><a href="confirmatory-factor-analysis.html"><i class="fa fa-check"></i><b>18</b> Confirmatory factor analysis</a><ul>
+<li class="chapter" data-level="18.1" data-path="defining-the-model.html"><a href="defining-the-model.html"><i class="fa fa-check"></i><b>18.1</b> Defining the model</a></li>
+<li class="chapter" data-level="18.2" data-path="model-fit.html"><a href="model-fit.html"><i class="fa fa-check"></i><b>18.2</b> Model fit</a></li>
+<li class="chapter" data-level="18.3" data-path="modification-indices.html"><a href="modification-indices.html"><i class="fa fa-check"></i><b>18.3</b> Modification indices</a></li>
+<li class="chapter" data-level="18.4" data-path="missing-data.html"><a href="missing-data.html"><i class="fa fa-check"></i><b>18.4</b> Missing data</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>19</b> Installing R and RStudio</a></li>
-<li class="chapter" data-level="20" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>20</b> Loading packages</a></li>
-<li class="chapter" data-level="21" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>21</b> Getting help</a></li>
-<li class="chapter" data-level="22" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>22</b> Missing values</a></li>
-<li class="chapter" data-level="23" data-path="rmarkdown-tricks.html"><a href="rmarkdown-tricks.html"><i class="fa fa-check"></i><b>23</b> Tips and tricks with RMarkdown</a></li>
-<li class="chapter" data-level="24" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html"><i class="fa fa-check"></i><b>24</b> Confidence, credible and prediction intervals</a><ul>
-<li class="chapter" data-level="24.1" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html#the-problem-with-confidence-intervals"><i class="fa fa-check"></i><b>24.1</b> The problem with confidence intervals</a></li>
-<li class="chapter" data-level="24.2" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html#forgetting-that-the-ci-depends-on-sample-size."><i class="fa fa-check"></i><b>24.2</b> Forgetting that the CI depends on sample size.</a></li>
-<li class="chapter" data-level="24.3" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html#what-does-this-mean-for-my-work-on-insert-speciality-here"><i class="fa fa-check"></i><b>24.3</b> What does this mean for my work on [insert speciality here]?</a><ul>
-<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html"><i class="fa fa-check"></i>Post hoc (pairwise) tests</a></li>
+<li class="chapter" data-level="19" data-path="installing-r-and-rstudio.html"><a href="installing-r-and-rstudio.html"><i class="fa fa-check"></i><b>19</b> Installing R and RStudio</a></li>
+<li class="chapter" data-level="20" data-path="loading-packages.html"><a href="loading-packages.html"><i class="fa fa-check"></i><b>20</b> Loading packages</a></li>
+<li class="chapter" data-level="21" data-path="getting-help.html"><a href="getting-help.html"><i class="fa fa-check"></i><b>21</b> Getting help</a></li>
+<li class="chapter" data-level="22" data-path="missing-values-1.html"><a href="missing-values-1.html"><i class="fa fa-check"></i><b>22</b> Missing values</a></li>
+<li class="chapter" data-level="23" data-path="tips-and-tricks-with-rmarkdown.html"><a href="tips-and-tricks-with-rmarkdown.html"><i class="fa fa-check"></i><b>23</b> Tips and tricks with RMarkdown</a></li>
+<li class="chapter" data-level="24" data-path="confidence-credible-and-prediction-intervals.html"><a href="confidence-credible-and-prediction-intervals.html"><i class="fa fa-check"></i><b>24</b> Confidence, credible and prediction intervals</a><ul>
+<li class="chapter" data-level="24.1" data-path="the-problem-with-confidence-intervals.html"><a href="the-problem-with-confidence-intervals.html"><i class="fa fa-check"></i><b>24.1</b> The problem with confidence intervals</a></li>
+<li class="chapter" data-level="24.2" data-path="forgetting-that-the-ci-depends-on-sample-size-.html"><a href="forgetting-that-the-ci-depends-on-sample-size-.html"><i class="fa fa-check"></i><b>24.2</b> Forgetting that the CI depends on sample size.</a></li>
+<li class="chapter" data-level="24.3" data-path="what-does-this-mean-for-my-work-on-insert-speciality-here.html"><a href="what-does-this-mean-for-my-work-on-insert-speciality-here.html"><i class="fa fa-check"></i><b>24.3</b> What does this mean for my work on [insert speciality here]?</a><ul>
+<li class="chapter" data-level="" data-path="what-does-this-mean-for-my-work-on-insert-speciality-here.html"><a href="what-does-this-mean-for-my-work-on-insert-speciality-here.html#post-hoc-pairwise-tests"><i class="fa fa-check"></i>Post hoc (pairwise) tests</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="25" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>25</b> References</a></li>
@@ -282,745 +286,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">disschecks &lt;-<span class="st"> </span>statcheck<span class="op">::</span><span class="kw">checkdir</span>(<span class="st">&#39;~/Downloads/dissertations/&#39;</span>)
-## Importing PDF files...
-## 
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|</span><span class="st">                                                                 </span><span class="er">|</span><span class="st">   </span><span class="dv">0</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=</span><span class="st">                                                                </span><span class="er">|</span><span class="st">   </span><span class="dv">1</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=</span><span class="st">                                                                </span><span class="er">|</span><span class="st">   </span><span class="dv">2</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==</span><span class="st">                                                               </span><span class="er">|</span><span class="st">   </span><span class="dv">3</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==</span><span class="st">                                                               </span><span class="er">|</span><span class="st">   </span><span class="dv">4</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===</span><span class="st">                                                              </span><span class="er">|</span><span class="st">   </span><span class="dv">4</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===</span><span class="st">                                                              </span><span class="er">|</span><span class="st">   </span><span class="dv">5</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|====</span><span class="st">                                                             </span><span class="er">|</span><span class="st">   </span><span class="dv">6</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|====</span><span class="st">                                                             </span><span class="er">|</span><span class="st">   </span><span class="dv">7</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=====</span><span class="st">                                                            </span><span class="er">|</span><span class="st">   </span><span class="dv">7</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=====</span><span class="st">                                                            </span><span class="er">|</span><span class="st">   </span><span class="dv">8</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|======</span><span class="st">                                                           </span><span class="er">|</span><span class="st">   </span><span class="dv">9</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|======</span><span class="st">                                                           </span><span class="er">|</span><span class="st">  </span><span class="dv">10</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=======</span><span class="st">                                                          </span><span class="er">|</span><span class="st">  </span><span class="dv">10</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=======</span><span class="st">                                                          </span><span class="er">|</span><span class="st">  </span><span class="dv">11</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|========</span><span class="st">                                                         </span><span class="er">|</span><span class="st">  </span><span class="dv">12</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|========</span><span class="st">                                                         </span><span class="er">|</span><span class="st">  </span><span class="dv">13</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=========</span><span class="st">                                                        </span><span class="er">|</span><span class="st">  </span><span class="dv">13</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=========</span><span class="st">                                                        </span><span class="er">|</span><span class="st">  </span><span class="dv">14</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==========</span><span class="st">                                                       </span><span class="er">|</span><span class="st">  </span><span class="dv">15</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==========</span><span class="st">                                                       </span><span class="er">|</span><span class="st">  </span><span class="dv">16</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===========</span><span class="st">                                                      </span><span class="er">|</span><span class="st">  </span><span class="dv">16</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===========</span><span class="st">                                                      </span><span class="er">|</span><span class="st">  </span><span class="dv">17</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|============</span><span class="st">                                                     </span><span class="er">|</span><span class="st">  </span><span class="dv">18</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|============</span><span class="st">                                                     </span><span class="er">|</span><span class="st">  </span><span class="dv">19</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=============</span><span class="st">                                                    </span><span class="er">|</span><span class="st">  </span><span class="dv">20</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==============</span><span class="st">                                                   </span><span class="er">|</span><span class="st">  </span><span class="dv">21</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==============</span><span class="st">                                                   </span><span class="er">|</span><span class="st">  </span><span class="dv">22</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===============</span><span class="st">                                                  </span><span class="er">|</span><span class="st">  </span><span class="dv">23</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===============</span><span class="st">                                                  </span><span class="er">|</span><span class="st">  </span><span class="dv">24</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|================</span><span class="st">                                                 </span><span class="er">|</span><span class="st">  </span><span class="dv">24</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|================</span><span class="st">                                                 </span><span class="er">|</span><span class="st">  </span><span class="dv">25</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=================</span><span class="st">                                                </span><span class="er">|</span><span class="st">  </span><span class="dv">26</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=================</span><span class="st">                                                </span><span class="er">|</span><span class="st">  </span><span class="dv">27</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==================</span><span class="st">                                               </span><span class="er">|</span><span class="st">  </span><span class="dv">27</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==================</span><span class="st">                                               </span><span class="er">|</span><span class="st">  </span><span class="dv">28</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===================</span><span class="st">                                              </span><span class="er">|</span><span class="st">  </span><span class="dv">29</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===================</span><span class="st">                                              </span><span class="er">|</span><span class="st">  </span><span class="dv">30</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|====================</span><span class="st">                                             </span><span class="er">|</span><span class="st">  </span><span class="dv">30</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|====================</span><span class="st">                                             </span><span class="er">|</span><span class="st">  </span><span class="dv">31</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=====================</span><span class="st">                                            </span><span class="er">|</span><span class="st">  </span><span class="dv">32</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=====================</span><span class="st">                                            </span><span class="er">|</span><span class="st">  </span><span class="dv">33</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|======================</span><span class="st">                                           </span><span class="er">|</span><span class="st">  </span><span class="dv">33</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|======================</span><span class="st">                                           </span><span class="er">|</span><span class="st">  </span><span class="dv">34</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=======================</span><span class="st">                                          </span><span class="er">|</span><span class="st">  </span><span class="dv">35</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=======================</span><span class="st">                                          </span><span class="er">|</span><span class="st">  </span><span class="dv">36</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|========================</span><span class="st">                                         </span><span class="er">|</span><span class="st">  </span><span class="dv">36</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|========================</span><span class="st">                                         </span><span class="er">|</span><span class="st">  </span><span class="dv">37</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=========================</span><span class="st">                                        </span><span class="er">|</span><span class="st">  </span><span class="dv">38</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=========================</span><span class="st">                                        </span><span class="er">|</span><span class="st">  </span><span class="dv">39</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==========================</span><span class="st">                                       </span><span class="er">|</span><span class="st">  </span><span class="dv">40</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===========================</span><span class="st">                                      </span><span class="er">|</span><span class="st">  </span><span class="dv">41</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===========================</span><span class="st">                                      </span><span class="er">|</span><span class="st">  </span><span class="dv">42</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|============================</span><span class="st">                                     </span><span class="er">|</span><span class="st">  </span><span class="dv">43</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|============================</span><span class="st">                                     </span><span class="er">|</span><span class="st">  </span><span class="dv">44</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=============================</span><span class="st">                                    </span><span class="er">|</span><span class="st">  </span><span class="dv">44</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=============================</span><span class="st">                                    </span><span class="er">|</span><span class="st">  </span><span class="dv">45</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==============================</span><span class="st">                                   </span><span class="er">|</span><span class="st">  </span><span class="dv">46</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==============================</span><span class="st">                                   </span><span class="er">|</span><span class="st">  </span><span class="dv">47</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===============================</span><span class="st">                                  </span><span class="er">|</span><span class="st">  </span><span class="dv">47</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===============================</span><span class="st">                                  </span><span class="er">|</span><span class="st">  </span><span class="dv">48</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|================================</span><span class="st">                                 </span><span class="er">|</span><span class="st">  </span><span class="dv">49</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|================================</span><span class="st">                                 </span><span class="er">|</span><span class="st">  </span><span class="dv">50</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=================================</span><span class="st">                                </span><span class="er">|</span><span class="st">  </span><span class="dv">50</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=================================</span><span class="st">                                </span><span class="er">|</span><span class="st">  </span><span class="dv">51</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==================================</span><span class="st">                               </span><span class="er">|</span><span class="st">  </span><span class="dv">52</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==================================</span><span class="st">                               </span><span class="er">|</span><span class="st">  </span><span class="dv">53</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===================================</span><span class="st">                              </span><span class="er">|</span><span class="st">  </span><span class="dv">53</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===================================</span><span class="st">                              </span><span class="er">|</span><span class="st">  </span><span class="dv">54</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|====================================</span><span class="st">                             </span><span class="er">|</span><span class="st">  </span><span class="dv">55</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|====================================</span><span class="st">                             </span><span class="er">|</span><span class="st">  </span><span class="dv">56</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=====================================</span><span class="st">                            </span><span class="er">|</span><span class="st">  </span><span class="dv">56</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=====================================</span><span class="st">                            </span><span class="er">|</span><span class="st">  </span><span class="dv">57</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|======================================</span><span class="st">                           </span><span class="er">|</span><span class="st">  </span><span class="dv">58</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|======================================</span><span class="st">                           </span><span class="er">|</span><span class="st">  </span><span class="dv">59</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=======================================</span><span class="st">                          </span><span class="er">|</span><span class="st">  </span><span class="dv">60</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|========================================</span><span class="st">                         </span><span class="er">|</span><span class="st">  </span><span class="dv">61</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|========================================</span><span class="st">                         </span><span class="er">|</span><span class="st">  </span><span class="dv">62</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=========================================</span><span class="st">                        </span><span class="er">|</span><span class="st">  </span><span class="dv">63</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=========================================</span><span class="st">                        </span><span class="er">|</span><span class="st">  </span><span class="dv">64</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==========================================</span><span class="st">                       </span><span class="er">|</span><span class="st">  </span><span class="dv">64</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==========================================</span><span class="st">                       </span><span class="er">|</span><span class="st">  </span><span class="dv">65</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===========================================</span><span class="st">                      </span><span class="er">|</span><span class="st">  </span><span class="dv">66</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===========================================</span><span class="st">                      </span><span class="er">|</span><span class="st">  </span><span class="dv">67</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|============================================</span><span class="st">                     </span><span class="er">|</span><span class="st">  </span><span class="dv">67</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|============================================</span><span class="st">                     </span><span class="er">|</span><span class="st">  </span><span class="dv">68</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=============================================</span><span class="st">                    </span><span class="er">|</span><span class="st">  </span><span class="dv">69</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=============================================</span><span class="st">                    </span><span class="er">|</span><span class="st">  </span><span class="dv">70</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==============================================</span><span class="st">                   </span><span class="er">|</span><span class="st">  </span><span class="dv">70</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==============================================</span><span class="st">                   </span><span class="er">|</span><span class="st">  </span><span class="dv">71</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===============================================</span><span class="st">                  </span><span class="er">|</span><span class="st">  </span><span class="dv">72</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===============================================</span><span class="st">                  </span><span class="er">|</span><span class="st">  </span><span class="dv">73</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|================================================</span><span class="st">                 </span><span class="er">|</span><span class="st">  </span><span class="dv">73</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|================================================</span><span class="st">                 </span><span class="er">|</span><span class="st">  </span><span class="dv">74</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=================================================</span><span class="st">                </span><span class="er">|</span><span class="st">  </span><span class="dv">75</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=================================================</span><span class="st">                </span><span class="er">|</span><span class="st">  </span><span class="dv">76</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==================================================</span><span class="st">               </span><span class="er">|</span><span class="st">  </span><span class="dv">76</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==================================================</span><span class="st">               </span><span class="er">|</span><span class="st">  </span><span class="dv">77</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===================================================</span><span class="st">              </span><span class="er">|</span><span class="st">  </span><span class="dv">78</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===================================================</span><span class="st">              </span><span class="er">|</span><span class="st">  </span><span class="dv">79</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|====================================================</span><span class="st">             </span><span class="er">|</span><span class="st">  </span><span class="dv">80</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=====================================================</span><span class="st">            </span><span class="er">|</span><span class="st">  </span><span class="dv">81</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=====================================================</span><span class="st">            </span><span class="er">|</span><span class="st">  </span><span class="dv">82</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|======================================================</span><span class="st">           </span><span class="er">|</span><span class="st">  </span><span class="dv">83</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|======================================================</span><span class="st">           </span><span class="er">|</span><span class="st">  </span><span class="dv">84</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=======================================================</span><span class="st">          </span><span class="er">|</span><span class="st">  </span><span class="dv">84</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=======================================================</span><span class="st">          </span><span class="er">|</span><span class="st">  </span><span class="dv">85</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|========================================================</span><span class="st">         </span><span class="er">|</span><span class="st">  </span><span class="dv">86</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|========================================================</span><span class="st">         </span><span class="er">|</span><span class="st">  </span><span class="dv">87</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=========================================================</span><span class="st">        </span><span class="er">|</span><span class="st">  </span><span class="dv">87</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=========================================================</span><span class="st">        </span><span class="er">|</span><span class="st">  </span><span class="dv">88</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==========================================================</span><span class="st">       </span><span class="er">|</span><span class="st">  </span><span class="dv">89</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==========================================================</span><span class="st">       </span><span class="er">|</span><span class="st">  </span><span class="dv">90</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===========================================================</span><span class="st">      </span><span class="er">|</span><span class="st">  </span><span class="dv">90</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===========================================================</span><span class="st">      </span><span class="er">|</span><span class="st">  </span><span class="dv">91</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|============================================================</span><span class="st">     </span><span class="er">|</span><span class="st">  </span><span class="dv">92</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|============================================================</span><span class="st">     </span><span class="er">|</span><span class="st">  </span><span class="dv">93</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=============================================================</span><span class="st">    </span><span class="er">|</span><span class="st">  </span><span class="dv">93</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=============================================================</span><span class="st">    </span><span class="er">|</span><span class="st">  </span><span class="dv">94</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==============================================================</span><span class="st">   </span><span class="er">|</span><span class="st">  </span><span class="dv">95</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==============================================================</span><span class="st">   </span><span class="er">|</span><span class="st">  </span><span class="dv">96</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===============================================================</span><span class="st">  </span><span class="er">|</span><span class="st">  </span><span class="dv">96</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===============================================================</span><span class="st">  </span><span class="er">|</span><span class="st">  </span><span class="dv">97</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|================================================================</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">98</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|================================================================</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">99</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=================================================================|</span><span class="st"> </span><span class="dv">100</span>%
-## Extracting statistics...
-## 
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|</span><span class="st">                                                                 </span><span class="er">|</span><span class="st">   </span><span class="dv">0</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=</span><span class="st">                                                                </span><span class="er">|</span><span class="st">   </span><span class="dv">1</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=</span><span class="st">                                                                </span><span class="er">|</span><span class="st">   </span><span class="dv">2</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==</span><span class="st">                                                               </span><span class="er">|</span><span class="st">   </span><span class="dv">3</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==</span><span class="st">                                                               </span><span class="er">|</span><span class="st">   </span><span class="dv">4</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===</span><span class="st">                                                              </span><span class="er">|</span><span class="st">   </span><span class="dv">4</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===</span><span class="st">                                                              </span><span class="er">|</span><span class="st">   </span><span class="dv">5</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|====</span><span class="st">                                                             </span><span class="er">|</span><span class="st">   </span><span class="dv">6</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|====</span><span class="st">                                                             </span><span class="er">|</span><span class="st">   </span><span class="dv">7</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=====</span><span class="st">                                                            </span><span class="er">|</span><span class="st">   </span><span class="dv">7</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=====</span><span class="st">                                                            </span><span class="er">|</span><span class="st">   </span><span class="dv">8</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|======</span><span class="st">                                                           </span><span class="er">|</span><span class="st">   </span><span class="dv">9</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|======</span><span class="st">                                                           </span><span class="er">|</span><span class="st">  </span><span class="dv">10</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=======</span><span class="st">                                                          </span><span class="er">|</span><span class="st">  </span><span class="dv">10</span>%
-## Warning in sqrt((1 - r^2)/df): NaNs produced
-## 
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=======</span><span class="st">                                                          </span><span class="er">|</span><span class="st">  </span><span class="dv">11</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|========</span><span class="st">                                                         </span><span class="er">|</span><span class="st">  </span><span class="dv">12</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|========</span><span class="st">                                                         </span><span class="er">|</span><span class="st">  </span><span class="dv">13</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=========</span><span class="st">                                                        </span><span class="er">|</span><span class="st">  </span><span class="dv">13</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=========</span><span class="st">                                                        </span><span class="er">|</span><span class="st">  </span><span class="dv">14</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==========</span><span class="st">                                                       </span><span class="er">|</span><span class="st">  </span><span class="dv">15</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==========</span><span class="st">                                                       </span><span class="er">|</span><span class="st">  </span><span class="dv">16</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===========</span><span class="st">                                                      </span><span class="er">|</span><span class="st">  </span><span class="dv">16</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===========</span><span class="st">                                                      </span><span class="er">|</span><span class="st">  </span><span class="dv">17</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|============</span><span class="st">                                                     </span><span class="er">|</span><span class="st">  </span><span class="dv">18</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|============</span><span class="st">                                                     </span><span class="er">|</span><span class="st">  </span><span class="dv">19</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=============</span><span class="st">                                                    </span><span class="er">|</span><span class="st">  </span><span class="dv">20</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==============</span><span class="st">                                                   </span><span class="er">|</span><span class="st">  </span><span class="dv">21</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==============</span><span class="st">                                                   </span><span class="er">|</span><span class="st">  </span><span class="dv">22</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===============</span><span class="st">                                                  </span><span class="er">|</span><span class="st">  </span><span class="dv">23</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===============</span><span class="st">                                                  </span><span class="er">|</span><span class="st">  </span><span class="dv">24</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|================</span><span class="st">                                                 </span><span class="er">|</span><span class="st">  </span><span class="dv">24</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|================</span><span class="st">                                                 </span><span class="er">|</span><span class="st">  </span><span class="dv">25</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=================</span><span class="st">                                                </span><span class="er">|</span><span class="st">  </span><span class="dv">26</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=================</span><span class="st">                                                </span><span class="er">|</span><span class="st">  </span><span class="dv">27</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==================</span><span class="st">                                               </span><span class="er">|</span><span class="st">  </span><span class="dv">27</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==================</span><span class="st">                                               </span><span class="er">|</span><span class="st">  </span><span class="dv">28</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===================</span><span class="st">                                              </span><span class="er">|</span><span class="st">  </span><span class="dv">29</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===================</span><span class="st">                                              </span><span class="er">|</span><span class="st">  </span><span class="dv">30</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|====================</span><span class="st">                                             </span><span class="er">|</span><span class="st">  </span><span class="dv">30</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|====================</span><span class="st">                                             </span><span class="er">|</span><span class="st">  </span><span class="dv">31</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=====================</span><span class="st">                                            </span><span class="er">|</span><span class="st">  </span><span class="dv">32</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=====================</span><span class="st">                                            </span><span class="er">|</span><span class="st">  </span><span class="dv">33</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|======================</span><span class="st">                                           </span><span class="er">|</span><span class="st">  </span><span class="dv">33</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|======================</span><span class="st">                                           </span><span class="er">|</span><span class="st">  </span><span class="dv">34</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=======================</span><span class="st">                                          </span><span class="er">|</span><span class="st">  </span><span class="dv">35</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=======================</span><span class="st">                                          </span><span class="er">|</span><span class="st">  </span><span class="dv">36</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|========================</span><span class="st">                                         </span><span class="er">|</span><span class="st">  </span><span class="dv">36</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|========================</span><span class="st">                                         </span><span class="er">|</span><span class="st">  </span><span class="dv">37</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=========================</span><span class="st">                                        </span><span class="er">|</span><span class="st">  </span><span class="dv">38</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=========================</span><span class="st">                                        </span><span class="er">|</span><span class="st">  </span><span class="dv">39</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==========================</span><span class="st">                                       </span><span class="er">|</span><span class="st">  </span><span class="dv">40</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===========================</span><span class="st">                                      </span><span class="er">|</span><span class="st">  </span><span class="dv">41</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===========================</span><span class="st">                                      </span><span class="er">|</span><span class="st">  </span><span class="dv">42</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|============================</span><span class="st">                                     </span><span class="er">|</span><span class="st">  </span><span class="dv">43</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|============================</span><span class="st">                                     </span><span class="er">|</span><span class="st">  </span><span class="dv">44</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=============================</span><span class="st">                                    </span><span class="er">|</span><span class="st">  </span><span class="dv">44</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=============================</span><span class="st">                                    </span><span class="er">|</span><span class="st">  </span><span class="dv">45</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==============================</span><span class="st">                                   </span><span class="er">|</span><span class="st">  </span><span class="dv">46</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==============================</span><span class="st">                                   </span><span class="er">|</span><span class="st">  </span><span class="dv">47</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===============================</span><span class="st">                                  </span><span class="er">|</span><span class="st">  </span><span class="dv">47</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===============================</span><span class="st">                                  </span><span class="er">|</span><span class="st">  </span><span class="dv">48</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|================================</span><span class="st">                                 </span><span class="er">|</span><span class="st">  </span><span class="dv">49</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|================================</span><span class="st">                                 </span><span class="er">|</span><span class="st">  </span><span class="dv">50</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=================================</span><span class="st">                                </span><span class="er">|</span><span class="st">  </span><span class="dv">50</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=================================</span><span class="st">                                </span><span class="er">|</span><span class="st">  </span><span class="dv">51</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==================================</span><span class="st">                               </span><span class="er">|</span><span class="st">  </span><span class="dv">52</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==================================</span><span class="st">                               </span><span class="er">|</span><span class="st">  </span><span class="dv">53</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===================================</span><span class="st">                              </span><span class="er">|</span><span class="st">  </span><span class="dv">53</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===================================</span><span class="st">                              </span><span class="er">|</span><span class="st">  </span><span class="dv">54</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|====================================</span><span class="st">                             </span><span class="er">|</span><span class="st">  </span><span class="dv">55</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|====================================</span><span class="st">                             </span><span class="er">|</span><span class="st">  </span><span class="dv">56</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=====================================</span><span class="st">                            </span><span class="er">|</span><span class="st">  </span><span class="dv">56</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=====================================</span><span class="st">                            </span><span class="er">|</span><span class="st">  </span><span class="dv">57</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|======================================</span><span class="st">                           </span><span class="er">|</span><span class="st">  </span><span class="dv">58</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|======================================</span><span class="st">                           </span><span class="er">|</span><span class="st">  </span><span class="dv">59</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=======================================</span><span class="st">                          </span><span class="er">|</span><span class="st">  </span><span class="dv">60</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|========================================</span><span class="st">                         </span><span class="er">|</span><span class="st">  </span><span class="dv">61</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|========================================</span><span class="st">                         </span><span class="er">|</span><span class="st">  </span><span class="dv">62</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=========================================</span><span class="st">                        </span><span class="er">|</span><span class="st">  </span><span class="dv">63</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=========================================</span><span class="st">                        </span><span class="er">|</span><span class="st">  </span><span class="dv">64</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==========================================</span><span class="st">                       </span><span class="er">|</span><span class="st">  </span><span class="dv">64</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==========================================</span><span class="st">                       </span><span class="er">|</span><span class="st">  </span><span class="dv">65</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===========================================</span><span class="st">                      </span><span class="er">|</span><span class="st">  </span><span class="dv">66</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===========================================</span><span class="st">                      </span><span class="er">|</span><span class="st">  </span><span class="dv">67</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|============================================</span><span class="st">                     </span><span class="er">|</span><span class="st">  </span><span class="dv">67</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|============================================</span><span class="st">                     </span><span class="er">|</span><span class="st">  </span><span class="dv">68</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=============================================</span><span class="st">                    </span><span class="er">|</span><span class="st">  </span><span class="dv">69</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=============================================</span><span class="st">                    </span><span class="er">|</span><span class="st">  </span><span class="dv">70</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==============================================</span><span class="st">                   </span><span class="er">|</span><span class="st">  </span><span class="dv">70</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==============================================</span><span class="st">                   </span><span class="er">|</span><span class="st">  </span><span class="dv">71</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===============================================</span><span class="st">                  </span><span class="er">|</span><span class="st">  </span><span class="dv">72</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===============================================</span><span class="st">                  </span><span class="er">|</span><span class="st">  </span><span class="dv">73</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|================================================</span><span class="st">                 </span><span class="er">|</span><span class="st">  </span><span class="dv">73</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|================================================</span><span class="st">                 </span><span class="er">|</span><span class="st">  </span><span class="dv">74</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=================================================</span><span class="st">                </span><span class="er">|</span><span class="st">  </span><span class="dv">75</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=================================================</span><span class="st">                </span><span class="er">|</span><span class="st">  </span><span class="dv">76</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==================================================</span><span class="st">               </span><span class="er">|</span><span class="st">  </span><span class="dv">76</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==================================================</span><span class="st">               </span><span class="er">|</span><span class="st">  </span><span class="dv">77</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===================================================</span><span class="st">              </span><span class="er">|</span><span class="st">  </span><span class="dv">78</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===================================================</span><span class="st">              </span><span class="er">|</span><span class="st">  </span><span class="dv">79</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|====================================================</span><span class="st">             </span><span class="er">|</span><span class="st">  </span><span class="dv">80</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=====================================================</span><span class="st">            </span><span class="er">|</span><span class="st">  </span><span class="dv">81</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=====================================================</span><span class="st">            </span><span class="er">|</span><span class="st">  </span><span class="dv">82</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|======================================================</span><span class="st">           </span><span class="er">|</span><span class="st">  </span><span class="dv">83</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|======================================================</span><span class="st">           </span><span class="er">|</span><span class="st">  </span><span class="dv">84</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=======================================================</span><span class="st">          </span><span class="er">|</span><span class="st">  </span><span class="dv">84</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=======================================================</span><span class="st">          </span><span class="er">|</span><span class="st">  </span><span class="dv">85</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|========================================================</span><span class="st">         </span><span class="er">|</span><span class="st">  </span><span class="dv">86</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|========================================================</span><span class="st">         </span><span class="er">|</span><span class="st">  </span><span class="dv">87</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=========================================================</span><span class="st">        </span><span class="er">|</span><span class="st">  </span><span class="dv">87</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=========================================================</span><span class="st">        </span><span class="er">|</span><span class="st">  </span><span class="dv">88</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==========================================================</span><span class="st">       </span><span class="er">|</span><span class="st">  </span><span class="dv">89</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==========================================================</span><span class="st">       </span><span class="er">|</span><span class="st">  </span><span class="dv">90</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===========================================================</span><span class="st">      </span><span class="er">|</span><span class="st">  </span><span class="dv">90</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===========================================================</span><span class="st">      </span><span class="er">|</span><span class="st">  </span><span class="dv">91</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|============================================================</span><span class="st">     </span><span class="er">|</span><span class="st">  </span><span class="dv">92</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|============================================================</span><span class="st">     </span><span class="er">|</span><span class="st">  </span><span class="dv">93</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=============================================================</span><span class="st">    </span><span class="er">|</span><span class="st">  </span><span class="dv">93</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=============================================================</span><span class="st">    </span><span class="er">|</span><span class="st">  </span><span class="dv">94</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==============================================================</span><span class="st">   </span><span class="er">|</span><span class="st">  </span><span class="dv">95</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|==============================================================</span><span class="st">   </span><span class="er">|</span><span class="st">  </span><span class="dv">96</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===============================================================</span><span class="st">  </span><span class="er">|</span><span class="st">  </span><span class="dv">96</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|===============================================================</span><span class="st">  </span><span class="er">|</span><span class="st">  </span><span class="dv">97</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|================================================================</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">98</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|================================================================</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">99</span>%
-  <span class="op">|</span><span class="st">                                                                       </span>
-<span class="st">  </span><span class="er">|=================================================================|</span><span class="st"> </span><span class="dv">100</span>%
-## 
-##  Check the significance level. 
-##  
-##  Some of the p value incongruencies are decision errors if the significance level is .1 or .01 instead of the conventional .05. It is recommended to check the actual significance level in the paper or text. Check if the reported p values are a decision error at a different significance level by running statcheck again with &#39;alpha&#39; set to .1 and/or .01. 
-## 
-## 
-##  Check for one tailed tests. 
-##  
-##  Some of the p value incongruencies might in fact be one tailed tests. It is recommended to check this in the actual paper or text. Check if the p values would also be incongruent if the test is indeed one sided by running statcheck again with &#39;OneTailedTests&#39; set to TRUE. To see which Sources probably contain a one tailed test, try unique(x$Source[x$OneTail]) (where x is the statcheck output). 
-## 
-## Warning in sqrt((1 - r^2)/df): NaNs produced
-
-## Warning in sqrt((1 - r^2)/df): NaNs produced
-
-disschecks <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(Statistic) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>reshape2<span class="op">::</span><span class="kw">dcast</span>(Statistic<span class="op">~</span>Error)
-## Using APAfactor as value column: use value.var to override.
-## Aggregation function missing: defaulting to length
-##   Statistic FALSE TRUE NA
-## 1      Chi2    72    9  0
-## 2         F   885  142  0
-## 3         r   128   18  1
-## 4         t   454  121  0
-## 5         Z     6    4  0
-
-disschecks <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(Statistic) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>reshape2<span class="op">::</span><span class="kw">dcast</span>(Statistic<span class="op">~</span>DecisionError)
-## Using APAfactor as value column: use value.var to override.
-## Aggregation function missing: defaulting to length
-##   Statistic FALSE TRUE NA
-## 1      Chi2    78    3  0
-## 2         F  1008   19  0
-## 3         r   146    0  1
-## 4         t   555   20  0
-## 5         Z     9    1  0</code></pre></div>
-<!-- XXX TODO 
-
-http://lme4.r-forge.r-project.org/lMMwR/lrgprt.pdf 
-
-http://www.stata.com/meeting/germany13/abstracts/materials/de13_jann.pdf
-
--->
-</div>
 <div id="multilevel-models" class="section level1">
 <h1><span class="header-section-number">17</span> Multilevel models</h1>
 <p>This chapter assumes:</p>
 <ul>
 <li>You know what a multilevel model is</li>
 <li>…</li>
-</ul>
-<div id="the-sleepstudy-data-and-traditional-rm-anova" class="section level2">
-<h2><span class="header-section-number">17.1</span> The <code>sleepstudy</code> data and traditional RM Anova</h2>
-<p>XXX As noted in the <a href="anova-cookbook.html">Anova cookbook section</a>, repeated measures anova can be approximated using linear mixed models.</p>
-<p>For example, using the same <code>sleepstudy</code> example, this model approximates a repeat measures anova in which multiple measurments of <code>Reaction</code> time are taken on multiple <code>Days</code> for each <code>Subject</code>:</p>
-<!-- 
-This post by the author of afex confirms these models are equivalent to RM anova:
-http://singmann.org/mixed-models-for-anova-designs-with-one-observation-per-unit-of-observation-and-cell-of-the-design/ 
--->
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sleep.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(Days) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>Subject), <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
-lmerTest<span class="op">::</span><span class="kw">anova</span>(sleep.model)
-## Analysis of Variance Table of type III  with  Satterthwaite 
-## approximation for degrees of freedom
-##              Sum Sq Mean Sq NumDF DenDF F.value    Pr(&gt;F)    
-## factor(Days) 166235   18471     9   153  18.703 &lt; 2.2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre></div>
-<p>If you really wanted to fit traditional RM Anova, this is the ‘real thing’:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">afex<span class="op">::</span><span class="kw">aov_car</span>(Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span><span class="kw">Error</span>(Subject<span class="op">/</span>(Days)), <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
-## Anova Table (Type 3 tests)
-## 
-## Response: Reaction
-##   Effect          df     MSE         F ges p.value
-## 1   Days 3.32, 56.46 2676.18 18.70 *** .29  &lt;.0001
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1
-## 
-## Sphericity correction method: GG</code></pre></div>
-<p>XXX ADD THESE EXAMPLES But see the <a href="multilevel-models.html">multilevel models section</a> for details of more interesting models which:</p>
-<div id="fit-a-simple-slope-for-days" class="section level3">
-<h3><span class="header-section-number">17.1.1</span> Fit a simple slope for <code>Days</code></h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Days, Reaction)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_smooth</span>() 
-## `geom_smooth()` using method = &#39;loess&#39;</code></pre></div>
-<p><img src="multilevel-models_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">slope.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>Subject),  <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
-lmerTest<span class="op">::</span><span class="kw">anova</span>(slope.model)
-## Analysis of Variance Table of type III  with  Satterthwaite 
-## approximation for degrees of freedom
-##      Sum Sq Mean Sq NumDF DenDF F.value    Pr(&gt;F)    
-## Days 162703  162703     1   161   169.4 &lt; 2.2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-slope.model.summary &lt;-<span class="st"> </span><span class="kw">summary</span>(slope.model)
-slope.model.summary<span class="op">$</span>coefficients
-##              Estimate Std. Error       df  t value Pr(&gt;|t|)
-## (Intercept) 251.40510  9.7467163  22.8102 25.79383        0
-## Days         10.46729  0.8042214 161.0036 13.01543        0</code></pre></div>
-</div>
-<div id="allow-the-effect-of-sleep-deprivation-to-vary-for-different-participants" class="section level3">
-<h3><span class="header-section-number">17.1.2</span> Allow the effect of sleep deprivation to vary for different participants</h3>
-<p>It looks like sleep deprivation hits some participants worse than others:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1234</span>)
-lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(Subject <span class="op">%in%</span><span class="st"> </span><span class="kw">sample</span>(<span class="kw">levels</span>(Subject), <span class="dv">10</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Days, Reaction, <span class="dt">group=</span>Subject, <span class="dt">color=</span>Subject)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span>F) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">size=</span><span class="dv">1</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
-<p><img src="multilevel-models_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>If we wanted to test whether there was significant variation in the effects of sleep deprivation between subjects, we could add a <em>random slope</em> to the model.</p>
-<p>The random slope allows the effect of <code>Days</code> to vary between subjects. So we can think of an overall slope (i.e. RT goes up over the days), from which individuals deviate by some amount (e.g. a resiliant person will have a negative deviation or residual from the overall slope).</p>
-<p>Adding the random slope doesn’t change the F test for <code>Days</code> that much:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">random.slope.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span>(Days<span class="op">|</span>Subject),  <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
-lmerTest<span class="op">::</span><span class="kw">anova</span>(random.slope.model)
-## Analysis of Variance Table of type III  with  Satterthwaite 
-## approximation for degrees of freedom
-##      Sum Sq Mean Sq NumDF DenDF F.value    Pr(&gt;F)    
-## Days  30031   30031     1    17  45.853 3.264e-06 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre></div>
-<p>Nor the overall slope coefficient:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">random.slope.model.summary &lt;-<span class="st"> </span><span class="kw">summary</span>(random.slope.model)
-slope.model.summary<span class="op">$</span>coefficients
-##              Estimate Std. Error       df  t value Pr(&gt;|t|)
-## (Intercept) 251.40510  9.7467163  22.8102 25.79383        0
-## Days         10.46729  0.8042214 161.0036 13.01543        0</code></pre></div>
-<p>But we can use the <code>lmerTest::rand()</code> function to show that there is statistically significant variation in slopes between individuals, using the likelihood ratio test:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lmerTest<span class="op">::</span><span class="kw">rand</span>(random.slope.model)
-## Analysis of Random effects Table:
-##              Chi.sq Chi.DF p.value    
-## Days:Subject   42.8      2   5e-10 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre></div>
-<p>Because the random slope for <code>Days</code> is statistically significant, we know it improves the model. One way to see that improvement is to plot residuals (unexplained error for each datapoint) against predicted values. To extract residual and fitted values we use the <code>residuals()</code> and <code>predict()</code> functions. These are then combined in a data_frame, to enable us to use ggplot for the subsequent figures.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create data frames containing residuals and fitted</span>
-<span class="co"># values for each model we ran above</span>
-a &lt;-<span class="st">  </span><span class="kw">data_frame</span>(
-    <span class="dt">model =</span> <span class="st">&quot;random.slope&quot;</span>,
-    <span class="dt">fitted =</span> <span class="kw">predict</span>(random.slope.model), 
-    <span class="dt">residual =</span> <span class="kw">residuals</span>(random.slope.model))
-b &lt;-<span class="st"> </span><span class="kw">data_frame</span>(
-    <span class="dt">model =</span> <span class="st">&quot;random.intercept&quot;</span>,
-    <span class="dt">fitted =</span> <span class="kw">predict</span>(slope.model), 
-    <span class="dt">residual =</span> <span class="kw">residuals</span>(slope.model)) 
-
-<span class="co"># join the two data frames together</span>
-residual.fitted.data &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(a,b)</code></pre></div>
-<p>We can see that the residuals from the random slope model are much more evenly distributed across the range of fitted values, which suggests that the assumption of homogeneity of variance is met in the random slope model:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plots residuals against fitted values for each model</span>
-residual.fitted.data <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(fitted, residual)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span>F) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model) 
-## `geom_smooth()` using method = &#39;loess&#39;</code></pre></div>
-<p><img src="multilevel-models_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<p>We can plot both of the random effects from this model (intercept and slope) to see how much the model expects individuals to deviate from the overall (mean) slope.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># extract the random effects from the model (intercept and slope)</span>
-<span class="kw">ranef</span>(random.slope.model)<span class="op">$</span>Subject <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="co"># implicitly convert them to a dataframe and add a column with the subject number</span>
-<span class="st">  </span><span class="kw">rownames_to_column</span>(<span class="dt">var=</span><span class="st">&quot;Subject&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="co"># plot the intercept and slobe values with geom_abline()</span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>()) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_abline</span>(<span class="kw">aes</span>(<span class="dt">intercept=</span><span class="st">`</span><span class="dt">(Intercept)</span><span class="st">`</span>, <span class="dt">slope=</span>Days, <span class="dt">color=</span>Subject)) <span class="op">+</span>
-<span class="st">  </span><span class="co"># add axis label</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Day&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual RT&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="co"># set the scale of the plot to something sensible</span>
-<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="dt">expand=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">100</span>, <span class="dv">100</span>)) </code></pre></div>
-<p><img src="multilevel-models_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<p>Inspecting this plot, there doesn’t seem to be any strong correlation between the RT value at which an individual starts (their intercept residual) and the slope describing how they change over the days compared with the average slope (their slope residual).</p>
-<p>That is, we can’t say that knowing whether a person has fast or slow RTs at the start of the study gives us a clue about what will happen to them after they are sleep deprived: some people start slow and get faster; other start fast but suffer and get slower.</p>
-<p>However we can explicitly check this correlation (between individuals’ intercept and slope residuals) using the <code>VarCorr()</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">VarCorr</span>(random.slope.model)
-##  Groups   Name        Std.Dev. Corr 
-##  Subject  (Intercept) 24.7404       
-##           Days         5.9221  0.066
-##  Residual             25.5918</code></pre></div>
-<p>The correlation between the random intercept and slopes is only 0.066, and so very low. We might, therefore, want to try fitting a model without this correlation. <code>lmer</code> includes the correlation by default, so we need to change the model formula to make it clear we don’t want it:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">uncorrelated.reffs.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(
-  Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Subject) <span class="op">+</span><span class="st"> </span>(<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>Days<span class="op">|</span>Subject),  
-  <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
-
-<span class="kw">VarCorr</span>(uncorrelated.reffs.model)
-##  Groups    Name        Std.Dev.
-##  Subject   (Intercept) 25.0513 
-##  Subject.1 Days         5.9882 
-##  Residual              25.5653</code></pre></div>
-<p>The variance components don’t change much when we constrain the <em>covariance</em> of intercepts and slopes to be zero, and we can explicitly compare these two models using the <code>anova()</code> function, which is somewhat confusingly named because in this instance it is performing a likelihood ratio test to compare the two models:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova</span>(random.slope.model, uncorrelated.reffs.model)
-## refitting model(s) with ML (instead of REML)
-## Data: lme4::sleepstudy
-## Models:
-## ..1: Reaction ~ Days + (1 | Subject) + (0 + Days | Subject)
-## object: Reaction ~ Days + (Days | Subject)
-##        Df    AIC    BIC  logLik deviance  Chisq Chi Df Pr(&gt;Chisq)
-## ..1     5 1762.0 1778.0 -876.00   1752.0                         
-## object  6 1763.9 1783.1 -875.97   1751.9 0.0639      1     0.8004</code></pre></div>
-<p>Model fit is not significantly worse with the constrained model, so for parsimony’s sake we prefer it to the more complex model.</p>
-</div>
-<div id="fitting-a-curve-for-the-effect-of-days" class="section level3">
-<h3><span class="header-section-number">17.1.3</span> Fitting a curve for the effect of <code>Days</code></h3>
-<p>In theory, we could also fit additional parameters for the effect of <code>Days</code>, although a combined smoothed line plot/scatterplot indicates that a linear function fits the data reasonably well.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Days, Reaction)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_smooth</span>() 
-## `geom_smooth()` using method = &#39;loess&#39;</code></pre></div>
-<p><img src="multilevel-models_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-<p>If we insisted on testing a curved (quadratic) function of <code>Days</code>, we could:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">quad.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(Days<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>Subject),  <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
-quad.model.summary &lt;-<span class="st"> </span><span class="kw">summary</span>(quad.model)
-quad.model.summary<span class="op">$</span>coefficients
-##                Estimate Std. Error        df   t value   Pr(&gt;|t|)
-## (Intercept) 255.4493728 10.4656310  30.04063 24.408406 0.00000000
-## Days          7.4340850  2.9707978 160.00374  2.502387 0.01334034
-## I(Days^2)     0.3370223  0.3177733 160.00374  1.060575 0.29048148</code></pre></div>
-<p>Here, the <em>p</em> value for <code>I(Days^2)</code> is not significant, suggesting (as does the plot) that a simple slope model is sufficient.</p>
-<!-- ## Arguments for bayesian model fitting -->
-<!-- See  -->
-<!-- https://arxiv.org/pdf/1701.04858.pdf -->
-
-</div>
-</div>
+</ul> 
 </div>
             </section>
 
@@ -1028,7 +300,7 @@ quad.model.summary<span class="op">$</span>coefficients
         </div>
       </div>
 <a href="mediation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="cfa.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="the-sleepstudy-data-and-traditional-rm-anova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

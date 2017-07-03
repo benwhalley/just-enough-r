@@ -8,9 +8,9 @@ output:
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 library(tidyverse)
 library(pander)
+
 library(lmerTest)
 ```
-
 
 
 
@@ -25,9 +25,8 @@ This section is intended as a shortcut to running Anova for a variety of common 
 
 ### Factorial anova, no bigger than 2x2
 
-```{r}
 
-```
+TODO
 
 
 ### Factorial anova, where one factor has > 2 levels.
@@ -52,6 +51,9 @@ eysenck %>%
   stat_summary(geom="pointrange", fun.data = mean_cl_boot) +
   ylab("Recall (95% CI)") + xlab("")
 ```
+
+
+[Visual inspection of the data (see Figure X) suggested that older adults recalled more words than younger adults, and that this difference was greatest for the intention, imagery, and adjective conditions. Recall peformance was worst in the counting and rhyming conditions.]{.apa-example}
 
 
 Or alternatively if we wanted to provde a better summary of the distribution of the raw data we could use a boxplot:

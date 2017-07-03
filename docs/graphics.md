@@ -65,6 +65,8 @@ One way to cut through the multituyde of options is to determine what the purpos
 </div>
 
 
+### 'Chart choosers' {-}
+
 There are various simple chart selection guides available online, of which these are quite nice examples:
 
 - [Chart selection guide (pdf)](http://extremepresentation.typepad.com/blog/2006/09/choosing_a_good.html)]
@@ -84,16 +86,18 @@ This guide is restricted to examples likely to be useful to experiemental and ap
 
 
 
-### Using ggplot
 
 
-When using `ggplot` it helps to think of five separate steps, of which 2 are optional
+### Thinking like `ggplot`
+
+When using `ggplot` it helps to think of five separate steps to making a plot (2 are optional, but commonly used):
 
 1. Choose the data you want to plot.
-2. Map variables to axes or other features on the plot.
+2. Map variables to axes or other features of the plot (e.g. sizes or colours).
 3. (Optionally) use `ggplot` functions to summarise your data before the plot is drawn (e.g. to calulate means and standard errors for point-range plots).
 4. Add visual display layers.
-5. (Optionally) Split the plot up (repeat it) into multiple panels.
+5. (Optionally) Split the plot up across multiple panels using groupings in the data.
+
 
 You can then customise the plot labels and title, and tweak other presentation parameters, although this often isn't necessary unless sending a graphic for publication. You can also export graphics in multiple high quality formats.
 
@@ -106,7 +110,6 @@ The simplest way to demonstrate these steps is with an example, and we begin wit
 
 Problem to be solved: You want to check/show whether variables are related in a linear fashion before running linear regression:
 
-
 *Step 1* is to select our data. As is typical in R, `ggplot` works best with long-format data. In the examples below we will use the `mtcars` dataset for convenience, so our first line of code is to use the `dplyr` pipe symbol (operator) to send the `mtcars` dataset to the next line of code:
 
 
@@ -114,7 +117,6 @@ Problem to be solved: You want to check/show whether variables are related in a 
 mtcars %>% 
   ...
 ```
-
 
 
 *Step 2* is to map the variables we want to axes or other features of the plot (e.g. the colours of points, or the linetypes used in line plots). Here we tell `ggplot` to use `disp` (engine size) on the x axis, and `mpg` on the y axis. We also tell it to colour the points differently depending on the value of `hp` (engine horsepower). At this point `ggplot` will create and label the axes and plot area, but doesn't yet display any of our data. For this we need to add visual display layers (we skip step 3 in this example, but will cover it in other examples below):
@@ -149,6 +151,13 @@ mtcars %>%
 
 And we have a pretty slick graph: `ggplot` has now added points for each pair of `disp` and `mpg` values, and coloured them according to the value of `hp` (see choosing colours below XXX).
 
+[Use the `airquality` dataset and create your own scatterplot and try to colour the points using the `Month` variable. Should `Month` be used as a factor or a numeric variable when colouring the points?]{.exercise}
+
+
+
+
+
+
 What's even neater about `ggplot` though is how easy it is to *layer* different visualisations of the same data. These visual layers are called `geom`'s and the functions which add them are all prefixed with `geom_`, so `geom_point()` for scatter plots, or `geom_line()` for line plots, or `geom_smooth()` for a smoothed line plot. We can add this to the scatter plot like so:
 
 
@@ -158,10 +167,9 @@ mtcars %>%
   ggplot(aes(x = disp, y = mpg, colour=hp)) +
   geom_point(size=2) + 
   geom_smooth(se=F, colour="grey") 
-## `geom_smooth()` using method = 'loess'
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 
 
@@ -181,13 +189,12 @@ mtcars %>%
   geom_point(size=2) + 
   geom_smooth(se=F, colour="grey") +
   facet_wrap("am")
-## `geom_smooth()` using method = 'loess'
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 
-One trick is to make sure factors are labelled nicely, because these labels appear on the final plot. Here the `mutate()` call [relabels the factor](XXX.html) which makes the plot easier to read:
+One trick is to make sure factors are labelled nicely, because these labels appear on the final plot. Here the `mutate()` call [relabels the factor](real-data.html#factors-and-numerics) which makes the plot easier to read:
 
 
 ```r
@@ -197,10 +204,9 @@ mtcars %>%
   geom_point(size=2) + 
   geom_smooth(se=F, colour="grey") +
   facet_wrap("american")
-## `geom_smooth()` using method = 'loess'
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 
 
@@ -213,7 +219,7 @@ lme4::sleepstudy %>%
   ggplot(aes(Reaction)) + geom_density()
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 Imagine we wanted to compare distributions for individuals. Simply overlaying the lines is confusing:
 
@@ -223,7 +229,7 @@ lme4::sleepstudy %>%
   ggplot(aes(Reaction, group=Subject)) + geom_density()
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 
 Facetting produces a nicer result:
@@ -234,7 +240,7 @@ lme4::sleepstudy %>%
   ggplot(aes(Reaction)) + geom_density() + facet_wrap("Subject")
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 
 But we could present the same information more compactly, and with better facility to compare between subjects, if we use a bottleplot:
@@ -247,7 +253,7 @@ lme4::sleepstudy %>%
   geom_violin() 
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 
 
@@ -271,7 +277,7 @@ mean.ranked.sleep %>%
   theme(aspect.ratio = .33)  # change the aspect ratio to make long and wide
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 
 
@@ -293,7 +299,7 @@ sleep.repeat %>%
   theme(aspect.ratio = .25)  # change the aspect ratio to make long and wide
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 
 
@@ -307,7 +313,7 @@ mean.ranked.sleep %>%
   geom_boxplot() 
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 
 
@@ -320,7 +326,7 @@ lme4::sleepstudy %>%
   geom_boxplot() 
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
 
 
@@ -366,25 +372,25 @@ When exploring a dataset, often useful to use built in functions or helpers from
 hist(mtcars$mpg)
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
 ```r
 plot(density(mtcars$mpg))
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-18-2.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-19-2.png" width="672" />
 
 ```r
 boxplot(mpg~cyl, data=mtcars)
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-18-3.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-19-3.png" width="672" />
 
 ```r
 Hmisc::hist.data.frame(mtcars)
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-18-4.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-19-4.png" width="672" />
 
 
 Even for simple plots, ggplot has some useful helper functions though:
@@ -394,13 +400,13 @@ Even for simple plots, ggplot has some useful helper functions though:
 qplot(mpg, data=mtcars, geom="density") + xlab("Miles per gallon")
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
 ```r
 qplot(x=factor(cyl), y=mpg, data=mtcars, geom="boxplot") 
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-19-2.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-20-2.png" width="672" />
 
 
 
@@ -412,13 +418,13 @@ qplot(x=factor(cyl), y=mpg, data=mtcars, geom="boxplot")
 with(mtcars, plot(mpg, wt))
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
 ```r
 pairs(select(mtcars, wt, disp, mpg))
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-20-2.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-21-2.png" width="672" />
 
 
 Again, for quick plots ggplot also has useful shortcut functions:
@@ -428,7 +434,7 @@ Again, for quick plots ggplot also has useful shortcut functions:
 qplot(mpg, wt, color=factor(cyl), data = mtcars)
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 
 
@@ -440,10 +446,9 @@ I don't think the base R plots are that convenient here. `ggplot2::` and the `st
 ```r
 ggplot(mtcars, aes(factor(cyl), mpg)) + 
   stat_summary(geom="bar")
-## No summary function supplied, defaulting to `mean_se()
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-23-1.png" width="672" />
 
 
 And if you are plotting quantities, as disussed above, showing a range is sensible (a boxplot would also fill both definitions):
@@ -452,9 +457,8 @@ And if you are plotting quantities, as disussed above, showing a range is sensib
 ```r
 ggplot(mtcars, aes(factor(cyl), mpg)) + 
   stat_summary(geom="pointrange")
-## No summary function supplied, defaulting to `mean_se()
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 

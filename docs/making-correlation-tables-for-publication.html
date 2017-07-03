@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Just enough R</title>
+  <meta name="description" content="‘Just enough’ R">
+  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Just enough R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Just enough R" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="obtaining-a-correlation-matrix.html">
+<link rel="next" href="other-types-of-correlation.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="https://hypothes.is/embed.js" async></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Just enough R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="getting-started-with-r-and-rstudio.html"><a href="getting-started-with-r-and-rstudio.html"><i class="fa fa-check"></i><b>2</b> Getting started with R and RStudio</a></li>
+<li class="chapter" data-level="3" data-path="datasets-and-dataframes.html"><a href="datasets-and-dataframes.html"><i class="fa fa-check"></i><b>3</b> Datasets and dataframes</a></li>
+<li class="chapter" data-level="4" data-path="placeholder.html"><a href="placeholder.html"><i class="fa fa-check"></i><b>4</b> Placeholder</a></li>
+<li class="chapter" data-level="5" data-path="summarising-data.html"><a href="summarising-data.html"><i class="fa fa-check"></i><b>5</b> Summarising data</a></li>
+<li class="chapter" data-level="6" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>6</b> Graphics</a></li>
+<li class="chapter" data-level="7" data-path="working-with-real-data.html"><a href="working-with-real-data.html"><i class="fa fa-check"></i><b>7</b> Working with ‘real’ data</a></li>
+<li class="chapter" data-level="8" data-path="correlations.html"><a href="correlations.html"><i class="fa fa-check"></i><b>8</b> Correlations</a><ul>
+<li class="chapter" data-level="8.1" data-path="obtaining-a-correlation-matrix.html"><a href="obtaining-a-correlation-matrix.html"><i class="fa fa-check"></i><b>8.1</b> Obtaining a correlation matrix</a></li>
+<li class="chapter" data-level="8.2" data-path="making-correlation-tables-for-publication.html"><a href="making-correlation-tables-for-publication.html"><i class="fa fa-check"></i><b>8.2</b> Making correlation tables for publication</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="making-correlation-tables-for-publication.html"><a href="making-correlation-tables-for-publication.html#apatables"><i class="fa fa-check"></i><b>8.2.1</b> <code>apaTables</code></a></li>
+<li class="chapter" data-level="8.2.2" data-path="making-correlation-tables-for-publication.html"><a href="making-correlation-tables-for-publication.html#by-hand"><i class="fa fa-check"></i><b>8.2.2</b> By hand</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="other-types-of-correlation.html"><a href="other-types-of-correlation.html"><i class="fa fa-check"></i><b>8.3</b> Other types of correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="t-tests.html"><a href="t-tests.html"><i class="fa fa-check"></i><b>9</b> t-tests</a></li>
+<li class="chapter" data-level="10" data-path="introduction-to-linear-models-in-r.html"><a href="introduction-to-linear-models-in-r.html"><i class="fa fa-check"></i><b>10</b> Introduction to linear models in R</a></li>
+<li class="chapter" data-level="11" data-path="anova-in-r.html"><a href="anova-in-r.html"><i class="fa fa-check"></i><b>11</b> Anova in R</a></li>
+<li class="chapter" data-level="12" data-path="anova-cookbook.html"><a href="anova-cookbook.html"><i class="fa fa-check"></i><b>12</b> Anova ‘Cookbook’</a></li>
+<li class="chapter" data-level="13" data-path="understanding-interactions-part-1.html"><a href="understanding-interactions-part-1.html"><i class="fa fa-check"></i><b>13</b> Understanding interactions (part 1)</a></li>
+<li class="chapter" data-level="14" data-path="making-predictions.html"><a href="making-predictions.html"><i class="fa fa-check"></i><b>14</b> Making predictions</a></li>
+<li class="chapter" data-level="15" data-path="mediation.html"><a href="mediation.html"><i class="fa fa-check"></i><b>15</b> Mediation</a></li>
+<li class="chapter" data-level="16" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>16</b> Multilevel models</a></li>
+<li class="chapter" data-level="17" data-path="confirmatory-factor-analysis.html"><a href="confirmatory-factor-analysis.html"><i class="fa fa-check"></i><b>17</b> Confirmatory factor analysis</a></li>
+<li class="chapter" data-level="18" data-path="installing-r-and-rstudio.html"><a href="installing-r-and-rstudio.html"><i class="fa fa-check"></i><b>18</b> Installing R and RStudio</a></li>
+<li class="chapter" data-level="19" data-path="loading-packages.html"><a href="loading-packages.html"><i class="fa fa-check"></i><b>19</b> Loading packages</a></li>
+<li class="chapter" data-level="20" data-path="getting-help.html"><a href="getting-help.html"><i class="fa fa-check"></i><b>20</b> Getting help</a></li>
+<li class="chapter" data-level="21" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>21</b> Missing values</a></li>
+<li class="chapter" data-level="22" data-path="tips-and-tricks-with-rmarkdown.html"><a href="tips-and-tricks-with-rmarkdown.html"><i class="fa fa-check"></i><b>22</b> Tips and tricks with RMarkdown</a></li>
+<li class="chapter" data-level="23" data-path="confidence-credible-and-prediction-intervals.html"><a href="confidence-credible-and-prediction-intervals.html"><i class="fa fa-check"></i><b>23</b> Confidence, credible and prediction intervals</a></li>
+<li class="chapter" data-level="24" data-path="calculate-pairwise-contrasts.html"><a href="calculate-pairwise-contrasts.html"><i class="fa fa-check"></i><b>24</b> calculate pairwise contrasts</a></li>
+<li class="chapter" data-level="25" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>25</b> References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">‘Just enough’ R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="making-correlation-tables-for-publication" class="section level2">
+<h2><span class="header-section-number">8.2</span> Making correlation tables for publication</h2>
+<div id="apatables" class="section level3">
+<h3><span class="header-section-number">8.2.1</span> <code>apaTables</code></h3>
+<p>If you want to produce output tables for publication the <code>apaTables</code> package might be useful. This block saves an APA formatted correlation table to an <a href="Table1_APA.doc">external Word document like this</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(apaTables)
+<span class="kw">apa.cor.table</span>(airquality, <span class="dt">filename=</span><span class="st">&quot;Table1_APA.doc&quot;</span>, <span class="dt">show.conf.interval=</span>F)
+## 
+## 
+## Means, standard deviations, and correlations
+##  
+## 
+##   Variable   M      SD    1      2     3      4     5   
+##   1. Ozone   42.13  32.99                               
+##                                                         
+##   2. Solar.R 185.93 90.06 .35**                         
+##                                                         
+##   3. Wind    9.96   3.52  -.60** -.06                   
+##                                                         
+##   4. Temp    77.88  9.47  .70**  .28** -.46**           
+##                                                         
+##   5. Month   6.99   1.42  .16    -.08  -.18*  .42**     
+##                                                         
+##   6. Day     15.80  8.86  -.01   -.15  .03    -.13  -.01
+##                                                         
+## 
+## Note. * indicates p &lt; .05; ** indicates p &lt; .01.
+## M and SD are used to represent mean and standard deviation, respectively.
+## </code></pre></div>
+</div>
+<div id="by-hand" class="section level3">
+<h3><span class="header-section-number">8.2.2</span> By hand</h3>
+<p>If you’re not bothered about strict APA foramt, you might still want to extract the <em>r</em> and <em>p</em> values as dataframes which can then be saved to a csv and opened in excel, or converted to a table by some other means.</p>
+<p>You can do this by storing the <code>corr.test</code> output in a variable, and the accessing the <code>$r</code> and <code>$p</code> values within it:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mycorrelations &lt;-<span class="st"> </span>psych<span class="op">::</span><span class="kw">corr.test</span>(airquality)
+<span class="kw">write.csv</span>(mycorrelations<span class="op">$</span>p, <span class="dt">file=</span><span class="st">&quot;airquality-r-values.csv&quot;</span>)
+mycorrelations<span class="op">$</span>p 
+##                Ozone      Solar.R         Wind         Temp        Month
+## Ozone   0.000000e+00 0.0019724194 1.298162e-11 0.000000e+00 5.617870e-01
+## Solar.R 1.793109e-04 0.0000000000 1.000000e+00 7.517729e-03 1.000000e+00
+## Wind    9.272583e-13 0.4959552068 0.000000e+00 3.434076e-08 2.471060e-01
+## Temp    0.000000e+00 0.0007517729 2.641597e-09 0.000000e+00 7.231443e-07
+## Month   7.760010e-02 0.3663533509 2.745622e-02 6.026202e-08 0.000000e+00
+## Day     8.879425e-01 0.0702233769 7.387466e-01 1.076164e-01 9.221900e-01
+##               Day
+## Ozone   1.0000000
+## Solar.R 0.5617870
+## Wind    1.0000000
+## Temp    0.6456986
+## Month   1.0000000
+## Day     0.0000000
+mycorrelations<span class="op">$</span>r 
+##               Ozone     Solar.R        Wind       Temp        Month
+## Ozone    1.00000000  0.34834169 -0.60154653  0.6983603  0.164519314
+## Solar.R  0.34834169  1.00000000 -0.05679167  0.2758403 -0.075300764
+## Wind    -0.60154653 -0.05679167  1.00000000 -0.4579879 -0.178292579
+## Temp     0.69836034  0.27584027 -0.45798788  1.0000000  0.420947252
+## Month    0.16451931 -0.07530076 -0.17829258  0.4209473  1.000000000
+## Day     -0.01322565 -0.15027498  0.02718090 -0.1305932 -0.007961763
+##                  Day
+## Ozone   -0.013225647
+## Solar.R -0.150274979
+## Wind     0.027180903
+## Temp    -0.130593175
+## Month   -0.007961763
+## Day      1.000000000</code></pre></div>
+<p>You can also access the CI for each pariwise correlation as a table:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mycorrelations<span class="op">$</span>ci <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre></div>
+<table style="width:64%;">
+<colgroup>
+<col width="25%" />
+<col width="11%" />
+<col width="9%" />
+<col width="11%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">lower</th>
+<th align="center">r</th>
+<th align="center">upper</th>
+<th align="center">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Ozone-Slr.R</strong></td>
+<td align="center">0.17</td>
+<td align="center">0.35</td>
+<td align="center">0.5</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Ozone-Wind</strong></td>
+<td align="center">-0.71</td>
+<td align="center">-0.6</td>
+<td align="center">-0.47</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Ozone-Temp</strong></td>
+<td align="center">0.59</td>
+<td align="center">0.7</td>
+<td align="center">0.78</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Ozone-Month</strong></td>
+<td align="center">-0.018</td>
+<td align="center">0.17</td>
+<td align="center">0.34</td>
+<td align="center">0.078</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Ozone-Day</strong></td>
+<td align="center">-0.2</td>
+<td align="center">-0.013</td>
+<td align="center">0.17</td>
+<td align="center">0.89</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Slr.R-Wind</strong></td>
+<td align="center">-0.22</td>
+<td align="center">-0.057</td>
+<td align="center">0.11</td>
+<td align="center">0.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="obtaining-a-correlation-matrix.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="other-types-of-correlation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["Just enough R.pdf", "Just enough R.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

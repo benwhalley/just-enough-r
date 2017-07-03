@@ -8,6 +8,8 @@ link-citations: yes
 ---
 
 
+# Introduction
+
 ![](media/keepcalm.png)
 
 <!-- 
@@ -18,7 +20,7 @@ https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r
 
 
 
-# Introduction
+
 
 
 R is software which makes it easy to work with and learn from data. 
@@ -90,7 +92,8 @@ I also assume you are using the RStudio editor and working in an RMarkdown docum
 
 
 
+## License
 
-
+These documents are licensed under the [CC BY-SA licence](https://creativecommons.org/licenses/by-sa/4.0/).
 
 
