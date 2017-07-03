@@ -1,0 +1,40 @@
+---
+title: 'Bayesian linear modelling via MCMC'
+output: bookdown::tufte_html2
+---
+
+
+```{r, include=FALSE}
+# ignore all this for the moment
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+library(tidyverse)
+library(pander)
+library(lmerTest)
+
+```
+
+
+# Baysian linear model fitting with MCMC {#bayes-mcmc}
+
+
+XXX TODO TO COMPLETE
+
+- Overview
+- RStan and rstanarm
+- stan_lm(y~x, data=df1)
+- stan_lmer(y~x+(c|group), data=df2)
+
+
+
+## Example of using a ROPE in a clinical trial
+
+- Example from FIT RCT for weight and BMI
+
+
+
+
+## Good references
+
+
+- Rethinking (McElreath): http://xcelab.net/rm/statistical-rethinking/
+- Doing Bayesian Data Analysis Kruschke: http://www.indiana.edu/~kruschke/DoingBayesianDataAnalysis/

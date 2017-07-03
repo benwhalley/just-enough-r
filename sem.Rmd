@@ -1,0 +1,22 @@
+---
+title: 'Structural equation modelling'
+output: bookdown::tufte_html2
+---
+
+
+```{r, include=FALSE}
+# ignore all this for the moment
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+library(tidyverse)
+library(pander)
+library(lmerTest)
+
+```
+
+
+# Structural eqution modelling {#sem}
+
+
+- do CFA first
+- lavaan for structural models
+
