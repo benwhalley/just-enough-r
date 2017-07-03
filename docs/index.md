@@ -8,7 +8,7 @@ link-citations: yes
 ---
 
 
-# Introduction
+# {-}
 
 ![](media/keepcalm.png)
 
@@ -21,7 +21,7 @@ https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r
 
 
 
-
+# Introduction
 
 R is software which makes it easy to work with and learn from data. 
 
