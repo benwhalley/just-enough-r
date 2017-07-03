@@ -69,6 +69,10 @@ hist(lakers$date, breaks=10)
 
 
 
+TODO XXX TBC
+
+
+
 ## Missing values {-}
 
 - `is.na()` and `is.finite`
