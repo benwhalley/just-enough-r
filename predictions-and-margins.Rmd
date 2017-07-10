@@ -17,7 +17,7 @@ theme_set(theme_tufte(base_size = 18))
 
 
 
-# Making predictions
+# Making predictions {#predictions-and-margins}
 
 
 
@@ -46,7 +46,7 @@ Consider the example used in a previous section where we measured `injury.severi
 
 ```{r, echo=F}
 expand.grid(Age=c("Young", "Old"), Gender=c("Male", "Female")) %>% as.data.frame() %>% 
-  mutate(mean="?") %>% pander::pander()
+  mutate(mean="?") %>% pander::pandoc.table()
 ```
 
 And as before, we might plot these data:

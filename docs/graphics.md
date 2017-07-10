@@ -7,22 +7,26 @@ output:
 
 
 
-# Graphics
+# Graphics {#graphics}
+
+
+<img src="graphics_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
 Graphics are the best thing about R. The base system alone provides lots of useful plotting functions, but the `ggplot2` package is exceptional in the consistent and powerful approach it takes to visualising data. This chapter focusses mostly on `ggplot`, but does include some pointers to other useful plotting functions.
 
 
+It's also worth pointing out here that the O'Reilly [R Graphics cookbook is available as a pdf download](https://ase.tufts.edu/bugs/guide/assets/R%20Graphics%20Cookbook.pdf) and is a much more comprehensive source than this page. 
 
-### The R Graphics Cookbook {-}
+The examples below are more selective and show plots likely to be of particular use in reporting your studies.
 
-It's worth pointing out that the O'Reilly [R Graphics cookbook is available as a pdf download here](https://ase.tufts.edu/bugs/guide/assets/R%20Graphics%20Cookbook.pdf) and is a much more comprehensive source than this page. Below are just some pointers to get you started.
-
-<img src="media/graphics-cookbook.png" width="200" />
+The emphaisis on showing you how to make _good_ plots that help you explore data and communicate your findings, rather than simply reproduce the output of SPSS or Excel.
 
 
-## Benefits of visualising data
 
-XXX TODO 
+
+## Benefits of visualising data {- #graphics-benefits}
+
+TODO  XXX
 
 - Psychology and human factors of graphics + Tufte. 
 - Importance of graphs to communicate.
@@ -31,7 +35,7 @@ XXX TODO
 
 
 
-## Choosing a plot type
+## Which tool to use? {- #graphics-approaches}
 
 Typically when setting out to plot data in R it pays to ask yourself whether you need:
 
@@ -39,14 +43,13 @@ Typically when setting out to plot data in R it pays to ask yourself whether you
 
 2. A plot that is specifically designed to communicate your data effectively, and where you do care about the details of the final output.
   
-
 For the first case, where you already know what you want --- for example to visualise a distribution of a single variable or to check diagnostics from a linear model --- there are many useful built-in functions in base-R.
 
 For the second case --- for example where you want to visualise the main outcomes of your study, or draw attention to specific aspects of your data --- there is `ggplot2`. We'll deal with the second case first, because using ggplot highlights many important aspects of plotting in general.
 
 
 
-## Choosing, layering and facetting graphics
+## Layered graphics with `ggplot` {- #layered-graphics}
 
 If you've never given much thought to data visualisation before, you might be surprised at the sheer variety of graphs types available.
 
@@ -65,7 +68,7 @@ One way to cut through the multituyde of options is to determine what the purpos
 </div>
 
 
-### 'Chart choosers' {-}
+### 'Chart chooser' guides {-}
 
 There are various simple chart selection guides available online, of which these are quite nice examples:
 
@@ -75,10 +78,9 @@ There are various simple chart selection guides available online, of which these
 ![](media/choosing_a_good_chart.jpg)
 
 
-
 *However*, guides which attempt to be comprehensive and show you a full range of plot types are perhaps not as useful as those which reflect our knowledge of which plots are the most effective forms of communication.
 
-For example, almost all guides to plotting, and especially R textbooks, will show you how to plot a simple bar graph. But bar graphs have numerous disadvantages over other plots which can show the same information. Specifically, they are: low in information density (and so inefficient in use of space); they make comparisons between multiple series very difficult (for example in [interacion plots](understanding-interactions.html)); and, perhaps most importantly, even when they include error bars, readers consistently misinterpret the quantitative information in bar graphs (specifically, when bar graphs are used to display estimates which contain error, readers assume points above the bar are less likely than points within the bar, even though this is typically not the case).
+For example, almost all guides to plotting, and especially R textbooks, will show you how to plot a simple bar graph. But bar graphs have numerous disadvantages over other plots which can show the same information. Specifically, they are: low in information density (and so inefficient in use of space); they make comparisons between multiple series very difficult (for example in [interacion plots](#understanding-interactions)); and, perhaps most importantly, even when they include error bars, readers consistently misinterpret the quantitative information in bar graphs (specifically, when bar graphs are used to display estimates which contain error, readers assume points above the bar are less likely than points within the bar, even though this is typically not the case).
 
 You should be guided in choosing plots not simply by mechanical rules based on the number or type of variables you want to display. Instead, you should be guided by the evidence from basic studies of human perception, and applied data on how different types of infromation displays are really used by readers.
 
@@ -88,7 +90,7 @@ This guide is restricted to examples likely to be useful to experiemental and ap
 
 
 
-### Thinking like `ggplot`
+### Thinking like `ggplot` 
 
 When using `ggplot` it helps to think of five separate steps to making a plot (2 are optional, but commonly used):
 
@@ -334,33 +336,29 @@ lme4::sleepstudy %>%
 ### Comparisons
 
 
-
+TODO XXX
 
 
 ### Composition
 
 
-
-### Combining plots in a grid
-
-
-
-### Exporting high quality ggplots for print
-
-
-See page [323 of the R Graphics Cookbook](https://ase.tufts.edu/bugs/guide/assets/R%20Graphics%20Cookbook.pdf)
-
-
+```r
+tribble
+## function (...) 
+## {
+##     data <- extract_frame_data_from_dots(...)
+##     turn_frame_data_into_tibble(data$frame_names, data$frame_rest)
+## }
+## <environment: namespace:tibble>
+```
 
 
-
+TODO XXX
 
 
 
 
-
-
-## 'Quick and dirty' plotting
+## 'Quick and dirty' (utility) plots {- #utility-plotting-functions}
 
 When exploring a dataset, often useful to use built in functions or helpers from other libraries. These help you quickly visualise relationships, but aren't always *exactly* what you need and can be hard to customise.
 
@@ -372,25 +370,25 @@ When exploring a dataset, often useful to use built in functions or helpers from
 hist(mtcars$mpg)
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
 ```r
 plot(density(mtcars$mpg))
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-19-2.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-20-2.png" width="672" />
 
 ```r
 boxplot(mpg~cyl, data=mtcars)
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-19-3.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-20-3.png" width="672" />
 
 ```r
 Hmisc::hist.data.frame(mtcars)
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-19-4.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-20-4.png" width="672" />
 
 
 Even for simple plots, ggplot has some useful helper functions though:
@@ -400,13 +398,13 @@ Even for simple plots, ggplot has some useful helper functions though:
 qplot(mpg, data=mtcars, geom="density") + xlab("Miles per gallon")
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
 ```r
 qplot(x=factor(cyl), y=mpg, data=mtcars, geom="boxplot") 
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-20-2.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-21-2.png" width="672" />
 
 
 
@@ -418,13 +416,13 @@ qplot(x=factor(cyl), y=mpg, data=mtcars, geom="boxplot")
 with(mtcars, plot(mpg, wt))
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 ```r
 pairs(select(mtcars, wt, disp, mpg))
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-21-2.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-22-2.png" width="672" />
 
 
 Again, for quick plots ggplot also has useful shortcut functions:
@@ -434,7 +432,7 @@ Again, for quick plots ggplot also has useful shortcut functions:
 qplot(mpg, wt, color=factor(cyl), data = mtcars)
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-23-1.png" width="672" />
 
 
 
@@ -448,7 +446,7 @@ ggplot(mtcars, aes(factor(cyl), mpg)) +
   stat_summary(geom="bar")
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 
 And if you are plotting quantities, as disussed above, showing a range is sensible (a boxplot would also fill both definitions):
@@ -459,6 +457,6 @@ ggplot(mtcars, aes(factor(cyl), mpg)) +
   stat_summary(geom="pointrange")
 ```
 
-<img src="graphics_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+<img src="graphics_files/figure-html/unnamed-chunk-25-1.png" width="672" />
 
 

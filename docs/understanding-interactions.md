@@ -8,7 +8,10 @@ bibliography: bibliography.bib
 
 
 
-# Understanding interactions (part 1)
+
+
+
+# Understanding interactions (part 1) {#understanding-interactions}
 
 
 Objectives of this section:
@@ -74,13 +77,30 @@ The reason this plot improves on the bar graph is because:
 
 
 
-## Visualising interactions in raw data
+## Visualising interactions in raw data 
+
+### {- #pain-music-data}
 
 Before setting out to *test* for an interaction using some kind of statistical model, it's a good idea to first visualise the relationships between outcomes and predictors.
 
 A student dissertation project investigated the analgesic quality of music during an experimental pain stimulus. Music was selected to be either *liked* (or disliked) by participants and was either *familiar* or unfamiliar to them. Pain was rated without music (`no.music`) and with music (`with.music`) using a 10cm visual analog scale anchored with the labels "no pain" and "worst pain ever".
 
 
+
+
+```r
+painmusic <- readRDS('data/painmusic.RDS')
+painmusic %>% glimpse
+```
+
+```
+## Observations: 112
+## Variables: 4
+## $ liked      <fctr> Disliked, Disliked, Liked, Disliked, Liked, Liked,...
+## $ familiar   <fctr> Familiar, Unfamiliar, Familiar, Familiar, Familiar...
+## $ no.music   <dbl> 4, 4, 6, 5, 3, 2, 6, 6, 7, 2, 7, 3, 5, 7, 6, 3, 7, ...
+## $ with.music <dbl> 7, 8, 7, 3, 3, 1, 6, 8, 9, 8, 7, 5, 7, 8, 4, 5, 4, ...
+```
 
 
 
@@ -98,7 +118,7 @@ painmusic %>%
   stat_summary(geom="bar") + xlab("")
 ```
 
-<img src="understanding-interactions_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="understanding-interactions_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 
 This gives a pretty clear indication that something is going on, but we have no idea about the distriburion of the underlying data, and so how much confidence to place in the finding.
@@ -117,7 +137,7 @@ painmusic %>%
   scale_color_discrete(name="")
 ```
 
-<img src="understanding-interactions_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="understanding-interactions_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 
 And here we use a boxplot to achieve similar ends:
@@ -132,10 +152,10 @@ painmusic %>%
   xlab("")
 ```
 
-<img src="understanding-interactions_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="understanding-interactions_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 
-The advantage of both these plots is that they preserve quite a bit of infrmation about the variable of interest. However, they don't make it easy to read the main effects and interaction as we saw for the point-line plot above.
+The advantage of these last two plots is that they preserve quite a bit of infrmation about the variable of interest. However, they don't make it easy to read the main effects and interaction as we saw for the point-line plot above.
 
 We can combine some benefits of both plots by adding an error bar to the point-line plot:
 
@@ -151,7 +171,7 @@ painmusic %>%
   xlab("") 
 ```
 
-<img src="understanding-interactions_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="understanding-interactions_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 This plot doesn't include all of the information about the distribution of effects that the density or boxplots do (for example, we can't see any asymmetry in the distributions any more), but we still get some information about the variability of the effect of the experimental conditions on pain by plotting the SE of the mean over the top of each point^[We could equally well plot the CI for the mean, or the quartiles)]
 
@@ -160,14 +180,17 @@ At this point, especially if your current data include only categorical predicto
 
 ## Continuous predictors
 
-...
+
+XXX TODO
+
+User  `modelr::gather_predictions` to plot 
 
 
 
 
 ## What next?
 
-You might like to move on to [making predictions from statistical models](predictions-and-margins.html), and plotting these.
+You might like to move on to [making predictions from models](predictions-and-margins.html), and plotting these.
 
 
 

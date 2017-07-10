@@ -9,7 +9,7 @@ bibliography: bibliography.bib
 
 
 
-# Making predictions
+# Making predictions {#predictions-and-margins}
 
 
 
@@ -37,17 +37,20 @@ Consider the example used in a previous section where we measured `injury.severi
 'Predicted means' (or predictions) refers to our best estimate for each category of person we're interested in. For example, if `age` were categorical (i.e. young vs. older people) then might have 4 predictions to calculate from our model:
 
 
----------------------
- Age   Gender   mean 
------ -------- ------
-Young   Male     ?   
-
- Old    Male     ?   
-
-Young  Female    ?   
-
- Old   Female    ?   
----------------------
+```
+## 
+## ---------------------
+##  Age   Gender   mean 
+## ----- -------- ------
+## Young   Male     ?   
+## 
+##  Old    Male     ?   
+## 
+## Young  Female    ?   
+## 
+##  Old   Female    ?   
+## ---------------------
+```
 
 And as before, we might plot these data:
 

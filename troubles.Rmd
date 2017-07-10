@@ -1,0 +1,48 @@
+---
+title: 'Troubleshooting'
+output: bookdown::tufte_html2
+---
+  
+```{r, include=FALSE}
+# ignore all this for the moment; it will be explained below
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+library(tidyverse)
+```
+
+
+# Common problems and troubleshooting {#troubles}
+
+
+### Scaling inputs {- #scaling-regression-inputs}
+
+
+Sometimes you might come across error messages like these:
+
+```
+Warning messages: 1: Some predictor variables are on very different scales: consider rescaling
+
+Model is nearly unidentifiable: very large eigenvalue - Rescale variables?; 
+
+Model is nearly unidentifiable: large eigenvalue ratio - Rescale variables?
+```
+
+Other similar messages might refer to 'convergence failure', e.g. for `lmer()` models.
+
+You should be aware that there are limits to the precision with which R (and computers in general) can store decimal values. This only tends to matter when working with very large or very small numbers — but this can crop up when estimating regression coefficients or (most often) variances that are extremely close to zero.
+
+If you have predictors and/or outcomes on very different scales you may also end up with very small regression coefficients, and this can make it harder for R to fit your model, or [for you to interpret it](#scaling-regression-inputs). 
+
+
+#### Troubleshooting
+
+If you see any of these errors the first step is to [rescale your inputs](#scaling-regression-inputs) ([see this section for how](#scaling-regression-inputs)), for example by dividing or multiplying so that they are in more natural or convenient units.
+
+
+Where variances or covariances are very close to zero, try simplifying your model. For example, if you have multiple random effects in a multilevel model, [try elimintating some of them, or constraining their covariances](#simplifying-mixed-models).
+
+
+
+
+
+
+

@@ -5,12 +5,12 @@ output:
 ---
 
 
-## Working with dataframes
+## Working with dataframes {- #working-with-dataframes}
 
 
 
 
-## Introducing the `tidyverse`
+### Introducing the `tidyverse` {- #tidyverse}
 
 R includes hundreds of built-in ways to select individual elements, rows or columns from a dataframe.  This guide isn't going to teach you many of them.
 
@@ -37,7 +37,7 @@ It's strongly recommended that you use these in your own code.
 
 
 
-## Selecting columns from a dataframe
+### Selecting columns from a dataframe {- #selecting-columns}
 
 
 *Selecting a single column*:
@@ -171,7 +171,7 @@ As a quick reference, you can use the following 'verbs' to select columns in dif
 There are other commands too, but these are probably the most useful to begin with. See the help files for more information.
 
 
-## Selecting rows of data
+### Selecting rows of data {- #selecting-rows}
 
 To select particular rows from a dataframe, `dplyr` provides the very useful `select()` function. Let's say we just want the 6-cylindered cars from the `mtcars` dataframe:
 
@@ -202,7 +202,7 @@ filter(mtcars, cyl==6 & gear==3)
 
 [^notesonoperators]:
   Some notes on `==` and `&`: You might have noted above that I wrote `==` rather than just `=` to define the criteria. This is because most programming languages, including R, use two `=` symbols to distinguish: *comparison* from *assignment*.
-Here we are doing comparison, so we use `==`. In R normall use `<-` to assign variables,  which avoids any ambiguity.
+Here we are doing comparison, so we use `==`. In R it's normal to use `<-` to assign variables,  which avoids any ambiguity.
 The `&` symbol does what you probably expect — it simply means 'AND'.
 
 
@@ -210,7 +210,7 @@ The `&` symbol does what you probably expect — it simply means 'AND'.
 
 
 
-## Combining column selections and filters with `dplyr`
+### Combining column selections and row filters {-}
 
 
 As you might have noticed above, we can 'nest' function calls in R. For example, we might want to both select some columns and filter rows.
@@ -231,9 +231,10 @@ summary(gas.guzzlers)
 ```
 
 
+
 This is OK, but can get quite confusing to read, and the more deeply functions are nested the easier it is to make a mistake.
 
-<br><br>
+### {- #pipes}
 
 `dplyr` provides an alternative to nested function calls, called the pipe.
 
@@ -277,11 +278,16 @@ smaller.bucket <- big.bucket.of.data %>%
 This turns out to be an incredibly useful pattern when processing and working with data. We can pour data through a series of filters and other operations, saving intermediate states where necessary.
 
 
+[You can insert the `%>%` symbol in RStdudio by typing `cmd-shift-M`, which saves a lot of typing.]{.explainer}
 
 
 
 
-## Modifying and creating new columns
+
+
+
+
+### Modifying and creating new columns {- #mutate}
 
 
 Often when working with data we want to compute new values from columns we already have. Let's say we have some data on the PHQ-9, which measures depression:
@@ -346,6 +352,62 @@ phq9.scored.df %>%
 
 Notice that we first stored the computed scores in `phq9.scored.df` and then used `select()` to get rid of the raw data columns to display only what we needed.
 
+See this section on [summarising and processing data](#split-apply-combine) for nice ways to create summary scores from questionnaires.
 
 
 
+
+
+
+### Sorting data {- #sorting}
+
+Sorting data is easy with `dplyr::arrange()`:
+
+
+```r
+airquality %>% 
+  arrange(Ozone) %>% 
+  head
+##   Ozone Solar.R Wind Temp Month Day
+## 1     1       8  9.7   59     5  21
+## 2     4      25  9.7   61     5  23
+## 3     6      78 18.4   57     5  18
+## 4     7      NA  6.9   74     5  11
+## 5     7      48 14.3   80     7  15
+## 6     7      49 10.3   69     9  24
+```
+
+
+By default sorting is ascending, but you can use a minus sign to reverse this:
+
+
+```r
+airquality %>% 
+  arrange(-Ozone) %>% 
+  head
+##   Ozone Solar.R Wind Temp Month Day
+## 1   168     238  3.4   81     8  25
+## 2   135     269  4.1   84     7   1
+## 3   122     255  4.0   89     8   7
+## 4   118     225  2.3   94     8  29
+## 5   115     223  5.7   79     5  30
+## 6   110     207  8.0   90     8   9
+```
+
+
+You can sort on multiple columns too:
+
+
+```r
+airquality %>% 
+  select(Month, Ozone) %>% 
+  arrange(Month, -Ozone) %>% 
+  head
+##   Month Ozone
+## 1     5   115
+## 2     5    45
+## 3     5    41
+## 4     5    37
+## 5     5    36
+## 6     5    34
+```

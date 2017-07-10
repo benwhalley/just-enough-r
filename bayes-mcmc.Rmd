@@ -4,9 +4,9 @@ output: bookdown::tufte_html2
 ---
 
 
-```{r, include=FALSE}
-# ignore all this for the moment
+```{r, include=F}
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+
 library(tidyverse)
 library(pander)
 library(lmerTest)
@@ -14,27 +14,114 @@ library(lmerTest)
 ```
 
 
+
 # Baysian linear model fitting with MCMC {#bayes-mcmc}
 
 
-XXX TODO TO COMPLETE
-
-- Overview
-- RStan and rstanarm
-- stan_lm(y~x, data=df1)
-- stan_lmer(y~x+(c|group), data=df2)
+This is a minimal guide to fitting and interpreting regression and multilevel models via MCMC. For _much_ more detail, and a much more comprehensive introduction to modern Bayesian analysis see [Jon Kruschke's *Doing Bayesian Data Analysis*](http://www.indiana.edu/~kruschke/DoingBayesianDataAnalysis/).
 
 
 
-## Example of using a ROPE in a clinical trial
+Let's revisit our [previous example which investigated the effect of familiar and liked music on pain perception](#pain-music-data):
+
+
+```{r}
+painmusic <- readRDS('data/painmusic.RDS')
+painmusic %>% 
+  ggplot(aes(liked, with.music - no.music, 
+             group=familiar, color=familiar)) + 
+  stat_summary(geom="pointrange", fun.data=mean_se) + 
+  stat_summary(geom="line",  fun.data=mean_se) +
+  ylab("Pain (VAS) with.music - no.music") +
+  scale_color_discrete(name="") + 
+  xlab("") 
+```
+
+```{r}
+# set sum contrasts
+options(contrasts = c("contr.sum", "contr.poly"))
+
+pain.model <- lm(with.music ~ no.music + familiar*liked , data=painmusic)
+summary(pain.model)
+```
+
+
+```{r}
+library(rstanarm)
+
+options(contrasts = c("contr.sum", "contr.poly"))
+pain.model.mcmc <- stan_lm(with.music ~ no.music + familiar*liked , data=painmusic, prior=NULL)
+summary(pain.model.mcmc)
+```
+
+
+### Posterior probabilities for parameters
+
+```{r}
+params.of.interest <- 
+  pain.model.mcmc %>% 
+  as.data.frame() %>%
+  select(familiar1, liked1, `familiar1:liked1`) %>% 
+  reshape2::melt() 
+
+params.of.interest %>% 
+    ggplot(aes(value, color=variable)) + 
+    geom_density() + 
+    geom_vline(xintercept = 0) +
+    scale_color_discrete("") +
+    xlab("Parameter value") + 
+    ylab("Posterior density") + 
+    theme(aspect.ratio = .5)
+```
+
+
+### Credible intervals
+
+```{r}
+get_HPDI <- function(l){
+  ci = rethinking::HPDI(l, prob=.95)
+  data_frame(median=median(l), lower=ci[1], upper=ci[2])
+}
+
+
+params.of.interest %>% 
+  group_by(variable) %>% 
+  do(., get_HPDI(.$value)) %>% 
+  rename(Estimate=median) %>% 
+  pander::pandoc.table(caption="Estimates and 95% credible intervals for the effect of group 2 at months 6 and 12")
+```
+
+
+
+
+
+### Bayesian 'p values' for parameters
+
+```{r}
+params.of.interest %>% 
+  group_by(variable) %>% 
+  summarise(`p (x<0)` = mean(value < 0))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Bayesian analysis of RCT data {#region-of-practical-importance}
+
+XXX TODO 
 
 - Example from FIT RCT for weight and BMI
+- Using and presenting the ROPE
 
 
 
 
-## Good references
-
-
-- Rethinking (McElreath): http://xcelab.net/rm/statistical-rethinking/
-- Doing Bayesian Data Analysis Kruschke: http://www.indiana.edu/~kruschke/DoingBayesianDataAnalysis/

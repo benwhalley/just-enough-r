@@ -8,7 +8,10 @@ output:
 
 
 
-# t-tests
+## t-tests {- #t-tests}
+
+
+#### Visualising your data first {-}
 
 Before you run any tests it's worth plotting your data. 
 
@@ -83,20 +86,20 @@ chicks.eating.beans %>%
 
 
 
-## Running t-tests
+#### Running the t-test {-}
 
 Assuming you really do still want to run a null hypothesis test on one or two means, the `t.test()` function performs most common variants, illustrated below.
 
 
-## 2 independent groups:
+
+
+##### 2 independent groups
+
+Assuming  your data are in long format:
 
 
 ```r
-# the t.test function is a bit crufty and won't accept a data= parameter
-# for all types of test. Instead we use the with(...) function to make
-# the variables in the chicks.eating.beans datafram available to the
-# t.test function.
-with(chicks.eating.beans, t.test(weight ~ feed))
+t.test(weight ~ feed, data=chicks.eating.beans)
 ```
 
 ```
@@ -114,14 +117,12 @@ with(chicks.eating.beans, t.test(weight ~ feed))
 ```
 
 
-Or equivalently, if your data are untidy and each group has it's own column:
+Or equivalently, if your [data are untidy](#tidying-data) and each group has it's own column (e.g. chicks eating soybeans in one column and those eating horsebeans in another):
+
+
 
 
 ```r
-untidy.chicks <- chicks.eating.beans %>% 
-  mutate(chick = row_number()) %>% 
-  reshape2::dcast(chick~feed, value.var = 'weight')
-
 with(untidy.chicks, t.test(horsebean, soybean))
 ```
 
@@ -140,31 +141,16 @@ with(untidy.chicks, t.test(horsebean, soybean))
 ```
 
 
-## Unequal variances
+##### Equal or unequal variances? {#equal-variances .admonition}
 
-By default R assumes your groups have unequal variances and applies an appropriate correction. If you don't want this you can add `var.equal = TRUE` and get a vanilla t-test:
+By default R assumes your groups have unequal variances and applies an appropriate correction (you will notice the output labelled 'Welch Two Sample t-test'). 
 
-
-```r
-with(untidy.chicks, t.test(horsebean, soybean, var.equal=TRUE))
-```
-
-```
-## 
-## 	Two Sample t-test
-## 
-## data:  horsebean and soybean
-## t = -4.3037, df = 22, p-value = 0.0002873
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -127.78018  -44.67696
-## sample estimates:
-## mean of x mean of y 
-##  160.2000  246.4286
-```
+You can turn this correction off (for example, if you're trying to replcate an analysis done using the default settings in SPSS) but you probably do want to assume unequal variances [see @ruxton2006unequal].
 
 
-## Paired samples
+
+
+##### Paired samples
 
 
 ```r
@@ -178,13 +164,13 @@ t.test(a, b, paired=TRUE)
 ## 	Paired t-test
 ## 
 ## data:  a and b
-## t = -3.384, df = 49, p-value = 0.001413
+## t = -2.5378, df = 49, p-value = 0.01439
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.8700365 -0.2217075
+##  -0.58524935 -0.06797779
 ## sample estimates:
 ## mean of the differences 
-##               -0.545872
+##              -0.3266136
 ```
 
 
@@ -203,18 +189,18 @@ with(long.form.data, t.test(value~key, paired=TRUE))
 ## 	Paired t-test
 ## 
 ## data:  value by key
-## t = -3.384, df = 49, p-value = 0.001413
+## t = -2.5378, df = 49, p-value = 0.01439
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.8700365 -0.2217075
+##  -0.58524935 -0.06797779
 ## sample estimates:
 ## mean of the differences 
-##               -0.545872
+##              -0.3266136
 ```
 
 
 
-## One-sample test 
+##### One-sample test 
 
 i.e. comparing sample mean with a specific value:
 
@@ -230,12 +216,12 @@ t.test(somedata, mu=2)
 ## 	One Sample t-test
 ## 
 ## data:  somedata
-## t = 2.4843, df = 49, p-value = 0.01645
+## t = 5.9314, df = 49, p-value = 2.985e-07
 ## alternative hypothesis: true mean is not equal to 2
 ## 95 percent confidence interval:
-##  2.078671 2.744683
+##  2.544122 3.101748
 ## sample estimates:
 ## mean of x 
-##  2.411677
+##  2.822935
 ```
 

@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="t-tests.html">
-<link rel="next" href="anova.html">
+<link rel="prev" href="test-if-mean-of-outcome-variable-is-different-from-2.html">
+<link rel="next" href="parameterisation.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -86,6 +86,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -101,170 +102,55 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">Just enough R</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#part-1-must-read"><i class="fa fa-check"></i>Part 1: ‘Must read’</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#part-2-nice-to-know"><i class="fa fa-check"></i>Part 2: Nice to know</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#part-3-loose-ends"><i class="fa fa-check"></i>Part 3: Loose ends</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#a-warning"><i class="fa fa-check"></i>A warning</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="start_here.html"><a href="start_here.html"><i class="fa fa-check"></i><b>2</b> Getting started with R and RStudio</a><ul>
-<li class="chapter" data-level="2.1" data-path="start_here.html"><a href="start_here.html#using-rmarkdown-to-record-and-share-work"><i class="fa fa-check"></i><b>2.1</b> Using RMarkdown to record and share work</a></li>
-<li class="chapter" data-level="2.2" data-path="start_here.html"><a href="start_here.html#writing-and-knitting-rmarkdown"><i class="fa fa-check"></i><b>2.2</b> Writing and ‘knitting’ RMarkdown</a></li>
-<li class="chapter" data-level="2.3" data-path="start_here.html"><a href="start_here.html#rstudio"><i class="fa fa-check"></i><b>2.3</b> RStudio</a></li>
-<li class="chapter" data-level="2.4" data-path="start_here.html"><a href="start_here.html#your-first-r-commands"><i class="fa fa-check"></i><b>2.4</b> Your first R commands</a></li>
-<li class="chapter" data-level="2.5" data-path="start_here.html"><a href="start_here.html#naming-things-variable-assignment"><i class="fa fa-check"></i><b>2.5</b> Naming things: <em>variable assignment</em></a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="start_here.html"><a href="start_here.html#vectors-and-lists"><i class="fa fa-check"></i><b>3</b> Vectors and lists</a><ul>
-<li class="chapter" data-level="3.1" data-path="start_here.html"><a href="start_here.html#vectors"><i class="fa fa-check"></i><b>3.1</b> Vectors</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="start_here.html"><a href="start_here.html#accessing-elements-within-vectors"><i class="fa fa-check"></i><b>3.1.1</b> Accessing elements within vectors</a></li>
-<li class="chapter" data-level="3.1.2" data-path="start_here.html"><a href="start_here.html#selecting-more-than-one-element-in-a-vector"><i class="fa fa-check"></i><b>3.1.2</b> Selecting more than one element in a vector</a></li>
-<li class="chapter" data-level="3.1.3" data-path="start_here.html"><a href="start_here.html#processing-vectors"><i class="fa fa-check"></i><b>3.1.3</b> Processing vectors</a></li>
-<li class="chapter" data-level="3.1.4" data-path="start_here.html"><a href="start_here.html#processing-vectors-to-make-new-vectors"><i class="fa fa-check"></i><b>3.1.4</b> Processing vectors to make new vectors</a></li>
-<li class="chapter" data-level="3.1.5" data-path="start_here.html"><a href="start_here.html#making-up-data-new-vectors"><i class="fa fa-check"></i><b>3.1.5</b> Making up data (new vectors)</a></li>
-<li class="chapter" data-level="3.1.6" data-path="start_here.html"><a href="start_here.html#useful-functions-to-learn-now"><i class="fa fa-check"></i><b>3.1.6</b> Useful functions to learn now</a></li>
-</ul></li>
-<li class="chapter" data-level="3.2" data-path="start_here.html"><a href="start_here.html#lists"><i class="fa fa-check"></i><b>3.2</b> Lists</a></li>
-<li class="chapter" data-level="3.3" data-path="start_here.html"><a href="start_here.html#questions-on-vectors-and-lists"><i class="fa fa-check"></i><b>3.3</b> Questions on vectors and lists</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="start_here.html"><a href="start_here.html#extended-questions"><i class="fa fa-check"></i><b>3.3.1</b> Extended questions:</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>4</b> Datasets and dataframes</a><ul>
-<li class="chapter" data-level="4.1" data-path="datasets.html"><a href="datasets.html#using-built-in-data"><i class="fa fa-check"></i><b>4.1</b> Using ‘built in’ data</a></li>
-<li class="chapter" data-level="4.2" data-path="datasets.html"><a href="datasets.html#importing-and-exporting-data"><i class="fa fa-check"></i><b>4.2</b> Importing and exporting data</a></li>
-<li class="chapter" data-level="4.3" data-path="datasets.html"><a href="datasets.html#importing-data-over-the-web"><i class="fa fa-check"></i><b>4.3</b> Importing data over the web</a></li>
-<li class="chapter" data-level="4.4" data-path="datasets.html"><a href="datasets.html#importing-from-spss-and-other-packages"><i class="fa fa-check"></i><b>4.4</b> Importing from SPSS and other packages</a></li>
-<li class="chapter" data-level="4.5" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html"><i class="fa fa-check"></i><b>4.5</b> Working with dataframes</a></li>
-<li class="chapter" data-level="4.6" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#introducing-the-tidyverse"><i class="fa fa-check"></i><b>4.6</b> Introducing the <code>tidyverse</code></a></li>
-<li class="chapter" data-level="4.7" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#selecting-columns-from-a-dataframe"><i class="fa fa-check"></i><b>4.7</b> Selecting columns from a dataframe</a></li>
-<li class="chapter" data-level="4.8" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#selecting-rows-of-data"><i class="fa fa-check"></i><b>4.8</b> Selecting rows of data</a></li>
-<li class="chapter" data-level="4.9" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#combining-column-selections-and-filters-with-dplyr"><i class="fa fa-check"></i><b>4.9</b> Combining column selections and filters with <code>dplyr</code></a></li>
-<li class="chapter" data-level="4.10" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#modifying-and-creating-new-columns"><i class="fa fa-check"></i><b>4.10</b> Modifying and creating new columns</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="summarising-data.html"><a href="summarising-data.html"><i class="fa fa-check"></i><b>5</b> Summarising data</a><ul>
-<li class="chapter" data-level="5.1" data-path="summarising-data.html"><a href="summarising-data.html#summaries-of-dataframes"><i class="fa fa-check"></i><b>5.1</b> Summaries of dataframes</a></li>
-<li class="chapter" data-level="5.2" data-path="summarising-data.html"><a href="summarising-data.html#split-apply-combine"><i class="fa fa-check"></i><b>5.2</b> Split, apply, combine</a></li>
-<li class="chapter" data-level="5.3" data-path="summarising-data.html"><a href="summarising-data.html#split-breaking-the-data-into-groups"><i class="fa fa-check"></i><b>5.3</b> Split: breaking the data into groups</a></li>
-<li class="chapter" data-level="5.4" data-path="summarising-data.html"><a href="summarising-data.html#apply-and-combine"><i class="fa fa-check"></i><b>5.4</b> Apply and combine</a></li>
-<li class="chapter" data-level="5.5" data-path="summarising-data.html"><a href="summarising-data.html#a-real-example"><i class="fa fa-check"></i><b>5.5</b> A ‘real’ example</a></li>
-<li class="chapter" data-level="5.6" data-path="summarising-data.html"><a href="summarising-data.html#sorting-data"><i class="fa fa-check"></i><b>5.6</b> Sorting data</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>6</b> Graphics</a><ul>
-<li class="chapter" data-level="" data-path="graphics.html"><a href="graphics.html#the-r-graphics-cookbook"><i class="fa fa-check"></i>The R Graphics Cookbook</a></li>
-<li class="chapter" data-level="6.1" data-path="graphics.html"><a href="graphics.html#benefits-of-visualising-data"><i class="fa fa-check"></i><b>6.1</b> Benefits of visualising data</a></li>
-<li class="chapter" data-level="6.2" data-path="graphics.html"><a href="graphics.html#choosing-a-plot-type"><i class="fa fa-check"></i><b>6.2</b> Choosing a plot type</a></li>
-<li class="chapter" data-level="6.3" data-path="graphics.html"><a href="graphics.html#choosing-layering-and-facetting-graphics"><i class="fa fa-check"></i><b>6.3</b> Choosing, layering and facetting graphics</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="graphics.html"><a href="graphics.html#using-ggplot"><i class="fa fa-check"></i><b>6.3.1</b> Using ggplot</a></li>
-<li class="chapter" data-level="6.3.2" data-path="graphics.html"><a href="graphics.html#relationships"><i class="fa fa-check"></i><b>6.3.2</b> Relationships</a></li>
-<li class="chapter" data-level="6.3.3" data-path="graphics.html"><a href="graphics.html#distributions"><i class="fa fa-check"></i><b>6.3.3</b> Distributions</a></li>
-<li class="chapter" data-level="6.3.4" data-path="graphics.html"><a href="graphics.html#comparisons"><i class="fa fa-check"></i><b>6.3.4</b> Comparisons</a></li>
-<li class="chapter" data-level="6.3.5" data-path="graphics.html"><a href="graphics.html#composition"><i class="fa fa-check"></i><b>6.3.5</b> Composition</a></li>
-<li class="chapter" data-level="6.3.6" data-path="graphics.html"><a href="graphics.html#combining-plots-in-a-grid"><i class="fa fa-check"></i><b>6.3.6</b> Combining plots in a grid</a></li>
-<li class="chapter" data-level="6.3.7" data-path="graphics.html"><a href="graphics.html#exporting-high-quality-ggplots-for-print"><i class="fa fa-check"></i><b>6.3.7</b> Exporting high quality ggplots for print</a></li>
-</ul></li>
-<li class="chapter" data-level="6.4" data-path="graphics.html"><a href="graphics.html#quick-and-dirty-plotting"><i class="fa fa-check"></i><b>6.4</b> ‘Quick and dirty’ plotting</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="graphics.html"><a href="graphics.html#distributions-1"><i class="fa fa-check"></i><b>6.4.1</b> Distributions</a></li>
-<li class="chapter" data-level="6.4.2" data-path="graphics.html"><a href="graphics.html#relationships-1"><i class="fa fa-check"></i><b>6.4.2</b> Relationships</a></li>
-<li class="chapter" data-level="6.4.3" data-path="graphics.html"><a href="graphics.html#quantities"><i class="fa fa-check"></i><b>6.4.3</b> Quantities</a></li>
+<li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="1" data-path="start-here.html"><a href="start-here.html"><i class="fa fa-check"></i><b>1</b> Workflow</a></li>
+<li class="part"><span><b>I Working with data</b></span></li>
+<li class="chapter" data-level="2" data-path="datasets-dataframes.html"><a href="datasets-dataframes.html"><i class="fa fa-check"></i><b>2</b> Datasets and dataframes</a></li>
+<li class="chapter" data-level="3" data-path="placeholder.html"><a href="placeholder.html"><i class="fa fa-check"></i><b>3</b> Placeholder</a></li>
+<li class="chapter" data-level="4" data-path="real-data.html"><a href="real-data.html"><i class="fa fa-check"></i><b>4</b> Working with ‘real’ data</a></li>
+<li class="chapter" data-level="5" data-path="summarising-data.html"><a href="summarising-data.html"><i class="fa fa-check"></i><b>5</b> Summarising data</a></li>
+<li class="chapter" data-level="6" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>6</b> Graphics</a></li>
+<li class="chapter" data-level="7" data-path="placeholder-1.html"><a href="placeholder-1.html"><i class="fa fa-check"></i><b>7</b> Placeholder</a></li>
+<li class="part"><span><b>II Statistics</b></span></li>
+<li class="chapter" data-level="8" data-path="basic-inferential-statistics.html"><a href="basic-inferential-statistics.html"><i class="fa fa-check"></i><b>8</b> Basic inferential statistics</a></li>
+<li class="chapter" data-level="9" data-path="access-the-chi2-value-alone.html"><a href="access-the-chi2-value-alone.html"><i class="fa fa-check"></i><b>9</b> access the chi2 value alone</a></li>
+<li class="chapter" data-level="10" data-path="placeholder-2.html"><a href="placeholder-2.html"><i class="fa fa-check"></i><b>10</b> Placeholder</a></li>
+<li class="chapter" data-level="11" data-path="test-if-mean-of-outcome-variable-is-different-from-2.html"><a href="test-if-mean-of-outcome-variable-is-different-from-2.html"><i class="fa fa-check"></i><b>11</b> test if mean of <code>outcome</code> variable is different from 2</a></li>
+<li class="chapter" data-level="12" data-path="linear-models-simple.html"><a href="linear-models-simple.html"><i class="fa fa-check"></i><b>12</b> Regression</a><ul>
+<li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#formulae"><i class="fa fa-check"></i>Describing statistical models using formulae</a></li>
+<li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#running-a-linear-model"><i class="fa fa-check"></i>Running a linear model</a></li>
+<li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#more-on-formulas"><i class="fa fa-check"></i>More on formulas</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html"><i class="fa fa-check"></i>Model specification</a><ul>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#regression-coding"><i class="fa fa-check"></i>Effect/dummy coding and contrasts</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#centering"><i class="fa fa-check"></i>Centering (is often helpful)</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#scaling-regression-inputs"><i class="fa fa-check"></i>Scaling inputs</a></li>
+<li class="chapter" data-level="12.0.1" data-path="parameterisation.html"><a href="parameterisation.html#alternatives-to-rescaling"><i class="fa fa-check"></i><b>12.0.1</b> Alternatives to rescaling</a></li>
+<li class="chapter" data-level="12.0.2" data-path="parameterisation.html"><a href="parameterisation.html#what-next"><i class="fa fa-check"></i><b>12.0.2</b> What next</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="real-data.html"><a href="real-data.html"><i class="fa fa-check"></i><b>7</b> Working with ‘real’ data</a><ul>
-<li class="chapter" data-level="7.1" data-path="real-data.html"><a href="real-data.html#how-to-tidy-data"><i class="fa fa-check"></i><b>7.1</b> How to ‘tidy’ data</a></li>
-<li class="chapter" data-level="7.2" data-path="real-data.html"><a href="real-data.html#deal-with-multiple-files"><i class="fa fa-check"></i><b>7.2</b> Deal with multiple files</a></li>
-<li class="chapter" data-level="7.3" data-path="real-data.html"><a href="real-data.html#error-checking"><i class="fa fa-check"></i><b>7.3</b> Error checking</a></li>
-<li class="chapter" data-level="7.4" data-path="real-data.html"><a href="real-data.html#missing-values"><i class="fa fa-check"></i><b>7.4</b> Missing values</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="correlations.html"><a href="correlations.html"><i class="fa fa-check"></i><b>8</b> Correlations</a><ul>
-<li class="chapter" data-level="8.1" data-path="correlations.html"><a href="correlations.html#obtaining-a-correlation-matrix"><i class="fa fa-check"></i><b>8.1</b> Obtaining a correlation matrix</a></li>
-<li class="chapter" data-level="8.2" data-path="correlations.html"><a href="correlations.html#making-correlation-tables-for-publication"><i class="fa fa-check"></i><b>8.2</b> Making correlation tables for publication</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="correlations.html"><a href="correlations.html#apatables"><i class="fa fa-check"></i><b>8.2.1</b> <code>apaTables</code></a></li>
-<li class="chapter" data-level="8.2.2" data-path="correlations.html"><a href="correlations.html#by-hand"><i class="fa fa-check"></i><b>8.2.2</b> By hand</a></li>
-</ul></li>
-<li class="chapter" data-level="8.3" data-path="correlations.html"><a href="correlations.html#other-types-of-correlation"><i class="fa fa-check"></i><b>8.3</b> Other types of correlation</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="t-tests.html"><a href="t-tests.html"><i class="fa fa-check"></i><b>9</b> t-tests</a><ul>
-<li class="chapter" data-level="9.1" data-path="t-tests.html"><a href="t-tests.html#running-t-tests"><i class="fa fa-check"></i><b>9.1</b> Running t-tests</a></li>
-<li class="chapter" data-level="9.2" data-path="t-tests.html"><a href="t-tests.html#independent-groups"><i class="fa fa-check"></i><b>9.2</b> 2 independent groups:</a></li>
-<li class="chapter" data-level="9.3" data-path="t-tests.html"><a href="t-tests.html#unequal-variances"><i class="fa fa-check"></i><b>9.3</b> Unequal variances</a></li>
-<li class="chapter" data-level="9.4" data-path="t-tests.html"><a href="t-tests.html#paired-samples"><i class="fa fa-check"></i><b>9.4</b> Paired samples</a></li>
-<li class="chapter" data-level="9.5" data-path="t-tests.html"><a href="t-tests.html#one-sample-test"><i class="fa fa-check"></i><b>9.5</b> One-sample test</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="linear-models-simple.html"><a href="linear-models-simple.html"><i class="fa fa-check"></i><b>10</b> Introduction to linear models in R</a><ul>
-<li class="chapter" data-level="10.1" data-path="linear-models-simple.html"><a href="linear-models-simple.html#describing-statistical-models-using-formulae"><i class="fa fa-check"></i><b>10.1</b> Describing statistical models using formulae</a></li>
-<li class="chapter" data-level="10.2" data-path="linear-models-simple.html"><a href="linear-models-simple.html#running-a-linear-model"><i class="fa fa-check"></i><b>10.2</b> Running a linear model</a></li>
-<li class="chapter" data-level="10.3" data-path="linear-models-simple.html"><a href="linear-models-simple.html#more-on-formulas"><i class="fa fa-check"></i><b>10.3</b> More on formulas</a><ul>
-<li class="chapter" data-level="10.3.1" data-path="linear-models-simple.html"><a href="linear-models-simple.html#other-formula-shortcuts"><i class="fa fa-check"></i><b>10.3.1</b> Other formula shortcuts</a></li>
-</ul></li>
-<li class="chapter" data-level="10.4" data-path="linear-models-simple.html"><a href="linear-models-simple.html#what-next"><i class="fa fa-check"></i><b>10.4</b> What next</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>11</b> Anova in R</a><ul>
-<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#rule-1-use-long-format-data"><i class="fa fa-check"></i>Rule 1: Use long format data</a></li>
-<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#rule-2-know-your-variables"><i class="fa fa-check"></i>Rule 2: Know your variables</a></li>
-<li><a href="anova.html#rule-3-dont-use-aov-or-anova">Rule 3: Don’t use <code>aov()</code> or <code>anova()</code></a><ul>
-<li class="chapter" data-level="11.0.1" data-path="anova.html"><a href="anova.html#but-what-about-insert-favourite-r-package-for-anova"><i class="fa fa-check"></i><b>11.0.1</b> But what about [insert favourite R package for Anova]?</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#rule-4-use-type-3-sums-of-squares-and-learn-about-why"><i class="fa fa-check"></i>Rule 4: Use type 3 sums of squares (and learn about why)</a></li>
-<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#general-anova-recommendations"><i class="fa fa-check"></i>General Anova recommendations</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="anova-cookbook.html"><a href="anova-cookbook.html"><i class="fa fa-check"></i><b>12</b> Anova ‘Cookbook’</a><ul>
-<li class="chapter" data-level="12.1" data-path="anova-cookbook.html"><a href="anova-cookbook.html#between-subjects-designs"><i class="fa fa-check"></i><b>12.1</b> Between subjects designs</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="anova-cookbook.html"><a href="anova-cookbook.html#factorial-anova-no-bigger-than-2x2"><i class="fa fa-check"></i><b>12.1.1</b> Factorial anova, no bigger than 2x2</a></li>
-<li class="chapter" data-level="12.1.2" data-path="anova-cookbook.html"><a href="anova-cookbook.html#factorial-anova-where-one-factor-has-2-levels."><i class="fa fa-check"></i><b>12.1.2</b> Factorial anova, where one factor has &gt; 2 levels.</a></li>
-<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#checking-assumptions"><i class="fa fa-check"></i>Checking assumptions</a></li>
-<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#post-hoc-tests"><i class="fa fa-check"></i>Post hoc tests</a></li>
-</ul></li>
-<li class="chapter" data-level="12.2" data-path="anova-cookbook.html"><a href="anova-cookbook.html#repeated-measures-or-split-plot-designs"><i class="fa fa-check"></i><b>12.2</b> Repeated measures or ‘split plot’ designs</a></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="understanding-interactions.html"><a href="understanding-interactions.html"><i class="fa fa-check"></i><b>13</b> Understanding interactions (part 1)</a><ul>
-<li class="chapter" data-level="13.1" data-path="understanding-interactions.html"><a href="understanding-interactions.html#what-is-an-interaction"><i class="fa fa-check"></i><b>13.1</b> What is an interaction?</a><ul>
-<li class="chapter" data-level="13.1.1" data-path="understanding-interactions.html"><a href="understanding-interactions.html#example-interaction-visualised"><i class="fa fa-check"></i><b>13.1.1</b> Example interaction visualised</a></li>
-</ul></li>
-<li class="chapter" data-level="13.2" data-path="understanding-interactions.html"><a href="understanding-interactions.html#visualising-interactions-in-raw-data"><i class="fa fa-check"></i><b>13.2</b> Visualising interactions in raw data</a></li>
-<li class="chapter" data-level="13.3" data-path="understanding-interactions.html"><a href="understanding-interactions.html#continuous-predictors"><i class="fa fa-check"></i><b>13.3</b> Continuous predictors</a></li>
-<li class="chapter" data-level="13.4" data-path="understanding-interactions.html"><a href="understanding-interactions.html#what-next-1"><i class="fa fa-check"></i><b>13.4</b> What next?</a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html"><i class="fa fa-check"></i><b>14</b> Making predictions</a><ul>
-<li class="chapter" data-level="14.1" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predictions-vs-margins"><i class="fa fa-check"></i><b>14.1</b> Predictions vs margins</a></li>
-<li class="chapter" data-level="14.2" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predicted-means"><i class="fa fa-check"></i><b>14.2</b> Predicted means</a></li>
-<li class="chapter" data-level="14.3" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#effects-margins"><i class="fa fa-check"></i><b>14.3</b> <em>Effects</em> (margins)</a></li>
-<li class="chapter" data-level="14.4" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#continuous-predictors-1"><i class="fa fa-check"></i><b>14.4</b> Continuous predictors</a></li>
-<li class="chapter" data-level="14.5" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predicted-means-and-margins-using-lm"><i class="fa fa-check"></i><b>14.5</b> Predicted means and margins using <code>lm()</code></a><ul>
-<li class="chapter" data-level="14.5.1" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#running-the-model"><i class="fa fa-check"></i><b>14.5.1</b> Running the model</a></li>
-<li class="chapter" data-level="14.5.2" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#making-predictions-for-means"><i class="fa fa-check"></i><b>14.5.2</b> Making predictions for means</a></li>
-<li class="chapter" data-level="14.5.3" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#step-1-make-a-new-dataframe"><i class="fa fa-check"></i><b>14.5.3</b> Step 1: Make a new dataframe</a></li>
-<li class="chapter" data-level="14.5.4" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#step-2-make-the-predictions"><i class="fa fa-check"></i><b>14.5.4</b> Step 2: Make the predictions</a></li>
-</ul></li>
-<li class="chapter" data-level="14.6" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#making-prdictions-for-margins-effects-of-predictors"><i class="fa fa-check"></i><b>14.6</b> Making prdictions for margins (<em>effects</em> of predictors)</a></li>
-<li class="chapter" data-level="14.7" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#marginal-effects"><i class="fa fa-check"></i><b>14.7</b> Marginal effects</a></li>
-<li class="chapter" data-level="14.8" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#with-continuous-covariates"><i class="fa fa-check"></i><b>14.8</b> With continuous covariates</a></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#visualising-interactions-from-linear-models"><i class="fa fa-check"></i><b>15</b> Visualising interactions from linear models</a></li>
-<li class="chapter" data-level="16" data-path="mediation.html"><a href="mediation.html"><i class="fa fa-check"></i><b>16</b> Mediation</a></li>
-<li class="chapter" data-level="17" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>17</b> Multilevel models</a><ul>
-<li class="chapter" data-level="17.1" data-path="multilevel-models.html"><a href="multilevel-models.html#the-sleepstudy-data-and-traditional-rm-anova"><i class="fa fa-check"></i><b>17.1</b> The <code>sleepstudy</code> data and traditional RM Anova</a><ul>
-<li class="chapter" data-level="17.1.1" data-path="multilevel-models.html"><a href="multilevel-models.html#fit-a-simple-slope-for-days"><i class="fa fa-check"></i><b>17.1.1</b> Fit a simple slope for <code>Days</code></a></li>
-<li class="chapter" data-level="17.1.2" data-path="multilevel-models.html"><a href="multilevel-models.html#allow-the-effect-of-sleep-deprivation-to-vary-for-different-participants"><i class="fa fa-check"></i><b>17.1.2</b> Allow the effect of sleep deprivation to vary for different participants</a></li>
-<li class="chapter" data-level="17.1.3" data-path="multilevel-models.html"><a href="multilevel-models.html#fitting-a-curve-for-the-effect-of-days"><i class="fa fa-check"></i><b>17.1.3</b> Fitting a curve for the effect of <code>Days</code></a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="18" data-path="cfa.html"><a href="cfa.html"><i class="fa fa-check"></i><b>18</b> Confirmatory factor analysis</a><ul>
-<li class="chapter" data-level="18.1" data-path="cfa.html"><a href="cfa.html#defining-the-model"><i class="fa fa-check"></i><b>18.1</b> Defining the model</a></li>
-<li class="chapter" data-level="18.2" data-path="cfa.html"><a href="cfa.html#model-fit"><i class="fa fa-check"></i><b>18.2</b> Model fit</a></li>
-<li class="chapter" data-level="18.3" data-path="cfa.html"><a href="cfa.html#modification-indices"><i class="fa fa-check"></i><b>18.3</b> Modification indices</a></li>
-<li class="chapter" data-level="18.4" data-path="cfa.html"><a href="cfa.html#missing-data"><i class="fa fa-check"></i><b>18.4</b> Missing data</a></li>
-</ul></li>
-<li class="chapter" data-level="19" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>19</b> Installing R and RStudio</a></li>
-<li class="chapter" data-level="20" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>20</b> Loading packages</a></li>
-<li class="chapter" data-level="21" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>21</b> Getting help</a></li>
-<li class="chapter" data-level="22" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>22</b> Missing values</a></li>
-<li class="chapter" data-level="23" data-path="rmarkdown-tricks.html"><a href="rmarkdown-tricks.html"><i class="fa fa-check"></i><b>23</b> Tips and tricks with RMarkdown</a></li>
-<li class="chapter" data-level="24" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html"><i class="fa fa-check"></i><b>24</b> Confidence, credible and prediction intervals</a><ul>
-<li class="chapter" data-level="24.1" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html#the-problem-with-confidence-intervals"><i class="fa fa-check"></i><b>24.1</b> The problem with confidence intervals</a></li>
-<li class="chapter" data-level="24.2" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html#forgetting-that-the-ci-depends-on-sample-size."><i class="fa fa-check"></i><b>24.2</b> Forgetting that the CI depends on sample size.</a></li>
-<li class="chapter" data-level="24.3" data-path="confidence-vs-prediction-intervals.html"><a href="confidence-vs-prediction-intervals.html#what-does-this-mean-for-my-work-on-insert-speciality-here"><i class="fa fa-check"></i><b>24.3</b> What does this mean for my work on [insert speciality here]?</a><ul>
-<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html"><i class="fa fa-check"></i>Post hoc (pairwise) tests</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="25" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>25</b> References</a></li>
+<li class="chapter" data-level="13" data-path="anova-in-r.html"><a href="anova-in-r.html"><i class="fa fa-check"></i><b>13</b> Anova</a></li>
+<li class="chapter" data-level="14" data-path="calculate-pairwise-contrasts.html"><a href="calculate-pairwise-contrasts.html"><i class="fa fa-check"></i><b>14</b> calculate pairwise contrasts</a></li>
+<li class="chapter" data-level="15" data-path="understanding-interactions.html"><a href="understanding-interactions.html"><i class="fa fa-check"></i><b>15</b> Understanding interactions (part 1)</a></li>
+<li class="chapter" data-level="16" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html"><i class="fa fa-check"></i><b>16</b> Making predictions</a></li>
+<li class="chapter" data-level="17" data-path="general-linear-models.html"><a href="general-linear-models.html"><i class="fa fa-check"></i><b>17</b> General linear models</a></li>
+<li class="chapter" data-level="18" data-path="mediation.html"><a href="mediation.html"><i class="fa fa-check"></i><b>18</b> Mediation</a></li>
+<li class="chapter" data-level="19" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>19</b> Multilevel models</a></li>
+<li class="chapter" data-level="20" data-path="cfa.html"><a href="cfa.html"><i class="fa fa-check"></i><b>20</b> Confirmatory factor analysis</a></li>
+<li class="chapter" data-level="21" data-path="sem.html"><a href="sem.html"><i class="fa fa-check"></i><b>21</b> Structural eqution modelling</a></li>
+<li class="chapter" data-level="22" data-path="power-analysis.html"><a href="power-analysis.html"><i class="fa fa-check"></i><b>22</b> Power analysis in R</a></li>
+<li class="chapter" data-level="23" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>23</b> Meta analysis in R</a></li>
+<li class="chapter" data-level="24" data-path="bayes-factors.html"><a href="bayes-factors.html"><i class="fa fa-check"></i><b>24</b> Bayes factors for rubbish data</a></li>
+<li class="chapter" data-level="25" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html"><i class="fa fa-check"></i><b>25</b> Baysian linear model fitting with MCMC</a></li>
+<li class="chapter" data-level="26" data-path="statistical-explanations.html"><a href="statistical-explanations.html"><i class="fa fa-check"></i><b>26</b> Statistical explanations</a></li>
+<li class="chapter" data-level="27" data-path="placeholder-3.html"><a href="placeholder-3.html"><i class="fa fa-check"></i><b>27</b> Placeholder</a></li>
+<li class="chapter" data-level="28" data-path="calculate-pairwise-contrasts-1.html"><a href="calculate-pairwise-contrasts-1.html"><i class="fa fa-check"></i><b>28</b> calculate pairwise contrasts</a></li>
+<li class="chapter" data-level="29" data-path="loose-ends.html"><a href="loose-ends.html"><i class="fa fa-check"></i><b>29</b> Loose ends</a></li>
+<li class="chapter" data-level="30" data-path="placeholder-4.html"><a href="placeholder-4.html"><i class="fa fa-check"></i><b>30</b> Placeholder</a></li>
+<li class="chapter" data-level="31" data-path="placeholder-5.html"><a href="placeholder-5.html"><i class="fa fa-check"></i><b>31</b> Placeholder</a></li>
+<li class="chapter" data-level="32" data-path="placeholder-6.html"><a href="placeholder-6.html"><i class="fa fa-check"></i><b>32</b> Placeholder</a></li>
+<li class="chapter" data-level="33" data-path="placeholder-7.html"><a href="placeholder-7.html"><i class="fa fa-check"></i><b>33</b> Placeholder</a></li>
+<li class="chapter" data-level="34" data-path="run-the-t-test.html"><a href="run-the-t-test.html"><i class="fa fa-check"></i><b>34</b> run the t test</a></li>
+<li class="chapter" data-level="35" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>35</b> References</a></li>
 </ul>
 
       </nav>
@@ -282,26 +168,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction-to-linear-models-in-r" class="section level1">
-<h1><span class="header-section-number">10</span> Introduction to linear models in R</h1>
+<div id="linear-models-simple" class="section level1">
+<h1><span class="header-section-number">12</span> Regression</h1>
 <p>This section assumes most readers will have done an introductory statistics course and had practce running multiple regression and or Anova in SPSS or a similar package.</p>
 <!-- If you haven't, don't rush out to do that though XXX what should they do instead? Recommend some MOOC? XXX? -->
-<div id="describing-statistical-models-using-formulae" class="section level2">
-<h2><span class="header-section-number">10.1</span> Describing statistical models using formulae</h2>
+<div id="formulae" class="section level3 unnumbered">
+<h3>Describing statistical models using formulae</h3>
 <p>R requires that you are explicit about the statistical model you want to run but provides a neat, concise way of describing models, called a <code>formula</code>. For multiple regression and simple Anova, the formulas we write map closely onto the underlying <em>linear model</em>. The formula syntax provides shortcuts to quickly describe all the models you are likely to need.</p>
 <p>Formulas have two parts: the left hand side and the right hand side, which are separated by the tilde symbol: <code>~</code>. Here, the tilde just means ‘is predicted by’.</p>
-<p>For example, this formula specifies a regression model where <code>height</code> is the <em>outcome</em>, and <code>age</code> and <code>gender</code> are the <em>predictor</em> variables.<a href="#fn15" class="footnoteRef" id="fnref15"><sup>15</sup></a></p>
+<p>For example, this formula specifies a regression model where <code>height</code> is the <em>outcome</em>, and <code>age</code> and <code>gender</code> are the <em>predictor</em> variables.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
 <pre><code>height ~ age + gender</code></pre>
 <p>There are lots more useful tricks to learn when writing formulas, which are covered below. But in the interests of instant gratification let’s work through a simple example first:</p>
 </div>
-<div id="running-a-linear-model" class="section level2">
-<h2><span class="header-section-number">10.2</span> Running a linear model</h2>
+<div id="running-a-linear-model" class="section level3 unnumbered">
+<h3>Running a linear model</h3>
 <p>Linear models (including Anova and multiple regression) are run using the <code>lm(...)</code> function, short for ‘linear model’. We will use the <code>mtcars</code> dataset, which is built into R, for our first example.</p>
 <p>First, we have a quick look at the data. The pairs plot suggests that <code>mpg</code> might be related to a number of the other variables including <code>disp</code> (engine size) and <code>wt</code> (car weight):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">select</span>(mpg, disp, wt) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span>pairs</code></pre></div>
-<p><img src="linear-models-simple_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="linear-models_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Before running any model, we should ask outselves: “what question we are trying to answer?”</p>
 <p>In this instance, we can see that both weight (<code>wt</code>) and engine size (<code>disp</code>) are related to <code>mpg</code>, but they are also correlated with one another. We might want to know, then, “are weight and engine size independent predictors of <code>mpg</code>?” That is, if we know a car’s weight, do we gain additional information about it’s <code>mpg</code> by measuring engine size?</p>
 <p>To answer this, we could use multiple regression, including both <code>wt</code> and <code>disp</code> as predictors of <code>mpg</code>. The formula for this model would be <code>mpg ~ wt + disp</code>. The command below runs the model:</p>
@@ -346,8 +232,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>Answer the original question: ‘accounting for weight (<code>wt</code>), does engine size (<code>disp</code>) tell us anything extra about a car’s <code>mpg</code>?’</p>
 </div>
-<div id="more-on-formulas" class="section level2">
-<h2><span class="header-section-number">10.3</span> More on formulas</h2>
+<div id="more-on-formulas" class="section level3 unnumbered">
+<h3>More on formulas</h3>
 <p>Above we briefly introduced R’s formula syntax. Formulas for linear models have the following structure:</p>
 <pre><code>left_hand_side ~ right_hand_side</code></pre>
 <p>For linear models <em>the left side is our outcome</em>, which is must be a continous variable. For categorical or binary outcomes you need to use <code>glm()</code> function, rather than <code>lm()</code>. See the section on <a href="glm.html">generalised linear models</a>) for more details.</p>
@@ -389,8 +275,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre></div>
 <p>But before you do too much with Anova in R <a href="anova.html">read this section</a>.</p>
-<div id="other-formula-shortcuts" class="section level3">
-<h3><span class="header-section-number">10.3.1</span> Other formula shortcuts</h3>
+<div id="other-formula-shortcuts" class="section level4 unnumbered">
+<h4>Other formula shortcuts</h4>
 <p>In addition to the <code>+</code> symbol, we can use other shortcuts to create linear models.</p>
 <p>As seen above, the colon (<code>:</code>) operator indicates the interaction between two terms. So <code>a:b</code> is equivalent to creating a new variable in the data frame where <code>a</code> is multiplied by <code>b</code>.</p>
 <p>The <code>*</code> symbol indicates the expansion of other terms in the model. So, <code>a*b</code> is the equivalent of <code>a + b + a:b</code>.</p>
@@ -403,18 +289,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Repeat the model above, but write the formula a different way (make the formula either more or less explicit, but retaining the same predictors in the model).</li>
 </ul>
 </div>
-</div>
-<div id="what-next" class="section level2">
-<h2><span class="header-section-number">10.4</span> What next</h2>
-<p><strong><em>It is strongly recommended that you read the <a href="anova.html">section on Anova</a> before doing anything else.</em></strong></p>
-<p>As noted above, R has a number of important differences in it’s default settings, as compared with packages like Stata or SPSS. These can make important differences to the way you interpret the output of linear models, especially Anova-type models with categorical predictors.</p>
-
-</div>
+</div> 
 </div>
 <div class="footnotes">
 <hr />
-<ol start="15">
-<li id="fn15"><p>I avoid the terms dependent/independent variables because they are confusing to many students, and because they are misleading when discussing non-experimental data.<a href="linear-models-simple.html#fnref15">↩</a></p></li>
+<ol start="1">
+<li id="fn1"><p>I avoid the terms dependent/independent variables because they are confusing to many students, and because they are misleading when discussing non-experimental data.<a href="linear-models-simple.html#fnref1">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -422,8 +302,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="t-tests.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="anova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="test-if-mean-of-outcome-variable-is-different-from-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="parameterisation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,0 +1,16 @@
+---
+title: 'Loose ends'
+output:
+  bookdown::tufte_html2
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+```
+
+
+
+# Loose ends
+
+
+This chapter contains information on some of the gory details omitted in the main text.

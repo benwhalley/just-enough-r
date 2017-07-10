@@ -8,7 +8,11 @@ link-citations: yes
 ---
 
 
-# {-}
+
+# {-} 
+
+# (PART) Getting started {-} 
+
 
 ![](media/keepcalm.png)
 
@@ -36,11 +40,11 @@ We are going to use R the same way we use any other statistics software: To chec
 Part 1 is meant to be read from beginning to end by those starting from scratch.
 
 
-1. [Getting started](start_here.html) 
-2. [Datasets and dataframes](datasets.html)
-2. [Manipulating dataframes](working-with-dataframes.html) (select and filter)
-3. [Summarising data](summarising-data.html) (split, apply, combine)
-4. [Visualising data](graphics.html) (layering graphics with `ggplot2`)
+1. [Getting started](#start_here) 
+2. [Datasets and dataframes](#datasets-dataframes)
+2. [Manipulating dataframes](#working-with-dataframes) (select and filter)
+3. [Summarising data](#summarising-data) (split, apply, combine)
+4. [Visualising data](#graphics) (layering graphics with `ggplot2`)
 
 
 
@@ -48,27 +52,46 @@ Part 1 is meant to be read from beginning to end by those starting from scratch.
 
 Part 2 can be read sequentially, but the chapters are also designed to work as standalone guides for specific techniques. 
 
-- [Working with real data](real-data.html)
-- [Correlations](correlations.html)
-- [t-tests](t-tests.html)
-- [Linear models](linear-models-simple.html)
-- [Anova in R](anova.html)
-- [Anova cookbook](anova-cookbook.html)
-- [Understanding interactions](understanding-interactions.html) (visualising interactions in raw data)
-- [Predictions and marginal effects](predictions-and-margins.html)
-- [Mediation](mediation.html)
-- [Linear mixed models (multilevel models)](multilevel-models.html)
-- Meta analysis
-- [Confirmatory factor analysis](cfa.html) 
-- Structural Equation Modelling
-- Power analysis
-- ... ^[It would also be lovely to have chapters on multiple imputation, power analysis, simulation, Bayesian modelling and much else. These aren't planned imminently, but contributions are welcome.]
+
+- [Working with real data](#real-data)
+- [Correlations](#correlations)
+- [t-tests](#t-tests)
+
+- [Regression and linear models](#linear-models-simple)
+- [Anova in R](#anova)
+- [Anova cookbook](#anova-cookbook)
+- [Understanding (and visualising) interactions](#understanding-interactions) (visualising interactions in raw data)
+- [Predictions and marginal effects](#predictions-and-margins)
+
+
+- [General linear models](#general-linear-models)
+- [Linear mixed models (multilevel models)](#multilevel-models)
+
+- [Mediation](#mediation)
+- [Meta analysis](#meta-analysis)
+- Scale construction
+- 'Reliability' analyses (inter rater reliability etc.)
+- [Confirmatory factor analysis](#cfa) 
+- [Structural Equation Modelling](#sem)
+- [Power analysis](#power-analysis)
+- [Bayes factors (aka what to do when your experiment doesn't work)](#bayes-factors)
+- Bayesian model fitting with MCMC
+- Multiple imputation (e.g. with MICE)
+- Simulation
+
+
+### Part 3: Statistical explanations {-}
+
+The main guide (mostly) assumes you understand the statistical principles which underpin the models you are running. These sections clarify some important or often-confused points.
+
+- [Confidence intervals vs. prediction intervals](confidence-vs-prediction-intervals.html)
+- [Multiple comparisons and *p* values](multiple-comparisons.html)
 
 
 
-### Part 3: Loose ends {-}
+### Part 4: Loose ends {-}
 
-Part 3 should be used interactively to answer questions that arise along the way.  
+Part 4 should be used interactively to answer questions that arise along the way.  
 
 Some of the content here is not specific to R, but may be useful in interpreting the output of some of the techniques taught in sections 1 and 2.
 
@@ -76,8 +99,18 @@ Some of the content here is not specific to R, but may be useful in interpreting
 - [Installing packages](packages.html)
 - [Handling missing values in R](missing-values.html)
 - [Using RMarkdown effectively](rmarkdown-tricks.html) (e.g. using `pander` and `knitr`)
-- [Dealing with multiple comparisons](multiple-comparisons.html)
-- [Confidence intervals vs. prediction intervals](confidence-vs-prediction-intervals.html)
+- [Automatic APA formatting](#apa-output)
+- [Common problems and toubleshooting](#troubles)
+
+### Part 5: Worked examples {-}
+
+- A 2x2 quasi-experimental design, in which age and gender are covariates of interest.
+- An applied experimental design comparing 2 treatments with multiple outcomes and followup times.
+- A 2x3x2 mixed experimental design measuring reaction times.
+
+
+
+
 
 
 
@@ -85,14 +118,16 @@ Some of the content here is not specific to R, but may be useful in interpreting
 
 This guide is extremely opinionated. 
 
-There are many ways to get things done with R, but trying to learn them all at once causes unhappiness. In particular, lots of the base R functions are old, quirky, inconstently named, and hard to remember. This guide recommends that you use several new 'packages' that replicate and extend some of R's basic functionality. Using this new set of packages, which are very thoughtfull designed and work together nicely, will help you form a more consistent mental model of how to work in R. You can learn the crufty old bits (which do still have their uses) later on.
+There are many ways to get things done with R, but trying to learn them all at once causes unhappiness. In particular, lots of the base R functions are old, quirky, inconstently named, and hard to remember. This guide recommends that you use several new 'packages' that replicate and extend some of R's basic functionality. 
 
-I also assume you are using the RStudio editor and working in an RMarkdown document (see the next section). This is important because this guide itself is written in RMarkdown, and editing it will be an important part of the learning process. If you don't have access to RStudio yet, see the [installation guide](installation.html).
+Using this new set of packages, which are very thoughtfully designed and work together nicely, will help you form a more consistent mental model and workflow in R. You can learn the crufty old bits (which do still have their uses) later on.
+
+The guide also assumes you are using the [RStudio editor](#rstudio) and working in an [RMarkdown document](#rmarkdown) (see the next section). This is important because this guide itself is written in RMarkdown, and editing it will be an important part of the learning process. If you don't have access to RStudio yet, see the [installation guide](installation.html).
 
 
 
 
-## License
+## License {-}
 
 These documents are licensed under the [CC BY-SA licence](https://creativecommons.org/licenses/by-sa/4.0/).
 

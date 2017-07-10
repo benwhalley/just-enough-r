@@ -6,30 +6,9 @@ bibliography: bibliography.bib
 ---
 
 
-```r
-library(tidyverse)
-```
-
-```
-## Loading tidyverse: ggplot2
-## Loading tidyverse: tibble
-## Loading tidyverse: tidyr
-## Loading tidyverse: readr
-## Loading tidyverse: purrr
-## Loading tidyverse: dplyr
-```
-
-```
-## Conflicts with tidy packages ----------------------------------------------
-```
-
-```
-## filter(): dplyr, stats
-## lag():    dplyr, stats
-```
 
 
-# Confidence, credible and prediction intervals
+## Confidence, credible and prediction intervals
 
 
 TODO: EXPAND ON THESE DEFINITIONS AND USE GRAPHICS AND PLOTS TO ILLUSTRATE
@@ -39,7 +18,7 @@ TODO: EXPAND ON THESE DEFINITIONS AND USE GRAPHICS AND PLOTS TO ILLUSTRATE
 *Prediction interval*: the range within which we expect 95% of new observations to fall. If we're considering the prediction interval for a specific point prediction (i.e. where we set predictors to specific values), then this interval woud be for new observations *with the same predictor values*.
 
 
-## The problem with confidence intervals
+### The problem with confidence intervals {-}
 
 Confidence intervals are helpful when we want to think about how *precise our estimate* is. For example, in an RCT we will want to estimate the difference between treatment groups, and it's conceivable be reasonable to want to know, for example, the range within which the true effect would fall 95% of the time if we replicated our study many times.
 
@@ -54,7 +33,7 @@ The problem with confidence intervals come because many researchers and clinicia
 - Misinterpret the CI as the range in which we are 95% sure the true value lies.
 
 
-## Forgetting that the CI depends on sample size.
+### Forgetting that the CI depends on sample size. {-}
 
 By forgetting that the CI contracts as the sample size increases, researchers can become overconfident about their ability to predict new observations. Imagine that we sample data from two populations with the same mean, but different variability:
 
@@ -75,13 +54,10 @@ df %>%
   geom_histogram() + 
   facet_grid(~samp) +
   scale_color_discrete("")
-```
-
-```
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-<img src="confidence-vs-prediction-intervals_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<img src="confidence-vs-prediction-intervals_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 
 - If we sample 100 individuals from each population the confidence interval around the sample mean would be wider in the high variability group. 
@@ -95,9 +71,9 @@ The important insight here is that *if our data are noisy and highly variable we
 
 
 
-## What does this mean for my work on [insert speciality here]?
+### What does this mean for my work on [insert speciality here]? {-}
 
-
+XXX TODO TBC
 
 
 

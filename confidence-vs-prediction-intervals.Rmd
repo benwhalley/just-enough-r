@@ -5,12 +5,13 @@ output:
 bibliography: bibliography.bib
 ---
 
-```{r setup}
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 library(tidyverse)
 ```
 
 
-# Confidence, credible and prediction intervals
+## Confidence, credible and prediction intervals
 
 
 TODO: EXPAND ON THESE DEFINITIONS AND USE GRAPHICS AND PLOTS TO ILLUSTRATE
@@ -20,7 +21,7 @@ TODO: EXPAND ON THESE DEFINITIONS AND USE GRAPHICS AND PLOTS TO ILLUSTRATE
 *Prediction interval*: the range within which we expect 95% of new observations to fall. If we're considering the prediction interval for a specific point prediction (i.e. where we set predictors to specific values), then this interval woud be for new observations *with the same predictor values*.
 
 
-## The problem with confidence intervals
+### The problem with confidence intervals {-}
 
 Confidence intervals are helpful when we want to think about how *precise our estimate* is. For example, in an RCT we will want to estimate the difference between treatment groups, and it's conceivable be reasonable to want to know, for example, the range within which the true effect would fall 95% of the time if we replicated our study many times.
 
@@ -35,7 +36,7 @@ The problem with confidence intervals come because many researchers and clinicia
 - Misinterpret the CI as the range in which we are 95% sure the true value lies.
 
 
-## Forgetting that the CI depends on sample size.
+### Forgetting that the CI depends on sample size. {-}
 
 By forgetting that the CI contracts as the sample size increases, researchers can become overconfident about their ability to predict new observations. Imagine that we sample data from two populations with the same mean, but different variability:
 
@@ -68,9 +69,9 @@ The important insight here is that *if our data are noisy and highly variable we
 
 
 
-## What does this mean for my work on [insert speciality here]?
+### What does this mean for my work on [insert speciality here]? {-}
 
-
+XXX TODO TBC
 
 
 

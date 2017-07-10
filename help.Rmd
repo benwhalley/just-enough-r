@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 ```
 
 
-# Getting help
+## Getting help {- #getting-help}
 
 If you don't know or can't remember what a function does, R provides help files which explain how they work.
 To access a help file for a function, just type `?command` in the console, or run `?command` command within an R block. For example, running `?mean` would bring up the documentation for the `mean` function.

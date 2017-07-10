@@ -11,6 +11,8 @@ library(lmerTest)
 ```
 
 
+## Multiple comparisons {#multiple-comparisons}
+
 XXX THIS JUST copied from previous anova section. Needs more on problem of multiple comparisons
 
 
@@ -46,6 +48,7 @@ By default Tukey correction is applied for multiple comparisons which is a reaso
 In the code below we request FDR-adjusted p values, and then use the `broom::tidy()` function to convert the table into a dataframe, and then show only the first 6 rows as a table in RMarkdown: 
 
 ```{r}
+
 # calculate pairwise contrasts
 eysenck.fdr <- lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition, adjust="fdr")
 
@@ -53,7 +56,7 @@ eysenck.fdr <- lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition, adjust="f
 eysenck.fdr$contrasts %>% 
   broom::tidy() %>% 
   head(6) %>% 
-  pander(caption="First 6 rows of the pairwise contrasts with FDR-adjusted p values")
+  pandoc.table(caption="First 6 rows of the pairwise contrasts with FDR-adjusted p values")
 ```
 
 
@@ -71,8 +74,13 @@ lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition, adjust="none")$contrast 
   mutate(significant = as.numeric(p.value < `q (10% FDR)`)) %>%
   # just show some of the results, at the break between sig and ns contrast
   filter(p.fdr.adjust > .01 & p.fdr.adjust < .4) %>%
-  pander(caption="Subset of contrasts, showing the break between significant and ns results, as determined by an FDR of 10%.", split.tables=Inf)
+  pandoc.table(caption="Subset of contrasts, showing the break between significant and ns results, as determined by an FDR of 10%.", split.tables=Inf)
 ```
 
 Note, that when you use `adjust='fdr'` then the p values returned are
 The [Biostat Handbook](http://www.biostathandbook.com/multiplecomparisons.html) has a good
+
+
+
+
+<!---TO ADD? https://rawgit.com/geneticsMiNIng/FactorMerger/master/materials/vignette.html--->

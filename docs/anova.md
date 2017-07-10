@@ -4,13 +4,17 @@ output: bookdown::tufte_html2
 ---
 
 
-# Anova in R
+# Anova {#anova-in-r}
+
+
+## Anova in R {- #anova}
+
   
 
 
 
 
-This section attempts to cover in a high level way how to specify anova models in R and some of the issues in interpreting the model output. If you just want the 'answers' — i.e. the syntax to specify common Anova models -- you could skip to the next section: [Anova cookbook](anova-cookbook.html)
+This section attempts to cover in a high level way how to specify anova models in R and some of the issues in interpreting the model output. If you just want the 'answers' — i.e. the syntax to specify common Anova models -- you could skip to the next section: [Anova cookbook](#anova-cookbook)
 
 
 
@@ -22,7 +26,7 @@ There are 4 rules for doing Anova in R and not wanting to cry:
 4. Learn about the types of sums of squares and always remember to specify `type=3`, unless you know better.
 
 
-## Rule 1: Use long format data {-}
+### Rule 1: Use long format data {-}
 
 In R, data are almost always most useful a long format where:
 
@@ -37,25 +41,24 @@ For example, in R we will have data like this:
 
 
 ```r
-df %>% head %>% pander
+df %>% head %>% pandoc.table
+## 
+## -------------------------------------
+##  person   time   predictor   outcome 
+## -------- ------ ----------- ---------
+##    1       1         0          7    
+## 
+##    1       2         0         12    
+## 
+##    1       3         0         11    
+## 
+##    2       1         3         13    
+## 
+##    2       2         3          5    
+## 
+##    2       3         3         11    
+## -------------------------------------
 ```
-
-
--------------------------------------
- person   time   predictor   outcome 
--------- ------ ----------- ---------
-   1       1         0          7    
-
-   1       2         0         12    
-
-   1       3         0         11    
-
-   2       1         3         13    
-
-   2       2         3          5    
-
-   2       3         3         11    
--------------------------------------
 
 
 
@@ -64,25 +67,24 @@ Whereas in SPSS we might have the same data structured like this:
 
 
 ```r
-df.wide %>% head %>% pander
+df.wide %>% head %>% pandoc.table
+## 
+## -----------------------------------------------
+##  person   predictor   Time 1   Time 2   Time 3 
+## -------- ----------- -------- -------- --------
+##    1          0         7        12       11   
+## 
+##    2          3         13       5        11   
+## 
+##    3          5         10       12       10   
+## 
+##    4          2         10       12       11   
+## 
+##    5          4         9        13       5    
+## 
+##    6          4         9        15       9    
+## -----------------------------------------------
 ```
-
-
------------------------------------------------
- person   predictor   Time 1   Time 2   Time 3 
--------- ----------- -------- -------- --------
-   1          0         7        12       11   
-
-   2          3         13       5        11   
-
-   3          5         10       12       10   
-
-   4          2         10       12       11   
-
-   5          4         9        13       5    
-
-   6          4         9        15       9    
------------------------------------------------
 
 
 
@@ -91,9 +93,9 @@ R always uses long form data when running an Anova, but one downside is that it 
 
 
 
-## Rule 2: Know your variables {-}
+### Rule 2: Know your variables {-}
 
-See [the section on dataframes](datasets.html) and be sure you can distinguish:
+See [the section on dataframes](#datasets-dataframes) and be sure you can distinguish:
 
 - Numeric variables
 - Factors
@@ -108,7 +110,7 @@ In Anova, you need to enter:
 
 
 
-## Rule 3: Don't use `aov()` or `anova()` {-}
+### Rule 3: Don't use `aov()` or `anova()` {-}
 
 This is the most important rule of all.
 
@@ -120,7 +122,7 @@ The recommendation here is:
 
 - If you have repeated measures, your data are perfectly balanced, and you have no missing values then use `afex::car_aov()`. But be careful to specify the Error term in your model to allow for the repeats.
 
-- If you think you might want a repeat measures Anova but your data are not balanced or you have missing data, use [linear mixed models](multilevel-models.html) instead via the `lme4::` package.
+- If you think you might want a repeat measures Anova but your data are not balanced or you have missing data, use [linear mixed models](#multilevel-models) instead via the `lme4::` package.
 
 
 
@@ -135,7 +137,7 @@ If you want effect sizes use: `lsr::etaSquared(model)` (install the `lsr` packag
 
 
 
-## Rule 4: Use type 3 sums of squares (and learn about why) {-}
+### Rule 4: Use type 3 sums of squares (and learn about why) {-}
 
 You may be aware, but there are at least 3 different ways of calculating the sums of squares for each factor and interaction in an Anova. In short, 
 
@@ -158,16 +160,16 @@ An even longer answer, including a much deeper exploration of the philosophical 
 
 
 
-## General Anova recommendations {-}
+### General recommendations {- #anova-recommendations}
 
 
-1. Make sure to [Plot your raw data *first*](graphics.html)
+1. Make sure to [Plot your raw data *first*](#graphics)
 
-1. Where you have interactions, [be cautious in interpreting the main effects in your model, and always plot the model predictions](understanding-interactions.html). 
+1. Where you have interactions, [be cautious in interpreting the main effects in your model, and always plot the model predictions](#understanding-interactions). 
 
-1. If you find yourself aggregating (averaging) data before running your model, [think about using a mixed or multilevel model](multilevel-models.html) instead.
+1. If you find yourself aggregating (averaging) data before running your model, [think about using a mixed or multilevel model](#multilevel-models) instead.
 
-1. If you are using repeated measures Anova, [check if you should should be using a mixed model](multilevel-models.html) instead. If you have an unbalanced design or any missing data, you probably should use a mixed model.
+1. If you are using repeated measures Anova, [check if you should should be using a mixed model](#multilevel-models) instead. If you have an unbalanced design or any missing data, you probably should use a mixed model.
 
 
 

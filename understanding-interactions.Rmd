@@ -17,7 +17,10 @@ theme_set(theme_tufte(base_size = 18))
 ```
 
 
-# Understanding interactions (part 1)
+
+
+
+# Understanding interactions (part 1) {#understanding-interactions}
 
 
 Objectives of this section:
@@ -101,24 +104,28 @@ The reason this plot improves on the bar graph is because:
 
 
 
-## Visualising interactions in raw data
+## Visualising interactions in raw data 
+
+### {- #pain-music-data}
 
 Before setting out to *test* for an interaction using some kind of statistical model, it's a good idea to first visualise the relationships between outcomes and predictors.
 
 A student dissertation project investigated the analgesic quality of music during an experimental pain stimulus. Music was selected to be either *liked* (or disliked) by participants and was either *familiar* or unfamiliar to them. Pain was rated without music (`no.music`) and with music (`with.music`) using a 10cm visual analog scale anchored with the labels "no pain" and "worst pain ever".
 
-```{r, include=F}
-# painmusic <- readxl::read_excel("~/Dropbox/Projects/music-pain/data/CompleteDataForAnalysis2.xlsx") %>%
-#   mutate(
-#   liked=factor(liked, labels=c("Disliked", "Liked")),
-#   familiar=factor(familiar, labels=c("Unfamiliar", "Familiar"))
-# ) %>% select(matches(".")) %>%
-#   select(liked, familiar, contains("intensity.vas")) %>% 
-#   rename(no.music=intensity.vas.baseline, with.music=intensity.vas.experimental) 
-# 
-# save(painmusic, file='data/painmusic.Rdata')
+```{r, include=F, eval=F}
+painmusic <- readxl::read_excel("~/Dropbox/Projects/music-pain/data/CompleteDataForAnalysis2.xlsx") %>%
+  mutate(
+  liked=factor(liked, labels=c("Disliked", "Liked")),
+  familiar=factor(familiar, labels=c("Unfamiliar", "Familiar"))
+) %>% select(matches(".")) %>%
+  select(liked, familiar, contains("intensity.vas")) %>%
+  rename(no.music=intensity.vas.baseline, with.music=intensity.vas.experimental)
 
-load('data/painmusic.Rdata')
+saveRDS(painmusic, file='data/painmusic.RDS')
+```
+
+```{r}
+painmusic <- readRDS('data/painmusic.RDS')
 painmusic %>% glimpse
 ```
 
@@ -166,7 +173,7 @@ painmusic %>%
 ```
 
 
-The advantage of both these plots is that they preserve quite a bit of infrmation about the variable of interest. However, they don't make it easy to read the main effects and interaction as we saw for the point-line plot above.
+The advantage of these last two plots is that they preserve quite a bit of infrmation about the variable of interest. However, they don't make it easy to read the main effects and interaction as we saw for the point-line plot above.
 
 We can combine some benefits of both plots by adding an error bar to the point-line plot:
 
@@ -188,14 +195,17 @@ At this point, especially if your current data include only categorical predicto
 
 ## Continuous predictors
 
-...
+
+XXX TODO
+
+User  `modelr::gather_predictions` to plot 
 
 
 
 
 ## What next?
 
-You might like to move on to [making predictions from statistical models](predictions-and-margins.html), and plotting these.
+You might like to move on to [making predictions from models](predictions-and-margins.html), and plotting these.
 
 
 

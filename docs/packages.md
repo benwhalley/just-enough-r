@@ -7,7 +7,8 @@ output:
 
 
 
-# Loading packages
+
+## Loading packages {- #packages}
 
 R has been around for a very long time, but has remained popular because it is easy for people to add new functions to it. 
 

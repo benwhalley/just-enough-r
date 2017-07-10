@@ -8,12 +8,18 @@ output:
 
 
 
-# Datasets and dataframes
 
-A dataframe is an object which can store data as you might encounter it in SPSS, Stata or other statistics packages. It's much like a spreadsheet, but with some constraints applied 
-'Constraints' sounds bad, but are helpful here: they make dataframes more structured and predictable to work with:
+# (PART) Working with data {-}
 
-- Each column is a vector, and so can only store one type of data ^[Remember that in a [previous chapter](start_here.html) we created *vectors*, which are sequences that contain only one type of thing, and *lists* (which can contain a mix of different things.]
+
+# Datasets and dataframes {#datasets-dataframes}
+
+A dataframe is an object which can store data as you might encounter it in SPSS, Stata, or other statistics packages. 
+
+It's much like a spreadsheet, but with some constraints applied. 
+'Constraints' sound bad, but are helpful here: they make dataframes more structured and predictable to work with:
+
+- Each column is a vector, and so can [only store one type of data](#vectors-and-lists)].
 
 - Every column has to be the same length (although missing values are allowed).
 
@@ -23,14 +29,10 @@ A dataframe is an object which can store data as you might encounter it in SPSS,
 Put another way, a dataframe behaves like a *list* of *vectors*, which means we can use a lot of the same rules to access elements within them (more on this below).
 
 
-## Using 'built in' data 
-
+### Using 'built in' data {- #built-in-data}
 
 
 The quickest way to see a dataframe in action is to use one that is built in[^builtin] to R. For example:
-
-[^builtin]:
-  To find a list of all the built in datasets you can type `help(datasets)`
 
 
 ```r
@@ -44,7 +46,45 @@ head(airquality)
 ## 6    28      NA 14.9   66     5   6
 ```
 
-Or we can use `dplyr::glimpse()` function to take a different look at the first few rows of the `mtcars` data. This flips the dataframe so the variables are listed in the first column of the output:
+Or
+
+```r
+head(mtcars)
+##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+```
+
+In both these examples the datasets (`airquality` and `mtcars`) are already loaded and available to be used in the `head()` function.
+
+[To find a list of all the built in datasets you can type `help(datasets)`. Familiarise yourself with some of the other included datasets, e.g. `datasets::attitude`. Watch out that not all the included dataset as re *dataframes*: some are just vectors of observations (e.g. the `airmiles` data) and some are 'time-series', (e.g. the `co2` data)]{.exercise}
+
+
+
+## Looking at data {- #looking-at-data}
+
+As we've already seen, using `print(df)` within an RMarkdown document creates a nice interactive table you can use to look at your data.
+
+However you won't want to print your whole data file when you Knit your RMarkdown document. The `head` function can be useful if you just want to see a few rows:
+
+
+```r
+head(mtcars)
+##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+```
+
+
+Or we can use glimpse()` function from the `dplyr::` package (see the [section on loading and using packages](#packages)) for a different view of the first few rows of the `mtcars` data. This flips the dataframe so the variables are listed in the first column of the output:
 
 
 ```r
@@ -65,10 +105,38 @@ glimpse(mtcars)
 ```
 
 
-In both these examples the datasets (`airquality` and `mtcars`) are already loaded and available to be used in the `head()` or `glimpse()` functions.
+
+You can use the `pander::` package to format tables nicely, for when you Knit a document to HTML, Word or PDF. For example:
 
 
-Other useful functions for looking at datasets include:
+```r
+pander::pandoc.table(head(airquality), 
+                     caption="Tables always need a caption.")
+## 
+## ---------------------------------------------
+##  Ozone   Solar.R   Wind   Temp   Month   Day 
+## ------- --------- ------ ------ ------- -----
+##   41       190     7.4     67      5      1  
+## 
+##   36       118      8      72      5      2  
+## 
+##   12       149     12.6    74      5      3  
+## 
+##   18       313     11.5    62      5      4  
+## 
+##   NA       NA      14.3    56      5      5  
+## 
+##   28       NA      14.9    66      5      6  
+## ---------------------------------------------
+## 
+## Table: Tables always need a caption.
+```
+
+
+See the section on [sharing and publishing for more ways to format and present tables](#sharing-and-publication).
+
+
+Other useful functions for looking at and exploring datasets include:
 
 
 ```r
@@ -115,23 +183,26 @@ psych::describe(airquality)
 
 
 There are also some helpful plotting functions which accept a dataframe:
-<label for="tufte-mn-" class="margin-toggle">&#8853;</label><input type="checkbox" id="tufte-mn-" class="margin-toggle"><span class="marginnote">These plots might not be worth including in a final write-up, but are very useful when exploring your data.</span>
 
 
 ```r
 boxplot(airquality)
 ```
 
-<img src="datasets_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="datasets_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 ```r
 psych::cor.plot(airquality)
 ```
 
-<img src="datasets_files/figure-html/unnamed-chunk-6-2.png" width="672" />
+<img src="datasets_files/figure-html/unnamed-chunk-9-2.png" width="672" />
+
+These plots might not be worth including in a final write-up, but are very useful when exploring your data.
 
 
-## Importing and exporting data
+
+
+## Importing and exporting data {- #importing-data}
 
 
 If you have data outside of R, *the simplest way to import it is to first save it as a comma or tab-separated text file*, normally with the file extension `.csv` or `.txt`^[This is easy to achieve in Excel and most other stats packages using the `Save As...` menu item].
@@ -185,11 +256,11 @@ Once it's loaded, you can use this new dataset like any other:
 pairs(angry.moods)
 ```
 
-<img src="datasets_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="datasets_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 
 
-## Importing data over the web
+### Importing data over the web {- #importing-data-from-the-web}
 
 One neat feature of the `readr` package is that you can import data from the web, using a URL rather than a filename on your local computer. This can be really helpful when sharing data and code with colleagues. For example, we can load the `angry_moods.csv` file from a URL:
 
@@ -204,6 +275,6 @@ head(angry.moods.from.url)
 
 
 
-## Importing from SPSS and other packages
+### Importing from SPSS and other packages {- #importing-proprietary-formats}
 
 This is often more trouble than it's worth (just use a csv file!) but if you really must see <https://www.datacamp.com/community/tutorials/r-data-import-tutorial>.

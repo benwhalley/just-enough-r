@@ -7,11 +7,11 @@ output:
 
 
 
-# Tips and tricks with RMarkdown
+## Tips and tricks with RMarkdown {- #rmarkdown-tricks}
 
 TODO, cover
 
-- Using `pander` to format tables nicely
+- Using `pander::pandoc.table` to format tables nicely
 - Rounding of values with `sprintf`
 
 - Accessing `coefficients()`
@@ -25,3 +25,13 @@ TODO, cover
 
 
 
+
+
+
+
+## Finding the backtick on your keyboard {- #backtick-location}
+
+
+![On windows](media/backtick-windows-uk.png)
+
+![On a Mac](media/backtick-mac-uk.png)

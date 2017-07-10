@@ -1,0 +1,18 @@
+---
+title: 'Statistical explanations'
+output:
+  bookdown::tufte_html2
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+
+```
+
+
+
+# Statistical explanations
+
+
+
+Explain what will be here

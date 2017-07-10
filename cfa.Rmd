@@ -12,12 +12,12 @@ library(tidyverse)
 ```
 
 
-# Confirmatory factor analysis
+# Confirmatory factor analysis {#cfa}
 
 *This section adapted from a guide originally produced by Jon May*
 
 
-First make sure the `lavaan` package is installed^[see: [installing packages](packages.html)]; it stands for Latent Variable Analysis and is the most popular package for CFA in R.
+First make sure the `lavaan` package is installed^[see: [installing packages](#packages)]; it stands for Latent Variable Analysis and is the most popular package for CFA in R.
 
 ```{r, eval=F}
 install.packages(lavaan)

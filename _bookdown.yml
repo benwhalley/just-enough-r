@@ -5,42 +5,53 @@ output_dir: "docs"
 rmd_files:
   [ "index.Rmd",
     "start_here.Rmd",
+
     "datasets.Rmd",
     "working-with-dataframes.Rmd",
+    "real-data.Rmd",
     "summarising-data.Rmd",
     "graphics.Rmd",
+    "graphics-ggplot-extras.Rmd",
 
-    "real-data.Rmd",
+
+    "basic-statistics.Rmd",
+    "crosstabulation.Rmd",
     "correlations.Rmd",
     "t-tests.Rmd",
-    "linear-models-simple.Rmd",
+
+
+    "linear-models.Rmd",
     "anova.Rmd",
     "anova-cookbook.Rmd",
+
     "understanding-interactions.Rmd",
     "predictions-and-margins.Rmd",
+
+    "general-linear-models.Rmd",
     "mediation.Rmd",
     "multilevel-models.Rmd",
     "cfa.Rmd",
+    "sem.Rmd",
+    "power-analysis.Rmd",
+    "meta-analysis.Rmd",
+    "bayes-factors.Rmd",
+    "bayes-mcmc.Rmd",
 
-    "installation.Rmd",
-    "packages.Rmd",
-    "help.Rmd",
-    "missing-values.Rmd",
-    "rmarkdown-tricks.Rmd",
+
+    "statistical-explanations.Rmd",
     "confidence-vs-prediction-intervals.Rmd",
     "multiple-comparisons.Rmd",
 
+
+    "loose-ends.Rmd",
+    "installation.Rmd",
+    "packages.Rmd",
+    "help.Rmd",
+    "rmarkdown-tricks.Rmd",
+    "sharing-and-publishing.Rmd",
+    
     "references.Rmd"
   ]
-
-
-
-
-
-
-
-
-
 
 
 

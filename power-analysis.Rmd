@@ -21,12 +21,11 @@ library(simr)
 If you want to do power analysis for a standard statistical test, e.g. t-tests, chi^2 or Anova, the `pwr::` package is what you need. [This guide has a good walkthrough](http://www.statmethods.net/stats/power.html).
 
 
-If you'd like to run power analyses for linear mixed models ([multilevel models](#multilevel-models)) then you need the `simr::` package. It has some neat features for calculating power by simulating data and results from a model you specify.
-
+If you'd like to run power analyses for linear mixed models ([multilevel models](#multilevel-models)) then you need [the `simr::` package](http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12504/full). It has some neat features for calculating power by simulating data and results from a model you specify.
 
 To take a simple example, let's fabricate some data where outcomes `y` are nested within groups `g`, and where there is a covariate of interest `x`. That is, we are interested in estimating our power to detect an effect of `x`. 
 
-Note though that in this simulated data, we create outcomes (`y`) with no relationship to `x`, and there is also no clustering by `g` at this stage (i.e. `y` and `g` are uncorrelated).
+Note though that in this simulated data, we create outcomes (`y`) with no relationship to `x`, and no clustering by `g` at this stage (i.e. `y`, `x` and `g` are uncorrelated).
 
 ```{r}
 set.seed(1234)
@@ -35,7 +34,9 @@ simulated.df <- data_frame(
   g = rep(1:10, 10),
   y = rnorm(100)
 )
+GGally::ggpairs(simulated.df)
 ```
+
 
 
 To use `simr::` we first run our 'model of interest'. In this case it's a random-intercepts [multilevel model](#multilevel-models). We can verify `x` is unrelated to outcome with `lmerTest::anova`:

@@ -1,0 +1,22 @@
+---
+title: 'General linear models'
+output: bookdown::tufte_html2
+---
+  
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+library(tidyverse)
+```
+
+
+# General linear models
+
+
+## Logistic regression
+
+- fitting
+- predicted probabilities
+- interactions and weirness between probbaility and logit space
+
+TODO XXX
+

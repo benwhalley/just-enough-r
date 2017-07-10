@@ -7,8 +7,7 @@ output:
 
 
 
-# Correlations
-
+## Correlations {- #correlations}
 
 The base R `cor()` function provides a simple way to get Pearson correlations, but to get a correlation matrix as you might expect from SPSS or Stata it's best to use the ``corr.test()`` function in the `psych` package.
 
@@ -59,7 +58,7 @@ mtcars %>%
 
 
 
-## Obtaining a correlation matrix
+### Creating a correlation matrix {- #correlation-matrix}
 
 
 The `psych::corr.test()` function is a quick way to obtain a pairwise correlation matrix for an entire dataset, along with p values and confidence intervals which the base R `cor()` function will not provide:
@@ -102,10 +101,73 @@ mycorrelations
 One thing to be aware of is that by default `corr.test()` produces p values that are adjusted for multiple comparisons in the top right hand triangle (i.e. above the diagonal). If you want the uncorrected values use the values below the diagonal (or pass `adjust=FALSE` when calling the function). 
 
 
-## Tables for publication
+
+### Working with correlation matrices {-}
+
+It's important to realise that, as with all R objects, we can work with correlation matrices to continue our data ananalyses.
+
+For example, as part of exploring your data, you might want to know whether correlations you observe in one sample are similar to those from another sample, when using the same questions. For example, let's say we ran a survey measuring variables from the theory of planned behaviour first in students, and later in older adults:
 
 
-### Using `apaTables` {-}
+
+We could run correlations for each sample separately:
+
+
+```r
+corr.students <- cor(students)
+corr.general.population <- cor(general.population)
+```
+
+
+And we could 'eyeball' both of these correlation matrices and try and spot patterns or differences between them, but this is quite hard:
+
+
+```r
+corr.students
+##              behaviour intention    control social.norm    attitude
+## behaviour   1.00000000 0.5514765 0.64787078  0.07185587  0.13179743
+## intention   0.55147645 1.0000000 0.39427210  0.29790114  0.43847665
+## control     0.64787078 0.3942721 1.00000000  0.01687272  0.01370568
+## social.norm 0.07185587 0.2979011 0.01687272  1.00000000 -0.01055921
+## attitude    0.13179743 0.4384766 0.01370568 -0.01055921  1.00000000
+
+corr.general.population
+##             behaviour intention social.norm    attitude    control
+## behaviour   1.0000000 0.5380706  0.28230551  0.23129188 0.14128284
+## intention   0.5380706 1.0000000  0.35597308  0.37583454 0.29027483
+## social.norm 0.2823055 0.3559731  1.00000000 -0.08050561 0.01012182
+## attitude    0.2312919 0.3758345 -0.08050561  1.00000000 0.04880911
+## control     0.1412828 0.2902748  0.01012182  0.04880911 1.00000000
+```
+
+
+But we could also simply *subtract* one matrix from the other to show the difference directly:
+
+
+```r
+corr.students - corr.general.population
+##                behaviour   intention    control social.norm     attitude
+## behaviour    0.000000000  0.01340583 0.36556527 -0.15943601 -0.009485413
+## intention    0.013405830  0.00000000 0.03829902 -0.07793340  0.148201816
+## control      0.365565268  0.03829902 0.00000000  0.09737834  0.003583860
+## social.norm -0.159436010 -0.07793340 0.09737834  0.00000000 -0.059368315
+## attitude    -0.009485413  0.14820182 0.00358386 -0.05936832  0.000000000
+```
+
+Now it's much more obvious that the behaviour/control correlation differs between the samples (it's higher in the students).
+
+The point here is not that this is an analysis you are likely to actually report (although you might find it useful when exploring the data), but rather to show that a correlation matrix, in common with the results of all the statistical tests we run, are themselves *just data points*. We can do whatever we like with our results — storing them in data frames to display later, or process as we need.
+
+In reality, if you wanted to test the difference in correlations (slopes) in two groups you probably want to use [multiple regression](#regression), and if you wanted to test a complex model like the theory of planned behaviour, you might consider [CFA](#cfa) and/or [SEM](#sem)).
+
+
+
+
+
+### Tables for publication {- #correlation-tables-for-publication}
+
+
+#### Using `apaTables` {-}
 If you want to produce output tables for publication the `apaTables` package might be useful. This block saves an APA formatted correlation table to an [external Word document like this](Table1_APA.doc).
 
 
@@ -137,9 +199,9 @@ apa.cor.table(airquality, filename="Table1_APA.doc", show.conf.interval=F)
 ```
 
 
-### By hand {-}
+#### By hand {-}
 
-If you're not bothered about strict APA foramt, you might still want to extract the *r* and *p* values as dataframes which can then be saved to a csv and opened in excel, or converted to a table by some other means. 
+If you're not bothered about strict APA format, you might still want to extract *r* and *p* values as dataframes which can then be saved to a csv and opened in excel, or converted to a table by some other means. 
 
 You can do this by storing the `corr.test` output in a variable, and the accessing the `$r` and `$p` values within it:
 
@@ -187,28 +249,27 @@ You can also access the CI for each pariwise correlation as a table:
 ```r
 mycorrelations$ci %>% 
   head() %>% 
-  pander()
+  pandoc.table()
+## 
+## ----------------------------------------------
+##      &nbsp;        lower    r     upper    p  
+## ----------------- ------- ------ ------- -----
+##  **Ozone-Slr.R**   0.17    0.35    0.5     0  
+## 
+##  **Ozone-Wind**    -0.71   -0.6   -0.47    0  
+## 
+##  **Ozone-Temp**    0.59    0.7    0.78     0  
+## 
+##  **Ozone-Month**  -0.018   0.17   0.34   0.078
+## 
+##   **Ozone-Day**    -0.2   -0.013  0.17   0.89 
+## 
+##  **Slr.R-Wind**    -0.22  -0.057  0.11    0.5 
+## ----------------------------------------------
 ```
 
 
-----------------------------------------------
-     &nbsp;        lower    r     upper    p  
------------------ ------- ------ ------- -----
- **Ozone-Slr.R**   0.17    0.35    0.5     0  
-
- **Ozone-Wind**    -0.71   -0.6   -0.47    0  
-
- **Ozone-Temp**    0.59    0.7    0.78     0  
-
- **Ozone-Month**  -0.018   0.17   0.34   0.078
-
-  **Ozone-Day**    -0.2   -0.013  0.17   0.89 
-
- **Slr.R-Wind**    -0.22  -0.057  0.11    0.5 
-----------------------------------------------
-
-
-## Other correlation methods
+### Other methods for correlation {- #correlation-methods}
 
 By default `corr.test` produces Pearson correlations, but You can pass the `method` argument `psych::corr.test()`:
 

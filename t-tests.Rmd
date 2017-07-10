@@ -14,7 +14,10 @@ panderOptions('keep.trailing.zeros', TRUE)
 
 
 
-# t-tests
+## t-tests {- #t-tests}
+
+
+#### Visualising your data first {-}
 
 Before you run any tests it's worth plotting your data. 
 
@@ -71,43 +74,45 @@ chicks.eating.beans %>%
 
 
 
-## Running t-tests
+#### Running the t-test {-}
 
 Assuming you really do still want to run a null hypothesis test on one or two means, the `t.test()` function performs most common variants, illustrated below.
 
 
-## 2 independent groups:
+
+
+##### 2 independent groups
+
+Assuming  your data are in long format:
 
 ```{r}
-# the t.test function is a bit crufty and won't accept a data= parameter
-# for all types of test. Instead we use the with(...) function to make
-# the variables in the chicks.eating.beans datafram available to the
-# t.test function.
-with(chicks.eating.beans, t.test(weight ~ feed))
+t.test(weight ~ feed, data=chicks.eating.beans)
 ```
 
 
-Or equivalently, if your data are untidy and each group has it's own column:
+Or equivalently, if your [data are untidy](#tidying-data) and each group has it's own column (e.g. chicks eating soybeans in one column and those eating horsebeans in another):
 
-```{r}
+```{r, include=F}
 untidy.chicks <- chicks.eating.beans %>% 
   mutate(chick = row_number()) %>% 
   reshape2::dcast(chick~feed, value.var = 'weight')
+```
 
+```{r}
 with(untidy.chicks, t.test(horsebean, soybean))
 ```
 
 
-## Unequal variances
+##### Equal or unequal variances? {#equal-variances .admonition}
 
-By default R assumes your groups have unequal variances and applies an appropriate correction. If you don't want this you can add `var.equal = TRUE` and get a vanilla t-test:
+By default R assumes your groups have unequal variances and applies an appropriate correction (you will notice the output labelled 'Welch Two Sample t-test'). 
 
-```{r}
-with(untidy.chicks, t.test(horsebean, soybean, var.equal=TRUE))
-```
+You can turn this correction off (for example, if you're trying to replcate an analysis done using the default settings in SPSS) but you probably do want to assume unequal variances [see @ruxton2006unequal].
 
 
-## Paired samples
+
+
+##### Paired samples
 
 ```{r}
 a <- rnorm(50, 2.5, 1)
@@ -127,7 +132,7 @@ with(long.form.data, t.test(value~key, paired=TRUE))
 
 
 
-## One-sample test 
+##### One-sample test 
 
 i.e. comparing sample mean with a specific value:
 

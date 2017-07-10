@@ -8,28 +8,31 @@ output:
 
 
 
-# Anova 'Cookbook'
+## Anova 'Cookbook' {- #anova-cookbook}
 
-This section is intended as a shortcut to running Anova for a variety of common types of model. If you want to understand more about what you are doing, read the section on [principles of Anova in R](anova.html).
-
-
-
-## Between subjects designs
+This section is intended as a shortcut to running Anova for a variety of common types of model. If you want to understand more about what you are doing, read the section on [principles of Anova in R](#anova).
 
 
-### Factorial anova, no bigger than 2x2
 
+### Between-subjects Anova {-}
+
+
+#### Factorial anova, 2x2 {-}
 
 TODO
 
 
-### Factorial anova, where one factor has > 2 levels.
+
+#### Factorial anova, where one factor has > 2 levels {-}
 
 We are using a dataset from Howell (REF), chapter 13 which recorded `Recall` among young v.s. older adults (`Age`) for each of 5 conditions.
 
 
 
+
+
 This data would commonly be plotted something like this:
+
 
 
 ```r
@@ -44,6 +47,7 @@ eysenck %>%
 
 
 [Visual inspection of the data (see Figure X) suggested that older adults recalled more words than younger adults, and that this difference was greatest for the intention, imagery, and adjective conditions. Recall peformance was worst in the counting and rhyming conditions.]{.apa-example}
+
 
 
 Or alternatively if we wanted to provde a better summary of the distribution of the raw data we could use a boxplot:
@@ -82,26 +86,143 @@ car::Anova(eysenck.model, type=3)
 ```
 
 
-### Checking assumptions {-}
 
-If we want to check assumptions of the model are met, these tables and plots would be a reasonable place to start. First running Levene's test:
+
+
+
+
+
+### Repeated measures or 'split plot' designs {-}
+
+It might be controversial to say so, but the tools to run traditional repeat measures Anova in R are a pain to use. It's not easy to run repeated measures Anova models using base packages alone and, although there are numerous packages which do simplify this a little, their syntax can be obtuse or confusing, and the output sometimes cryptic. To make matters worse, various textbooks, online guides and the R help files themselves show many ways to achieve the same ends, and it can be difficult to follow the differences between the underlying models that are run.
+
+At this point, given the [many other advantages of linear mixed models over traditional repeated measures Anova](http://jamanetwork.com/journals/jamapsychiatry/article-abstract/481967), and given that many researchers abuse traditional Anova in practice (e.g. using it for unbalanced data, or where some data are missing), the recommendation here is to simply give up and learn how to run linear mixed models. These can (very closely) replicate traditional Anova approaches, but also:
+
+- Handle missing data or unbalanced designs gracefully and efficiently.
+
+- Be expanded to include multiple levels of nesting. For example, allowing pupils to be nested within classes, within schools. Alternatively multiple measurements of individual patients might be clustered by hospital or therapist.
+
+- Allow time to be treated as a continuous variable. For example, time can be modelled as a slope or some kind of curve, rather than a fixed set of observation-points. This can be more parsimonious, and more flexible when dealing with real-world data (e.g. from clinical trials).
+
+It would be best at this point to [jump straight to the main section multilevel or mixed-effects models](#multilevel-models), but to give one brief example of mixed models in use:
+
+
+
+The `sleepstudy` dataset in the `lme4` package provides reaction time data recorded from participants over a period of 10 days, during which time they were deprived of sleep.
+
+
+```r
+lme4::sleepstudy %>% head(12) %>% pandoc.table
+## 
+## ---------------------------
+##  Reaction   Days   Subject 
+## ---------- ------ ---------
+##   249.6      0       308   
+## 
+##   258.7      1       308   
+## 
+##   250.8      2       308   
+## 
+##   321.4      3       308   
+## 
+##   356.9      4       308   
+## 
+##   414.7      5       308   
+## 
+##   382.2      6       308   
+## 
+##   290.1      7       308   
+## 
+##   430.6      8       308   
+## 
+##   466.4      9       308   
+## 
+##   222.7      0       309   
+## 
+##   205.3      1       309   
+## ---------------------------
+```
+
+We can plot these data to show the increase in RT as sleep deprivation continues:
+
+
+```r
+lme4::sleepstudy %>% 
+  ggplot(aes(factor(Days), Reaction)) + 
+  geom_boxplot() + 
+  xlab("Days") + ylab("RT (ms)") + 
+  geom_label(aes(y=400, x=2, label="you start to\nfeel bad here"), color="red") + 
+  geom_label(aes(y=450, x=9, label="imagine how bad\nyou feel by this point"), color="red") 
+```
+
+<img src="anova-cookbook_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+
+
+If we want to test whether there are significant differences in RTs between `Days`, we could fit something very similar to a traditional repeat measures Anova using the `lme4::lmer()` function, and obtain an Anova table for the model using the special `lmerTest::anova()` function:
+
+
+```r
+sleep.model <- lmer(Reaction ~ factor(Days) + (1 | Subject), data=lme4::sleepstudy)
+lmerTest::anova(sleep.model)
+## Analysis of Variance Table of type III  with  Satterthwaite 
+## approximation for degrees of freedom
+##              Sum Sq Mean Sq NumDF DenDF F.value    Pr(>F)    
+## factor(Days) 166235   18471     9   153  18.703 < 2.2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
+If you had really wanted to fit the traditional repeated measures Anova, the closest equivalent would be:
+
+
+```r
+afex::aov_car(Reaction ~ Days + Error(Subject/(Days)), data=lme4::sleepstudy)
+## Anova Table (Type 3 tests)
+## 
+## Response: Reaction
+##   Effect          df     MSE         F ges p.value
+## 1   Days 3.32, 56.46 2676.18 18.70 *** .29  <.0001
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1
+## 
+## Sphericity correction method: GG
+```
+
+This gives almost-identical results. You may find that in other cases the `lmer` and traditional anova models diverge slightly, but this is likely to be caused by factors including imbalances in the data, partially missing data (only complete cases can be analyses by traditional anova) or other violations of the assumptions of one or both of the models. There is no clear steer in the literature as to which model is 'best' in the general sense, and it is likely that the linear model will be a better fit for a greater range of datasets.
+
+See the [multilevel models section](#multilevel-models) for details of more interesting models using this dataset which:
+
+- Fit a simple slope for `Days`
+- Fit curves or other functions for `Days`
+- Allow the effect of sleep deprivation to vary for different participants
+
+
+
+
+
+
+
+
+## Checking assumptions {-}
+
+
+
+If we want to check assumptions of the Anova are met, these tables and plots would be a reasonable place to start. First running Levene's test:
 
 
 ```r
 car::leveneTest(eysenck.model) %>% 
-  pander()
+  pandoc.table()
+## 
+## -----------------------------------
+##   &nbsp;     Df   F value   Pr(>F) 
+## ----------- ---- --------- --------
+##  **group**   9     1.031    0.4217 
+## 
+##              90     NA        NA   
+## -----------------------------------
 ```
-
-
------------------------------------
-  &nbsp;     Df   F value   Pr(>F) 
------------ ---- --------- --------
- **group**   9     1.031    0.4217 
-
-             90     NA        NA   
------------------------------------
-
-Table: Levene's Test for Homogeneity of Variance (center = median)
 
 
 Then a QQ-plot of the model residuals to assess normality:
@@ -113,8 +234,8 @@ car::qqPlot(eysenck.model)
 ```
 
 <div class="figure">
-<img src="anova-cookbook_files/figure-html/unnamed-chunk-7-1.png" alt="QQ plot to assess normality of model residuals" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-7)QQ plot to assess normality of model residuals</p>
+<img src="anova-cookbook_files/figure-html/unnamed-chunk-11-1.png" alt="QQ plot to assess normality of model residuals" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-11)QQ plot to assess normality of model residuals</p>
 </div>
 
 
@@ -122,7 +243,7 @@ And finally a residual-vs-fitted plot:
 
 
 ```r
-# we have to make a dataframe containing the fitted values and residuals first
+
 data_frame(
   fitted = predict(eysenck.model), 
   residual = residuals(eysenck.model)) %>% 
@@ -134,12 +255,14 @@ data_frame(
 ```
 
 <div class="figure">
-<img src="anova-cookbook_files/figure-html/unnamed-chunk-8-1.png" alt="Residual vs fitted (spread vs. level) plot to check homogeneity of variance." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-8)Residual vs fitted (spread vs. level) plot to check homogeneity of variance.</p>
+<img src="anova-cookbook_files/figure-html/unnamed-chunk-12-1.png" alt="Residual vs fitted (spread vs. level) plot to check homogeneity of variance." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-12)Residual vs fitted (spread vs. level) plot to check homogeneity of variance.</p>
 </div>
 
 
-### Post hoc tests {-}
+
+
+## Post hoc tests {-}
 
 If we want to look at post-hoc pairwise tests we can use the the `lsmeans()` function from the `lsmeans::` package:
 
@@ -212,7 +335,7 @@ lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition)
 ## P value adjustment: tukey method for comparing a family of 10 estimates
 ```
 
-By default Tukey correction is applied for multiple comparisons which is a reasonable default. If you want to use other methods (e.g. to use false discovery rate adjustment, see the section on [multiple comparisons](multiple-comparisons.html)) you can use the `adjust` argument. 
+By default Tukey correction is applied for multiple comparisons which is a reasonable default. If you want to use other methods (e.g. to use false discovery rate adjustment, see the section on [multiple comparisons](#multiple-comparisons)) you can use the `adjust` argument. 
 
 In the code below we request FDR-adjusted p values, and then use the `broom::tidy()` function to convert the table into a dataframe, and then show only the first 6 rows as a table in RMarkdown: 
 
@@ -225,140 +348,32 @@ eysenck.fdr <- lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition, adjust="f
 eysenck.fdr$contrasts %>% 
   broom::tidy() %>% 
   head(6) %>% 
-  pander(caption="First 6 rows of the pairwise contrasts with FDR-adjusted p values")
-```
-
-
---------------------------------------------------------------------------------
-    level1         level2       estimate   std.error   df   statistic   p.value 
--------------- --------------- ---------- ----------- ---- ----------- ---------
-Young,Counting Older,Counting     0.5        1.267     90    0.3947     0.7263  
-
-Young,Counting  Young,Rhyming     0.1        1.267     90    0.07893    0.9373  
-
-Young,Counting  Older,Rhyming     -0.6       1.267     90    -0.4736    0.6824  
-
-Young,Counting Young,Adjective     -4        1.267     90    -3.157    0.003251 
-
-Young,Counting Older,Adjective    -7.8       1.267     90    -6.157    7.626e-08
-
-Young,Counting  Young,Imagery     -6.4       1.267     90    -5.052    5.698e-06
---------------------------------------------------------------------------------
-
-Table: First 6 rows of the pairwise contrasts with FDR-adjusted p values
-
-
-
-
-
-
-
-
-## Repeated measures or 'split plot' designs
-
-It might be controversial to say so, but the tools to run traditional repeat measures Anova in R are a pain to use. It's not easy to run repeated measures Anova models using base packages alone and, although there are numerous packages which do simplify this a little, their syntax can be obtuse or confusing, and the output sometimes cryptic. To make matters worse, various textbooks, online guides and the R help files themselves show many ways to achieve the same ends, and it can be difficult to follow the differences between the underlying models that are run.
-
-At this point, given the [many other advantages of linear mixed models over traditional repeated measures Anova](http://jamanetwork.com/journals/jamapsychiatry/article-abstract/481967), and given that many researchers abuse traditional Anova in practice (e.g. using it for unbalanced data, or where some data are missing), the recommendation here is to simply give up and learn how to run linear mixed models. These can (very closely) replicate traditional Anova approaches, but also:
-
-- Handle missing data or unbalanced designs gracefully and efficiently.
-
-- Be expanded to include multiple levels of nesting. For example, allowing pupils to be nested within classes, within schools. Alternatively multiple measurements of individual patients might be clustered by hospital or therapist.
-
-- Allow time to be treated as a continuous variable. For example, time can be modelled as a slope or some kind of curve, rather than a fixed set of observation-points. This can be more parsimonious, and more flexible when dealing with real-world data (e.g. from clinical trials).
-
-It would be best at this point to [jump straight to the main section multilevel or mixed-effects models](multilevel-models.html), but to give one brief example of mixed models in use:
-
-
-
-The `sleepstudy` dataset in the `lme4` package provides reaction time data recorded from participants over a period of 10 days, during which time they were deprived of sleep.
-
-
-```r
-lme4::sleepstudy %>% head(12) %>% pander
-```
-
-
----------------------------
- Reaction   Days   Subject 
----------- ------ ---------
-  249.6      0       308   
-
-  258.7      1       308   
-
-  250.8      2       308   
-
-  321.4      3       308   
-
-  356.9      4       308   
-
-  414.7      5       308   
-
-  382.2      6       308   
-
-  290.1      7       308   
-
-  430.6      8       308   
-
-  466.4      9       308   
-
-  222.7      0       309   
-
-  205.3      1       309   
----------------------------
-
-We can plot these data to show the increase in RT as sleep deprivation continues:
-
-
-```r
-lme4::sleepstudy %>% 
-  ggplot(aes(factor(Days), Reaction)) + 
-  geom_boxplot() + 
-  xlab("Days") + ylab("RT (ms)") + 
-  geom_label(aes(y=400, x=2, label="you start to\nfeel bad here"), color="red") + 
-  geom_label(aes(y=450, x=9, label="imagine how bad\nyou feel by this point"), color="red") 
-```
-
-<img src="anova-cookbook_files/figure-html/unnamed-chunk-12-1.png" width="672" />
-
-
-If we want to test whether there are significant differences in RTs between `Days`, we could fit something very similar to a traditional repeat measures Anova using the `lme4::lmer()` function, and obtain an Anova table for the model using the special `lmerTest::anova()` function:
-
-
-```r
-sleep.model <- lmer(Reaction ~ factor(Days) + (1 | Subject), data=lme4::sleepstudy)
-lmerTest::anova(sleep.model)
-## Analysis of Variance Table of type III  with  Satterthwaite 
-## approximation for degrees of freedom
-##              Sum Sq Mean Sq NumDF DenDF F.value    Pr(>F)    
-## factor(Days) 166235   18471     9   153  18.703 < 2.2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-
-If you had really wanted to fit the traditional repeated measures Anova, the closest equivalent would be:
-
-
-```r
-afex::aov_car(Reaction ~ Days + Error(Subject/(Days)), data=lme4::sleepstudy)
-## Anova Table (Type 3 tests)
+  pandoc.table(caption="First 6 rows of the pairwise contrasts with FDR-adjusted p values")
 ## 
-## Response: Reaction
-##   Effect          df     MSE         F ges p.value
-## 1   Days 3.32, 56.46 2676.18 18.70 *** .29  <.0001
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '+' 0.1 ' ' 1
+## --------------------------------------------------------------------------------
+##     level1         level2       estimate   std.error   df   statistic   p.value 
+## -------------- --------------- ---------- ----------- ---- ----------- ---------
+## Young,Counting Older,Counting     0.5        1.267     90    0.3947     0.7263  
 ## 
-## Sphericity correction method: GG
+## Young,Counting  Young,Rhyming     0.1        1.267     90    0.07893    0.9373  
+## 
+## Young,Counting  Older,Rhyming     -0.6       1.267     90    -0.4736    0.6824  
+## 
+## Young,Counting Young,Adjective     -4        1.267     90    -3.157    0.003251 
+## 
+## Young,Counting Older,Adjective    -7.8       1.267     90    -6.157    7.626e-08
+## 
+## Young,Counting  Young,Imagery     -6.4       1.267     90    -5.052    5.698e-06
+## --------------------------------------------------------------------------------
+## 
+## Table: First 6 rows of the pairwise contrasts with FDR-adjusted p values
 ```
 
-This gives almost-identical results. You may find that in other cases the `lmer` and traditional anova models diverge slightly, but this is likely to be caused by factors including imbalances in the data, partially missing data (only complete cases can be analyses by traditional anova) or other violations of the assumptions of one or both of the models. There is no clear steer in the literature as to which model is 'best' in the general sense, and it is likely that the linear model will be a better fit for a greater range of datasets.
 
-See the [multilevel models section](multilevel-models.html) for details of more interesting models using this dataset which:
 
-- Fit a simple slope for `Days`
-- Fit curves or other functions for `Days`
-- Allow the effect of sleep deprivation to vary for different participants
+
+
+
 
 
 

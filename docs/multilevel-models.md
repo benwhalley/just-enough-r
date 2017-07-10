@@ -63,7 +63,7 @@ http://www.stata.com/meeting/germany13/abstracts/materials/de13_jann.pdf
 -->
 
 
-# Multilevel models
+# Multilevel models {#multilevel-models}
 
 
 This chapter assumes:
@@ -362,13 +362,124 @@ Here, the *p* value for `I(Days^2)` is not significant, suggesting (as does the 
 
 
 
+## Intraclass correlations and the variance partition coefficient {#icc-and-vpc}
+
+XXX TODO
+
+- Show how to calculate VPC/ICC from `VarCorr(lmerobject)`
 
 
 
 
 
-<!-- ## Arguments for bayesian model fitting -->
 
-<!-- See  -->
+## Arguments for fitting mixed models via MCMC
 
-<!-- https://arxiv.org/pdf/1701.04858.pdf -->
+https://arxiv.org/pdf/1701.04858.pdf
+
+And then [Bayes via MCMC](#bayes-mcmc)
+
+
+
+
+
+
+
+
+
+## Troubleshooting {- #troubleshooting-multilevel-models}
+
+
+### Convergence problems and simplifying the random effects structure {- #simplifying-mixed-models}
+
+It's common, when variances and covariances are close to zero, that `lmer` has trouble fitting your model. The solution is to simplify complex models, removing of constraining some random effects.
+
+For example, in an experiment where you have multiple `stimuli` and different experimental `condition`s, with many repeated `trial`s, you might end up with data like this:
+
+
+
+
+
+```r
+df %>%
+  head()
+## # A tibble: 6 × 5
+##   trial condition block subject       RT
+##   <int>     <int> <int>   <int>    <dbl>
+## 1     1         1     1       1 299.4842
+## 2     2         1     1       1 300.3993
+## 3     3         1     1       1 302.3392
+## 4     4         1     1       1 300.5553
+## 5     5         1     1       1 300.0016
+## 6     6         1     1       1 300.8154
+```
+
+
+Which you could model with `lmer` like this:
+
+
+```r
+m1 <- lmer(RT ~ block * trial * condition + (block+condition|subject), data=df)
+```
+
+You can list the random effects from the model using the `VarCorr` function:
+
+
+```r
+VarCorr(m1)
+##  Groups   Name        Std.Dev. Corr         
+##  subject  (Intercept) 0.889780              
+##           block       0.027554  0.165       
+##           condition   0.015883 -0.803  0.454
+##  Residual             0.991723
+```
+
+As `VarCorr` shows, this model estimates: 
+- random intercepts for `subject`, 
+- random slopes for `trial` and `condition`, and
+- three covariances between these random effects. 
+
+If these covariances are very close to zero though, as is often the case, this can cause convergence issues, especially if insufficient data are available. 
+
+If this occurs, you might want to simplify the model. For example, to remove all the covariances between random effects you might rewrite the model this way:
+
+
+
+```r
+m2 <- lmer(RT ~ block * trial * condition + 
+  (1|subject) +
+  (0+block|subject) + 
+  (0+condition|subject), data=df)
+VarCorr(m2)
+
+```
+
+To remove only covariances with the intercept:
+
+
+
+```r
+m3 <- lmer(RT ~ block * trial * condition + 
+  (1|subject) + 
+  (0+block+condition|subject), data=df)
+
+VarCorr(m3)
+```
+
+
+In general, the recommendation is to try and fit a full random effects structure, and simplify it by removing the least theoretically plausible parameters. See:
+
+- This tutorial on mixed models in linguistics: http://www.bodowinter.com/tutorial/bw_LME_tutorial2.pdf
+
+- @barr2013random, which recommends you 'keep it maximal', meaning that you should keep all random effects terms, including covariances, where this is possible.
+
+
+[See this page for lots more examples of more complex mixed models](http://rpsychologist.com/r-guide-longitudinal-lme-lmer)
+
+
+
+
+
+
+
+

@@ -6,6 +6,8 @@ output: bookdown::tufte_html2
 
 
 
+## Multiple comparisons {#multiple-comparisons}
+
 XXX THIS JUST copied from previous anova section. Needs more on problem of multiple comparisons
 
 
@@ -122,6 +124,7 @@ In the code below we request FDR-adjusted p values, and then use the `broom::tid
 
 
 ```r
+
 # calculate pairwise contrasts
 eysenck.fdr <- lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition, adjust="fdr")
 
@@ -129,27 +132,26 @@ eysenck.fdr <- lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition, adjust="f
 eysenck.fdr$contrasts %>% 
   broom::tidy() %>% 
   head(6) %>% 
-  pander(caption="First 6 rows of the pairwise contrasts with FDR-adjusted p values")
+  pandoc.table(caption="First 6 rows of the pairwise contrasts with FDR-adjusted p values")
+## 
+## --------------------------------------------------------------------------------
+##     level1         level2       estimate   std.error   df   statistic   p.value 
+## -------------- --------------- ---------- ----------- ---- ----------- ---------
+## Young,Counting Older,Counting     0.5        1.267     90    0.3947     0.7263  
+## 
+## Young,Counting  Young,Rhyming     0.1        1.267     90    0.07893    0.9373  
+## 
+## Young,Counting  Older,Rhyming     -0.6       1.267     90    -0.4736    0.6824  
+## 
+## Young,Counting Young,Adjective     -4        1.267     90    -3.157    0.003251 
+## 
+## Young,Counting Older,Adjective    -7.8       1.267     90    -6.157    7.626e-08
+## 
+## Young,Counting  Young,Imagery     -6.4       1.267     90    -5.052    5.698e-06
+## --------------------------------------------------------------------------------
+## 
+## Table: First 6 rows of the pairwise contrasts with FDR-adjusted p values
 ```
-
-
---------------------------------------------------------------------------------
-    level1         level2       estimate   std.error   df   statistic   p.value 
--------------- --------------- ---------- ----------- ---- ----------- ---------
-Young,Counting Older,Counting     0.5        1.267     90    0.3947     0.7263  
-
-Young,Counting  Young,Rhyming     0.1        1.267     90    0.07893    0.9373  
-
-Young,Counting  Older,Rhyming     -0.6       1.267     90    -0.4736    0.6824  
-
-Young,Counting Young,Adjective     -4        1.267     90    -3.157    0.003251 
-
-Young,Counting Older,Adjective    -7.8       1.267     90    -6.157    7.626e-08
-
-Young,Counting  Young,Imagery     -6.4       1.267     90    -5.052    5.698e-06
---------------------------------------------------------------------------------
-
-Table: First 6 rows of the pairwise contrasts with FDR-adjusted p values
 
 
 You should note that the FDR adjusted p values do not represent probabilities in the normal sense. Instead, the p value now indicates the *false discovery rate at which the p value should be considered statistically significant*. So, for example, if the adjusted p value  0.09, then this indicates the contrast *would* be significant if the acceptable false discovery rate is 10% (people often set their acceptable false discover rate to be 5% out of habit, but this is not always appropriate).
@@ -167,29 +169,33 @@ lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition, adjust="none")$contrast 
   mutate(significant = as.numeric(p.value < `q (10% FDR)`)) %>%
   # just show some of the results, at the break between sig and ns contrast
   filter(p.fdr.adjust > .01 & p.fdr.adjust < .4) %>%
-  pander(caption="Subset of contrasts, showing the break between significant and ns results, as determined by an FDR of 10%.", split.tables=Inf)
+  pandoc.table(caption="Subset of contrasts, showing the break between significant and ns results, as determined by an FDR of 10%.", split.tables=Inf)
+## 
+## ------------------------------------------------------------------------------------
+##     level1          level2       p.value   q (10% FDR)   p.fdr.adjust   significant 
+## --------------- --------------- --------- ------------- -------------- -------------
+##  Older,Rhyming  Young,Adjective 0.008667     0.07111       0.01219           1      
+## 
+## Older,Adjective Young,Intention  0.02964     0.07333       0.03923           1      
+## 
+## Older,Adjective  Older,Imagery   0.02964     0.07556       0.03923           1      
+## 
+## Young,Adjective  Young,Imagery   0.06139     0.07778       0.07893           1      
+## 
+##  Older,Imagery  Older,Intention   0.183       0.08          0.2288           0      
+## 
+## Older,Adjective  Young,Imagery   0.2721      0.08222        0.3222           0      
+## 
+##  Young,Imagery  Young,Intention  0.2721      0.08444        0.3222           0      
+## ------------------------------------------------------------------------------------
+## 
+## Table: Subset of contrasts, showing the break between significant and ns results, as determined by an FDR of 10%.
 ```
-
-
-------------------------------------------------------------------------------------
-    level1          level2       p.value   q (10% FDR)   p.fdr.adjust   significant 
---------------- --------------- --------- ------------- -------------- -------------
- Older,Rhyming  Young,Adjective 0.008667     0.07111       0.01219           1      
-
-Older,Adjective Young,Intention  0.02964     0.07333       0.03923           1      
-
-Older,Adjective  Older,Imagery   0.02964     0.07556       0.03923           1      
-
-Young,Adjective  Young,Imagery   0.06139     0.07778       0.07893           1      
-
- Older,Imagery  Older,Intention   0.183       0.08          0.2288           0      
-
-Older,Adjective  Young,Imagery   0.2721      0.08222        0.3222           0      
-
- Young,Imagery  Young,Intention  0.2721      0.08444        0.3222           0      
-------------------------------------------------------------------------------------
-
-Table: Subset of contrasts, showing the break between significant and ns results, as determined by an FDR of 10%.
 
 Note, that when you use `adjust='fdr'` then the p values returned are
 The [Biostat Handbook](http://www.biostathandbook.com/multiplecomparisons.html) has a good
+
+
+
+
+<!---TO ADD? https://rawgit.com/geneticsMiNIng/FactorMerger/master/materials/vignette.html--->
