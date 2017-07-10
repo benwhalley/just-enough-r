@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Just enough R</title>
+  <meta name="description" content="‘Just enough’ R">
+  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Just enough R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Just enough R" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="linear-models-simple.html">
+<link rel="next" href="anova-in-r.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="https://hypothes.is/embed.js" async></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Just enough R</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="1" data-path="start-here.html"><a href="start-here.html"><i class="fa fa-check"></i><b>1</b> Workflow</a></li>
+<li class="part"><span><b>I Working with data</b></span></li>
+<li class="chapter" data-level="2" data-path="datasets-dataframes.html"><a href="datasets-dataframes.html"><i class="fa fa-check"></i><b>2</b> Datasets and dataframes</a></li>
+<li class="chapter" data-level="3" data-path="placeholder.html"><a href="placeholder.html"><i class="fa fa-check"></i><b>3</b> Placeholder</a></li>
+<li class="chapter" data-level="4" data-path="real-data.html"><a href="real-data.html"><i class="fa fa-check"></i><b>4</b> Working with ‘real’ data</a></li>
+<li class="chapter" data-level="5" data-path="summarising-data.html"><a href="summarising-data.html"><i class="fa fa-check"></i><b>5</b> Summarising data</a></li>
+<li class="chapter" data-level="6" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>6</b> Graphics</a></li>
+<li class="chapter" data-level="7" data-path="placeholder-1.html"><a href="placeholder-1.html"><i class="fa fa-check"></i><b>7</b> Placeholder</a></li>
+<li class="part"><span><b>II Statistics</b></span></li>
+<li class="chapter" data-level="8" data-path="basic-inferential-statistics.html"><a href="basic-inferential-statistics.html"><i class="fa fa-check"></i><b>8</b> Basic inferential statistics</a></li>
+<li class="chapter" data-level="9" data-path="access-the-chi2-value-alone.html"><a href="access-the-chi2-value-alone.html"><i class="fa fa-check"></i><b>9</b> access the chi2 value alone</a></li>
+<li class="chapter" data-level="10" data-path="placeholder-2.html"><a href="placeholder-2.html"><i class="fa fa-check"></i><b>10</b> Placeholder</a></li>
+<li class="chapter" data-level="11" data-path="test-if-mean-of-outcome-variable-is-different-from-2.html"><a href="test-if-mean-of-outcome-variable-is-different-from-2.html"><i class="fa fa-check"></i><b>11</b> test if mean of <code>outcome</code> variable is different from 2</a></li>
+<li class="chapter" data-level="12" data-path="linear-models-simple.html"><a href="linear-models-simple.html"><i class="fa fa-check"></i><b>12</b> Regression</a><ul>
+<li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#formulae"><i class="fa fa-check"></i>Describing statistical models using formulae</a></li>
+<li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#running-a-linear-model"><i class="fa fa-check"></i>Running a linear model</a></li>
+<li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#more-on-formulas"><i class="fa fa-check"></i>More on formulas</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html"><i class="fa fa-check"></i>Model specification</a><ul>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#regression-coding"><i class="fa fa-check"></i>Effect/dummy coding and contrasts</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#centering"><i class="fa fa-check"></i>Centering (is often helpful)</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#scaling-regression-inputs"><i class="fa fa-check"></i>Scaling inputs</a></li>
+<li class="chapter" data-level="12.0.1" data-path="parameterisation.html"><a href="parameterisation.html#alternatives-to-rescaling"><i class="fa fa-check"></i><b>12.0.1</b> Alternatives to rescaling</a></li>
+<li class="chapter" data-level="12.0.2" data-path="parameterisation.html"><a href="parameterisation.html#what-next"><i class="fa fa-check"></i><b>12.0.2</b> What next</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="anova-in-r.html"><a href="anova-in-r.html"><i class="fa fa-check"></i><b>13</b> Anova</a></li>
+<li class="chapter" data-level="14" data-path="calculate-pairwise-contrasts.html"><a href="calculate-pairwise-contrasts.html"><i class="fa fa-check"></i><b>14</b> calculate pairwise contrasts</a></li>
+<li class="chapter" data-level="15" data-path="understanding-interactions.html"><a href="understanding-interactions.html"><i class="fa fa-check"></i><b>15</b> Understanding interactions (part 1)</a></li>
+<li class="chapter" data-level="16" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html"><i class="fa fa-check"></i><b>16</b> Making predictions</a></li>
+<li class="chapter" data-level="17" data-path="general-linear-models.html"><a href="general-linear-models.html"><i class="fa fa-check"></i><b>17</b> General linear models</a></li>
+<li class="chapter" data-level="18" data-path="mediation.html"><a href="mediation.html"><i class="fa fa-check"></i><b>18</b> Mediation</a></li>
+<li class="chapter" data-level="19" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>19</b> Multilevel models</a></li>
+<li class="chapter" data-level="20" data-path="cfa.html"><a href="cfa.html"><i class="fa fa-check"></i><b>20</b> Confirmatory factor analysis</a></li>
+<li class="chapter" data-level="21" data-path="sem.html"><a href="sem.html"><i class="fa fa-check"></i><b>21</b> Structural eqution modelling</a></li>
+<li class="chapter" data-level="22" data-path="power-analysis.html"><a href="power-analysis.html"><i class="fa fa-check"></i><b>22</b> Power analysis in R</a></li>
+<li class="chapter" data-level="23" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i><b>23</b> Meta analysis in R</a></li>
+<li class="chapter" data-level="24" data-path="bayes-factors.html"><a href="bayes-factors.html"><i class="fa fa-check"></i><b>24</b> Bayes factors for rubbish data</a></li>
+<li class="chapter" data-level="25" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html"><i class="fa fa-check"></i><b>25</b> Baysian linear model fitting with MCMC</a></li>
+<li class="chapter" data-level="26" data-path="statistical-explanations.html"><a href="statistical-explanations.html"><i class="fa fa-check"></i><b>26</b> Statistical explanations</a></li>
+<li class="chapter" data-level="27" data-path="placeholder-3.html"><a href="placeholder-3.html"><i class="fa fa-check"></i><b>27</b> Placeholder</a></li>
+<li class="chapter" data-level="28" data-path="calculate-pairwise-contrasts-1.html"><a href="calculate-pairwise-contrasts-1.html"><i class="fa fa-check"></i><b>28</b> calculate pairwise contrasts</a></li>
+<li class="chapter" data-level="29" data-path="loose-ends.html"><a href="loose-ends.html"><i class="fa fa-check"></i><b>29</b> Loose ends</a></li>
+<li class="chapter" data-level="30" data-path="placeholder-4.html"><a href="placeholder-4.html"><i class="fa fa-check"></i><b>30</b> Placeholder</a></li>
+<li class="chapter" data-level="31" data-path="placeholder-5.html"><a href="placeholder-5.html"><i class="fa fa-check"></i><b>31</b> Placeholder</a></li>
+<li class="chapter" data-level="32" data-path="placeholder-6.html"><a href="placeholder-6.html"><i class="fa fa-check"></i><b>32</b> Placeholder</a></li>
+<li class="chapter" data-level="33" data-path="placeholder-7.html"><a href="placeholder-7.html"><i class="fa fa-check"></i><b>33</b> Placeholder</a></li>
+<li class="chapter" data-level="34" data-path="run-the-t-test.html"><a href="run-the-t-test.html"><i class="fa fa-check"></i><b>34</b> run the t test</a></li>
+<li class="chapter" data-level="35" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>35</b> References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">‘Just enough’ R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="parameterisation" class="section level2 unnumbered">
+<h2>Model specification</h2>
+<p>It’s helpful to think about regression and other statistical models as if they were machines - perhaps looms in a cloth factory. We the machines raw thread, and they busy themselves producing the finished cloth. The nature of the finished cloth is dependent on two factors: the raw material we feed it, and the setup and configuration of the machine itself.</p>
+<p>In regression (and Anova) the same is true: Our finished results are the parameter estimates the model weaves from our raw data. The pattern we see depends on the configuration of the machine, and it’s important to realise the same data can provide very different outputs depending on the setup of the machine.</p>
+<div id="equivalent-models" class="section level4 unnumbered">
+<h4>Equivalent models</h4>
+<p>In some cases the ‘setup’ of the machine produces changes which, although they appear very different, are in fact equivalent in some sense. Let’s say our weaving machine produces a lovely set of rugs, shown in the figure below:</p>
+<div class="figure">
+<img src="media/rugs1.jpg" alt="Rugs made in configuration 1" />
+<p class="caption">Rugs made in configuration 1</p>
+</div>
+<p>Now imagine that we flip all the standard settings on the weaving machine. We feed the same raw materials to the loom, but the results <em>look</em> very different:</p>
+<div class="figure">
+<img src="media/rugs2.jpg" alt="Rugs made after configuration is changed" />
+<p class="caption">Rugs made after configuration is changed</p>
+</div>
+<p>The second set of rugs are inversions of the first, <em>but the patterns remain the same</em>. The same sort of thing happens when we recode variables before entering them in our regression models. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(<span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data=</span>mtcars))
+## (Intercept)          wt 
+##   37.285126   -5.344472</code></pre></div>
+<p>We can run a completely equivalent model if we ‘flip’ the weight (<code>wt</code>) coefficient by multiplying by <code>-1</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars<span class="op">$</span>wt.reversed  &lt;-<span class="st"> </span><span class="op">-</span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span>mtcars<span class="op">$</span>wt
+<span class="kw">coef</span>(<span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt.reversed, <span class="dt">data=</span>mtcars))
+## (Intercept) wt.reversed 
+##   37.285126    5.344472</code></pre></div>
+<p>These models are equivalent in all the important ways: the test statistics, p values are all the same: only the sign of the coefficient for weight has changed.</p>
+<p>The same kind of thing happens when we choose a <a href="parameterisation.html#regression-coding">different <em>coding scheme</em> for categorical variables (see section below)</a>: although the parameter estimates change when the coding format thcnages, the <em>underlying model is equivalent because it would make the same predictions for new data</em>.</p>
+</div>
+<div id="non-equivalent-models" class="section level4 unnumbered">
+<h4>Non-equivalent models</h4>
+<p>In the case above we saw models which were equivalent in the sense that they produced identical predictions for new observations.</p>
+<p>Now we need to stretch our rug analogy a little, but imagine the output of our machine is now an image of the northern lights, as in image A below, but that by changing some settings of the machine, we might instead produce image B:</p>
+<div class="figure">
+<img src="media/aurora.jpg" alt="Image credit: https://www.flickr.com/photos/undercrimson/13155461724" />
+<p class="caption">Image credit: <a href="https://www.flickr.com/photos/undercrimson/13155461724" class="uri">https://www.flickr.com/photos/undercrimson/13155461724</a></p>
+</div>
+<p>You might reasonably ask why we would prefer image B or C to image A? The answer is that, when running statistical models, we must remember that they are always <em>simplifications</em> of reality that are (hopefully) <em>useful</em> to us.</p>
+<p>For example, our goal might be to use images of the northern lights to track the position of the aurora in the sky. If so, we might find that thresholding the picture in this way makes it easier to see where the centre of mass of the light is. By smoothing out many of the ‘ripples’ and suface level patterning in the light, the overall shape becomes clearer. And in fact this is one of the techniques computer vision systems do use to pre-process image inputs.</p>
+<p>Likewise, we face similar problems when analysing psychological data. For example, when we measure an outcome repeatedly over a period of seconds, days or months we are probably interested in the overall <em>shape</em> of the change, rather than in the suface-level patterning of these changes.</p>
+<p>Let’s stretch the images analogy again and simplify the image above by taking a single pixel high ‘slice’ through the centre of each image (A, B and C). In the figure below I’ve stretched these slices vertically so that you can see the banding in the colour, but each of these images is just a single pixel high:</p>
+<div class="figure">
+<img src="media/aurora-1-px.jpg" />
+
+</div>
+<p>Let’s simplify this even further, and convert these images to greyscale:</p>
+<div class="figure">
+<img src="media/aurora-1-px-grey.jpg" />
+
+</div>
+<p>We might think of these 3 images as follows:</p>
+<ul>
+<li><p>‘Raw’ represents our raw data (image A above), and the greys represent the value of our ‘outcome’ (intensity of light). The x-axis in this case is position in the sky, but could just as well be time or some other continuous variable.</p></li>
+<li><p>‘Threshold’ represents some kind of categorical model for these data (akin to image B above), in which we ‘chunk’ up the x-axis and make predictions for each chunk.</p></li>
+<li><p>‘Smooth’ (akin to image C above) represents some kind of linear model with terms which represent the gradual changes in the outcome across the range of the x-axis (like <a href="#polynomials">slopes or polynomial terms in regression</a>).</p></li>
+</ul>
+<p>Because a digital image is just a list of <code>intensity</code> values for each pixel we can read the image into R and plot the raw values like any other:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">intensity.vec &lt;-<span class="st"> </span><span class="kw">as.vector</span>(png<span class="op">::</span><span class="kw">readPNG</span>(<span class="st">&#39;media/aurora-1-px-raw.png&#39;</span>))
+
+aurora.image &lt;-<span class="st"> </span><span class="kw">data_frame</span>(
+  <span class="dt">Intensity =</span> intensity.vec) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">x =</span> <span class="kw">row_number</span>())
+
+aurora.image <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x, Intensity)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span>.<span class="dv">5</span>)</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-10"></span>
+<img src="linear-models_files/figure-html/unnamed-chunk-10-1.png" alt="Plot of the intensity of light in the single pixel slice from the Aurora image. Intensity of 1 corresponds to white, and 0 to black in the original image." width="672" />
+<p class="caption">
+Figure 12.1: Plot of the intensity of light in the single pixel slice from the Aurora image. Intensity of 1 corresponds to white, and 0 to black in the original image.
+</p>
+</div>
+<p>We can fit linear models to these data, just like any other. So we migth start by predicting intensity with a simple slope:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aurora.linear &lt;-<span class="st"> </span><span class="kw">lm</span>(Intensity <span class="op">~</span><span class="st"> </span>x, <span class="dt">data=</span>aurora.image)</code></pre></div>
+<p>And we could make predictions from this model and plot them against the original:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aurora.image <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">linear.prediction =</span> <span class="kw">predict</span>(aurora.linear)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>(<span class="dt">id.var=</span><span class="st">&#39;x&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x, value, <span class="dt">group=</span>variable, <span class="dt">color=</span>variable)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span>.<span class="dv">5</span>)
+## Warning: attributes are not identical across measure variables; they will
+## be dropped</code></pre></div>
+<p><img src="linear-models_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>As we can see, our predictions are pretty terrible, because the linear model only allows for a simple slope over the range of <code>x</code>.</p>
+<p>To improve the model, we can go in one of two ways:</p>
+<ol style="list-style-type: decimal">
+<li>Fit slopes and curves for <code>x</code></li>
+<li>Break <code>x</code> up into chunks</li>
+</ol>
+</div>
+<div id="chunks" class="section level4 unnumbered">
+<h4>Chunks</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a new chunked x variable (a factor)</span>
+x.in.chunks &lt;-<span class="st"> </span><span class="kw">cut</span>(aurora.image<span class="op">$</span>x, <span class="dt">breaks=</span><span class="dv">8</span>)
+
+<span class="co"># Run a model with these chunks as a factor</span>
+aurora.chunks &lt;-<span class="st"> </span><span class="kw">lm</span>(Intensity <span class="op">~</span><span class="st"> </span>x.in.chunks, <span class="dt">data=</span>aurora.image)
+
+<span class="co"># Plot the predictions again</span>
+aurora.image <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">linear.prediction =</span> <span class="kw">predict</span>(aurora.linear),
+    <span class="dt">chunked.prediction =</span> <span class="kw">predict</span>(aurora.chunks)
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>(<span class="dt">id.var=</span><span class="st">&#39;x&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x, value, <span class="dt">group=</span>variable, <span class="dt">color=</span>variable)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span>.<span class="dv">5</span>)
+## Warning: attributes are not identical across measure variables; they will
+## be dropped</code></pre></div>
+<p><img src="linear-models_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>That’s somewhat better, although we can still see that the extremes of our observed data are not well predicted by either the linear model (the flat line) or the chunked model.</p>
+<p><span class="exercise">Try cutting the <code>x</code> variable into more chunks. What are the pros and cons of doing this? How many chunks would you need to reproduce the original data faithfully?</span></p>
+</div>
+<div id="slopes-and-curves" class="section level4 unnumbered">
+<h4>Slopes and curves</h4>
+<p>An alternative strategy at this point is to try and fit smooth curves through the data. One way of doing this (<a href="#polynomials">explained in greater detail in the section on polynomials</a>) is to fit multiple parameters to represent the initial slope, and then changes in slope, across the values of <code>x</code>. In general, we need to fit one parameter for each change in ‘direction’ we want our cuve to take.</p>
+<p>For example, we can fit a curve with 3 changes of direction by fitting the ‘third degree’ polynomial:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aurora.curve &lt;-<span class="st"> </span><span class="kw">lm</span>(Intensity <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dv">3</span>), <span class="dt">data=</span>aurora.image)
+
+aurora.image <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">curve.prediction =</span> <span class="kw">predict</span>(aurora.curve)
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>(<span class="dt">id.var=</span><span class="st">&#39;x&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x, value, <span class="dt">group=</span>variable, <span class="dt">color=</span>variable)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span>.<span class="dv">5</span>)
+## Warning: attributes are not identical across measure variables; they will
+## be dropped</code></pre></div>
+<p><img src="linear-models_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Or we could increase the number of parameters in our curve to allow a tighter fit with the raw data and plot all the models together:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aurora.curve &lt;-<span class="st"> </span><span class="kw">lm</span>(Intensity <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dv">7</span>), <span class="dt">data=</span>aurora.image)
+
+all.predictions &lt;-<span class="st"> </span>aurora.image <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">linear.prediction =</span> <span class="kw">predict</span>(aurora.linear),
+    <span class="dt">chunked.prediction =</span> <span class="kw">predict</span>(aurora.chunks),
+    <span class="dt">curve.prediction =</span> <span class="kw">predict</span>(aurora.curve)
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>(<span class="dt">id.var=</span><span class="st">&#39;x&#39;</span>)
+## Warning: attributes are not identical across measure variables; they will
+## be dropped
+
+all.predictions <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x, value, <span class="dt">group=</span>variable, <span class="dt">color=</span>variable)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span>.<span class="dv">5</span>)</code></pre></div>
+<p><img src="linear-models_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>We can see that this curved model is a better approximation to the raw data than our ‘chunked’ model in some places (e.g. x = 100), but worse in others (e.g. x = 625). Overall though, the R<sup>2</sup> is much higher for the curves model here:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(aurora.chunks)<span class="op">$</span>r.squared
+## [1] 0.4463338
+<span class="kw">summary</span>(aurora.curve)<span class="op">$</span>r.squared
+## [1] 0.6162421</code></pre></div>
+<p>And this is the case even though our model contains only 8 parameters, and so is just as parsimonious as the chunked model above.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># count the number of parameters in the chunked and curved models</span>
+<span class="kw">length</span>(<span class="kw">coef</span>(aurora.chunks))
+## [1] 8
+<span class="kw">length</span>(<span class="kw">coef</span>(aurora.curve))
+## [1] 8</code></pre></div>
+<p><span class="exercise">Try to plot a curve that fits even more closely to the data. There are 1200 pixels in our original image. How many parameters would you need for the model to fit the image exactly? What happens in practice if you try and fit this model?</span></p>
+<p>For fun, we can even plot our data back in image form and see which is closest to matching the original:</p>
+<p><img src="linear-models_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><span class="admonition">There is no ‘right answer’ here: each model has pros and cons. You need to think about how you want to simplify your data, and set up your models appropriately.</span></p>
+</div>
+<div id="regression-coding" class="section level3 unnumbered">
+<h3>Effect/dummy coding and contrasts</h3>
+<p>TODO: Explain this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">contrasts =</span> <span class="kw">c</span>(<span class="st">&quot;contr.treatment&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))
+<span class="kw">lm</span>(mpg<span class="op">~</span><span class="kw">factor</span>(cyl), <span class="dt">data=</span>mtcars)
+## 
+## Call:
+## lm(formula = mpg ~ factor(cyl), data = mtcars)
+## 
+## Coefficients:
+##  (Intercept)  factor(cyl)6  factor(cyl)8  
+##       26.664        -6.921       -11.564
+
+<span class="kw">options</span>(<span class="dt">contrasts =</span> <span class="kw">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))
+<span class="kw">lm</span>(mpg<span class="op">~</span><span class="kw">factor</span>(cyl), <span class="dt">data=</span>mtcars)
+## 
+## Call:
+## lm(formula = mpg ~ factor(cyl), data = mtcars)
+## 
+## Coefficients:
+##  (Intercept)  factor(cyl)1  factor(cyl)2  
+##      20.5022        6.1615       -0.7593</code></pre></div>
+</div>
+<div id="centering" class="section level3 unnumbered">
+<h3>Centering (is often helpful)</h3>
+<p>When interpreting regression coefficients, and especially when interactions are present in a model, it’s often overlooked that the regression parameters are the effect on the outcome of a 1-unit change in the predictor, <em>when all the other predictors are zero</em>. This applies to the intercept too: it is the predicted value of the outcome when <em>all</em> of the predictors are zero.</p>
+<p>This is unhelpful because it makes the intercept mostly meaningless, and the other coefficients harder to interpret.</p>
+<p>It’s often a good idea to <em>center</em> your predictors so that you can interpret the intercept of the model as the average of your sample.</p>
+<!-- TODO FLESH THIS OUT -->
+</div>
+<div id="scaling-regression-inputs" class="section level3 unnumbered">
+<h3>Scaling inputs</h3>
+<p>Interpreting regression coefficients requires that we think in the <em>units</em> of the predictor.</p>
+<p>For example, if we include ‘age in years’ in our model, then this <code>yob</code> coefficient gives us the change in the outcome for each additional year.</p>
+<p>However, we’re often not interested in the effect of a single year. If we are dealing with the effect of age in the general population, we’re unlikely to care about the effect of 1 year, and it might be more useful and natural to think about 10-year differences in age. In contrast, if our research is on adolescence, then the changes of the course of a year might be too crude, and we may want to think about changes over months instead.</p>
+<p>It’s important to realise there is no general or ‘correct’ solution to this problem. Regression models don’t care about the scale of our variables (within limits), but we do need to make choice about how we scale inputs. These choices should aim to</p>
+<ul>
+<li>make regression coefficients easily interpretable and</li>
+<li>make results comparable across studies</li>
+</ul>
+<p>These two goals will not always be 100% aligned, and there will be tradeoffs needed as you select your strategy, which will normally be one of:</p>
+<ol style="list-style-type: decimal">
+<li><p>Putting coefficients on a ‘natural’ scale or relate to meaningful quantities</p></li>
+<li><p>Standardising coefficients.</p></li>
+</ol>
+<div id="using-a-natural-scale" class="section level5">
+<h5><span class="header-section-number">12.0.0.0.1</span> Using a ‘natural’ scale</h5>
+<p>This will often mean just leaving your predictors ‘as-is’, but it might also mean dividing your predictor by some number to put it into more convenient units. For example, dividing age in years by 10 would mean that you can interpret the coefficient as the change over a decade, which might be easier to think about.</p>
+</div>
+<div id="standardising" class="section level5">
+<h5><span class="header-section-number">12.0.0.0.2</span> Standardising</h5>
+<p>Gelman <span class="citation">(Gelman <a href="#ref-gelman2008scaling">2008</a>)</span> recommends standardising coefficients by centering and dividing by two standard deviations. This can be useful because binary variables like sex (male/female) will then be on a <em>similar</em> scale to numeric inputs.</p>
+<p>However, be cautious when standardising. You will sometimes see people interpret standardised coefficients in terms of ‘relative importance’ of the predictors. For example, they might say that if <span class="math inline">\(\beta^1 = .2\)</span> and <span class="math inline">\(\beta^2 = .4\)</span> then <span class="math inline">\(\beta^2\)</span> is twice as important as <span class="math inline">\(\beta^\)</span>. Although this is appealing, it’s not always valid.</p>
+<p>The main problem is that you don’t always know whether you have a full range of values of predictors in your sample. For example, imagine a case where the a regression coefficient for <code>age</code> was linear, and = .5 in a sample from the general population.</p>
+<p>We can plot these data to show the effect of age, and gender:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(incomes, <span class="kw">aes</span>(age, income, <span class="dt">group=</span>gender, <span class="dt">color=</span>gender)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span>F, <span class="dt">method=</span><span class="st">&quot;lm&quot;</span>)</code></pre></div>
+<p><img src="linear-models_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>Older people earn more than younger people, and men earn slighly more than women (in this simulated dataset), but this gender gap doesn’t change with age.</p>
+<p>We can model this and print the effects of <code>age</code> and <code>gender</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m1 &lt;-<span class="st"> </span><span class="kw">lm</span>(income<span class="op">~</span>age<span class="op">+</span>gender, <span class="dt">data=</span>incomes)
+<span class="kw">coef</span>(m1)
+## (Intercept)         age     gender1 
+## 30494.75486    30.75124  -486.30867</code></pre></div>
+<p>And we can standardize these effects using the <code>stadardize</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(arm<span class="op">::</span><span class="kw">standardize</span>(m1))
+## (Intercept)       z.age    c.gender 
+##  31727.1240    920.5955    972.6173</code></pre></div>
+<p>Based on these standardised coefficients we migth say that age and gender are of roughly equal importance in predicting income.</p>
+<p>If we re-fit the model on a subset of the data, for example only individuals under 40, the regression coefficients won’t change much because the effect was constant across the range of ages:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">younger.incomes &lt;-<span class="st"> </span>incomes <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(age<span class="op">&lt;</span><span class="dv">40</span>)
+
+m2 &lt;-<span class="st"> </span><span class="kw">lm</span>(income<span class="op">~</span>age<span class="op">+</span>gender, <span class="dt">data=</span>younger.incomes)
+<span class="kw">coef</span>(m2)
+## (Intercept)         age     gender1 
+##  30522.7491     29.6859   -525.4932</code></pre></div>
+<p>But, the standardised coefficients <em>do</em> change, because we have restricted the range of ages in the sample:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(arm<span class="op">::</span><span class="kw">standardize</span>(m2))
+## (Intercept)       z.age    c.gender 
+##  31372.5885    542.2628   1050.9863</code></pre></div>
+<p>The standardised effect of <code>age</code> is now roughly half that of <code>gender</code>.</p>
+<p><span class="admonition">The take home message here is that standardisation can be useful to put predictors on a similar scale, but it’s not a panacea and can’t be interpreted as a simple measure of ‘importance’. You still need to think!</span></p>
+</div>
+</div>
+<div id="alternatives-to-rescaling" class="section level3">
+<h3><span class="header-section-number">12.0.1</span> Alternatives to rescaling</h3>
+<p>A nice alternative to scaling the inputs of your regression is to set aside the raw coefficients and instead make <a href="predictions-and-margins.html#predictions-and-margins">predictions for values of the predictors that are of theoretical or practical interest</a>. The section on <a href="predictions-and-margins.html#predictions-and-margins">predictions and marginal effects</a> has lots more detail on this.</p>
+</div>
+<div id="what-next" class="section level3">
+<h3><span class="header-section-number">12.0.2</span> What next</h3>
+<p><strong><em>It is strongly recommended that you read the <a href="anova.html">section on Anova</a> before doing anything else.</em></strong></p>
+<p>As noted above, R has a number of important differences in it’s default settings, as compared with packages like Stata or SPSS. These can make important differences to the way you interpret the output of linear models, especially Anova-type models with categorical predictors.</p>
+
+</div>
+</div>
+<!-- </div> -->
+<h3> References</h3>
+<div id="refs" class="references">
+<div id="ref-gelman2008scaling">
+<p>Gelman, Andrew. 2008. “Scaling Regression Inputs by Dividing by Two Standard Deviations.” <em>Statistics in Medicine</em> 27 (15). Wiley Online Library: 2865–73. <a href="http://www.stat.columbia.edu/~gelman/research/published/standardizing7.pdf" class="uri">http://www.stat.columbia.edu/~gelman/research/published/standardizing7.pdf</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="linear-models-simple.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="anova-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["Just enough R.pdf", "Just enough R.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
