@@ -8,7 +8,6 @@ output:
 
 
 
-# Loose ends
+# R details
 
-
-This chapter contains information on some of the gory details omitted in the main text.
+This chapter contains some details omitted in the main text, covering how to install R and RStudio, and how to install and use useful packages.

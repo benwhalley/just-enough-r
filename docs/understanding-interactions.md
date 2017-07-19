@@ -1,5 +1,5 @@
 ---
-title: 'Understanding interactions (part 1)'
+title: 'Understanding interactions'
 output:
   bookdown::tufte_html2
 bibliography: bibliography.bib
@@ -11,7 +11,7 @@ bibliography: bibliography.bib
 
 
 
-# Understanding interactions (part 1) {#understanding-interactions}
+# Understanding interactions {#understanding-interactions}
 
 
 Objectives of this section:
@@ -19,15 +19,21 @@ Objectives of this section:
 - Clarify/recap what an interaction is
 - Appreciate the importance of visualising interactions
 - Compare different methods of plotting interactions in raw data 
+
+- Visualise interactions based on statistical model predictions
 - Deal with cases where predictors are both categorical and continuous (or a mix)
 
 
-## What is an interaction? 
+
+
+
+
+## What is an interaction? {-}
 
 For an interaction to occur we must measure:
 
-- an outcome (severity of injury in a car crash, for example)
-- at least 2 predictors of that outcome (e.g. age and gender)
+- An *outcome*: severity of injury in a car crash, for example.
+- At least 2 *predictors* of that outcome: e.g. age and gender.
 
 Let's think of a scenario where we've measured severity of injury after road accidents, along with the age and gender of the drivers involved. Let's assume^[This example is loosely based on figures reported by @kockelman2002driver]:
 
@@ -36,16 +42,23 @@ Let's think of a scenario where we've measured severity of injury after road acc
 
 For an interaction to occur we have to show that, for example:
 
-- If you ware old and also female then you are more severely injured than we would expect simply by adding the effects for being female (+10 points) and for being over 60 (+10 points).  That is, if an interaction occurs the risk of being older and female is > a 20 point increase in severity. 
+- If you ware old and also female then you will be more severely injured
+- This increase in severity of injury is more than we would expect simply by adding the effects for being female (+10 points) and for being over 60 (+10 points).  That is, if an interaction occurs the risk of being older and female is > a 20 point increase in severity. 
+
+
+[Think of some other example of interactions from your own work.]{.exercise}
+
+
+[Interactions capture the idea that the *effect* of one predictor changes depending on the value of another predictor.]{.admonition}
 
 
 
-> Interactions capture the idea that the *effect* of one predictor changes across the range of another.
+## Visualising interactions from raw data  {-}
+
+In the previous section we established that interactions capture the idea that the *effect* of one predictor changes depending on the value of another predictor.
 
 
-### Example interaction visualised
-
-We can see this illustrated in the figure below:
+We can see this illustrated in the traditional bar plot below. In the left panel we see a dummy dataset in which there is no interaction; in the right panel are data which do show evidence of an interaction:
 
 
 
@@ -57,7 +70,7 @@ We can see this illustrated in the figure below:
 
 
 
-And this plot might be better re-drawn as a point and line plot:
+Howeber this bar plot might be better if it were re-drawn as a point and line plot:
 
 <div class="figure">
 <img src="understanding-interactions_files/figure-html/unnamed-chunk-4-1.png" alt="Point and line plot of injury severity by age and gender." width="672" />
@@ -65,23 +78,20 @@ And this plot might be better re-drawn as a point and line plot:
 </div>
 
 
-The reason this plot improves on the bar graph is because:
+The reason the point and line plot improves on the bars for a number of reasons:
 
 - Readers tend to misinterpret bar plots by assuming that values 'above' the bar are less likely than values contained 'within' the bar, when this is not the case [@newman2012bar].
 
-- The main effects are easy to distinguish in the line plot: just ask yourself if the lines are horizontal or not, and whether they are separated vertically. In contrast, reading the interction from the bar graph requires that we average pairs of bars (sometimes not adjacent to one another) and compare them - a much more difficult mental operation.
+- The main effects are easy to distinguish in the line plot: just ask yourself if the lines are horizontal or not, and whether they are separated vertically. In contrast, reading the interaction from the bar graph requires that we average pairs of bars (sometimes not adjacent to one another) and compare them - a much more difficult mental operation.
 
 - The interaction is easy to spot: Ask yourself if the lines are parallel. If they *are* parallel then the *difference* between men and women is constant for individuals of different ages. 
 
 
 
 
+### A painful example {- #pain-music-data}
 
-## Visualising interactions in raw data 
-
-### {- #pain-music-data}
-
-Before setting out to *test* for an interaction using some kind of statistical model, it's a good idea to first visualise the relationships between outcomes and predictors.
+Before setting out to *test* for an interaction using some kind of statistical model, it's always a good idea to first visualise the relationships between outcomes and predictors.
 
 A student dissertation project investigated the analgesic quality of music during an experimental pain stimulus. Music was selected to be either *liked* (or disliked) by participants and was either *familiar* or unfamiliar to them. Pain was rated without music (`no.music`) and with music (`with.music`) using a 10cm visual analog scale anchored with the labels "no pain" and "worst pain ever".
 
@@ -103,11 +113,10 @@ painmusic %>% glimpse
 ```
 
 
+Before running inferential tests, it would be helpful to see if the data are congruent with the study prediction that *liked* and *familiar* music would be more effective at reducing pain than disliked or unfamiliar music
 
-Before modelling the outcome, it would be helpful to see if the data are congruent with the study prediction that *liked* and *familiar* music would be more effective than disliked or unfamiliar music
 
-
-We can do this in many different ways. The most common would be a simple bar plot, which we can create using the `stat_summary()` function from `ggplot2`.
+We can do this in many different ways. The most common (but not the best) choice would be a simple bar plot, which we can create using the `stat_summary()` function from `ggplot2`.
 
 
 ```r
@@ -121,11 +130,11 @@ painmusic %>%
 <img src="understanding-interactions_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 
-This gives a pretty clear indication that something is going on, but we have no idea about the distriburion of the underlying data, and so how much confidence to place in the finding.
+This gives a pretty clear indication that something is going on, but we have no idea about the *distribution* of the underlying data, and so how much confidence we should place in the finding. We are also hiding distributional information that could be useful to check that assumptions of models we run later are also met (for example of equal variances between groups).
 
 If we want to preserve more information about the underlying distribution we can use density plots, boxplots, or pointrange plots, among others.
 
-Here we use a grouped^[we have used the `interaction()` function to automatically create groups within the data for both `liked` and `familiar`.] density plot:
+Here we use a grouped density plot. The `interaction()` function is used to automatically create a variable with the 4 possible groupings we can make when combining the`liked` and `familiar` variables:
 
 
 ```r
@@ -173,27 +182,17 @@ painmusic %>%
 
 <img src="understanding-interactions_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
-This plot doesn't include all of the information about the distribution of effects that the density or boxplots do (for example, we can't see any asymmetry in the distributions any more), but we still get some information about the variability of the effect of the experimental conditions on pain by plotting the SE of the mean over the top of each point^[We could equally well plot the CI for the mean, or the quartiles)]
+This plot doesn't include all of the information about the distribution of effects that the density or boxplots do (for example, we can't see any asymmetry in the distributions any more), but we still get some information about the variability of the effect of the experimental conditions on pain by plotting the SE of the mean over the top of each point^[We could equally well plot the 95% confidence interval for the mean, or the interquartile range)]
 
 At this point, especially if your current data include only categorical predictors, you might want to move on to the section on [making predictions from models](predictions-and-margins.html) and visualising these.
 
 
-## Continuous predictors
+## Continuous predictors {-}
 
 
 XXX TODO
 
 User  `modelr::gather_predictions` to plot 
-
-
-
-
-## What next?
-
-You might like to move on to [making predictions from models](predictions-and-margins.html), and plotting these.
-
-
-
 
 
 

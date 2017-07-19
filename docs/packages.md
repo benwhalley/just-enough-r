@@ -32,6 +32,8 @@ qplot(mtcars$mpg, bins=7)
 <img src="packages_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 
+#### {- #package-namespacing}
+
 You don't strictly *need* to load packages to use the features within them though. If a package is installed on your system you can also call a function it provides directly. In the example below we call the `hist.data.frame` from the `Hmisc` package, and obtain histograms of all the variables in the `mtcars` dataset:
 
 

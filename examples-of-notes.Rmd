@@ -1,0 +1,5 @@
+[admonition]{.admonition}
+
+[.exercise]{.exercise}
+
+[This is a paragraph with apa]{.apa-example}

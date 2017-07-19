@@ -11,7 +11,7 @@ output:
 ## t-tests {- #t-tests}
 
 
-#### Visualising your data first {-}
+### Visualising your data first {-}
 
 Before you run any tests it's worth plotting your data. 
 
@@ -52,8 +52,7 @@ Layering boxes and bottles can work well too because it combines information abo
 chickwts %>% 
   ggplot(aes(feed, weight)) +
   geom_violin() +
-  geom_boxplot(width=.1) + 
-  xlab("")
+  geom_boxplot(width=.1)
 ```
 
 <img src="t-tests_files/figure-html/unnamed-chunk-3-1.png" width="672" />
@@ -86,14 +85,14 @@ chicks.eating.beans %>%
 
 
 
-#### Running the t-test {-}
+### Running a t-test {-}
 
 Assuming you really do still want to run a null hypothesis test on one or two means, the `t.test()` function performs most common variants, illustrated below.
 
 
 
 
-##### 2 independent groups
+##### 2 independent groups {-}
 
 Assuming  your data are in long format:
 
@@ -141,7 +140,7 @@ with(untidy.chicks, t.test(horsebean, soybean))
 ```
 
 
-##### Equal or unequal variances? {#equal-variances .admonition}
+##### Equal or unequal variances? {- #equal-variances .admonition}
 
 By default R assumes your groups have unequal variances and applies an appropriate correction (you will notice the output labelled 'Welch Two Sample t-test'). 
 
@@ -150,7 +149,7 @@ You can turn this correction off (for example, if you're trying to replcate an a
 
 
 
-##### Paired samples
+##### Paired samples {-}
 
 
 ```r
@@ -164,17 +163,17 @@ t.test(a, b, paired=TRUE)
 ## 	Paired t-test
 ## 
 ## data:  a and b
-## t = -2.5378, df = 49, p-value = 0.01439
+## t = -4.9242, df = 49, p-value = 1.003e-05
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.58524935 -0.06797779
+##  -0.7997833 -0.3361904
 ## sample estimates:
 ## mean of the differences 
-##              -0.3266136
+##              -0.5679869
 ```
 
 
-Note that we could also 'melt' the data into long  format and use the `paired=TRUE` argument with a formula:
+Note that we could also ['melt' the data into long format](#wide-to-long) and use the `paired=TRUE` argument with a formula:
 
 
 ```r
@@ -189,18 +188,18 @@ with(long.form.data, t.test(value~key, paired=TRUE))
 ## 	Paired t-test
 ## 
 ## data:  value by key
-## t = -2.5378, df = 49, p-value = 0.01439
+## t = -4.9242, df = 49, p-value = 1.003e-05
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.58524935 -0.06797779
+##  -0.7997833 -0.3361904
 ## sample estimates:
 ## mean of the differences 
-##              -0.3266136
+##              -0.5679869
 ```
 
 
 
-##### One-sample test 
+##### One-sample test {-}
 
 i.e. comparing sample mean with a specific value:
 
@@ -216,12 +215,12 @@ t.test(somedata, mu=2)
 ## 	One Sample t-test
 ## 
 ## data:  somedata
-## t = 5.9314, df = 49, p-value = 2.985e-07
+## t = 3.2149, df = 49, p-value = 0.002311
 ## alternative hypothesis: true mean is not equal to 2
 ## 95 percent confidence interval:
-##  2.544122 3.101748
+##  2.176788 2.766268
 ## sample estimates:
 ## mean of x 
-##  2.822935
+##  2.471528
 ```
 

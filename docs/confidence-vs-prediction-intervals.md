@@ -8,10 +8,12 @@ bibliography: bibliography.bib
 
 
 
-## Confidence, credible and prediction intervals
+## Confidence, credible and prediction intervals {- #intervals}
 
 
-TODO: EXPAND ON THESE DEFINITIONS AND USE GRAPHICS AND PLOTS TO ILLUSTRATE
+Some quick definitions to begin:
+
+<!-- TODO: EXPAND ON THESE DEFINITIONS AND USE GRAPHICS AND PLOTS TO ILLUSTRATE -->
 
 *Confidence interval*: The range within which we would expect the true value to fall, 95% of the time, if we replicated the study. 
 
@@ -69,13 +71,14 @@ But imagine taking a single *new sample* from either population. These samples w
 The important insight here is that *if our data are noisy and highly variable we can never make firm predictions for new individuals, even if we collect so much data that we are very certain about the location of the mean*.
 
 
+<!-- 
 
 
-### What does this mean for my work on [insert speciality here]? {-}
-
-XXX TODO TBC
+### But should I report the CI or not? {-}
 
 
+
+ -->
 
 
 

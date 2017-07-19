@@ -29,7 +29,6 @@ One of the biggest adjustments people need to make when moving away from SPSS or
 
 
 
-
 ### Using RMarkdown to record and share work {- #rmarkdown}
 
 This it might seem an odd place to start: we haven't got anything to share yet! But the RStudio editor (see below) includes important features which help us record and organise our work, and share it with colleagues. For many people this ability to keep a detailed record of your work, and revisit and review it later, turns out to be *the* major advantages of R over traditional statistics packages.
@@ -53,7 +52,7 @@ To include R code within a document we write 3 backticks (`` ``` ``), followed b
     ```{r}`r ''`
     2 + 2
     ```
-     
+
 When a document including this chunk is run or 'knitted', the final result will include the the line `2+2` followed by the number `4` on the next line. This means we can use RMarkdown to 'show our workings': our analysis can be interleaved with narrative text to explain or interpret the calculations.
 
 You can see how this works in practice in the next section.
@@ -61,8 +60,7 @@ You can see how this works in practice in the next section.
 
 ## RStudio {- #rstudio}
 
-RStudio is a text editor which has been customised to make working with R easy. It can be installed on your own computer, or you can login to a shared RStudio server^[e.g. one run by your university.] from a web browser. Either way the interface is largely the same.  
-
+RStudio is a text editor which has been customised to make working with R easy. It can be installed on your own computer, or you can login to a shared RStudio server (for example, one run by your university) from a web browser. Either way the interface is largely the same.  
 
 
 ```{r echo=FALSE, fig.fullwidth=T}
@@ -72,11 +70,13 @@ knitr::include_graphics('media/rstudio-mainwindow.png')
 
 The figure above shows the main RStudio interface, comprising:
 
-1. The main R-script or RMarkdown editor window
-1. The R console, into which you can type R commands, and see output from commands run in the script editor.
-1. The 'environment' panel, which lists all the variables you have defined and currently available to use.
-1. The files and help panel. Within this the files tab enables you to open files stored on the server, or in the current project on your disk.
+1. The main R-script or RMarkdown editor window. This is where you write commands, which can then be executed (to run the current line type ctrl-Enter or cmd-Enter on a Mac).
 
+1. The R console, into which you can type R commands directly, and see the output of commands run in the script editor.
+
+1. The 'environment' panel, which lists all the variables you have defined and currently available to use.
+
+1. The files and help panel. Within this panel the 'files' tab enables you to open files stored on the server, in the current project, or elsewhere on your hard drive.
 
 
 
@@ -133,7 +133,7 @@ OK - so that's it for this video. Just quickly before I go though, it's worth kn
 -->
 
 
-The video^[Note: this isn't the final version.. it will be more polished!]:
+The video:
 
 - Shows you how to type commands into the Console and view the results.
 - Run a plotting function, and see the result.
@@ -154,24 +154,36 @@ Once you have watched the video:
 
 ### First commands {-}
 
-You can type R commands directly into the console and see the result there too, but you should make a habit of working in an RMarkdown file. This keeps a record of everything you try, and makes it easy to edit/amend commands which don't work as you expect.
+You can type R commands directly into the console and see the result there, but you should make a habit of working in an RMarkdown file. This keeps a record of everything you try, and makes it easy to edit/amend commands which don't work as you expect.
 
-Now would be a good time to open and RMarkdown document to see how it works. A good place to start would be to open the source to this document. The best way to do this is to download the source code for *this* project, and then open the file `start_here.Rmd`.
+Now would be a good time to open an RMarkdown document to see how it works. A good place to start would be to open the source to this document. The best way to do this is to download the source code for the 'Just Enough R' project, and then open the file `start_here.Rmd`.
+
+
+#### {- .exercise}
 
 The source for this RMarkdown file is available here: <https://raw.githubusercontent.com/benwhalley/just-enough-r/master/start_here.Rmd>.
 
 Or you can download the whole project here: <https://github.com/benwhalley/just-enough-r/archive/master.zip>. This link downloads a 'zip' file, which is a compressed folder containing all the files in the project. To 'unzip' it on Mac or Windows just double-click the file in the Finder or Windows Explorer.
 
+
+
+#### {-}
+
 To run code in the RStudio interface put your cursor on a line within an R Block (or select the code you want to run), and press `Ctrl-Enter`. The result will appear below the code block.
 
 The command in the R block below prints (shows on screen) the first few rows of the `mtcars` dataset, which is built in to R as an example. 
 
-Place your cursor somewhere in the line the command is on and run it by typing `Ctrl-Enter`:
+Place your cursor somewhere in the line the command is on and run it by typing `Ctrl-Enter`, shown in this brief video:
+
+
+<iframe src="https://player.vimeo.com/video/225968925" width="640" height="480" frameborder="0"></iframe>
+<p><a href="https://vimeo.com/225968925">Create and R block in RMarkdown, then run some simple commands.</a> from <a href="https://vimeo.com/user67812521">Ben Whalley</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 
 
 ```{r}
 head(mtcars)
 ```
+
 
 If you are reading this from within RStudio, running `head(mtcars)` will have included an interactive table in the document, which you can use this to view the `mtcars` dataset. If you are still reading the compiled html or pdf document you will see a table containing the same data, included within the body of the document.
 
@@ -226,7 +238,7 @@ As you will see below, we can give anything a label by assigning it to a variabl
 
 
 
-# Vectors and lists {#vectors-and-lists}
+### Vectors and lists {- #vectors-and-lists}
 
 When working with data, we often have lists of 'things': for example a list of measurements we have made.
 
@@ -237,7 +249,7 @@ When working with data, we often have lists of 'things': for example a list of m
 
 
 
-## Vectors {- #vector}
+#### Vectors {- #vector}
 
 We can create a vector of numbers and display it like this:
 
@@ -272,7 +284,7 @@ Try creating your own vector of numbers in a new code block below^[i.e. edit the
 
 
 
-### Accessing elements within vectors {-}
+#### Accessing elements within vectors {- #access-vector-elements}
 
 Once we have created a vector, we often want to access the individual elements again. We do this based on their *position*. 
 
@@ -292,7 +304,7 @@ my.vector[1]
 Here, the square brackets specify a *subset* of the vector we want - in this case, just the first element.
 
 
-### Selecting more than one element in a vector {-}
+#### Selecting more than one element in a vector {-}
 
 A neat feature of subsetting is that we can grab more than one element at a time. 
 
@@ -319,7 +331,7 @@ first.two.elements
 <!-- If you want to know more see <http://www.statmethods.net/management/subset.html> -->
 
 
-### Processing vectors {-}
+#### Processing vectors {-}
 
 Many of R's most useful functions process *vectors of numbers* in some way. For example, if we want to calculate the average of our vector of heights we just type:
 
@@ -374,7 +386,7 @@ We'll cover lots more plotting and visualisation later on.
 
 
 
-### Processing vectors to make new vectors {-}
+#### Processing vectors to make new vectors {-}
 
 So far we've seen R functions which process a vector of numbers and produce a single number, a new vector of a different length (like `quantile` or `fivenum`), or some other object (like `hist` which makes a plot).
 However many other functions accept a single input, do something to it, and return a single processed value. 
@@ -399,6 +411,9 @@ This also works with simple arithmetic So, if we wanted to convert all the heigh
 heights / 100
 ```
 
+
+#### {- #paste}
+
 This trick also works with other functions like `paste`, which combines the inputs you send it to produce an alphanumeric string:
 
 ```{r}
@@ -415,7 +430,18 @@ paste(bottles, "green bottles hanging on the wall")
 In other programming languages we might have had to write a 'loop' to create each line of the song, but R lets us write short statements to summarise *what* needs to be done; we don't need to worry worrying about *how* it gets done.
 
 
-### Making up data (new vectors) {-}
+#### {- #paste0 .tip}
+
+The `paste0` function does much the same, but leaves no spaces in the combined strings, which can be useful:
+
+```{r}
+paste0("N=", 1:10)
+```
+
+
+
+
+#### Making up data (new vectors) {-}
 
 Sometimes you'll need to create vectors containing regular sequences or randomly selected numbers.
 
@@ -458,7 +484,7 @@ hist(random.numbers)
 
 
 
-### Useful functions to learn now {- }
+#### Useful functions to learn now {- }
 
 There are *thousands* of functions built into R. Below are a few examples which are likely to be useful as you work with your data:
 
@@ -503,7 +529,7 @@ Try and experiment with each of these functions. Check the output against what y
 
 
 
-## Lists {- #lists}
+### Lists {- #lists}
 
 Try running the code below:
 
@@ -574,7 +600,7 @@ my.party$drinks[1]
 ```
 
 
-###  {- .exercise}
+####  {- .exercise}
 
 1. Create a vector containing 3 numbers then:
 
@@ -593,13 +619,13 @@ sqrt(1:10) * 10
 
 
 
-### {- .exercise}
+#### {- .exercise}
 
 Extended questions:
 
-4. What is the average of the 9 times table, up to and including 9 x 1000? 
+- What is the average of the 9 times table, up to and including 9 x 1000? 
 
-5. Use the `paste` and `c(...)` functions to create a vector which contains the sequence "1 elephant", "2 elephants", ...,  "1000 elephants". 
+- Use the `paste` and `c(...)` functions to create a vector which contains the sequence "1 elephant", "2 elephants", ...,  "1000 elephants". 
 
 
 

@@ -6,10 +6,10 @@ output:
 
 
 
-# (PART) Statistics {-}
+# (PART) Analysis {-}
+
 
 # Basic inferential statistics
-
 
 
 R has simple functions for common inferential statistics like Chi^2^, t-tests, correlations and many more. This section is by no means exhaustive, but covers [statistics for crosstabulations](#crosstabs), [differences in means](#t-tests), and [linear correlation](#correlations).

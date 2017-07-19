@@ -7,30 +7,154 @@ output:
 
 
 
-## Sharing and publishing your work {- #sharing-and-publication}
+# (PART) Sharing {-}
+
+# Sharing and publishing your work {#sharing-and-publication}
+
+Have you ever manually copied hundres of numbers from SPSS tables to a MS Word document? If so, rejoice that you'll never have to again!
+
+R and RMarkdown provide many useful features when formatting results for publication. The key steps in the process are to:
+
+1. [Extract](#extract-results-from-models) results from models (normally into a dataframe)
+2. Select/filter/summarise/combine or otherwise [process your results](#process-model-results)
+3. Output to a [plot](#graphics), [table](#output-tables), or [inline in your text](#apa-output) (or save for later)
+
+
+
+## Extracting results from models {- #extract-results-from-models}
+
+
+One of the nice things about R is that the `summary()` function will almost always provide a concise output, showing the key features of an model you have run.
+
+However, this text output isn't suitable for publication, and can even be too verbose for communicating with colleagues. Often, when communicating with others, you want to focus in on the important details from analyses and to do this you need to extract results from your models.
+
+Thankfully, there is almost always a method to extract results to a [`dataframe`]( #datasets-dataframes). For example, if we run a linear model:
+
+
+
+```r
+model.fit <- lm(mpg~wt+disp, data=mtcars)
+summary(model.fit)
+## 
+## Call:
+## lm(formula = mpg ~ wt + disp, data = mtcars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.4087 -2.3243 -0.7683  1.7721  6.3484 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 34.96055    2.16454  16.151 4.91e-16 ***
+## wt          -3.35082    1.16413  -2.878  0.00743 ** 
+## disp        -0.01773    0.00919  -1.929  0.06362 .  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.917 on 29 degrees of freedom
+## Multiple R-squared:  0.7809,	Adjusted R-squared:  0.7658 
+## F-statistic: 51.69 on 2 and 29 DF,  p-value: 2.744e-10
+```
+
+
+
+We can extract the parameter table from this model by saving the `summary()` of it, and then using the `$` operator to access the `coefficients` table (actually a matrix), which is stored within the summary object. In the example below, we also convert this to a dataframe:
+
+
+
+```r
+model.fit.summary <- summary(model.fit)
+as.data.frame(model.fit.summary$coefficients)
+##                Estimate  Std. Error   t value     Pr(>|t|)
+## (Intercept) 34.96055404 2.164539504 16.151497 4.910746e-16
+## wt          -3.35082533 1.164128079 -2.878399 7.430725e-03
+## disp        -0.01772474 0.009190429 -1.928609 6.361981e-02
+```
+
+
+It's actually a useful trick to learn how to 'poke around' inside R objects using the `$` and `@` operators (if you want the gory details of how these operators work, [start with this guide](http://adv-r.had.co.nz/OO-essentials.html) to object systems in R).
+
+In the video below, I use RStudio's autocomplete feature to find results buried within a `lm` object:
+
+
+<iframe src="https://player.vimeo.com/video/225529842" width="862" height="892" frameborder="0"></iframe>
+
+
+
+For example, we could write the follwing to extract a table of coefficients, test statistics and *p* values from an `lm()` object (this is shown in the video:
+
+
+```r
+model.fit.summary <- summary(model.fit)
+model.fit.summary$coefficients %>% 
+  as.data.frame()
+##                Estimate  Std. Error   t value     Pr(>|t|)
+## (Intercept) 34.96055404 2.164539504 16.151497 4.910746e-16
+## wt          -3.35082533 1.164128079 -2.878399 7.430725e-03
+## disp        -0.01772474 0.009190429 -1.928609 6.361981e-02
+```
 
 
 
 
-### Extracting results from models
 
 
-TODO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```r
+model.fit %>% broom::tidy()
+##          term    estimate   std.error statistic      p.value
+## 1 (Intercept) 34.96055404 2.164539504 16.151497 4.910746e-16
+## 2          wt -3.35082533 1.164128079 -2.878399 7.430725e-03
+## 3        disp -0.01772474 0.009190429 -1.928609 6.361981e-02
+```
+
 
 - Use `broom`
 
 
 
+- Hint at the other things hidden in R objects (e.g. the formula and rsquared value in the `lm` object). Using @ and $ to autocomplete and find things
 
 
-### APA formatting for free {#apa-output}
+
+
+
+## Process your results {- #process-model-results}
+
+- Calculate VPC/ICC from an lmer models using `model %>% summary %>% as.data.frame()$varcor`
+
+
+
+
+## Printing tables {- #output-tables}
+
+
+
+## APA formatting for free {- #apa-output}
 
 
 A neat trick to avoid [fat finger errors](https://en.wikipedia.org/wiki/Fat-finger_error) is to use functions to automatically display results in APA format. Unfortunately, there isn't a single package which works with all types of model, but it's not too hard switch  between them.
 
 
 
-#### Chi^2^ {-}
+### Chi^2^ {-}
 
 For basic stats the `apa::` package is simple to use. Below we use the `apa::chisq_apa()` function to properly format the results of our chi^2^ test ([see the full chi^2^ example]#crosstabs)):
 
@@ -67,7 +191,7 @@ apastats::describe.chi(lego.table, addN=T)
 ```
 
 
-##### Inserting test results into your text {#inline-apa-format}
+#### Inserting results into your text {#inline-apa-format}
 
 If you are using RMarkdown, you can drop formatted results into your text without copying and pasting. Just type the following and the chi^2^ test result is automatically inserted inline in your text:
 
@@ -79,7 +203,7 @@ If you are using RMarkdown, you can drop formatted results into your text withou
 
 
 
-#### T-test {-}
+### T-test {-}
 
 
 ```r
@@ -112,7 +236,7 @@ mean difference=1358lbs;
 
 
 
-#### Anova {-}
+### Anova {-}
 
 
 ```r
@@ -131,13 +255,14 @@ describe.Anova(mpg.anova, term="am:cyl")
 [There was no interaction between location of manufacture and number of cylinders, _F_(1, 28) = 3.41, _p_ = .076, but there was a main effect of location of manufacture, _F_(1, 28) = 3.41, _p_ = .076, such that US-made cars had significantly higher fuel consumption than European or Japanese brands (see [Figure X or Table X])]{.apa-example}
 
 
+<!-- 
+TODO add formatting of effect size estimates here
 
-XXX TODO add formatting of effect size estimates here
+ -->
 
 
 
-
-#### Multilevel models {-}
+### Multilevel models {-}
 
 
 If you have loaded the `lmerTest` package `apastats` can output either coefficients for single parameters, or F tests:
@@ -154,8 +279,6 @@ describe.glm(sleep.model, term="factor(Days)1")
 describe.lmtaov(anova(sleep.model), term='factor(Days)')
 ## [1] "_F_(9, 153.0) = 18.70, _p_ < .001"
 ```
-
-
 
 
 [There were significant differences in reaction times across the 10 days of the study, _F_(9, 153.0) = 18.70, _p_ < .001 such that reaction latencies tended to increase in duration (see [Figure X]).]{.apa-example}

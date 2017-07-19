@@ -79,8 +79,8 @@ pain.model.mcmc <- stan_lm(with.music ~ no.music + familiar*liked , data=painmus
 ## 
 ## SAMPLING FOR MODEL 'lm' NOW (CHAIN 1).
 ## 
-## Gradient evaluation took 4.9e-05 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 0.49 seconds.
+## Gradient evaluation took 0.000629 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 6.29 seconds.
 ## Adjust your expectations accordingly!
 ## 
 ## 
@@ -97,9 +97,9 @@ pain.model.mcmc <- stan_lm(with.music ~ no.music + familiar*liked , data=painmus
 ## Iteration: 1800 / 2000 [ 90%]  (Sampling)
 ## Iteration: 2000 / 2000 [100%]  (Sampling)
 ## 
-##  Elapsed Time: 0.177351 seconds (Warm-up)
-##                0.193414 seconds (Sampling)
-##                0.370765 seconds (Total)
+##  Elapsed Time: 0.222017 seconds (Warm-up)
+##                0.267789 seconds (Sampling)
+##                0.489806 seconds (Total)
 ## 
 ## 
 ## SAMPLING FOR MODEL 'lm' NOW (CHAIN 2).
@@ -122,15 +122,15 @@ pain.model.mcmc <- stan_lm(with.music ~ no.music + familiar*liked , data=painmus
 ## Iteration: 1800 / 2000 [ 90%]  (Sampling)
 ## Iteration: 2000 / 2000 [100%]  (Sampling)
 ## 
-##  Elapsed Time: 0.223141 seconds (Warm-up)
-##                0.190582 seconds (Sampling)
-##                0.413723 seconds (Total)
+##  Elapsed Time: 0.200475 seconds (Warm-up)
+##                0.171597 seconds (Sampling)
+##                0.372072 seconds (Total)
 ## 
 ## 
 ## SAMPLING FOR MODEL 'lm' NOW (CHAIN 3).
 ## 
-## Gradient evaluation took 1.2e-05 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 0.12 seconds.
+## Gradient evaluation took 2e-05 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 0.2 seconds.
 ## Adjust your expectations accordingly!
 ## 
 ## 
@@ -147,15 +147,15 @@ pain.model.mcmc <- stan_lm(with.music ~ no.music + familiar*liked , data=painmus
 ## Iteration: 1800 / 2000 [ 90%]  (Sampling)
 ## Iteration: 2000 / 2000 [100%]  (Sampling)
 ## 
-##  Elapsed Time: 0.169626 seconds (Warm-up)
-##                0.171959 seconds (Sampling)
-##                0.341585 seconds (Total)
+##  Elapsed Time: 0.216848 seconds (Warm-up)
+##                0.27519 seconds (Sampling)
+##                0.492038 seconds (Total)
 ## 
 ## 
 ## SAMPLING FOR MODEL 'lm' NOW (CHAIN 4).
 ## 
-## Gradient evaluation took 1.3e-05 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 0.13 seconds.
+## Gradient evaluation took 4.3e-05 seconds
+## 1000 transitions using 10 leapfrog steps per transition would take 0.43 seconds.
 ## Adjust your expectations accordingly!
 ## 
 ## 
@@ -172,10 +172,10 @@ pain.model.mcmc <- stan_lm(with.music ~ no.music + familiar*liked , data=painmus
 ## Iteration: 1800 / 2000 [ 90%]  (Sampling)
 ## Iteration: 2000 / 2000 [100%]  (Sampling)
 ## 
-##  Elapsed Time: 0.190413 seconds (Warm-up)
-##                0.187699 seconds (Sampling)
-##                0.378112 seconds (Total)
-## Warning: There were 3 divergent transitions after warmup. Increasing adapt_delta above 0.95 may help. See
+##  Elapsed Time: 0.244502 seconds (Warm-up)
+##                0.213128 seconds (Sampling)
+##                0.45763 seconds (Total)
+## Warning: There were 4 divergent transitions after warmup. Increasing adapt_delta above 0.95 may help. See
 ## http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 ## Warning: Examine the pairs() plot to diagnose sampling problems
 summary(pain.model.mcmc)
@@ -199,28 +199,28 @@ summary(pain.model.mcmc)
 ## familiar1:liked1   -0.2    0.1   -0.4   -0.3   -0.2   -0.1    0.1 
 ## sigma               1.5    0.1    1.3    1.4    1.5    1.5    1.7 
 ## log-fit_ratio       0.0    0.1   -0.1    0.0    0.0    0.0    0.1 
-## R2                  0.5    0.1    0.3    0.4    0.5    0.5    0.6 
+## R2                  0.5    0.1    0.4    0.4    0.5    0.5    0.6 
 ## mean_PPD            5.3    0.2    4.9    5.2    5.3    5.5    5.7 
-## log-posterior    -206.1    2.3 -211.6 -207.4 -205.7 -204.4 -202.6 
+## log-posterior    -206.1    2.3 -211.6 -207.4 -205.8 -204.4 -202.6 
 ## 
 ## Diagnostics:
 ##                  mcse Rhat n_eff
-## (Intercept)      0.0  1.0  1795 
-## no.music         0.0  1.0  1779 
-## familiar1        0.0  1.0  3875 
+## (Intercept)      0.0  1.0  1338 
+## no.music         0.0  1.0  1310 
+## familiar1        0.0  1.0  4000 
 ## liked1           0.0  1.0  4000 
-## familiar1:liked1 0.0  1.0  3833 
-## sigma            0.0  1.0  3480 
-## log-fit_ratio    0.0  1.0  2236 
-## R2               0.0  1.0  2103 
+## familiar1:liked1 0.0  1.0  4000 
+## sigma            0.0  1.0  3657 
+## log-fit_ratio    0.0  1.0  1938 
+## R2               0.0  1.0  1626 
 ## mean_PPD         0.0  1.0  4000 
-## log-posterior    0.1  1.0   942 
+## log-posterior    0.1  1.0   940 
 ## 
 ## For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split chains (at convergence Rhat=1).
 ```
 
 
-### Posterior probabilities for parameters
+### Posterior probabilities for parameters {-}
 
 
 ```r
@@ -244,7 +244,21 @@ params.of.interest %>%
 <img src="bayes-mcmc_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 
-### Credible intervals
+### Credible intervals {- #credible-intervals}
+
+
+Credible intervals are distinct from [confidence intervals](#intervals) 
+
+TODO EXPAND
+
+<!--
+Use this to explain HPI
+
+ https://www.researchgate.net/post/Why_do_we_use_Highest_Posterior_Density_HPD_Interval_as_the_interval_estimator_in_Bayesian_Method 
+
+http://doingbayesiandataanalysis.blogspot.co.uk/2012/04/why-to-use-highest-density-intervals.html
+
+-->
 
 
 ```r
@@ -263,11 +277,11 @@ params.of.interest %>%
 ## --------------------------------------------------
 ##     variable      Estimate     lower      upper   
 ## ---------------- ---------- ----------- ----------
-##    familiar1     0.1960585  -0.08546274 0.45610204
+##    familiar1     0.1989966  -0.06631311 0.46888634
 ## 
-##      liked1      0.2953212  0.02752668  0.55668637
+##      liked1      0.2976592  0.03733399  0.57809565
 ## 
-## familiar1:liked1 -0.1782482 -0.45246869 0.08223303
+## familiar1:liked1 -0.1761959 -0.44440685 0.09406865
 ## --------------------------------------------------
 ## 
 ## Table: Estimates and 95% credible intervals for the effect of group 2 at months 6 and 12
@@ -277,7 +291,8 @@ params.of.interest %>%
 
 
 
-### Bayesian 'p values' for parameters
+### Bayesian 'p values' for parameters {-}
+
 
 
 ```r
@@ -287,30 +302,27 @@ params.of.interest %>%
 ## # A tibble: 3 × 2
 ##           variable `p (x<0)`
 ##             <fctr>     <dbl>
-## 1        familiar1   0.07325
-## 2           liked1   0.01550
-## 3 familiar1:liked1   0.90500
+## 1        familiar1   0.07225
+## 2           liked1   0.01425
+## 3 familiar1:liked1   0.90700
 ```
 
 
+TODO - add a fuller explanation of why [multiple comparisons](#mutiple-comparisons) are not an issue for Bayesian analysis [@gelman2012we], because *p* values do not have the same interpretation in terms of long run frequencies of replication; they are a representation of the weight of the evidence in favour of a hypothesis.
 
 
 
 
 
+<!-- 
 
+## Bayesian analysis of RCT data {- #region-of-practical-importance}
 
-
-
-
-
-## Bayesian analysis of RCT data {#region-of-practical-importance}
-
-XXX TODO 
+TODO 
 
 - Example from FIT RCT for weight and BMI
 - Using and presenting the ROPE
 
-
+ -->
 
 

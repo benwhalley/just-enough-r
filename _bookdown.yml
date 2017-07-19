@@ -3,6 +3,7 @@ new_session: yes
 output_dir: "docs"
 
 rmd_files:
+
   [ "index.Rmd",
     "start_here.Rmd",
 
@@ -22,7 +23,6 @@ rmd_files:
 
     "linear-models.Rmd",
     "anova.Rmd",
-    "anova-cookbook.Rmd",
 
     "understanding-interactions.Rmd",
     "predictions-and-margins.Rmd",
@@ -30,26 +30,32 @@ rmd_files:
     "general-linear-models.Rmd",
     "mediation.Rmd",
     "multilevel-models.Rmd",
-    "cfa.Rmd",
-    "sem.Rmd",
+    "cfa-sem.Rmd",
     "power-analysis.Rmd",
-    "meta-analysis.Rmd",
-    "bayes-factors.Rmd",
+    
+
+    "additional-stubs.Rmd",
     "bayes-mcmc.Rmd",
 
-
+    
     "statistical-explanations.Rmd",
     "confidence-vs-prediction-intervals.Rmd",
     "multiple-comparisons.Rmd",
+    "link-functions.Rmd",
+    "over-fitting.Rmd",
+    "gof.Rmd",
 
 
     "loose-ends.Rmd",
     "installation.Rmd",
     "packages.Rmd",
+    "colours.Rmd",
     "help.Rmd",
-    "rmarkdown-tricks.Rmd",
-    "sharing-and-publishing.Rmd",
+    "functions.Rmd",
     
+
+    "sharing-and-publishing.Rmd",
+
     "references.Rmd"
   ]
 

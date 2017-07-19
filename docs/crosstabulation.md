@@ -10,7 +10,7 @@ output:
 
 
 
-## Crosstabulations and chi.^2^ {- #crosstabs}
+## Crosstabulations and \chi^2^ {- #crosstabs}
 
 
 We saw in a previous section [how to create a frequency table of one or more variables](#frequency-tables). Using that previous example, assume  we already have a crosstabulation of `age` and `prefers`
@@ -26,7 +26,8 @@ lego.table
 ##   6 years    12   30
 ```
 
-We can easily run the inferential chi^2^ test on this table:
+We can easily run the inferential \chi^2^ (sometimes spelled "chi", but pronounced "kai"-squared) test on this table:
+
 
 
 ```r
@@ -63,7 +64,7 @@ apa::apa(lego.test, print_n=T)
 
 
 
-### Three-way tables
+### Three-way tables {-}
 
 You can also use `table()` to get 3-way tables of frequencies. For example, using the `mtcars` dataset we create a 3-way table, and then convert the result to a dataframe so we can print the table nicely in RMarkdown using the `pandoc.table()` function.
 

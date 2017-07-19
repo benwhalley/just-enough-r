@@ -55,7 +55,7 @@ summary(pain.model.mcmc)
 ```
 
 
-### Posterior probabilities for parameters
+### Posterior probabilities for parameters {-}
 
 ```{r}
 params.of.interest <- 
@@ -75,7 +75,21 @@ params.of.interest %>%
 ```
 
 
-### Credible intervals
+### Credible intervals {- #credible-intervals}
+
+
+Credible intervals are distinct from [confidence intervals](#intervals) 
+
+TODO EXPAND
+
+<!--
+Use this to explain HPI
+
+ https://www.researchgate.net/post/Why_do_we_use_Highest_Posterior_Density_HPD_Interval_as_the_interval_estimator_in_Bayesian_Method 
+
+http://doingbayesiandataanalysis.blogspot.co.uk/2012/04/why-to-use-highest-density-intervals.html
+
+-->
 
 ```{r}
 get_HPDI <- function(l){
@@ -95,7 +109,8 @@ params.of.interest %>%
 
 
 
-### Bayesian 'p values' for parameters
+### Bayesian 'p values' for parameters {-}
+
 
 ```{r}
 params.of.interest %>% 
@@ -104,24 +119,21 @@ params.of.interest %>%
 ```
 
 
+TODO - add a fuller explanation of why [multiple comparisons](#mutiple-comparisons) are not an issue for Bayesian analysis [@gelman2012we], because *p* values do not have the same interpretation in terms of long run frequencies of replication; they are a representation of the weight of the evidence in favour of a hypothesis.
 
 
 
 
 
+<!-- 
 
+## Bayesian analysis of RCT data {- #region-of-practical-importance}
 
-
-
-
-
-## Bayesian analysis of RCT data {#region-of-practical-importance}
-
-XXX TODO 
+TODO 
 
 - Example from FIT RCT for weight and BMI
 - Using and presenting the ROPE
 
-
+ -->
 
 

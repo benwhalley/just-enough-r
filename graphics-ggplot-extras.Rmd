@@ -118,6 +118,6 @@ ggsave(filename = "myplot.pdf")
 ```
 
 
-See page [323 of the R Graphics Cookbook](https://ase.tufts.edu/bugs/guide/assets/R%20Graphics%20Cookbook.pdf) for lots more detail.
+See the [ggplot docs on exporting](http://ggplot2.tidyverse.org/reference/ggsave.html) or page [323 of the R Graphics Cookbook](https://ase.tufts.edu/bugs/guide/assets/R%20Graphics%20Cookbook.pdf) for lots more detail.
 
 

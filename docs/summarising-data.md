@@ -27,7 +27,14 @@ In particular, we place an emphasis on functions *which return dataframes*, beca
 
 
 
-## Frequency tables {- #frequency-tables}
+
+
+
+## Utility functions for descriptive statistics {-}
+
+
+
+### Frequency tables {- #frequency-tables}
 
 
 Let's say we ask 4 year olds and 6 year olds whether they prefer lego or duplo. We use the `table()` command to get a cross tabulation of these `age` categories and what the child `prefers`. We wrap `table(...)` in the `with()` function to tell it which dataframe to use:
@@ -46,8 +53,8 @@ lego.table
 
 
 
+### Summary statistics {-}
 
-## Utility functions for descriptive statistics {-}
 
 In this guide so far you might have notices functions which provide summaries of an entire dataframe. For example:
 
@@ -94,7 +101,7 @@ Although useful, these functions miss two important elements:
 
 
 
-### Creating a data frame of summary information {-}
+### Creating a data frame of summary statistics {-}
 
 Thanksfully, many summary functions allow us to pass their results to the `as.data.frame()` function, which converts the output into a table which we can use like any other dataset.
 

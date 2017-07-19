@@ -15,3 +15,6 @@ library(lmerTest)
 
 
 # Meta analysis in R {#meta-analysis}
+
+
+For the moment, [see this introduction to meta analysis in R](https://www.r-bloggers.com/r-and-meta-analysis/)

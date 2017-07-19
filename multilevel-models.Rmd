@@ -13,18 +13,6 @@ library(lmerTest)
 
 ```
 
-```{r}
-disschecks <- statcheck::checkdir('~/Downloads/dissertations/')
-
-disschecks %>% 
-  group_by(Statistic) %>% 
-  reshape2::dcast(Statistic~Error)
-
-disschecks %>% 
-  group_by(Statistic) %>% 
-  reshape2::dcast(Statistic~DecisionError)
-  
-```
 
 <!-- XXX TODO 
 
@@ -47,7 +35,7 @@ This chapter assumes:
 
 
 
-## The `sleepstudy` data and traditional RM Anova
+## The `sleepstudy` data and traditional RM Anova {-}
 
 XXX As noted in the [Anova cookbook section](anova-cookbook.html), repeated measures anova can be approximated using linear mixed models.
 
@@ -74,7 +62,7 @@ afex::aov_car(Reaction ~ Days + Error(Subject/(Days)), data=lme4::sleepstudy)
 XXX ADD THESE EXAMPLES
 But see the [multilevel models section](multilevel-models.html) for details of more interesting models which:
 
-### Fit a simple slope for `Days`
+### Fit a simple slope for `Days` {-}
 
 ```{r}
 lme4::sleepstudy %>% 
@@ -91,8 +79,7 @@ slope.model.summary$coefficients
 ```
 
 
-
-### Allow the effect of sleep deprivation to vary for different participants
+### Allow the effect of sleep deprivation to vary for different participants {-}
 
 It looks like sleep deprivation hits some participants worse than others:
 
@@ -218,7 +205,7 @@ Model fit is not significantly worse with the constrained model, so for parsimon
 
 
 
-### Fitting a curve for the effect of `Days`
+### Fitting a curve for the effect of `Days` {-}
 
 In theory, we could also fit additional parameters for the effect of `Days`, although a combined smoothed line plot/scatterplot indicates that a linear function fits the data reasonably well.
 
@@ -249,10 +236,11 @@ Here, the *p* value for `I(Days^2)` is not significant, suggesting (as does the 
 
 
 
-## Intraclass correlations and the variance partition coefficient {#icc-and-vpc}
+## Intraclass correlations {- #icc-and-vpc}
 
-XXX TODO
+<!-- XXX TODO -->
 
+- ICC and VPC are the same
 - Show how to calculate VPC/ICC from `VarCorr(lmerobject)`
 
 
@@ -260,7 +248,7 @@ XXX TODO
 
 
 
-## Arguments for fitting mixed models via MCMC
+## Arguments for fitting mixed models via MCMC {-}
 
 https://arxiv.org/pdf/1701.04858.pdf
 

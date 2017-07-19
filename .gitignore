@@ -1,3 +1,8 @@
 .httr-oauth
 .Rproj.user
 *_cache
+*.md
+*_files/
+*.acorn
+*.mov
+myplot.pdf

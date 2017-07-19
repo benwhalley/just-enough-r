@@ -17,6 +17,15 @@ This chapter will assume:
 
 
 
+<!-- 
+
+http://lavaan.ugent.be/tutorial/mediation.html
 
 
-TODO XXX TBC
+# indirect effect (a*b)
+             ab := a*b
+           # total effect
+             total := c + (a*b) 
+
+
+-->

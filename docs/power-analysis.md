@@ -10,9 +10,13 @@ output: bookdown::tufte_html2
 # Power analysis in R {#power-analysis}
 
 
+### For most inferential statistics {-}
 
-If you want to do power analysis for a standard statistical test, e.g. t-tests, chi^2 or Anova, the `pwr::` package is what you need. [This guide has a good walkthrough](http://www.statmethods.net/stats/power.html).
+If you want to do power analysis for a standard statistical test, e.g. t-tests, chi^2^ or Anova, the `pwr::` package is what you need. [This guide has a good walkthrough](http://www.statmethods.net/stats/power.html).
 
+
+
+### For multilevel or generalised linear models {-}
 
 If you'd like to run power analyses for linear mixed models ([multilevel models](#multilevel-models)) then you need [the `simr::` package](http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12504/full). It has some neat features for calculating power by simulating data and results from a model you specify.
 
@@ -87,7 +91,7 @@ power.sim
 ## Based on 100 simulations, (0 warnings, 0 errors)
 ## alpha = 0.05, nrow = 100
 ## 
-## Time elapsed: 0 h 0 m 24 s
+## Time elapsed: 0 h 0 m 26 s
 ```
 
 Our observed power (proportion of times we get a significant *p* value) is very low here, so we might want increase our hypothesised effect of `x`, for example to see what power we have to detect an effect of x = .8:
@@ -107,7 +111,7 @@ power.sim
 ## Based on 100 simulations, (0 warnings, 0 errors)
 ## alpha = 0.05, nrow = 100
 ## 
-## Time elapsed: 0 h 0 m 22 s
+## Time elapsed: 0 h 0 m 27 s
 ```
 
 
@@ -138,7 +142,7 @@ power.sim
 ## Based on 100 simulations, (0 warnings, 0 errors)
 ## alpha = 0.05, nrow = 100
 ## 
-## Time elapsed: 0 h 0 m 23 s
+## Time elapsed: 0 h 0 m 26 s
 ```
 
 Because the amount of clustering in our data has increased our statistical power has gone down. This is because, when clustering is present, each new observation (row) in the dataset provides less new *information* to estimate our treatment effect. Note that in this example we increased the variance associated with `g` by quite a lot: setting the variance of `g` to 0.5 equates to an ICC for `g` of .33 (because .5 / (.5 + 1) = .33; see the section on [calculating ICCs and VPCs]{#icc-and-vpc})

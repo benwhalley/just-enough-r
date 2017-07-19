@@ -17,9 +17,13 @@ library(simr)
 # Power analysis in R {#power-analysis}
 
 
+### For most inferential statistics {-}
 
-If you want to do power analysis for a standard statistical test, e.g. t-tests, chi^2 or Anova, the `pwr::` package is what you need. [This guide has a good walkthrough](http://www.statmethods.net/stats/power.html).
+If you want to do power analysis for a standard statistical test, e.g. t-tests, chi^2^ or Anova, the `pwr::` package is what you need. [This guide has a good walkthrough](http://www.statmethods.net/stats/power.html).
 
+
+
+### For multilevel or generalised linear models {-}
 
 If you'd like to run power analyses for linear mixed models ([multilevel models](#multilevel-models)) then you need [the `simr::` package](http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12504/full). It has some neat features for calculating power by simulating data and results from a model you specify.
 

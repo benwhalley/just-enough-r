@@ -9,7 +9,7 @@ bibliography: bibliography.bib
 
 
 
-# Making predictions {#predictions-and-margins}
+## Making predictions {- #predictions-and-margins}
 
 
 
@@ -22,7 +22,7 @@ Objectives of this section:
 
 
 
-## Predictions vs margins
+### Predictions vs margins {-}
 
 Before we start, let's consider what we're trying to achieve in making predictions from our models. We need to make a distinction between:
 
@@ -32,7 +32,7 @@ Before we start, let's consider what we're trying to achieve in making predictio
 Consider the example used in a previous section where we measured `injury.severity` after road accidents, plus two predictor variables: `gender` and `age`.
 
 
-## Predicted means
+### Predicted means {-}
 
 'Predicted means' (or predictions) refers to our best estimate for each category of person we're interested in. For example, if `age` were categorical (i.e. young vs. older people) then might have 4 predictions to calculate from our model:
 
@@ -65,7 +65,7 @@ This plot uses the raw data, but these points could equally have been estimated 
 
 
 
-## *Effects* (margins)
+### *Effects* (margins) {-}
 
 Terms like: *predicted effects*, *margins* or *marginal effects* refer, instead, to the effect of one predictor.
 
@@ -112,7 +112,7 @@ As before, these differences use the raw data, but *could* have been calculated 
 
 
 
-## Continuous predictors
+### Continuous predictors {-}
 
 In the examples above, our data were all categorical, which mean that it was straightforward to identify categories of people for whom we might want to make a prediction (i.e. young men, young women, older men, older women).
 
@@ -182,7 +182,7 @@ We'll see examples of both below.
 
 
 
-## Predicted means and margins using `lm()`
+## Predicted means and margins using `lm()` {-}
 
 The section above details two types of predictions: predictions for means, and predictions for margins (effects). We can use the figure below as a way of visualising the difference:
 
@@ -199,7 +199,7 @@ gridExtra::grid.arrange(means.plot+ggtitle("Means"), margins.plot+ggtitle("Margi
 
 
 
-### Running the model
+### Running the model {-}
 
 Lets say we want to run a linear model  predicts injury severity from gender and a categorical measurement of age (young v.s. old).
 
@@ -227,7 +227,7 @@ anova(injurymodel)
 Having saved the regression model in the variable `injurymodel` we can use this to make predictions for means and estimate marginal effects:
 
 
-### Making predictions for means
+### Making predictions for means {-}
 
 When making predictions, they key question to bear in mind is 'predictions for what?' That is, what values of the predictor variables are we going to use to estimate the outcome?
 
@@ -241,7 +241,7 @@ It goes like this:
 
 
 
-### Step 1: Make a new dataframe
+#### Step 1: Make a new dataframe {-}
 
 
 ```r
@@ -264,7 +264,7 @@ prediction.data
 
 
 
-### Step 2: Make the predictions
+#### Step 2: Make the predictions {-}
 
 The R `predict()` function has two useful arguments:
 
@@ -288,7 +288,7 @@ injury.predictions
 
 
 
-## Making prdictions for margins (*effects* of predictors)
+### Making prdictions for margins (*effects* of predictors) {-}
 
 
 
@@ -353,7 +353,7 @@ mtcars.plus.predictions %>% group_by(vs) %>%
 
 
 
-## Marginal effects
+### Marginal effects  {-}
 
 What is the effect of being black or female on the chance of you getting diabetes?
 
@@ -466,10 +466,10 @@ summary(m2.margins) %>% as.data.frame() %>%
 
 
 
-## With continuous covariates
+## Predictions with continuous covariates {-}
 
 - Run 2 x Continuous Anova
-- Predict at different levels of
+- Predict at different levels of X
 
 
 
@@ -478,18 +478,21 @@ summary(m2.margins) %>% as.data.frame() %>%
 
 
 
+## Visualising interactions {-}
 
-
-
-
-
-
-
-# Visualising interactions from linear models
-
-check this:
+<!-- check this:
   https://strengejacke.wordpress.com/2013/10/31/visual-interpretation-of-interaction-terms-in-linear-models-with-ggplot-rstats/
 
+Also - you can interpret main effect when there are interactions
+
+http://www.theanalysisfactor.com/interpret-main-effects-interaction/
+
+
+
+
+Show them `granova`?
+
+ -->
 
 Steps this page will work through:
 

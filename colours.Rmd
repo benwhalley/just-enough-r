@@ -1,0 +1,33 @@
+---
+title: 'Colours'
+output:
+  bookdown::tufte_html2
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=F)
+
+library(tidyverse)
+library(pander)
+```
+
+
+
+## Named colours in R {- #named-colours}
+
+```{r, results='asis'}
+print.col <- Vectorize(function(col){
+  rgb <- grDevices::col2rgb(col)
+  sprintf("<span style='padding:1em; background-color: rgb(%s, %s, %s);'>&nbsp;</span> %s \n\n", rgb[1], rgb[2], rgb[3], col,  rgb[1], rgb[2], rgb[3])
+})
+
+pandoc.p(print.col(colours()))
+```
+
+
+### ColourBrewer with ggplot {- #color-brewer}
+
+See: http://ggplot2.tidyverse.org/reference/scale_brewer.html
+
+
+

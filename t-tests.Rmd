@@ -17,7 +17,7 @@ panderOptions('keep.trailing.zeros', TRUE)
 ## t-tests {- #t-tests}
 
 
-#### Visualising your data first {-}
+### Visualising your data first {-}
 
 Before you run any tests it's worth plotting your data. 
 
@@ -48,8 +48,7 @@ Layering boxes and bottles can work well too because it combines information abo
 chickwts %>% 
   ggplot(aes(feed, weight)) +
   geom_violin() +
-  geom_boxplot(width=.1) + 
-  xlab("")
+  geom_boxplot(width=.1)
 ```
 
 
@@ -74,14 +73,14 @@ chicks.eating.beans %>%
 
 
 
-#### Running the t-test {-}
+### Running a t-test {-}
 
 Assuming you really do still want to run a null hypothesis test on one or two means, the `t.test()` function performs most common variants, illustrated below.
 
 
 
 
-##### 2 independent groups
+##### 2 independent groups {-}
 
 Assuming  your data are in long format:
 
@@ -103,7 +102,7 @@ with(untidy.chicks, t.test(horsebean, soybean))
 ```
 
 
-##### Equal or unequal variances? {#equal-variances .admonition}
+##### Equal or unequal variances? {- #equal-variances .admonition}
 
 By default R assumes your groups have unequal variances and applies an appropriate correction (you will notice the output labelled 'Welch Two Sample t-test'). 
 
@@ -112,7 +111,7 @@ You can turn this correction off (for example, if you're trying to replcate an a
 
 
 
-##### Paired samples
+##### Paired samples {-}
 
 ```{r}
 a <- rnorm(50, 2.5, 1)
@@ -121,7 +120,7 @@ t.test(a, b, paired=TRUE)
 ```
 
 
-Note that we could also 'melt' the data into long  format and use the `paired=TRUE` argument with a formula:
+Note that we could also ['melt' the data into long format](#wide-to-long) and use the `paired=TRUE` argument with a formula:
 
 ```{r}
 long.form.data <- data_frame(a=a, b=b) %>% 
@@ -132,7 +131,7 @@ with(long.form.data, t.test(value~key, paired=TRUE))
 
 
 
-##### One-sample test 
+##### One-sample test {-}
 
 i.e. comparing sample mean with a specific value:
 

@@ -11,8 +11,9 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 
 
 
+# (PART) Loose ends {-} 
+
+
 # Statistical explanations
 
-
-
-Explain what will be here
+This section contains longer explanations of some of the concepts raised in the 'Doing' section. It is not intended to replace an introductory statistics text; rather, the idea is to provide *just-enough* background to these complex topics to ensure you deal with them in a senstive way in your own work.

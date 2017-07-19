@@ -19,20 +19,21 @@ A dataframe is an object which can store data as you might encounter it in SPSS,
 It's much like a spreadsheet, but with some constraints applied. 
 'Constraints' sound bad, but are helpful here: they make dataframes more structured and predictable to work with:
 
-- Each column is a vector, and so can [only store one type of data](#vectors-and-lists)].
+- Each column is a [vector](#vectors-and-lists), and so can [only store one type of data](#vectors-and-lists)].
 
 - Every column has to be the same length (although missing values are allowed).
 
 - Each column should have a name.
 
 
-Put another way, a dataframe behaves like a *list* of *vectors*, which means we can use a lot of the same rules to access elements within them (more on this below).
+Put another way, a dataframe behaves like a *list* of *vectors*, which means we can use a lot of the same rules to [access elements within them](#access-vector-elements) (more on this below).
 
 
-### Using 'built in' data {- #built-in-data}
+
+#### Using 'built in' data {- #built-in-data}
 
 
-The quickest way to see a dataframe in action is to use one that is built in[^builtin] to R. For example:
+The quickest way to see a dataframe in action is to use one that is [built in to R](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html). For example:
 
 
 ```r
@@ -48,6 +49,7 @@ head(airquality)
 
 Or
 
+
 ```r
 head(mtcars)
 ##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
@@ -61,7 +63,7 @@ head(mtcars)
 
 In both these examples the datasets (`airquality` and `mtcars`) are already loaded and available to be used in the `head()` function.
 
-[To find a list of all the built in datasets you can type `help(datasets)`. Familiarise yourself with some of the other included datasets, e.g. `datasets::attitude`. Watch out that not all the included dataset as re *dataframes*: some are just vectors of observations (e.g. the `airmiles` data) and some are 'time-series', (e.g. the `co2` data)]{.exercise}
+[To find a list of all the built in datasets you can type `help(datasets)` or see <https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html>. Familiarise yourself with some of the other included datasets, e.g. `datasets::attitude`. Watch out that not all the included datasets are *dataframes*: Some are just vectors of observations (e.g. the `airmiles` data) and some are 'time-series', (e.g. the `co2` data)]{.exercise}
 
 
 
@@ -69,7 +71,7 @@ In both these examples the datasets (`airquality` and `mtcars`) are already load
 
 As we've already seen, using `print(df)` within an RMarkdown document creates a nice interactive table you can use to look at your data.
 
-However you won't want to print your whole data file when you Knit your RMarkdown document. The `head` function can be useful if you just want to see a few rows:
+However you won't want to print your whole data file when you Knit your RMarkdown document. The `head` function can be useful if you just want to show a few rows:
 
 
 ```r
@@ -84,7 +86,7 @@ head(mtcars)
 ```
 
 
-Or we can use glimpse()` function from the `dplyr::` package (see the [section on loading and using packages](#packages)) for a different view of the first few rows of the `mtcars` data. This flips the dataframe so the variables are listed in the first column of the output:
+Or we can use `glimpse()` function from the `dplyr::` package (see the [section on loading and using packages](#packages)) for a different view of the first few rows of the `mtcars` data. This flips the dataframe so the variables are listed in the first column of the output:
 
 
 ```r
@@ -106,31 +108,32 @@ glimpse(mtcars)
 
 
 
-You can use the `pander::` package to format tables nicely, for when you Knit a document to HTML, Word or PDF. For example:
+You can use the `pander()` function (from the `pander::` package) to format tables nicely, for when you Knit a document to HTML, Word or PDF. For example:
 
 
 ```r
-pander::pandoc.table(head(airquality), 
-                     caption="Tables always need a caption.")
-## 
-## ---------------------------------------------
-##  Ozone   Solar.R   Wind   Temp   Month   Day 
-## ------- --------- ------ ------ ------- -----
-##   41       190     7.4     67      5      1  
-## 
-##   36       118      8      72      5      2  
-## 
-##   12       149     12.6    74      5      3  
-## 
-##   18       313     11.5    62      5      4  
-## 
-##   NA       NA      14.3    56      5      5  
-## 
-##   28       NA      14.9    66      5      6  
-## ---------------------------------------------
-## 
-## Table: Tables always need a caption.
+library(pander)
+pander(head(airquality), caption="Tables always need a caption.")
 ```
+
+
+---------------------------------------------
+ Ozone   Solar.R   Wind   Temp   Month   Day 
+------- --------- ------ ------ ------- -----
+  41       190     7.4     67      5      1  
+
+  36       118      8      72      5      2  
+
+  12       149     12.6    74      5      3  
+
+  18       313     11.5    62      5      4  
+
+  NA       NA      14.3    56      5      5  
+
+  28       NA      14.9    66      5      6  
+---------------------------------------------
+
+Table: Tables always need a caption.
 
 
 See the section on [sharing and publishing for more ways to format and present tables](#sharing-and-publication).
@@ -164,38 +167,52 @@ Or the more compact and useful output from `describe()` which is in the `pysch` 
 
 
 ```r
-psych::describe(airquality)
-##         vars   n   mean    sd median trimmed   mad  min   max range  skew
-## Ozone      1 116  42.13 32.99   31.5   37.80 25.95  1.0 168.0   167  1.21
-## Solar.R    2 146 185.93 90.06  205.0  190.34 98.59  7.0 334.0   327 -0.42
-## Wind       3 153   9.96  3.52    9.7    9.87  3.41  1.7  20.7    19  0.34
-## Temp       4 153  77.88  9.47   79.0   78.28  8.90 56.0  97.0    41 -0.37
-## Month      5 153   6.99  1.42    7.0    6.99  1.48  5.0   9.0     4  0.00
-## Day        6 153  15.80  8.86   16.0   15.80 11.86  1.0  31.0    30  0.00
-##         kurtosis   se
-## Ozone       1.11 3.06
-## Solar.R    -1.00 7.45
-## Wind        0.03 0.28
-## Temp       -0.46 0.77
-## Month      -1.32 0.11
-## Day        -1.22 0.72
+# fast = T just skips some of the available stats (e.g. kurtosis)
+psych::describe(airquality, fast = T) %>% 
+  pander(caption="Summary statistics generated by the `psych::describe()` function.")
 ```
 
 
-There are also some helpful plotting functions which accept a dataframe:
+----------------------------------------------------------------
+   &nbsp;      vars   n   mean   sd    min   max   range    se  
+------------- ------ --- ------ ----- ----- ----- ------- ------
+  **Ozone**     1    116 42.13  32.99   1    168    167   3.063 
+
+ **Solar.R**    2    146 185.9  90.06   7    334    327   7.453 
+
+  **Wind**      3    153 9.958  3.523  1.7  20.7    19    0.2848
+
+  **Temp**      4    153 77.88  9.465  56    97     41    0.7652
+
+  **Month**     5    153 6.993  1.417   5     9      4    0.1145
+
+   **Day**      6    153  15.8  8.865   1    31     30    0.7167
+----------------------------------------------------------------
+
+Table: Summary statistics generated by the `psych::describe()` function.
+
+
+There are also some helpful plotting functions which accept a whole dataframe:
 
 
 ```r
 boxplot(airquality)
 ```
 
-<img src="datasets_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<div class="figure">
+<img src="datasets_files/figure-html/unnamed-chunk-9-1.png" alt="Box plot of all variables in a dataset." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-9)Box plot of all variables in a dataset.</p>
+</div>
+
 
 ```r
 psych::cor.plot(airquality)
 ```
 
-<img src="datasets_files/figure-html/unnamed-chunk-9-2.png" width="672" />
+<div class="figure">
+<img src="datasets_files/figure-html/unnamed-chunk-10-1.png" alt="Correlation heatmap of all variables in a dataset. Colours indicate size of the correlation between pairs of variables." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-10)Correlation heatmap of all variables in a dataset. Colours indicate size of the correlation between pairs of variables.</p>
+</div>
 
 These plots might not be worth including in a final write-up, but are very useful when exploring your data.
 
@@ -203,7 +220,6 @@ These plots might not be worth including in a final write-up, but are very usefu
 
 
 ## Importing and exporting data {- #importing-data}
-
 
 If you have data outside of R, *the simplest way to import it is to first save it as a comma or tab-separated text file*, normally with the file extension `.csv` or `.txt`^[This is easy to achieve in Excel and most other stats packages using the `Save As...` menu item].
 
@@ -256,7 +272,7 @@ Once it's loaded, you can use this new dataset like any other:
 pairs(angry.moods)
 ```
 
-<img src="datasets_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="datasets_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 
 

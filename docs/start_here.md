@@ -25,7 +25,6 @@ One of the biggest adjustments people need to make when moving away from SPSS or
 
 
 
-
 ### Using RMarkdown to record and share work {- #rmarkdown}
 
 This it might seem an odd place to start: we haven't got anything to share yet! But the RStudio editor (see below) includes important features which help us record and organise our work, and share it with colleagues. For many people this ability to keep a detailed record of your work, and revisit and review it later, turns out to be *the* major advantages of R over traditional statistics packages.
@@ -49,7 +48,7 @@ To include R code within a document we write 3 backticks (`` ``` ``), followed b
     ```{r}
     2 + 2
     ```
-     
+
 When a document including this chunk is run or 'knitted', the final result will include the the line `2+2` followed by the number `4` on the next line. This means we can use RMarkdown to 'show our workings': our analysis can be interleaved with narrative text to explain or interpret the calculations.
 
 You can see how this works in practice in the next section.
@@ -57,20 +56,21 @@ You can see how this works in practice in the next section.
 
 ## RStudio {- #rstudio}
 
-RStudio is a text editor which has been customised to make working with R easy. It can be installed on your own computer, or you can login to a shared RStudio server^[e.g. one run by your university.] from a web browser. Either way the interface is largely the same.  
+RStudio is a text editor which has been customised to make working with R easy. It can be installed on your own computer, or you can login to a shared RStudio server (for example, one run by your university) from a web browser. Either way the interface is largely the same.  
 
 
-
-![](media/rstudio-mainwindow.png)<!-- -->
+<img src="media/rstudio-mainwindow.png" width="1495" />
 
 
 The figure above shows the main RStudio interface, comprising:
 
-1. The main R-script or RMarkdown editor window
-1. The R console, into which you can type R commands, and see output from commands run in the script editor.
-1. The 'environment' panel, which lists all the variables you have defined and currently available to use.
-1. The files and help panel. Within this the files tab enables you to open files stored on the server, or in the current project on your disk.
+1. The main R-script or RMarkdown editor window. This is where you write commands, which can then be executed (to run the current line type ctrl-Enter or cmd-Enter on a Mac).
 
+1. The R console, into which you can type R commands directly, and see the output of commands run in the script editor.
+
+1. The 'environment' panel, which lists all the variables you have defined and currently available to use.
+
+1. The files and help panel. Within this panel the 'files' tab enables you to open files stored on the server, in the current project, or elsewhere on your hard drive.
 
 
 
@@ -127,7 +127,7 @@ OK - so that's it for this video. Just quickly before I go though, it's worth kn
 -->
 
 
-The video^[Note: this isn't the final version.. it will be more polished!]:
+The video:
 
 - Shows you how to type commands into the Console and view the results.
 - Run a plotting function, and see the result.
@@ -148,19 +148,30 @@ Once you have watched the video:
 
 ### First commands {-}
 
-You can type R commands directly into the console and see the result there too, but you should make a habit of working in an RMarkdown file. This keeps a record of everything you try, and makes it easy to edit/amend commands which don't work as you expect.
+You can type R commands directly into the console and see the result there, but you should make a habit of working in an RMarkdown file. This keeps a record of everything you try, and makes it easy to edit/amend commands which don't work as you expect.
 
-Now would be a good time to open and RMarkdown document to see how it works. A good place to start would be to open the source to this document. The best way to do this is to download the source code for *this* project, and then open the file `start_here.Rmd`.
+Now would be a good time to open an RMarkdown document to see how it works. A good place to start would be to open the source to this document. The best way to do this is to download the source code for the 'Just Enough R' project, and then open the file `start_here.Rmd`.
+
+
+#### {- .exercise}
 
 The source for this RMarkdown file is available here: <https://raw.githubusercontent.com/benwhalley/just-enough-r/master/start_here.Rmd>.
 
 Or you can download the whole project here: <https://github.com/benwhalley/just-enough-r/archive/master.zip>. This link downloads a 'zip' file, which is a compressed folder containing all the files in the project. To 'unzip' it on Mac or Windows just double-click the file in the Finder or Windows Explorer.
 
+
+
+#### {-}
+
 To run code in the RStudio interface put your cursor on a line within an R Block (or select the code you want to run), and press `Ctrl-Enter`. The result will appear below the code block.
 
 The command in the R block below prints (shows on screen) the first few rows of the `mtcars` dataset, which is built in to R as an example. 
 
-Place your cursor somewhere in the line the command is on and run it by typing `Ctrl-Enter`:
+Place your cursor somewhere in the line the command is on and run it by typing `Ctrl-Enter`, shown in this brief video:
+
+
+<iframe src="https://player.vimeo.com/video/225968925" width="640" height="480" frameborder="0"></iframe>
+<p><a href="https://vimeo.com/225968925">Create and R block in RMarkdown, then run some simple commands.</a> from <a href="https://vimeo.com/user67812521">Ben Whalley</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 
 
 
@@ -174,6 +185,7 @@ head(mtcars)
 ## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
 ## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
 ```
+
 
 If you are reading this from within RStudio, running `head(mtcars)` will have included an interactive table in the document, which you can use this to view the `mtcars` dataset. If you are still reading the compiled html or pdf document you will see a table containing the same data, included within the body of the document.
 
@@ -235,7 +247,7 @@ As you will see below, we can give anything a label by assigning it to a variabl
 
 
 
-# Vectors and lists {#vectors-and-lists}
+### Vectors and lists {- #vectors-and-lists}
 
 When working with data, we often have lists of 'things': for example a list of measurements we have made.
 
@@ -246,7 +258,7 @@ When working with data, we often have lists of 'things': for example a list of m
 
 
 
-## Vectors {- #vector}
+#### Vectors {- #vector}
 
 We can create a vector of numbers and display it like this:
 
@@ -285,7 +297,7 @@ Try creating your own vector of numbers in a new code block below^[i.e. edit the
 
 
 
-### Accessing elements within vectors {-}
+#### Accessing elements within vectors {- #access-vector-elements}
 
 Once we have created a vector, we often want to access the individual elements again. We do this based on their *position*. 
 
@@ -308,7 +320,7 @@ my.vector[1]
 Here, the square brackets specify a *subset* of the vector we want - in this case, just the first element.
 
 
-### Selecting more than one element in a vector {-}
+#### Selecting more than one element in a vector {-}
 
 A neat feature of subsetting is that we can grab more than one element at a time. 
 
@@ -339,7 +351,7 @@ first.two.elements
 <!-- If you want to know more see <http://www.statmethods.net/management/subset.html> -->
 
 
-### Processing vectors {-}
+#### Processing vectors {-}
 
 Many of R's most useful functions process *vectors of numbers* in some way. For example, if we want to calculate the average of our vector of heights we just type:
 
@@ -415,7 +427,7 @@ We'll cover lots more plotting and visualisation later on.
 
 
 
-### Processing vectors to make new vectors {-}
+#### Processing vectors to make new vectors {-}
 
 So far we've seen R functions which process a vector of numbers and produce a single number, a new vector of a different length (like `quantile` or `fivenum`), or some other object (like `hist` which makes a plot).
 However many other functions accept a single input, do something to it, and return a single processed value. 
@@ -446,6 +458,9 @@ heights / 100
 ##  [1] 2.03 1.48 1.56 1.58 1.67 1.62 1.72 1.64 1.72 1.87 1.34 1.82 1.75
 ```
 
+
+#### {- #paste}
+
 This trick also works with other functions like `paste`, which combines the inputs you send it to produce an alphanumeric string:
 
 
@@ -469,7 +484,20 @@ paste(bottles, "green bottles hanging on the wall")
 In other programming languages we might have had to write a 'loop' to create each line of the song, but R lets us write short statements to summarise *what* needs to be done; we don't need to worry worrying about *how* it gets done.
 
 
-### Making up data (new vectors) {-}
+#### {- #paste0 .tip}
+
+The `paste0` function does much the same, but leaves no spaces in the combined strings, which can be useful:
+
+
+```r
+paste0("N=", 1:10)
+##  [1] "N=1"  "N=2"  "N=3"  "N=4"  "N=5"  "N=6"  "N=7"  "N=8"  "N=9"  "N=10"
+```
+
+
+
+
+#### Making up data (new vectors) {-}
 
 Sometimes you'll need to create vectors containing regular sequences or randomly selected numbers.
 
@@ -498,21 +526,21 @@ We can also use random number-generating functions built into R to create vector
 ```r
 # 10 uniformly distributed random numbers between 0 and 1
 runif(10)
-##  [1] 0.1859517 0.1403806 0.6693456 0.8472666 0.2309495 0.2300545 0.8666919
-##  [8] 0.4884143 0.9654400 0.4645153
+##  [1] 0.24286994 0.17523228 0.05899854 0.36021067 0.23732466 0.49818123
+##  [7] 0.15009582 0.87234990 0.06308135 0.16701757
 
 # 1,000 uniformly distributed random numbers between 1 and 100
 my.numbers <- runif(1000, 1, 10)
 
 # 10 random-normal numbers with mean 10 and SD=1
 rnorm(10, mean=10)
-##  [1]  8.859302  9.779185 10.357482 10.937483  8.555067 10.594929 10.930529
-##  [8]  8.958609  9.831223  8.265265
+##  [1]  9.123508  9.803758  8.528340  8.667840 11.115023  9.529525  8.384174
+##  [8] 10.208620  9.170439 11.156358
 
 # 10 random-normal numbers with mean 10 and SD=5
 rnorm(10, 10, 5)
-##  [1] 10.8100825  8.9958930  2.7580386  7.4021015  7.5288401  0.1225604
-##  [7]  8.4658622  8.2993016 16.7534052  4.5453275
+##  [1] 10.449631  8.899558  8.970688 24.198560  7.328819 15.203273 12.129459
+##  [8]  9.480256  6.589127 11.159354
 ```
 
 We can then use these numbers in our code, for example plotting them:
@@ -523,11 +551,11 @@ random.numbers <- rnorm(10000)
 hist(random.numbers)
 ```
 
-<img src="start_here_files/figure-html/unnamed-chunk-27-1.png" width="672" />
+<img src="start_here_files/figure-html/unnamed-chunk-28-1.png" width="672" />
 
 
 
-### Useful functions to learn now {- }
+#### Useful functions to learn now {- }
 
 There are *thousands* of functions built into R. Below are a few examples which are likely to be useful as you work with your data:
 
@@ -567,9 +595,9 @@ ages <- round(rnorm(10, mean=40, sd=10))
 
 # get the rank order of elements (i.e. what their positions would be if the vector was sorted)
 ages
-##  [1] 52 36 49 48 42 53 35 38 52 28
+##  [1] 50 57 45 38 39 42 52 40 38 40
 rank(ages, ties.method="first")
-##  [1]  8  3  7  6  5 10  2  4  9  1
+##  [1]  8 10  7  1  3  6  9  4  2  5
 ```
 
 
@@ -578,10 +606,10 @@ rank(ages, ties.method="first")
 labels <- paste("Position:", rank(ages, ties.method="first"))
 names(ages) <- labels
 ages
-##  Position: 8  Position: 3  Position: 7  Position: 6  Position: 5 
-##           52           36           49           48           42 
-## Position: 10  Position: 2  Position: 4  Position: 9  Position: 1 
-##           53           35           38           52           28
+##  Position: 8 Position: 10  Position: 7  Position: 1  Position: 3 
+##           50           57           45           38           39 
+##  Position: 6  Position: 9  Position: 4  Position: 2  Position: 5 
+##           42           52           40           38           40
 ```
 
 
@@ -595,7 +623,7 @@ Try and experiment with each of these functions. Check the output against what y
 
 
 
-## Lists {- #lists}
+### Lists {- #lists}
 
 Try running the code below:
 
@@ -682,7 +710,7 @@ my.party$drinks[1]
 ```
 
 
-###  {- .exercise}
+####  {- .exercise}
 
 1. Create a vector containing 3 numbers then:
 
@@ -704,13 +732,13 @@ sqrt(1:10) * 10
 
 
 
-### {- .exercise}
+#### {- .exercise}
 
 Extended questions:
 
-4. What is the average of the 9 times table, up to and including 9 x 1000? 
+- What is the average of the 9 times table, up to and including 9 x 1000? 
 
-5. Use the `paste` and `c(...)` functions to create a vector which contains the sequence "1 elephant", "2 elephants", ...,  "1000 elephants". 
+- Use the `paste` and `c(...)` functions to create a vector which contains the sequence "1 elephant", "2 elephants", ...,  "1000 elephants". 
 
 
 

@@ -35,7 +35,7 @@ We are going to use R the same way we use any other statistics software: To chec
 
 
 
-### Part 1: 'Must read' {-}
+#### Part 1: 'Must read' {-}
 
 Part 1 is meant to be read from beginning to end by those starting from scratch.
 
@@ -48,7 +48,7 @@ Part 1 is meant to be read from beginning to end by those starting from scratch.
 
 
 
-### Part 2: Nice to know {-}
+#### Part 2: Nice to know {-}
 
 Part 2 can be read sequentially, but the chapters are also designed to work as standalone guides for specific techniques. 
 
@@ -80,7 +80,7 @@ Part 2 can be read sequentially, but the chapters are also designed to work as s
 - Simulation
 
 
-### Part 3: Statistical explanations {-}
+#### Part 3: Statistical explanations {-}
 
 The main guide (mostly) assumes you understand the statistical principles which underpin the models you are running. These sections clarify some important or often-confused points.
 
@@ -89,7 +89,7 @@ The main guide (mostly) assumes you understand the statistical principles which 
 
 
 
-### Part 4: Loose ends {-}
+#### Part 4: Loose ends {-}
 
 Part 4 should be used interactively to answer questions that arise along the way.  
 
@@ -102,7 +102,8 @@ Some of the content here is not specific to R, but may be useful in interpreting
 - [Automatic APA formatting](#apa-output)
 - [Common problems and toubleshooting](#troubles)
 
-### Part 5: Worked examples {-}
+
+#### Part 5: Worked examples {-}
 
 - A 2x2 quasi-experimental design, in which age and gender are covariates of interest.
 - An applied experimental design comparing 2 treatments with multiple outcomes and followup times.
@@ -114,7 +115,7 @@ Some of the content here is not specific to R, but may be useful in interpreting
 
 
 
-## A warning {-}
+### A warning {-}
 
 This guide is extremely opinionated. 
 
@@ -127,7 +128,7 @@ The guide also assumes you are using the [RStudio editor](#rstudio) and working 
 
 
 
-## License {-}
+### License {-}
 
 These documents are licensed under the [CC BY-SA licence](https://creativecommons.org/licenses/by-sa/4.0/).
 

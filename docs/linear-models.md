@@ -183,7 +183,6 @@ But before you do too much with Anova in R [read this section](anova.html).
 
 
 
-
 #### Other formula shortcuts {-}
 
 In addition to the `+` symbol, we can use other shortcuts to create linear models.
@@ -197,18 +196,90 @@ Finally, it's good to know that other functions can be used within R formulas to
 The formula syntax is very powerful, and the above only shows the basics, but you can read the `formulae` help pages in RStudio for more details.
 
 
-As an exercise, run the following models using the mtcars dataset:
+##### {- .exercise}
+
+Run the following models using the mtcars dataset:
 
 - With `mpg` as the outcome, and with `cyl` and `hp` as predictors
+
 - As above, but adding the interaction of `cyl` and `hp`.
+
 - Repeat the model above, but write the formula a different way (make the formula either more or less explicit, but retaining the same predictors in the model).
+
+
+
+
+
+
+## Factors and variable codings {-}
+
+
+#### {- #factors-vs-linear-inputs}
+
+If you store categorical data as numbers (e.g. groups `1`, `2`, `3` ...) it's important to make sure your predictors are entered correctly into your models.
+
+In general, R works in a 'regressiony' way and will assume variables in a formula are linear predictors. So, a `group` variable coded `1`...`4` will be entered as a single parameter where 4 is considered twice as large as 2, etc.
+
+See below for example. In the first model `cyl` is entered as a 'linear slope'; in the second each value of `cyl` (4,5, or 6) is treated as a separate category. The predictions from each model could be very different:
+
+
+```r
+linear.model <- lm(mpg ~ cyl, data=mtcars)
+categorical.model <- lm(mpg ~ factor(cyl), data=mtcars)
+```
+
+In the case of different experimental groups what you would normally want is for `group` to be coded and entered as a number of categorical parameters in your model. The most common way of doing this is to use 'dummy coding', and this is what R will implement by default for [character or factor variables](#character-and-factor).
+
+To make sure your categorical variables are entered into your model as categories (and not a slope) you can either:
+
+- Convert the variable to a character or factor type in the dataframe or
+- Specify that the variable is a factor when you run the model
+
+For example, here we specify `cyl` is a factor within the model formula:
+
+
+```r
+lm(mpg ~ factor(cyl), data=mtcars)
+## 
+## Call:
+## lm(formula = mpg ~ factor(cyl), data = mtcars)
+## 
+## Coefficients:
+##  (Intercept)  factor(cyl)6  factor(cyl)8  
+##       26.664        -6.921       -11.564
+```
+
+
+Whereas here we convert to a factor in the original dataset:
+
+
+```r
+mtcars$cyl.factor <- factor(mtcars$cyl)
+lm(mpg ~ cyl.factor, data=mtcars)
+## 
+## Call:
+## lm(formula = mpg ~ cyl.factor, data = mtcars)
+## 
+## Coefficients:
+## (Intercept)  cyl.factor6  cyl.factor8  
+##      26.664       -6.921      -11.564
+```
+
+
+[Neither option is universally better, but if you have variables which are *definitely* factors (i.e. should never be used as slopes) it's probably better to convert them in the original dataframe, before you start modelling]{.admonition}
+
+
+
+
+
+
 
 
 
 ## Model specification {- #parameterisation}
 
-
-It's helpful to think about regression and other statistical models as if they were machines - perhaps looms in a cloth factory. We the machines raw thread, and they busy themselves producing the finished cloth. The nature of the finished cloth is dependent on two factors: the raw material we feed it, and the setup and configuration of the machine itself. 
+It's helpful to think about regression and other statistical models as if they were machines that do work for us --- perhaps looms in a cloth factory. 
+We feed the machines raw materials, and they busy themselves producing the finished cloth. The nature of the finished cloth is dependent on two factors: the raw material we feed it, and the setup and configuration of the machine itself. 
 
 In regression (and Anova) the same is true: Our finished results are the parameter estimates the model weaves from our raw data. The pattern we see depends on the configuration of the machine, and it's important to realise the same data can provide very different outputs depending on the setup of the machine.
 
@@ -302,8 +373,8 @@ aurora.image %>%
 ```
 
 <div class="figure">
-<img src="linear-models_files/figure-html/unnamed-chunk-10-1.png" alt="Plot of the intensity of light in the single pixel slice from the Aurora image. Intensity of 1 corresponds to white, and 0 to black in the original image." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-10)Plot of the intensity of light in the single pixel slice from the Aurora image. Intensity of 1 corresponds to white, and 0 to black in the original image.</p>
+<img src="linear-models_files/figure-html/unnamed-chunk-13-1.png" alt="Plot of the intensity of light in the single pixel slice from the Aurora image. Intensity of 1 corresponds to white, and 0 to black in the original image." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-13)Plot of the intensity of light in the single pixel slice from the Aurora image. Intensity of 1 corresponds to white, and 0 to black in the original image.</p>
 </div>
 
 
@@ -328,7 +399,7 @@ aurora.image %>%
 ## be dropped
 ```
 
-<img src="linear-models_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="linear-models_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 As we can see, our predictions are pretty terrible, because the linear model only allows for a simple slope over the range of `x`.
 
@@ -363,7 +434,7 @@ aurora.image %>%
 ## be dropped
 ```
 
-<img src="linear-models_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="linear-models_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 That's somewhat better, although we can still see that the extremes of our observed data are not well predicted by either the linear model (the flat line) or the chunked model.
 
@@ -391,7 +462,7 @@ aurora.image %>%
 ## be dropped
 ```
 
-<img src="linear-models_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="linear-models_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 
 Or we could increase the number of parameters in our curve to allow a tighter fit with the raw data and plot all the models together:
@@ -416,7 +487,7 @@ all.predictions %>%
   geom_point(size=.5)
 ```
 
-<img src="linear-models_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="linear-models_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
 We can see that this curved model is a better approximation to the raw data than our 'chunked' model in some places (e.g. x = 100), but worse in others (e.g. x = 625). Overall though, the R^2^ is much higher for the curves model here:
 
@@ -440,16 +511,13 @@ length(coef(aurora.curve))
 ## [1] 8
 ```
 
-
 [Try to plot a curve that fits even more closely to the data. There are 1200 pixels in our original image. How many parameters would you need for the model to fit the image exactly? What happens in practice if you try and fit this model?]{.exercise}
-
-
 
 For fun, we can even plot our data back in image form and see which is closest to matching the original:
 
-<img src="linear-models_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+<img src="linear-models_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
-[There is no 'right answer' here: each model has pros and cons. You need to think about how you want to simplify your data, and set up your models appropriately.]{.admonition}
+[There is no 'right answer' here: each model has pros and cons. You need to think about what the purpose of your model is, how you want to simplify your data, and then set up your models appropriately.]{.admonition}
 
 
 
@@ -542,7 +610,7 @@ We can plot these data to show the effect of age, and gender:
 ggplot(incomes, aes(age, income, group=gender, color=gender)) + geom_point() + geom_smooth(se=F, method="lm")
 ```
 
-<img src="linear-models_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+<img src="linear-models_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 Older people earn more than younger people, and men earn slighly more than women (in this simulated dataset), but this gender gap doesn't change with age.
 

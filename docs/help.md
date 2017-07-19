@@ -15,3 +15,19 @@ To access a help file for a function, just type `?command` in the console, or ru
 You can also type `CRTL-Shift-H` while your cursor is over any R function in the RStudio interface.
 
 It's fair to say R documentation isn't always written for beginners. However the 'examples' sections are usually quite informative: you can normally see this by scrolling right to the end of the help file.
+
+
+
+
+
+
+
+### Finding the backtick on your keyboard {- #backtick-location}
+
+
+The backtick ``` symbol is unfamiliar to some readers. Here's where it is:
+
+
+![On windows](media/backtick-windows-uk.png)
+
+![On a Mac](media/backtick-mac-uk.png)

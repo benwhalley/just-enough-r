@@ -11,16 +11,199 @@ library(lmerTest)
 ```
 
 
-## Multiple comparisons {#multiple-comparisons}
-
-XXX THIS JUST copied from previous anova section. Needs more on problem of multiple comparisons
+## Multiple comparisons {- #multiple-comparisons}
 
 
-### Post hoc (pairwise) tests {-}
 
-As in the Anova cookbook, we use a dataset from Howell (REF), chapter 13 which recorded `Recall` among young v.s. older adults (`Age`) for each of 5 conditions:
+People get very confused about multiple comparisons and 'doing things right™'. There are many different tests and procedures, and thousands of pages of tutorials and guides each of which recommends a slightly different approach. Textbooks typically describe the tests themselves in detail, and list the assumptions they make, but it sometimes feels like nobody will give a straight answer. 
+
+The inconsistency arises because different researchers have different priorities. It will help to re-address what a p value is, and what it is for.
+
+
+### *p* values and 'false discoveries'
+
+In frequentist statistics, *p* values are defined as *the probability of obtaining a test statistic at least as large as that observed, if the null hypothesis is true. That is, it's the probability that the data we have will mislead us into thinking there is a difference, if the effect we test is, in fact, zero.
+
+Let's pretend we are creative researchers and, over the course of our career, we will develop 100 hypotheses, each of which we test in an experiment, represented by squares in the plot below:
 
 ```{r}
+x <- c(experiments=100)
+waffle::waffle(x, colors=c("lightgrey"))
+```
+
+We are concientious and use [sample size calculations](#power) for our studies, setting our desired power = .8, and use *p* = .05 as our criterion for rejecting the null hypotheses. As is common, we report tests which reject the null hypothesis as if our predictions had been supported and the alternative hypotheses were true.
+
+Let's be generous and say that, in reality, 50% of our hypotheses are true (the other 50% are nice ideas, but don't pan out). Because we set our power to be .8 in our sample size calculation, this means that over the course of our career we will detect around 40 'true' effects, and publish them. These are shown in blue in the figure below:
+
+
+```{r, echo=F}
+waffle::waffle(c(40, 60), colors=c("blue", "lightgrey")) + guides(fill=F)
+```
+
+Because we set our alpha level to 0.05, we will also have some false positives, shown in red:
+
+
+```{r, echo=F}
+waffle::waffle(c(40, 5, 55), colors=c("blue", "red", "lightgrey")) + guides(fill=F)
+```
+
+But what that means is that *for the effects we publish as supporting our hypotheses* (i.e. the blue and red squares) then we will be making false claims 5/40 = 12.5% of the time. This is obviously much higher than the nominal alpha level implies. What's more, if we're not such hotshot theorists and only 20% of our hypotheses are in fact true then we will make even more false claims: 5/20 = 25%.
+
+
+### Multiple tests on the same data {-}
+
+Another problem arises when we run multiple statistical tests on the same data. 
+
+The most common case is that we have multiple experimental conditions and want to test whether any of the differences between them are significant. If we had experimental 3 groups, then there are 3 possible comparisons between them, for example (A-B, A-C, B-C). This can be compounded if we have multiple outcome measurements (for example, measuring depression *and* anxiety in a clincal trial; see @feise2002multiple).
+
+This works like a lucky dip or lottery: if you buy more tickets you have a larger change of winning a prize. In this case, with three comparisons between the groups (tickets) we have a 15% chance of winning a prize, rather than the 5% we intended.
+
+Assuming each of our 100 experiments allows for 3 tests, any of which would be 'interesting' if significant (and we would therefore publish them), then our plot looks like this:
+
+
+```{r, echo=F}
+x <- c(40, 15, 100-55)
+waffle::waffle(x, colors=c("blue", "red", "lightgrey")) + guides(fill=F)
+```
+
+And our 'false discovery rate' (at the level of our published papers) is now over one third: 15/40 = 37.5%.
+
+
+##### False discovery rates for single experiments {-}
+
+We can also think about a false discovery rate for findings presented within a particular paper, or set of analyses. Imagine we have a 2x4 factorial design, and so we have 8 experimental groups, and 28 possible pairwise combinations:
+
+```{r, echo=F, results="asis"}
+expand.grid(A=1:2, B=1:4) %>% 
+  pandoc.table(caption="Cells in the 2x4 design")
+
+df <- combn(1:8, 2) %>% t %>%  
+  as.data.frame %>% 
+  rownames_to_column(var="Comparison")
+
+snip.middle <- function(df, n=6) {
+  setdots <- function(x) NA
+  mid <- df[1,] %>% mutate_all(funs(setdots))
+  bind_rows(head(df, n=n), mid, tail(df, n=n))
+}
+
+combn(1:8, 2) %>% t %>%  
+  as.data.frame %>% 
+  rownames_to_column(var="Comparison") %>% 
+  rename(Cell.1=V1, Cell.2=V2) %>% 
+  snip.middle(n=3) %>% 
+  pandoc.table(caption="Pairwise comparisons", missing="...") 
+
+```
+
+Assuming there are 'real' differences between one third of these pairings, then we have the same problem as we did when considering all the experiments in a researchers' career: Using *p* < .05 as our criterion, and power of .8 then we will report around 9 significant differences, but 1 or 2 of these will false discoveries (16%).
+
+```{r, echo=F, include=F}
+disc <- 28 * .8 * .333
+fa <- 28 * .05
+fdr <- fa/(disc+fa)
+fd <- (disc+fa) * fdr
+
+disc + fa
+fd
+fdr
+```
+
+
+
+
+### What to do about it? {-}
+
+
+There are two decisions you need to make: First, which technique do you want to use to mitigate the risks of multiple comparisons? Second, what is the 'family' of tests you are going to apply this to?
+
+
+[If you find the whole language around null hypothesis testing and p values unhelpful, and the detail of multiple comparison adjustment confusing, there is another way: Multiple comparison problems are largely a non-issue for Bayesian analyses [@gelman2012we], and recent developments in the software make simple models like Anova and regression [easy to implement in a Bayesian framework in R](#bayes-mcmc).]{.explainer}
+
+
+
+#### Which technique? {-}
+
+Inevitably, it depends! 
+
+- If your main worry is about ever making a type 1 error then you need to control the familywise error rate. The Bonferroni or Tukey correction are likely the best solutions (see details below). Both have the disadvantage of increasing the type 2 error rate: you will falsely accept the null, even when your alternative hypothesis is correct more often.
+
+- If your main concern is about the number of 'false discoveries' you make, and it's import to you to avoid rejecting 'good' hypotheses, then you need to control the false discovery rate. The Benjamini and Hochberg method, often abbreviated as BH or FDR correction, is what you need.
+
+
+Principled arguments can be made for both approaches, and which you pick will depend on which concerns are most pressing to you, and what is 'normal' in your field.
+
+[It's worth noting that in specific fields (for example neuroscience, where huge numbers of comparisons must be made between voxels or regions in brain imaging studies) more sophisticated methods to control for multiple comparisons are often commonplace and expected [@nichols2003controlling]. This guide only deals with some of the simpler but common cases.]{.explainer}
+
+
+
+#### How big is the family? {-}
+
+![](media/large-family.jpg)
+
+
+Whichever technique we employ we do need to determine how many tests we want to correct for having run; i.e. what size the 'family' of tests is. Unfortuntately, deciding which set of tests constitutes a 'family' is an unresolved problem, and reasonable people will come up with different solutions. As @feise2002multiple put it:
+
+> It is unclear how wide the operative term "family" should be [...] Does "family" include tests that were performed, but not published? Does it include a meta-analysis upon those tests? Should future papers on the same data set be accounted for in the first publication? Should each researcher have a career-wise adjusted p-value, or should there be a discipline-wise adjusted p-value? Should we publish an issue-wise adjusted p-value and a year-end-journal-wise adjusted p-value? Should our studies examine only one association at a time, thereby wasting valuable resources? No statistical theory provides answers for these practical issues, because it is impossible to formally account for an infinite number of potential inferences.
+
+The 'right' answer, then, vary from case to case, and local conventions in particular disciplines will dictate what is normal and expected by supervisors and reviewers. However, there are a few common cases for which we can make some recommendations on what might constitue 'good practice'. We do not claim that these are the 'correct' answers, but if you deviate from these recommendations it would be worth having a reasonable justification to hand!
+
+
+
+##### Multiple outcome variables {-}
+
+In a clinical trial or other applied study you might want to measure more than one variable to detect changes across a variety of domains (e.g. both depression and anxiety).
+
+Although no firm consensus exists, it is common practice to:
+
+- Analyse multiple outcomes without correction (and indicate this in the text)
+- Designate one outcome from the study to be 'primary', and report this both in pre-trial protocols and reports of the results.
+
+See @feise2002multiple for more details.
+
+
+
+
+#### Multiple 'timepoints' for the outcome {-}
+
+Another common case is where the same outcome variable will be measured on multiple occasions to track progress over time. For example, an RCT might measure outcome at treatment end, and again 12 months later.
+
+In the cases where there are only a few measurements of outcome made then you could choose between:
+
+1. Bonferroni correction of *p* values for the between-group difference at each timepoint or
+2. Designating one of the timepoints as the 'primary' outcome.
+
+In practice option 2 is more common, and probably makes more sense in applied settings where it is the longer-term prognosis of participants wich matters most.
+
+
+
+
+#### Pairwise comparisons in factorial designs {-}
+
+Say you have a complex complex factorial design where multiple pairwise comparisons and other contrasts are possible.
+
+- If you are only interested in specific main effects or interactions from the full factorial model then specify this in advance and report these F-tests and *p* values without correction.
+
+- If you are only interested in a small number of the possible pairwise comparisons or specific contrasts then specify this up front. Either report the comparisons without correction (noting this in the text) or use FDR/Bonferroni correction for this small family of tests. 
+
+- It is perfectly reasonable to be interested only in specific pairwise comparisons contained within an Anova F-test. It is normal to report the F from the Anova, but it is *not* necessary for the F test to be significant before reporting the pairwise comparison of interest (with or without FDR/Bonferroni correction). 
+
+- If you have not specified the comparisons of interest in advance, then use FDR or Tukey correction for the complete set of pairwise tests. If you feel able to claim that some of these pairwise comparisons would *never* have been of interest then you could reduce the family size for this correction accordingly, but you should make this justification in your report.
+
+
+
+
+
+
+### Practical examples {-}
+
+
+#### Factorial Anova and pairwise comparisons {-}
+
+
+In the [Anova cookbook](#howell-factorial-example), we used a dataset from Howell's textbook which recorded `Recall` among young v.s. older adults (`Age`) for each of 5 conditions:
+
+```{r, echo=F}
 eysenck <- readRDS("data/eysenck.Rdata")
 eysenck %>% 
   ggplot(aes(Condition, Recall, group=Age, color=Age)) + 
@@ -28,22 +211,43 @@ eysenck %>%
   ylab("Recall (95% CI)") + xlab("")
 ```
 
+In an ideal world we would have published a trial protocol before collecting data, and specified which comparisons were of interest to us. However for the purposes of this example I'll assume you didn't do this, and need to address the potential for mutliple comparisons accordingly.
 
-We might run an Anova on this dataset:
+
+The design of the study suggests that we were interested in the effect of the experimental conditions on recall, and we might have predicted that these experimental manipulations would affect older and younder adults differently. Because we didn't pre-specify our analyses, we should acknowledge that we would likly report any differences between any of the 5 experimental conditions (10 possible comparisons) and any differences between younger and older adults in any of those conditions (45 possible pairwise comparisons).
+
+Because replicating this experiment is relatively cheap (testing might only 30 minutes per participant), and we are confident that other labs would want to replicate any significant findings we report, we are less concerned with the absolute rate of type 1 errors, but would like to limit our 'false discovery rate'. We set our acceptable false discovery rate to 5%.
+
+We run an Anova model, including main effects for `Age` and `Condition` and their interaction:
 
 ```{r}
 eysenck.model <- lm(Recall~Age*Condition, data=eysenck)
 car::Anova(eysenck.model, type=3)
 ```
 
+We report that there is are significant main effects for Age, Condition, and a significant interaction for `Age:Condition`.  At this point, if we hadn't already plotted the raw data, we would certainly want to do that, or to [make predictions for each cell in the design and plot them](#understanding-interactions).
 
-We can see there is a significant interaction for `Age:Condition`.  If we want to look at post-hoc pairwise tests we can use the the `lsmeans()` function from the `lsmeans::` package:
+Because the plot of the raw data (see above) suggested that the counting and rhyming conditions produced lower recall rates than the other conditions, we might want to report the relevant pairwise tests. We can use the the `lsmeans()` function from the `lsmeans::` package to compute these:
+
 
 ```{r}
-lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition)
+lsmeans::lsmeans(eysenck.model, pairwise~Condition)
 ```
 
-By default Tukey correction is applied for multiple comparisons which is a reasonable default. If you want to use other methods (e.g. to use false discovery rate adjustment, see the section on [multiple comparisons](multiple-comparisons.html)) you can use the `adjust` argument. 
+By default Tukey correction is applied for multiple comparisons, which is a reasonable choice. If you wanted to adjust for the false discovery rate instead, you can use the `adjust` argument:
+
+The plot also suggested that older and younger adults appeared to differ for the 'adjective', 'imagery', and 'intention' conditions. We can compute these detailed pairwise comparisons by including the interaction term, `Age:Condition` in the call to `lsmeans()`:
+
+```{r}
+lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition, adjust="fdr")
+```
+
+You should note that the FDR adjusted p values do not represent probabilities in the normal sense. Instead, the p value now indicates the *false discovery rate at which the p value should be considered statistically significant*. So, for example, if the adjusted p value = 0.09, then this indicates the contrast *would* be significant if the acceptable false discovery rate is 10% (people often set their acceptable false discovery rate to be 5% out of habit, but this is not always appropriate).
+
+
+
+
+###### Extracting pairwise comparisons to display in your report {- #extract-contrasts .explainer}
 
 In the code below we request FDR-adjusted p values, and then use the `broom::tidy()` function to convert the table into a dataframe, and then show only the first 6 rows as a table in RMarkdown: 
 
@@ -60,7 +264,159 @@ eysenck.fdr$contrasts %>%
 ```
 
 
-You should note that the FDR adjusted p values do not represent probabilities in the normal sense. Instead, the p value now indicates the *false discovery rate at which the p value should be considered statistically significant*. So, for example, if the adjusted p value  0.09, then this indicates the contrast *would* be significant if the acceptable false discovery rate is 10% (people often set their acceptable false discover rate to be 5% out of habit, but this is not always appropriate).
+
+
+##### Adjusting for the FDR by hand {-}
+
+If you have a set of tests for which you want to adjust for the FDR it's easy to use R's `p.adjust()` to do this for you.
+
+```{r}
+p.values <- runif(10, min=.001, max=.07)
+
+p.values 
+p.adjust(p.values, method="fdr")
+```
+
+We can plot these values to see the effect the adjustment has:
+
+
+```{r, echo=F, fig.cap="Example of the adjustments made to p values by FDR and Bonferroni methods. Unadjusted p values are shown in grey. Note these are the same p values adjusted by both methods, but each plot required a different scale: Bonferroni really is _very_ conservative with more than a small number of comparisons."}
+data_frame(`p value (raw)` = p.values, 
+                   `FDR` = p.adjust(p.values, method="fdr"),
+                   `Bonferroni` = p.adjust(p.values, method="bonferroni")) %>%
+  arrange(`p value (raw)`) %>%
+  mutate(rank=1:10) %>%
+  reshape2::melt(id.var=c("p value (raw)","rank") )%>%
+  ggplot(aes(x=factor(rank), y=value, group=rank, color=variable)) +
+  geom_hline(yintercept=0.05) + 
+  geom_line(color="grey", arrow=arrow(length = unit(0.25, "cm"))) + 
+  
+  geom_point(aes(y=`p value (raw)`), colour="darkgrey") +
+  geom_segment(aes(x = rank, y = `p value (raw)`, xend=rank, yend=value), color="grey", 
+               arrow=arrow(length = unit(0.25, "cm"))) +
+  geom_point() +
+  ylab("p value") +
+  xlab("Ranking of p values") + 
+  facet_wrap(~variable, scales="free") +
+  guides(color=F) + theme(aspect.ratio = 2)
+```
+
+
+
+
+
+
+
+#### Other contrasts {- #contrasts}
+
+
+The `lsmeans::` package provides tools to compute contrasts for Anova and other linear models:
+
+```{r}
+library(lsmeans)
+```
+
+
+
+We can see a number of these different contrasts below. First, we run a model model including the factor Days:
+
+```{r}
+slope.model <- lmer(Reaction ~ factor(Days) + (1|Subject),
+                    data=lme4::sleepstudy)
+```
+
+
+And then we create the `lsmeans` object:
+```{r}
+slope.model.lsm <- lsmeans::lsmeans(slope.model, ~Days)
+```
+
+Which  we can use to calculate the various contrasts. First, consecutive contrasts where each level is compared with the next:
+
+```{r}
+lsmeans::contrast(slope.model.lsm, "consec")
+```
+
+
+Polynomial contrasts allow us to test whether the increase in RT's over the days is linear or curved:
+
+```{r}
+lsmeans::contrast(slope.model.lsm, "poly", adjust="fdr", max.degree=3)
+```
+
+
+Tukey contrasts will provide Tukey's HSD test for every pairwise comparison:
+
+```{r}
+lsmeans::contrast(slope.model.lsm, "tukey", adjust="fdr")
+```
+
+
+If we want to compare particular levels of `Days` with a specific reference level we can use the `trt.vs.ctrl` contrast type:
+
+```{r}
+lsmeans::contrast(slope.model.lsm, "trt.vs.ctrl", ref=1, adjust="fdr")
+```
+
+
+
+And if we want to compare each level against the grand mean, the `eff` contrast type is short for `effect`:
+
+```{r}
+lsmeans::contrast(slope.model.lsm, "eff", adjust="fdr")
+```
+
+To list all the availble contrast types, or see the relevant help files, you can type:
+
+```{r}
+ls("package:lsmeans", pat=".lsmc")
+help(pairwise.lsmc)
+```
+
+
+
+
+
+#### Contrasts for interactions {- #interaction-pairwise-contrasts}
+
+Let's recall [our example of factorial Anova](#howell-factorial-example):
+
+```{r}
+eysenck <- readRDS("data/eysenck.Rdata")
+eysenck.model <- lm(Recall~Age*Condition, data=eysenck)
+car::Anova(eysenck.model, type=3)
+```
+
+
+We can compute pairwise comparisons within the interaction as follows:
+
+```{r}
+eysenck.lsm <- lsmeans::lsmeans(eysenck.model, ~Age:Condition)
+```
+
+And the various contrasts, here comparing each cell agains the grand mean:
+
+```{r}
+lsmeans::contrast(eysenck.lsm, "eff", adjust="fdr")
+```
+
+
+Or all of the pairwise tests with Tukey adjustment:
+
+```{r}
+lsmeans::contrast(eysenck.lsm, "tukey")
+```
+
+
+
+
+
+
+<!-- 
+
+###### The FDR Algorithm {- .explainer}
+
+
 
 ```{r}
 # Set our acceptable false discovery rate to 10%
@@ -77,10 +433,9 @@ lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition, adjust="none")$contrast 
   pandoc.table(caption="Subset of contrasts, showing the break between significant and ns results, as determined by an FDR of 10%.", split.tables=Inf)
 ```
 
-Note, that when you use `adjust='fdr'` then the p values returned are
-The [Biostat Handbook](http://www.biostathandbook.com/multiplecomparisons.html) has a good
+-->
 
 
-
-
-<!---TO ADD? https://rawgit.com/geneticsMiNIng/FactorMerger/master/materials/vignette.html--->
+<!---
+TO ADD? https://rawgit.com/geneticsMiNIng/FactorMerger/master/materials/vignette.html
+--->
