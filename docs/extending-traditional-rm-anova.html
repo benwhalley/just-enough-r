@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Just enough R</title>
+  <meta name="description" content="‘Just enough’ R">
+  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Just enough R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Just enough R" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="fitting-models.html">
+<link rel="next" href="icc-and-vpc.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="https://hypothes.is/embed.js" async></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Just enough R</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a></li>
+<li class="part"><span><b>I Getting started</b></span></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#a-warning"><i class="fa fa-check"></i>A warning</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#license"><i class="fa fa-check"></i>License</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="start-here.html"><a href="start-here.html"><i class="fa fa-check"></i><b>2</b> Workflow</a><ul>
+<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#rmarkdown"><i class="fa fa-check"></i>Using RMarkdown to record and share work</a></li>
+<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#writing-and-knitting-rmarkdown"><i class="fa fa-check"></i>Writing and ‘knitting’ RMarkdown</a></li>
+<li class="chapter" data-level="" data-path="rstudio.html"><a href="rstudio.html"><i class="fa fa-check"></i>RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>3</b> R Basics</a><ul>
+<li class="chapter" data-level="" data-path="r-basics.html"><a href="r-basics.html#first-commands"><i class="fa fa-check"></i>First commands</a></li>
+<li><a href="r-basics.html#variables">Naming things: <em>variable assignment</em></a></li>
+<li class="chapter" data-level="" data-path="r-basics.html"><a href="r-basics.html#vectors-and-lists"><i class="fa fa-check"></i>Vectors and lists</a></li>
+<li class="chapter" data-level="" data-path="r-basics.html"><a href="r-basics.html#lists"><i class="fa fa-check"></i>Lists</a></li>
+</ul></li>
+<li class="part"><span><b>II Working with data</b></span></li>
+<li class="chapter" data-level="4" data-path="datasets-dataframes.html"><a href="datasets-dataframes.html"><i class="fa fa-check"></i><b>4</b> Datasets and dataframes</a><ul>
+<li class="chapter" data-level="" data-path="looking-at-data.html"><a href="looking-at-data.html"><i class="fa fa-check"></i>Looking at data</a></li>
+<li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html"><i class="fa fa-check"></i>Importing and exporting data</a><ul>
+<li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html#importing-data-from-the-web"><i class="fa fa-check"></i>Importing data over the web</a></li>
+<li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html#importing-proprietary-formats"><i class="fa fa-check"></i>Importing from SPSS and other packages</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html"><i class="fa fa-check"></i>Working with dataframes</a><ul>
+<li><a href="working-with-dataframes.html#tidyverse">Introducing the <code>tidyverse</code></a></li>
+<li class="chapter" data-level="" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#selecting-columns"><i class="fa fa-check"></i>Selecting columns from a dataframe</a></li>
+<li class="chapter" data-level="" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#selecting-rows"><i class="fa fa-check"></i>Selecting rows of data</a></li>
+<li class="chapter" data-level="" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#combining-column-selections-and-row-filters"><i class="fa fa-check"></i>Combining column selections and row filters</a></li>
+<li><a href="working-with-dataframes.html#pipes"></a></li>
+<li class="chapter" data-level="" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#mutate"><i class="fa fa-check"></i>Modifying and creating new columns</a></li>
+<li class="chapter" data-level="" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html#sorting"><i class="fa fa-check"></i>Sorting data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="real-data.html"><a href="real-data.html"><i class="fa fa-check"></i><b>5</b> Working with ‘real’ data</a><ul>
+<li class="chapter" data-level="" data-path="storing-data.html"><a href="storing-data.html"><i class="fa fa-check"></i>Storing your data</a><ul>
+<li class="chapter" data-level="" data-path="storing-data.html"><a href="storing-data.html#use-csv"><i class="fa fa-check"></i>CSV files are your friend</a></li>
+<li class="chapter" data-level="" data-path="storing-data.html"><a href="storing-data.html#save-intermediate-steps"><i class="fa fa-check"></i>Save processes, not outcomes</a></li>
+<li class="chapter" data-level="" data-path="storing-data.html"><a href="storing-data.html#rds-files"><i class="fa fa-check"></i>RDS files can be useful to preserve R objects</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html"><i class="fa fa-check"></i>Types of variable</a><ul>
+<li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html#numeric-variables"><i class="fa fa-check"></i>Numeric variables</a></li>
+<li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html#character-and-factor"><i class="fa fa-check"></i>Characters, factors (and booleans)</a></li>
+<li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html#dates"><i class="fa fa-check"></i>Dates</a></li>
+<li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html#missing-values"><i class="fa fa-check"></i>Missing values</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="missing.html"><a href="missing.html"><i class="fa fa-check"></i>Missing values</a></li>
+<li class="chapter" data-level="" data-path="tidying-data.html"><a href="tidying-data.html"><i class="fa fa-check"></i>Tidying data</a><ul>
+<li class="chapter" data-level="" data-path="tidying-data.html"><a href="tidying-data.html#reshaping"><i class="fa fa-check"></i>Reshaping</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="dealing-with-multiple-files.html"><a href="dealing-with-multiple-files.html"><i class="fa fa-check"></i>Dealing with multiple files</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="summarising-data.html"><a href="summarising-data.html"><i class="fa fa-check"></i><b>6</b> Summarising data</a><ul>
+<li class="chapter" data-level="" data-path="utility-functions-for-descriptive-statistics.html"><a href="utility-functions-for-descriptive-statistics.html"><i class="fa fa-check"></i>Utility functions for descriptive statistics</a><ul>
+<li class="chapter" data-level="" data-path="utility-functions-for-descriptive-statistics.html"><a href="utility-functions-for-descriptive-statistics.html#frequency-tables"><i class="fa fa-check"></i>Frequency tables</a></li>
+<li class="chapter" data-level="" data-path="utility-functions-for-descriptive-statistics.html"><a href="utility-functions-for-descriptive-statistics.html#summary-statistics"><i class="fa fa-check"></i>Summary statistics</a></li>
+<li class="chapter" data-level="" data-path="utility-functions-for-descriptive-statistics.html"><a href="utility-functions-for-descriptive-statistics.html#creating-a-data-frame-of-summary-statistics"><i class="fa fa-check"></i>Creating a data frame of summary statistics</a></li>
+<li class="chapter" data-level="6.0.1" data-path="utility-functions-for-descriptive-statistics.html"><a href="utility-functions-for-descriptive-statistics.html#computing-statistics-by-groups--v"><i class="fa fa-check"></i><b>6.0.1</b> Computing statistics by-groups {-}v</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="split-apply-combine.html"><a href="split-apply-combine.html"><i class="fa fa-check"></i>A generalised approach: Split, apply, combine</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>7</b> Graphics</a><ul>
+<li class="chapter" data-level="" data-path="graphics-benefits.html"><a href="graphics-benefits.html"><i class="fa fa-check"></i>Benefits of visualising data</a></li>
+<li class="chapter" data-level="" data-path="graphics-approaches.html"><a href="graphics-approaches.html"><i class="fa fa-check"></i>Which tool to use?</a></li>
+<li><a href="layered-graphics.html#layered-graphics">Layered graphics with <code>ggplot</code></a><ul>
+<li class="chapter" data-level="" data-path="layered-graphics.html"><a href="layered-graphics.html"><i class="fa fa-check"></i>A thought on ‘chart chooser’ guides</a></li>
+<li><a href="layered-graphics.html#thinking-like-ggplot">Thinking like <code>ggplot</code></a></li>
+<li class="chapter" data-level="" data-path="layered-graphics.html"><a href="layered-graphics.html#relationships"><i class="fa fa-check"></i>‘Relationships’</a></li>
+<li class="chapter" data-level="" data-path="layered-graphics.html"><a href="layered-graphics.html#distributions"><i class="fa fa-check"></i>‘Distributions’</a></li>
+<li class="chapter" data-level="" data-path="layered-graphics.html"><a href="layered-graphics.html#comparisons"><i class="fa fa-check"></i>‘Comparisons’</a></li>
+<li class="chapter" data-level="" data-path="layered-graphics.html"><a href="layered-graphics.html#composition"><i class="fa fa-check"></i>‘Composition’</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html"><i class="fa fa-check"></i>‘Quick and dirty’ (utility) plots</a><ul>
+<li class="chapter" data-level="7.0.1" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html#distributions-1"><i class="fa fa-check"></i><b>7.0.1</b> Distributions</a></li>
+<li class="chapter" data-level="7.0.2" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html#relationships-1"><i class="fa fa-check"></i><b>7.0.2</b> Relationships</a></li>
+<li class="chapter" data-level="7.0.3" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html#quantities"><i class="fa fa-check"></i><b>7.0.3</b> Quantities</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ggplot-details.html"><a href="ggplot-details.html"><i class="fa fa-check"></i>Tricks with ggplot</a><ul>
+<li class="chapter" data-level="" data-path="ggplot-details.html"><a href="ggplot-details.html#facetting-plots"><i class="fa fa-check"></i>More ways to facet a plot</a></li>
+<li><a href="ggplot-details.html#facet_wrap"><code>facet_wrap</code></a></li>
+<li><a href="ggplot-details.html#facet_grid"><code>facet_grid</code></a></li>
+<li class="chapter" data-level="" data-path="ggplot-details.html"><a href="ggplot-details.html#combining-plots"><i class="fa fa-check"></i>Combining separate plots in a grid</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exporting-graphics.html"><a href="exporting-graphics.html"><i class="fa fa-check"></i>Exporting for print</a></li>
+</ul></li>
+<li class="part"><span><b>III Analysis</b></span></li>
+<li class="chapter" data-level="8" data-path="basic-inferential-statistics.html"><a href="basic-inferential-statistics.html"><i class="fa fa-check"></i><b>8</b> Basic inferential statistics</a><ul>
+<li><a href="crosstabs.html#crosstabs">Crosstabulations and <sup>2</sup></a><ul>
+<li class="chapter" data-level="" data-path="crosstabs.html"><a href="crosstabs.html"><i class="fa fa-check"></i>Three-way tables</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html"><i class="fa fa-check"></i>Correlations</a><ul>
+<li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html#correlation-matrix"><i class="fa fa-check"></i>Creating a correlation matrix</a></li>
+<li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html#working-with-correlation-matrices"><i class="fa fa-check"></i>Working with correlation matrices</a></li>
+<li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html#correlation-tables-for-publication"><i class="fa fa-check"></i>Tables for publication</a></li>
+<li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html#correlation-methods"><i class="fa fa-check"></i>Other methods for correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="t-tests.html"><a href="t-tests.html"><i class="fa fa-check"></i>t-tests</a><ul>
+<li class="chapter" data-level="" data-path="t-tests.html"><a href="t-tests.html#visualising-your-data-first"><i class="fa fa-check"></i>Visualising your data first</a></li>
+<li class="chapter" data-level="" data-path="t-tests.html"><a href="t-tests.html#running-a-t-test"><i class="fa fa-check"></i>Running a t-test</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="linear-models-simple.html"><a href="linear-models-simple.html"><i class="fa fa-check"></i><b>9</b> Regression</a><ul>
+<li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#formulae"><i class="fa fa-check"></i>Describing statistical models using formulae</a></li>
+<li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#running-a-linear-model"><i class="fa fa-check"></i>Running a linear model</a></li>
+<li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#more-on-formulas"><i class="fa fa-check"></i>More on formulas</a></li>
+<li class="chapter" data-level="" data-path="factors-and-variable-codings.html"><a href="factors-and-variable-codings.html"><i class="fa fa-check"></i>Factors and variable codings</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html"><i class="fa fa-check"></i>Model specification</a><ul>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#regression-coding"><i class="fa fa-check"></i>Effect/dummy coding and contrasts</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#centering"><i class="fa fa-check"></i>Centering (is often helpful)</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#scaling-regression-inputs"><i class="fa fa-check"></i>Scaling inputs</a></li>
+<li class="chapter" data-level="9.0.1" data-path="parameterisation.html"><a href="parameterisation.html#alternatives-to-rescaling"><i class="fa fa-check"></i><b>9.0.1</b> Alternatives to rescaling</a></li>
+<li class="chapter" data-level="9.0.2" data-path="parameterisation.html"><a href="parameterisation.html#what-next"><i class="fa fa-check"></i><b>9.0.2</b> What next</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>10</b> Anova</a><ul>
+<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#rules-for-using-anova-in-r"><i class="fa fa-check"></i>Rules for using Anova in R</a></li>
+<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#anova-recommendations"><i class="fa fa-check"></i>Recommendations for doing Anova</a></li>
+<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html"><i class="fa fa-check"></i>Anova ‘Cookbook’</a><ul>
+<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#between-subjects-anova"><i class="fa fa-check"></i>Between-subjects Anova</a></li>
+<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#repeated-measures"><i class="fa fa-check"></i>Repeated measures or ‘split plot’ designs</a></li>
+<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#trad-rm-anova"><i class="fa fa-check"></i>Traditional repeated measures Anova</a></li>
+<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#comparison-with-a-multilevel-model"><i class="fa fa-check"></i>Comparison with a multilevel model</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="checking-assumptions.html"><a href="checking-assumptions.html"><i class="fa fa-check"></i>Checking assumptions</a></li>
+<li class="chapter" data-level="" data-path="followup-tests.html"><a href="followup-tests.html"><i class="fa fa-check"></i>Followup tests</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="understanding-interactions.html"><a href="understanding-interactions.html"><i class="fa fa-check"></i><b>11</b> Understanding interactions</a><ul>
+<li class="chapter" data-level="" data-path="what-is-an-interaction.html"><a href="what-is-an-interaction.html"><i class="fa fa-check"></i>What is an interaction?</a></li>
+<li class="chapter" data-level="" data-path="visualising-interactions-from-raw-data.html"><a href="visualising-interactions-from-raw-data.html"><i class="fa fa-check"></i>Visualising interactions from raw data</a><ul>
+<li class="chapter" data-level="" data-path="visualising-interactions-from-raw-data.html"><a href="visualising-interactions-from-raw-data.html#pain-music-data"><i class="fa fa-check"></i>A painful example</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="continuous-predictors.html"><a href="continuous-predictors.html"><i class="fa fa-check"></i>Continuous predictors</a></li>
+<li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html"><i class="fa fa-check"></i>Making predictions</a><ul>
+<li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predictions-vs-margins"><i class="fa fa-check"></i>Predictions vs margins</a></li>
+<li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predicted-means"><i class="fa fa-check"></i>Predicted means</a></li>
+<li><a href="predictions-and-margins.html#effects-margins"><em>Effects</em> (margins)</a></li>
+<li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#continuous-predictors-1"><i class="fa fa-check"></i>Continuous predictors</a></li>
+</ul></li>
+<li><a href="predicted-means-and-margins-using-lm.html#predicted-means-and-margins-using-lm">Predicted means and margins using <code>lm()</code></a><ul>
+<li class="chapter" data-level="" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html"><i class="fa fa-check"></i>Running the model</a></li>
+<li class="chapter" data-level="" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html#making-predictions-for-means"><i class="fa fa-check"></i>Making predictions for means</a></li>
+<li><a href="predicted-means-and-margins-using-lm.html#making-prdictions-for-margins-effects-of-predictors">Making prdictions for margins (<em>effects</em> of predictors)</a></li>
+<li class="chapter" data-level="" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html#marginal-effects"><i class="fa fa-check"></i>Marginal effects</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="predictions-with-continuous-covariates.html"><a href="predictions-with-continuous-covariates.html"><i class="fa fa-check"></i>Predictions with continuous covariates</a></li>
+<li class="chapter" data-level="" data-path="visualising-interactions.html"><a href="visualising-interactions.html"><i class="fa fa-check"></i>Visualising interactions</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="general-linear-models.html"><a href="general-linear-models.html"><i class="fa fa-check"></i><b>12</b> General linear models</a><ul>
+<li class="chapter" data-level="" data-path="general-linear-models.html"><a href="general-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="mediation.html"><a href="mediation.html"><i class="fa fa-check"></i><b>13</b> Mediation</a></li>
+<li class="chapter" data-level="14" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>14</b> Multilevel models</a><ul>
+<li class="chapter" data-level="" data-path="fitting-models.html"><a href="fitting-models.html"><i class="fa fa-check"></i>Fitting multilevel models in R</a><ul>
+<li><a href="fitting-models.html#use-lmer-and-glmer">Use <code>lmer</code> and <code>glmer</code></a></li>
+<li><a href="fitting-models.html#p-values-in-multilevel-models"><em>p</em> values in multilevel models</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="extending-traditional-rm-anova.html"><a href="extending-traditional-rm-anova.html"><i class="fa fa-check"></i>Extending traditional RM Anova</a><ul>
+<li><a href="extending-traditional-rm-anova.html#fit-a-simple-slope-for-days">Fit a simple slope for <code>Days</code></a></li>
+<li class="chapter" data-level="" data-path="extending-traditional-rm-anova.html"><a href="extending-traditional-rm-anova.html#allow-the-effect-of-sleep-deprivation-to-vary-for-different-participants"><i class="fa fa-check"></i>Allow the effect of sleep deprivation to vary for different participants</a></li>
+<li><a href="extending-traditional-rm-anova.html#growth-curve-sleep-example">Fitting a curve for the effect of <code>Days</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="icc-and-vpc.html"><a href="icc-and-vpc.html"><i class="fa fa-check"></i>Variance partition coefficients and intraclass correlations</a></li>
+<li class="chapter" data-level="" data-path="threelevel.html"><a href="threelevel.html"><i class="fa fa-check"></i>3 level models with ‘partially crossed’ random effects</a></li>
+<li class="chapter" data-level="" data-path="troubleshooting-multilevel-models.html"><a href="troubleshooting-multilevel-models.html"><i class="fa fa-check"></i>Troubleshooting</a><ul>
+<li class="chapter" data-level="" data-path="troubleshooting-multilevel-models.html"><a href="troubleshooting-multilevel-models.html#simplifying-mixed-models"><i class="fa fa-check"></i>Convergence problems and simplifying the random effects structure</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="multilevel-bayes-reasons.html"><a href="multilevel-bayes-reasons.html"><i class="fa fa-check"></i>Bayesian multilevel models</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="covariance-modelling.html"><a href="covariance-modelling.html"><i class="fa fa-check"></i><b>15</b> Covariance modelling</a><ul>
+<li class="chapter" data-level="" data-path="path-models.html"><a href="path-models.html"><i class="fa fa-check"></i>Path models</a><ul>
+<li class="chapter" data-level="" data-path="path-models.html"><a href="path-models.html#defining-the-model"><i class="fa fa-check"></i>Defining the model</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cfa.html"><a href="cfa.html"><i class="fa fa-check"></i>Confirmatory factor analysis (CFA)</a><ul>
+<li class="chapter" data-level="" data-path="cfa.html"><a href="cfa.html#defining-the-model-1"><i class="fa fa-check"></i>Defining the model</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="model-fit.html"><a href="model-fit.html"><i class="fa fa-check"></i>Model fit</a></li>
+<li class="chapter" data-level="" data-path="modification-indices.html"><a href="modification-indices.html"><i class="fa fa-check"></i>Modification indices</a></li>
+<li class="chapter" data-level="" data-path="model-improvement.html"><a href="model-improvement.html"><i class="fa fa-check"></i>Model modification and improvement</a></li>
+<li class="chapter" data-level="" data-path="sem.html"><a href="sem.html"><i class="fa fa-check"></i>Structural eqution modelling (SEM)</a></li>
+<li class="chapter" data-level="" data-path="identification.html"><a href="identification.html"><i class="fa fa-check"></i>‘Identification’ in CFA and SEM</a></li>
+<li class="chapter" data-level="" data-path="cfa-sem-missing-data.html"><a href="cfa-sem-missing-data.html"><i class="fa fa-check"></i>Missing data</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="power-analysis.html"><a href="power-analysis.html"><i class="fa fa-check"></i><b>16</b> Power analysis in R</a><ul>
+<li class="chapter" data-level="" data-path="power-analysis.html"><a href="power-analysis.html#for-most-inferential-statistics"><i class="fa fa-check"></i>For most inferential statistics</a></li>
+<li class="chapter" data-level="" data-path="power-analysis.html"><a href="power-analysis.html#for-multilevel-or-generalised-linear-models"><i class="fa fa-check"></i>For multilevel or generalised linear models</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html"><i class="fa fa-check"></i><b>17</b> Baysian linear model fitting with MCMC</a><ul>
+<li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#posterior-probabilities-for-parameters"><i class="fa fa-check"></i>Posterior probabilities for parameters</a></li>
+<li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#credible-intervals"><i class="fa fa-check"></i>Credible intervals</a></li>
+<li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#bayesian-p-values-for-parameters"><i class="fa fa-check"></i>Bayesian ‘p values’ for parameters</a></li>
+</ul></li>
+<li class="part"><span><b>IV Loose ends</b></span></li>
+<li class="chapter" data-level="18" data-path="statistical-explanations.html"><a href="statistical-explanations.html"><i class="fa fa-check"></i><b>18</b> Statistical explanations</a><ul>
+<li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html"><i class="fa fa-check"></i>Confidence, credible and prediction intervals</a><ul>
+<li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html#the-problem-with-confidence-intervals"><i class="fa fa-check"></i>The problem with confidence intervals</a></li>
+<li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html#forgetting-that-the-ci-depends-on-sample-size."><i class="fa fa-check"></i>Forgetting that the CI depends on sample size.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html"><i class="fa fa-check"></i>Multiple comparisons</a><ul>
+<li class="chapter" data-level="18.0.1" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#p-values-and-false-discoveries"><i class="fa fa-check"></i><b>18.0.1</b> <em>p</em> values and ‘false discoveries’</a></li>
+<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#multiple-tests-on-the-same-data"><i class="fa fa-check"></i>Multiple tests on the same data</a></li>
+<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#what-to-do-about-it"><i class="fa fa-check"></i>What to do about it?</a></li>
+<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#practical-examples"><i class="fa fa-check"></i>Practical examples</a></li>
+<li><a href="multiple-comparisons.html#contrasts-lmer">Followup tests using <code>lmer</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i>Clustered data</a></li>
+<li class="chapter" data-level="" data-path="fixed-or-random.html"><a href="fixed-or-random.html"><i class="fa fa-check"></i>Fixed vs Random effects</a></li>
+<li class="chapter" data-level="" data-path="link-functions.html"><a href="link-functions.html"><i class="fa fa-check"></i>Link functions and transformation</a><ul>
+<li class="chapter" data-level="" data-path="link-functions.html"><a href="link-functions.html#logistic-link-function"><i class="fa fa-check"></i>Logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="model-comparison-and-selection.html"><a href="model-comparison-and-selection.html"><i class="fa fa-check"></i>Model comparison and selection</a><ul>
+<li class="chapter" data-level="" data-path="model-comparison-and-selection.html"><a href="model-comparison-and-selection.html#models-are-imperfect"><i class="fa fa-check"></i>Models are imperfect</a></li>
+<li class="chapter" data-level="" data-path="model-comparison-and-selection.html"><a href="model-comparison-and-selection.html#over-fitting"><i class="fa fa-check"></i>Overfitting/underfitting</a></li>
+<li class="chapter" data-level="" data-path="model-comparison-and-selection.html"><a href="model-comparison-and-selection.html#variable-selection"><i class="fa fa-check"></i>Choosing the ‘right variables’</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gof.html"><a href="gof.html"><i class="fa fa-check"></i>Goodness of fit statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="r-details.html"><a href="r-details.html"><i class="fa fa-check"></i><b>19</b> R details</a><ul>
+<li class="chapter" data-level="" data-path="r-details.html"><a href="r-details.html#installation-intro"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i>Loading packages</a></li>
+<li class="chapter" data-level="" data-path="named-colours.html"><a href="named-colours.html"><i class="fa fa-check"></i>Named colours in R</a><ul>
+<li class="chapter" data-level="" data-path="named-colours.html"><a href="named-colours.html#color-brewer"><i class="fa fa-check"></i>ColourBrewer with ggplot</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="getting-help.html"><a href="getting-help.html"><i class="fa fa-check"></i>Getting help</a><ul>
+<li class="chapter" data-level="" data-path="getting-help.html"><a href="getting-help.html#backtick-location"><i class="fa fa-check"></i>Finding the backtick on your keyboard</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html"><i class="fa fa-check"></i>Re-using code</a><ul>
+<li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html#helper-functions"><i class="fa fa-check"></i>Writing helper functions</a></li>
+<li><a href="code-reuse.html#ggplot-reuse">Re-using code with <code>ggplot</code></a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>V Sharing</b></span></li>
+<li class="chapter" data-level="20" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html"><i class="fa fa-check"></i><b>20</b> Sharing and publishing your work</a><ul>
+<li class="chapter" data-level="" data-path="extract-results-from-models.html"><a href="extract-results-from-models.html"><i class="fa fa-check"></i>Extracting results from models</a></li>
+<li class="chapter" data-level="" data-path="process-model-results.html"><a href="process-model-results.html"><i class="fa fa-check"></i>Process your results</a></li>
+<li class="chapter" data-level="" data-path="output-tables.html"><a href="output-tables.html"><i class="fa fa-check"></i>Printing tables</a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html"><i class="fa fa-check"></i>APA formatting for free</a><ul>
+<li><a href="apa-output.html#chi2">Chi<sup>2</sup></a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#t-test"><i class="fa fa-check"></i>T-test</a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#anova-1"><i class="fa fa-check"></i>Anova</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#multilevel-models"><i class="fa fa-check"></i>Multilevel models</a></li>
+<li class="chapter" data-level="20.0.1" data-path="apa-output.html"><a href="apa-output.html#publication"><i class="fa fa-check"></i><b>20.0.1</b> Publication</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>21</b> References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">‘Just enough’ R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="extending-traditional-rm-anova" class="section level2 unnumbered">
+<h2>Extending traditional RM Anova</h2>
+<p>As noted in the <a href="anova-cookbook.html">Anova cookbook section</a>, repeated measures anova can be approximated using linear mixed models.</p>
+<p>For example, reprising the <a href="anova-cookbook.html#sleepstudy-rmanova"><code>sleepstudy</code> example</a>, we can approximate a repeated measures Anova in which multiple measurements of <code>Reaction</code> time are taken on multiple <code>Days</code> for each <code>Subject</code>.</p>
+<p>As we <a href="anova-cookbook.html#sleepstudy-rmanova">saw before</a>, the traditional RM Anova model is:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sleep.rmanova &lt;-<span class="st"> </span>afex<span class="op">::</span><span class="kw">aov_car</span>(Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span><span class="kw">Error</span>(Subject<span class="op">/</span>(Days)), <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
+sleep.rmanova
+## Anova Table (Type 3 tests)
+## 
+## Response: Reaction
+##   Effect          df     MSE         F ges p.value
+## 1   Days 3.32, 56.46 2676.18 18.70 *** .29  &lt;.0001
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1
+## 
+## Sphericity correction method: GG</code></pre></div>
+<p>The equivalent lmer model is:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lmerTest)
+sleep.lmer &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(Days) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>Subject), <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
+<span class="kw">anova</span>(sleep.lmer)
+## Analysis of Variance Table of type III  with  Satterthwaite 
+## approximation for degrees of freedom
+##              Sum Sq Mean Sq NumDF DenDF F.value    Pr(&gt;F)    
+## factor(Days) 166235   18471     9   153  18.703 &lt; 2.2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre></div>
+<!-- 
+This post by the author of afex confirms these models are equivalent to RM anova:
+http://singmann.org/mixed-models-for-anova-designs-with-one-observation-per-unit-of-observation-and-cell-of-the-design/ 
+-->
+<p>The following sections demonstrate just some of the extensions to RM Anova which are possible with mutlilevel models,</p>
+<div id="fit-a-simple-slope-for-days" class="section level3 unnumbered">
+<h3>Fit a simple slope for <code>Days</code></h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Days, Reaction)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>() 
+## `geom_smooth()` using method = &#39;loess&#39;</code></pre></div>
+<p><img src="multilevel-models_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">slope.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>Subject),  <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
+lmerTest<span class="op">::</span><span class="kw">anova</span>(slope.model)
+## Analysis of Variance Table of type III  with  Satterthwaite 
+## approximation for degrees of freedom
+##      Sum Sq Mean Sq NumDF DenDF F.value    Pr(&gt;F)    
+## Days 162703  162703     1   161   169.4 &lt; 2.2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+slope.model.summary &lt;-<span class="st"> </span><span class="kw">summary</span>(slope.model)
+slope.model.summary<span class="op">$</span>coefficients
+##              Estimate Std. Error       df  t value Pr(&gt;|t|)
+## (Intercept) 251.40510  9.7467163  22.8102 25.79383        0
+## Days         10.46729  0.8042214 161.0036 13.01543        0</code></pre></div>
+</div>
+<div id="allow-the-effect-of-sleep-deprivation-to-vary-for-different-participants" class="section level3 unnumbered">
+<h3>Allow the effect of sleep deprivation to vary for different participants</h3>
+<p>If we plot the data, it looks like sleep deprivation hits some participants worse than others:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1234</span>)
+lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(Subject <span class="op">%in%</span><span class="st"> </span><span class="kw">sample</span>(<span class="kw">levels</span>(Subject), <span class="dv">10</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Days, Reaction, <span class="dt">group=</span>Subject, <span class="dt">color=</span>Subject)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span>F) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">size=</span><span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
+<p><img src="multilevel-models_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>If we wanted to test whether there was significant variation in the effects of sleep deprivation between subjects, by adding a <a href="fixed-or-random.html#random-slopes-intercepts">random slope</a> to the model.</p>
+<p>The random slope allows the effect of <code>Days</code> to vary between subjects. So we can think of an overall slope (i.e. RT goes up over the days), from which individuals deviate by some amount (e.g. a resiliant person will have a negative deviation or residual from the overall slope).</p>
+<p>Adding the random slope doesn’t change the <em>F</em> test for <code>Days</code> that much:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">random.slope.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span>(Days<span class="op">|</span>Subject),  <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
+lmerTest<span class="op">::</span><span class="kw">anova</span>(random.slope.model)
+## Analysis of Variance Table of type III  with  Satterthwaite 
+## approximation for degrees of freedom
+##      Sum Sq Mean Sq NumDF DenDF F.value    Pr(&gt;F)    
+## Days  30031   30031     1    17  45.853 3.264e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre></div>
+<p>Nor the overall slope coefficient:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">random.slope.model.summary &lt;-<span class="st"> </span><span class="kw">summary</span>(random.slope.model)
+slope.model.summary<span class="op">$</span>coefficients
+##              Estimate Std. Error       df  t value Pr(&gt;|t|)
+## (Intercept) 251.40510  9.7467163  22.8102 25.79383        0
+## Days         10.46729  0.8042214 161.0036 13.01543        0</code></pre></div>
+<p>But we can use the <code>lmerTest::rand()</code> function to show that there is statistically significant variation in slopes between individuals, using the likelihood ratio test:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lmerTest<span class="op">::</span><span class="kw">rand</span>(random.slope.model)
+## Analysis of Random effects Table:
+##              Chi.sq Chi.DF p.value    
+## Days:Subject   42.8      2   5e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre></div>
+<p>Because the random slope for <code>Days</code> is statistically significant, we know it improves the model. One way to see that improvement is to plot residuals (unexplained error for each datapoint) against predicted values. To extract residual and fitted values we use the <code>residuals()</code> and <code>predict()</code> functions. These are then combined in a data_frame, to enable us to use ggplot for the subsequent figures.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create data frames containing residuals and fitted</span>
+<span class="co"># values for each model we ran above</span>
+a &lt;-<span class="st">  </span><span class="kw">data_frame</span>(
+    <span class="dt">model =</span> <span class="st">&quot;random.slope&quot;</span>,
+    <span class="dt">fitted =</span> <span class="kw">predict</span>(random.slope.model), 
+    <span class="dt">residual =</span> <span class="kw">residuals</span>(random.slope.model))
+b &lt;-<span class="st"> </span><span class="kw">data_frame</span>(
+    <span class="dt">model =</span> <span class="st">&quot;random.intercept&quot;</span>,
+    <span class="dt">fitted =</span> <span class="kw">predict</span>(slope.model), 
+    <span class="dt">residual =</span> <span class="kw">residuals</span>(slope.model)) 
+
+<span class="co"># join the two data frames together</span>
+residual.fitted.data &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(a,b)</code></pre></div>
+<p>We can see that the residuals from the random slope model are much more evenly distributed across the range of fitted values, which suggests that the assumption of homogeneity of variance is met in the random slope model:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plots residuals against fitted values for each model</span>
+residual.fitted.data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(fitted, residual)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span>F) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model) 
+## `geom_smooth()` using method = &#39;loess&#39;</code></pre></div>
+<p><img src="multilevel-models_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>We can plot both of the random effects from this model (intercept and slope) to see how much the model expects individuals to deviate from the overall (mean) slope.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># extract the random effects from the model (intercept and slope)</span>
+<span class="kw">ranef</span>(random.slope.model)<span class="op">$</span>Subject <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># implicitly convert them to a dataframe and add a column with the subject number</span>
+<span class="st">  </span><span class="kw">rownames_to_column</span>(<span class="dt">var=</span><span class="st">&quot;Subject&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># plot the intercept and slobe values with geom_abline()</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>()) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_abline</span>(<span class="kw">aes</span>(<span class="dt">intercept=</span><span class="st">`</span><span class="dt">(Intercept)</span><span class="st">`</span>, <span class="dt">slope=</span>Days, <span class="dt">color=</span>Subject)) <span class="op">+</span>
+<span class="st">  </span><span class="co"># add axis label</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Day&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual RT&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="co"># set the scale of the plot to something sensible</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="dt">expand=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">100</span>, <span class="dv">100</span>)) </code></pre></div>
+<p><img src="multilevel-models_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Inspecting this plot, there doesn’t seem to be any strong correlation between the RT value at which an individual starts (their intercept residual) and the slope describing how they change over the days compared with the average slope (their slope residual).</p>
+<p>That is, we can’t say that knowing whether a person has fast or slow RTs at the start of the study gives us a clue about what will happen to them after they are sleep deprived: some people start slow and get faster; other start fast but suffer and get slower.</p>
+<p>However we can explicitly check this correlation (between individuals’ intercept and slope residuals) using the <code>VarCorr()</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">VarCorr</span>(random.slope.model)
+##  Groups   Name        Std.Dev. Corr 
+##  Subject  (Intercept) 24.7404       
+##           Days         5.9221  0.066
+##  Residual             25.5918</code></pre></div>
+<p>The correlation between the random intercept and slopes is only 0.066, and so very low. We might, therefore, want to try fitting a model without this correlation. <code>lmer</code> includes the correlation by default, so we need to change the model formula to make it clear we don’t want it:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">uncorrelated.reffs.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(
+  Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Subject) <span class="op">+</span><span class="st"> </span>(<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>Days<span class="op">|</span>Subject),  
+  <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
+
+<span class="kw">VarCorr</span>(uncorrelated.reffs.model)
+##  Groups    Name        Std.Dev.
+##  Subject   (Intercept) 25.0513 
+##  Subject.1 Days         5.9882 
+##  Residual              25.5653</code></pre></div>
+<p>The variance components don’t change much when we constrain the <em>covariance</em> of intercepts and slopes to be zero, and we can explicitly compare these two models using the <code>anova()</code> function, which is somewhat confusingly named because in this instance it is performing a likelihood ratio test to compare the two models:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova</span>(random.slope.model, uncorrelated.reffs.model)
+## refitting model(s) with ML (instead of REML)
+## Data: lme4::sleepstudy
+## Models:
+## ..1: Reaction ~ Days + (1 | Subject) + (0 + Days | Subject)
+## object: Reaction ~ Days + (Days | Subject)
+##        Df    AIC    BIC  logLik deviance  Chisq Chi Df Pr(&gt;Chisq)
+## ..1     5 1762.0 1778.0 -876.00   1752.0                         
+## object  6 1763.9 1783.1 -875.97   1751.9 0.0639      1     0.8004</code></pre></div>
+<p>Model fit is not significantly worse with the constrained model, <a href="model-comparison-and-selection.html#over-fitting">so for parsimony’s sake we prefer it to the more complex model</a>.</p>
+</div>
+<div id="growth-curve-sleep-example" class="section level3 unnumbered">
+<h3>Fitting a curve for the effect of <code>Days</code></h3>
+<p>In theory, we could also fit additional parameters for the effect of <code>Days</code>, although a combined smoothed line plot/scatterplot indicates that a linear function fits the data reasonably well.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Days, Reaction)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>() 
+## `geom_smooth()` using method = &#39;loess&#39;</code></pre></div>
+<p><img src="multilevel-models_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>If we insisted on testing a curved (quadratic) function of <code>Days</code>, we could:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">quad.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(Days<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>Subject),  <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
+quad.model.summary &lt;-<span class="st"> </span><span class="kw">summary</span>(quad.model)
+quad.model.summary<span class="op">$</span>coefficients
+##                Estimate Std. Error        df   t value   Pr(&gt;|t|)
+## (Intercept) 255.4493728 10.4656310  30.04063 24.408406 0.00000000
+## Days          7.4340850  2.9707978 160.00374  2.502387 0.01334034
+## I(Days^2)     0.3370223  0.3177733 160.00374  1.060575 0.29048148</code></pre></div>
+<p>Here, the <em>p</em> value for <code>I(Days^2)</code> is not significant, suggesting (as does the plot) that a simple slope model is sufficient.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="fitting-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="icc-and-vpc.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["Just enough R.pdf", "Just enough R.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

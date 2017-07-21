@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="mediation.html">
-<link rel="next" href="the-sleepstudy-data-and-traditional-rm-anova.html">
+<link rel="next" href="fitting-models.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -254,16 +254,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="13" data-path="mediation.html"><a href="mediation.html"><i class="fa fa-check"></i><b>13</b> Mediation</a></li>
 <li class="chapter" data-level="14" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>14</b> Multilevel models</a><ul>
-<li><a href="the-sleepstudy-data-and-traditional-rm-anova.html#the-sleepstudy-data-and-traditional-rm-anova">The <code>sleepstudy</code> data and traditional RM Anova</a><ul>
-<li><a href="the-sleepstudy-data-and-traditional-rm-anova.html#fit-a-simple-slope-for-days">Fit a simple slope for <code>Days</code></a></li>
-<li class="chapter" data-level="" data-path="the-sleepstudy-data-and-traditional-rm-anova.html"><a href="the-sleepstudy-data-and-traditional-rm-anova.html"><i class="fa fa-check"></i>Allow the effect of sleep deprivation to vary for different participants</a></li>
-<li><a href="the-sleepstudy-data-and-traditional-rm-anova.html#fitting-a-curve-for-the-effect-of-days">Fitting a curve for the effect of <code>Days</code></a></li>
+<li class="chapter" data-level="" data-path="fitting-models.html"><a href="fitting-models.html"><i class="fa fa-check"></i>Fitting multilevel models in R</a><ul>
+<li><a href="fitting-models.html#use-lmer-and-glmer">Use <code>lmer</code> and <code>glmer</code></a></li>
+<li><a href="fitting-models.html#p-values-in-multilevel-models"><em>p</em> values in multilevel models</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="icc-and-vpc.html"><a href="icc-and-vpc.html"><i class="fa fa-check"></i>Intraclass correlations</a></li>
-<li class="chapter" data-level="" data-path="arguments-for-fitting-mixed-models-via-mcmc.html"><a href="arguments-for-fitting-mixed-models-via-mcmc.html"><i class="fa fa-check"></i>Arguments for fitting mixed models via MCMC</a></li>
+<li class="chapter" data-level="" data-path="extending-traditional-rm-anova.html"><a href="extending-traditional-rm-anova.html"><i class="fa fa-check"></i>Extending traditional RM Anova</a><ul>
+<li><a href="extending-traditional-rm-anova.html#fit-a-simple-slope-for-days">Fit a simple slope for <code>Days</code></a></li>
+<li class="chapter" data-level="" data-path="extending-traditional-rm-anova.html"><a href="extending-traditional-rm-anova.html#allow-the-effect-of-sleep-deprivation-to-vary-for-different-participants"><i class="fa fa-check"></i>Allow the effect of sleep deprivation to vary for different participants</a></li>
+<li><a href="extending-traditional-rm-anova.html#growth-curve-sleep-example">Fitting a curve for the effect of <code>Days</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="icc-and-vpc.html"><a href="icc-and-vpc.html"><i class="fa fa-check"></i>Variance partition coefficients and intraclass correlations</a></li>
+<li class="chapter" data-level="" data-path="threelevel.html"><a href="threelevel.html"><i class="fa fa-check"></i>3 level models with ‘partially crossed’ random effects</a></li>
 <li class="chapter" data-level="" data-path="troubleshooting-multilevel-models.html"><a href="troubleshooting-multilevel-models.html"><i class="fa fa-check"></i>Troubleshooting</a><ul>
 <li class="chapter" data-level="" data-path="troubleshooting-multilevel-models.html"><a href="troubleshooting-multilevel-models.html#simplifying-mixed-models"><i class="fa fa-check"></i>Convergence problems and simplifying the random effects structure</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="multilevel-bayes-reasons.html"><a href="multilevel-bayes-reasons.html"><i class="fa fa-check"></i>Bayesian multilevel models</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="covariance-modelling.html"><a href="covariance-modelling.html"><i class="fa fa-check"></i><b>15</b> Covariance modelling</a><ul>
 <li class="chapter" data-level="" data-path="path-models.html"><a href="path-models.html"><i class="fa fa-check"></i>Path models</a><ul>
@@ -274,34 +279,35 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="" data-path="model-fit.html"><a href="model-fit.html"><i class="fa fa-check"></i>Model fit</a></li>
 <li class="chapter" data-level="" data-path="modification-indices.html"><a href="modification-indices.html"><i class="fa fa-check"></i>Modification indices</a></li>
-<li class="chapter" data-level="" data-path="missing-data.html"><a href="missing-data.html"><i class="fa fa-check"></i>Missing data</a></li>
-<li class="chapter" data-level="" data-path="sem.html"><a href="sem.html"><i class="fa fa-check"></i>Structural eqution modelling</a></li>
+<li class="chapter" data-level="" data-path="model-improvement.html"><a href="model-improvement.html"><i class="fa fa-check"></i>Model modification and improvement</a></li>
+<li class="chapter" data-level="" data-path="sem.html"><a href="sem.html"><i class="fa fa-check"></i>Structural eqution modelling (SEM)</a></li>
+<li class="chapter" data-level="" data-path="identification.html"><a href="identification.html"><i class="fa fa-check"></i>‘Identification’ in CFA and SEM</a></li>
+<li class="chapter" data-level="" data-path="cfa-sem-missing-data.html"><a href="cfa-sem-missing-data.html"><i class="fa fa-check"></i>Missing data</a></li>
 </ul></li>
 <li class="chapter" data-level="16" data-path="power-analysis.html"><a href="power-analysis.html"><i class="fa fa-check"></i><b>16</b> Power analysis in R</a><ul>
 <li class="chapter" data-level="" data-path="power-analysis.html"><a href="power-analysis.html#for-most-inferential-statistics"><i class="fa fa-check"></i>For most inferential statistics</a></li>
 <li class="chapter" data-level="" data-path="power-analysis.html"><a href="power-analysis.html#for-multilevel-or-generalised-linear-models"><i class="fa fa-check"></i>For multilevel or generalised linear models</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="additional-stub-articles.html"><a href="additional-stub-articles.html"><i class="fa fa-check"></i><b>17</b> Additional stub articles</a><ul>
-<li class="chapter" data-level="" data-path="meta-analysis.html"><a href="meta-analysis.html"><i class="fa fa-check"></i>Meta analysis</a></li>
-<li class="chapter" data-level="" data-path="bayes-factors.html"><a href="bayes-factors.html"><i class="fa fa-check"></i>Bayes factors</a></li>
-</ul></li>
-<li class="chapter" data-level="18" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html"><i class="fa fa-check"></i><b>18</b> Baysian linear model fitting with MCMC</a><ul>
+<li class="chapter" data-level="17" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html"><i class="fa fa-check"></i><b>17</b> Baysian linear model fitting with MCMC</a><ul>
 <li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#posterior-probabilities-for-parameters"><i class="fa fa-check"></i>Posterior probabilities for parameters</a></li>
 <li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#credible-intervals"><i class="fa fa-check"></i>Credible intervals</a></li>
 <li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#bayesian-p-values-for-parameters"><i class="fa fa-check"></i>Bayesian ‘p values’ for parameters</a></li>
 </ul></li>
 <li class="part"><span><b>IV Loose ends</b></span></li>
-<li class="chapter" data-level="19" data-path="statistical-explanations.html"><a href="statistical-explanations.html"><i class="fa fa-check"></i><b>19</b> Statistical explanations</a><ul>
+<li class="chapter" data-level="18" data-path="statistical-explanations.html"><a href="statistical-explanations.html"><i class="fa fa-check"></i><b>18</b> Statistical explanations</a><ul>
 <li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html"><i class="fa fa-check"></i>Confidence, credible and prediction intervals</a><ul>
 <li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html#the-problem-with-confidence-intervals"><i class="fa fa-check"></i>The problem with confidence intervals</a></li>
 <li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html#forgetting-that-the-ci-depends-on-sample-size."><i class="fa fa-check"></i>Forgetting that the CI depends on sample size.</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html"><i class="fa fa-check"></i>Multiple comparisons</a><ul>
-<li class="chapter" data-level="19.0.1" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#p-values-and-false-discoveries"><i class="fa fa-check"></i><b>19.0.1</b> <em>p</em> values and ‘false discoveries’</a></li>
+<li class="chapter" data-level="18.0.1" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#p-values-and-false-discoveries"><i class="fa fa-check"></i><b>18.0.1</b> <em>p</em> values and ‘false discoveries’</a></li>
 <li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#multiple-tests-on-the-same-data"><i class="fa fa-check"></i>Multiple tests on the same data</a></li>
 <li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#what-to-do-about-it"><i class="fa fa-check"></i>What to do about it?</a></li>
 <li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#practical-examples"><i class="fa fa-check"></i>Practical examples</a></li>
+<li><a href="multiple-comparisons.html#contrasts-lmer">Followup tests using <code>lmer</code></a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i>Clustered data</a></li>
+<li class="chapter" data-level="" data-path="fixed-or-random.html"><a href="fixed-or-random.html"><i class="fa fa-check"></i>Fixed vs Random effects</a></li>
 <li class="chapter" data-level="" data-path="link-functions.html"><a href="link-functions.html"><i class="fa fa-check"></i>Link functions and transformation</a><ul>
 <li class="chapter" data-level="" data-path="link-functions.html"><a href="link-functions.html#logistic-link-function"><i class="fa fa-check"></i>Logistic regression</a></li>
 </ul></li>
@@ -310,16 +316,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="model-comparison-and-selection.html"><a href="model-comparison-and-selection.html#over-fitting"><i class="fa fa-check"></i>Overfitting/underfitting</a></li>
 <li class="chapter" data-level="" data-path="model-comparison-and-selection.html"><a href="model-comparison-and-selection.html#variable-selection"><i class="fa fa-check"></i>Choosing the ‘right variables’</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="gof.html"><a href="gof.html"><i class="fa fa-check"></i>Goodness of fit statistics</a><ul>
-<li class="chapter" data-level="" data-path="gof.html"><a href="gof.html#model-improvement"><i class="fa fa-check"></i>Model modification and improvment</a></li>
+<li class="chapter" data-level="" data-path="gof.html"><a href="gof.html"><i class="fa fa-check"></i>Goodness of fit statistics</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="20" data-path="r-details.html"><a href="r-details.html"><i class="fa fa-check"></i><b>20</b> R details</a><ul>
-<li class="chapter" data-level="" data-path="installation-intro.html"><a href="installation-intro.html"><i class="fa fa-check"></i>Installation</a><ul>
-<li class="chapter" data-level="" data-path="installation-intro.html"><a href="installation-intro.html#rstudio-server"><i class="fa fa-check"></i>RStudio Server</a></li>
-<li class="chapter" data-level="" data-path="installation-intro.html"><a href="installation-intro.html#local-install"><i class="fa fa-check"></i>Installing on your own machine.</a></li>
-<li class="chapter" data-level="" data-path="installation-intro.html"><a href="installation-intro.html#dependencies"><i class="fa fa-check"></i>Package dependencies</a></li>
-</ul></li>
+<li class="chapter" data-level="19" data-path="r-details.html"><a href="r-details.html"><i class="fa fa-check"></i><b>19</b> R details</a><ul>
+<li class="chapter" data-level="" data-path="r-details.html"><a href="r-details.html#installation-intro"><i class="fa fa-check"></i>Installation</a></li>
 <li class="chapter" data-level="" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i>Loading packages</a></li>
 <li class="chapter" data-level="" data-path="named-colours.html"><a href="named-colours.html"><i class="fa fa-check"></i>Named colours in R</a><ul>
 <li class="chapter" data-level="" data-path="named-colours.html"><a href="named-colours.html#color-brewer"><i class="fa fa-check"></i>ColourBrewer with ggplot</a></li>
@@ -333,7 +333,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="part"><span><b>V Sharing</b></span></li>
-<li class="chapter" data-level="21" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html"><i class="fa fa-check"></i><b>21</b> Sharing and publishing your work</a><ul>
+<li class="chapter" data-level="20" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html"><i class="fa fa-check"></i><b>20</b> Sharing and publishing your work</a><ul>
 <li class="chapter" data-level="" data-path="extract-results-from-models.html"><a href="extract-results-from-models.html"><i class="fa fa-check"></i>Extracting results from models</a></li>
 <li class="chapter" data-level="" data-path="process-model-results.html"><a href="process-model-results.html"><i class="fa fa-check"></i>Process your results</a></li>
 <li class="chapter" data-level="" data-path="output-tables.html"><a href="output-tables.html"><i class="fa fa-check"></i>Printing tables</a></li>
@@ -342,10 +342,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#t-test"><i class="fa fa-check"></i>T-test</a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#anova-1"><i class="fa fa-check"></i>Anova</a></li>
 <li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#multilevel-models"><i class="fa fa-check"></i>Multilevel models</a></li>
-<li class="chapter" data-level="21.0.1" data-path="apa-output.html"><a href="apa-output.html#publication"><i class="fa fa-check"></i><b>21.0.1</b> Publication</a></li>
+<li class="chapter" data-level="20.0.1" data-path="apa-output.html"><a href="apa-output.html#publication"><i class="fa fa-check"></i><b>20.0.1</b> Publication</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>22</b> References</a></li>
+<li class="chapter" data-level="21" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>21</b> References</a></li>
 </ul>
 
       </nav>
@@ -365,11 +365,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="multilevel-models" class="section level1">
 <h1><span class="header-section-number">14</span> Multilevel models</h1>
-<p>This chapter assumes:</p>
-<ul>
-<li>You know what a multilevel model is</li>
-<li>…</li>
-</ul> 
+<p>Psychological data often contains natural <em>groupings</em>. In intervention research, multiple patients may be treated by individual therapists, or children taught within classes, which are further nested within schools; in experimental research participants may respond on multiple occasions to a variety of stimuli.</p>
+<p>Although disparate in nature, these groupings share a common characteristic: they induce <em>dependency</em> between the observations we make. That is, our data points are <em>not independently sampled</em> from one another.</p>
+<p>When data are clustered int his way then multilevel, sometimes called linear mixed models, serve two purposes:</p>
+<ol style="list-style-type: decimal">
+<li><p>They overcome limitations of conventional models which assume that data <em>are</em> independently sampled (<a href="clustering.html#clustering">read a more detailed explanation of why handling non-independence properly matters</a>)</p></li>
+<li><p>They allow us to answer substantive questions about <em>sources of variation</em> in our data.</p></li>
+</ol>
+<div id="repeated-measures-anova-and-beyond" class="section level6 unnumbered">
+<h6>Repeated measures Anova and beyond</h6>
+<p>RM Anova is another technique which relaxes the assumption of independent sampling, and is widely used in psychology: it is common that participants make repeated responses which can be categorised by various experimental variables (e.g. time, condition).</p>
+<p>However RM Anova is just a special case of a much wider family of models: linear mixed models, but one which makes a number of restrictions which can be invonvenient, inefficient, or unreasonable.</p>
+</div>
+<div id="substantive-questions-about-variation" class="section level6 unnumbered">
+<h6>Substantive questions about variation</h6>
+<p>Additionally, rather than simply ‘managing’ the non-independence of observations — treating it is a kind of nuisance to be eliminated — mixed models can allow researchers to focus on the sources of variation in their data directly.</p>
+<p>It can be of substantive interest to estimate <a href="icc-and-vpc.html#icc-and-vpc">how much variation in the outcome is due to different levels of the nested structure</a>. For example, in a clinical trial researchers might want to know how much influence therapists have on their clients’ outcome: if patients are ‘nested’ within therapists then multilevel models can estimate the variation between therapists (the ‘therapist effect’) and variation ‘within’ therapists (i.e. variation between clients).</p>
+</div> 
 </div>
             </section>
 
@@ -377,7 +389,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="mediation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="the-sleepstudy-data-and-traditional-rm-anova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="fitting-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

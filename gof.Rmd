@@ -3,61 +3,60 @@ title: 'Goodness of fit statistics'
 output: bookdown::tufte_html2
 ---
 
-
-
 ## Goodness of fit statistics {- #gof}
 
-It's worth noting that many 'goodness of fit' statistics are misnamed and are in fact indexing 'badness of fit'. This applies to RMSEA, \Chi^2^, BIC, AIC and others.
+It's worth noting that many 'goodness of fit' statistics are misnamed and are in fact indexing 'badness of fit'. This applies to RMSEA, \chi^2^, BIC, AIC and others.
 
 However all of these indices are trying to solve similar problems in subtly different ways. The problem is that we would like a model which:
 
-- Fits the data we have and also
+- Fits the data we have *and also*
 - Predicts new data 
 
-You might think that these goals would be aligned and that a model which fits the data we have would also be good ad predicting new data, but this isn't the case. In fact, if we '[overfit](#over-fitting)' our current data we won't be able to predict new observations very accurately.
+You might think that these goals would be aligned and that a model which fits the data we have would also be good ad predicting new data, but this isn't the case. In fact, if we [overfit](#over-fitting) our current data we won't be able to predict new observations very accurately.
 
-For this reason most fit indices attempt to:
+
+#### How fit indices work {-}
+
+There is a tradeoff involved to avoid over-fitting the data, and most fit indices attempt to:
 
 - Quantify how well the model fits the current data but
 - Penalise models which use many parameters (i.e. those in danger of overfitting)
 
-
-Each formula for a goodness of fit statistic represents a different tradeoff between these goals. For this 
-
+Each formula for a goodness of fit statistic represents a different tradeoff between these goals.
 
 
 
 
-#### {- .admonition }
+#### {- .tip }
 
-Model fit statistics are useful but can be misleading and misused. See
-David Kenny's page on model fit for more details:
+Model fit statistics are useful but can be misleading and misused. See David Kenny's page on model fit for more details:
 <http://davidakenny.net/cm/fit.htm>
 
 
 
-#### RMSEA {-}
+#### {- #common-fit-indices}
+Below are some of the most useful and commonly reported GOF statistics for CFA and SEM models:
 
-MacCallum, Browne and Sugawara (1996) have used 0.01, 0.05, and 0.08 to
-indicate excellent, good, and mediocre fit, respectively.
 
-RMSEA &lt; .05 often used as a cutoff for a reasonably fitting model,
-athough others suggest .1.
 
-RMSEA is also used to calculate the 'probability of a close fit' or
-pclose statistic — this is the probability that the RMSEA is under 0.05.
+#### Root Mean Square Error of Approximation (RMSEA) {-}
+
+MacCallum, Browne and Sugawara (1996) have used 0.01, 0.05, and 0.08 to indicate excellent, good, and mediocre fit, respectively.
+
+RMSEA &lt; .05 often used as a cutoff for a reasonably fitting model, athough others suggest .1.
+
+RMSEA is also used to calculate the 'probability of a close fit' or pclose statistic — this is the probability that the RMSEA is under 0.05.
 
 
 
 
 #### Comparative fit index (CFI) {-}
 
-CFI (and the related TLI) assesses the relative improvement in fit of
-your model compared with the baseline model.
+CFI (and the related TLI) assesses the relative improvement in fit of your model compared with the baseline model.
 
-Ranges between 0 and 1.
+CFI ranges between 0 and 1.
 
-Conventional threshold for a good fitting model is for CFI to be &gt; .9
+The conventional (rule of thumb) threshold for a good fitting model is for CFI to be > .9
 
 
 
@@ -65,26 +64,23 @@ Conventional threshold for a good fitting model is for CFI to be &gt; .9
 
 #### Akaike Information Criterion (AIC) and Bayesian Information Criterion (BIC) {-}
 
-The AIC and BIC are measures of comparative fit, so can be used when
-models are non-nested (and therefore otherwise not easily comparable).
+The AIC and BIC are measures of comparative fit, so can be used when models are non-nested (and therefore otherwise not easily comparable).
 
 AIC is particularly attractive because it corresponds to a measure of *predictive* accuracy. That is, selecting the model with the smallest AIC is one way of asking: "which model is most likely to accurately predict new data?"
 
 
 
 
-#### Things which can influence fit statistics {-}
+#### Factors which can influence fit statistics {-}
 
 All of the following can influence or bias fit statistics:
 
--   Number of variables (although this is not well understood. RMSEA
-    goes down with more variables, but other fit statistics
-    will increase).
+-   Number of variables (although note RMSEA trends to reduce with more parameters included, but other fit statistics will increase).
 -   Model complexity (different statistics reward parsimony to
     different degrees).
 -   Sample size (varies by statistic: some increase and others decrease
     with sample size).
--   Non-normality (will worsen fit).
+-   Non-normality of outcome data will (tend to) worsen fit.
 
 
 
@@ -106,33 +102,5 @@ However, you should almost never just report a single model, and so:
 This set of slides on model fit provides all fo the formulae and an
 explanation for many different fit indices:
 <http://www.psych.umass.edu/uploads/people/79/Fit_Indices.pdf>
-
-
-
-
-### Model modification and improvment {- #model-improvement}
-
-Modification indices are a way of improving your model by identifying
-parameters which, if included, would improve model fit (or constraints removed). However, remember that:
-
--   Use of modification indices should be informed by theory
--   MI may suggest paths which don't make substantive sense
-
-[It's very important to avoid adding paths in a completely data-driven way because this is almost certain to lead to [over-fitting](#over-fitting).]
-
-
-It's also important to work one step at a time, because the table of modification indices may change as you add additional paths. For example, the path second largest MI value may change once you add the path with the largest MI to the model.
-
-
-The basic steps to follow are:
-
-1.  Run a simple, theoretically-derived model
-2.  Notice it fits badly
-3.  Add any additional paths which make theoretical sense
-4.  Check GOF; If it still fits badly then,
-5.  Run MI and identify the largest value
-6.  If this parameter makes theoretical sense, relax the constraint
-7.  Re-run the model and return to step 4
-
 
 

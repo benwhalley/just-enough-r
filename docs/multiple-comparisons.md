@@ -714,6 +714,144 @@ lsmeans::contrast(eysenck.lsm, "tukey")
 
 
 
+### Followup tests using `lmer` {- #contrasts-lmer }
+
+Many of the contrasts possible after lm and Anova models are also possible using `lmer` for [multilevel models](#multilevel-models).
+
+Let's say we repeat one of the models from above, looking at the effect of `Days` of sleep deprivation on reaction times:
+
+
+
+```r
+sleep <- lme4::sleepstudy %>% mutate(Days=factor(Days))
+m <- lmer(Reaction~Days+(1|Subject), data=sleep)
+anova(m)
+## Analysis of Variance Table of type III  with  Satterthwaite 
+## approximation for degrees of freedom
+##      Sum Sq Mean Sq NumDF DenDF F.value    Pr(>F)    
+## Days 166235   18471     9   153  18.703 < 2.2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+[One quirk of `lsmeansLT` is that you can't specify that a variable is a factor within a formula. So the model `lmer(Reaction~factor(Days)+(1|Subject), data=lme4::sleepstudy)` would be fine, and we could use it with `lsmeansLT` to get cell means, but this would later fail if we tried to calculate contrasts. This is why in the example we transform `Days` to be a factor in in a copy of the dataframe, and then run the model.]{.tip}
+
+
+We can see a significant effect of `Days`, and so want to compute followup tests. 
+
+To first estimate cell means and create an `lsmeans` object, you can use the `lsmeans()` function in the `lsmeans::` package:
+
+
+```r
+m.lsm <- lsmeans::lsmeans(m, "Days")
+m.lsm
+##  Days   lsmean       SE    df lower.CL upper.CL
+##  0    256.6518 11.45778 41.98 233.5288 279.7748
+##  1    264.4958 11.45778 41.98 241.3727 287.6188
+##  2    265.3619 11.45778 41.98 242.2389 288.4849
+##  3    282.9920 11.45778 41.98 259.8690 306.1150
+##  4    288.6494 11.45778 41.98 265.5264 311.7724
+##  5    308.5185 11.45778 41.98 285.3954 331.6415
+##  6    312.1783 11.45778 41.98 289.0552 335.3013
+##  7    318.7506 11.45778 41.98 295.6276 341.8736
+##  8    336.6295 11.45778 41.98 313.5065 359.7525
+##  9    350.8512 11.45778 41.98 327.7282 373.9742
+## 
+## Degrees-of-freedom method: satterthwaite 
+## Confidence level used: 0.95
+```
+
+
+We could extract these estimates and plot them if required:
+
+
+```r
+m.lsm.df <- m.lsm %>% broom::tidy()
+m.lsm.df %>% 
+  ggplot(aes(Days, estimate, ymin=conf.low, ymax=conf.high)) + 
+  geom_pointrange() + 
+  ylab("RT")
+```
+
+<img src="multiple-comparisons_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+
+
+If we wanted to compare each day against every other day we can use `contrast()`:
+
+
+```r
+m.tukey <- lsmeans::contrast(m.lsm, 'tukey') 
+m.tukey
+##  contrast    estimate       SE     df t.ratio p.value
+##  0 - 1     -7.8439500 10.47531 152.99  -0.749  0.9991
+##  0 - 2     -8.7100944 10.47531 152.99  -0.831  0.9980
+##  0 - 3    -26.3402056 10.47531 152.99  -2.515  0.2692
+##  0 - 4    -31.9976167 10.47531 152.99  -3.055  0.0770
+##  0 - 5    -51.8666500 10.47531 152.99  -4.951  0.0001
+##  0 - 6    -55.5264500 10.47531 152.99  -5.301  <.0001
+##  0 - 7    -62.0987778 10.47531 152.99  -5.928  <.0001
+##  0 - 8    -79.9777000 10.47531 152.99  -7.635  <.0001
+##  0 - 9    -94.1994167 10.47531 152.99  -8.993  <.0001
+##  1 - 2     -0.8661444 10.47531 152.99  -0.083  1.0000
+##  1 - 3    -18.4962556 10.47531 152.99  -1.766  0.7554
+##  1 - 4    -24.1536667 10.47531 152.99  -2.306  0.3914
+##  1 - 5    -44.0227000 10.47531 152.99  -4.203  0.0018
+##  1 - 6    -47.6825000 10.47531 152.99  -4.552  0.0004
+##  1 - 7    -54.2548278 10.47531 152.99  -5.179  <.0001
+##  1 - 8    -72.1337500 10.47531 152.99  -6.886  <.0001
+##  1 - 9    -86.3554667 10.47531 152.99  -8.244  <.0001
+##  2 - 3    -17.6301111 10.47531 152.99  -1.683  0.8033
+##  2 - 4    -23.2875222 10.47531 152.99  -2.223  0.4457
+##  2 - 5    -43.1565556 10.47531 152.99  -4.120  0.0024
+##  2 - 6    -46.8163556 10.47531 152.99  -4.469  0.0006
+##  2 - 7    -53.3886833 10.47531 152.99  -5.097  <.0001
+##  2 - 8    -71.2676056 10.47531 152.99  -6.803  <.0001
+##  2 - 9    -85.4893222 10.47531 152.99  -8.161  <.0001
+##  3 - 4     -5.6574111 10.47531 152.99  -0.540  0.9999
+##  3 - 5    -25.5264444 10.47531 152.99  -2.437  0.3118
+##  3 - 6    -29.1862444 10.47531 152.99  -2.786  0.1506
+##  3 - 7    -35.7585722 10.47531 152.99  -3.414  0.0274
+##  3 - 8    -53.6374944 10.47531 152.99  -5.120  <.0001
+##  3 - 9    -67.8592111 10.47531 152.99  -6.478  <.0001
+##  4 - 5    -19.8690333 10.47531 152.99  -1.897  0.6712
+##  4 - 6    -23.5288333 10.47531 152.99  -2.246  0.4303
+##  4 - 7    -30.1011611 10.47531 152.99  -2.874  0.1223
+##  4 - 8    -47.9800833 10.47531 152.99  -4.580  0.0004
+##  4 - 9    -62.2018000 10.47531 152.99  -5.938  <.0001
+##  5 - 6     -3.6598000 10.47531 152.99  -0.349  1.0000
+##  5 - 7    -10.2321278 10.47531 152.99  -0.977  0.9932
+##  5 - 8    -28.1110500 10.47531 152.99  -2.684  0.1898
+##  5 - 9    -42.3327667 10.47531 152.99  -4.041  0.0033
+##  6 - 7     -6.5723278 10.47531 152.99  -0.627  0.9998
+##  6 - 8    -24.4512500 10.47531 152.99  -2.334  0.3734
+##  6 - 9    -38.6729667 10.47531 152.99  -3.692  0.0112
+##  7 - 8    -17.8789222 10.47531 152.99  -1.707  0.7901
+##  7 - 9    -32.1006389 10.47531 152.99  -3.064  0.0750
+##  8 - 9    -14.2217167 10.47531 152.99  -1.358  0.9379
+## 
+## P value adjustment: tukey method for comparing a family of 10 estimates
+```
+
+Or we might want to see if there was a significant change between any consecutive days (it doesn't look like there was):
+
+
+```r
+m.contrast.consecutive <- lsmeans::contrast(m.lsm, 'consec', method="fdr") 
+m.contrast.consecutive
+##  Days_consec   estimate       SE     df t.ratio p.value
+##  1 - 0        7.8439500 10.47531 152.99   0.749  0.4551
+##  2 - 1        0.8661444 10.47531 152.99   0.083  0.9342
+##  3 - 2       17.6301111 10.47531 152.99   1.683  0.0944
+##  4 - 3        5.6574111 10.47531 152.99   0.540  0.5899
+##  5 - 4       19.8690333 10.47531 152.99   1.897  0.0597
+##  6 - 5        3.6598000 10.47531 152.99   0.349  0.7273
+##  7 - 6        6.5723278 10.47531 152.99   0.627  0.5313
+##  8 - 7       17.8789222 10.47531 152.99   1.707  0.0899
+##  9 - 8       14.2217167 10.47531 152.99   1.358  0.1766
+```
+
+
+
 
 
 <!-- 

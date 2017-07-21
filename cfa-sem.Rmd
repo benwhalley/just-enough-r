@@ -6,7 +6,7 @@ output:
 
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE, message=F)
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE, message=F, warning = F)
 library(tufte)
 library(tidyverse)
 library(pander)
@@ -26,6 +26,9 @@ Nice reference guide: https://www.scribd.com/document/238478414/Beaujean-Latent-
 
 -->
 
+>The CFA examples were adapted from a guide originally produced by Jon May
+
+
 
 This section covers path analysis (path models), confirmatory factor analysis (CFA) and structural equation modelling (SEM). You are encouraged to work through the path models and CFA sections, and especially the material on assessing model fit, before tacking SEM.
 
@@ -43,7 +46,7 @@ library(lavaan)
 ```
 
 
-[The CFA examples were adapted from a guide originally produced by Jon May]{.explainer}
+
 
 
 
@@ -247,6 +250,7 @@ semPlot::semPaths(hz.fit, "std")
 To examine the model fit we use `fitmeasures()` and pass a list of the names of the fit indices we would like calculated:
 
 ```{r}
+library(lavaan)
 fitmeasures(hz.fit, c('cfi', 'rmsea', 'rmsea.ci.upper', 'bic')) 
 ```
 
@@ -302,26 +306,334 @@ fitmeasures(hz.fit.2, c('cfi', 'rmsea', 'rmsea.ci.upper', 'bic'))
 RMSEA has improved somewhat, but we'd probably want to investigate this model further, and make additional improvements to it (although see the notes on [model improvements](#model-improvement))
 
 
-## Missing data {-}
 
-If you have missing data, add the argument `estimator='MLM'` to the `cfa()` function to use a [robust method](https://en.wikipedia.org/wiki/Robust_statistics). There are no missing data in this dataset, but it would look like this:
 
-```{r}
-hz.fit.2.mlm <- cfa(hz.model.2, data=hz, estimator="MLM")
-hz.fit.2.mlm
+
+
+
+
+
+
+
+## Model modification and improvement {- #model-improvement}
+
+Modification indices are a way of improving your model by identifying
+parameters which, if included, would improve model fit (or constraints removed). However, remember that:
+
+-   Use of modification indices should be informed by theory
+-   MI may suggest paths which don't make substantive sense
+
+[It's very important to avoid adding paths in a completely data-driven way because this is almost certain to lead to [over-fitting](#over-fitting).]{.tip}
+
+
+It's also important to work one step at a time, because the table of modification indices may change as you add additional paths. For example, the path second largest MI value may change once you add the path with the largest MI to the model.
+
+
+The basic steps to follow are:
+
+1.  Run a simple, theoretically-derived model
+2.  Notice it fits badly
+3.  Add any additional paths which make theoretical sense
+4.  Check GOF; If it still fits badly then,
+5.  Run MI and identify the largest value
+6.  If this parameter makes theoretical sense, relax the constraint
+7.  Re-run the model and return to step 4
+
+
+
+
+
+## Structural eqution modelling (SEM) {- #sem}
+
+Combining Path models and CFA to create structural equation models (SEM) allows researchers to combine allow for measurment imperfection whilst also (attempting to) infer information about causation. 
+
+SEM involves adding paths to CFA models which are, like predictors in standard regression models, are assumed to be causal in nature; i.e. rather than variables $x$ and $y$ simply covarying with one another, we are prepared to make the assumption that $x$ causes $y$.
+
+It's worth pointing out though, right from the offset,  that *causal relationships drawn from SEM models always dependent on assumptions we are prepared to make when setting up our model*. There is nothing magical in the technique that makes allows us to infer causality from non-experimental data (although note SEM can be used for some experimental analyses). 
+
+It is only be our substantive knowledge of the domain that makes any kind of causal inference reasonable, and when using SEM the onus is always *on us* to check our assumptions, provide sensitivity analyses which test alternative causal models, and interpret observational data cautiously.
+
+[Note, there are techniques which use SEM as a means to make stronger kinds of causal statements, for example [instrumental variable analysis](https://en.wikipedia.org/wiki/Instrumental_variable), but even here, inferring causality still requires that we make strong assumptions about the process which generated our data.
+
+Nonetheless, with these caveats in mind, SEM can be a useful technique to quantify relationships been observed variables where we have measurement error, and especially where we have a theoretical model linking these observations.
+
+
+
+#### Steps to running an SEM {-}
+
+1. Identify and test the fit of a *measurement model*. This is a CFA model which includes all of your observed variables, arranged in relation to the latent variables you think generated the data, and where covariances between all these latent variables are included. This step many include [many rounds of model fitting and modification](#model-improvement).
+
+2. Ensure your measurement model [fits the data adequately](#gof) before continuing. Test alternative or simplified measurements models and report where these perform well (e.g. are close in fit to your desired model). SEM models that are based on a poorly fitting measurment model will produce parameter estimates that are imprecise, unstable or both, and you should not proceed unless an adequately fitting measrement model is founds ([see this nice discussion, which includes relevant references](https://stats.stackexchange.com/a/143465/)).
+
+3. Convert your measurement model by removing covariances between latent variables, and including new structural paths. Test model fit, and interpret the paths of interest. Avoid making changes to the measurement part of the model at this stage. Where the model is complex consider adjusting *p* values to allow for multuple comparisons (if using NHST).
+
+4. Test alternative models (e.g. with paths removed or reversed). Report where alternatives also fit the data.
+
+5. In writing up, provide sufficient detail for other researchers to replicate your analyses, and to follow the logic of the ammendments you make. Ideally share your raw data, but at a minimum share the covariance matrix. Report GOF statistics, and [follow published reporting guidelines for SEM](#XXXTODO). Always include a diagram of your final model (at the least).
+
+
+
+
+#### A worked example: Building from a measurement model to SEM {-}
+
+```{r, include=F}
+library(lavaan)
+model.tpb.gen <- ' 
+  AT =~ a1 + .7*a2+ .5*a3+ .4*sn1 + .4*sn2
+  SN =~ sn1 + .45*sn2 + .5*sn3 + .6*sn4 + .5*a1
+  PBC =~ pc1 + .8*pc2 + .7*pc3 + .4*pc4 + .6*pc5
+  intention ~ .3*AT + .3*SN + .5*PBC
+  exercise ~ 1*intention + .6*PBC 
+  AT ~~ .3 * SN
+'  
+set.seed(1234)
+drop5pc <- function(l) ifelse(rbinom(length(l), 1, .05)==1, NA,  l)
+
+tpb.df <- simulateData(model.tpb.gen, sample.nobs=487,  debug=F) %>% 
+  rowwise() %>% 
+  mutate(
+    exercise = max(0, round(exercise * 10 + 80)),
+    intention = max(0, intention * 2 + 10)
+  ) %>% 
+  mutate_each(funs(drop5pc), a1, a2, sn4, intention)
+
 ```
 
 
 
+Imagine we have some data from a study that aimed to test the theory of planned behaviour. Researcher measured exercise and intentions, along with multiple measures of attitudes, social norms and percieved behavioural control. 
 
-## Structural eqution modelling {- #sem}
-
-
-
-
-- do CFA first
-- lavaan for structural models
+```{r}
+tpb.df %>% psych::describe(fast=T)
+```
 
 
+There were some missing data, but nothing to suggest a systematic pattern. For the moment we continue with standard methods:
 
+
+```{r}
+mice::md.pattern(tpb.df) 
+```
+
+
+
+We start by fitting a measurement model. The model sytax includes lines with 
+
+- `=~` separatatig left and right hand side (to define the latents)
+- `~~` to specify latent covariances
+
+We are not including `exercise` and `intention` yet because these are observed variables only (we don't have multiple measurements for them) and so they don't need to be in the measurement model:
+
+```{r}
+mes.mod <- ' 
+  # the "measurement" part, defining the latent variables
+  AT =~ a1 + a2 + a3 + sn1
+  SN =~ sn1 + sn2 + sn3 + sn4
+  PBC =~ pc1 + pc2 + pc3 + pc4 + pc5
+  
+  # note that lavaan automatically includes latent covariances
+  # but we can add here anyway to be explicit
+  AT ~~ SN
+  SN ~~ PBC
+  AT ~~ PBC
+'  
+```
+
+We can fit this model to the data like so:
+
+```{r}
+mes.mod.fit <- cfa(mes.mod, data=tpb.df)
+summary(mes.mod.fit)
+```
+
+And we can assess model fit using `fitmeasures`. Here we select a subset of the possible fit indices to keep the output manageable.
+
+```{r}
+useful.fit.measures <- c('chisq', 'rmsea', 'cfi', 'aic')
+fitmeasures(mes.mod.fit, useful.fit.measures)
+```
+
+
+This model looks pretty good (see the [guide to fit indices](#common-fit-indices)), but still check [modification indices to identify improvements](#model-improvement). If they made theoretical sense we might choose to add paths:
+
+```{r}
+modificationindices(mes.mod.fit) %>% 
+  as.data.frame() %>% 
+  filter(mi>4) %>% 
+  arrange(-mi) %>% 
+  pander(caption="Modification indices for the measurement model")
+```
+
+
+However, in this case unless we had substantive reasons to add the paths, it would probably be reasonable to continue with the original model.
+
+
+
+##### Measurement model fits, so proceed to SEM {-}
+
+Our SEM model adapts the CFA (measurement model), including additional observed variables (e.g. intention and exercise) and any relevant structural paths:
+
+```{r}
+sem.mod <- ' 
+  # this section identical to measurement model
+  AT =~ a1 + a2 + a3 + sn1
+  SN =~ sn1 + sn2 + sn3 + sn4
+  PBC =~ pc1 + pc2 + pc3 + pc4 + pc5
+
+  # additional structural paths
+  intention ~ AT + SN + PBC
+  exercise ~ intention
+'
+```
+
+
+We can fit it as before, but now using the `sem()` function rather than the `cfa()` function:
+
+
+```{r}
+sem.mod.fit <- cfa(sem.mod, data=tpb.df)
+```
+
+The first thing we do is check the model fit:
+
+```{r}
+fitmeasures(sem.mod.fit, useful.fit.measures)
+```
+
+
+RMSEA is slightly higher than we like, so we can check the modification indices:
+
+
+
+```{r}
+sem.mi <- modificationindices(sem.mod.fit) %>% 
+  as.data.frame() %>% 
+  arrange(-mi)
+
+sem.mi %>% 
+  head(6) %>% 
+  pander(caption="Top 6 modification indices for the SEM model")
+```
+
+
+Interestingly, this model suggests two additional paths involving `exercise` and the `PBC` latent:
+
+```{r}
+sem.mi %>% 
+  filter(lhs %in% c('exercise', 'PBC') & rhs %in% c('exercise', 'PBC')) %>% 
+  pander()
+```
+
+
+Of these suggested paths, the largest MI is for the one which says PBC is predicted by exercise. However, the model would also be improved by allowing PBC to predict exercise.
+Which should we add?
+
+***The answer will depend on both previous theory and knowledge of the data.***
+
+If it were the case that exercise was measured at a later time point than PBC. In this case the decision is reasonably clear, because the temporal sequencing of observations would determine the most likely path. These data were collected contemporaneously, however, and so we can't use our *design* to differentiate the causal possibilities.
+
+Another consideration would be that, by adding a path from exercise to PBC we would make the [model non-recursive](#identification-recursion), and likely [non-identified](#identification).
+
+A theorist might also argue that because previous studies, and the theory of planned behaviour itself, predict that PBC may exert a direct influence on behaviour, we should add the path with the smaller MI (so allow PBC to predict exercise).
+
+In this case, the best course of action would probably be to report the theoretically implied model, but also test alternative models in which causal relations between the variables are reversed or otherwise altered (along with measures of fit and key parameter estimates). The discussion of your paper would then make the case for your preferred account, but make clear that the data were (most likely) unable to provide a persuasive case either way, and that alternative explanations cannot be ruled out.
+
+
+
+
+##### Interpreting and presenting key parameters {-}
+
+One of the best ways to present estimates from your final model is in a diagram, because this is intutive and provides a simple way for readers to comprehend the paths implied by your model.
+
+We can automatically generate a plot from a fitted model using `semPaths()`. Here, the `what='std'` is requesting standardised parameter estimates be shown. Adding `residuals=F` hides variances of observed and latent variables, which are not of interest here. The line thicknesses are scaled to represent the size parameter itself:
+
+```{r}
+semPlot::semPaths(sem.mod.fit, what='std', residuals=F)
+```
+
+
+For more information on reporting SEM however, see @schreiber2006reporting.
+
+
+
+
+
+
+
+
+## 'Identification' in CFA and SEM {- #identification}
+
+Identification refers to the idea that a model is 'estimable', or more specifically whether there is a single best solution for the parameters specified in the model. An analogy would be the 'line of best fit' in regression - if we could draw two lines that fit the data equally well then our method doesn't enable us to choose between these possibilities, and is essentially meaningless (or uninterpretable, anyway).
+
+This is a complex topic, but David Kenny has
+an excellent page here which covers identification in lots of detail:
+<http://davidakenny.net/cm/identify.htm>. Some of the key ideas to
+takeaway are:
+
+####  {- #identification-recursion}
+
+-   Feedback loops and other non-recursive models are likely to cause
+    problems without special attention.
+    
+-   Latent variables need a scale. To do this either fix their variance,
+    or fix a factor loading to 1.
+    
+-   You need 'enough data'. Normally this will be at least 3 measured
+    variables per latent. Sometimes 2 is enough, provided the errors of
+    these variables are uncorrelated, but you may struggle to fit models
+    because of 'empirical under-identification'^[Note, indicators themselves should be correlated with one another in a bivariate correlation matrix. It's only the errors which should be uncorrelated.]
+    
+-   If a model is non-identified, it may either i) fail to run or,
+    worse, ii) produce spurious results.
+
+
+##### Rule B {-}
+
+For structural models, 'Rule B' also applies when deciding when a model is identified: No more than one of the following statements should be true about variables or latents in your
+model:
+
+-   X directly causes Y
+-   Y directly causes X
+-   X and Y have a correlated disturbance
+-   X and Y are correlated exogenous variables
+
+But see <http://davidakenny.net/cm/identify_formal.htm#RuleB> for a proper explanation.
+
+
+
+
+
+
+
+<!-- TODO improve with notes from 557 -->
+
+
+## Missing data {- #cfa-sem-missing-data}
+
+If you have missing data  you can use the `missing = "ML"` argument to ask lavaan to estimate the 'full information maximum likelihood' (see <http://lavaan.ugent.be/tutorial/est.html>).
+
+```{r}
+# fit ML model including mean structure to make comparable with FIML fit below
+# (means are always included with FIML model fits)
+sem.mod.fit <- sem(sem.mod, data=tpb.df, meanstructure=TRUE)
+
+# fit again including missing data also
+sem.mod.fit.fiml <- sem(sem.mod, data=tpb.df, missing="ML")
+```
+
+
+It doesn't look like the parameter estimates change much. To compare them explicitly we can extract the relevant coefficients from each (they don't look all that different):
+
+```{r}
+library(apastats)
+bind_cols(
+  parameterestimates(sem.mod.fit) %>% 
+    select(lhs, op, rhs, est, pvalue) %>% 
+    rename(ml=est, ml.p = pvalue),
+  parameterestimates(sem.mod.fit.fiml) %>% 
+    transmute(fiml=est, fiml.p = round.p(pvalue))) %>% 
+  filter(op=="~") %>% 
+  mutate(ml = t.round(ml), fiml = t.round(fiml), ml.p = round.p(ml.p)) %>% 
+  pander("Comparison of ML and MLM parameter estimates.")
+```
 

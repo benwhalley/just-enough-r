@@ -34,13 +34,15 @@ rmd_files:
     "power-analysis.Rmd",
     
 
-    "additional-stubs.Rmd",
+    # "additional-stubs.Rmd",
     "bayes-mcmc.Rmd",
 
     
     "statistical-explanations.Rmd",
     "confidence-vs-prediction-intervals.Rmd",
     "multiple-comparisons.Rmd",
+    "clustering.Rmd",
+    "fixed-or-random.Rmd",
     "link-functions.Rmd",
     "over-fitting.Rmd",
     "gof.Rmd",
@@ -58,15 +60,3 @@ rmd_files:
 
     "references.Rmd"
   ]
-
-
-
-
-
-
-
-
-
-
-
-

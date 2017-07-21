@@ -300,6 +300,7 @@ At this point, given the [many other advantages of linear mixed models over trad
 It would be best at this point to [jump straight to the main section multilevel or mixed-effects models](#multilevel-models), but to give one brief example of mixed models in use:
 
 
+#### {- #sleepstudy-rmanova}
 
 The `sleepstudy` dataset in the `lme4` package provides reaction time data recorded from participants over a period of 10 days, during which time they were deprived of sleep.
 

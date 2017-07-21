@@ -69,8 +69,8 @@ Part 2 can be read sequentially, but the chapters are also designed to work as s
 
 - [Mediation](#mediation)
 - [Meta analysis](#meta-analysis)
-- Scale construction
-- 'Reliability' analyses (inter rater reliability etc.)
+<!-- - Scale construction -->
+<!-- - 'Reliability' analyses (inter rater reliability etc.) -->
 - [Confirmatory factor analysis](#cfa) 
 - [Structural Equation Modelling](#sem)
 - [Power analysis](#power-analysis)

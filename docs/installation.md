@@ -8,17 +8,17 @@ output:
 
 
 
-## Installation {- #installation-intro}
+### Installation {- #installation-intro}
 
 
-### RStudio Server {- #rstudio-server}
+#### RStudio Server {- #rstudio-server}
 
 The simplest way to get started with RStudio is to get an account on a server installation of the software (if you are a Plymouth University student please see the guidance on the DLE).
 
 
 
 
-### Installing on your own machine. {- #local-install}
+#### Installing on your own machine. {- #local-install}
 
 
 1. [Download RStudio 1.01 or later](https://www.rstudio.com/products/rstudio/download/) (I'd suggest using whatever version is most recent and upgrading as new versions become available because the software is fairly actively developed).
@@ -30,7 +30,7 @@ The simplest way to get started with RStudio is to get an account on a server in
 
 
 
-### Package dependencies {- #dependencies}
+#### Package dependencies {- #dependencies}
 
 As noted, this guide uses a number of recent R packages to make learning R simpler and more consistent. This requires that the packages are installed first.
 

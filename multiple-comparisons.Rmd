@@ -410,6 +410,59 @@ lsmeans::contrast(eysenck.lsm, "tukey")
 
 
 
+### Followup tests using `lmer` {- #contrasts-lmer }
+
+Many of the contrasts possible after lm and Anova models are also possible using `lmer` for [multilevel models](#multilevel-models).
+
+Let's say we repeat one of the models from above, looking at the effect of `Days` of sleep deprivation on reaction times:
+
+
+```{r}
+sleep <- lme4::sleepstudy %>% mutate(Days=factor(Days))
+m <- lmer(Reaction~Days+(1|Subject), data=sleep)
+anova(m)
+```
+
+[One quirk of `lsmeansLT` is that you can't specify that a variable is a factor within a formula. So the model `lmer(Reaction~factor(Days)+(1|Subject), data=lme4::sleepstudy)` would be fine, and we could use it with `lsmeansLT` to get cell means, but this would later fail if we tried to calculate contrasts. This is why in the example we transform `Days` to be a factor in in a copy of the dataframe, and then run the model.]{.tip}
+
+
+We can see a significant effect of `Days`, and so want to compute followup tests. 
+
+To first estimate cell means and create an `lsmeans` object, you can use the `lsmeans()` function in the `lsmeans::` package:
+
+```{r}
+m.lsm <- lsmeans::lsmeans(m, "Days")
+m.lsm
+```
+
+
+We could extract these estimates and plot them if required:
+
+```{r}
+m.lsm.df <- m.lsm %>% broom::tidy()
+m.lsm.df %>% 
+  ggplot(aes(Days, estimate, ymin=conf.low, ymax=conf.high)) + 
+  geom_pointrange() + 
+  ylab("RT")
+```
+
+
+If we wanted to compare each day against every other day we can use `contrast()`:
+
+```{r}
+m.tukey <- lsmeans::contrast(m.lsm, 'tukey') 
+m.tukey
+```
+
+Or we might want to see if there was a significant change between any consecutive days (it doesn't look like there was):
+
+```{r}
+m.contrast.consecutive <- lsmeans::contrast(m.lsm, 'consec', method="fdr") 
+m.contrast.consecutive
+```
+
+
+
 
 
 <!-- 
