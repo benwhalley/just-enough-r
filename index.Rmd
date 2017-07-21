@@ -75,17 +75,21 @@ Part 2 can be read sequentially, but the chapters are also designed to work as s
 - [Structural Equation Modelling](#sem)
 - [Power analysis](#power-analysis)
 - [Bayes factors (aka what to do when your experiment doesn't work)](#bayes-factors)
-- Bayesian model fitting with MCMC
-- Multiple imputation (e.g. with MICE)
-- Simulation
+- [Bayesian model fitting with MCMC](#bayes-mcmc)
 
+<!-- - Multiple imputation (e.g. with MICE)
+- Simulation
+ -->
 
 #### Part 3: Statistical explanations {-}
 
 The main guide (mostly) assumes you understand the statistical principles which underpin the models you are running. These sections clarify some important or often-confused points.
 
-- [Confidence intervals vs. prediction intervals](confidence-vs-prediction-intervals.html)
-- [Multiple comparisons and *p* values](multiple-comparisons.html)
+- [Confidence intervals vs. prediction intervals](#intervals)
+- [Multiple comparisons and *p* values](#multiple-comparisons)
+- [Clustered data](#clustering)
+- [The distinction between fixed and random effects](#fixed-or-random)
+- [Model comparison and selection](#comparison-and-selection)
 
 
 
@@ -95,20 +99,11 @@ Part 4 should be used interactively to answer questions that arise along the way
 
 Some of the content here is not specific to R, but may be useful in interpreting the output of some of the techniques taught in sections 1 and 2.
 
-- [Installing RStudio](installation.html)
-- [Installing packages](packages.html)
-- [Handling missing values in R](missing-values.html)
-- [Using RMarkdown effectively](rmarkdown-tricks.html) (e.g. using `pander` and `knitr`)
-- [Automatic APA formatting](#apa-output)
-- [Common problems and toubleshooting](#troubles)
 
 
-#### Part 5: Worked examples {-}
+#### Part 5: Sharing and publishing analyses {-}
 
-- A 2x2 quasi-experimental design, in which age and gender are covariates of interest.
-- An applied experimental design comparing 2 treatments with multiple outcomes and followup times.
-- A 2x3x2 mixed experimental design measuring reaction times.
-
+Practical guidance and examples of extracting model results and formatting for APA journals.
 
 
 

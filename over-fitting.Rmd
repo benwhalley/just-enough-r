@@ -4,7 +4,7 @@ output: bookdown::tufte_html2
 ---
 
 
-## Model comparison and selection {-}
+## Model comparison and selection {- #comparison-and-selection}
 
 
 ### Models are imperfect {-}

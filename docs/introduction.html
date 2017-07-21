@@ -311,10 +311,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="link-functions.html"><a href="link-functions.html"><i class="fa fa-check"></i>Link functions and transformation</a><ul>
 <li class="chapter" data-level="" data-path="link-functions.html"><a href="link-functions.html#logistic-link-function"><i class="fa fa-check"></i>Logistic regression</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="model-comparison-and-selection.html"><a href="model-comparison-and-selection.html"><i class="fa fa-check"></i>Model comparison and selection</a><ul>
-<li class="chapter" data-level="" data-path="model-comparison-and-selection.html"><a href="model-comparison-and-selection.html#models-are-imperfect"><i class="fa fa-check"></i>Models are imperfect</a></li>
-<li class="chapter" data-level="" data-path="model-comparison-and-selection.html"><a href="model-comparison-and-selection.html#over-fitting"><i class="fa fa-check"></i>Overfitting/underfitting</a></li>
-<li class="chapter" data-level="" data-path="model-comparison-and-selection.html"><a href="model-comparison-and-selection.html#variable-selection"><i class="fa fa-check"></i>Choosing the ‘right variables’</a></li>
+<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html"><i class="fa fa-check"></i>Model comparison and selection</a><ul>
+<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#models-are-imperfect"><i class="fa fa-check"></i>Models are imperfect</a></li>
+<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#over-fitting"><i class="fa fa-check"></i>Overfitting/underfitting</a></li>
+<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#variable-selection"><i class="fa fa-check"></i>Choosing the ‘right variables’</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="gof.html"><a href="gof.html"><i class="fa fa-check"></i>Goodness of fit statistics</a></li>
 </ul></li>
@@ -399,39 +399,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="sem.html#sem">Structural Equation Modelling</a></li>
 <li><a href="power-analysis.html#power-analysis">Power analysis</a></li>
 <li><a href="#bayes-factors">Bayes factors (aka what to do when your experiment doesn’t work)</a></li>
-<li>Bayesian model fitting with MCMC</li>
-<li>Multiple imputation (e.g. with MICE)</li>
-<li><p>Simulation</p></li>
+<li><p><a href="bayes-mcmc.html#bayes-mcmc">Bayesian model fitting with MCMC</a></p></li>
 </ul>
+<!-- - Multiple imputation (e.g. with MICE)
+- Simulation
+ -->
 </div>
 <div id="part-3-statistical-explanations" class="section level4 unnumbered">
 <h4>Part 3: Statistical explanations</h4>
 <p>The main guide (mostly) assumes you understand the statistical principles which underpin the models you are running. These sections clarify some important or often-confused points.</p>
 <ul>
-<li><a href="confidence-vs-prediction-intervals.html">Confidence intervals vs. prediction intervals</a></li>
-<li><a href="multiple-comparisons.html">Multiple comparisons and <em>p</em> values</a></li>
+<li><a href="intervals.html#intervals">Confidence intervals vs. prediction intervals</a></li>
+<li><a href="multiple-comparisons.html#multiple-comparisons">Multiple comparisons and <em>p</em> values</a></li>
+<li><a href="clustering.html#clustering">Clustered data</a></li>
+<li><a href="fixed-or-random.html#fixed-or-random">The distinction between fixed and random effects</a></li>
+<li><a href="comparison-and-selection.html#comparison-and-selection">Model comparison and selection</a></li>
 </ul>
 </div>
 <div id="part-4-loose-ends" class="section level4 unnumbered">
 <h4>Part 4: Loose ends</h4>
 <p>Part 4 should be used interactively to answer questions that arise along the way.</p>
 <p>Some of the content here is not specific to R, but may be useful in interpreting the output of some of the techniques taught in sections 1 and 2.</p>
-<ul>
-<li><a href="installation.html">Installing RStudio</a></li>
-<li><a href="packages.html">Installing packages</a></li>
-<li><a href="missing-values.html">Handling missing values in R</a></li>
-<li><a href="rmarkdown-tricks.html">Using RMarkdown effectively</a> (e.g. using <code>pander</code> and <code>knitr</code>)</li>
-<li><a href="apa-output.html#apa-output">Automatic APA formatting</a></li>
-<li><a href="#troubles">Common problems and toubleshooting</a></li>
-</ul>
 </div>
-<div id="part-5-worked-examples" class="section level4 unnumbered">
-<h4>Part 5: Worked examples</h4>
-<ul>
-<li>A 2x2 quasi-experimental design, in which age and gender are covariates of interest.</li>
-<li>An applied experimental design comparing 2 treatments with multiple outcomes and followup times.</li>
-<li>A 2x3x2 mixed experimental design measuring reaction times.</li>
-</ul>
+<div id="part-5-sharing-and-publishing-analyses" class="section level4 unnumbered">
+<h4>Part 5: Sharing and publishing analyses</h4>
+<p>Practical guidance and examples of extracting model results and formatting for APA journals.</p>
 </div>
 <div id="a-warning" class="section level3 unnumbered">
 <h3>A warning</h3>
