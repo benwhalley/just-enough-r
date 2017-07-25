@@ -1,0 +1,38 @@
+---
+title: 'More example datasets'
+output:
+  bookdown::tufte_html2
+---
+
+```{r, include=FALSE}
+
+knitr::opts_chunk$set(include=F)
+library(tidyverse)
+library(pander)
+library(lubridate)
+```
+
+
+
+```{r}
+  # data from: https://en.wikipedia.org/wiki/Mile_run_world_record_progression#Men
+miles <-
+  read_csv('data/miletimes.csv') %>%
+  mutate(date=lubridate::dmy(date)) %>% 
+  select(-auto) %>% 
+  separate(time, into=c('m','s'), sep=":") %>% 
+  mutate_each(funs(as.numeric), m,s) %>% 
+  mutate(time=lubridate::seconds(m*60+s)) 
+
+saveRDS(miles, file="data/miles.RDS")
+miles %>% filter(date < lubridate::dmy("01 January 1970")) %>% 
+saveRDS(., file="data/miles-pre-1970.RDS")
+
+miles %>% glimpse
+
+```
+
+
+
+
+
