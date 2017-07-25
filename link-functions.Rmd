@@ -1,0 +1,125 @@
+---
+title: 'Link functions and `glm`'
+output: bookdown::tufte_html2
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+library(tidyverse)
+library(pander)
+library(lmerTest)
+```
+
+
+## Link functions and transformation {- #link-functions}
+
+
+Linear regression models and allows predicted values to rang between negative -∞ (infinity) and +∞.
+
+Where outcome data are continuous and (in theory or if we make a reasonable assumption) this isn't a problem. However for binary or count data this isn't the case.
+
+For binary data we want to predict the probability of a positive response, and this can range between zero and 1.
+
+For count data, responses are always going to be non-negative (i.e. zero or greater).
+
+Logistic and poisson regression extend regular linear regression to allow this to happen by using different 'link functions'. These link functions connect our data (constrained to 0/1 or non-negative integers) to the underlying linear model which allows values between -∞ and +∞.
+
+
+
+
+### Logistic regression {- #logistic-link-function}
+
+When we have binary data, we want to be able run something like regression, but 
+where we predict a *probability* of the outcome. 
+
+Because probabilities are limited to between 0 and 1, we need t transform them to allow them to range bwteen -∞ (infinity) to +∞, becuase this is the scale that our underlying linear model works on.
+
+
+You can think of the solution as coming in two parts:
+
+
+#### Step 1 {-}
+
+As a first step we can transform a probability on the 0---1 scale to a 0
+\rightarrow ∞ scale by using converting it to *odds*, which are expressed as
+ratio:
+
+$$\textrm{odds} = \dfrac{\textrm{probability}}{1-\textrm{probability}}$$
+
+Probabilities and odds ratios are two *equivalent* ways of expressing
+the same idea.
+
+So a probability of .5 equates to an odds ratio of 1 (i.e. 1 to 1); *p*=.6
+equates to odds of 1.5 (that is, 1.5 to 1, or 3 to 2), and *p* = .95
+equates to an odds ratio of 19 (19 to 1).
+
+[*If a bookie gives odds of 66:1 on a horse, what probability
+does he think it has of winning?*]{.exercise}
+
+Odds convert or *map* probabilities from 0 to 1 onto the [real
+numbers](http://en.wikipedia.org/wiki/Real_number) from 0 to ∞.
+
+
+```{r, echo=F, fig.cap="Probabilities converted to the odds scale. As p approaches 1 Odds goes to infinity."}
+df <- data.frame(x = c(.01, .99))
+odds <- function(p) p/(1-p)
+ggplot(df, aes(x)) +
+  stat_function(fun = odds, colour = "red") +
+  ylab("Odds") + 
+  xlab("Probability") + coord_flip()
+```
+
+
+
+
+##### {- .exercise}
+
+- Is it easier to think about odds or probabilities?
+
+- How easy is it to switch between the two scales in your head? Explain why.
+
+- Should researchers use odds or probability when discussing with members of the public?
+
+
+
+
+
+#### Step 2
+
+The second step is to remove the restriction that when we convert a
+probability the odds must always be > zero. This is important, because we'd like our 'regression' coefficients to be able to vary between -∞ and ∞.
+
+To do this, we take the *logarithm* of the odds --- sometimes called the *logit*.
+
+The figure below shows the transformation of probabilities between 0 and
+1 to the log odds scale. The logit has two nice properties:
+
+1.  First, it flattens the rather square curve for the odds in the
+    figure above, and
+
+2.  Second it converts odds of less than one to negative numbers,
+    because the *log* of a number between 0 and 1 is always
+    negative[^1].
+
+
+
+```{r, echo=F, fig.cap="Probabilities converted to the logit (log-odds) scale. Notice how the slope implies that as probabilities approach 0 or 1 then the logit will get very large."}
+df <- data.frame(
+  x = c(.01, .99)
+)
+
+logit <- function(x) log(x/(1-x))
+
+ggplot(df, aes(x)) +
+  stat_function(fun = logit, colour = "red") +
+  ylab("Log odds (logit)") + 
+  xlab("Probability") + 
+  coord_flip()
+```
+
+
+Now jump back to [running logistic regression](#logistic-regression).
+
+
+
+
