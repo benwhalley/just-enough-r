@@ -13,7 +13,22 @@ library(pander)
 
 
 
-## Named colours in R {- #named-colours}
+## Colours {-}
+
+
+### Picking colours for plots {- #picking-colours}
+
+See https://www.perceptualedge.com/articles/b-eye/choosing_colors.pdf for an interesting discussion on picking colours for data visualisation. 
+
+Also check the [ggplots docs for colour brewer](http://ggplot2.tidyverse.org/reference/scale_brewer.html) and the [Colour Brewer website](http://colorbrewer2.org/).
+
+
+
+
+### Named colours in R {- #named-colours}
+
+
+
 
 ```{r, results='asis'}
 print.col <- Vectorize(function(col){

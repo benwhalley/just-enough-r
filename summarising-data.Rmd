@@ -8,8 +8,6 @@ output:
 
 # Summarising data {#summarising-data}
 
-
-
 ```{r, include=FALSE, message=F}
 # ignore all this for the moment; it will be explained below
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
@@ -100,7 +98,8 @@ This summary table can be processed like any other dataframe. For instance, we c
 
 ```{r}
 psych::describe(angry.moods, skew=FALSE) %>% 
-  # rownames_to_column converts to a df but saves the row names in a new column
+  # rownames_to_column converts to a df but saves the 
+  # row names in a new column for us, which can be useful
   rownames_to_column(var="variable") %>% 
   select(variable, mean, sd) %>% 
   filter(mean > 20) %>% 
@@ -109,21 +108,39 @@ psych::describe(angry.moods, skew=FALSE) %>%
 
 
 
+##### Rownames are evil {.explainer}
 
-### Computing statistics by-groups {-}v
+Historically 'row names' were used on R to label individual rows in a dataframe. It turned out that this is generally a bad idea, because sorting and some summary functions would get very confused and mix up row names and the data itself.
+
+It's generally considered best practice to avoid row names, and store everything as columns of data.
+
+If you find that rownames in your data have disappeared, [see this guide for turning them into an extra column of data using `tibble::rownames_to_column()`](#rownames).
 
 
-```{r}
-psych::describe.by(mtcars, 'cyl')
-```
 
+
+
+### Computing statistics by-groups {-}
 
 
 ```{r, error=T}
-psych::describeBy(mtcars, 'cyl') %>% 
-  as.data.frame()
+psych::describeBy(mtcars, 'cyl')
 ```
 
+This is helpful, but there's no simple way to convert the result to a dataframe, which we will want if we are creating tables for publication.
+
+`describeBy` actually returns a list of tables, one for each level of the `cyl` variable, so it is is possible to convert each table in turn:
+
+```{r}
+summary.tables <- psych::describeBy(mtcars, 'cyl')
+summary.tables[1] %>% 
+  as.data.frame() %>% 
+  head(3)
+```
+
+But this is pretty yucky. Not only are the column names all mangled up, but we also have to think about extracting each levell in turn, and need to check how many levels in `cyl` there are. What happens if an extra level gets added? Our code will likely break.
+
+Thankfully there is much nicer and more consistent way to compute exactly the summaries we want, sometimes termed the 'split, apply, combine' method.
 
 
 
@@ -144,14 +161,16 @@ angry.moods %>%
 
 This has returned a dataframe containing the statistics we need, although in this instance the dataframe only has one row. What if we want the numbers for men and women separately?
 
-Utility functions like `describeBy` have options to do this (for example, perhaps you would specify grouping variables in a summary function). But there's a more general pattern at work --- we want to:
+Utility functions like `describeBy` have options to do this (you would specify grouping variables in that). But there's a more general pattern at work --- we want to:
 
-- *Split* our data (into men and women)
+- *Split* our data (into men and women, or some other categorisation)
 - *Apply* some function to them (e.g. calculate the mean) and then
 - *Combine* it into a single table again (for more processing or analysis)
 
 
-It's helpful to think of this *split $\rightarrow$ apply $\rightarrow$ combine* pattern whenever we are processing data because it makes explicit what it is that we want to do.
+It's helpful to think of this *split $\rightarrow$ apply $\rightarrow$ combine* pattern whenever we are processing data because it *makes explicit what we want to do*.
+
+
 
 #### Split: breaking the data into groups {-}
 
@@ -164,7 +183,6 @@ angry.moods %>%
 ```
 
 Weirdly, this doesn't seem to have done anything. The data aren't sorted by `Gender`, and there is no visible sign of the grouping, but stick with it...
-
 
 
 #### Apply and combine {-}
@@ -196,7 +214,6 @@ In the previous section on datasets, we saw some found some raw data from a stud
 phq9.df <- readr::read_csv("phq.csv")
 glimpse(phq9.df)
 ```
-
 
 
 If this were our data we might want to:
@@ -264,4 +281,46 @@ I've broken the code into multiple lines to make it clearer to read. In English,
 
 
 
+## Fancy reshaping {- #fancy-reshaping}
+
+As noted in the section on [reshaping](#reshaping) above, it's common to combine the process of reshaping and aggregating or summarising in the same step. 
+
+For example here we have multiple rows per person, 3 trial at time 1, and 3 more trials at time 2:
+
+```{r, include=F}
+expt.data <- readRDS("expt.data.csv") %>% filter(trial < 4)
+```
+
+```{r}
+expt.data %>% 
+  arrange(person, time, trial) %>% 
+  head %>% 
+  pander
+```
+
+
+We can reshape and aggregate this in a single step using `dcast`. Here we request the mean for each person at each time, with observations for each time split across two columns:
+
+```{r, message=T, warning=T}
+library(reshape2)
+expt.data %>%
+	dcast(person~paste0('time',time), 
+	      fun.aggregate=mean) %>% 
+  head %>% 
+  pander
+```
+
+Here `dcast` has correctly guessed that `RT` is the value we want to aggregate (you can specify explicitly with the `value.var=` parameter).
+
+`dcast` knows to aggregate using the mean because we set this with the `agg.function` parameter; this just stands for 'aggregation function'.
+
+We don't have to request the mean though: any function will do. Here we request the SD instead:
+
+```{r, message=T, warning=T}
+expt.data %>%
+	dcast(person~time, 
+	      fun.aggregate=sd) %>% 
+  head %>% 
+  pander
+```
 

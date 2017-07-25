@@ -13,7 +13,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 library(tidyverse)
 library(tufte)
-
+library(pander)
 ```
 
 
@@ -43,11 +43,12 @@ It's strongly recommended that you use these in your own code.
 
 
 
-### Selecting columns from a dataframe {- #selecting-columns}
+## Selecting columns {- #selecting-columns}
 
 
-*Selecting a single column*:
-  Because dataframes act like lists of vectors, we can access columns from them using the `$` symbol. For example, here we select the `Ozone` column, which returns a vector of the observations made:
+###### Selecting a single column {-}
+
+Because dataframes act like lists of vectors, we can access columns from them using the `$` symbol. For example, here we select the `Ozone` column, which returns a vector of the observations made:
 
 ```{r}
 airquality$Ozone
@@ -62,8 +63,10 @@ summary(airquality$Ozone)
 
 
 
-*Selecting more than one column*:
-  To select multiple columns the `select()` function from `dplyr` is the simplest solution. You give `select()` a dataframe and the names of the columns you want, and it returns a new dataframe with just those columns, in the order you specified:
+
+###### Selecting more than one column {-}
+
+To select multiple columns the `select()` function from `dplyr` is the simplest solution. You give `select()` a dataframe plus the names of the columns you want, and it returns a new dataframe with just those columns, in the order you specified:
 
 
 ```{r}
@@ -124,9 +127,9 @@ As a quick reference, you can use the following 'verbs' to select columns in dif
 There are other commands too, but these are probably the most useful to begin with. See the help files for more information.
 
 
-### Selecting rows of data {- #selecting-rows}
+## Selecting rows {- #selecting-rows}
 
-To select particular rows from a dataframe, `dplyr` provides the very useful `select()` function. Let's say we just want the 6-cylindered cars from the `mtcars` dataframe:
+To select particular rows from a dataframe, `dplyr` provides the very useful `filter()` function. Let's say we just want the 6-cylindered cars from the `mtcars` dataframe:
 
 ```{r}
 filter(mtcars, cyl==6)
@@ -140,18 +143,150 @@ filter(mtcars, cyl==6 & gear==3)
 
 
 
-[^notesonoperators]:
-  Some notes on `==` and `&`: You might have noted above that I wrote `==` rather than just `=` to define the criteria. This is because most programming languages, including R, use two `=` symbols to distinguish: *comparison* from *assignment*.
-Here we are doing comparison, so we use `==`. In R it's normal to use `<-` to assign variables,  which avoids any ambiguity.
-The `&` symbol does what you probably expect — it simply means 'AND'.
+## 'Operators' {- #operators}
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/4TYv2PhG89A?rel=0" frameborder="0" allowfullscreen></iframe>
+
+
+In the two examples above we used two equals signs `==` to compare values. There are other operators we can use though to create other filters. Rather than describe them, the examples below demonstrate what each of them do:
+
+
+
+###### Equality and matching {-}
+
+To compare a single value we use `==`
+
+```{r}
+2 == 2
+```
+
+And in a filter:
+
+```{r}
+filter(mtcars, cyl==6)
+```
+
+
+
+###### {- .explainer}
+
+You might have noted above that we write `==` rather than just `=` to define the criteria. This is because most programming languages, including R, use two `=` symbols to distinguish: *comparison* from *assignment*.
+
+Here we are doing comparison, so we use `==`. In R it's normal to use `<-` to assign variables, which avoids any ambiguity.
+
+
+
+To test if a value is in a vector of suitable matches we can use: `%in%`:
+
+```{r}
+0 %in% 1:10
+2 %in% 1:10
+```
+
+And, perhaps less obviously, we can test whether each value in a vector is in a second vector. This returns a vector of `TRUE/FALSE` values as long as the first list:
+
+```{r}
+c(1, 2) %in% c(2, 3, 4)
+```
+
+And this is very useful in a dataframe filter:
+
+
+```{r}
+head(filter(mtcars, cyl %in% c(4, 6)))
+```
 
 
 
 
+###### Greater/less than {-}
+
+The `<` and `>` symbols work as you'd expect:
+
+```{r, eval=F}
+head(filter(mtcars, cyl > 4))
+head(filter(mtcars, cyl < 5))
+```
 
 
-### Combining column selections and row filters {-}
+You can also use `>=` and `<=`:
 
+```{r, eval=F}
+filter(mtcars, cyl >= 6)
+filter(mtcars, cyl <= 4)
+```
+
+
+
+###### Negation (opposite of) {-}
+
+The `!` is very useful to tell R to reverse an expression; that is, take the opposite of the value. In the simplest example:
+
+
+```{r}
+!TRUE
+```
+
+This is helpful because we can reverse the meaning of other expressions:
+
+```{r}
+is.na(NA)
+!is.na(NA)
+```
+
+And we can use in filters. Here we select rows where `Ozone` is missing (`NA`):
+
+```{r, eval=F}
+filter(airquality, is.na(Ozone))
+```
+
+And here we use `!` to reverse the expression and select rows which are not missing:
+
+```{r, eval=F}
+filter(airquality, !is.na(Ozone))
+```
+
+
+[Try running these commands for yourself and experiment with changing the operators to make select different combinations of rows]{.exercise}
+
+
+
+
+###### Other logical operators {-}
+
+
+There are operators for 'and'/'or' which can combine other filters
+
+```{r}
+filter(mtcars, hp > 200 | wt > 4)
+```
+
+Using `&` (and) makes the filter more restrictive:
+
+```{r}
+filter(mtcars, hp > 200 & wt > 4)
+```
+
+
+Finally, you can set the order in which operators are applied by using parentheses. This means these expressions are subtly different:
+
+```{r}
+# first
+filter(mtcars, (hp > 200 & wt > 4) | cyl==8)
+
+# second reordered evaluation
+filter(mtcars, hp > 200 & (wt > 4 | cyl==8))
+```
+
+
+[Try writing in plain English the meaning of the two filter expressions above]{.exercise}
+
+
+
+
+## Pipes {-}
+
+We are often going to want to combine both `select` and `filter` to return a subset of our original data.
 
 As you might have noticed above, we can 'nest' function calls in R. For example, we might want to both select some columns and filter rows.
 
@@ -163,8 +298,8 @@ summary(gas.guzzlers)
 ```
 
 
-
 This is OK, but can get quite confusing to read, and the more deeply functions are nested the easier it is to make a mistake.
+
 
 ### {- #pipes}
 
@@ -210,7 +345,7 @@ This turns out to be an incredibly useful pattern when processing and working wi
 
 
 
-### Modifying and creating new columns {- #mutate}
+## Modifying and creating new columns {- #mutate}
 
 
 Often when working with data we want to compute new values from columns we already have. Let's say we have some data on the PHQ-9, which measures depression:
@@ -242,7 +377,7 @@ See this section on [summarising and processing data](#split-apply-combine) for 
 
 
 
-### Sorting data {- #sorting}
+## Sorting {- #sorting}
 
 Sorting data is easy with `dplyr::arrange()`:
 
@@ -270,3 +405,181 @@ airquality %>%
   arrange(Month, -Ozone) %>% 
   head
 ```
+
+
+
+
+
+
+
+
+
+
+
+## Reshaping {- #reshaping}
+
+<div style="width:100%;height:0;padding-bottom:75%;position:relative;"><iframe src="https://giphy.com/embed/J42u1BTrks9eU" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/funny-transformer-J42u1BTrks9eU">via GIPHY</a></p>
+
+
+This section will probably require more attention than any other in the guide, but will likely be the most useful thing you learn in R.
+
+
+As previously discussed, most things work best in R if you have data in *long format*. This means we prefer data that look like this:
+
+```{r, echo=F}
+d <- expand.grid(person=1:3, time=paste("Time", 1:4)) %>%
+  mutate(outcome = rnorm(n(), 20, 3)) 
+d %>% pander
+```
+
+
+
+And NOT like this:
+
+```{r, echo=F}
+d %>% 
+  reshape2::dcast(person~time, value.var = "outcome") %>% 
+  pander
+```
+
+
+
+In long format data:
+
+  - each row of the dataframe corresponds to a single measurement occasion
+  - each column corresponds to a variable which is measured
+
+
+Fortunately it's fairly easy to move between the two formats, provided your variables are named in a consistent way.
+
+
+
+
+
+
+
+
+#### Wide to long format {- #wide-to-long}
+
+This is the most common requirement. Often you will have several columns which actually measure the same thing, and you will need to convert these two two columns  - a 'key', and a value.
+
+For example, let's say we measure patients on 10 days:
+
+```{r, include=F}
+sleep.wide <- lme4::sleepstudy %>%
+	reshape2::dcast(Subject~paste0("Day.", Days), value.var = "Reaction") %>% 
+  mutate(Subject=as.numeric(Subject)) %>% 
+  arrange(Subject) 
+
+saveRDS(sleep.wide, 'data/sleep.wide.RDS')
+```
+
+```{r}
+sleep.wide %>% 
+  head(4) %>% 
+  pander(caption="Data for the first 4 subjects")
+```
+
+
+
+We want to convert RT measurements on each Day to a single variable, and create a new variable to keep track of what `Day` the measurement was taken:
+
+The `melt()` function in the `reshape2::` package does this for us:
+
+```{r}
+library(reshape2)
+sleep.long <- sleep.wide %>% 
+  melt(id.var="Subject") %>%
+  arrange(Subject, variable)  
+
+sleep.long %>% 
+  head(12) %>% 
+  pander
+```
+```{r include=F}
+saveRDS(sleep.long, 'data/sleep.long.RDS')
+```
+
+
+Here melt has created two new variable: `variable`, which keeps track of what was measured, and `value` which contains the score. This is the format we need when [plotting graphs](#graphics) and running [regression and Anova models](#linear-models-simple).
+
+
+
+#### Long to wide format {- #long-to-wide}
+
+To continue the example from above, these are long form data we just made:
+
+```{r}
+sleep.long %>% 
+  head(3) %>% 
+  pander(caption="First 3 rows in the long format dataset")
+```
+
+We can convert these back to the original wide format using `dcast`, again in the `reshape2` package. The name of the `dcast` function indicates we can 'cast' a dataframe (the d prefix). So here, casting means the opposite of 'melting'.
+
+Using `dcast` is a little more fiddly than `melt` because we have to say *how* we want the data spread wide. In this example we could either have:
+
+- Columns for each day, with rows for each subject
+- Columns for each subject, with rows for each day
+
+Although it's obvious to us which we want, we have to be explicit. We do this using a [formula](#formulae), which we'll see again in the regression section. 
+
+Each formula has two sides, left and right, separated by the tilde (`~`) symbol. On the left hand side we say which variable we want to keep in rows. On the right hand side we say which variables to conver to columns. So, for example:
+
+```{r}
+# rows per subject, columns per day
+sleep.long %>%
+	dcast(Subject~variable) %>% 
+  head(3)
+```
+
+
+To compare, we can convert so each Subject has a column by reversing the formula:
+
+```{r}
+# note we select only the first 7 Subjects to 
+# keep the table to a manageable size
+sleep.long %>%
+  filter(Subject < 8) %>% 
+	dcast(variable~Subject)
+```
+
+
+
+###### {- .tip}
+One neat trick when casting is to use `paste` to  give your columns nicer names. So for example:
+
+```{r}
+sleep.long %>%
+  filter(Subject < 8) %>% 
+	dcast(variable~paste0("Participant.", Subject))
+```
+
+Notice we used `paste0` rather than `paste` to avoid spaces in variable names, which is allowed but can be a pain. [See more on working with character strings in a later section](#string-handling).
+
+
+
+
+##### {-}
+
+For a more detailed explanation and various other methods for reshaping data, see: http://r4ds.had.co.nz/tidy-data.html
+
+
+
+
+### Summarising and reshaping {-}
+
+
+One common trick when reshaping is to convert a datafile which has multiple rows and columns per person to one with only a single row. Although useful this isn't covered in this section, because it is combining two techniques:
+
+- Reshaping (i.e. from long to wide or back)
+- Aggregating or summarising (converting multiple rows to one)
+
+In the next section we cover [summarising data](#summarising-data), and introduce the 'split-apply-combine' method for summarising. Once you have a good grasp of this, you could check out the ['fancy reshaping' section](#fancy-reshaping) which does provide examples.
+
+
+
+
+
+
+
