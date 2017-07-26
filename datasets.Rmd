@@ -25,7 +25,7 @@ A dataframe is an object which can store data as you might encounter it in SPSS,
 It's much like a spreadsheet, but with some constraints applied. 
 'Constraints' sound bad, but are helpful here: they make dataframes more structured and predictable to work with:
 
-- Each column is a [vector](#vectors-and-lists), and so can [only store one type of data](#vectors-and-lists)].
+- Each column is a [vector](#vectors-and-lists), and so can [only store one type of data](#vectors-and-lists).
 
 - Every column has to be the same length (although missing values are allowed).
 
@@ -57,6 +57,8 @@ In both these examples the datasets (`airquality` and `mtcars`) are already load
 
 
 
+
+
 ## Looking at data {- #looking-at-data}
 
 As we've already seen, using `print(df)` within an RMarkdown document creates a nice interactive table you can use to look at your data.
@@ -73,7 +75,6 @@ Or we can use `glimpse()` function from the `dplyr::` package (see the [section 
 ```{r}
 glimpse(mtcars)
 ```
-
 
 
 You can use the `pander()` function (from the `pander::` package) to format tables nicely, for when you Knit a document to HTML, Word or PDF. For example:
@@ -114,6 +115,33 @@ psych::cor.plot(airquality)
 ```
 
 These plots might not be worth including in a final write-up, but are very useful when exploring your data.
+
+
+
+
+### Using individual columns {-}
+
+Because dataframes are like a list of vectors, we can access individual columns using the `$` symbol. This extracts the column as a vector, so we can pass it to functions:
+
+```{r}
+mean(mtcars$mpg)
+```
+
+Or slice it:
+
+
+```{r}
+(first.mpg <- mtcars$mpg[1])
+(worst.mpg <- sort(mtcars$mpg)[1])
+(best.mpg <- rev(sort(mtcars$mpg))[1])
+```
+
+
+
+[The problem with extracting individual columns in this way is that it's easy for data to be taken out of context: for example, if you sort individual columns then your data might get mixed up, leading to errors. In general if you are accessing individual columns of data in this way it's a sign your code may be brittle and vulnerable to errors. In later sections we introduce methods for working on the whole dataset, which tends to be safer.]{.admonition}
+
+
+
 
 
 

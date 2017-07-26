@@ -71,25 +71,25 @@ You can also use `table()` to get 3-way tables of frequencies. For example, usin
 
 ```r
 with(mtcars, table(am, cyl, gear)) %>%
-  as.data.frame() %>% 
+  as_data_frame() %>% 
   head() %>% 
   pandoc.table()
 ## 
-## ------------------------
-##  am   cyl   gear   Freq 
-## ---- ----- ------ ------
-##  0     4     3      1   
+## ----------------------
+##  am   cyl   gear   n  
+## ---- ----- ------ ----
+##  0     4     3     1  
 ## 
-##  1     4     3      0   
+##  1     4     3     0  
 ## 
-##  0     6     3      2   
+##  0     6     3     2  
 ## 
-##  1     6     3      0   
+##  1     6     3     0  
 ## 
-##  0     8     3      12  
+##  0     8     3     12 
 ## 
-##  1     8     3      0   
-## ------------------------
+##  1     8     3     0  
+## ----------------------
 ```
 
 

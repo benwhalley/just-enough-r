@@ -10,6 +10,8 @@ output:
 
 # Workflow {#start-here}
 
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/k56UXc4paIM?rel=0" frameborder="0" allowfullscreen></iframe>
+
 
 One of the biggest adjustments people need to make when moving away from SPSS or other tools is to work out a 'way of working'. Good students often develop ways of working, saving and communicating their findings that become habitual. These habits are often attempts to work around limitations of these packages, but nevertheless habits are easier to replace than break, so here's one alternative solution:
 
@@ -25,7 +27,7 @@ One of the biggest adjustments people need to make when moving away from SPSS or
 
 
 
-### Using RMarkdown to record and share work {- #rmarkdown}
+#### Using RMarkdown to record and share work {- #rmarkdown}
 
 This it might seem an odd place to start: we haven't got anything to share yet! But the RStudio editor (see below) includes important features which help us record and organise our work, and share it with colleagues. For many people this ability to keep a detailed record of your work, and revisit and review it later, turns out to be *the* major advantages of R over traditional statistics packages.
 
@@ -39,7 +41,7 @@ An RMarkdown document mixes R code with markdown. This means you can combine you
 RMarkdown is easily converted to other formats like HTML, Word, or PDF to share with other people. When you click the **Knit** button (in the Rstudio interface), a document will be generated that combines your text with the results of your R code.
 
 
-### Writing and 'knitting' RMarkdown {-}
+##### Writing and 'knitting' RMarkdown {-}
 
 To include R code within a document we write 3 backticks (`` ``` ``), followed by `{r}`. We the include our R code, and close the block with 3 more backticks ([how to find the backtick on your keyboard](#backtick-location)).
 
@@ -171,7 +173,7 @@ Place your cursor somewhere in the line the command is on and run it by typing `
 
 
 <iframe src="https://player.vimeo.com/video/225968925" width="640" height="480" frameborder="0"></iframe>
-<p><a href="https://vimeo.com/225968925">Create and R block in RMarkdown, then run some simple commands.</a> from <a href="https://vimeo.com/user67812521">Ben Whalley</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+<p><a href="https://vimeo.com/225968925">Create an R block in RMarkdown, then run some simple commands.</a></p>
 
 
 
@@ -197,7 +199,7 @@ Hopefully at this point it's obvious that RStudio and RMarkdown give you:
 
 
 
-### Naming things: *variable assignment* {- #variables}
+## Naming things: *variable assignment* {- #variables}
 
 One of the nice things about R is that we can assign labels to parts of our analysis to keep track of them. Using good, descriptive names is good practice and makes your code easier to read (e.g. when you or others need to revisit in future.
 
@@ -247,18 +249,18 @@ As you will see below, we can give anything a label by assigning it to a variabl
 
 
 
-### Vectors and lists {- #vectors-and-lists}
+## Vectors and lists {- #vectors-and-lists}
 
-When working with data, we often have lists of 'things': for example a list of measurements we have made.
+When working with data, we often have lists or sequences of 'things'. For example: a list of measurements we have made.
 
-- When all the things are of the *same* 'type', then in R this is called a *vector* (or a matrix if has 2 dimensions, like a table^[Or an array if it has more than 2 dimensions]).
+- When all the things are of the same type, R calls this a *vector*^[It's actually a matrix if has 2 dimensions, like a table, or an array if it has more than 2 dimensions.]).
 
-- When the list contains a mix of *different* things, then R calls it a *list*.
-
-
+- When there is a mix of different things R calls this a *list*.
 
 
-#### Vectors {- #vector}
+
+
+### Vectors {- #vector}
 
 We can create a vector of numbers and display it like this:
 
@@ -272,14 +274,14 @@ heights <- c(203, 148, 156, 158, 167,
 
 The `c()` command is shorthand for *combine*, so the example above combines the individual elements (numbers) into a new vector.
 
-We can create a vector of alphanumeric names just eas easily:
+We can create a vector of alphanumeric names just as easily:
 
 
 ```r
 names <- c("Ben", "Joe", "Sue", "Rosa")
 ```
 
-And we can check the values stored in these variables by printing them, e.g.:
+And we can check the values stored in these variables by printing them. You can either type `print(heights)`, or just write the name of the variable alone, which will print it by default. E.g.:
 
 
 ```r
@@ -296,8 +298,7 @@ Try creating your own vector of numbers in a new code block below^[i.e. edit the
 
 
 
-
-#### Accessing elements within vectors {- #access-vector-elements}
+### Accessing elements {- #access-vector-elements}
 
 Once we have created a vector, we often want to access the individual elements again. We do this based on their *position*. 
 
@@ -320,7 +321,7 @@ my.vector[1]
 Here, the square brackets specify a *subset* of the vector we want - in this case, just the first element.
 
 
-#### Selecting more than one element in a vector {-}
+### Selecting more than one element {-}
 
 A neat feature of subsetting is that we can grab more than one element at a time. 
 
@@ -351,7 +352,8 @@ first.two.elements
 <!-- If you want to know more see <http://www.statmethods.net/management/subset.html> -->
 
 
-#### Processing vectors {-}
+
+## Processing vectors {-}
 
 Many of R's most useful functions process *vectors of numbers* in some way. For example, if we want to calculate the average of our vector of heights we just type:
 
@@ -427,7 +429,7 @@ We'll cover lots more plotting and visualisation later on.
 
 
 
-#### Processing vectors to make new vectors {-}
+### Making new vectors {-}
 
 So far we've seen R functions which process a vector of numbers and produce a single number, a new vector of a different length (like `quantile` or `fivenum`), or some other object (like `hist` which makes a plot).
 However many other functions accept a single input, do something to it, and return a single processed value. 
@@ -497,7 +499,7 @@ paste0("N=", 1:10)
 
 
 
-#### Making up data (new vectors) {-}
+### Making up data (new vectors) {-}
 
 Sometimes you'll need to create vectors containing regular sequences or randomly selected numbers.
 
@@ -555,9 +557,12 @@ hist(random.numbers)
 
 
 
-#### Useful functions to learn now {- }
+## Functions to learn now {- }
 
-There are *thousands* of functions built into R. Below are a few examples which are likely to be useful as you work with your data:
+There are *thousands* of functions built into R. Below are just a few examples which are likely to be useful as you work with your data:
+
+
+###### Repetition {-}
 
 
 ```r
@@ -576,6 +581,9 @@ rep(c("Custard", "Gravy"), 5)
 ```
 
 
+###### Sequences {-}
+
+
 ```r
 # make a sequence and then sort it
 countdown <- 100:1
@@ -587,6 +595,23 @@ sort(countdown)
 ##  [69]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85
 ##  [86]  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100
 ```
+
+
+Make sequences with steps of a particular size:
+
+
+```r
+seq(from=0, to=1, by=.1)
+##  [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+
+seq(from=0, to=10, length.out=12)
+##  [1]  0.0000000  0.9090909  1.8181818  2.7272727  3.6363636  4.5454545
+##  [7]  5.4545455  6.3636364  7.2727273  8.1818182  9.0909091 10.0000000
+```
+
+
+
+###### Ranking {-}
 
 
 ```r
@@ -601,29 +626,41 @@ rank(ages, ties.method="first")
 ```
 
 
-```r
-# you could even label the vector of ages if you wanted
-labels <- paste("Position:", rank(ages, ties.method="first"))
-names(ages) <- labels
-ages
-##  Position: 8 Position: 10  Position: 7  Position: 1  Position: 3 
-##           50           57           45           38           39 
-##  Position: 6  Position: 9  Position: 4  Position: 2  Position: 5 
-##           42           52           40           38           40
-```
+
+###### Unique values {-}
 
 
 ```r
 # return the unique values in a vector
-unique( rep(1:10, 100) )
+unique(rep(1:10, 100))
 ##  [1]  1  2  3  4  5  6  7  8  9 10
 ```
+
+
+
+###### Lengths {-}
+
+
+```r
+# return the unique values in a vector
+length(seq(1,100, 2))
+## [1] 50
+```
+
+
+###### {- .exercise}
 
 Try and experiment with each of these functions. Check the output against what you expected to happen, and make sure you understand what they do.
 
 
 
-### Lists {- #lists}
+
+
+
+
+
+
+## Lists {- #lists}
 
 Try running the code below:
 

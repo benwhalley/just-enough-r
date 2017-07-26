@@ -19,7 +19,7 @@ A dataframe is an object which can store data as you might encounter it in SPSS,
 It's much like a spreadsheet, but with some constraints applied. 
 'Constraints' sound bad, but are helpful here: they make dataframes more structured and predictable to work with:
 
-- Each column is a [vector](#vectors-and-lists), and so can [only store one type of data](#vectors-and-lists)].
+- Each column is a [vector](#vectors-and-lists), and so can [only store one type of data](#vectors-and-lists).
 
 - Every column has to be the same length (although missing values are allowed).
 
@@ -262,8 +262,6 @@ As you can see, when loading the `.csv` file the `read_csv()` makes some assumpt
 A common error is for stray notes or text values in a spreadsheet to cause a column which should be numeric to be converted to the `character` type.
 
 
-
-
 Once it's loaded, you can use this new dataset like any other:
 
 
@@ -294,3 +292,36 @@ head(angry.moods.from.url)
 ### Importing from SPSS and other packages {- #importing-proprietary-formats}
 
 This is often more trouble than it's worth (just use a csv file!) but if you really must see <https://www.datacamp.com/community/tutorials/r-data-import-tutorial>.
+
+
+
+
+### Saving and exporting data {-}
+
+#### Saving for later use in R {-}
+
+If you are saving data to use again later in R, the best format is RDS. Saving files to RDS [is covered in a later section (click to see)](#rds-files).
+
+#### Saving for publication or sharing {-}
+
+If you want to share data with someone else, or open it in a different software package, using '.csv' format is strongly recommended.
+
+Saving a dataframe to .csv is as simple as:
+
+
+```r
+readr::write_csv(mtcars, 'mtcars.csv')
+```
+
+
+[You can also use the `write.csv()` function in base R, but this version from `readr` is faster and has more sensible defalts (e.g. it doesn't write rownames, but does save column names in the first row)]{.tip}
+
+
+
+
+
+
+
+
+
+

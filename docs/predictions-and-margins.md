@@ -39,17 +39,17 @@ Consider the example used in a previous section where we measured `injury.severi
 
 ```
 ## 
-## ---------------------
-##  Age   Gender   mean 
-## ----- -------- ------
-## Young   Male     ?   
+## -----------------------
+##   Age    Gender   mean 
+## ------- -------- ------
+##  Young    Male     ?   
 ## 
-##  Old    Male     ?   
+##   Old     Male     ?   
 ## 
-## Young  Female    ?   
+##  Young   Female    ?   
 ## 
-##  Old   Female    ?   
-## ---------------------
+##   Old    Female    ?   
+## -----------------------
 ```
 
 And as before, we might plot these data:
@@ -299,13 +299,13 @@ m.predictions <- predict(m, interval='confidence')
 
 mtcars.plus.predictions <- bind_cols(
   mtcars,
-  m.predictions %>% as.data.frame()
+  m.predictions %>% as_data_frame()
 )
 
-prediction.frame <- expand.grid(vs=0:1, wt=2) %>% as.data.frame()
+prediction.frame <- expand.grid(vs=0:1, wt=2) %>% as_data_frame()
 prediction.frame.plus.predictions <- bind_cols(
   prediction.frame,
-  predict(m, newdata=prediction.frame, interval='confidence') %>% as.data.frame()
+  predict(m, newdata=prediction.frame, interval='confidence') %>% as_data_frame()
 )
 
 
@@ -444,7 +444,7 @@ summary(m2.margins)
 ```
 
 ```r
-summary(m2.margins) %>% as.data.frame() %>%
+summary(m2.margins) %>% as_data_frame() %>%
   filter(factor=="vs") %>%
   ggplot(aes(wt, AME)) +
   geom_point() + geom_line()

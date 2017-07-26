@@ -278,7 +278,7 @@ The command below converts the output of `modificationindices()` to a dataframe.
 
 ```{r}
 modificationindices(hz.fit) %>% 
-  as.data.frame() %>% 
+  as_data_frame() %>% 
   arrange(-mi) %>% 
   filter(mi > 5) %>% 
   select(lhs, op, rhs, mi, epc) %>% 
@@ -458,7 +458,7 @@ This model looks pretty good (see the [guide to fit indices](#common-fit-indices
 
 ```{r}
 modificationindices(mes.mod.fit) %>% 
-  as.data.frame() %>% 
+  as_data_frame() %>% 
   filter(mi>4) %>% 
   arrange(-mi) %>% 
   pander(caption="Modification indices for the measurement model")
@@ -507,7 +507,7 @@ RMSEA is slightly higher than we like, so we can check the modification indices:
 
 ```{r}
 sem.mi <- modificationindices(sem.mod.fit) %>% 
-  as.data.frame() %>% 
+  as_data_frame() %>% 
   arrange(-mi)
 
 sem.mi %>% 

@@ -82,14 +82,14 @@ Although useful, these functions miss two important elements:
 
 ### Creating a data frame of summary statistics {-}
 
-Thanksfully, many summary functions allow us to pass their results to the `as.data.frame()` function, which converts the output into a table which we can use like any other dataset.
+Thanksfully, many summary functions allow us to pass their results to the `as_data_frame()` function, which converts the output into a table which we can use like any other dataset.
 
 In this example, we create summary statistics with the `psych::describe()` function, then convert to a dataframe and format as a table in RMarkdown:
 
 
 ```{r}
 psych::describe(angry.moods, skew=FALSE) %>% 
-  as.data.frame %>% 
+  as_data_frame %>% 
   pandoc.table()
 ```
 
@@ -133,8 +133,8 @@ This is helpful, but there's no simple way to convert the result to a dataframe,
 
 ```{r}
 summary.tables <- psych::describeBy(mtcars, 'cyl')
-summary.tables[1] %>% 
-  as.data.frame() %>% 
+summary.tables[[1]] %>% 
+  as_data_frame() %>% 
   head(3)
 ```
 

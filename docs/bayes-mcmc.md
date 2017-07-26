@@ -226,7 +226,7 @@ summary(pain.model.mcmc)
 ```r
 params.of.interest <- 
   pain.model.mcmc %>% 
-  as.data.frame() %>%
+  as_data_frame() %>%
   select(familiar1, liked1, `familiar1:liked1`) %>% 
   reshape2::melt() 
 ## No id variables; using all as measure variables

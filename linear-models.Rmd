@@ -541,7 +541,7 @@ The standardised effect of `age` is now roughly half that of `gender`.
 
 
 
-### Alternatives to rescaling
+### Alternatives to rescaling {-}
 
 A nice alternative to scaling the inputs of your regression is to set aside the raw coefficients and instead make [predictions for values of the predictors that are of theoretical or practical interest](#predictions-and-margins). The section on [predictions and marginal effects](#predictions-and-margins) has lots more detail on this.
 
@@ -551,7 +551,7 @@ A nice alternative to scaling the inputs of your regression is to set aside the 
 
 
 
-### What next
+### What next {-}
 
 ***It is strongly recommended that you read the [section on Anova](anova.html) before doing anything else.***
 

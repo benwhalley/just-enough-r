@@ -51,10 +51,12 @@ rmd_files:
     "loose-ends.Rmd",
     "installation.Rmd",
     "packages.Rmd",
+    "rownames.Rmd",
     "colours.Rmd",
+    "string-handling.Rmd",
     "help.Rmd",
     "functions.Rmd",
-    
+    "example.datasets.Rmd",    
 
     "sharing-and-publishing.Rmd",
 

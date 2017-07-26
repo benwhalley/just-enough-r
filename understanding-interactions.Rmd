@@ -71,7 +71,7 @@ We can see this illustrated in the traditional bar plot below. In the left panel
 
 ```{r, echo=F}
 inter.df <- expand.grid(female=0:1, older=0:1, interaction=0:1) %>% 
-  as.data.frame() %>% 
+  as_data_frame() %>% 
   mutate(severity.of.injury = 50 + 10 * female + 10* older + 20 * female*older*interaction) %>%
   mutate(female=factor(female, labels=c("Male", "Female"))) %>% 
   mutate(older=factor(older, labels=c("Young", "Old"))) %>% 

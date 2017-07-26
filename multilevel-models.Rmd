@@ -354,14 +354,14 @@ Helpfully, if we convert the result of `VarCorr` to a dataframe, we are provided
 
 ```{r}
 VarCorr(random.intercepts.model) %>% 
-  as.data.frame()
+  as_data_frame()
 ```
 
 The variance partition coefficient is simply the variance at a given level of the model, divided by the total variance (the sum of the variance parameters). So we can write:
 
 ```{r}
 VarCorr(random.intercepts.model) %>% 
-  as.data.frame() %>% 
+  as_data_frame() %>% 
   mutate(icc=vcov/sum(vcov)) %>% 
   select(grp, icc)
 ```
@@ -412,7 +412,7 @@ summary(lectures.model)
 As before, we can extract only the variance components from the model, and look at the ICC:
 
 ```{r}
-VarCorr(lectures.model) %>% as.data.frame() %>% 
+VarCorr(lectures.model) %>% as_data_frame() %>% 
   mutate(icc=vcov/sum(vcov)) %>% 
   select(grp, vcov, icc)
 ```
@@ -436,7 +436,7 @@ service.means$lsmeans.table %>%
 
 Or change the proportions of variance components at each level (they don't, much, in this instance):
 ```{r}
-VarCorr(lectures.model.2) %>% as.data.frame() %>% 
+VarCorr(lectures.model.2) %>% as_data_frame() %>% 
   mutate(icc=vcov/sum(vcov)) %>% 
   select(grp, vcov, icc)
 ```
@@ -460,7 +460,7 @@ For example, in an experiment where you have multiple `stimuli` and different ex
 
 ```{r, include=F}
 df <- expand.grid(trial=1:20, condition=1:4, block=1:4, subject=1:50) %>%
-  as.data.frame() %>%
+  as_data_frame() %>%
   group_by(subject) %>%
   mutate(u = rnorm(1)) %>%
   ungroup() %>%

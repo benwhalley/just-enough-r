@@ -11,8 +11,6 @@ output:
 
 
 
-
-
 Before you begin this section, make sure you have fully understood the section on [datasets and dataframes](datasets.html), and in particular that you are happy using the `%>%` symbol to describe a flow of data.
 
 The chapter outlines several different approaches to obtaining summary statistics, and covers:
@@ -103,7 +101,7 @@ Although useful, these functions miss two important elements:
 
 ### Creating a data frame of summary statistics {-}
 
-Thanksfully, many summary functions allow us to pass their results to the `as.data.frame()` function, which converts the output into a table which we can use like any other dataset.
+Thanksfully, many summary functions allow us to pass their results to the `as_data_frame()` function, which converts the output into a table which we can use like any other dataset.
 
 In this example, we create summary statistics with the `psych::describe()` function, then convert to a dataframe and format as a table in RMarkdown:
 
@@ -111,26 +109,26 @@ In this example, we create summary statistics with the `psych::describe()` funct
 
 ```r
 psych::describe(angry.moods, skew=FALSE) %>% 
-  as.data.frame %>% 
+  as_data_frame %>% 
   pandoc.table()
 ## 
-## ---------------------------------------------------------------------------
-##         &nbsp;          vars   n   mean    sd    min   max   range    se   
-## ---------------------- ------ --- ------ ------ ----- ----- ------- -------
-##       **Gender**         1    78  1.615  0.4897   1     2      1    0.05544
+## ---------------------------------------------------------------------------------
+##         &nbsp;          vars   n    mean      sd     min   max   range     se    
+## ---------------------- ------ ---- ------- -------- ----- ----- ------- ---------
+##       **Gender**         1     78   1.615   0.4897    1     2      1     0.05544 
 ## 
-##       **Sports**         2    78  1.679  0.4697   1     2      1    0.05318
+##       **Sports**         2     78   1.679   0.4697    1     2      1     0.05318 
 ## 
-##     **Anger.Out**        3    78  16.08  4.217    9    27     18    0.4775 
+##     **Anger.Out**        3     78   16.08   4.217     9    27     18     0.4775  
 ## 
-##      **Anger.In**        4    78  18.58  4.697   10    31     21    0.5319 
+##      **Anger.In**        4     78   18.58   4.697    10    31     21     0.5319  
 ## 
-##    **Control.Out**       5    78  23.69  4.688   14    32     18    0.5309 
+##    **Control.Out**       5     78   23.69   4.688    14    32     18     0.5309  
 ## 
-##     **Control.In**       6    78  21.96  4.945   11    32     21    0.5599 
+##     **Control.In**       6     78   21.96   4.945    11    32     21     0.5599  
 ## 
-##  **Anger.Expression**    7    78    37   12.94    7    68     61     1.465 
-## ---------------------------------------------------------------------------
+##  **Anger.Expression**    7     78    37     12.94     7    68     61      1.465  
+## ---------------------------------------------------------------------------------
 ```
 
 
@@ -139,7 +137,8 @@ This summary table can be processed like any other dataframe. For instance, we c
 
 ```r
 psych::describe(angry.moods, skew=FALSE) %>% 
-  # rownames_to_column converts to a df but saves the row names in a new column
+  # rownames_to_column converts to a df but saves the 
+  # row names in a new column for us, which can be useful
   rownames_to_column(var="variable") %>% 
   select(variable, mean, sd) %>% 
   filter(mean > 20) %>% 
@@ -158,14 +157,24 @@ psych::describe(angry.moods, skew=FALSE) %>%
 
 
 
+##### Rownames are evil {.explainer}
 
-### Computing statistics by-groups {-}v
+Historically 'row names' were used on R to label individual rows in a dataframe. It turned out that this is generally a bad idea, because sorting and some summary functions would get very confused and mix up row names and the data itself.
+
+It's generally considered best practice to avoid row names, and store everything as columns of data.
+
+If you find that rownames in your data have disappeared, [see this guide for turning them into an extra column of data using `tibble::rownames_to_column()`](#rownames).
+
+
+
+
+
+### Computing statistics by-groups {-}
 
 
 
 ```r
-psych::describe.by(mtcars, 'cyl')
-## Warning: describe.by is deprecated. Please use the describeBy function
+psych::describeBy(mtcars, 'cyl')
 ## 
 ##  Descriptive statistics by group 
 ## group: 4
@@ -247,15 +256,29 @@ psych::describe.by(mtcars, 'cyl')
 ## carb     2.24  0.42
 ```
 
+This is helpful, but there's no simple way to convert the result to a dataframe, which we will want if we are creating tables for publication.
 
+`describeBy` actually returns a list of tables, one for each level of the `cyl` variable, so it is is possible to convert each table in turn:
 
 
 ```r
-psych::describeBy(mtcars, 'cyl') %>% 
-  as.data.frame()
-## Error in as.data.frame.default(.): cannot coerce class "c("psych", "describeBy")" to a data.frame
+summary.tables <- psych::describeBy(mtcars, 'cyl')
+summary.tables[[1]] %>% 
+  as_data_frame() %>% 
+  head(3)
+## # A tibble: 3 x 13
+##    vars     n      mean        sd median   trimmed      mad   min   max
+##   <int> <dbl>     <dbl>     <dbl>  <dbl>     <dbl>    <dbl> <dbl> <dbl>
+## 1     1    11  26.66364  4.509828     26  26.44444  6.52344  21.4  33.9
+## 2     2    11   4.00000  0.000000      4   4.00000  0.00000   4.0   4.0
+## 3     3    11 105.13636 26.871594    108 104.30000 42.99540  71.1 146.7
+## # ... with 4 more variables: range <dbl>, skew <dbl>, kurtosis <dbl>,
+## #   se <dbl>
 ```
 
+But this is pretty yucky. Not only are the column names all mangled up, but we also have to think about extracting each levell in turn, and need to check how many levels in `cyl` there are. What happens if an extra level gets added? Our code will likely break.
+
+Thankfully there is much nicer and more consistent way to compute exactly the summaries we want, sometimes termed the 'split, apply, combine' method.
 
 
 
@@ -281,14 +304,16 @@ angry.moods %>%
 
 This has returned a dataframe containing the statistics we need, although in this instance the dataframe only has one row. What if we want the numbers for men and women separately?
 
-Utility functions like `describeBy` have options to do this (for example, perhaps you would specify grouping variables in a summary function). But there's a more general pattern at work --- we want to:
+Utility functions like `describeBy` have options to do this (you would specify grouping variables in that). But there's a more general pattern at work --- we want to:
 
-- *Split* our data (into men and women)
+- *Split* our data (into men and women, or some other categorisation)
 - *Apply* some function to them (e.g. calculate the mean) and then
 - *Combine* it into a single table again (for more processing or analysis)
 
 
-It's helpful to think of this *split $\rightarrow$ apply $\rightarrow$ combine* pattern whenever we are processing data because it makes explicit what it is that we want to do.
+It's helpful to think of this *split $\rightarrow$ apply $\rightarrow$ combine* pattern whenever we are processing data because it *makes explicit what we want to do*.
+
+
 
 #### Split: breaking the data into groups {-}
 
@@ -313,7 +338,6 @@ angry.moods %>%
 ```
 
 Weirdly, this doesn't seem to have done anything. The data aren't sorted by `Gender`, and there is no visible sign of the grouping, but stick with it...
-
 
 
 #### Apply and combine {-}
@@ -381,7 +405,6 @@ glimpse(phq9.df)
 ## $ month   <int> 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 18, 0, 1,...
 ## $ group   <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, ...
 ```
-
 
 
 If this were our data we might want to:
@@ -482,4 +505,105 @@ I've broken the code into multiple lines to make it clearer to read. In English,
 
 
 
+## Fancy reshaping {- #fancy-reshaping}
+
+As noted in the section on [reshaping](#reshaping) above, it's common to combine the process of reshaping and aggregating or summarising in the same step. 
+
+For example here we have multiple rows per person, 3 trial at time 1, and 3 more trials at time 2:
+
+
+
+
+```r
+expt.data %>% 
+  arrange(person, time, trial) %>% 
+  head %>% 
+  pander
+```
+
+
+-------------------------------------------
+ Condition   trial   time   person    RT   
+----------- ------- ------ -------- -------
+     1         1      1       1      284.5 
+
+     1         2      1       1      309.3 
+
+     1         3      1       1      346.7 
+
+     1         1      2       1       368  
+
+     1         2      2       1      263.7 
+
+     1         3      2       1      220.4 
+-------------------------------------------
+
+
+We can reshape and aggregate this in a single step using `dcast`. Here we request the mean for each person at each time, with observations for each time split across two columns:
+
+
+```r
+library(reshape2)
+## 
+## Attaching package: 'reshape2'
+## The following object is masked from 'package:tidyr':
+## 
+##     smiths
+expt.data %>%
+	dcast(person~paste0('time',time), 
+	      fun.aggregate=mean) %>% 
+  head %>% 
+  pander
+## Using RT as value column: use value.var to override.
+```
+
+
+------------------------
+ person   time1   time2 
+-------- ------- -------
+   1      313.5    284  
+
+   2      252.2   263.3 
+
+   3      263.1   290.4 
+
+   4      271.2   249.4 
+
+   5      274.3   329.9 
+
+   6      280.3   231.7 
+------------------------
+
+Here `dcast` has correctly guessed that `RT` is the value we want to aggregate (you can specify explicitly with the `value.var=` parameter).
+
+`dcast` knows to aggregate using the mean because we set this with the `agg.function` parameter; this just stands for 'aggregation function'.
+
+We don't have to request the mean though: any function will do. Here we request the SD instead:
+
+
+```r
+expt.data %>%
+	dcast(person~time, 
+	      fun.aggregate=sd) %>% 
+  head %>% 
+  pander
+## Using RT as value column: use value.var to override.
+```
+
+
+------------------------
+ person     1       2   
+-------- ------- -------
+   1      31.27   75.85 
+
+   2      15.07   33.98 
+
+   3      88.71    104  
+
+   4      40.42   3.913 
+
+   5      61.34   52.7  
+
+   6      35.82   17.3  
+------------------------
 

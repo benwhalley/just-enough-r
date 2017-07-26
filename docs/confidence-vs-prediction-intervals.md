@@ -43,7 +43,7 @@ By forgetting that the CI contracts as the sample size increases, researchers ca
 ```r
 set.seed(1234)
 df <- expand.grid(v=c(1,3,3,3), i=1:1000) %>% 
-  as.data.frame %>%
+  as_data_frame %>%
   mutate(y = rnorm(length(.$i), 100, v)) %>% 
   mutate(samp = factor(v, labels=c("Low variability", "High variability")))
 ```

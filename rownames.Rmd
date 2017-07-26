@@ -39,7 +39,7 @@ We see row names here:
 
 ```{r}
 psych::describe(mtcars) %>%
-	as.data.frame() %>% 
+	as_data_frame() %>% 
   head(3)
 ```
 
@@ -47,7 +47,7 @@ But not here (just numbers in their place):
 
 ```{r}
 psych::describe(mtcars) %>%
-	as.data.frame() %>% 
+	as_data_frame() %>% 
   arrange(mean) %>% 
   head(3)
 ```
@@ -74,7 +74,7 @@ mtcars %>%
 <!-- Some example of `broom` in action: -->
 
 <!-- ```{r} -->
-<!-- psych::describe(mtcars, fast=T) %>% as.data.frame() -->
+<!-- psych::describe(mtcars, fast=T) %>% as_data_frame() -->
 <!--   broom::tidy() %>%  -->
 <!--   pander -->
 

@@ -78,7 +78,7 @@ expand.grid(A=1:2, B=1:4) %>%
   pandoc.table(caption="Cells in the 2x4 design")
 
 df <- combn(1:8, 2) %>% t %>%  
-  as.data.frame %>% 
+  as_data_frame %>% 
   rownames_to_column(var="Comparison")
 
 snip.middle <- function(df, n=6) {
@@ -88,7 +88,7 @@ snip.middle <- function(df, n=6) {
 }
 
 combn(1:8, 2) %>% t %>%  
-  as.data.frame %>% 
+  as_data_frame %>% 
   rownames_to_column(var="Comparison") %>% 
   rename(Cell.1=V1, Cell.2=V2) %>% 
   snip.middle(n=3) %>% 

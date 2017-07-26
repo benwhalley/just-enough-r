@@ -75,3 +75,10 @@ pkgs <- c(
 )
 
 install.packages(pkgs)
+
+
+
+devtools::install_github("hadley/colformat")
+devtools::install_github("ropenscilabs/skimr")
+
+

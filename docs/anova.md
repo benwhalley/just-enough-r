@@ -11,7 +11,7 @@ output: bookdown::tufte_html2
 
 
 
-[Be sure to read the [section on linear models in R](#linear-models-simple) before you reading this section, and specifically the parts on [specifying models with formulae](#formulae).]{.admonition}
+[Be sure to read the [section on linear models in R](#linear-models-simple) *before* you read this section, and specifically the parts on [specifying models with formulae](#formulae).]{.admonition}
 
 This section attempts to cover in a high level way how to specify anova models in R and some of the issues in interpreting the model output. If you need to revise the basic idea of an Anova, the Howell textbook [@howell2016fundamental]. For a very quick reminder, [this interactive/animated explanation of Anova is helpful](http://web.utah.edu/stat/introstats/anovaflash.html).
 
@@ -25,7 +25,7 @@ If you just want the 'answers' — i.e. the syntax to specify common Anova model
 There are 4 rules for doing Anova in R and not wanting to cry:
 
 1. Keep your data in 'long' format.
-2. Know the differences between character, factor and numeric variables
+2. Know the [differences between character, factor and numeric](#factors-and-numerics) variables
 3. Do not use the `aov()` or `anova()` functions to get an Anova table unless you know what you are doing.
 4. Learn about the types of sums of squares and always remember to specify `type=3`, unless you know better.
 
@@ -102,24 +102,25 @@ df.wide %>%
 
 
 
-R always uses long form data when running an Anova, but one downside is that it therefore has no automatic to know which rows belong to which person (assuming individual people are the unit of error in your model). This means that for repeated measures designs you need to be careful to explicitly specify any repeated measures when specifying the model (see the section on repeated designs below).
+R always uses long form data when running an Anova, but one downside is that it therefore has no automatic to know which rows belong to which person (assuming individual people are the unit of error in your model). This means that for repeated measures designs you need to make explicit which measures are repeated when specifying the model (see the section on repeated designs below).
 
 
 
 #### Rule 2: Know your variables {-}
 
-See [the section on dataframes](#datasets-dataframes) and be sure you can distinguish:
+See [the section on dataframes](#datasets-dataframes) and [on the different column types](#factors-and-numerics) and be sure you can distinguish:
 
 - Numeric variables
 - Factors
 - Character strings.
 
 
-In Anova, you need to enter:
+In Anova:
 
-- Numeric variables as your outcome
-- Factors or (preferably) character strings as predictors
-- (If you want to run Ancova models, you can also add numeric predictors.)
+- Outcomes will be numeric variables
+- Predictors will be factors or (preferably) character strings
+
+If you want to run Ancova models, you can also add numeric predictors.
 
 
 
@@ -135,15 +136,8 @@ The recommendation here is:
 
 - If you have repeated measures, your data are perfectly balanced, and you have no missing values then [use `afex::car_aov()`](#repeated-measures).
 
-- If you want a repeated measures Anova but your data are not balanced, or you have missing data, use [linear mixed models](#multilevel-models) instead via the `lme4::` package.
+- If you think you want a repeated measures Anova but your data are not balanced, or you have missing data, use [linear mixed models](#multilevel-models) instead via the `lme4::` package.
 
-
-
-#### But what about [insert favourite R package for Anova]? {- .explainer}
-
-Lots of people like `ez::ezANOVA` and other similar packages. My problem with `ezANOVA` is that it doesn't use formulae to define the model and for this reason encourages people to think of Anova as something magical and separate from linear models and regression in general. 
-
-This guide is called 'just enough R', so I've chosen to show only `car::Anova` because I find this the most transparent method to explain. Using formulae to specify the model reinforces a technique which is useful in many other contexts.
 
 
 
@@ -506,10 +500,19 @@ Table: `ez::ezANOVA` output.
 
 
 
-
 [These are the same models: any differences in the output are simply due to rounding.  You should use whichever of  `ez::` and `afex::` you find easiest to understand]{.admonition}
 
 The `ges` column is the generalised eta squared effect-size measure, which is preferable to the partial eta-squared reported by SPSS [@bakeman2005recommended].
+
+
+
+
+#### But what about [insert favourite R package for Anova]? {- .explainer}
+
+Lots of people like `ez::ezANOVA` and other similar packages. My problem with `ezANOVA` is that it doesn't use formulae to define the model and for this reason encourages students to think of Anova as something magical and separate from linear models and regression in general. 
+
+This guide is called 'just enough R', so I've mostly chosen to show only `car::Anova` because I find this the most coherent method to explain. Using formulae to specify the model reinforces a technique which is useful in many other contexts. I've make an exception for repeated because many people find specifying the error structure explicitly confusing and hard to get right, and so `ez::` may be the best option in these cases.
+
 
 
 

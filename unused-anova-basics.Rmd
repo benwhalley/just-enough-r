@@ -228,7 +228,7 @@ Where there is an interaction, the meaning of the main effects changes. *The mor
 
 ```{r include=F}
 df <- expand.grid(time=1:3, person=1:10) %>%
-  as.data.frame() %>%
+  as_data_frame() %>%
   mutate(
     outcome = rpois(n(), 10)
   ) %>%

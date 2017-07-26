@@ -110,7 +110,7 @@ Practical guidance and examples of extracting model results and formatting for A
 
 
 
-### A warning {-}
+#### A warning {-}
 
 This guide is extremely opinionated. 
 
@@ -123,7 +123,7 @@ The guide also assumes you are using the [RStudio editor](#rstudio) and working 
 
 
 
-### License {-}
+#### License {-}
 
 These documents are licensed under the [CC BY-SA licence](https://creativecommons.org/licenses/by-sa/4.0/).
 

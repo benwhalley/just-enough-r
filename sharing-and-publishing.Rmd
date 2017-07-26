@@ -48,7 +48,7 @@ We can extract the parameter table from this model by saving the `summary()` of 
 
 ```{r}
 model.fit.summary <- summary(model.fit)
-as.data.frame(model.fit.summary$coefficients)
+as_data_frame(model.fit.summary$coefficients)
 ```
 
 
@@ -66,20 +66,8 @@ For example, we could write the follwing to extract a table of coefficients, tes
 ```{r}
 model.fit.summary <- summary(model.fit)
 model.fit.summary$coefficients %>% 
-  as.data.frame()
+  as_data_frame()
 ```
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -108,7 +96,7 @@ model.fit %>% broom::tidy()
 
 ## Process your results {- #process-model-results}
 
-- Calculate VPC/ICC from an lmer models using `model %>% summary %>% as.data.frame()$varcor`
+- Calculate VPC/ICC from an lmer models using `model %>% summary %>% as_data_frame()$varcor`
 
 
 

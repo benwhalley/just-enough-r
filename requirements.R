@@ -42,6 +42,7 @@ pkgs <- c(
   'DiagrammeR', 
   'DiagrammeRsvg',
   'ez',
+  'gapminder',
   'GGally',
   'granova',
   'gridExtra',
@@ -66,6 +67,7 @@ pkgs <- c(
   'reshape2',
   'rgl',
   'rstanarm',
+  'rsvg',
   'semPlot',
   'simr',
   'statcheck',
@@ -75,3 +77,10 @@ pkgs <- c(
 )
 
 install.packages(pkgs)
+
+
+
+devtools::install_github("hadley/colformat")
+devtools::install_github("ropenscilabs/skimr")
+
+

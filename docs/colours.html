@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Just enough R</title>
+  <meta name="description" content="‘Just enough’ R">
+  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Just enough R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Just enough R" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="rownames.html">
+<link rel="next" href="string-handling.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="https://hypothes.is/embed.js" async></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Just enough R</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a></li>
+<li class="part"><span><b>I Getting started</b></span></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="start-here.html"><a href="start-here.html"><i class="fa fa-check"></i><b>2</b> Workflow</a><ul>
+<li class="chapter" data-level="" data-path="rstudio.html"><a href="rstudio.html"><i class="fa fa-check"></i>RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>3</b> R Basics</a><ul>
+<li class="chapter" data-level="" data-path="r-basics.html"><a href="r-basics.html#first-commands"><i class="fa fa-check"></i>First commands</a></li>
+<li><a href="variables.html#variables">Naming things: <em>variable assignment</em></a></li>
+<li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html"><i class="fa fa-check"></i>Vectors and lists</a><ul>
+<li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html#vector"><i class="fa fa-check"></i>Vectors</a></li>
+<li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html#access-vector-elements"><i class="fa fa-check"></i>Accessing elements</a></li>
+<li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html#selecting-more-than-one-element"><i class="fa fa-check"></i>Selecting more than one element</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="processing-vectors.html"><a href="processing-vectors.html"><i class="fa fa-check"></i>Processing vectors</a><ul>
+<li class="chapter" data-level="" data-path="processing-vectors.html"><a href="processing-vectors.html#making-new-vectors"><i class="fa fa-check"></i>Making new vectors</a></li>
+<li class="chapter" data-level="" data-path="processing-vectors.html"><a href="processing-vectors.html#making-up-data-new-vectors"><i class="fa fa-check"></i>Making up data (new vectors)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="functions-to-learn-now.html"><a href="functions-to-learn-now.html"><i class="fa fa-check"></i>Functions to learn now</a></li>
+<li class="chapter" data-level="" data-path="lists.html"><a href="lists.html"><i class="fa fa-check"></i>Lists</a></li>
+</ul></li>
+<li class="part"><span><b>II Working with data</b></span></li>
+<li class="chapter" data-level="4" data-path="datasets-dataframes.html"><a href="datasets-dataframes.html"><i class="fa fa-check"></i><b>4</b> Datasets and dataframes</a><ul>
+<li class="chapter" data-level="" data-path="looking-at-data.html"><a href="looking-at-data.html"><i class="fa fa-check"></i>Looking at data</a></li>
+<li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html"><i class="fa fa-check"></i>Importing and exporting data</a><ul>
+<li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html#importing-data-from-the-web"><i class="fa fa-check"></i>Importing data over the web</a></li>
+<li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html#importing-proprietary-formats"><i class="fa fa-check"></i>Importing from SPSS and other packages</a></li>
+<li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html#saving-and-exporting-data"><i class="fa fa-check"></i>Saving and exporting data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html"><i class="fa fa-check"></i>Working with dataframes</a><ul>
+<li><a href="working-with-dataframes.html#tidyverse">Introducing the <code>tidyverse</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="selecting-columns.html"><a href="selecting-columns.html"><i class="fa fa-check"></i>Selecting columns</a></li>
+<li class="chapter" data-level="" data-path="selecting-rows.html"><a href="selecting-rows.html"><i class="fa fa-check"></i>Selecting rows</a></li>
+<li class="chapter" data-level="" data-path="operators.html"><a href="operators.html"><i class="fa fa-check"></i>‘Operators’</a></li>
+<li class="chapter" data-level="" data-path="pipes.html"><a href="pipes.html"><i class="fa fa-check"></i>Pipes</a><ul>
+<li><a href="pipes.html#pipes"></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="mutate.html"><a href="mutate.html"><i class="fa fa-check"></i>Modifying and creating new columns</a></li>
+<li class="chapter" data-level="" data-path="sorting.html"><a href="sorting.html"><i class="fa fa-check"></i>Sorting</a></li>
+<li class="chapter" data-level="" data-path="reshaping.html"><a href="reshaping.html"><i class="fa fa-check"></i>Reshaping</a><ul>
+<li class="chapter" data-level="" data-path="reshaping.html"><a href="reshaping.html#summarising-and-reshaping"><i class="fa fa-check"></i>Summarising and reshaping</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="real-data.html"><a href="real-data.html"><i class="fa fa-check"></i><b>5</b> Working with ‘real’ data</a><ul>
+<li class="chapter" data-level="" data-path="storing-data.html"><a href="storing-data.html"><i class="fa fa-check"></i>Storing your data</a><ul>
+<li class="chapter" data-level="" data-path="storing-data.html"><a href="storing-data.html#use-csv"><i class="fa fa-check"></i>CSV files are your friend</a></li>
+<li class="chapter" data-level="" data-path="storing-data.html"><a href="storing-data.html#save-intermediate-steps"><i class="fa fa-check"></i>Save processes, not outcomes</a></li>
+<li class="chapter" data-level="" data-path="storing-data.html"><a href="storing-data.html#rds-files"><i class="fa fa-check"></i>RDS files can be useful to preserve R objects</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html"><i class="fa fa-check"></i>Types of variable</a><ul>
+<li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html#numeric-variables"><i class="fa fa-check"></i>Numeric variables</a></li>
+<li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html#character-and-factor"><i class="fa fa-check"></i>Characters, factors (and booleans)</a></li>
+<li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html#dates"><i class="fa fa-check"></i>Dates</a></li>
+<li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html#missing-values"><i class="fa fa-check"></i>Missing values</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="missing.html"><a href="missing.html"><i class="fa fa-check"></i>Missing values</a></li>
+<li class="chapter" data-level="" data-path="tidying-data.html"><a href="tidying-data.html"><i class="fa fa-check"></i>Tidying data</a></li>
+<li class="chapter" data-level="" data-path="dealing-with-multiple-files.html"><a href="dealing-with-multiple-files.html"><i class="fa fa-check"></i>Dealing with multiple files</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="summarising-data.html"><a href="summarising-data.html"><i class="fa fa-check"></i><b>6</b> Summarising data</a><ul>
+<li class="chapter" data-level="" data-path="utility-functions-for-descriptive-statistics.html"><a href="utility-functions-for-descriptive-statistics.html"><i class="fa fa-check"></i>Utility functions for descriptive statistics</a><ul>
+<li class="chapter" data-level="" data-path="utility-functions-for-descriptive-statistics.html"><a href="utility-functions-for-descriptive-statistics.html#frequency-tables"><i class="fa fa-check"></i>Frequency tables</a></li>
+<li class="chapter" data-level="" data-path="utility-functions-for-descriptive-statistics.html"><a href="utility-functions-for-descriptive-statistics.html#summary-statistics"><i class="fa fa-check"></i>Summary statistics</a></li>
+<li class="chapter" data-level="" data-path="utility-functions-for-descriptive-statistics.html"><a href="utility-functions-for-descriptive-statistics.html#creating-a-data-frame-of-summary-statistics"><i class="fa fa-check"></i>Creating a data frame of summary statistics</a></li>
+<li class="chapter" data-level="" data-path="utility-functions-for-descriptive-statistics.html"><a href="utility-functions-for-descriptive-statistics.html#computing-statistics-by-groups"><i class="fa fa-check"></i>Computing statistics by-groups</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="split-apply-combine.html"><a href="split-apply-combine.html"><i class="fa fa-check"></i>A generalised approach: Split, apply, combine</a></li>
+<li class="chapter" data-level="" data-path="fancy-reshaping.html"><a href="fancy-reshaping.html"><i class="fa fa-check"></i>Fancy reshaping</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>7</b> Graphics</a><ul>
+<li class="chapter" data-level="" data-path="graphics-benefits.html"><a href="graphics-benefits.html"><i class="fa fa-check"></i>Benefits of visualising data</a></li>
+<li class="chapter" data-level="" data-path="graphics-approaches.html"><a href="graphics-approaches.html"><i class="fa fa-check"></i>Which tool to use?</a></li>
+<li><a href="layered-graphics.html#layered-graphics">Layered graphics with <code>ggplot</code></a><ul>
+<li class="chapter" data-level="" data-path="layered-graphics.html"><a href="layered-graphics.html"><i class="fa fa-check"></i>A thought on ‘chart chooser’ guides</a></li>
+<li><a href="layered-graphics.html#thinking-like-ggplot">Thinking like <code>ggplot</code></a></li>
+<li class="chapter" data-level="" data-path="layered-graphics.html"><a href="layered-graphics.html#relationships"><i class="fa fa-check"></i>‘Relationships’</a></li>
+<li class="chapter" data-level="" data-path="layered-graphics.html"><a href="layered-graphics.html#distributions"><i class="fa fa-check"></i>‘Distributions’</a></li>
+<li class="chapter" data-level="" data-path="layered-graphics.html"><a href="layered-graphics.html#comparisons"><i class="fa fa-check"></i>‘Comparisons’</a></li>
+<li class="chapter" data-level="" data-path="layered-graphics.html"><a href="layered-graphics.html#composition"><i class="fa fa-check"></i>‘Composition’</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html"><i class="fa fa-check"></i>‘Quick and dirty’ (utility) plots</a><ul>
+<li class="chapter" data-level="7.0.1" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html#distributions-1"><i class="fa fa-check"></i><b>7.0.1</b> Distributions</a></li>
+<li class="chapter" data-level="7.0.2" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html#relationships-1"><i class="fa fa-check"></i><b>7.0.2</b> Relationships</a></li>
+<li class="chapter" data-level="7.0.3" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html#quantities"><i class="fa fa-check"></i><b>7.0.3</b> Quantities</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ggplot-details.html"><a href="ggplot-details.html"><i class="fa fa-check"></i>Tricks with ggplot</a><ul>
+<li class="chapter" data-level="" data-path="ggplot-details.html"><a href="ggplot-details.html#facetting-plots"><i class="fa fa-check"></i>More ways to facet a plot</a></li>
+<li><a href="ggplot-details.html#facet_wrap"><code>facet_wrap</code></a></li>
+<li><a href="ggplot-details.html#facet_grid"><code>facet_grid</code></a></li>
+<li class="chapter" data-level="" data-path="ggplot-details.html"><a href="ggplot-details.html#combining-plots"><i class="fa fa-check"></i>Combining separate plots in a grid</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exporting-graphics.html"><a href="exporting-graphics.html"><i class="fa fa-check"></i>Exporting for print</a></li>
+</ul></li>
+<li class="part"><span><b>III Analysis</b></span></li>
+<li class="chapter" data-level="8" data-path="basic-inferential-statistics.html"><a href="basic-inferential-statistics.html"><i class="fa fa-check"></i><b>8</b> Basic inferential statistics</a><ul>
+<li><a href="crosstabs.html#crosstabs">Crosstabulations and <sup>2</sup></a><ul>
+<li class="chapter" data-level="" data-path="crosstabs.html"><a href="crosstabs.html"><i class="fa fa-check"></i>Three-way tables</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html"><i class="fa fa-check"></i>Correlations</a><ul>
+<li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html#correlation-matrix"><i class="fa fa-check"></i>Creating a correlation matrix</a></li>
+<li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html#working-with-correlation-matrices"><i class="fa fa-check"></i>Working with correlation matrices</a></li>
+<li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html#correlation-tables-for-publication"><i class="fa fa-check"></i>Tables for publication</a></li>
+<li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html#correlation-methods"><i class="fa fa-check"></i>Other methods for correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="t-tests.html"><a href="t-tests.html"><i class="fa fa-check"></i>t-tests</a><ul>
+<li class="chapter" data-level="" data-path="t-tests.html"><a href="t-tests.html#visualising-your-data-first"><i class="fa fa-check"></i>Visualising your data first</a></li>
+<li class="chapter" data-level="" data-path="t-tests.html"><a href="t-tests.html#running-a-t-test"><i class="fa fa-check"></i>Running a t-test</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="linear-models-simple.html"><a href="linear-models-simple.html"><i class="fa fa-check"></i><b>9</b> Regression</a><ul>
+<li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#formulae"><i class="fa fa-check"></i>Describing statistical models using formulae</a></li>
+<li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#running-a-linear-model"><i class="fa fa-check"></i>Running a linear model</a></li>
+<li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#more-on-formulas"><i class="fa fa-check"></i>More on formulas</a></li>
+<li class="chapter" data-level="" data-path="factors-and-variable-codings.html"><a href="factors-and-variable-codings.html"><i class="fa fa-check"></i>Factors and variable codings</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html"><i class="fa fa-check"></i>Model specification</a><ul>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#regression-coding"><i class="fa fa-check"></i>Effect/dummy coding and contrasts</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#centering"><i class="fa fa-check"></i>Centering (is often helpful)</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#scaling-regression-inputs"><i class="fa fa-check"></i>Scaling inputs</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#alternatives-to-rescaling"><i class="fa fa-check"></i>Alternatives to rescaling</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#what-next"><i class="fa fa-check"></i>What next</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>10</b> Anova</a><ul>
+<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#rules-for-using-anova-in-r"><i class="fa fa-check"></i>Rules for using Anova in R</a></li>
+<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#anova-recommendations"><i class="fa fa-check"></i>Recommendations for doing Anova</a></li>
+<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html"><i class="fa fa-check"></i>Anova ‘Cookbook’</a><ul>
+<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#between-subjects-anova"><i class="fa fa-check"></i>Between-subjects Anova</a></li>
+<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#repeated-measures"><i class="fa fa-check"></i>Repeated measures or ‘split plot’ designs</a></li>
+<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#trad-rm-anova"><i class="fa fa-check"></i>Traditional repeated measures Anova</a></li>
+<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#comparison-with-a-multilevel-model"><i class="fa fa-check"></i>Comparison with a multilevel model</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="checking-assumptions.html"><a href="checking-assumptions.html"><i class="fa fa-check"></i>Checking assumptions</a></li>
+<li class="chapter" data-level="" data-path="followup-tests.html"><a href="followup-tests.html"><i class="fa fa-check"></i>Followup tests</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="understanding-interactions.html"><a href="understanding-interactions.html"><i class="fa fa-check"></i><b>11</b> Understanding interactions</a><ul>
+<li class="chapter" data-level="" data-path="what-is-an-interaction.html"><a href="what-is-an-interaction.html"><i class="fa fa-check"></i>What is an interaction?</a></li>
+<li class="chapter" data-level="" data-path="visualising-interactions-from-raw-data.html"><a href="visualising-interactions-from-raw-data.html"><i class="fa fa-check"></i>Visualising interactions from raw data</a><ul>
+<li class="chapter" data-level="" data-path="visualising-interactions-from-raw-data.html"><a href="visualising-interactions-from-raw-data.html#pain-music-data"><i class="fa fa-check"></i>A painful example</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="continuous-predictors.html"><a href="continuous-predictors.html"><i class="fa fa-check"></i>Continuous predictors</a></li>
+<li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html"><i class="fa fa-check"></i>Making predictions</a><ul>
+<li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predictions-vs-margins"><i class="fa fa-check"></i>Predictions vs margins</a></li>
+<li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predicted-means"><i class="fa fa-check"></i>Predicted means</a></li>
+<li><a href="predictions-and-margins.html#effects-margins"><em>Effects</em> (margins)</a></li>
+<li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#continuous-predictors-1"><i class="fa fa-check"></i>Continuous predictors</a></li>
+</ul></li>
+<li><a href="predicted-means-and-margins-using-lm.html#predicted-means-and-margins-using-lm">Predicted means and margins using <code>lm()</code></a><ul>
+<li class="chapter" data-level="" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html"><i class="fa fa-check"></i>Running the model</a></li>
+<li class="chapter" data-level="" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html#making-predictions-for-means"><i class="fa fa-check"></i>Making predictions for means</a></li>
+<li><a href="predicted-means-and-margins-using-lm.html#making-prdictions-for-margins-effects-of-predictors">Making prdictions for margins (<em>effects</em> of predictors)</a></li>
+<li class="chapter" data-level="" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html#marginal-effects"><i class="fa fa-check"></i>Marginal effects</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="predictions-with-continuous-covariates.html"><a href="predictions-with-continuous-covariates.html"><i class="fa fa-check"></i>Predictions with continuous covariates</a></li>
+<li class="chapter" data-level="" data-path="visualising-interactions.html"><a href="visualising-interactions.html"><i class="fa fa-check"></i>Visualising interactions</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="general-linear-models.html"><a href="general-linear-models.html"><i class="fa fa-check"></i><b>12</b> General linear models</a><ul>
+<li class="chapter" data-level="" data-path="general-linear-models.html"><a href="general-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="mediation.html"><a href="mediation.html"><i class="fa fa-check"></i><b>13</b> Mediation</a></li>
+<li class="chapter" data-level="14" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>14</b> Multilevel models</a><ul>
+<li class="chapter" data-level="" data-path="fitting-models.html"><a href="fitting-models.html"><i class="fa fa-check"></i>Fitting multilevel models in R</a><ul>
+<li><a href="fitting-models.html#use-lmer-and-glmer">Use <code>lmer</code> and <code>glmer</code></a></li>
+<li><a href="fitting-models.html#p-values-in-multilevel-models"><em>p</em> values in multilevel models</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="extending-traditional-rm-anova.html"><a href="extending-traditional-rm-anova.html"><i class="fa fa-check"></i>Extending traditional RM Anova</a><ul>
+<li><a href="extending-traditional-rm-anova.html#fit-a-simple-slope-for-days">Fit a simple slope for <code>Days</code></a></li>
+<li class="chapter" data-level="" data-path="extending-traditional-rm-anova.html"><a href="extending-traditional-rm-anova.html#allow-the-effect-of-sleep-deprivation-to-vary-for-different-participants"><i class="fa fa-check"></i>Allow the effect of sleep deprivation to vary for different participants</a></li>
+<li><a href="extending-traditional-rm-anova.html#growth-curve-sleep-example">Fitting a curve for the effect of <code>Days</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="icc-and-vpc.html"><a href="icc-and-vpc.html"><i class="fa fa-check"></i>Variance partition coefficients and intraclass correlations</a></li>
+<li class="chapter" data-level="" data-path="threelevel.html"><a href="threelevel.html"><i class="fa fa-check"></i>3 level models with ‘partially crossed’ random effects</a></li>
+<li class="chapter" data-level="" data-path="troubleshooting-multilevel-models.html"><a href="troubleshooting-multilevel-models.html"><i class="fa fa-check"></i>Troubleshooting</a><ul>
+<li class="chapter" data-level="" data-path="troubleshooting-multilevel-models.html"><a href="troubleshooting-multilevel-models.html#simplifying-mixed-models"><i class="fa fa-check"></i>Convergence problems and simplifying the random effects structure</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="multilevel-bayes-reasons.html"><a href="multilevel-bayes-reasons.html"><i class="fa fa-check"></i>Bayesian multilevel models</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="covariance-modelling.html"><a href="covariance-modelling.html"><i class="fa fa-check"></i><b>15</b> Covariance modelling</a><ul>
+<li class="chapter" data-level="" data-path="path-models.html"><a href="path-models.html"><i class="fa fa-check"></i>Path models</a><ul>
+<li class="chapter" data-level="" data-path="path-models.html"><a href="path-models.html#defining-the-model"><i class="fa fa-check"></i>Defining the model</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cfa.html"><a href="cfa.html"><i class="fa fa-check"></i>Confirmatory factor analysis (CFA)</a><ul>
+<li class="chapter" data-level="" data-path="cfa.html"><a href="cfa.html#defining-the-model-1"><i class="fa fa-check"></i>Defining the model</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="model-fit.html"><a href="model-fit.html"><i class="fa fa-check"></i>Model fit</a></li>
+<li class="chapter" data-level="" data-path="modification-indices.html"><a href="modification-indices.html"><i class="fa fa-check"></i>Modification indices</a></li>
+<li class="chapter" data-level="" data-path="model-improvement.html"><a href="model-improvement.html"><i class="fa fa-check"></i>Model modification and improvement</a></li>
+<li class="chapter" data-level="" data-path="sem.html"><a href="sem.html"><i class="fa fa-check"></i>Structural eqution modelling (SEM)</a></li>
+<li class="chapter" data-level="" data-path="identification.html"><a href="identification.html"><i class="fa fa-check"></i>‘Identification’ in CFA and SEM</a></li>
+<li class="chapter" data-level="" data-path="cfa-sem-missing-data.html"><a href="cfa-sem-missing-data.html"><i class="fa fa-check"></i>Missing data</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="power-analysis.html"><a href="power-analysis.html"><i class="fa fa-check"></i><b>16</b> Power analysis in R</a><ul>
+<li class="chapter" data-level="" data-path="power-analysis.html"><a href="power-analysis.html#for-most-inferential-statistics"><i class="fa fa-check"></i>For most inferential statistics</a></li>
+<li class="chapter" data-level="" data-path="power-analysis.html"><a href="power-analysis.html#for-multilevel-or-generalised-linear-models"><i class="fa fa-check"></i>For multilevel or generalised linear models</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html"><i class="fa fa-check"></i><b>17</b> Baysian linear model fitting with MCMC</a><ul>
+<li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#posterior-probabilities-for-parameters"><i class="fa fa-check"></i>Posterior probabilities for parameters</a></li>
+<li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#credible-intervals"><i class="fa fa-check"></i>Credible intervals</a></li>
+<li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#bayesian-p-values-for-parameters"><i class="fa fa-check"></i>Bayesian ‘p values’ for parameters</a></li>
+</ul></li>
+<li class="part"><span><b>IV Loose ends</b></span></li>
+<li class="chapter" data-level="18" data-path="statistical-explanations.html"><a href="statistical-explanations.html"><i class="fa fa-check"></i><b>18</b> Statistical explanations</a><ul>
+<li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html"><i class="fa fa-check"></i>Confidence, credible and prediction intervals</a><ul>
+<li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html#the-problem-with-confidence-intervals"><i class="fa fa-check"></i>The problem with confidence intervals</a></li>
+<li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html#forgetting-that-the-ci-depends-on-sample-size."><i class="fa fa-check"></i>Forgetting that the CI depends on sample size.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html"><i class="fa fa-check"></i>Multiple comparisons</a><ul>
+<li class="chapter" data-level="18.0.1" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#p-values-and-false-discoveries"><i class="fa fa-check"></i><b>18.0.1</b> <em>p</em> values and ‘false discoveries’</a></li>
+<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#multiple-tests-on-the-same-data"><i class="fa fa-check"></i>Multiple tests on the same data</a></li>
+<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#what-to-do-about-it"><i class="fa fa-check"></i>What to do about it?</a></li>
+<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#practical-examples"><i class="fa fa-check"></i>Practical examples</a></li>
+<li><a href="multiple-comparisons.html#contrasts-lmer">Followup tests using <code>lmer</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i>Clustered data</a></li>
+<li class="chapter" data-level="" data-path="fixed-or-random.html"><a href="fixed-or-random.html"><i class="fa fa-check"></i>Fixed vs Random effects</a></li>
+<li class="chapter" data-level="" data-path="link-functions.html"><a href="link-functions.html"><i class="fa fa-check"></i>Link functions and transformation</a><ul>
+<li class="chapter" data-level="" data-path="link-functions.html"><a href="link-functions.html#logistic-link-function"><i class="fa fa-check"></i>Logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html"><i class="fa fa-check"></i>Model comparison and selection</a><ul>
+<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#models-are-imperfect"><i class="fa fa-check"></i>Models are imperfect</a></li>
+<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#over-fitting"><i class="fa fa-check"></i>Overfitting/underfitting</a></li>
+<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#variable-selection"><i class="fa fa-check"></i>Choosing the ‘right variables’</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="gof.html"><a href="gof.html"><i class="fa fa-check"></i>Goodness of fit statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="r-details.html"><a href="r-details.html"><i class="fa fa-check"></i><b>19</b> R details</a><ul>
+<li class="chapter" data-level="" data-path="r-details.html"><a href="r-details.html#installation-intro"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i>Loading packages</a></li>
+<li class="chapter" data-level="" data-path="rownames.html"><a href="rownames.html"><i class="fa fa-check"></i>Rownames are evil</a></li>
+<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html"><i class="fa fa-check"></i>Colours</a><ul>
+<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#picking-colours"><i class="fa fa-check"></i>Picking colours for plots</a></li>
+<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#named-colours"><i class="fa fa-check"></i>Named colours in R</a></li>
+<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#color-brewer"><i class="fa fa-check"></i>ColourBrewer with ggplot</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="string-handling.html"><a href="string-handling.html"><i class="fa fa-check"></i>Working with character strings</a><ul>
+<li class="chapter" data-level="19.0.1" data-path="string-handling.html"><a href="string-handling.html#searching-and-replacing"><i class="fa fa-check"></i><b>19.0.1</b> Searching and replacing</a></li>
+<li><a href="processing-vectors.html#paste">Using <code>paste</code> to make labels</a></li>
+<li><a href="string-handling.html#separate-and-extract">Fixing up <code>variable</code> after melting</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="getting-help.html"><a href="getting-help.html"><i class="fa fa-check"></i>Getting help</a><ul>
+<li class="chapter" data-level="" data-path="getting-help.html"><a href="getting-help.html#backtick-location"><i class="fa fa-check"></i>Finding the backtick on your keyboard</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html"><i class="fa fa-check"></i>Re-using code</a><ul>
+<li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html#helper-functions"><i class="fa fa-check"></i>Writing helper functions</a></li>
+<li><a href="code-reuse.html#ggplot-reuse">Re-using code with <code>ggplot</code></a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>V Sharing</b></span></li>
+<li class="chapter" data-level="20" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html"><i class="fa fa-check"></i><b>20</b> Sharing and publishing your work</a><ul>
+<li class="chapter" data-level="" data-path="extract-results-from-models.html"><a href="extract-results-from-models.html"><i class="fa fa-check"></i>Extracting results from models</a></li>
+<li class="chapter" data-level="" data-path="process-model-results.html"><a href="process-model-results.html"><i class="fa fa-check"></i>Process your results</a></li>
+<li class="chapter" data-level="" data-path="output-tables.html"><a href="output-tables.html"><i class="fa fa-check"></i>Printing tables</a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html"><i class="fa fa-check"></i>APA formatting for free</a><ul>
+<li><a href="apa-output.html#chi2">Chi<sup>2</sup></a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#t-test"><i class="fa fa-check"></i>T-test</a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#anova-1"><i class="fa fa-check"></i>Anova</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#multilevel-models"><i class="fa fa-check"></i>Multilevel models</a></li>
+<li class="chapter" data-level="20.0.1" data-path="apa-output.html"><a href="apa-output.html#publication"><i class="fa fa-check"></i><b>20.0.1</b> Publication</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>21</b> References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">‘Just enough’ R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="colours" class="section level2 unnumbered">
+<h2>Colours</h2>
+<div id="picking-colours" class="section level3 unnumbered">
+<h3>Picking colours for plots</h3>
+<p>See <a href="https://www.perceptualedge.com/articles/b-eye/choosing_colors.pdf" class="uri">https://www.perceptualedge.com/articles/b-eye/choosing_colors.pdf</a> for an interesting discussion on picking colours for data visualisation.</p>
+<p>Also check the <a href="http://ggplot2.tidyverse.org/reference/scale_brewer.html">ggplots docs for colour brewer</a> and the <a href="http://colorbrewer2.org/">Colour Brewer website</a>.</p>
+</div>
+<div id="named-colours" class="section level3 unnumbered">
+<h3>Named colours in R</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">print.col &lt;-<span class="st"> </span><span class="kw">Vectorize</span>(<span class="cf">function</span>(col){
+  rgb &lt;-<span class="st"> </span>grDevices<span class="op">::</span><span class="kw">col2rgb</span>(col)
+  <span class="kw">sprintf</span>(<span class="st">&quot;&lt;span style=&#39;padding:1em; background-color: rgb(%s, %s, %s);&#39;&gt;&amp;nbsp;&lt;/span&gt; %s </span><span class="ch">\n\n</span><span class="st">&quot;</span>, rgb[<span class="dv">1</span>], rgb[<span class="dv">2</span>], rgb[<span class="dv">3</span>], col,  rgb[<span class="dv">1</span>], rgb[<span class="dv">2</span>], rgb[<span class="dv">3</span>])
+})
+
+<span class="kw">pandoc.p</span>(<span class="kw">print.col</span>(<span class="kw">colours</span>()))</code></pre></div>
+<p><span style="padding:1em; background-color: rgb(255, 255, 255);"> </span> white</p>
+<p><span style="padding:1em; background-color: rgb(240, 248, 255);"> </span> aliceblue</p>
+<p><span style="padding:1em; background-color: rgb(250, 235, 215);"> </span> antiquewhite</p>
+<p><span style="padding:1em; background-color: rgb(255, 239, 219);"> </span> antiquewhite1</p>
+<p><span style="padding:1em; background-color: rgb(238, 223, 204);"> </span> antiquewhite2</p>
+<p><span style="padding:1em; background-color: rgb(205, 192, 176);"> </span> antiquewhite3</p>
+<p><span style="padding:1em; background-color: rgb(139, 131, 120);"> </span> antiquewhite4</p>
+<p><span style="padding:1em; background-color: rgb(127, 255, 212);"> </span> aquamarine</p>
+<p><span style="padding:1em; background-color: rgb(127, 255, 212);"> </span> aquamarine1</p>
+<p><span style="padding:1em; background-color: rgb(118, 238, 198);"> </span> aquamarine2</p>
+<p><span style="padding:1em; background-color: rgb(102, 205, 170);"> </span> aquamarine3</p>
+<p><span style="padding:1em; background-color: rgb(69, 139, 116);"> </span> aquamarine4</p>
+<p><span style="padding:1em; background-color: rgb(240, 255, 255);"> </span> azure</p>
+<p><span style="padding:1em; background-color: rgb(240, 255, 255);"> </span> azure1</p>
+<p><span style="padding:1em; background-color: rgb(224, 238, 238);"> </span> azure2</p>
+<p><span style="padding:1em; background-color: rgb(193, 205, 205);"> </span> azure3</p>
+<p><span style="padding:1em; background-color: rgb(131, 139, 139);"> </span> azure4</p>
+<p><span style="padding:1em; background-color: rgb(245, 245, 220);"> </span> beige</p>
+<p><span style="padding:1em; background-color: rgb(255, 228, 196);"> </span> bisque</p>
+<p><span style="padding:1em; background-color: rgb(255, 228, 196);"> </span> bisque1</p>
+<p><span style="padding:1em; background-color: rgb(238, 213, 183);"> </span> bisque2</p>
+<p><span style="padding:1em; background-color: rgb(205, 183, 158);"> </span> bisque3</p>
+<p><span style="padding:1em; background-color: rgb(139, 125, 107);"> </span> bisque4</p>
+<p><span style="padding:1em; background-color: rgb(0, 0, 0);"> </span> black</p>
+<p><span style="padding:1em; background-color: rgb(255, 235, 205);"> </span> blanchedalmond</p>
+<p><span style="padding:1em; background-color: rgb(0, 0, 255);"> </span> blue</p>
+<p><span style="padding:1em; background-color: rgb(0, 0, 255);"> </span> blue1</p>
+<p><span style="padding:1em; background-color: rgb(0, 0, 238);"> </span> blue2</p>
+<p><span style="padding:1em; background-color: rgb(0, 0, 205);"> </span> blue3</p>
+<p><span style="padding:1em; background-color: rgb(0, 0, 139);"> </span> blue4</p>
+<p><span style="padding:1em; background-color: rgb(138, 43, 226);"> </span> blueviolet</p>
+<p><span style="padding:1em; background-color: rgb(165, 42, 42);"> </span> brown</p>
+<p><span style="padding:1em; background-color: rgb(255, 64, 64);"> </span> brown1</p>
+<p><span style="padding:1em; background-color: rgb(238, 59, 59);"> </span> brown2</p>
+<p><span style="padding:1em; background-color: rgb(205, 51, 51);"> </span> brown3</p>
+<p><span style="padding:1em; background-color: rgb(139, 35, 35);"> </span> brown4</p>
+<p><span style="padding:1em; background-color: rgb(222, 184, 135);"> </span> burlywood</p>
+<p><span style="padding:1em; background-color: rgb(255, 211, 155);"> </span> burlywood1</p>
+<p><span style="padding:1em; background-color: rgb(238, 197, 145);"> </span> burlywood2</p>
+<p><span style="padding:1em; background-color: rgb(205, 170, 125);"> </span> burlywood3</p>
+<p><span style="padding:1em; background-color: rgb(139, 115, 85);"> </span> burlywood4</p>
+<p><span style="padding:1em; background-color: rgb(95, 158, 160);"> </span> cadetblue</p>
+<p><span style="padding:1em; background-color: rgb(152, 245, 255);"> </span> cadetblue1</p>
+<p><span style="padding:1em; background-color: rgb(142, 229, 238);"> </span> cadetblue2</p>
+<p><span style="padding:1em; background-color: rgb(122, 197, 205);"> </span> cadetblue3</p>
+<p><span style="padding:1em; background-color: rgb(83, 134, 139);"> </span> cadetblue4</p>
+<p><span style="padding:1em; background-color: rgb(127, 255, 0);"> </span> chartreuse</p>
+<p><span style="padding:1em; background-color: rgb(127, 255, 0);"> </span> chartreuse1</p>
+<p><span style="padding:1em; background-color: rgb(118, 238, 0);"> </span> chartreuse2</p>
+<p><span style="padding:1em; background-color: rgb(102, 205, 0);"> </span> chartreuse3</p>
+<p><span style="padding:1em; background-color: rgb(69, 139, 0);"> </span> chartreuse4</p>
+<p><span style="padding:1em; background-color: rgb(210, 105, 30);"> </span> chocolate</p>
+<p><span style="padding:1em; background-color: rgb(255, 127, 36);"> </span> chocolate1</p>
+<p><span style="padding:1em; background-color: rgb(238, 118, 33);"> </span> chocolate2</p>
+<p><span style="padding:1em; background-color: rgb(205, 102, 29);"> </span> chocolate3</p>
+<p><span style="padding:1em; background-color: rgb(139, 69, 19);"> </span> chocolate4</p>
+<p><span style="padding:1em; background-color: rgb(255, 127, 80);"> </span> coral</p>
+<p><span style="padding:1em; background-color: rgb(255, 114, 86);"> </span> coral1</p>
+<p><span style="padding:1em; background-color: rgb(238, 106, 80);"> </span> coral2</p>
+<p><span style="padding:1em; background-color: rgb(205, 91, 69);"> </span> coral3</p>
+<p><span style="padding:1em; background-color: rgb(139, 62, 47);"> </span> coral4</p>
+<p><span style="padding:1em; background-color: rgb(100, 149, 237);"> </span> cornflowerblue</p>
+<p><span style="padding:1em; background-color: rgb(255, 248, 220);"> </span> cornsilk</p>
+<p><span style="padding:1em; background-color: rgb(255, 248, 220);"> </span> cornsilk1</p>
+<p><span style="padding:1em; background-color: rgb(238, 232, 205);"> </span> cornsilk2</p>
+<p><span style="padding:1em; background-color: rgb(205, 200, 177);"> </span> cornsilk3</p>
+<p><span style="padding:1em; background-color: rgb(139, 136, 120);"> </span> cornsilk4</p>
+<p><span style="padding:1em; background-color: rgb(0, 255, 255);"> </span> cyan</p>
+<p><span style="padding:1em; background-color: rgb(0, 255, 255);"> </span> cyan1</p>
+<p><span style="padding:1em; background-color: rgb(0, 238, 238);"> </span> cyan2</p>
+<p><span style="padding:1em; background-color: rgb(0, 205, 205);"> </span> cyan3</p>
+<p><span style="padding:1em; background-color: rgb(0, 139, 139);"> </span> cyan4</p>
+<p><span style="padding:1em; background-color: rgb(0, 0, 139);"> </span> darkblue</p>
+<p><span style="padding:1em; background-color: rgb(0, 139, 139);"> </span> darkcyan</p>
+<p><span style="padding:1em; background-color: rgb(184, 134, 11);"> </span> darkgoldenrod</p>
+<p><span style="padding:1em; background-color: rgb(255, 185, 15);"> </span> darkgoldenrod1</p>
+<p><span style="padding:1em; background-color: rgb(238, 173, 14);"> </span> darkgoldenrod2</p>
+<p><span style="padding:1em; background-color: rgb(205, 149, 12);"> </span> darkgoldenrod3</p>
+<p><span style="padding:1em; background-color: rgb(139, 101, 8);"> </span> darkgoldenrod4</p>
+<p><span style="padding:1em; background-color: rgb(169, 169, 169);"> </span> darkgray</p>
+<p><span style="padding:1em; background-color: rgb(0, 100, 0);"> </span> darkgreen</p>
+<p><span style="padding:1em; background-color: rgb(169, 169, 169);"> </span> darkgrey</p>
+<p><span style="padding:1em; background-color: rgb(189, 183, 107);"> </span> darkkhaki</p>
+<p><span style="padding:1em; background-color: rgb(139, 0, 139);"> </span> darkmagenta</p>
+<p><span style="padding:1em; background-color: rgb(85, 107, 47);"> </span> darkolivegreen</p>
+<p><span style="padding:1em; background-color: rgb(202, 255, 112);"> </span> darkolivegreen1</p>
+<p><span style="padding:1em; background-color: rgb(188, 238, 104);"> </span> darkolivegreen2</p>
+<p><span style="padding:1em; background-color: rgb(162, 205, 90);"> </span> darkolivegreen3</p>
+<p><span style="padding:1em; background-color: rgb(110, 139, 61);"> </span> darkolivegreen4</p>
+<p><span style="padding:1em; background-color: rgb(255, 140, 0);"> </span> darkorange</p>
+<p><span style="padding:1em; background-color: rgb(255, 127, 0);"> </span> darkorange1</p>
+<p><span style="padding:1em; background-color: rgb(238, 118, 0);"> </span> darkorange2</p>
+<p><span style="padding:1em; background-color: rgb(205, 102, 0);"> </span> darkorange3</p>
+<p><span style="padding:1em; background-color: rgb(139, 69, 0);"> </span> darkorange4</p>
+<p><span style="padding:1em; background-color: rgb(153, 50, 204);"> </span> darkorchid</p>
+<p><span style="padding:1em; background-color: rgb(191, 62, 255);"> </span> darkorchid1</p>
+<p><span style="padding:1em; background-color: rgb(178, 58, 238);"> </span> darkorchid2</p>
+<p><span style="padding:1em; background-color: rgb(154, 50, 205);"> </span> darkorchid3</p>
+<p><span style="padding:1em; background-color: rgb(104, 34, 139);"> </span> darkorchid4</p>
+<p><span style="padding:1em; background-color: rgb(139, 0, 0);"> </span> darkred</p>
+<p><span style="padding:1em; background-color: rgb(233, 150, 122);"> </span> darksalmon</p>
+<p><span style="padding:1em; background-color: rgb(143, 188, 143);"> </span> darkseagreen</p>
+<p><span style="padding:1em; background-color: rgb(193, 255, 193);"> </span> darkseagreen1</p>
+<p><span style="padding:1em; background-color: rgb(180, 238, 180);"> </span> darkseagreen2</p>
+<p><span style="padding:1em; background-color: rgb(155, 205, 155);"> </span> darkseagreen3</p>
+<p><span style="padding:1em; background-color: rgb(105, 139, 105);"> </span> darkseagreen4</p>
+<p><span style="padding:1em; background-color: rgb(72, 61, 139);"> </span> darkslateblue</p>
+<p><span style="padding:1em; background-color: rgb(47, 79, 79);"> </span> darkslategray</p>
+<p><span style="padding:1em; background-color: rgb(151, 255, 255);"> </span> darkslategray1</p>
+<p><span style="padding:1em; background-color: rgb(141, 238, 238);"> </span> darkslategray2</p>
+<p><span style="padding:1em; background-color: rgb(121, 205, 205);"> </span> darkslategray3</p>
+<p><span style="padding:1em; background-color: rgb(82, 139, 139);"> </span> darkslategray4</p>
+<p><span style="padding:1em; background-color: rgb(47, 79, 79);"> </span> darkslategrey</p>
+<p><span style="padding:1em; background-color: rgb(0, 206, 209);"> </span> darkturquoise</p>
+<p><span style="padding:1em; background-color: rgb(148, 0, 211);"> </span> darkviolet</p>
+<p><span style="padding:1em; background-color: rgb(255, 20, 147);"> </span> deeppink</p>
+<p><span style="padding:1em; background-color: rgb(255, 20, 147);"> </span> deeppink1</p>
+<p><span style="padding:1em; background-color: rgb(238, 18, 137);"> </span> deeppink2</p>
+<p><span style="padding:1em; background-color: rgb(205, 16, 118);"> </span> deeppink3</p>
+<p><span style="padding:1em; background-color: rgb(139, 10, 80);"> </span> deeppink4</p>
+<p><span style="padding:1em; background-color: rgb(0, 191, 255);"> </span> deepskyblue</p>
+<p><span style="padding:1em; background-color: rgb(0, 191, 255);"> </span> deepskyblue1</p>
+<p><span style="padding:1em; background-color: rgb(0, 178, 238);"> </span> deepskyblue2</p>
+<p><span style="padding:1em; background-color: rgb(0, 154, 205);"> </span> deepskyblue3</p>
+<p><span style="padding:1em; background-color: rgb(0, 104, 139);"> </span> deepskyblue4</p>
+<p><span style="padding:1em; background-color: rgb(105, 105, 105);"> </span> dimgray</p>
+<p><span style="padding:1em; background-color: rgb(105, 105, 105);"> </span> dimgrey</p>
+<p><span style="padding:1em; background-color: rgb(30, 144, 255);"> </span> dodgerblue</p>
+<p><span style="padding:1em; background-color: rgb(30, 144, 255);"> </span> dodgerblue1</p>
+<p><span style="padding:1em; background-color: rgb(28, 134, 238);"> </span> dodgerblue2</p>
+<p><span style="padding:1em; background-color: rgb(24, 116, 205);"> </span> dodgerblue3</p>
+<p><span style="padding:1em; background-color: rgb(16, 78, 139);"> </span> dodgerblue4</p>
+<p><span style="padding:1em; background-color: rgb(178, 34, 34);"> </span> firebrick</p>
+<p><span style="padding:1em; background-color: rgb(255, 48, 48);"> </span> firebrick1</p>
+<p><span style="padding:1em; background-color: rgb(238, 44, 44);"> </span> firebrick2</p>
+<p><span style="padding:1em; background-color: rgb(205, 38, 38);"> </span> firebrick3</p>
+<p><span style="padding:1em; background-color: rgb(139, 26, 26);"> </span> firebrick4</p>
+<p><span style="padding:1em; background-color: rgb(255, 250, 240);"> </span> floralwhite</p>
+<p><span style="padding:1em; background-color: rgb(34, 139, 34);"> </span> forestgreen</p>
+<p><span style="padding:1em; background-color: rgb(220, 220, 220);"> </span> gainsboro</p>
+<p><span style="padding:1em; background-color: rgb(248, 248, 255);"> </span> ghostwhite</p>
+<p><span style="padding:1em; background-color: rgb(255, 215, 0);"> </span> gold</p>
+<p><span style="padding:1em; background-color: rgb(255, 215, 0);"> </span> gold1</p>
+<p><span style="padding:1em; background-color: rgb(238, 201, 0);"> </span> gold2</p>
+<p><span style="padding:1em; background-color: rgb(205, 173, 0);"> </span> gold3</p>
+<p><span style="padding:1em; background-color: rgb(139, 117, 0);"> </span> gold4</p>
+<p><span style="padding:1em; background-color: rgb(218, 165, 32);"> </span> goldenrod</p>
+<p><span style="padding:1em; background-color: rgb(255, 193, 37);"> </span> goldenrod1</p>
+<p><span style="padding:1em; background-color: rgb(238, 180, 34);"> </span> goldenrod2</p>
+<p><span style="padding:1em; background-color: rgb(205, 155, 29);"> </span> goldenrod3</p>
+<p><span style="padding:1em; background-color: rgb(139, 105, 20);"> </span> goldenrod4</p>
+<p><span style="padding:1em; background-color: rgb(190, 190, 190);"> </span> gray</p>
+<p><span style="padding:1em; background-color: rgb(0, 0, 0);"> </span> gray0</p>
+<p><span style="padding:1em; background-color: rgb(3, 3, 3);"> </span> gray1</p>
+<p><span style="padding:1em; background-color: rgb(5, 5, 5);"> </span> gray2</p>
+<p><span style="padding:1em; background-color: rgb(8, 8, 8);"> </span> gray3</p>
+<p><span style="padding:1em; background-color: rgb(10, 10, 10);"> </span> gray4</p>
+<p><span style="padding:1em; background-color: rgb(13, 13, 13);"> </span> gray5</p>
+<p><span style="padding:1em; background-color: rgb(15, 15, 15);"> </span> gray6</p>
+<p><span style="padding:1em; background-color: rgb(18, 18, 18);"> </span> gray7</p>
+<p><span style="padding:1em; background-color: rgb(20, 20, 20);"> </span> gray8</p>
+<p><span style="padding:1em; background-color: rgb(23, 23, 23);"> </span> gray9</p>
+<p><span style="padding:1em; background-color: rgb(26, 26, 26);"> </span> gray10</p>
+<p><span style="padding:1em; background-color: rgb(28, 28, 28);"> </span> gray11</p>
+<p><span style="padding:1em; background-color: rgb(31, 31, 31);"> </span> gray12</p>
+<p><span style="padding:1em; background-color: rgb(33, 33, 33);"> </span> gray13</p>
+<p><span style="padding:1em; background-color: rgb(36, 36, 36);"> </span> gray14</p>
+<p><span style="padding:1em; background-color: rgb(38, 38, 38);"> </span> gray15</p>
+<p><span style="padding:1em; background-color: rgb(41, 41, 41);"> </span> gray16</p>
+<p><span style="padding:1em; background-color: rgb(43, 43, 43);"> </span> gray17</p>
+<p><span style="padding:1em; background-color: rgb(46, 46, 46);"> </span> gray18</p>
+<p><span style="padding:1em; background-color: rgb(48, 48, 48);"> </span> gray19</p>
+<p><span style="padding:1em; background-color: rgb(51, 51, 51);"> </span> gray20</p>
+<p><span style="padding:1em; background-color: rgb(54, 54, 54);"> </span> gray21</p>
+<p><span style="padding:1em; background-color: rgb(56, 56, 56);"> </span> gray22</p>
+<p><span style="padding:1em; background-color: rgb(59, 59, 59);"> </span> gray23</p>
+<p><span style="padding:1em; background-color: rgb(61, 61, 61);"> </span> gray24</p>
+<p><span style="padding:1em; background-color: rgb(64, 64, 64);"> </span> gray25</p>
+<p><span style="padding:1em; background-color: rgb(66, 66, 66);"> </span> gray26</p>
+<p><span style="padding:1em; background-color: rgb(69, 69, 69);"> </span> gray27</p>
+<p><span style="padding:1em; background-color: rgb(71, 71, 71);"> </span> gray28</p>
+<p><span style="padding:1em; background-color: rgb(74, 74, 74);"> </span> gray29</p>
+<p><span style="padding:1em; background-color: rgb(77, 77, 77);"> </span> gray30</p>
+<p><span style="padding:1em; background-color: rgb(79, 79, 79);"> </span> gray31</p>
+<p><span style="padding:1em; background-color: rgb(82, 82, 82);"> </span> gray32</p>
+<p><span style="padding:1em; background-color: rgb(84, 84, 84);"> </span> gray33</p>
+<p><span style="padding:1em; background-color: rgb(87, 87, 87);"> </span> gray34</p>
+<p><span style="padding:1em; background-color: rgb(89, 89, 89);"> </span> gray35</p>
+<p><span style="padding:1em; background-color: rgb(92, 92, 92);"> </span> gray36</p>
+<p><span style="padding:1em; background-color: rgb(94, 94, 94);"> </span> gray37</p>
+<p><span style="padding:1em; background-color: rgb(97, 97, 97);"> </span> gray38</p>
+<p><span style="padding:1em; background-color: rgb(99, 99, 99);"> </span> gray39</p>
+<p><span style="padding:1em; background-color: rgb(102, 102, 102);"> </span> gray40</p>
+<p><span style="padding:1em; background-color: rgb(105, 105, 105);"> </span> gray41</p>
+<p><span style="padding:1em; background-color: rgb(107, 107, 107);"> </span> gray42</p>
+<p><span style="padding:1em; background-color: rgb(110, 110, 110);"> </span> gray43</p>
+<p><span style="padding:1em; background-color: rgb(112, 112, 112);"> </span> gray44</p>
+<p><span style="padding:1em; background-color: rgb(115, 115, 115);"> </span> gray45</p>
+<p><span style="padding:1em; background-color: rgb(117, 117, 117);"> </span> gray46</p>
+<p><span style="padding:1em; background-color: rgb(120, 120, 120);"> </span> gray47</p>
+<p><span style="padding:1em; background-color: rgb(122, 122, 122);"> </span> gray48</p>
+<p><span style="padding:1em; background-color: rgb(125, 125, 125);"> </span> gray49</p>
+<p><span style="padding:1em; background-color: rgb(127, 127, 127);"> </span> gray50</p>
+<p><span style="padding:1em; background-color: rgb(130, 130, 130);"> </span> gray51</p>
+<p><span style="padding:1em; background-color: rgb(133, 133, 133);"> </span> gray52</p>
+<p><span style="padding:1em; background-color: rgb(135, 135, 135);"> </span> gray53</p>
+<p><span style="padding:1em; background-color: rgb(138, 138, 138);"> </span> gray54</p>
+<p><span style="padding:1em; background-color: rgb(140, 140, 140);"> </span> gray55</p>
+<p><span style="padding:1em; background-color: rgb(143, 143, 143);"> </span> gray56</p>
+<p><span style="padding:1em; background-color: rgb(145, 145, 145);"> </span> gray57</p>
+<p><span style="padding:1em; background-color: rgb(148, 148, 148);"> </span> gray58</p>
+<p><span style="padding:1em; background-color: rgb(150, 150, 150);"> </span> gray59</p>
+<p><span style="padding:1em; background-color: rgb(153, 153, 153);"> </span> gray60</p>
+<p><span style="padding:1em; background-color: rgb(156, 156, 156);"> </span> gray61</p>
+<p><span style="padding:1em; background-color: rgb(158, 158, 158);"> </span> gray62</p>
+<p><span style="padding:1em; background-color: rgb(161, 161, 161);"> </span> gray63</p>
+<p><span style="padding:1em; background-color: rgb(163, 163, 163);"> </span> gray64</p>
+<p><span style="padding:1em; background-color: rgb(166, 166, 166);"> </span> gray65</p>
+<p><span style="padding:1em; background-color: rgb(168, 168, 168);"> </span> gray66</p>
+<p><span style="padding:1em; background-color: rgb(171, 171, 171);"> </span> gray67</p>
+<p><span style="padding:1em; background-color: rgb(173, 173, 173);"> </span> gray68</p>
+<p><span style="padding:1em; background-color: rgb(176, 176, 176);"> </span> gray69</p>
+<p><span style="padding:1em; background-color: rgb(179, 179, 179);"> </span> gray70</p>
+<p><span style="padding:1em; background-color: rgb(181, 181, 181);"> </span> gray71</p>
+<p><span style="padding:1em; background-color: rgb(184, 184, 184);"> </span> gray72</p>
+<p><span style="padding:1em; background-color: rgb(186, 186, 186);"> </span> gray73</p>
+<p><span style="padding:1em; background-color: rgb(189, 189, 189);"> </span> gray74</p>
+<p><span style="padding:1em; background-color: rgb(191, 191, 191);"> </span> gray75</p>
+<p><span style="padding:1em; background-color: rgb(194, 194, 194);"> </span> gray76</p>
+<p><span style="padding:1em; background-color: rgb(196, 196, 196);"> </span> gray77</p>
+<p><span style="padding:1em; background-color: rgb(199, 199, 199);"> </span> gray78</p>
+<p><span style="padding:1em; background-color: rgb(201, 201, 201);"> </span> gray79</p>
+<p><span style="padding:1em; background-color: rgb(204, 204, 204);"> </span> gray80</p>
+<p><span style="padding:1em; background-color: rgb(207, 207, 207);"> </span> gray81</p>
+<p><span style="padding:1em; background-color: rgb(209, 209, 209);"> </span> gray82</p>
+<p><span style="padding:1em; background-color: rgb(212, 212, 212);"> </span> gray83</p>
+<p><span style="padding:1em; background-color: rgb(214, 214, 214);"> </span> gray84</p>
+<p><span style="padding:1em; background-color: rgb(217, 217, 217);"> </span> gray85</p>
+<p><span style="padding:1em; background-color: rgb(219, 219, 219);"> </span> gray86</p>
+<p><span style="padding:1em; background-color: rgb(222, 222, 222);"> </span> gray87</p>
+<p><span style="padding:1em; background-color: rgb(224, 224, 224);"> </span> gray88</p>
+<p><span style="padding:1em; background-color: rgb(227, 227, 227);"> </span> gray89</p>
+<p><span style="padding:1em; background-color: rgb(229, 229, 229);"> </span> gray90</p>
+<p><span style="padding:1em; background-color: rgb(232, 232, 232);"> </span> gray91</p>
+<p><span style="padding:1em; background-color: rgb(235, 235, 235);"> </span> gray92</p>
+<p><span style="padding:1em; background-color: rgb(237, 237, 237);"> </span> gray93</p>
+<p><span style="padding:1em; background-color: rgb(240, 240, 240);"> </span> gray94</p>
+<p><span style="padding:1em; background-color: rgb(242, 242, 242);"> </span> gray95</p>
+<p><span style="padding:1em; background-color: rgb(245, 245, 245);"> </span> gray96</p>
+<p><span style="padding:1em; background-color: rgb(247, 247, 247);"> </span> gray97</p>
+<p><span style="padding:1em; background-color: rgb(250, 250, 250);"> </span> gray98</p>
+<p><span style="padding:1em; background-color: rgb(252, 252, 252);"> </span> gray99</p>
+<p><span style="padding:1em; background-color: rgb(255, 255, 255);"> </span> gray100</p>
+<p><span style="padding:1em; background-color: rgb(0, 255, 0);"> </span> green</p>
+<p><span style="padding:1em; background-color: rgb(0, 255, 0);"> </span> green1</p>
+<p><span style="padding:1em; background-color: rgb(0, 238, 0);"> </span> green2</p>
+<p><span style="padding:1em; background-color: rgb(0, 205, 0);"> </span> green3</p>
+<p><span style="padding:1em; background-color: rgb(0, 139, 0);"> </span> green4</p>
+<p><span style="padding:1em; background-color: rgb(173, 255, 47);"> </span> greenyellow</p>
+<p><span style="padding:1em; background-color: rgb(190, 190, 190);"> </span> grey</p>
+<p><span style="padding:1em; background-color: rgb(0, 0, 0);"> </span> grey0</p>
+<p><span style="padding:1em; background-color: rgb(3, 3, 3);"> </span> grey1</p>
+<p><span style="padding:1em; background-color: rgb(5, 5, 5);"> </span> grey2</p>
+<p><span style="padding:1em; background-color: rgb(8, 8, 8);"> </span> grey3</p>
+<p><span style="padding:1em; background-color: rgb(10, 10, 10);"> </span> grey4</p>
+<p><span style="padding:1em; background-color: rgb(13, 13, 13);"> </span> grey5</p>
+<p><span style="padding:1em; background-color: rgb(15, 15, 15);"> </span> grey6</p>
+<p><span style="padding:1em; background-color: rgb(18, 18, 18);"> </span> grey7</p>
+<p><span style="padding:1em; background-color: rgb(20, 20, 20);"> </span> grey8</p>
+<p><span style="padding:1em; background-color: rgb(23, 23, 23);"> </span> grey9</p>
+<p><span style="padding:1em; background-color: rgb(26, 26, 26);"> </span> grey10</p>
+<p><span style="padding:1em; background-color: rgb(28, 28, 28);"> </span> grey11</p>
+<p><span style="padding:1em; background-color: rgb(31, 31, 31);"> </span> grey12</p>
+<p><span style="padding:1em; background-color: rgb(33, 33, 33);"> </span> grey13</p>
+<p><span style="padding:1em; background-color: rgb(36, 36, 36);"> </span> grey14</p>
+<p><span style="padding:1em; background-color: rgb(38, 38, 38);"> </span> grey15</p>
+<p><span style="padding:1em; background-color: rgb(41, 41, 41);"> </span> grey16</p>
+<p><span style="padding:1em; background-color: rgb(43, 43, 43);"> </span> grey17</p>
+<p><span style="padding:1em; background-color: rgb(46, 46, 46);"> </span> grey18</p>
+<p><span style="padding:1em; background-color: rgb(48, 48, 48);"> </span> grey19</p>
+<p><span style="padding:1em; background-color: rgb(51, 51, 51);"> </span> grey20</p>
+<p><span style="padding:1em; background-color: rgb(54, 54, 54);"> </span> grey21</p>
+<p><span style="padding:1em; background-color: rgb(56, 56, 56);"> </span> grey22</p>
+<p><span style="padding:1em; background-color: rgb(59, 59, 59);"> </span> grey23</p>
+<p><span style="padding:1em; background-color: rgb(61, 61, 61);"> </span> grey24</p>
+<p><span style="padding:1em; background-color: rgb(64, 64, 64);"> </span> grey25</p>
+<p><span style="padding:1em; background-color: rgb(66, 66, 66);"> </span> grey26</p>
+<p><span style="padding:1em; background-color: rgb(69, 69, 69);"> </span> grey27</p>
+<p><span style="padding:1em; background-color: rgb(71, 71, 71);"> </span> grey28</p>
+<p><span style="padding:1em; background-color: rgb(74, 74, 74);"> </span> grey29</p>
+<p><span style="padding:1em; background-color: rgb(77, 77, 77);"> </span> grey30</p>
+<p><span style="padding:1em; background-color: rgb(79, 79, 79);"> </span> grey31</p>
+<p><span style="padding:1em; background-color: rgb(82, 82, 82);"> </span> grey32</p>
+<p><span style="padding:1em; background-color: rgb(84, 84, 84);"> </span> grey33</p>
+<p><span style="padding:1em; background-color: rgb(87, 87, 87);"> </span> grey34</p>
+<p><span style="padding:1em; background-color: rgb(89, 89, 89);"> </span> grey35</p>
+<p><span style="padding:1em; background-color: rgb(92, 92, 92);"> </span> grey36</p>
+<p><span style="padding:1em; background-color: rgb(94, 94, 94);"> </span> grey37</p>
+<p><span style="padding:1em; background-color: rgb(97, 97, 97);"> </span> grey38</p>
+<p><span style="padding:1em; background-color: rgb(99, 99, 99);"> </span> grey39</p>
+<p><span style="padding:1em; background-color: rgb(102, 102, 102);"> </span> grey40</p>
+<p><span style="padding:1em; background-color: rgb(105, 105, 105);"> </span> grey41</p>
+<p><span style="padding:1em; background-color: rgb(107, 107, 107);"> </span> grey42</p>
+<p><span style="padding:1em; background-color: rgb(110, 110, 110);"> </span> grey43</p>
+<p><span style="padding:1em; background-color: rgb(112, 112, 112);"> </span> grey44</p>
+<p><span style="padding:1em; background-color: rgb(115, 115, 115);"> </span> grey45</p>
+<p><span style="padding:1em; background-color: rgb(117, 117, 117);"> </span> grey46</p>
+<p><span style="padding:1em; background-color: rgb(120, 120, 120);"> </span> grey47</p>
+<p><span style="padding:1em; background-color: rgb(122, 122, 122);"> </span> grey48</p>
+<p><span style="padding:1em; background-color: rgb(125, 125, 125);"> </span> grey49</p>
+<p><span style="padding:1em; background-color: rgb(127, 127, 127);"> </span> grey50</p>
+<p><span style="padding:1em; background-color: rgb(130, 130, 130);"> </span> grey51</p>
+<p><span style="padding:1em; background-color: rgb(133, 133, 133);"> </span> grey52</p>
+<p><span style="padding:1em; background-color: rgb(135, 135, 135);"> </span> grey53</p>
+<p><span style="padding:1em; background-color: rgb(138, 138, 138);"> </span> grey54</p>
+<p><span style="padding:1em; background-color: rgb(140, 140, 140);"> </span> grey55</p>
+<p><span style="padding:1em; background-color: rgb(143, 143, 143);"> </span> grey56</p>
+<p><span style="padding:1em; background-color: rgb(145, 145, 145);"> </span> grey57</p>
+<p><span style="padding:1em; background-color: rgb(148, 148, 148);"> </span> grey58</p>
+<p><span style="padding:1em; background-color: rgb(150, 150, 150);"> </span> grey59</p>
+<p><span style="padding:1em; background-color: rgb(153, 153, 153);"> </span> grey60</p>
+<p><span style="padding:1em; background-color: rgb(156, 156, 156);"> </span> grey61</p>
+<p><span style="padding:1em; background-color: rgb(158, 158, 158);"> </span> grey62</p>
+<p><span style="padding:1em; background-color: rgb(161, 161, 161);"> </span> grey63</p>
+<p><span style="padding:1em; background-color: rgb(163, 163, 163);"> </span> grey64</p>
+<p><span style="padding:1em; background-color: rgb(166, 166, 166);"> </span> grey65</p>
+<p><span style="padding:1em; background-color: rgb(168, 168, 168);"> </span> grey66</p>
+<p><span style="padding:1em; background-color: rgb(171, 171, 171);"> </span> grey67</p>
+<p><span style="padding:1em; background-color: rgb(173, 173, 173);"> </span> grey68</p>
+<p><span style="padding:1em; background-color: rgb(176, 176, 176);"> </span> grey69</p>
+<p><span style="padding:1em; background-color: rgb(179, 179, 179);"> </span> grey70</p>
+<p><span style="padding:1em; background-color: rgb(181, 181, 181);"> </span> grey71</p>
+<p><span style="padding:1em; background-color: rgb(184, 184, 184);"> </span> grey72</p>
+<p><span style="padding:1em; background-color: rgb(186, 186, 186);"> </span> grey73</p>
+<p><span style="padding:1em; background-color: rgb(189, 189, 189);"> </span> grey74</p>
+<p><span style="padding:1em; background-color: rgb(191, 191, 191);"> </span> grey75</p>
+<p><span style="padding:1em; background-color: rgb(194, 194, 194);"> </span> grey76</p>
+<p><span style="padding:1em; background-color: rgb(196, 196, 196);"> </span> grey77</p>
+<p><span style="padding:1em; background-color: rgb(199, 199, 199);"> </span> grey78</p>
+<p><span style="padding:1em; background-color: rgb(201, 201, 201);"> </span> grey79</p>
+<p><span style="padding:1em; background-color: rgb(204, 204, 204);"> </span> grey80</p>
+<p><span style="padding:1em; background-color: rgb(207, 207, 207);"> </span> grey81</p>
+<p><span style="padding:1em; background-color: rgb(209, 209, 209);"> </span> grey82</p>
+<p><span style="padding:1em; background-color: rgb(212, 212, 212);"> </span> grey83</p>
+<p><span style="padding:1em; background-color: rgb(214, 214, 214);"> </span> grey84</p>
+<p><span style="padding:1em; background-color: rgb(217, 217, 217);"> </span> grey85</p>
+<p><span style="padding:1em; background-color: rgb(219, 219, 219);"> </span> grey86</p>
+<p><span style="padding:1em; background-color: rgb(222, 222, 222);"> </span> grey87</p>
+<p><span style="padding:1em; background-color: rgb(224, 224, 224);"> </span> grey88</p>
+<p><span style="padding:1em; background-color: rgb(227, 227, 227);"> </span> grey89</p>
+<p><span style="padding:1em; background-color: rgb(229, 229, 229);"> </span> grey90</p>
+<p><span style="padding:1em; background-color: rgb(232, 232, 232);"> </span> grey91</p>
+<p><span style="padding:1em; background-color: rgb(235, 235, 235);"> </span> grey92</p>
+<p><span style="padding:1em; background-color: rgb(237, 237, 237);"> </span> grey93</p>
+<p><span style="padding:1em; background-color: rgb(240, 240, 240);"> </span> grey94</p>
+<p><span style="padding:1em; background-color: rgb(242, 242, 242);"> </span> grey95</p>
+<p><span style="padding:1em; background-color: rgb(245, 245, 245);"> </span> grey96</p>
+<p><span style="padding:1em; background-color: rgb(247, 247, 247);"> </span> grey97</p>
+<p><span style="padding:1em; background-color: rgb(250, 250, 250);"> </span> grey98</p>
+<p><span style="padding:1em; background-color: rgb(252, 252, 252);"> </span> grey99</p>
+<p><span style="padding:1em; background-color: rgb(255, 255, 255);"> </span> grey100</p>
+<p><span style="padding:1em; background-color: rgb(240, 255, 240);"> </span> honeydew</p>
+<p><span style="padding:1em; background-color: rgb(240, 255, 240);"> </span> honeydew1</p>
+<p><span style="padding:1em; background-color: rgb(224, 238, 224);"> </span> honeydew2</p>
+<p><span style="padding:1em; background-color: rgb(193, 205, 193);"> </span> honeydew3</p>
+<p><span style="padding:1em; background-color: rgb(131, 139, 131);"> </span> honeydew4</p>
+<p><span style="padding:1em; background-color: rgb(255, 105, 180);"> </span> hotpink</p>
+<p><span style="padding:1em; background-color: rgb(255, 110, 180);"> </span> hotpink1</p>
+<p><span style="padding:1em; background-color: rgb(238, 106, 167);"> </span> hotpink2</p>
+<p><span style="padding:1em; background-color: rgb(205, 96, 144);"> </span> hotpink3</p>
+<p><span style="padding:1em; background-color: rgb(139, 58, 98);"> </span> hotpink4</p>
+<p><span style="padding:1em; background-color: rgb(205, 92, 92);"> </span> indianred</p>
+<p><span style="padding:1em; background-color: rgb(255, 106, 106);"> </span> indianred1</p>
+<p><span style="padding:1em; background-color: rgb(238, 99, 99);"> </span> indianred2</p>
+<p><span style="padding:1em; background-color: rgb(205, 85, 85);"> </span> indianred3</p>
+<p><span style="padding:1em; background-color: rgb(139, 58, 58);"> </span> indianred4</p>
+<p><span style="padding:1em; background-color: rgb(255, 255, 240);"> </span> ivory</p>
+<p><span style="padding:1em; background-color: rgb(255, 255, 240);"> </span> ivory1</p>
+<p><span style="padding:1em; background-color: rgb(238, 238, 224);"> </span> ivory2</p>
+<p><span style="padding:1em; background-color: rgb(205, 205, 193);"> </span> ivory3</p>
+<p><span style="padding:1em; background-color: rgb(139, 139, 131);"> </span> ivory4</p>
+<p><span style="padding:1em; background-color: rgb(240, 230, 140);"> </span> khaki</p>
+<p><span style="padding:1em; background-color: rgb(255, 246, 143);"> </span> khaki1</p>
+<p><span style="padding:1em; background-color: rgb(238, 230, 133);"> </span> khaki2</p>
+<p><span style="padding:1em; background-color: rgb(205, 198, 115);"> </span> khaki3</p>
+<p><span style="padding:1em; background-color: rgb(139, 134, 78);"> </span> khaki4</p>
+<p><span style="padding:1em; background-color: rgb(230, 230, 250);"> </span> lavender</p>
+<p><span style="padding:1em; background-color: rgb(255, 240, 245);"> </span> lavenderblush</p>
+<p><span style="padding:1em; background-color: rgb(255, 240, 245);"> </span> lavenderblush1</p>
+<p><span style="padding:1em; background-color: rgb(238, 224, 229);"> </span> lavenderblush2</p>
+<p><span style="padding:1em; background-color: rgb(205, 193, 197);"> </span> lavenderblush3</p>
+<p><span style="padding:1em; background-color: rgb(139, 131, 134);"> </span> lavenderblush4</p>
+<p><span style="padding:1em; background-color: rgb(124, 252, 0);"> </span> lawngreen</p>
+<p><span style="padding:1em; background-color: rgb(255, 250, 205);"> </span> lemonchiffon</p>
+<p><span style="padding:1em; background-color: rgb(255, 250, 205);"> </span> lemonchiffon1</p>
+<p><span style="padding:1em; background-color: rgb(238, 233, 191);"> </span> lemonchiffon2</p>
+<p><span style="padding:1em; background-color: rgb(205, 201, 165);"> </span> lemonchiffon3</p>
+<p><span style="padding:1em; background-color: rgb(139, 137, 112);"> </span> lemonchiffon4</p>
+<p><span style="padding:1em; background-color: rgb(173, 216, 230);"> </span> lightblue</p>
+<p><span style="padding:1em; background-color: rgb(191, 239, 255);"> </span> lightblue1</p>
+<p><span style="padding:1em; background-color: rgb(178, 223, 238);"> </span> lightblue2</p>
+<p><span style="padding:1em; background-color: rgb(154, 192, 205);"> </span> lightblue3</p>
+<p><span style="padding:1em; background-color: rgb(104, 131, 139);"> </span> lightblue4</p>
+<p><span style="padding:1em; background-color: rgb(240, 128, 128);"> </span> lightcoral</p>
+<p><span style="padding:1em; background-color: rgb(224, 255, 255);"> </span> lightcyan</p>
+<p><span style="padding:1em; background-color: rgb(224, 255, 255);"> </span> lightcyan1</p>
+<p><span style="padding:1em; background-color: rgb(209, 238, 238);"> </span> lightcyan2</p>
+<p><span style="padding:1em; background-color: rgb(180, 205, 205);"> </span> lightcyan3</p>
+<p><span style="padding:1em; background-color: rgb(122, 139, 139);"> </span> lightcyan4</p>
+<p><span style="padding:1em; background-color: rgb(238, 221, 130);"> </span> lightgoldenrod</p>
+<p><span style="padding:1em; background-color: rgb(255, 236, 139);"> </span> lightgoldenrod1</p>
+<p><span style="padding:1em; background-color: rgb(238, 220, 130);"> </span> lightgoldenrod2</p>
+<p><span style="padding:1em; background-color: rgb(205, 190, 112);"> </span> lightgoldenrod3</p>
+<p><span style="padding:1em; background-color: rgb(139, 129, 76);"> </span> lightgoldenrod4</p>
+<p><span style="padding:1em; background-color: rgb(250, 250, 210);"> </span> lightgoldenrodyellow</p>
+<p><span style="padding:1em; background-color: rgb(211, 211, 211);"> </span> lightgray</p>
+<p><span style="padding:1em; background-color: rgb(144, 238, 144);"> </span> lightgreen</p>
+<p><span style="padding:1em; background-color: rgb(211, 211, 211);"> </span> lightgrey</p>
+<p><span style="padding:1em; background-color: rgb(255, 182, 193);"> </span> lightpink</p>
+<p><span style="padding:1em; background-color: rgb(255, 174, 185);"> </span> lightpink1</p>
+<p><span style="padding:1em; background-color: rgb(238, 162, 173);"> </span> lightpink2</p>
+<p><span style="padding:1em; background-color: rgb(205, 140, 149);"> </span> lightpink3</p>
+<p><span style="padding:1em; background-color: rgb(139, 95, 101);"> </span> lightpink4</p>
+<p><span style="padding:1em; background-color: rgb(255, 160, 122);"> </span> lightsalmon</p>
+<p><span style="padding:1em; background-color: rgb(255, 160, 122);"> </span> lightsalmon1</p>
+<p><span style="padding:1em; background-color: rgb(238, 149, 114);"> </span> lightsalmon2</p>
+<p><span style="padding:1em; background-color: rgb(205, 129, 98);"> </span> lightsalmon3</p>
+<p><span style="padding:1em; background-color: rgb(139, 87, 66);"> </span> lightsalmon4</p>
+<p><span style="padding:1em; background-color: rgb(32, 178, 170);"> </span> lightseagreen</p>
+<p><span style="padding:1em; background-color: rgb(135, 206, 250);"> </span> lightskyblue</p>
+<p><span style="padding:1em; background-color: rgb(176, 226, 255);"> </span> lightskyblue1</p>
+<p><span style="padding:1em; background-color: rgb(164, 211, 238);"> </span> lightskyblue2</p>
+<p><span style="padding:1em; background-color: rgb(141, 182, 205);"> </span> lightskyblue3</p>
+<p><span style="padding:1em; background-color: rgb(96, 123, 139);"> </span> lightskyblue4</p>
+<p><span style="padding:1em; background-color: rgb(132, 112, 255);"> </span> lightslateblue</p>
+<p><span style="padding:1em; background-color: rgb(119, 136, 153);"> </span> lightslategray</p>
+<p><span style="padding:1em; background-color: rgb(119, 136, 153);"> </span> lightslategrey</p>
+<p><span style="padding:1em; background-color: rgb(176, 196, 222);"> </span> lightsteelblue</p>
+<p><span style="padding:1em; background-color: rgb(202, 225, 255);"> </span> lightsteelblue1</p>
+<p><span style="padding:1em; background-color: rgb(188, 210, 238);"> </span> lightsteelblue2</p>
+<p><span style="padding:1em; background-color: rgb(162, 181, 205);"> </span> lightsteelblue3</p>
+<p><span style="padding:1em; background-color: rgb(110, 123, 139);"> </span> lightsteelblue4</p>
+<p><span style="padding:1em; background-color: rgb(255, 255, 224);"> </span> lightyellow</p>
+<p><span style="padding:1em; background-color: rgb(255, 255, 224);"> </span> lightyellow1</p>
+<p><span style="padding:1em; background-color: rgb(238, 238, 209);"> </span> lightyellow2</p>
+<p><span style="padding:1em; background-color: rgb(205, 205, 180);"> </span> lightyellow3</p>
+<p><span style="padding:1em; background-color: rgb(139, 139, 122);"> </span> lightyellow4</p>
+<p><span style="padding:1em; background-color: rgb(50, 205, 50);"> </span> limegreen</p>
+<p><span style="padding:1em; background-color: rgb(250, 240, 230);"> </span> linen</p>
+<p><span style="padding:1em; background-color: rgb(255, 0, 255);"> </span> magenta</p>
+<p><span style="padding:1em; background-color: rgb(255, 0, 255);"> </span> magenta1</p>
+<p><span style="padding:1em; background-color: rgb(238, 0, 238);"> </span> magenta2</p>
+<p><span style="padding:1em; background-color: rgb(205, 0, 205);"> </span> magenta3</p>
+<p><span style="padding:1em; background-color: rgb(139, 0, 139);"> </span> magenta4</p>
+<p><span style="padding:1em; background-color: rgb(176, 48, 96);"> </span> maroon</p>
+<p><span style="padding:1em; background-color: rgb(255, 52, 179);"> </span> maroon1</p>
+<p><span style="padding:1em; background-color: rgb(238, 48, 167);"> </span> maroon2</p>
+<p><span style="padding:1em; background-color: rgb(205, 41, 144);"> </span> maroon3</p>
+<p><span style="padding:1em; background-color: rgb(139, 28, 98);"> </span> maroon4</p>
+<p><span style="padding:1em; background-color: rgb(102, 205, 170);"> </span> mediumaquamarine</p>
+<p><span style="padding:1em; background-color: rgb(0, 0, 205);"> </span> mediumblue</p>
+<p><span style="padding:1em; background-color: rgb(186, 85, 211);"> </span> mediumorchid</p>
+<p><span style="padding:1em; background-color: rgb(224, 102, 255);"> </span> mediumorchid1</p>
+<p><span style="padding:1em; background-color: rgb(209, 95, 238);"> </span> mediumorchid2</p>
+<p><span style="padding:1em; background-color: rgb(180, 82, 205);"> </span> mediumorchid3</p>
+<p><span style="padding:1em; background-color: rgb(122, 55, 139);"> </span> mediumorchid4</p>
+<p><span style="padding:1em; background-color: rgb(147, 112, 219);"> </span> mediumpurple</p>
+<p><span style="padding:1em; background-color: rgb(171, 130, 255);"> </span> mediumpurple1</p>
+<p><span style="padding:1em; background-color: rgb(159, 121, 238);"> </span> mediumpurple2</p>
+<p><span style="padding:1em; background-color: rgb(137, 104, 205);"> </span> mediumpurple3</p>
+<p><span style="padding:1em; background-color: rgb(93, 71, 139);"> </span> mediumpurple4</p>
+<p><span style="padding:1em; background-color: rgb(60, 179, 113);"> </span> mediumseagreen</p>
+<p><span style="padding:1em; background-color: rgb(123, 104, 238);"> </span> mediumslateblue</p>
+<p><span style="padding:1em; background-color: rgb(0, 250, 154);"> </span> mediumspringgreen</p>
+<p><span style="padding:1em; background-color: rgb(72, 209, 204);"> </span> mediumturquoise</p>
+<p><span style="padding:1em; background-color: rgb(199, 21, 133);"> </span> mediumvioletred</p>
+<p><span style="padding:1em; background-color: rgb(25, 25, 112);"> </span> midnightblue</p>
+<p><span style="padding:1em; background-color: rgb(245, 255, 250);"> </span> mintcream</p>
+<p><span style="padding:1em; background-color: rgb(255, 228, 225);"> </span> mistyrose</p>
+<p><span style="padding:1em; background-color: rgb(255, 228, 225);"> </span> mistyrose1</p>
+<p><span style="padding:1em; background-color: rgb(238, 213, 210);"> </span> mistyrose2</p>
+<p><span style="padding:1em; background-color: rgb(205, 183, 181);"> </span> mistyrose3</p>
+<p><span style="padding:1em; background-color: rgb(139, 125, 123);"> </span> mistyrose4</p>
+<p><span style="padding:1em; background-color: rgb(255, 228, 181);"> </span> moccasin</p>
+<p><span style="padding:1em; background-color: rgb(255, 222, 173);"> </span> navajowhite</p>
+<p><span style="padding:1em; background-color: rgb(255, 222, 173);"> </span> navajowhite1</p>
+<p><span style="padding:1em; background-color: rgb(238, 207, 161);"> </span> navajowhite2</p>
+<p><span style="padding:1em; background-color: rgb(205, 179, 139);"> </span> navajowhite3</p>
+<p><span style="padding:1em; background-color: rgb(139, 121, 94);"> </span> navajowhite4</p>
+<p><span style="padding:1em; background-color: rgb(0, 0, 128);"> </span> navy</p>
+<p><span style="padding:1em; background-color: rgb(0, 0, 128);"> </span> navyblue</p>
+<p><span style="padding:1em; background-color: rgb(253, 245, 230);"> </span> oldlace</p>
+<p><span style="padding:1em; background-color: rgb(107, 142, 35);"> </span> olivedrab</p>
+<p><span style="padding:1em; background-color: rgb(192, 255, 62);"> </span> olivedrab1</p>
+<p><span style="padding:1em; background-color: rgb(179, 238, 58);"> </span> olivedrab2</p>
+<p><span style="padding:1em; background-color: rgb(154, 205, 50);"> </span> olivedrab3</p>
+<p><span style="padding:1em; background-color: rgb(105, 139, 34);"> </span> olivedrab4</p>
+<p><span style="padding:1em; background-color: rgb(255, 165, 0);"> </span> orange</p>
+<p><span style="padding:1em; background-color: rgb(255, 165, 0);"> </span> orange1</p>
+<p><span style="padding:1em; background-color: rgb(238, 154, 0);"> </span> orange2</p>
+<p><span style="padding:1em; background-color: rgb(205, 133, 0);"> </span> orange3</p>
+<p><span style="padding:1em; background-color: rgb(139, 90, 0);"> </span> orange4</p>
+<p><span style="padding:1em; background-color: rgb(255, 69, 0);"> </span> orangered</p>
+<p><span style="padding:1em; background-color: rgb(255, 69, 0);"> </span> orangered1</p>
+<p><span style="padding:1em; background-color: rgb(238, 64, 0);"> </span> orangered2</p>
+<p><span style="padding:1em; background-color: rgb(205, 55, 0);"> </span> orangered3</p>
+<p><span style="padding:1em; background-color: rgb(139, 37, 0);"> </span> orangered4</p>
+<p><span style="padding:1em; background-color: rgb(218, 112, 214);"> </span> orchid</p>
+<p><span style="padding:1em; background-color: rgb(255, 131, 250);"> </span> orchid1</p>
+<p><span style="padding:1em; background-color: rgb(238, 122, 233);"> </span> orchid2</p>
+<p><span style="padding:1em; background-color: rgb(205, 105, 201);"> </span> orchid3</p>
+<p><span style="padding:1em; background-color: rgb(139, 71, 137);"> </span> orchid4</p>
+<p><span style="padding:1em; background-color: rgb(238, 232, 170);"> </span> palegoldenrod</p>
+<p><span style="padding:1em; background-color: rgb(152, 251, 152);"> </span> palegreen</p>
+<p><span style="padding:1em; background-color: rgb(154, 255, 154);"> </span> palegreen1</p>
+<p><span style="padding:1em; background-color: rgb(144, 238, 144);"> </span> palegreen2</p>
+<p><span style="padding:1em; background-color: rgb(124, 205, 124);"> </span> palegreen3</p>
+<p><span style="padding:1em; background-color: rgb(84, 139, 84);"> </span> palegreen4</p>
+<p><span style="padding:1em; background-color: rgb(175, 238, 238);"> </span> paleturquoise</p>
+<p><span style="padding:1em; background-color: rgb(187, 255, 255);"> </span> paleturquoise1</p>
+<p><span style="padding:1em; background-color: rgb(174, 238, 238);"> </span> paleturquoise2</p>
+<p><span style="padding:1em; background-color: rgb(150, 205, 205);"> </span> paleturquoise3</p>
+<p><span style="padding:1em; background-color: rgb(102, 139, 139);"> </span> paleturquoise4</p>
+<p><span style="padding:1em; background-color: rgb(219, 112, 147);"> </span> palevioletred</p>
+<p><span style="padding:1em; background-color: rgb(255, 130, 171);"> </span> palevioletred1</p>
+<p><span style="padding:1em; background-color: rgb(238, 121, 159);"> </span> palevioletred2</p>
+<p><span style="padding:1em; background-color: rgb(205, 104, 137);"> </span> palevioletred3</p>
+<p><span style="padding:1em; background-color: rgb(139, 71, 93);"> </span> palevioletred4</p>
+<p><span style="padding:1em; background-color: rgb(255, 239, 213);"> </span> papayawhip</p>
+<p><span style="padding:1em; background-color: rgb(255, 218, 185);"> </span> peachpuff</p>
+<p><span style="padding:1em; background-color: rgb(255, 218, 185);"> </span> peachpuff1</p>
+<p><span style="padding:1em; background-color: rgb(238, 203, 173);"> </span> peachpuff2</p>
+<p><span style="padding:1em; background-color: rgb(205, 175, 149);"> </span> peachpuff3</p>
+<p><span style="padding:1em; background-color: rgb(139, 119, 101);"> </span> peachpuff4</p>
+<p><span style="padding:1em; background-color: rgb(205, 133, 63);"> </span> peru</p>
+<p><span style="padding:1em; background-color: rgb(255, 192, 203);"> </span> pink</p>
+<p><span style="padding:1em; background-color: rgb(255, 181, 197);"> </span> pink1</p>
+<p><span style="padding:1em; background-color: rgb(238, 169, 184);"> </span> pink2</p>
+<p><span style="padding:1em; background-color: rgb(205, 145, 158);"> </span> pink3</p>
+<p><span style="padding:1em; background-color: rgb(139, 99, 108);"> </span> pink4</p>
+<p><span style="padding:1em; background-color: rgb(221, 160, 221);"> </span> plum</p>
+<p><span style="padding:1em; background-color: rgb(255, 187, 255);"> </span> plum1</p>
+<p><span style="padding:1em; background-color: rgb(238, 174, 238);"> </span> plum2</p>
+<p><span style="padding:1em; background-color: rgb(205, 150, 205);"> </span> plum3</p>
+<p><span style="padding:1em; background-color: rgb(139, 102, 139);"> </span> plum4</p>
+<p><span style="padding:1em; background-color: rgb(176, 224, 230);"> </span> powderblue</p>
+<p><span style="padding:1em; background-color: rgb(160, 32, 240);"> </span> purple</p>
+<p><span style="padding:1em; background-color: rgb(155, 48, 255);"> </span> purple1</p>
+<p><span style="padding:1em; background-color: rgb(145, 44, 238);"> </span> purple2</p>
+<p><span style="padding:1em; background-color: rgb(125, 38, 205);"> </span> purple3</p>
+<p><span style="padding:1em; background-color: rgb(85, 26, 139);"> </span> purple4</p>
+<p><span style="padding:1em; background-color: rgb(255, 0, 0);"> </span> red</p>
+<p><span style="padding:1em; background-color: rgb(255, 0, 0);"> </span> red1</p>
+<p><span style="padding:1em; background-color: rgb(238, 0, 0);"> </span> red2</p>
+<p><span style="padding:1em; background-color: rgb(205, 0, 0);"> </span> red3</p>
+<p><span style="padding:1em; background-color: rgb(139, 0, 0);"> </span> red4</p>
+<p><span style="padding:1em; background-color: rgb(188, 143, 143);"> </span> rosybrown</p>
+<p><span style="padding:1em; background-color: rgb(255, 193, 193);"> </span> rosybrown1</p>
+<p><span style="padding:1em; background-color: rgb(238, 180, 180);"> </span> rosybrown2</p>
+<p><span style="padding:1em; background-color: rgb(205, 155, 155);"> </span> rosybrown3</p>
+<p><span style="padding:1em; background-color: rgb(139, 105, 105);"> </span> rosybrown4</p>
+<p><span style="padding:1em; background-color: rgb(65, 105, 225);"> </span> royalblue</p>
+<p><span style="padding:1em; background-color: rgb(72, 118, 255);"> </span> royalblue1</p>
+<p><span style="padding:1em; background-color: rgb(67, 110, 238);"> </span> royalblue2</p>
+<p><span style="padding:1em; background-color: rgb(58, 95, 205);"> </span> royalblue3</p>
+<p><span style="padding:1em; background-color: rgb(39, 64, 139);"> </span> royalblue4</p>
+<p><span style="padding:1em; background-color: rgb(139, 69, 19);"> </span> saddlebrown</p>
+<p><span style="padding:1em; background-color: rgb(250, 128, 114);"> </span> salmon</p>
+<p><span style="padding:1em; background-color: rgb(255, 140, 105);"> </span> salmon1</p>
+<p><span style="padding:1em; background-color: rgb(238, 130, 98);"> </span> salmon2</p>
+<p><span style="padding:1em; background-color: rgb(205, 112, 84);"> </span> salmon3</p>
+<p><span style="padding:1em; background-color: rgb(139, 76, 57);"> </span> salmon4</p>
+<p><span style="padding:1em; background-color: rgb(244, 164, 96);"> </span> sandybrown</p>
+<p><span style="padding:1em; background-color: rgb(46, 139, 87);"> </span> seagreen</p>
+<p><span style="padding:1em; background-color: rgb(84, 255, 159);"> </span> seagreen1</p>
+<p><span style="padding:1em; background-color: rgb(78, 238, 148);"> </span> seagreen2</p>
+<p><span style="padding:1em; background-color: rgb(67, 205, 128);"> </span> seagreen3</p>
+<p><span style="padding:1em; background-color: rgb(46, 139, 87);"> </span> seagreen4</p>
+<p><span style="padding:1em; background-color: rgb(255, 245, 238);"> </span> seashell</p>
+<p><span style="padding:1em; background-color: rgb(255, 245, 238);"> </span> seashell1</p>
+<p><span style="padding:1em; background-color: rgb(238, 229, 222);"> </span> seashell2</p>
+<p><span style="padding:1em; background-color: rgb(205, 197, 191);"> </span> seashell3</p>
+<p><span style="padding:1em; background-color: rgb(139, 134, 130);"> </span> seashell4</p>
+<p><span style="padding:1em; background-color: rgb(160, 82, 45);"> </span> sienna</p>
+<p><span style="padding:1em; background-color: rgb(255, 130, 71);"> </span> sienna1</p>
+<p><span style="padding:1em; background-color: rgb(238, 121, 66);"> </span> sienna2</p>
+<p><span style="padding:1em; background-color: rgb(205, 104, 57);"> </span> sienna3</p>
+<p><span style="padding:1em; background-color: rgb(139, 71, 38);"> </span> sienna4</p>
+<p><span style="padding:1em; background-color: rgb(135, 206, 235);"> </span> skyblue</p>
+<p><span style="padding:1em; background-color: rgb(135, 206, 255);"> </span> skyblue1</p>
+<p><span style="padding:1em; background-color: rgb(126, 192, 238);"> </span> skyblue2</p>
+<p><span style="padding:1em; background-color: rgb(108, 166, 205);"> </span> skyblue3</p>
+<p><span style="padding:1em; background-color: rgb(74, 112, 139);"> </span> skyblue4</p>
+<p><span style="padding:1em; background-color: rgb(106, 90, 205);"> </span> slateblue</p>
+<p><span style="padding:1em; background-color: rgb(131, 111, 255);"> </span> slateblue1</p>
+<p><span style="padding:1em; background-color: rgb(122, 103, 238);"> </span> slateblue2</p>
+<p><span style="padding:1em; background-color: rgb(105, 89, 205);"> </span> slateblue3</p>
+<p><span style="padding:1em; background-color: rgb(71, 60, 139);"> </span> slateblue4</p>
+<p><span style="padding:1em; background-color: rgb(112, 128, 144);"> </span> slategray</p>
+<p><span style="padding:1em; background-color: rgb(198, 226, 255);"> </span> slategray1</p>
+<p><span style="padding:1em; background-color: rgb(185, 211, 238);"> </span> slategray2</p>
+<p><span style="padding:1em; background-color: rgb(159, 182, 205);"> </span> slategray3</p>
+<p><span style="padding:1em; background-color: rgb(108, 123, 139);"> </span> slategray4</p>
+<p><span style="padding:1em; background-color: rgb(112, 128, 144);"> </span> slategrey</p>
+<p><span style="padding:1em; background-color: rgb(255, 250, 250);"> </span> snow</p>
+<p><span style="padding:1em; background-color: rgb(255, 250, 250);"> </span> snow1</p>
+<p><span style="padding:1em; background-color: rgb(238, 233, 233);"> </span> snow2</p>
+<p><span style="padding:1em; background-color: rgb(205, 201, 201);"> </span> snow3</p>
+<p><span style="padding:1em; background-color: rgb(139, 137, 137);"> </span> snow4</p>
+<p><span style="padding:1em; background-color: rgb(0, 255, 127);"> </span> springgreen</p>
+<p><span style="padding:1em; background-color: rgb(0, 255, 127);"> </span> springgreen1</p>
+<p><span style="padding:1em; background-color: rgb(0, 238, 118);"> </span> springgreen2</p>
+<p><span style="padding:1em; background-color: rgb(0, 205, 102);"> </span> springgreen3</p>
+<p><span style="padding:1em; background-color: rgb(0, 139, 69);"> </span> springgreen4</p>
+<p><span style="padding:1em; background-color: rgb(70, 130, 180);"> </span> steelblue</p>
+<p><span style="padding:1em; background-color: rgb(99, 184, 255);"> </span> steelblue1</p>
+<p><span style="padding:1em; background-color: rgb(92, 172, 238);"> </span> steelblue2</p>
+<p><span style="padding:1em; background-color: rgb(79, 148, 205);"> </span> steelblue3</p>
+<p><span style="padding:1em; background-color: rgb(54, 100, 139);"> </span> steelblue4</p>
+<p><span style="padding:1em; background-color: rgb(210, 180, 140);"> </span> tan</p>
+<p><span style="padding:1em; background-color: rgb(255, 165, 79);"> </span> tan1</p>
+<p><span style="padding:1em; background-color: rgb(238, 154, 73);"> </span> tan2</p>
+<p><span style="padding:1em; background-color: rgb(205, 133, 63);"> </span> tan3</p>
+<p><span style="padding:1em; background-color: rgb(139, 90, 43);"> </span> tan4</p>
+<p><span style="padding:1em; background-color: rgb(216, 191, 216);"> </span> thistle</p>
+<p><span style="padding:1em; background-color: rgb(255, 225, 255);"> </span> thistle1</p>
+<p><span style="padding:1em; background-color: rgb(238, 210, 238);"> </span> thistle2</p>
+<p><span style="padding:1em; background-color: rgb(205, 181, 205);"> </span> thistle3</p>
+<p><span style="padding:1em; background-color: rgb(139, 123, 139);"> </span> thistle4</p>
+<p><span style="padding:1em; background-color: rgb(255, 99, 71);"> </span> tomato</p>
+<p><span style="padding:1em; background-color: rgb(255, 99, 71);"> </span> tomato1</p>
+<p><span style="padding:1em; background-color: rgb(238, 92, 66);"> </span> tomato2</p>
+<p><span style="padding:1em; background-color: rgb(205, 79, 57);"> </span> tomato3</p>
+<p><span style="padding:1em; background-color: rgb(139, 54, 38);"> </span> tomato4</p>
+<p><span style="padding:1em; background-color: rgb(64, 224, 208);"> </span> turquoise</p>
+<p><span style="padding:1em; background-color: rgb(0, 245, 255);"> </span> turquoise1</p>
+<p><span style="padding:1em; background-color: rgb(0, 229, 238);"> </span> turquoise2</p>
+<p><span style="padding:1em; background-color: rgb(0, 197, 205);"> </span> turquoise3</p>
+<p><span style="padding:1em; background-color: rgb(0, 134, 139);"> </span> turquoise4</p>
+<p><span style="padding:1em; background-color: rgb(238, 130, 238);"> </span> violet</p>
+<p><span style="padding:1em; background-color: rgb(208, 32, 144);"> </span> violetred</p>
+<p><span style="padding:1em; background-color: rgb(255, 62, 150);"> </span> violetred1</p>
+<p><span style="padding:1em; background-color: rgb(238, 58, 140);"> </span> violetred2</p>
+<p><span style="padding:1em; background-color: rgb(205, 50, 120);"> </span> violetred3</p>
+<p><span style="padding:1em; background-color: rgb(139, 34, 82);"> </span> violetred4</p>
+<p><span style="padding:1em; background-color: rgb(245, 222, 179);"> </span> wheat</p>
+<p><span style="padding:1em; background-color: rgb(255, 231, 186);"> </span> wheat1</p>
+<p><span style="padding:1em; background-color: rgb(238, 216, 174);"> </span> wheat2</p>
+<p><span style="padding:1em; background-color: rgb(205, 186, 150);"> </span> wheat3</p>
+<p><span style="padding:1em; background-color: rgb(139, 126, 102);"> </span> wheat4</p>
+<p><span style="padding:1em; background-color: rgb(245, 245, 245);"> </span> whitesmoke</p>
+<p><span style="padding:1em; background-color: rgb(255, 255, 0);"> </span> yellow</p>
+<p><span style="padding:1em; background-color: rgb(255, 255, 0);"> </span> yellow1</p>
+<p><span style="padding:1em; background-color: rgb(238, 238, 0);"> </span> yellow2</p>
+<p><span style="padding:1em; background-color: rgb(205, 205, 0);"> </span> yellow3</p>
+<p><span style="padding:1em; background-color: rgb(139, 139, 0);"> </span> yellow4</p>
+<p><span style="padding:1em; background-color: rgb(154, 205, 50);"> </span> yellowgreen</p>
+</div>
+<div id="color-brewer" class="section level3 unnumbered">
+<h3>ColourBrewer with ggplot</h3>
+<p>See: <a href="http://ggplot2.tidyverse.org/reference/scale_brewer.html" class="uri">http://ggplot2.tidyverse.org/reference/scale_brewer.html</a></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="rownames.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="string-handling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["Just enough R.pdf", "Just enough R.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

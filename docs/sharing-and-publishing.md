@@ -64,11 +64,13 @@ We can extract the parameter table from this model by saving the `summary()` of 
 
 ```r
 model.fit.summary <- summary(model.fit)
-as.data.frame(model.fit.summary$coefficients)
-##                Estimate  Std. Error   t value     Pr(>|t|)
-## (Intercept) 34.96055404 2.164539504 16.151497 4.910746e-16
-## wt          -3.35082533 1.164128079 -2.878399 7.430725e-03
-## disp        -0.01772474 0.009190429 -1.928609 6.361981e-02
+as_data_frame(model.fit.summary$coefficients)
+## # A tibble: 3 x 4
+##      Estimate `Std. Error` `t value`   `Pr(>|t|)`
+##         <dbl>        <dbl>     <dbl>        <dbl>
+## 1 34.96055404  2.164539504 16.151497 4.910746e-16
+## 2 -3.35082533  1.164128079 -2.878399 7.430725e-03
+## 3 -0.01772474  0.009190429 -1.928609 6.361981e-02
 ```
 
 
@@ -87,11 +89,13 @@ For example, we could write the follwing to extract a table of coefficients, tes
 ```r
 model.fit.summary <- summary(model.fit)
 model.fit.summary$coefficients %>% 
-  as.data.frame()
-##                Estimate  Std. Error   t value     Pr(>|t|)
-## (Intercept) 34.96055404 2.164539504 16.151497 4.910746e-16
-## wt          -3.35082533 1.164128079 -2.878399 7.430725e-03
-## disp        -0.01772474 0.009190429 -1.928609 6.361981e-02
+  as_data_frame()
+## # A tibble: 3 x 4
+##      Estimate `Std. Error` `t value`   `Pr(>|t|)`
+##         <dbl>        <dbl>     <dbl>        <dbl>
+## 1 34.96055404  2.164539504 16.151497 4.910746e-16
+## 2 -3.35082533  1.164128079 -2.878399 7.430725e-03
+## 3 -0.01772474  0.009190429 -1.928609 6.361981e-02
 ```
 
 
@@ -138,7 +142,7 @@ model.fit %>% broom::tidy()
 
 ## Process your results {- #process-model-results}
 
-- Calculate VPC/ICC from an lmer models using `model %>% summary %>% as.data.frame()$varcor`
+- Calculate VPC/ICC from an lmer models using `model %>% summary %>% as_data_frame()$varcor`
 
 
 

@@ -89,7 +89,7 @@ Then later on you can load it like this:
 
 
 ```r
-restored.massive.df  <-  readRDS('massive.RDS')
+restored.massive.df <-  readRDS('massive.RDS')
 ```
 
 [If you do this in RMarkdown, by default the RDS files will be saved in the same directory as your .Rmd file.]{.tip}
@@ -166,41 +166,23 @@ For example, you will often come across data where groupings are stored in eithe
 data_frame(month = 1:12,
   month.name = format(ISOdatetime(2000,1:12,1,0,0,0),"%b"),
   group = c("Waiting", "Treatment", "Control", rep(NA, 9)),
-  group.number = c(1:3, rep(NA, 9))
-  ) %>% 
-  pander(caption="Month and group as numeric and character variables")
+  group.number = c(1:3, rep(NA, 9)))
+## # A tibble: 12 x 4
+##    month month.name     group group.number
+##    <int>      <chr>     <chr>        <int>
+##  1     1        Jan   Waiting            1
+##  2     2        Feb Treatment            2
+##  3     3        Mar   Control            3
+##  4     4        Apr      <NA>           NA
+##  5     5        May      <NA>           NA
+##  6     6        Jun      <NA>           NA
+##  7     7        Jul      <NA>           NA
+##  8     8        Aug      <NA>           NA
+##  9     9        Sep      <NA>           NA
+## 10    10        Oct      <NA>           NA
+## 11    11        Nov      <NA>           NA
+## 12    12        Dec      <NA>           NA
 ```
-
-
----------------------------------------------
- month   month.name    group    group.number 
-------- ------------ --------- --------------
-   1        Jan       Waiting        1       
-
-   2        Feb      Treatment       2       
-
-   3        Mar       Control        3       
-
-   4        Apr         NA           NA      
-
-   5        May         NA           NA      
-
-   6        Jun         NA           NA      
-
-   7        Jul         NA           NA      
-
-   8        Aug         NA           NA      
-
-   9        Sep         NA           NA      
-
-  10        Oct         NA           NA      
-
-  11        Nov         NA           NA      
-
-  12        Dec         NA           NA      
----------------------------------------------
-
-Table: Month and group as numeric and character variables
 
 
 One problem with storing categories as numeric variables is that we can end up with [confusing results when running regression models](#factors-vs-linear-inputs). 
@@ -735,209 +717,6 @@ This part of the guide is currently incomplete, but excellent tuturials exist he
 
 
 
-### Reshaping {-}
-
-In R we almost always want to keep our data in long format and only convert to wid format when presenting in tables for publication.
-
-In long format data:
-
-  - each row of the dataframe corresponds to a single measurement occasion
-  - each column corresponds to a variable which is measured
-
-
-
-
-#### Wide to long format {- #wide-to-long}
-
-This is the most common requirement. Often you will have several columns which actually measure the same thing, and you will need to convert these two two columns  - a 'key', and a value.
-
-For example, let's say we measure patients on 10 days:
-
-
-
-
-```r
-head(sleep.wide) %>% 
-  pander()
-```
-
-
------------------------------------------------------------------------------------------
- Subject   Day.0   Day.1   Day.2   Day.3   Day.4   Day.5   Day.6   Day.7   Day.8   Day.9 
---------- ------- ------- ------- ------- ------- ------- ------- ------- ------- -------
-    1      249.6   258.7   250.8   321.4   356.9   414.7   382.2   290.1   430.6   466.4 
-
-    2      222.7   205.3    203    204.7   207.7    216    213.6   217.7   224.3   237.3 
-
-    3      199.1   194.3   234.3   232.8   229.3   220.5   235.4   255.8    261    247.5 
-
-    4      321.5   300.4   283.9   285.1   285.8   297.6   280.2   318.3   305.3    354  
-
-    5      287.6    285    301.8   320.1   316.3   293.3   290.1   334.8   293.7   371.6 
-
-    6      234.9   242.8    273    309.8   317.5    310    454.2   346.8   330.3   253.9 
------------------------------------------------------------------------------------------
-
-This is useful for plotting a correlation matrix, but not much else:
-
-
-```r
-arm::corrplot(sleep.wide %>% select(-Subject))
-```
-
-<img src="real-data_files/figure-html/unnamed-chunk-30-1.png" width="672" />
-
-
-We want to convert RT measurements on each Day to a single variable, and create a new variable to keep track of what `Day` the measurement was taken:
-
-The `melt()` function in the `reshape2::` package does this for us:
-
-
-```r
-sleep.long <- sleep.wide %>% 
-  reshape2::melt(id.var="Subject") %>%
-  arrange(Subject, variable)  
-
-sleep.long %>% head(12) %>% pander
-```
-
-
-----------------------------
- Subject   variable   value 
---------- ---------- -------
-    1       Day.0     249.6 
-
-    1       Day.1     258.7 
-
-    1       Day.2     250.8 
-
-    1       Day.3     321.4 
-
-    1       Day.4     356.9 
-
-    1       Day.5     414.7 
-
-    1       Day.6     382.2 
-
-    1       Day.7     290.1 
-
-    1       Day.8     430.6 
-
-    1       Day.9     466.4 
-
-    2       Day.0     222.7 
-
-    2       Day.1     205.3 
-----------------------------
-
-Here melt has created two new variable: `variable`, which keeps track of what was measured, and `value` which contains the score. This makes it much easier to use `ggplot` and other modelling functions, e.g. to plot time series:
-
-
-```r
-sleep.long %>% 
-  ggplot(aes(variable, value)) + 
-  geom_point()
-```
-
-<img src="real-data_files/figure-html/unnamed-chunk-32-1.png" width="672" />
-
-
-##### Fixing-up index variables after 'melting' {-}
-
-`melt()` creates a new column called `variable`, but in this instance we know that the values `Day.1`, `Day.2`... are not separate categories but actually form a linear sequence, 1:9.
-
-We can use the `extract` or `separate` functions to split up this new variable and give us the numeric day:
-
-
-```r
-sleep.long %>% 
-  separate(variable, c("variable", "Day")) %>% 
-  mutate(Day=as.numeric(Day)) %>% 
-  arrange(Subject) %>% 
-  head %>% pander
-```
-
-
-----------------------------------
- Subject   variable   Day   value 
---------- ---------- ----- -------
-    1        Day       0    249.6 
-
-    1        Day       1    258.7 
-
-    1        Day       2    250.8 
-
-    1        Day       3    321.4 
-
-    1        Day       4    356.9 
-
-    1        Day       5    414.7 
-----------------------------------
-
-
-[If you are familiar with [regular expressions](https://code.tutsplus.com/tutorials/you-dont-know-anything-about-regular-expressions-a-complete-guide--net-7869) you will be happy to know that you can use regex to separate variables using `extract` and `separate`. [See this guide for more details on how `separate` and `extract` work](https://rpubs.com/bradleyboehmke/data_wrangling)]{.explainer}
-
-
-
-#### Long to wide format {- #long-to-wide}
-
-For an example:
-
-
-These are long form data:
-
-```r
-lme4::sleepstudy %>% head %>% pander
-```
-
-
----------------------------
- Reaction   Days   Subject 
----------- ------ ---------
-  249.6      0       308   
-
-  258.7      1       308   
-
-  250.8      2       308   
-
-  321.4      3       308   
-
-  356.9      4       308   
-
-  414.7      5       308   
----------------------------
-
-Which I converted to wide format for the example above:
-
-
-```r
-lme4::sleepstudy %>%
-	reshape2::dcast(Subject~Days,value.var = "Reaction") %>% 
-  head %>% pander
-```
-
-
----------------------------------------------------------------------
- Subject    0     1     2     3     4     5     6     7     8     9  
---------- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
-   308    249.6 258.7 250.8 321.4 356.9 414.7 382.2 290.1 430.6 466.4
-
-   309    222.7 205.3  203  204.7 207.7  216  213.6 217.7 224.3 237.3
-
-   310    199.1 194.3 234.3 232.8 229.3 220.5 235.4 255.8  261  247.5
-
-   330    321.5 300.4 283.9 285.1 285.8 297.6 280.2 318.3 305.3  354 
-
-   331    287.6  285  301.8 320.1 316.3 293.3 290.1 334.8 293.7 371.6
-
-   332    234.9 242.8  273  309.8 317.5  310  454.2 346.8 330.3 253.9
----------------------------------------------------------------------
-
-
-For a more detailed explanation, see: http://r4ds.had.co.nz/tidy-data.html
-
-
-
 
 ## Dealing with multiple files {-}
 
@@ -1000,19 +779,19 @@ raw.file.paths <- raw.files  %>%
 
 raw.file.paths %>% 
   head(3) %>% 
-  pander
+  pander()
 ```
 
 
-----------------------------------------------------
-  filename                  filepath                
------------- ---------------------------------------
-person1.csv  data/multiple-file-example/person1.csv 
+--------------------------------------------------------
+   filename                    filepath                 
+-------------- -----------------------------------------
+ person1.csv    data/multiple-file-example/person1.csv  
 
-person10.csv data/multiple-file-example/person10.csv
+ person10.csv   data/multiple-file-example/person10.csv 
 
-person11.csv data/multiple-file-example/person11.csv
-----------------------------------------------------
+ person11.csv   data/multiple-file-example/person11.csv 
+--------------------------------------------------------
 
 
 
@@ -1043,33 +822,33 @@ We can check these data look OK by sampling 10 rows at random:
 ```r
 raw.data %>% 
   sample_n(10) %>% 
-  pander
+  pander()
 ```
 
 
---------------------------------------------
- Condition   trial   time   person     RT   
------------ ------- ------ -------- --------
-     4         4      1       39    206.6536
+-------------------------------------------
+ Condition   trial   time   person    RT   
+----------- ------- ------ -------- -------
+     4        10      1       48      190  
 
-     3         7      2       25    415.8980
+     3         4      2       32     344.3 
 
-     3        19      2       31    283.9301
+     3         8      2       32      413  
 
-     1        15      1       11    275.7647
+     2        13      1       13     218.8 
 
-     4        14      1       37    297.0155
+     4         8      2       44     220.4 
 
-     2         2      2       24    213.8569
+     2        19      2       19     106.6 
 
-     1        15      1       6     192.1442
+     2        12      1       16     168.9 
 
-     2         1      1       18    224.0050
+     1        23      2       5      211.9 
 
-     2        21      1       15    191.2992
+     1        16      2       2      183.4 
 
-     2         2      2       19    196.1174
---------------------------------------------
+     1         2      1       6      266.5 
+-------------------------------------------
 
 
 
@@ -1103,21 +882,21 @@ raw.data.with.paths %>%
 ```
 
 
------------------------------------------------------------------------------------
- Condition   trial   time   person     RT                   filepath               
------------ ------- ------ -------- -------- --------------------------------------
-     1         1      1       1     284.5491 data/multiple-file-example/person1.csv
+------------------------------------------------------------------------------------
+ Condition   trial   time   person    RT                    filepath                
+----------- ------- ------ -------- ------- ----------------------------------------
+     1         1      1       1      284.5   data/multiple-file-example/person1.csv 
 
-     1         2      1       1     309.3162 data/multiple-file-example/person1.csv
+     1         2      1       1      309.3   data/multiple-file-example/person1.csv 
 
-     1         3      1       1     346.6588 data/multiple-file-example/person1.csv
+     1         3      1       1      346.7   data/multiple-file-example/person1.csv 
 
-     1         4      1       1     291.1182 data/multiple-file-example/person1.csv
+     1         4      1       1      291.1   data/multiple-file-example/person1.csv 
 
-     1         5      1       1     281.6240 data/multiple-file-example/person1.csv
+     1         5      1       1      281.6   data/multiple-file-example/person1.csv 
 
-     1         6      1       1     292.0952 data/multiple-file-example/person1.csv
------------------------------------------------------------------------------------
+     1         6      1       1      292.1   data/multiple-file-example/person1.csv 
+------------------------------------------------------------------------------------
 
 
 At this point you might want to [use the `extract()` or `separate()` functions](#extract-to-split-column-names) to post-process the filename and re-create the `person` variable from this (although here that's already been done for us).

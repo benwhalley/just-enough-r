@@ -45,7 +45,7 @@ Consider the example used in a previous section where we measured `injury.severi
 'Predicted means' (or predictions) refers to our best estimate for each category of person we're interested in. For example, if `age` were categorical (i.e. young vs. older people) then might have 4 predictions to calculate from our model:
 
 ```{r, echo=F}
-expand.grid(Age=c("Young", "Old"), Gender=c("Male", "Female")) %>% as.data.frame() %>% 
+expand.grid(Age=c("Young", "Old"), Gender=c("Male", "Female")) %>% as_data_frame() %>% 
   mutate(mean="?") %>% pander::pandoc.table()
 ```
 
@@ -116,7 +116,7 @@ However, `age` is typically measured as a continuous variable, and we would want
 # in this block we simulate some more data to illustrate the points below
 set.seed(1234)
 injuries <- expand.grid(female=0:1, age=30:50, person=1:100) %>% 
-  as.data.frame() %>% 
+  as_data_frame() %>% 
   mutate(severity.of.injury = 50 + -10 * female + .2 * age + .4 * female*age +
            rnorm(length(.$female), 0, 5),
          age = age+rnorm(n(), 0, 1)) %>%
@@ -248,13 +248,13 @@ m.predictions <- predict(m, interval='confidence')
 
 mtcars.plus.predictions <- bind_cols(
   mtcars,
-  m.predictions %>% as.data.frame()
+  m.predictions %>% as_data_frame()
 )
 
-prediction.frame <- expand.grid(vs=0:1, wt=2) %>% as.data.frame()
+prediction.frame <- expand.grid(vs=0:1, wt=2) %>% as_data_frame()
 prediction.frame.plus.predictions <- bind_cols(
   prediction.frame,
-  predict(m, newdata=prediction.frame, interval='confidence') %>% as.data.frame()
+  predict(m, newdata=prediction.frame, interval='confidence') %>% as_data_frame()
 )
 
 
@@ -297,7 +297,7 @@ m2.margins <- margins(m2, at = list(wt = 1.5:4.5))
 
 summary(m2.margins)
 
-summary(m2.margins) %>% as.data.frame() %>%
+summary(m2.margins) %>% as_data_frame() %>%
   filter(factor=="vs") %>%
   ggplot(aes(wt, AME)) +
   geom_point() + geom_line()

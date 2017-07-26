@@ -447,10 +447,12 @@ Helpfully, if we convert the result of `VarCorr` to a dataframe, we are provided
 
 ```r
 VarCorr(random.intercepts.model) %>% 
-  as.data.frame()
-##        grp        var1 var2      vcov    sdcor
-## 1  Subject (Intercept) <NA> 1378.1785 37.12383
-## 2 Residual        <NA> <NA>  960.4566 30.99123
+  as_data_frame()
+## # A tibble: 2 x 5
+##        grp        var1  var2      vcov    sdcor
+##      <chr>       <chr> <chr>     <dbl>    <dbl>
+## 1  Subject (Intercept)  <NA> 1378.1785 37.12383
+## 2 Residual        <NA>  <NA>  960.4566 30.99123
 ```
 
 The variance partition coefficient is simply the variance at a given level of the model, divided by the total variance (the sum of the variance parameters). So we can write:
@@ -458,10 +460,12 @@ The variance partition coefficient is simply the variance at a given level of th
 
 ```r
 VarCorr(random.intercepts.model) %>% 
-  as.data.frame() %>% 
+  as_data_frame() %>% 
   mutate(icc=vcov/sum(vcov)) %>% 
   select(grp, icc)
+## # A tibble: 2 x 2
 ##        grp       icc
+##      <chr>     <dbl>
 ## 1  Subject 0.5893089
 ## 2 Residual 0.4106911
 ```
@@ -537,10 +541,12 @@ As before, we can extract only the variance components from the model, and look 
 
 
 ```r
-VarCorr(lectures.model) %>% as.data.frame() %>% 
+VarCorr(lectures.model) %>% as_data_frame() %>% 
   mutate(icc=vcov/sum(vcov)) %>% 
   select(grp, vcov, icc)
+## # A tibble: 3 x 3
 ##        grp       vcov        icc
+##      <chr>      <dbl>      <dbl>
 ## 1        s 0.08245431 0.04716828
 ## 2        d 0.28066190 0.16055362
 ## 3 Residual 1.38497203 0.79227810
@@ -579,10 +585,12 @@ service.means$lsmeans.table %>%
 Or change the proportions of variance components at each level (they don't, much, in this instance):
 
 ```r
-VarCorr(lectures.model.2) %>% as.data.frame() %>% 
+VarCorr(lectures.model.2) %>% as_data_frame() %>% 
   mutate(icc=vcov/sum(vcov)) %>% 
   select(grp, vcov, icc)
+## # A tibble: 3 x 3
 ##        grp       vcov        icc
+##      <chr>      <dbl>      <dbl>
 ## 1        s 0.08133698 0.04677067
 ## 2        d 0.27419184 0.15766674
 ## 3 Residual 1.38353063 0.79556258

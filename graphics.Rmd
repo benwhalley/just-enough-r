@@ -22,6 +22,13 @@ data_frame(pictures = abs(rnorm(100, 30, 10)), words = pictures*1000+rnorm(100, 
   ggplot(aes(pictures, words)) + geom_point() + geom_smooth(se=F)
 ```
 
+
+
+<!-- TODO ADD @matejka2017sameand dino plots -->
+
+
+
+
 Graphics are the best thing about R. The base system alone provides lots of useful plotting functions, but the `ggplot2` package is exceptional in the consistent and powerful approach it takes to visualising data. This chapter focusses mostly on `ggplot`, but does include some pointers to other useful plotting functions.
 
 
