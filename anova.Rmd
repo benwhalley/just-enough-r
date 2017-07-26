@@ -350,7 +350,7 @@ expt.data <- expand.grid(Condition=factor(1:4),
     RT = RT + rnorm(n(), 0, 50) * (time==2), 
     RT = RT - (10*sqrt(trial) + rnorm(n(), 0, 5)) * (Condition == 2|Condition==4)
   )
-saveRDS(expt.data, file="expt.data.csv")
+saveRDS(expt.data, file="data/expt.data.RDS")
 ```
 
 

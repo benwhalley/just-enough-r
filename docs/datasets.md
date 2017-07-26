@@ -9,9 +9,6 @@ output:
 
 
 
-# (PART) Working with data {-}
-
-
 # Datasets and dataframes {#datasets-dataframes}
 
 A dataframe is an object which can store data as you might encounter it in SPSS, Stata, or other statistics packages. 
@@ -67,6 +64,8 @@ In both these examples the datasets (`airquality` and `mtcars`) are already load
 
 
 
+
+
 ## Looking at data {- #looking-at-data}
 
 As we've already seen, using `print(df)` within an RMarkdown document creates a nice interactive table you can use to look at your data.
@@ -105,7 +104,6 @@ glimpse(mtcars)
 ## $ gear <dbl> 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, ...
 ## $ carb <dbl> 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, ...
 ```
-
 
 
 You can use the `pander()` function (from the `pander::` package) to format tables nicely, for when you Knit a document to HTML, Word or PDF. For example:
@@ -219,6 +217,39 @@ These plots might not be worth including in a final write-up, but are very usefu
 
 
 
+### Using individual columns {-}
+
+Because dataframes are like a list of vectors, we can access individual columns using the `$` symbol. This extracts the column as a vector, so we can pass it to functions:
+
+
+```r
+mean(mtcars$mpg)
+## [1] 20.09062
+```
+
+Or slice it:
+
+
+
+```r
+(first.mpg <- mtcars$mpg[1])
+## [1] 21
+(worst.mpg <- sort(mtcars$mpg)[1])
+## [1] 10.4
+(best.mpg <- rev(sort(mtcars$mpg))[1])
+## [1] 33.9
+```
+
+
+
+[The problem with extracting individual columns in this way is that it's easy for data to be taken out of context: for example, if you sort individual columns then your data might get mixed up, leading to errors. In general if you are accessing individual columns of data in this way it's a sign your code may be brittle and vulnerable to errors. In later sections we introduce methods for working on the whole dataset, which tends to be safer.]{.admonition}
+
+
+
+
+
+
+
 ## Importing and exporting data {- #importing-data}
 
 If you have data outside of R, *the simplest way to import it is to first save it as a comma or tab-separated text file*, normally with the file extension `.csv` or `.txt`^[This is easy to achieve in Excel and most other stats packages using the `Save As...` menu item].
@@ -244,7 +275,7 @@ angry.moods <- readr::read_csv('data/angry_moods.csv')
 ##   Anger.Expression = col_integer()
 ## )
 head(angry.moods)
-## # A tibble: 6 × 7
+## # A tibble: 6 x 7
 ##   Gender Sports Anger.Out Anger.In Control.Out Control.In Anger.Expression
 ##    <int>  <int>     <int>    <int>       <int>      <int>            <int>
 ## 1      2      1        18       13          23         20               36
@@ -270,7 +301,7 @@ Once it's loaded, you can use this new dataset like any other:
 pairs(angry.moods)
 ```
 
-<img src="datasets_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="datasets_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 
 

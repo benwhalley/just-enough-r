@@ -23,83 +23,11 @@ This chapter shows you how to address each of these problems.
 
 
 
-## Storing your data {- #storing-data}
-
-
-### CSV files are your friend {- #use-csv}
-
-Comma-sepatated-values files are a plain text format which are idea for storing your data. Some advantages include:
-
-- Understood by almost every piece of software on the planet
-- Will remain readbale in future
-- Easy to store 2D data (like data frames)
-- Human readable (just open in Notepad)
-
-
-Commercial formats like Excel, SPSS (.sav) and Stata (.dta) don't have these properties.
-
-Although CSV has some disadvantages, they are all easily overcome if you [save the steps of your data processing and analysis in your R code](#save-intermediate-steps), see below.
-
-
-
-
-
-### Save processes, not outcomes {- #save-intermediate-steps}
-
-Many students (and academics) make errors in their analyses because they process data by hand (e.g. editing files in Excel) or use GUI tools to run analyses.
-
-In both cases these errors are hard to identify or rectify because only the outputs of the analysis can be saved, and *no record has been made of how these outputs were produced*. 
-
-In contrast, if you do your data processing and analysis in R/RMarkdown you benefit from a concrete, repeatable series of steps  which can be checked/verified by others. This can also save lots of time if you need to processing additional data later on (e.g. if you run more participants).
-
-
-Some principles to follow when working:
-
-- Save your raw data in the simplest possible format, in CSV
-
-- Always include column names in the file
-
-- Use descriptive names, but with a regular strucuture.
-
-- Never include spaces or special characters in the column names. Use underscores (`_`) if you want to make things more readable.
-
-- Make names <20 characters in length if possible
-
-
-
-
-
-
-
-
-### RDS files can be useful to preserve R objects {- #rds-files}
-
-If you have R objects which you'd like to save, for example because they took a long time to compute, the the RDS format is the best way of preserving them.
-
-To save something:
-
-
-```r
-# create a huge df of random numbers... 
-massive.df <- data_frame(nums = rnorm(1:1e8))
-saveRDS(massive.df, file="massive.RDS")
-```
-
-Then later on you can load it like this:
-
-
-```r
-restored.massive.df <-  readRDS('massive.RDS')
-```
-
-[If you do this in RMarkdown, by default the RDS files will be saved in the same directory as your .Rmd file.]{.tip}
-
-
-
-
 ## Types of variable {- #factors-and-numerics}
 
-When working with data in Excel or other packages like SPSS you've probably become aware that different types of data get treated differently. For example, in Excel you can't set up a formula like `=SUM(...)` on cells which include letters (rather than just numbers). It does't make sense. However, Excel and many other programmes will sometimes make guesses about what to do if you combine different types of data. For example, if you add `28` to `1 Feb 2017` the result is `1 March 2017`. This is sometimes what you want, but can often lead to unexpected results and errors in data analyses.
+When working with data in Excel or other packages like SPSS you've probably become aware that different types of data get treated differently. For example, in Excel you can't set up a formula like `=SUM(...)` on cells which include letters (rather than just numbers). It does't make sense. However, Excel and many other programmes will sometimes make guesses about what to do if you combine different types of data. 
+
+For example, if you add `28` to `1 Feb 2017` the result is `1 March 2017`. This is sometimes what you want, but can often lead to unexpected results and errors in data analyses.
 
 R is much more strict about not mixing types of data. Vectors (and columns in dataframes) can only contain one type of thing. In general, there are probably 4 types of data you will encounter in data analysis problems:
 
@@ -138,57 +66,64 @@ One thing to note here is that the `glimpse()` command tells us the *type* of ea
 - `team`: type `fctr`, short for factor and
 
 
-[Other numeric variables might sometimes have type = `dbl`, which stands for 'double precision' floating point number (that is, a decimal fraction). But for most data analysis purposes we can treat all numeric variable types the same.]{.admonition}
 
-
-
-
-### Numeric variables {-}
+### Differences in *quantity*: numeric variables {-}
 
 We've already seem numeric variables in the section on [vectors and lists](#vectors). These behave pretty much as you'd expect, and we won't expand on them here. 
 
 #### {- .explainer}
 
-One small aside is that you should be aware that there are limits to the precision with which R (and computers in general) can store decimal values. This only tends to matter when working with very large or very small numbers — but this can crop up when estimating regression coefficients that are very small for example, and is one reason why [scaling inputs to regression models can improve performance and accuracy of results](#scaling-regression-inputs).
+As an aside, you should be aware that there are limits to the precision with which R (and computers in general) can store decimal values. This only tends to matter when working with very large or very small numbers — but this can crop up when estimating regression coefficients that are very small for example, and is one reason why [scaling inputs to regression models can improve performance and accuracy of results](#scaling-regression-inputs).
 
 
 
-### Characters, factors (and booleans) {- #character-and-factor}
+### Differences in *quality or kind* {- #character-and-factor}
 
 In many cases variables will be used to identify cases which have *qualitative differences*: for example, where different groups or measurement occasions in an experimental study, or different genders.
 
-It can sometimes cause confusion that these categorical variables can be stored in as numeric variables, or as 'character' types (strings of letters and numbers), or as a third type called factors.
+There are several types of variale which can store qualitative differences, and include:
+
+- Character variables
+- 'Factors'
+- Boolean or logical variables
+
+
+It can cause confusion that categorical variables are, in practice, stored variously as numeric variables, 'character' types (strings of letters and numbers), or as a third type called factors.
 
 For example, you will often come across data where groupings are stored in either one of these formats:
 
 
-```r
-data_frame(month = 1:12,
-  month.name = format(ISOdatetime(2000,1:12,1,0,0,0),"%b"),
-  group = c("Waiting", "Treatment", "Control", rep(NA, 9)),
-  group.number = c(1:3, rep(NA, 9)))
-## # A tibble: 12 x 4
-##    month month.name     group group.number
-##    <int>      <chr>     <chr>        <int>
-##  1     1        Jan   Waiting            1
-##  2     2        Feb Treatment            2
-##  3     3        Mar   Control            3
-##  4     4        Apr      <NA>           NA
-##  5     5        May      <NA>           NA
-##  6     6        Jun      <NA>           NA
-##  7     7        Jul      <NA>           NA
-##  8     8        Aug      <NA>           NA
-##  9     9        Sep      <NA>           NA
-## 10    10        Oct      <NA>           NA
-## 11    11        Nov      <NA>           NA
-## 12    12        Dec      <NA>           NA
-```
+
+-----------------------------------------------
+ month   month.name     group     group.number 
+------- ------------ ----------- --------------
+   1        Jan        Waiting         1       
+
+   2        Feb       Treatment        2       
+
+   3        Mar        Control         3       
+
+   4        Apr                                
+
+   5        May                                
+
+   6        Jun                                
+
+   7        Jul                                
+
+   8        Aug                                
+
+   9        Sep                                
+
+  10        Oct                                
+
+  11        Nov                                
+
+  12        Dec                                
+-----------------------------------------------
 
 
-One problem with storing categories as numeric variables is that we can end up with [confusing results when running regression models](#factors-vs-linear-inputs). 
-
-
-For this reason, it's often best to store your categorical variables as strings of letters and numbers (e.g. "Group 1", "Group 2") and avoid simple numbers (e.g. 1, 2, 3).
+When storing categories as numeric variables you can end up with [confusing results when running regression models](#factors-vs-linear-inputs).  For this reason, it's often best to store your categorical variables as descriptive strings of letters and numbers (e.g. "Treatment", "Control") and avoid simple numbers (e.g. 1, 2, 3).
 
 *Factors* are R's answer to this problem of storing categorical data.
 Factors assign one number for each unique value in a variable, and optionally allow you to attach a label to it.
@@ -223,13 +158,13 @@ as.numeric(group.labelled)
 
 
 
-These days, for simple analyses it's best to store everything as the `character` type (letters and numbers), but factors can still be useful for making tables or graphs where the list of categories is known and needs to be in a particular order. For more about factors, and lots of useful functions for working with them, see the `forcats::` package: <https://github.com/tidyverse/forcats>
+For simple analyses it's often best to store everything as the `character` type (letters and numbers), but factors can still be useful for making tables or graphs where the list of categories is known and needs to be in a particular order. For more about factors, and lots of useful functions for working with them, see the `forcats::` package: <https://github.com/tidyverse/forcats>
 
 
 
 ### Dates {-}
 
-Like  most computers, R stores dates as the number of days since January 1, 1970. This means that we can work with dates just like other numbers, and it makes sense to have the `min()`, or `max()` of a series of dates:
+Internally, R stores dates as the number of days since January 1, 1970. This means that we can work with dates just like other numbers, and it makes sense to have the `min()`, or `max()` of a series of dates:
 
 
 
@@ -261,7 +196,7 @@ However, R does treat dates slightly differently from other numbers, and will fo
 hist(lakers$date, breaks=7)
 ```
 
-<img src="real-data_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="real-data_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 
 ### Missing values {-}
@@ -659,7 +594,7 @@ fit.data %>%
 ## Warning: Removed 8 rows containing missing values (geom_point).
 ```
 
-<img src="real-data_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+<img src="real-data_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 There's a clear trend here for lighter patients (at baseline) to have more missing data at followup. There's also a suggestion that younger patients are more likely to have been lost to followup.
 
@@ -713,6 +648,80 @@ This part of the guide is currently incomplete, but excellent tuturials exist he
 
 - http://tidyr.tidyverse.org and 
 - http://r4ds.had.co.nz/tidy-data.html
+
+
+
+
+
+
+## Saving data {- #storing-data}
+
+
+#### Use CSV files {- #use-csv}
+
+Comma-sepatated-values files are a plain text format which are idea for storing your data. Some advantages include:
+
+- Understood by almost every piece of software on the planet
+- Will remain readbale in future
+- Easy to store 2D data (like data frames)
+- Human readable (just open in Notepad)
+
+
+Commercial formats like Excel, SPSS (.sav) and Stata (.dta) don't have these properties.
+
+Although CSV has some disadvantages, they are all easily overcome if you [save the steps of your data processing and analysis in your R code](#save-intermediate-steps), see below.
+
+
+
+#### Save processes, not outcomes {- #save-intermediate-steps}
+
+Many students (and academics) make errors in their analyses because they process data by hand (e.g. editing files in Excel) or use GUI tools to run analyses.
+
+In both cases these errors are hard to identify or rectify because only the outputs of the analysis can be saved, and *no record has been made of how these outputs were produced*. 
+
+In contrast, if you do your data processing and analysis in R/RMarkdown you benefit from a concrete, repeatable series of steps  which can be checked/verified by others. This can also save lots of time if you need to processing additional data later on (e.g. if you run more participants).
+
+
+Some principles to follow when working:
+
+- Save your raw data in the simplest possible format, in CSV
+
+- Always include column names in the file
+
+- Use descriptive names, but with a regular strucuture.
+
+- Never include spaces or special characters in the column names. Use underscores (`_`) if you want to make things more readable.
+
+- Make names <20 characters in length if possible
+
+
+
+
+
+#### RDS files can be useful to preserve R objects {- #rds-files}
+
+If you have R objects which you'd like to save, for example because they took a long time to compute, the the RDS format is the best way of preserving them.
+
+To save something:
+
+
+```r
+# create a huge df of random numbers... 
+massive.df <- data_frame(nums = rnorm(1:1e8))
+saveRDS(massive.df, file="massive.RDS")
+```
+
+Then later on you can load it like this:
+
+
+```r
+restored.massive.df <-  readRDS('massive.RDS')
+```
+
+[If you do this in RMarkdown, by default the RDS files will be saved in the same directory as your .Rmd file.]{.tip}
+
+
+
 
 
 
@@ -829,25 +838,25 @@ raw.data %>%
 -------------------------------------------
  Condition   trial   time   person    RT   
 ----------- ------- ------ -------- -------
-     4        10      1       48      190  
+     3        14      2       28     336.4 
 
-     3         4      2       32     344.3 
+     3         4      2       33     316.1 
 
-     3         8      2       32      413  
+     1        15      2       6      211.2 
 
-     2        13      1       13     218.8 
+     4         1      1       42     248.1 
 
-     4         8      2       44     220.4 
+     4        23      2       42     258.1 
 
-     2        19      2       19     106.6 
+     2        18      2       15     258.9 
 
-     2        12      1       16     168.9 
+     3        14      1       26     251.6 
 
-     1        23      2       5      211.9 
+     3        24      1       27      196  
 
-     1        16      2       2      183.4 
+     4        15      1       37     188.7 
 
-     1         2      1       6      266.5 
+     2        25      2       22     126.1 
 -------------------------------------------
 
 

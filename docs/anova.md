@@ -635,7 +635,11 @@ See the [multilevel models section](#multilevel-models) for more details, includ
 
 ## Checking assumptions {-}
 
-If we want to check assumptions of our Anova models are met, these tables and plots would be a reasonable place to start. First running Levene's test:
+
+[The text below continues on from [this example of factorial Anova](#howell-factorial-example).]{.tip}
+
+
+If we want to check that the assumptions of our Anova models are met, these tables and plots would be a reasonable place to start. First running Levene's test:
 
 
 ```r
@@ -690,8 +694,15 @@ data_frame(
 
 
 
+For more on assumptions checks after linear models or Anova see: <http://www.statmethods.net/stats/anovaAssumptions.html>
+
+
+
 
 ## Followup tests {-}
+
+[The text below continues on from [this example of factorial Anova](#howell-factorial-example).]{.tip}
+
 
 If we want to look at post-hoc pairwise tests we can use the the `lsmeans()` function from the `lsmeans::` package. By default Tukey correction is applied for multiple comparisons, which is a reasonable default:
 

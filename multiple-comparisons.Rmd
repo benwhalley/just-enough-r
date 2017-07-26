@@ -216,7 +216,7 @@ In an ideal world we would have published a trial protocol before collecting dat
 
 The design of the study suggests that we were interested in the effect of the experimental conditions on recall, and we might have predicted that these experimental manipulations would affect older and younder adults differently. Because we didn't pre-specify our analyses, we should acknowledge that we would likly report any differences between any of the 5 experimental conditions (10 possible comparisons) and any differences between younger and older adults in any of those conditions (45 possible pairwise comparisons).
 
-Because replicating this experiment is relatively cheap (testing might only 30 minutes per participant), and we are confident that other labs would want to replicate any significant findings we report, we are less concerned with the absolute rate of type 1 errors, but would like to limit our 'false discovery rate'. We set our acceptable false discovery rate to 5%.
+Because replicating this experiment is relatively cheap (testing might only take 30 minutes per participant), and we are confident that other labs would want to replicate any significant findings we report, we are less concerned with the absolute rate of type 1 errors, but would like to limit our 'false discovery rate'. We set our acceptable false discovery rate to 5%.
 
 We run an Anova model, including main effects for `Age` and `Condition` and their interaction:
 

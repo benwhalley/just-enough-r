@@ -1,0 +1,93 @@
+---
+title: 'Reshaping video'
+output:
+  bookdown::tufte_html2
+---
+
+
+In this video I'll show some useful ways to reshape data, and to create summaries of data in the process.
+
+Before we start I'll just load a few packages that we'll use later.
+
+
+```{r}
+library(tidyverse)
+library(pander)
+library(reshape2)
+library(gapminder)
+```
+
+
+
+
+So the simplest case is that we have some data in a wide format, and we want to make them long-form.
+
+When we have long format data, perhaps for a repeated measures experiment:
+
+  - each row of the dataframe corresponds to a single measurement occasion
+  - each column corresponds to a variable which is measured
+
+
+So - let's take the sleepstudy example. We might have a wide version of it where each person represents a row, and each column represents their reaction time, measured over 9 days.
+
+```{r}
+(sleep.wide <- readRDS('data/sleep.wide.RDS'))
+```
+
+OK - so we don't want it in this format, and we'd prefer it in long form where we have
+
+- Multiple rows per person
+- One column called `reaction time` or something similar:
+
+
+To do this we can use the melt function.
+
+But that hasn't done what we might have wanted... We now have only two columns: variable and value... We can see our RTs towards the end of the dataframe if we page through, but the Subject column has also been melted, but we didn't want that.
+
+```{r}
+sleep.wide %>% melt
+```
+
+
+What we need to do is to tell melt which is the identifying variable or `id.var`. This creates the data we want, and we can also rename the variable if we want.
+
+```{r}
+sleep.long <- sleep.wide %>% 
+  melt(id.var="Subject") %>% 
+  rename(RT=value)
+
+sleep.long
+```
+
+
+
+
+
+
+To go back the other way we can use the `dcast` function.
+
+This way we get a column per day - the variable name to the left of the tilde symbol becomes the rows, and the one on the right gets turned into columns.
+```{r}
+sleep.long %>% 
+  dcast(Subject~variable)
+```
+
+
+If we reverse them we get one-column per Subject
+
+```{r}
+sleep.long %>% 
+  dcast(Subject~variable)
+```
+
+
+
+
+
+
+Ok - that's it. Have a practice yourself.
+
+
+
+
+

@@ -10,8 +10,8 @@ output:
 
 # Workflow {#start-here}
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/k56UXc4paIM?rel=0" frameborder="0" allowfullscreen></iframe>
-
+<!-- <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/k56UXc4paIM?rel=0" frameborder="0" allowfullscreen></iframe>
+ -->
 
 One of the biggest adjustments people need to make when moving away from SPSS or other tools is to work out a 'way of working'. Good students often develop ways of working, saving and communicating their findings that become habitual. These habits are often attempts to work around limitations of these packages, but nevertheless habits are easier to replace than break, so here's one alternative solution:
 
@@ -53,7 +53,11 @@ To include R code within a document we write 3 backticks (`` ``` ``), followed b
 
 When a document including this chunk is run or 'knitted', the final result will include the the line `2+2` followed by the number `4` on the next line. This means we can use RMarkdown to 'show our workings': our analysis can be interleaved with narrative text to explain or interpret the calculations.
 
-You can see how this works in practice in the next section.
+You can see how this works in practice in the next section. A more detailed guide to using RMarkdown, which covers many of the 'chunk options' available to customise output, [is available here](http://cfss.uchicago.edu/block013_rmarkdown.html)
+
+
+[If you'd like to use RMarkdown to include manage your citations, [see this guide]()]{.tip}
+
 
 
 ## RStudio {- #rstudio}
@@ -145,7 +149,7 @@ Once you have watched the video:
 
 
 
-# R Basics
+## R Basics
 
 
 ### First commands {-}
@@ -220,13 +224,13 @@ the.magic.number
 ```
 
 
-Or if we want to be explicit:
 
+One neat shortcut when assigning variables is to wrap the line in parentheses: this both makes the assignment and prints the result to the console:
 
 
 ```r
-print(the.magic.number)
-## [1] 3
+(i.am.a.new.variable <- 22)
+## [1] 22
 ```
 
 
@@ -236,12 +240,12 @@ Helpfully, we can also do simple calculations as we assign variables:
 
 ```r
 one.score <- 20
-four.score.years.and.ten <- one.score * 4 + 10
-print(four.score.years.and.ten)
+(four.score.years.and.ten <- one.score * 4 + 10)
 ## [1] 90
 ```
 
-As you will see below, we can give anything a label by assigning it to a variable. It doesn't have to be simple numbers: we can also assign words, graphics and plots, the results of a statistical model, or *lists* of any of these things.
+
+[We can give *anything* a label by assigning it to a variable. It doesn't have to be a number: we can also assign words, graphics and plots, the results of a statistical model, or *lists* of any of these things.]{.tip}
 
 
 
@@ -256,6 +260,7 @@ When working with data, we often have lists or sequences of 'things'. For exampl
 - When all the things are of the same type, R calls this a *vector*^[It's actually a matrix if has 2 dimensions, like a table, or an array if it has more than 2 dimensions.]).
 
 - When there is a mix of different things R calls this a *list*.
+
 
 
 

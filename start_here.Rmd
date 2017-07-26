@@ -14,8 +14,8 @@ library(tufte)
 
 # Workflow {#start-here}
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/k56UXc4paIM?rel=0" frameborder="0" allowfullscreen></iframe>
-
+<!-- <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/k56UXc4paIM?rel=0" frameborder="0" allowfullscreen></iframe>
+ -->
 
 One of the biggest adjustments people need to make when moving away from SPSS or other tools is to work out a 'way of working'. Good students often develop ways of working, saving and communicating their findings that become habitual. These habits are often attempts to work around limitations of these packages, but nevertheless habits are easier to replace than break, so here's one alternative solution:
 
@@ -155,7 +155,7 @@ Once you have watched the video:
 
 
 
-# R Basics
+## R Basics
 
 
 ### First commands {-}
@@ -251,6 +251,7 @@ When working with data, we often have lists or sequences of 'things'. For exampl
 - When all the things are of the same type, R calls this a *vector*^[It's actually a matrix if has 2 dimensions, like a table, or an array if it has more than 2 dimensions.]).
 
 - When there is a mix of different things R calls this a *list*.
+
 
 
 

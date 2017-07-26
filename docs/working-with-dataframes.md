@@ -205,8 +205,8 @@ filter(mtcars, cyl==6 & gear==3)
 
 ## 'Operators' {- #operators}
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/4TYv2PhG89A?rel=0" frameborder="0" allowfullscreen></iframe>
-
+<!-- <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/4TYv2PhG89A?rel=0" frameborder="0" allowfullscreen></iframe>
+ -->
 
 In the two examples above we used two equals signs `==` to compare values. There are other operators we can use though to create other filters. Rather than describe them, the examples below demonstrate what each of them do:
 

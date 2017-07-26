@@ -20,7 +20,7 @@ library(pander)
 We saw in a previous section [how to create a frequency table of one or more variables](#frequency-tables). Using that previous example, assume  we already have a crosstabulation of `age` and `prefers`
 
 ```{r, include=F}
-lego.duplo.df <- readRDS("lego.RDS")
+lego.duplo.df <- readRDS("data/lego.RDS")
 lego.table <- with(lego.duplo.df, table(age, prefers))
 lego.duplo.df %>% glimpse
 ```

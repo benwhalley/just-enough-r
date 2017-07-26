@@ -117,7 +117,7 @@ A neat trick to avoid [fat finger errors](https://en.wikipedia.org/wiki/Fat-fing
 For basic stats the `apa::` package is simple to use. Below we use the `apa::chisq_apa()` function to properly format the results of our chi^2^ test ([see the full chi^2^ example]#crosstabs)):
 
 ```{r, include=F}
-lego.duplo.df <- readRDS("lego.RDS")
+lego.duplo.df <- readRDS("data/lego.RDS")
 lego.table <- with(lego.duplo.df, table(age, prefers))
 ```
 

@@ -23,7 +23,7 @@ The chapter outlines several different approaches to obtaining summary statistic
 In particular, we place an emphasis on functions *which return dataframes*, because this enables us to process and present our summaries in useful ways.
 
 
-
+<!-- VIDEO COVERING THIS MATERIAL -->
 
 
 

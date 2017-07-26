@@ -109,18 +109,6 @@ model.fit.summary$coefficients %>%
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 ```r
 model.fit %>% broom::tidy()
 ##          term    estimate   std.error statistic      p.value

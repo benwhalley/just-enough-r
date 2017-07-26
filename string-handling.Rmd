@@ -70,11 +70,13 @@ sleep.wide %>%
 
 However the contents of `variable` are now a character string (i.e. a list of letters and numbers) rather than numeric values (see [column types](#factors-and-numerics)) but in this instance we know that the values `Day.1`, `Day.2`... are not really separate categories but actually form a linear sequence, from 1 to 9.
 
+
 We can use the `extract` or `separate` functions to split up `variable` and create a numeric column for `Day`:
 
 ```{r include=F}
 sleep.long <- readRDS('data/sleep.long.RDS')
 ```
+
 
 ```{r}
 sleep.long %>% 

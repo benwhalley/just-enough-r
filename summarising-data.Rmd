@@ -29,7 +29,7 @@ The chapter outlines several different approaches to obtaining summary statistic
 In particular, we place an emphasis on functions *which return dataframes*, because this enables us to process and present our summaries in useful ways.
 
 
-
+<!-- VIDEO COVERING THIS MATERIAL -->
 
 
 
@@ -46,7 +46,7 @@ Let's say we ask 4 year olds and 6 year olds whether they prefer lego or duplo. 
 ```{r, include=F, echo=F}
 set.seed(1234)
 lego.duplo.df <- data_frame(prefers=c(rep("duplo", 50), rep("lego", 50)), age=c(rep("4 years", 38), rep("6 years", 42), rep("4 years", 20)) ) %>% sample_frac(., 1)
-saveRDS(lego.duplo.df, file="lego.RDS")
+saveRDS(lego.duplo.df, file="data/lego.RDS")
 ```
 
 ```{r}
@@ -288,7 +288,7 @@ As noted in the section on [reshaping](#reshaping) above, it's common to combine
 For example here we have multiple rows per person, 3 trial at time 1, and 3 more trials at time 2:
 
 ```{r, include=F}
-expt.data <- readRDS("expt.data.csv") %>% filter(trial < 4)
+expt.data <- readRDS("data/expt.data.RDS") %>% filter(trial < 4)
 ```
 
 ```{r}

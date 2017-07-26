@@ -586,14 +586,14 @@ These two goals will not always be 100% aligned, and there will be tradeoffs nee
 2. Standardising coefficients.
 
 
-##### Using a 'natural' scale
+##### Using a 'natural' scale {-}
 
 This will often mean just leaving your predictors 'as-is', but it might also mean dividing your predictor by some number to put it into more convenient units. For example, dividing age in years by 10 would mean that you can interpret the coefficient as the change over a decade, which might be easier to think about. 
 
 
 
 
-##### Standardising
+##### Standardising {-}
 
 Gelman [@gelman2008scaling] recommends standardising coefficients by centering and dividing by two standard deviations. This can be useful because binary variables like sex (male/female) will then be on a *similar* scale to numeric inputs.
 

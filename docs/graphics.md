@@ -12,6 +12,13 @@ output:
 
 <img src="graphics_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
+
+
+<!-- TODO ADD @matejka2017sameand dino plots -->
+
+
+
+
 Graphics are the best thing about R. The base system alone provides lots of useful plotting functions, but the `ggplot2` package is exceptional in the consistent and powerful approach it takes to visualising data. This chapter focusses mostly on `ggplot`, but does include some pointers to other useful plotting functions.
 
 
@@ -83,7 +90,7 @@ For the second case --- for example where you want to visualise the main outcome
 
 If you've never given much thought to data visualisation before, you might be surprised at the sheer variety of graphs types available.
 
-One way to cut through the multituyde of options is to determine what the purpose of your plot is. Although not a complete list, it's likely your plot will show at least one of:
+One way to cut through the multitude of options is to determine what the purpose of your plot is. Although not a complete list, it's likely your plot will show at least one of:
 
 
 - Relationships
