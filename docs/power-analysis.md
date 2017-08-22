@@ -7,7 +7,7 @@ output: bookdown::tufte_html2
 
 
 
-# Power analysis in R {#power-analysis}
+# Power analysis {#power-analysis}
 
 
 ### For most inferential statistics {-}

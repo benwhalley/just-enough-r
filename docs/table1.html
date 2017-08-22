@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="importing-data.html">
-<link rel="next" href="selecting-columns.html">
+<link rel="prev" href="t-tests.html">
+<link rel="next" href="linear-models-simple.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -376,30 +376,341 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="working-with-dataframes" class="section level2 unnumbered">
-<h2>Working with dataframes</h2>
-<div id="tidyverse" class="section level3 unnumbered">
-<h3>Introducing the <code>tidyverse</code></h3>
-<p>R includes hundreds of built-in ways to select individual elements, rows or columns from a dataframe. This guide isn’t going to teach you many of them.</p>
-<p>The truth is that R can be overwhelming to new users, especially those new to programming. R is sometimes <em>too</em> powerful and flexible: there are too many different to accomplish the same end, and this can lead to confusion.</p>
-<p>Recently, a suite of packages has been developed for R which tries to provide a simple, consistent set of tools for working with data and graphics.</p>
-<p>This suite of packages is called the <em>tidyverse</em>, and you can load all of these packages by calling:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
-<p>In this guide we make much use of two components from the tidyverse:</p>
+<div id="table1" class="section level2">
+<h2><span class="header-section-number">6.1</span> Making “Table 1”</h2>
+<p>Table 1 in reports of clinical trials and many psychological studies reports characteristics of the sample. Typically, you will want to present information collected at baseline, split by experimental groups, including:</p>
 <ul>
-<li><code>dplyr</code>: to select, filter and summarise data</li>
-<li><code>ggplot2</code>: to make plots</li>
+<li>Means, standard deviations or other descriptive statistics for continuous variables</li>
+<li>Frequencies of particular responses for categorical variables</li>
+<li>Some kind of inferential test for a zero-difference between the groups; this could be a t-test, an F-statistic where there are more than 2 groups, or a chi-squared test for categorical variables.</li>
 </ul>
-<p>It’s strongly recommended that you use these in your own code.</p>
+<!-- Make reference to this? https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3379950/ -->
+<p>Producing this table is a pain because it requires collating multiple statistics, calculated from different functions. Many researchers resort to performing all the analyses required for each part of the table, and then copying-and-pasting results into Word.</p>
+<p>It can be automated though! This example combines and extends many of the techniques we have learned using the split-apply-combine method.</p>
+<p>To begin, let’s simulate some data from a fairly standard 2-arm clinical trial or psychological experiment:</p>
+<p>Check our data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boring.study <span class="op">%&gt;%</span><span class="st"> </span>glimpse
+## Observations: 280
+## Variables: 8
+## $ person    &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1...
+## $ time      &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1...
+## $ condition &lt;fctr&gt; Control, Control, Control, Control, Control, Contro...
+## $ yob       &lt;dbl&gt; 1984, 1984, 1982, 1973, 1976, 1988, 1984, 1981, 1982...
+## $ WM        &lt;dbl&gt; 86, 112, 87, 101, 97, 97, 89, 78, 114, 107, 110, 100...
+## $ education &lt;chr&gt; NA, &quot;Postgraduate&quot;, &quot;Primary&quot;, &quot;Postgraduate&quot;, &quot;Seco...
+## $ ethnicity &lt;chr&gt; &quot;Mixed / multiple ethnic groups&quot;, &quot;White British&quot;, &quot;...
+## $ Attitude  &lt;dbl&gt; 4, 4, 8, 11, 9, 5, 6, 8, 10, 10, 7, 15, 10, 8, 6, 5,...</code></pre></div>
+<p>Start by making a long-form table for the categorical variables:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">boring.study.categorical.melted &lt;-<span class="st"> </span>
+<span class="st">  </span>table1.categorical.Ns &lt;-<span class="st"> </span>boring.study <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(condition, education, ethnicity) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">melt</span>(<span class="dt">id.var=</span><span class="st">&#39;condition&#39;</span>) </code></pre></div>
+<p>Then calculate the N’s for each response/variable in each group:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(table1.categorical.Ns &lt;-<span class="st"> </span>
+<span class="st">  </span>boring.study.categorical.melted <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(condition, variable, value) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">dcast</span>(variable<span class="op">+</span>value<span class="op">~</span>condition, <span class="dt">value.var=</span><span class="st">&quot;N&quot;</span>))
+##    variable                                       value Control
+## 1 education                                    Graduate      28
+## 2 education                                Postgraduate      33
+## 3 education                                     Primary      26
+## 4 education                                   Secondary      30
+## 5 education                                        &lt;NA&gt;      23
+## 6 ethnicity                       Asian / Asian British      37
+## 7 ethnicity Black / African / Caribbean / Black British      26
+## 8 ethnicity              Mixed / multiple ethnic groups      36
+## 9 ethnicity                               White British      41
+##   Intervention
+## 1           23
+## 2           30
+## 3           31
+## 4           30
+## 5           26
+## 6           32
+## 7           32
+## 8           35
+## 9           41</code></pre></div>
+<p>Then make a second table containing Chi2 test statistics for each variable:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(table1.categorical.tests &lt;-<span class="st"> </span>
+<span class="st">  </span>boring.study.categorical.melted <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(variable) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">do</span>(., <span class="kw">chisq.test</span>(.<span class="op">$</span>value, .<span class="op">$</span>condition) <span class="op">%&gt;%</span><span class="st"> </span>tidy) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># this purely to facilitate matching rows up below</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">firstrowforvar=</span>T))
+## # A tibble: 2 x 6
+## # Groups:   variable [2]
+##    variable statistic   p.value parameter                     method
+##      &lt;fctr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;int&gt;                     &lt;fctr&gt;
+## 1 education  1.032863 0.7933008         3 Pearson&#39;s Chi-squared test
+## 2 ethnicity  0.997093 0.8019554         3 Pearson&#39;s Chi-squared test
+## # ... with 1 more variables: firstrowforvar &lt;lgl&gt;</code></pre></div>
+<p>Combine these together:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(table1.categorical.both &lt;-<span class="st"> </span>table1.categorical.Ns <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(variable) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># we join on firstrowforvar to make sure we don&#39;t duplicate the tests</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">firstrowforvar=</span><span class="kw">row_number</span>()<span class="op">==</span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(., table1.categorical.tests, <span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;variable&quot;</span>, <span class="st">&quot;firstrowforvar&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># this is gross, but we don&#39;t want to repeat the variable names in our table</span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">variable =</span> <span class="kw">ifelse</span>(firstrowforvar<span class="op">==</span>T, <span class="kw">as.character</span>(variable), <span class="ot">NA</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(variable, value, Control, Intervention, statistic, parameter, p.value))
+## # A tibble: 9 x 7
+##    variable                                       value Control
+##       &lt;chr&gt;                                       &lt;chr&gt;   &lt;int&gt;
+## 1 education                                    Graduate      28
+## 2      &lt;NA&gt;                                Postgraduate      33
+## 3      &lt;NA&gt;                                     Primary      26
+## 4      &lt;NA&gt;                                   Secondary      30
+## 5      &lt;NA&gt;                                        &lt;NA&gt;      23
+## 6 ethnicity                       Asian / Asian British      37
+## 7      &lt;NA&gt; Black / African / Caribbean / Black British      26
+## 8      &lt;NA&gt;              Mixed / multiple ethnic groups      36
+## 9      &lt;NA&gt;                               White British      41
+## # ... with 4 more variables: Intervention &lt;int&gt;, statistic &lt;dbl&gt;,
+## #   parameter &lt;int&gt;, p.value &lt;dbl&gt;</code></pre></div>
+<p>Now we deal with the continuous variables. First we make a ‘long’ version of the continuous data</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">continuous_variables &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;yob&quot;</span>, <span class="st">&quot;WM&quot;</span>)
+boring.continuous.melted &lt;-<span class="st"> </span>
+<span class="st">  </span>boring.study <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(condition, continuous_variables) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">melt</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(variable) 
+## Using condition as id variables
+
+boring.continuous.melted <span class="op">%&gt;%</span><span class="st"> </span>head
+## # A tibble: 6 x 3
+## # Groups:   variable [1]
+##   condition variable value
+##      &lt;fctr&gt;   &lt;fctr&gt; &lt;dbl&gt;
+## 1   Control      yob  1984
+## 2   Control      yob  1984
+## 3   Control      yob  1982
+## 4   Control      yob  1973
+## 5   Control      yob  1976
+## 6   Control      yob  1988</code></pre></div>
+<p>Then calculate separate tables of t-tests and means/SD’s:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(table.continuous_variables.tests &lt;-<span class="st"> </span>
+<span class="st">    </span>boring.continuous.melted <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="co"># note that we pass the result of t-test to tidy, which returns a dataframe</span>
+<span class="st">    </span><span class="kw">do</span>(., <span class="kw">t.test</span>(.<span class="op">$</span>value<span class="op">~</span>.<span class="op">$</span>condition) <span class="op">%&gt;%</span><span class="st"> </span>tidy) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">select</span>(variable, statistic, parameter, p.value))
+## # A tibble: 2 x 4
+## # Groups:   variable [2]
+##   variable   statistic parameter   p.value
+##     &lt;fctr&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1      yob -0.02325905  277.2538 0.9814604
+## 2       WM -1.59245520  276.2850 0.1124259
+
+(table.continuous_variables.descriptives &lt;-<span class="st"> </span>
+<span class="st">    </span>boring.continuous.melted <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">group_by</span>(variable, condition) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="co"># this is not needed here because we have no missing values, but if there </span>
+<span class="st">    </span><span class="co"># were missing value in this dataset then mean/sd functions would fail below,</span>
+<span class="st">    </span><span class="co">#  so best to remove rows without a response:</span>
+<span class="st">    </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(value)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="co"># note, we might also want the median/IQR</span>
+<span class="st">    </span><span class="kw">summarise</span>(<span class="dt">Mean=</span><span class="kw">mean</span>(value), <span class="dt">SD=</span><span class="kw">sd</span>(value)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">group_by</span>(variable, condition) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="co"># we format the mean and SD into a single column using sprintf. </span>
+<span class="st">    </span><span class="co"># we don&#39;t have to do this, but it makes reshaping simpler and we probably want</span>
+<span class="st">    </span><span class="co"># to round the numbers at some point, and so may as well do this now.</span>
+<span class="st">    </span><span class="kw">transmute</span>(<span class="dt">MSD =</span> <span class="kw">sprintf</span>(<span class="st">&quot;%.2f (%.2f)&quot;</span>, Mean, SD)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">dcast</span>(variable<span class="op">~</span>condition))
+## Adding missing grouping variables: `variable`, `condition`
+## Using MSD as value column: use value.var to override.
+##   variable        Control   Intervention
+## 1      yob 1978.78 (5.00) 1978.79 (5.27)
+## 2       WM   98.59 (9.62) 100.49 (10.41)</code></pre></div>
+<p>And combine them:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(table.continuous_variables.both &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(table.continuous_variables.descriptives, 
+            table.continuous_variables.tests))
+## Joining, by = &quot;variable&quot;
+##   variable        Control   Intervention   statistic parameter   p.value
+## 1      yob 1978.78 (5.00) 1978.79 (5.27) -0.02325905  277.2538 0.9814604
+## 2       WM   98.59 (9.62) 100.49 (10.41) -1.59245520  276.2850 0.1124259</code></pre></div>
+<p>Finally put the whole thing together:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(table1 &lt;-<span class="st"> </span>table1.categorical.both <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># make these variables into character format to be consistent with </span>
+<span class="st">  </span><span class="co"># the Mean (SD) column for continuus variables</span>
+<span class="st">  </span><span class="kw">mutate_each</span>(<span class="kw">funs</span>(format), Control, Intervention) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># note the &#39;.&#39; as the first argument, which is the input from the pipe</span>
+<span class="st">  </span><span class="kw">bind_rows</span>(., 
+          table.continuous_variables.both) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># prettify a few things</span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">df =</span> parameter, 
+         <span class="dt">p=</span>p.value,
+         <span class="st">`</span><span class="dt">Control N/Mean (SD)</span><span class="st">`</span>=<span class="st"> </span>Control,
+         <span class="dt">Variable=</span>variable, 
+         <span class="dt">Response=</span>value, 
+         <span class="st">`</span><span class="dt">t/χ2</span><span class="st">`</span> =<span class="st"> </span>statistic)) 
+## `mutate_each()` is deprecated.
+## Use `mutate_all()`, `mutate_at()` or `mutate_if()` instead.
+## To map `funs` over a selection of variables, use `mutate_at()`
+## Warning in bind_rows_(x, .id): binding character and factor vector,
+## coercing into character vector
+## # A tibble: 11 x 7
+##     Variable                                    Response
+##        &lt;chr&gt;                                       &lt;chr&gt;
+##  1 education                                    Graduate
+##  2      &lt;NA&gt;                                Postgraduate
+##  3      &lt;NA&gt;                                     Primary
+##  4      &lt;NA&gt;                                   Secondary
+##  5      &lt;NA&gt;                                        &lt;NA&gt;
+##  6 ethnicity                       Asian / Asian British
+##  7      &lt;NA&gt; Black / African / Caribbean / Black British
+##  8      &lt;NA&gt;              Mixed / multiple ethnic groups
+##  9      &lt;NA&gt;                               White British
+## 10       yob                                        &lt;NA&gt;
+## 11        WM                                        &lt;NA&gt;
+## # ... with 5 more variables: `Control N/Mean (SD)` &lt;chr&gt;,
+## #   Intervention &lt;chr&gt;, `t/χ2` &lt;dbl&gt;, df &lt;dbl&gt;, p &lt;dbl&gt;</code></pre></div>
+<p>And we can print to markdown format for outputting. This is best done in a separate chunk to avoid warnings/messages appearing in the final document.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">table1 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># split.tables argument needed to avoid the table wrapping</span>
+<span class="st">  </span><span class="kw">pander</span>(<span class="dt">split.tables=</span><span class="ot">Inf</span>,
+         <span class="dt">caption=</span><span class="st">&#39;Table presenting baseline differences between conditions. Categorical variables tested with Pearson χ2, continuous variables with two-sample t-test.&#39;</span>)</code></pre></div>
+<table>
+<caption>Table presenting baseline differences between conditions. Categorical variables tested with Pearson χ2, continuous variables with two-sample t-test.</caption>
+<colgroup>
+<col width="10%" />
+<col width="29%" />
+<col width="19%" />
+<col width="15%" />
+<col width="9%" />
+<col width="7%" />
+<col width="7%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Variable</th>
+<th align="center">Response</th>
+<th align="center">Control N/Mean (SD)</th>
+<th align="center">Intervention</th>
+<th align="center">t/χ2</th>
+<th align="center">df</th>
+<th align="center">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">education</td>
+<td align="center">Graduate</td>
+<td align="center">28</td>
+<td align="center">23</td>
+<td align="center">1.033</td>
+<td align="center">3</td>
+<td align="center">0.7933</td>
+</tr>
+<tr class="even">
+<td align="center">NA</td>
+<td align="center">Postgraduate</td>
+<td align="center">33</td>
+<td align="center">30</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center">Primary</td>
+<td align="center">26</td>
+<td align="center">31</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">NA</td>
+<td align="center">Secondary</td>
+<td align="center">30</td>
+<td align="center">30</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">23</td>
+<td align="center">26</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">ethnicity</td>
+<td align="center">Asian / Asian British</td>
+<td align="center">37</td>
+<td align="center">32</td>
+<td align="center">0.9971</td>
+<td align="center">3</td>
+<td align="center">0.802</td>
+</tr>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center">Black / African / Caribbean / Black British</td>
+<td align="center">26</td>
+<td align="center">32</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">NA</td>
+<td align="center">Mixed / multiple ethnic groups</td>
+<td align="center">36</td>
+<td align="center">35</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center">White British</td>
+<td align="center">41</td>
+<td align="center">41</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">yob</td>
+<td align="center">NA</td>
+<td align="center">1978.78 (5.00)</td>
+<td align="center">1978.79 (5.27)</td>
+<td align="center">-0.02326</td>
+<td align="center">277.3</td>
+<td align="center">0.9815</td>
+</tr>
+<tr class="odd">
+<td align="center">WM</td>
+<td align="center">NA</td>
+<td align="center">98.59 (9.62)</td>
+<td align="center">100.49 (10.41)</td>
+<td align="center">-1.592</td>
+<td align="center">276.3</td>
+<td align="center">0.1124</td>
+</tr>
+</tbody>
+</table>
+<p>Some exercises to work on/extensions to this code you might need:</p>
+<ul>
+<li>Add a new continuous variable to the simulated dataset and include it in the final table</li>
+<li>Create a third experimental group and amend the code to i) include 3 columns for the N/Mean and ii) report the F-test from a one-way Anova as the test statistic.</li>
+<li>Add the within-group percentage for each response to a categorical variable.</li>
+</ul>
+
 </div>
-</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="importing-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="selecting-columns.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="t-tests.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linear-models-simple.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

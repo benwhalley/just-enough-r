@@ -1,5 +1,5 @@
 ---
-title: 'Confidence, credible and prediction intervals'
+title: 'Intervals'
 output:
   bookdown::tufte_html2
 bibliography: bibliography.bib
@@ -8,7 +8,7 @@ bibliography: bibliography.bib
 
 
 
-## Confidence, credible and prediction intervals {- #intervals}
+# Intervals {#intervals}
 
 
 Some quick definitions to begin:

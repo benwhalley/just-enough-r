@@ -6,8 +6,6 @@ output:
 
 
 
-# (PART) Analysis {-}
-
 
 # Basic inferential statistics
 

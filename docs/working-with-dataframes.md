@@ -18,7 +18,7 @@ The truth is that R can be overwhelming to new users, especially those new to pr
 
 Recently, a suite of packages has been developed for R which tries to provide a simple, consistent set of tools for working with data and graphics.
 
-This suite of packages is called the *tidyverse*, and you can load all of these pacakges by calling:
+This suite of packages is called the *tidyverse*, and you can load all of these packages by calling:
 
 
 ```r
@@ -176,7 +176,9 @@ There are other commands too, but these are probably the most useful to begin wi
 
 ## Selecting rows {- #selecting-rows}
 
-To select particular rows from a dataframe, `dplyr` provides the very useful `filter()` function. Let's say we just want the 6-cylindered cars from the `mtcars` dataframe:
+To select particular rows from a dataframe, `dplyr` provides the `filter()` function. 
+
+If we only want to see the 6-cylindered cars from the `mtcars` dataframe:
 
 
 ```r
@@ -191,7 +193,7 @@ filter(mtcars, cyl==6)
 ## 7 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
 ```
 
-Here we used the `filter` function to select rows matching a particular criteria: in this case, that `cyl==6`. We can match two criteria at once if needed[^notesonoperators]:
+The `filter` function selects rows matching criteria you set: in this case, that `cyl==6`. We can match two criteria at once if needed:
 
 
 ```r
@@ -208,7 +210,9 @@ filter(mtcars, cyl==6 & gear==3)
 <!-- <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/4TYv2PhG89A?rel=0" frameborder="0" allowfullscreen></iframe>
  -->
 
-In the two examples above we used two equals signs `==` to compare values. There are other operators we can use though to create other filters. Rather than describe them, the examples below demonstrate what each of them do:
+When selecting rows in the [example above](#selecting-rows) we used two equals signs `==` to compare values. 
+
+However, there are other operators we can use to create filters. Rather than describe them, the examples below demonstrate what each of them do.
 
 
 
@@ -243,18 +247,19 @@ filter(mtcars, cyl==6)
 
 You might have noted above that we write `==` rather than just `=` to define the criteria. This is because most programming languages, including R, use two `=` symbols to distinguish: *comparison* from *assignment*.
 
-Here we are doing comparison, so we use `==`. In R it's normal to use `<-` to assign variables, which avoids any ambiguity.
 
+
+###### Presence/absence {-}
 
 
 To test if a value is in a vector of suitable matches we can use: `%in%`:
 
 
 ```r
-0 %in% 1:10
-## [1] FALSE
 2 %in% 1:10
 ## [1] TRUE
+100 %in% 1:10
+## [1] FALSE
 ```
 
 And, perhaps less obviously, we can test whether each value in a vector is in a second vector. This returns a vector of `TRUE/FALSE` values as long as the first list:
@@ -418,9 +423,9 @@ filter(mtcars, hp > 200 & (wt > 4 | cyl==8))
 
 ## Pipes {-}
 
-We are often going to want to combine both `select` and `filter` to return a subset of our original data.
+We often want to combine `select` and `filter` (and other functions) to return a subset of our original data.
 
-As you might have noticed above, we can 'nest' function calls in R. For example, we might want to both select some columns and filter rows.
+As you might have noticed above, we can 'nest' function calls in R. For example, we might want to select specific columns and filter out some rows.
 
 Taking the `mtcars` data, we might want to select the weights of only those cars with low `mpg`:
 
@@ -443,12 +448,12 @@ This is OK, but can get quite confusing to read, and the more deeply functions a
 
 ### {- #pipes}
 
-`dplyr` provides an alternative to nested function calls, called the pipe.
+> `dplyr` provides an alternative to nested function calls, called the pipe.
 
 Imagine your dataframe as a big bucket containing data. From this bucket, you can 'pour' your data down through a series of tubes and filters, until at the bottom of your screen you have a smaller bucket containing just the data you want.
 
 
-Think of your data 'flowing' down the screen.
+> Think of your data 'flowing' down the screen.
 
 To make data flow from one bucket to another, we use the 'pipe' operator: `%>%`
 
@@ -472,7 +477,7 @@ big.bucket.of.data %>%
 
 So we have achieved the same outcome, but the code reads as a series of operations which the data flows through, connected by our pipes (the `%>%`). At the end of the last pipe, our data gets dumped into the `summary()` function^[You might notice that when we write the `select` function we don't explicitly name the dataframe to be used. This is because R *implicitly* passes the output of the pipe to the first argument of the function. So here, the output of `filter(mpg<15)` is used as the dataframe in the `select` function.]
 
-We could just has well have saved this smaller 'bucket' of data so we can use it later on:
+We could just as well have saved this smaller 'bucket' of data so we can use it later on:
 
 
 ```r
@@ -502,21 +507,6 @@ Often when working with data we want to compute new values from columns we alrea
 
 ```r
 phq9.df <- readr::read_csv("phq.csv")
-## Parsed with column specification:
-## cols(
-##   patient = col_integer(),
-##   phq9_01 = col_integer(),
-##   phq9_02 = col_integer(),
-##   phq9_03 = col_integer(),
-##   phq9_04 = col_integer(),
-##   phq9_05 = col_integer(),
-##   phq9_06 = col_integer(),
-##   phq9_07 = col_integer(),
-##   phq9_08 = col_integer(),
-##   phq9_09 = col_integer(),
-##   month = col_integer(),
-##   group = col_integer()
-## )
 glimpse(phq9.df)
 ## Observations: 2,429
 ## Variables: 12
@@ -559,7 +549,7 @@ phq9.scored.df %>%
 
 Notice that we first stored the computed scores in `phq9.scored.df` and then used `select()` to get rid of the raw data columns to display only what we needed.
 
-See this section on [summarising and processing data](#split-apply-combine) for nice ways to create summary scores from questionnaires.
+See this section on [summarising and processing data](#split-apply-combine) for a [neater way to create summary scores](#mutate-with-rowmeans) in this sort of situation.
 
 
 
@@ -568,7 +558,7 @@ See this section on [summarising and processing data](#split-apply-combine) for 
 
 ## Sorting {- #sorting}
 
-Sorting data is easy with `dplyr::arrange()`:
+You can sort dataframes with `arrange()`:
 
 
 ```r
@@ -602,7 +592,7 @@ airquality %>%
 ```
 
 
-You can sort on multiple columns too:
+You can sort on multiple columns too, but the order of the variables makes a difference:
 
 
 ```r
@@ -617,6 +607,19 @@ airquality %>%
 ## 4     5    37
 ## 5     5    36
 ## 6     5    34
+
+
+airquality %>% 
+  select(Month, Ozone) %>% 
+  arrange(-Ozone, Month) %>% 
+  head
+##   Month Ozone
+## 1     8   168
+## 2     7   135
+## 3     8   122
+## 4     8   118
+## 5     5   115
+## 6     8   110
 ```
 
 
@@ -631,8 +634,8 @@ airquality %>%
 
 ## Reshaping {- #reshaping}
 
-<div style="width:100%;height:0;padding-bottom:75%;position:relative;"><iframe src="https://giphy.com/embed/J42u1BTrks9eU" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/funny-transformer-J42u1BTrks9eU">via GIPHY</a></p>
-
+<!-- <div style="width:100%;height:0;padding-bottom:75%;position:relative;"><iframe src="https://giphy.com/embed/J42u1BTrks9eU" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/funny-transformer-J42u1BTrks9eU">via GIPHY</a></p>
+ -->
 
 This section will probably require more attention than any other in the guide, but will likely be the most useful thing you learn in R.
 
@@ -739,11 +742,6 @@ The `melt()` function in the `reshape2::` package does this for us:
 
 ```r
 library(reshape2)
-## 
-## Attaching package: 'reshape2'
-## The following object is masked from 'package:tidyr':
-## 
-##     smiths
 sleep.long <- sleep.wide %>% 
   melt(id.var="Subject") %>%
   arrange(Subject, variable)  

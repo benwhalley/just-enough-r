@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="importing-data.html">
-<link rel="next" href="selecting-columns.html">
+<link rel="prev" href="summarising-data.html">
+<link rel="next" href="a-generalised-approach.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -376,21 +376,311 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="working-with-dataframes" class="section level2 unnumbered">
-<h2>Working with dataframes</h2>
-<div id="tidyverse" class="section level3 unnumbered">
-<h3>Introducing the <code>tidyverse</code></h3>
-<p>R includes hundreds of built-in ways to select individual elements, rows or columns from a dataframe. This guide isn’t going to teach you many of them.</p>
-<p>The truth is that R can be overwhelming to new users, especially those new to programming. R is sometimes <em>too</em> powerful and flexible: there are too many different to accomplish the same end, and this can lead to confusion.</p>
-<p>Recently, a suite of packages has been developed for R which tries to provide a simple, consistent set of tools for working with data and graphics.</p>
-<p>This suite of packages is called the <em>tidyverse</em>, and you can load all of these packages by calling:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
-<p>In this guide we make much use of two components from the tidyverse:</p>
-<ul>
-<li><code>dplyr</code>: to select, filter and summarise data</li>
-<li><code>ggplot2</code>: to make plots</li>
-</ul>
-<p>It’s strongly recommended that you use these in your own code.</p>
+<div id="quick-and-dirty" class="section level2 unnumbered">
+<h2>“Quick and dirty”</h2>
+<div id="using-utility-functions-built-into-r" class="section level4 unnumbered">
+<h4>Using utility functions built into R</h4>
+</div>
+<div id="frequency-tables" class="section level3 unnumbered">
+<h3>Frequency tables</h3>
+<p>Let’s say we ask 4 year olds and 6 year olds whether they prefer lego or duplo. We can use the <code>table()</code> command to get a cross tabulation of these <code>age</code> categories and what the child <code>prefers</code>. We wrap <code>table(...)</code> in the <code>with()</code> function to tell it which dataframe to use:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lego.table &lt;-<span class="st"> </span><span class="kw">with</span>(lego.duplo.df, <span class="kw">table</span>(age, prefers))
+lego.table
+##          prefers
+## age       duplo lego
+##   4 years    38   20
+##   6 years    12   30</code></pre></div>
+</div>
+<div id="summary-statistics" class="section level3 unnumbered">
+<h3>Summary statistics</h3>
+<p>In this guide so far you might have noticed functions which provide summaries of an entire dataframe. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(angry.moods)
+##      Gender          Sports        Anger.Out        Anger.In    
+##  Min.   :1.000   Min.   :1.000   Min.   : 9.00   Min.   :10.00  
+##  1st Qu.:1.000   1st Qu.:1.000   1st Qu.:13.00   1st Qu.:15.00  
+##  Median :2.000   Median :2.000   Median :16.00   Median :18.50  
+##  Mean   :1.615   Mean   :1.679   Mean   :16.08   Mean   :18.58  
+##  3rd Qu.:2.000   3rd Qu.:2.000   3rd Qu.:18.00   3rd Qu.:22.00  
+##  Max.   :2.000   Max.   :2.000   Max.   :27.00   Max.   :31.00  
+##   Control.Out      Control.In    Anger.Expression
+##  Min.   :14.00   Min.   :11.00   Min.   : 7.00   
+##  1st Qu.:21.00   1st Qu.:18.25   1st Qu.:27.00   
+##  Median :24.00   Median :22.00   Median :36.00   
+##  Mean   :23.69   Mean   :21.96   Mean   :37.00   
+##  3rd Qu.:27.00   3rd Qu.:24.75   3rd Qu.:44.75   
+##  Max.   :32.00   Max.   :32.00   Max.   :68.00</code></pre></div>
+<p>Or:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">describe</span>(angry.moods, <span class="dt">skew=</span><span class="ot">FALSE</span>)
+##                  vars  n  mean    sd min max range   se
+## Gender              1 78  1.62  0.49   1   2     1 0.06
+## Sports              2 78  1.68  0.47   1   2     1 0.05
+## Anger.Out           3 78 16.08  4.22   9  27    18 0.48
+## Anger.In            4 78 18.58  4.70  10  31    21 0.53
+## Control.Out         5 78 23.69  4.69  14  32    18 0.53
+## Control.In          6 78 21.96  4.95  11  32    21 0.56
+## Anger.Expression    7 78 37.00 12.94   7  68    61 1.47</code></pre></div>
+<p>Although useful, these functions miss two important elements:</p>
+<ol style="list-style-type: decimal">
+<li>We have to operate on the whole dataframe at once</li>
+<li>The output is just printed to screen. We might prefer to get back a dataframe so that we can process the results further.</li>
+</ol>
+</div>
+<div id="creating-a-data-frame-of-summary-statistics" class="section level3 unnumbered">
+<h3>Creating a data frame of summary statistics</h3>
+<p>Thanksfully, many summary functions allow us to pass their results to the <code>as_data_frame()</code> function, which converts the output into a table which we can use like any other dataset.</p>
+<p>In this example, we create summary statistics with the <code>psych::describe()</code> function, then convert to a dataframe and format as a table in RMarkdown:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">describe</span>(angry.moods, <span class="dt">skew=</span><span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>as_data_frame <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre></div>
+<table>
+<colgroup>
+<col width="28%" />
+<col width="8%" />
+<col width="6%" />
+<col width="9%" />
+<col width="11%" />
+<col width="7%" />
+<col width="7%" />
+<col width="9%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">vars</th>
+<th align="center">n</th>
+<th align="center">mean</th>
+<th align="center">sd</th>
+<th align="center">min</th>
+<th align="center">max</th>
+<th align="center">range</th>
+<th align="center">se</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Gender</strong></td>
+<td align="center">1</td>
+<td align="center">78</td>
+<td align="center">1.615</td>
+<td align="center">0.4897</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">0.05544</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Sports</strong></td>
+<td align="center">2</td>
+<td align="center">78</td>
+<td align="center">1.679</td>
+<td align="center">0.4697</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">0.05318</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Anger.Out</strong></td>
+<td align="center">3</td>
+<td align="center">78</td>
+<td align="center">16.08</td>
+<td align="center">4.217</td>
+<td align="center">9</td>
+<td align="center">27</td>
+<td align="center">18</td>
+<td align="center">0.4775</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Anger.In</strong></td>
+<td align="center">4</td>
+<td align="center">78</td>
+<td align="center">18.58</td>
+<td align="center">4.697</td>
+<td align="center">10</td>
+<td align="center">31</td>
+<td align="center">21</td>
+<td align="center">0.5319</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Control.Out</strong></td>
+<td align="center">5</td>
+<td align="center">78</td>
+<td align="center">23.69</td>
+<td align="center">4.688</td>
+<td align="center">14</td>
+<td align="center">32</td>
+<td align="center">18</td>
+<td align="center">0.5309</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Control.In</strong></td>
+<td align="center">6</td>
+<td align="center">78</td>
+<td align="center">21.96</td>
+<td align="center">4.945</td>
+<td align="center">11</td>
+<td align="center">32</td>
+<td align="center">21</td>
+<td align="center">0.5599</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Anger.Expression</strong></td>
+<td align="center">7</td>
+<td align="center">78</td>
+<td align="center">37</td>
+<td align="center">12.94</td>
+<td align="center">7</td>
+<td align="center">68</td>
+<td align="center">61</td>
+<td align="center">1.465</td>
+</tr>
+</tbody>
+</table>
+<p>This summary table can be processed like any other dataframe. For instance, we can select columns and rows from it using <code>dplyr</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">describe</span>(angry.moods, <span class="dt">skew=</span><span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># rownames_to_column converts to a df but saves the </span>
+<span class="st">  </span><span class="co"># row names in a new column for us, which can be useful</span>
+<span class="st">  </span><span class="kw">rownames_to_column</span>(<span class="dt">var=</span><span class="st">&quot;variable&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(variable, mean, sd) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(mean <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>pander</code></pre></div>
+<table style="width:49%;">
+<colgroup>
+<col width="26%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">variable</th>
+<th align="center">mean</th>
+<th align="center">sd</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Control.Out</td>
+<td align="center">23.69</td>
+<td align="center">4.688</td>
+</tr>
+<tr class="even">
+<td align="center">Control.In</td>
+<td align="center">21.96</td>
+<td align="center">4.945</td>
+</tr>
+<tr class="odd">
+<td align="center">Anger.Expression</td>
+<td align="center">37</td>
+<td align="center">12.94</td>
+</tr>
+</tbody>
+</table>
+<div id="rownames-are-evil" class="section level5 explainer">
+<h5><span class="header-section-number">4.0.0.0.1</span> Rownames are evil</h5>
+<p>Historically ‘row names’ were used on R to label individual rows in a dataframe. It turned out that this is generally a bad idea, because sorting and some summary functions would get very confused and mix up row names and the data itself.</p>
+<p>It’s generally considered best practice to avoid row names, and store everything as columns of data.</p>
+<p>If you find that rownames in your data have disappeared, <a href="rownames.html#rownames">see this guide for turning them into an extra column of data using <code>tibble::rownames_to_column()</code></a>.</p>
+</div>
+</div>
+<div id="computing-statistics-by-groups" class="section level3 unnumbered">
+<h3>Computing statistics by-groups</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">describeBy</span>(mtcars, <span class="st">&#39;cyl&#39;</span>)
+## 
+##  Descriptive statistics by group 
+## group: 4
+##      vars  n   mean    sd median trimmed   mad   min    max range  skew
+## mpg     1 11  26.66  4.51  26.00   26.44  6.52 21.40  33.90 12.50  0.26
+## cyl     2 11   4.00  0.00   4.00    4.00  0.00  4.00   4.00  0.00   NaN
+## disp    3 11 105.14 26.87 108.00  104.30 43.00 71.10 146.70 75.60  0.12
+## hp      4 11  82.64 20.93  91.00   82.67 32.62 52.00 113.00 61.00  0.01
+## drat    5 11   4.07  0.37   4.08    4.02  0.34  3.69   4.93  1.24  1.00
+## wt      6 11   2.29  0.57   2.20    2.27  0.54  1.51   3.19  1.68  0.30
+## qsec    7 11  19.14  1.68  18.90   18.99  1.48 16.70  22.90  6.20  0.55
+## vs      8 11   0.91  0.30   1.00    1.00  0.00  0.00   1.00  1.00 -2.47
+## am      9 11   0.73  0.47   1.00    0.78  0.00  0.00   1.00  1.00 -0.88
+## gear   10 11   4.09  0.54   4.00    4.11  0.00  3.00   5.00  2.00  0.11
+## carb   11 11   1.55  0.52   2.00    1.56  0.00  1.00   2.00  1.00 -0.16
+##      kurtosis   se
+## mpg     -1.65 1.36
+## cyl       NaN 0.00
+## disp    -1.64 8.10
+## hp      -1.71 6.31
+## drat     0.12 0.11
+## wt      -1.36 0.17
+## qsec    -0.02 0.51
+## vs       4.52 0.09
+## am      -1.31 0.14
+## gear    -0.01 0.16
+## carb    -2.15 0.16
+## -------------------------------------------------------- 
+## group: 6
+##      vars n   mean    sd median trimmed   mad    min    max  range  skew
+## mpg     1 7  19.74  1.45  19.70   19.74  1.93  17.80  21.40   3.60 -0.16
+## cyl     2 7   6.00  0.00   6.00    6.00  0.00   6.00   6.00   0.00   NaN
+## disp    3 7 183.31 41.56 167.60  183.31 11.27 145.00 258.00 113.00  0.80
+## hp      4 7 122.29 24.26 110.00  122.29  7.41 105.00 175.00  70.00  1.36
+## drat    5 7   3.59  0.48   3.90    3.59  0.03   2.76   3.92   1.16 -0.74
+## wt      6 7   3.12  0.36   3.21    3.12  0.36   2.62   3.46   0.84 -0.22
+## qsec    7 7  17.98  1.71  18.30   17.98  1.90  15.50  20.22   4.72 -0.12
+## vs      8 7   0.57  0.53   1.00    0.57  0.00   0.00   1.00   1.00 -0.23
+## am      9 7   0.43  0.53   0.00    0.43  0.00   0.00   1.00   1.00  0.23
+## gear   10 7   3.86  0.69   4.00    3.86  0.00   3.00   5.00   2.00  0.11
+## carb   11 7   3.43  1.81   4.00    3.43  0.00   1.00   6.00   5.00 -0.26
+##      kurtosis    se
+## mpg     -1.91  0.55
+## cyl       NaN  0.00
+## disp    -1.23 15.71
+## hp       0.25  9.17
+## drat    -1.40  0.18
+## wt      -1.98  0.13
+## qsec    -1.75  0.65
+## vs      -2.20  0.20
+## am      -2.20  0.20
+## gear    -1.24  0.26
+## carb    -1.50  0.69
+## -------------------------------------------------------- 
+## group: 8
+##      vars  n   mean    sd median trimmed   mad    min    max  range  skew
+## mpg     1 14  15.10  2.56  15.20   15.15  1.56  10.40  19.20   8.80 -0.36
+## cyl     2 14   8.00  0.00   8.00    8.00  0.00   8.00   8.00   0.00   NaN
+## disp    3 14 353.10 67.77 350.50  349.63 73.39 275.80 472.00 196.20  0.45
+## hp      4 14 209.21 50.98 192.50  203.67 44.48 150.00 335.00 185.00  0.91
+## drat    5 14   3.23  0.37   3.12    3.19  0.16   2.76   4.22   1.46  1.34
+## wt      6 14   4.00  0.76   3.75    3.95  0.41   3.17   5.42   2.25  0.99
+## qsec    7 14  16.77  1.20  17.18   16.86  0.79  14.50  18.00   3.50 -0.80
+## vs      8 14   0.00  0.00   0.00    0.00  0.00   0.00   0.00   0.00   NaN
+## am      9 14   0.14  0.36   0.00    0.08  0.00   0.00   1.00   1.00  1.83
+## gear   10 14   3.29  0.73   3.00    3.17  0.00   3.00   5.00   2.00  1.83
+## carb   11 14   3.50  1.56   3.50    3.25  0.74   2.00   8.00   6.00  1.48
+##      kurtosis    se
+## mpg     -0.57  0.68
+## cyl       NaN  0.00
+## disp    -1.26 18.11
+## hp       0.09 13.62
+## drat     1.08  0.10
+## wt      -0.71  0.20
+## qsec    -0.92  0.32
+## vs        NaN  0.00
+## am       1.45  0.10
+## gear     1.45  0.19
+## carb     2.24  0.42</code></pre></div>
+<p>This is helpful, but there’s no simple way to convert the result to a dataframe, which we will want if we are creating tables for publication.</p>
+<p><code>describeBy</code> actually returns a list of tables, one for each level of the <code>cyl</code> variable, so it is is possible to convert each table in turn:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summary.tables &lt;-<span class="st"> </span>psych<span class="op">::</span><span class="kw">describeBy</span>(mtcars, <span class="st">&#39;cyl&#39;</span>)
+summary.tables[[<span class="dv">1</span>]] <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as_data_frame</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>)
+## # A tibble: 3 x 13
+##    vars     n      mean        sd median   trimmed      mad   min   max
+##   &lt;int&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     1    11  26.66364  4.509828     26  26.44444  6.52344  21.4  33.9
+## 2     2    11   4.00000  0.000000      4   4.00000  0.00000   4.0   4.0
+## 3     3    11 105.13636 26.871594    108 104.30000 42.99540  71.1 146.7
+## # ... with 4 more variables: range &lt;dbl&gt;, skew &lt;dbl&gt;, kurtosis &lt;dbl&gt;,
+## #   se &lt;dbl&gt;</code></pre></div>
+<p>But this is pretty yucky. Not only are the column names all mangled up, but we also have to think about extracting each levell in turn, and need to check how many levels in <code>cyl</code> there are. What happens if an extra level gets added? Our code will likely break.</p>
+<p>Thankfully there is much nicer and more consistent way to compute exactly the summaries we want, sometimes termed the ‘split, apply, combine’ method.</p>
 </div>
 </div>
             </section>
@@ -398,8 +688,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="importing-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="selecting-columns.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="summarising-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="a-generalised-approach.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

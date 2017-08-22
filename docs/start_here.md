@@ -6,57 +6,54 @@ output:
   
 
 
+# Working with R {#r-basics}
 
 
-# Workflow {#start-here}
+### Workflow {- #start-here}
 
 <!-- <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/k56UXc4paIM?rel=0" frameborder="0" allowfullscreen></iframe>
  -->
 
-One of the biggest adjustments people need to make when moving away from SPSS or other tools is to work out a 'way of working'. Good students often develop ways of working, saving and communicating their findings that become habitual. These habits are often attempts to work around limitations of these packages, but nevertheless habits are easier to replace than break, so here's one alternative solution:
+One of the biggest adjustments people need to make when moving away from SPSS or other tools is to work out a 'way of working'. Good students often develop ways of working, saving and communicating their findings that become habitual. These habits are often attempts to work around limitations of these packages, so hopefully they will fade in time. But nevertheless habits are easier to replace than break, so here's an alternative model to adopt:
+
 
 1. Work in RStudio, and specifically use RMarkdown documents (see [next section](#rmarkdown))
 
 2. Always keep your raw data in [.csv format](#use-csv). 
 
-3. Avoid saving multiple 'processed' versions of your data, and never edit data by hand unless absolutely necessary. [Use R to process data and RMarkdown to document the steps taken](#save-intermediate-steps).
+3. Avoid saving multiple 'processed' versions of your data, and never edit data by hand unless absolutely necessary.
 
-4. 'Knit' (run) your RMarkdown documents and save them as HTML files for sharing with colleagues.
+4. [Use R to process data and RMarkdown to document the steps taken](#save-intermediate-steps).
 
-5. 'Knit' your RMarkdown documents to Word .doc format to [produce tables and graphs for publication](#sharing-and-publication).
+5. 'Knit' (run) your RMarkdown documents for sharing with colleagues, or for publication.
 
 
 
-#### Using RMarkdown to record and share work {- #rmarkdown}
 
-This it might seem an odd place to start: we haven't got anything to share yet! But the RStudio editor (see below) includes important features which help us record and organise our work, and share it with colleagues. For many people this ability to keep a detailed record of your work, and revisit and review it later, turns out to be *the* major advantages of R over traditional statistics packages.
+## RMarkdown {- #rmarkdown}
+
+This it might seem an odd place to start: we haven't got anything to share yet! 
+
+But the RStudio editor ([see below](#rstudio)) includes important features which help us record and organise our work, and share it with colleagues. For many people this ability to keep a detailed record of your work, and revisit and review it later, turns out to be *the* major advantages of R over traditional statistics packages.
 
 You are currently reading the output of an 'RMarkdown' document. 
 
-- 'R' is a computer language for working with data.
-- Markdown is a simple text format which allows you to combine writing, images and code (see http://commonmark.org/help/).  
+- R is a computer language designed for working with data.
+- Markdown is a simple text-based format which can include prose, hypertext links, images, and code (see http://commonmark.org/help/).  
 
-An RMarkdown document mixes R code with markdown. This means you can combine your analysis with text explaining and interpreting the results.
+An RMarkdown document mixes R code with Markdown. This means you can combine your analysis with text that explains and interprets it. RMarkdown includes all the details neeed to reproduce an analysis. 
 
-RMarkdown is easily converted to other formats like HTML, Word, or PDF to share with other people. When you click the **Knit** button (in the Rstudio interface), a document will be generated that combines your text with the results of your R code.
-
-
-##### Writing and 'knitting' RMarkdown {-}
-
-To include R code within a document we write 3 backticks (`` ``` ``), followed by `{r}`. We the include our R code, and close the block with 3 more backticks ([how to find the backtick on your keyboard](#backtick-location)).
-
-<!-- ignore the fact that this has extra characters in the first line of the code block... this is to make the chunk display in the final compiled file as an example. You won't see this again. -->
-
-    ```{r}
-    2 + 2
-    ```
-
-When a document including this chunk is run or 'knitted', the final result will include the the line `2+2` followed by the number `4` on the next line. This means we can use RMarkdown to 'show our workings': our analysis can be interleaved with narrative text to explain or interpret the calculations.
-
-You can see how this works in practice in the next section. A more detailed guide to using RMarkdown, which covers many of the 'chunk options' available to customise output, [is available here](http://cfss.uchicago.edu/block013_rmarkdown.html)
+Like computer code, it can be 'run' or executed: in the language of RStudio, you 'knit' your RMarkdown to produce a finished document which combines analyses, graphs, and explanatory text in formats which can be shared. 
 
 
-[If you'd like to use RMarkdown to include manage your citations, [see this guide]()]{.tip}
+#### Writing and 'knitting' RMarkdown {-}
+
+To include R code within RMarkdown we write 3 backticks (`` ``` ``), followed by `{r}`. We the include our R code, and close the block with 3 more backticks ([how to find the backtick on your keyboard](#backtick-location)).
+
+![A code chunk in the RMarkdown editor](media/r-code-chunk.png)
+
+When a document including this chunk is run or 'knitted', the final result will include the the line `2+2` followed by the number `4` on the next line. We can use RMarkdown to 'show our workings': our analysis can be interleaved with narrative text to explain or interpret the calculations.
+
 
 
 
@@ -147,12 +144,16 @@ Once you have watched the video:
 
 
 
+###### More about RMarkdown {- .tip}
+
+A more detailed guide to using RMarkdown, which covers many of the 'chunk options' available to customise output, [is available here](http://cfss.uchicago.edu/block013_rmarkdown.html)
+
+If you'd like to use RMarkdown to include manage your citations, [see this guide](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html)
 
 
-## R Basics
 
 
-### First commands {-}
+## First commands {-}
 
 You can type R commands directly into the console and see the result there, but you should make a habit of working in an RMarkdown file. This keeps a record of everything you try, and makes it easy to edit/amend commands which don't work as you expect.
 
@@ -203,50 +204,53 @@ Hopefully at this point it's obvious that RStudio and RMarkdown give you:
 
 
 
-## Naming things: *variable assignment* {- #variables}
+## Naming things {- #variables}
 
-One of the nice things about R is that we can assign labels to parts of our analysis to keep track of them. Using good, descriptive names is good practice and makes your code easier to read (e.g. when you or others need to revisit in future.
+We can assign labels to the results of calculations and other parts of our analyses to keep track of them. 
 
-To assign labels to particular values we use the `<-` symbol. That is, we have a *value* and use the `<-` symbol to point to the *variable* we want to assign it to. For example:
+To assign labels we use the `<-` symbol. The `<-` symbol points from the value we want to store, to the name we want to use. For example:
 
 
 ```r
-the.magic.number <- 3
+the_magic_number <- 3
 ```
 
-This assigns the value `3` to the variable `the.magic.number`. This block wouldn't display anything because assigning a variable doesn't create any output. To both assign a variable *and* display it we would type:
+This assigns the value `3` to the variable `the_magic_number`. This block wouldn't display anything because assigning a variable doesn't create any output. To both assign a variable *and* display it we would type:
   
 
 ```r
-the.magic.number <- 3
-the.magic.number
+the_magic_number <- 3
+the_magic_number
 ## [1] 3
 ```
 
 
 
-One neat shortcut when assigning variables is to wrap the line in parentheses: this both makes the assignment and prints the result to the console:
+Or we can use a shortcut: if we wrap the line in parentheses this both makes the assignment and prints the result to the console:
+
 
 
 ```r
-(i.am.a.new.variable <- 22)
+(i_am_a_new_variable <- 22)
 ## [1] 22
 ```
 
 
 
-Helpfully, we can also do simple calculations as we assign variables:
+
+Helpfully, we can do  calculations as we assign variables:
 
 
 ```r
-one.score <- 20
-(four.score.years.and.ten <- one.score * 4 + 10)
+one_score <- 20
+(four_score_years_and_ten <- one_score * 4 + 10)
 ## [1] 90
 ```
 
 
-[We can give *anything* a label by assigning it to a variable. It doesn't have to be a number: we can also assign words, graphics and plots, the results of a statistical model, or *lists* of any of these things.]{.tip}
 
+
+[We can give *anything* a label by assigning it to a variable. It doesn't have to be a number: we can also assign words, graphics and plots, the results of a statistical model, or *lists* of any of these things.]{.tip}
 
 
 
@@ -257,7 +261,7 @@ one.score <- 20
 
 When working with data, we often have lists or sequences of 'things'. For example: a list of measurements we have made.
 
-- When all the things are of the same type, R calls this a *vector*^[It's actually a matrix if has 2 dimensions, like a table, or an array if it has more than 2 dimensions.]).
+- When all the things are of the same type, R calls this a *vector*^[It's actually a matrix if has 2 dimensions, like a table, or an array if it has more than 2 dimensions.].
 
 - When there is a mix of different things R calls this a *list*.
 
@@ -590,15 +594,14 @@ rep(c("Custard", "Gravy"), 5)
 
 
 ```r
-# make a sequence and then sort it
-countdown <- 100:1
-sort(countdown)
-##   [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
-##  [18]  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34
-##  [35]  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51
-##  [52]  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68
-##  [69]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85
-##  [86]  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100
+# make a sequence 
+(countdown <- 100:1)
+##   [1] 100  99  98  97  96  95  94  93  92  91  90  89  88  87  86  85  84
+##  [18]  83  82  81  80  79  78  77  76  75  74  73  72  71  70  69  68  67
+##  [35]  66  65  64  63  62  61  60  59  58  57  56  55  54  53  52  51  50
+##  [52]  49  48  47  46  45  44  43  42  41  40  39  38  37  36  35  34  33
+##  [69]  32  31  30  29  28  27  26  25  24  23  22  21  20  19  18  17  16
+##  [86]  15  14  13  12  11  10   9   8   7   6   5   4   3   2   1
 ```
 
 
@@ -606,10 +609,10 @@ Make sequences with steps of a particular size:
 
 
 ```r
-seq(from=0, to=1, by=.1)
+(tenths  <- seq(from=0, to=1, by=.1))
 ##  [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
 
-seq(from=0, to=10, length.out=12)
+(twelfths <- seq(from=0, to=10, length.out=12))
 ##  [1]  0.0000000  0.9090909  1.8181818  2.7272727  3.6363636  4.5454545
 ##  [7]  5.4545455  6.3636364  7.2727273  8.1818182  9.0909091 10.0000000
 ```
@@ -671,21 +674,24 @@ Try running the code below:
 
 
 ```r
-confusing.vector <- c(1, 2, 3, "Wibble")
-first.element <- confusing.vector[1]
+(confusing.vector <- c(1, 2, 3, "Wibble"))
+## [1] "1"      "2"      "3"      "Wibble"
+(first.element <- confusing.vector[1])
+## [1] "1"
 sqrt(first.element)
 ## Error in sqrt(first.element): non-numeric argument to mathematical function
 ```
 
 
-Take a minute to try and make a guess at what went wrong. Why does R complain that '`1`' is non-numeric?
+Take a minute to try and make a guess at what went wrong. Why does R complain that the '`1`' is non-numeric?
 
-When we built the vector we used `c` to combine the elements `1`, `2`, `3` and `"Wibble"`. Although our first and second elements are numbers, `"Wibble"` is not - it's made up of letters (this is called a character string).
-Remember that vectors can only contain one *type* of thing. And so R automatically converts all the elements to the same type, if it can. 
+When we built the vector we used `c` to combine the elements `1`, `2`, `3` and `"Wibble"`. Although our first three elements are numbers, `"Wibble"` is not - it's made up of letters (this is called a character string).
+
+Vectors can only contain one *type* of thing so R automatically converts all the elements to the same type, if it can. 
 
 Because R can't reliably convert `"Wibble"` to a number, everything in the vector was converted to the `character` type instead. We get an error because R can't mutiply words together.
 
-If you're not sure what type of thing your vector contains, you can use the `typeof` command:
+If you're not sure what type of thing your vector contains, you can use the `typeof` function:
 
 
 ```r
@@ -757,9 +763,9 @@ my.party$drinks[1]
 1. Create a vector containing 3 numbers then:
 
   - Access just the last number
-  - Create a new list containing the first and last number
+  - Create a new vector containing just the first and last number
 
-2. Create a list containing, your address and your age in years. Then:
+2. Create a list containing your address and your age in years. Then:
 
   - Multiply your age in years by your flat or house number (by accessing the relevant elements in the list)
 

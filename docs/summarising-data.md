@@ -6,7 +6,8 @@ output:
 
 
 
-# Summarising data {#summarising-data}
+# Summaries {#summarising-data}
+
 
 
 
@@ -28,8 +29,10 @@ In particular, we place an emphasis on functions *which return dataframes*, beca
 
 
 
-## Utility functions for descriptive statistics {-}
+## Quick and dirty {-}
 
+
+#### Using utility functions built into R {-}
 
 
 ### Frequency tables {- #frequency-tables}
@@ -110,26 +113,27 @@ In this example, we create summary statistics with the `psych::describe()` funct
 ```r
 psych::describe(angry.moods, skew=FALSE) %>% 
   as_data_frame %>% 
-  pandoc.table()
-## 
-## ---------------------------------------------------------------------------------
-##         &nbsp;          vars   n    mean      sd     min   max   range     se    
-## ---------------------- ------ ---- ------- -------- ----- ----- ------- ---------
-##       **Gender**         1     78   1.615   0.4897    1     2      1     0.05544 
-## 
-##       **Sports**         2     78   1.679   0.4697    1     2      1     0.05318 
-## 
-##     **Anger.Out**        3     78   16.08   4.217     9    27     18     0.4775  
-## 
-##      **Anger.In**        4     78   18.58   4.697    10    31     21     0.5319  
-## 
-##    **Control.Out**       5     78   23.69   4.688    14    32     18     0.5309  
-## 
-##     **Control.In**       6     78   21.96   4.945    11    32     21     0.5599  
-## 
-##  **Anger.Expression**    7     78    37     12.94     7    68     61      1.465  
-## ---------------------------------------------------------------------------------
+  pander()
 ```
+
+
+---------------------------------------------------------------------------------
+        &nbsp;          vars   n    mean      sd     min   max   range     se    
+---------------------- ------ ---- ------- -------- ----- ----- ------- ---------
+      **Gender**         1     78   1.615   0.4897    1     2      1     0.05544 
+
+      **Sports**         2     78   1.679   0.4697    1     2      1     0.05318 
+
+    **Anger.Out**        3     78   16.08   4.217     9    27     18     0.4775  
+
+     **Anger.In**        4     78   18.58   4.697    10    31     21     0.5319  
+
+   **Control.Out**       5     78   23.69   4.688    14    32     18     0.5309  
+
+    **Control.In**       6     78   21.96   4.945    11    32     21     0.5599  
+
+ **Anger.Expression**    7     78    37     12.94     7    68     61      1.465  
+---------------------------------------------------------------------------------
 
 
 This summary table can be processed like any other dataframe. For instance, we can select columns and rows from it using `dplyr`:
@@ -142,18 +146,19 @@ psych::describe(angry.moods, skew=FALSE) %>%
   rownames_to_column(var="variable") %>% 
   select(variable, mean, sd) %>% 
   filter(mean > 20) %>% 
-  pandoc.table
-## 
-## -----------------------------
-##     variable      mean   sd  
-## ---------------- ------ -----
-##   Control.Out    23.69  4.688
-## 
-##    Control.In    21.96  4.945
-## 
-## Anger.Expression   37   12.94
-## -----------------------------
+  pander
 ```
+
+
+----------------------------------
+     variable       mean     sd   
+------------------ ------- -------
+   Control.Out      23.69   4.688 
+
+    Control.In      21.96   4.945 
+
+ Anger.Expression    37     12.94 
+----------------------------------
 
 
 
@@ -282,9 +287,12 @@ Thankfully there is much nicer and more consistent way to compute exactly the su
 
 
 
-## A generalised approach: Split, apply, combine {- #split-apply-combine}
+## A generalised approach {-}
 
-The  `dplyr::` package, and especially the `summarise()` function provides a generalised way to create dataframes of frequencies and other summary statistics, grouped and sorted however we like.
+
+#### The 'split, apply, combine' model {- #split-apply-combine}
+
+The `dplyr::` package, and especially the `summarise()` function provides a generalised way to create dataframes of frequencies and other summary statistics, grouped and sorted however we like.
 
 For example, let's say we want the mean of some of our variables across the whole dataframe:
 
@@ -301,8 +309,9 @@ angry.moods %>%
 ## 1       16.07692      4.21737
 ```
 
+The `summarise` function has returned a dataframe containing the statistics we need, although in this instance the dataframe only has one row. 
 
-This has returned a dataframe containing the statistics we need, although in this instance the dataframe only has one row. What if we want the numbers for men and women separately?
+What if we want the numbers for men and women separately?
 
 Utility functions like `describeBy` have options to do this (you would specify grouping variables in that). But there's a more general pattern at work --- we want to:
 
@@ -415,7 +424,7 @@ If this were our data we might want to:
 
 Using only the commands above[^sneaked]  we can write:
 
-[^sneaked]: You might have noticed I sneaked something new in here: the call to `pandoc.table()`. This is from the `pander::` package, which contains is a useful set of functions function for when writing RMarkdown documents. They convert many R objects into more readable output: here it makes a nice table for us in the compiled document.  We cover more [tips and tricks for formatting RMarkdown documents here](rmarkdown-tricks.html). You might also want to check [this page on missing values](missing-values.html) to explain the filter which uses `!is.na()`, but you could leave it for later.
+[^sneaked]: You might have noticed I sneaked something new in here: the call to `pander()`. This is from the `pander::` package, which contains is a useful set of functions function for when writing RMarkdown documents. They convert many R objects into more readable output: here it makes a nice table for us in the compiled document.  We cover more tips and tricks for formatting RMarkdown documents in the chapter on [sharing and publishing your data](#sharing-and-publication). You might also want to check [this page on missing values](#missing) to explain the filter which uses `!is.na()`, but you could equally leave this for later.
 
 
 
@@ -457,11 +466,11 @@ phq9.summary.df %>%
 
 
 
-###### A 'neater way' {-}
+###### A 'neater way' {- #mutate-with-rowmeans}
 
 You might have thought that typing out each variable in the above example (`phq9_01 + phq9_02...`) seemed a bit repetitive.
 
-In general, if you find yourself typing something repetitive in R then there will a better way of doing it, and this is true here.
+In general, if you find yourself typing something repetitive in R then there *will* a better way of doing it, and this is true here.
 
 Stepping back, *what we want is the row mean of all the variables starting with `phq9_0`*. We can write this more concisely like so:
 

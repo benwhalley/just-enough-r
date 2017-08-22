@@ -6,7 +6,7 @@ output: bookdown::tufte_html2
 
 
 
-## Multiple comparisons {- #multiple-comparisons}
+# Multiple comparisons {#multiple-comparisons}
 
 
 
@@ -363,26 +363,44 @@ eysenck.fdr <- lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition, adjust="f
 eysenck.fdr$contrasts %>% 
   broom::tidy() %>% 
   head(6) %>% 
-  pandoc.table(caption="First 6 rows of the pairwise contrasts with FDR-adjusted p values")
-## 
-## --------------------------------------------------------------------------------
-##     level1         level2       estimate   std.error   df   statistic   p.value 
-## -------------- --------------- ---------- ----------- ---- ----------- ---------
-## Young,Counting Older,Counting     0.5        1.267     90    0.3947     0.7263  
-## 
-## Young,Counting  Young,Rhyming     0.1        1.267     90    0.07893    0.9373  
-## 
-## Young,Counting  Older,Rhyming     -0.6       1.267     90    -0.4736    0.6824  
-## 
-## Young,Counting Young,Adjective     -4        1.267     90    -3.157    0.003251 
-## 
-## Young,Counting Older,Adjective    -7.8       1.267     90    -6.157    7.626e-08
-## 
-## Young,Counting  Young,Imagery     -6.4       1.267     90    -5.052    5.698e-06
-## --------------------------------------------------------------------------------
-## 
-## Table: First 6 rows of the pairwise contrasts with FDR-adjusted p values
+  pander(caption="First 6 rows of the pairwise contrasts with FDR-adjusted p values")
 ```
+
+
+--------------------------------------------------------------------------
+     level1           level2        estimate   std.error   df   statistic 
+---------------- ----------------- ---------- ----------- ---- -----------
+ Young,Counting   Older,Counting      0.5        1.267     90    0.3947   
+
+ Young,Counting    Young,Rhyming      0.1        1.267     90    0.07893  
+
+ Young,Counting    Older,Rhyming      -0.6       1.267     90    -0.4736  
+
+ Young,Counting   Young,Adjective      -4        1.267     90    -3.157   
+
+ Young,Counting   Older,Adjective     -7.8       1.267     90    -6.157   
+
+ Young,Counting    Young,Imagery      -6.4       1.267     90    -5.052   
+--------------------------------------------------------------------------
+
+Table: First 6 rows of the pairwise contrasts with FDR-adjusted p values (continued below)
+
+ 
+-----------
+  p.value  
+-----------
+  0.7263   
+
+  0.9373   
+
+  0.6824   
+
+ 0.003251  
+
+ 7.626e-08 
+
+ 5.698e-06 
+-----------
 
 
 
@@ -873,28 +891,29 @@ lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition, adjust="none")$contrast 
   mutate(significant = as.numeric(p.value < `q (10% FDR)`)) %>%
   # just show some of the results, at the break between sig and ns contrast
   filter(p.fdr.adjust > .01 & p.fdr.adjust < .4) %>%
-  pandoc.table(caption="Subset of contrasts, showing the break between significant and ns results, as determined by an FDR of 10%.", split.tables=Inf)
-## 
-## ------------------------------------------------------------------------------------
-##     level1          level2       p.value   q (10% FDR)   p.fdr.adjust   significant 
-## --------------- --------------- --------- ------------- -------------- -------------
-##  Older,Rhyming  Young,Adjective 0.008667     0.07111       0.01219           1      
-## 
-## Older,Adjective Young,Intention  0.02964     0.07333       0.03923           1      
-## 
-## Older,Adjective  Older,Imagery   0.02964     0.07556       0.03923           1      
-## 
-## Young,Adjective  Young,Imagery   0.06139     0.07778       0.07893           1      
-## 
-##  Older,Imagery  Older,Intention   0.183       0.08          0.2288           0      
-## 
-## Older,Adjective  Young,Imagery   0.2721      0.08222        0.3222           0      
-## 
-##  Young,Imagery  Young,Intention  0.2721      0.08444        0.3222           0      
-## ------------------------------------------------------------------------------------
-## 
-## Table: Subset of contrasts, showing the break between significant and ns results, as determined by an FDR of 10%.
+  pander(caption="Subset of contrasts, showing the break between significant and ns results, as determined by an FDR of 10%.", split.tables=Inf)
 ```
+
+
+-----------------------------------------------------------------------------------------
+     level1            level2        p.value    q (10% FDR)   p.fdr.adjust   significant 
+----------------- ----------------- ---------- ------------- -------------- -------------
+  Older,Rhyming    Young,Adjective   0.008667     0.07111       0.01219           1      
+
+ Older,Adjective   Young,Intention   0.02964      0.07333       0.03923           1      
+
+ Older,Adjective    Older,Imagery    0.02964      0.07556       0.03923           1      
+
+ Young,Adjective    Young,Imagery    0.06139      0.07778       0.07893           1      
+
+  Older,Imagery    Older,Intention    0.183        0.08          0.2288           0      
+
+ Older,Adjective    Young,Imagery     0.2721      0.08222        0.3222           0      
+
+  Young,Imagery    Young,Intention    0.2721      0.08444        0.3222           0      
+-----------------------------------------------------------------------------------------
+
+Table: Subset of contrasts, showing the break between significant and ns results, as determined by an FDR of 10%.
 
 -->
 

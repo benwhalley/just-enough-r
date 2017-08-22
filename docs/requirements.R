@@ -83,4 +83,5 @@ install.packages(pkgs)
 devtools::install_github("hadley/colformat")
 devtools::install_github("ropenscilabs/skimr")
 
-
+# install dev version otherwise fails on R 3.3.3
+install.packages("MuMIn", repos="http://R-Forge.R-project.org")

@@ -10,8 +10,7 @@ bibliography: bibliography.bib
 
 
 
-
-# Understanding interactions {#understanding-interactions}
+# Interactions {#understanding-interactions}
 
 
 Objectives of this section:
@@ -25,10 +24,7 @@ Objectives of this section:
 
 
 
-
-
-
-## What is an interaction? {-}
+### What is an interaction? {-}
 
 For an interaction to occur we must measure:
 

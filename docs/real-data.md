@@ -7,7 +7,7 @@ output:
 
 
 
-# Working with 'real' data {#real-data}
+# 'Real' data {#real-data}
 
 *Note: If you already lucky enough to have nicely formatted data, ready for use in R, then you could skip this section and revisit it later,* save for the section on [factors and other variable types](#factors-and-numerics).
 
@@ -27,9 +27,9 @@ This chapter shows you how to address each of these problems.
 
 When working with data in Excel or other packages like SPSS you've probably become aware that different types of data get treated differently. For example, in Excel you can't set up a formula like `=SUM(...)` on cells which include letters (rather than just numbers). It does't make sense. However, Excel and many other programmes will sometimes make guesses about what to do if you combine different types of data. 
 
-For example, if you add `28` to `1 Feb 2017` the result is `1 March 2017`. This is sometimes what you want, but can often lead to unexpected results and errors in data analyses.
+For example, if you add `28` to `1 Feb 2017` the result is `1 March 2017`. This is sometimes what you want, but can often lead to [unexpected results and errors in data analyses](http://www.sciencemag.org/news/sifter/one-five-genetics-papers-contains-errors-thanks-microsoft-excel).
 
-R is much more strict about not mixing types of data. Vectors (and columns in dataframes) can only contain one type of thing. In general, there are probably 4 types of data you will encounter in data analysis problems:
+R is much more strict about not mixing types of data. Vectors (or columns in dataframes) can only contain one type of thing. In general, there are probably 4 types of data you will encounter in data analysis problems:
 
 - Numeric variables
 - Character variables
@@ -40,13 +40,13 @@ R is much more strict about not mixing types of data. Vectors (and columns in da
 
 
 
-The file `lakers.RDS` contains a dataset adapted from the `lubridate::lakers` dataset.
+The file `data/lakers.RDS` contains a dataset adapted from the `lubridate::lakers` dataset.
 
 It contains four variables to illustrate the common variable types. From the original dataset which provides scores and other information from each Los Angeles Lakers basketball game in the 2008-2009 season we have the `date`, `opponent`, `team`, and  `points` variables.
 
 
 ```r
-lakers <- readRDS("lakers.RDS")
+lakers <- readRDS("data/lakers.RDS")
 lakers %>% 
   glimpse
 ## Observations: 34,624
@@ -71,62 +71,34 @@ One thing to note here is that the `glimpse()` command tells us the *type* of ea
 
 We've already seem numeric variables in the section on [vectors and lists](#vectors). These behave pretty much as you'd expect, and we won't expand on them here. 
 
-#### {- .explainer}
 
-As an aside, you should be aware that there are limits to the precision with which R (and computers in general) can store decimal values. This only tends to matter when working with very large or very small numbers — but this can crop up when estimating regression coefficients that are very small for example, and is one reason why [scaling inputs to regression models can improve performance and accuracy of results](#scaling-regression-inputs).
+#### {- .tip}
+
+There are different types of numeric variable, (e.g. integers, stored as `int`  v.s. types like `dbl` which can store numbers with a decimal place) but for most purposes the differences won't matter.
 
 
 
 ### Differences in *quality or kind* {- #character-and-factor}
 
-In many cases variables will be used to identify cases which have *qualitative differences*: for example, where different groups or measurement occasions in an experimental study, or different genders.
+In many cases variables will be used to identify values which are *qualitatively different*. For example, different groups or measurement occasions in an experimental study, or perhaps different genders or countries in survey data.
 
-There are several types of variale which can store qualitative differences, and include:
 
-- Character variables
+In practice, these qualitative differences get stored in a range of different variable types, including:
+
+- Numeric variables (e.g. `time = 1`, or `time = 2`...)
+- Character variables (e.g. `time = "time 1"`, `time = "time 2"`...)
+- Boolean or logical variables (e.g. `time1 == TRUE` or `time1 == FALSE`)
 - 'Factors'
-- Boolean or logical variables
-
-
-It can cause confusion that categorical variables are, in practice, stored variously as numeric variables, 'character' types (strings of letters and numbers), or as a third type called factors.
-
-For example, you will often come across data where groupings are stored in either one of these formats:
 
 
 
------------------------------------------------
- month   month.name     group     group.number 
-------- ------------ ----------- --------------
-   1        Jan        Waiting         1       
+Storing categories as numeric variables can produce [confusing results when running regression models](#factors-vs-linear-inputs).  
 
-   2        Feb       Treatment        2       
+For this reason, it's normally best to store your categorical variables as descriptive strings of letters and numbers (e.g. "Treatment", "Control") and avoid simple numbers (e.g. 1, 2, 3). Or as a factor.
 
-   3        Mar        Control         3       
-
-   4        Apr                                
-
-   5        May                                
-
-   6        Jun                                
-
-   7        Jul                                
-
-   8        Aug                                
-
-   9        Sep                                
-
-  10        Oct                                
-
-  11        Nov                                
-
-  12        Dec                                
------------------------------------------------
-
-
-When storing categories as numeric variables you can end up with [confusing results when running regression models](#factors-vs-linear-inputs).  For this reason, it's often best to store your categorical variables as descriptive strings of letters and numbers (e.g. "Treatment", "Control") and avoid simple numbers (e.g. 1, 2, 3).
-
-*Factors* are R's answer to this problem of storing categorical data.
+Factors are R's answer to the problem of storing categorical data.
 Factors assign one number for each unique value in a variable, and optionally allow you to attach a label to it.
+
 
 For example:
 
@@ -196,7 +168,7 @@ However, R does treat dates slightly differently from other numbers, and will fo
 hist(lakers$date, breaks=7)
 ```
 
-<img src="real-data_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="real-data_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 
 ### Missing values {-}
@@ -591,10 +563,9 @@ fit.data %>%
   mutate(missing.followup = is.na(kg2)) %>% 
   ggplot(aes(kg1, age, color=missing.followup)) +
   geom_point()
-## Warning: Removed 8 rows containing missing values (geom_point).
 ```
 
-<img src="real-data_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+<img src="real-data_files/figure-html/unnamed-chunk-23-1.png" width="672" />
 
 There's a clear trend here for lighter patients (at baseline) to have more missing data at followup. There's also a suggestion that younger patients are more likely to have been lost to followup.
 
@@ -641,30 +612,159 @@ For some nice missing data visualisation techniques, including those for repeate
 ## Tidying data {-}
 
 
-'Tidying' data means converting it into the format that is most useful for data analyses. 
+'Tidying' data means converting it into the format that is most useful for data analyses, and so we have already covered many of the key techniques: selecting and filtering data, reshaping and summarising.
+
+However the ideas behind 'tidying' draw together other related concepts which link together the way we enter, store and process data: for example the idea of '[relational data]()' and techniques to join together related datasets.
 
 
-This part of the guide is currently incomplete, but excellent tuturials exist here: 
+#### A philosophy of tidy data {-}
 
-- http://tidyr.tidyverse.org and 
-- http://r4ds.had.co.nz/tidy-data.html
-
+The chapter on tidying in 'R for data science' is well worth reading for it's thoughtful explanation of why we want tidy data, and the core techniques to clean up untidy data:  <http://r4ds.had.co.nz/tidy-data.html>
 
 
+#### Broom {- #broom}
+
+The [`broom::` library](http://varianceexplained.org/r/broom-intro/) is also worth learning. It takes a slightly different approach, by providing methods to 'clean up' the output of many older R functions.
+
+For example, the `lm()` or `car::Anova` functions display results in the console, but don't make it easy to extract results as a dataframe.
+
+`broom::` provides a consistent way of extracting the key numbers from most R objects. Let's say we have a regression model:
 
 
 
-## Saving data {- #storing-data}
+```r
+(model.1 <- lm(mpg ~ factor(cyl) + wt + disp, data=mtcars))
+## 
+## Call:
+## lm(formula = mpg ~ factor(cyl) + wt + disp, data = mtcars)
+## 
+## Coefficients:
+##  (Intercept)  factor(cyl)6  factor(cyl)8            wt          disp  
+##    34.041673     -4.305559     -6.322786     -3.306751      0.001715
+```
+
+
+We can extract model fit statistics as a dataframe with `glance`:
+
+
+```r
+glance(model.1)
+##   r.squared adj.r.squared    sigma statistic      p.value df    logLik
+## 1 0.8375299     0.8134602 2.603054   34.7961 2.726351e-10  5 -73.30158
+##        AIC      BIC deviance df.residual
+## 1 158.6032 167.3976  182.949          27
+```
+
+Coefficients with `tidy`:
+
+```r
+tidy(model.1)
+##           term     estimate  std.error  statistic      p.value
+## 1  (Intercept) 34.041672760 1.96303906 17.3413120 3.661629e-16
+## 2 factor(cyl)6 -4.305559465 1.46475954 -2.9394309 6.661872e-03
+## 3 factor(cyl)8 -6.322785631 2.59841631 -2.4333228 2.186022e-02
+## 4           wt -3.306751078 1.10508285 -2.9923106 5.855001e-03
+## 5         disp  0.001714866 0.01348116  0.1272046 8.997211e-01
+```
+
+Which can then be plotted easily (adding the `conf.int=T` includes 95% confidence intervals for each parameter):
+
+
+```r
+tidy(model.1, conf.int = T) %>% 
+  ggplot(aes(term, estimate, ymin=conf.low, ymax=conf.high)) + 
+  geom_pointrange() +
+  geom_hline(yintercept = 0)
+```
+
+<img src="real-data_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+
+Finally, we can get fitted and residual values, plus common diagnostic metrics like Cooks distances, using the `augment` function:
+
+
+```r
+augment(model.1) %>% head
+##           .rownames  mpg factor.cyl.    wt disp  .fitted   .se.fit
+## 1         Mazda RX4 21.0           6 2.620  160 21.34680 1.0583597
+## 2     Mazda RX4 Wag 21.0           6 2.875  160 20.50358 1.0086391
+## 3        Datsun 710 22.8           4 2.320  108 26.55522 0.7853730
+## 4    Hornet 4 Drive 21.4           6 3.215  258 19.54734 1.3552679
+## 5 Hornet Sportabout 18.7           8 3.440  360 16.96102 0.9783961
+## 6           Valiant 18.1           6 3.460  225 18.68060 1.0587563
+##       .resid       .hat   .sigma      .cooksd .std.resid
+## 1 -0.3468040 0.16531044 2.651595 0.0008423297 -0.1458272
+## 2  0.4964176 0.15014309 2.650537 0.0015120693  0.2068669
+## 3 -3.7552157 0.09103024 2.537679 0.0458585462 -1.5131327
+## 4  1.8526561 0.27107161 2.618281 0.0516853704  0.8336221
+## 5  1.7389850 0.14127428 2.626986 0.0171005288  0.7209173
+## 6 -0.5805993 0.16543438 2.649710 0.0023633145 -0.2441536
+```
+
+
+Again these can be plotted:
+
+
+```r
+augment(model.1) %>% 
+  ggplot(aes(x=.fitted, y=.resid)) + 
+  geom_point() + 
+  geom_smooth()
+```
+
+<img src="real-data_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+
+
+
+Because `broom` always returns a dataframe with a consistent set of column names we can also combine model results into tables for comparison. In this plot we see what happens to the regression coefficients in model 1 when we add `disp`, `carb` and `drat` in model 2. We plot the coefficients side by side for ease of comparison, and can see that the estimates for cyl1 and wt both shrink slightly with the addition of these variables:
+
+
+
+```r
+# run a new model with more predictors
+(model.2 <- lm(mpg ~ factor(cyl) + wt + disp + carb + drat, data=mtcars))
+## 
+## Call:
+## lm(formula = mpg ~ factor(cyl) + wt + disp + carb + drat, data = mtcars)
+## 
+## Coefficients:
+##  (Intercept)  factor(cyl)6  factor(cyl)8            wt          disp  
+##    29.849209     -2.796142     -4.116561     -2.748229     -0.002826  
+##         carb          drat  
+##    -0.587422      1.056532
+
+# make a single dataframe from both models
+# addin a new `model` column with mutate to 
+# identify which coefficient came from which model
+combined.results <- bind_rows(
+  tidy(model.1, conf.int = T) %>% mutate(model="1"), 
+  tidy(model.2, conf.int = T) %>%  mutate(model="2")) 
+```
+
+
+```r
+combined.results %>% 
+  # remove the intercept to make plot scale more sane
+  filter(term != "(Intercept)") %>% 
+  ggplot(aes(term, estimate, ymin=conf.low, ymax=conf.high, color=model)) +
+    geom_pointrange(position=position_dodge(width=.1)) + 
+  geom_hline(yintercept = 0)
+```
+
+<img src="real-data_files/figure-html/unnamed-chunk-32-1.png" width="672" />
+
+
+
+## Saving things {- #storing-data}
 
 
 #### Use CSV files {- #use-csv}
 
-Comma-sepatated-values files are a plain text format which are idea for storing your data. Some advantages include:
+Comma-separated-values files are a plain text format which are idea for storing and sharing your data. They are:
 
-- Understood by almost every piece of software on the planet
-- Will remain readbale in future
-- Easy to store 2D data (like data frames)
-- Human readable (just open in Notepad)
+- Understood by almost every piece of software, ever
+- Will be readable in future
+- Perfect for storing 2D data (like dataframes)
+- Readable by humans (just open them in Notepad)
 
 
 Commercial formats like Excel, SPSS (.sav) and Stata (.dta) don't have these properties.
@@ -707,7 +807,7 @@ To save something:
 
 ```r
 # create a huge df of random numbers... 
-massive.df <- data_frame(nums = rnorm(1:1e8))
+massive.df <- data_frame(nums = rnorm(1:1e6))
 saveRDS(massive.df, file="massive.RDS")
 ```
 
@@ -787,20 +887,14 @@ raw.file.paths <- raw.files  %>%
   mutate(filepath = paste0("data/multiple-file-example/", filename))
 
 raw.file.paths %>% 
-  head(3) %>% 
-  pander()
+  head(3)
+## # A tibble: 3 x 2
+##       filename                                filepath
+##          <chr>                                   <chr>
+## 1  person1.csv  data/multiple-file-example/person1.csv
+## 2 person10.csv data/multiple-file-example/person10.csv
+## 3 person11.csv data/multiple-file-example/person11.csv
 ```
-
-
---------------------------------------------------------
-   filename                    filepath                 
--------------- -----------------------------------------
- person1.csv    data/multiple-file-example/person1.csv  
-
- person10.csv   data/multiple-file-example/person10.csv 
-
- person11.csv   data/multiple-file-example/person11.csv 
---------------------------------------------------------
 
 
 
@@ -838,25 +932,25 @@ raw.data %>%
 -------------------------------------------
  Condition   trial   time   person    RT   
 ----------- ------- ------ -------- -------
-     3        14      2       28     336.4 
+     1         1      1       10     297.3 
 
-     3         4      2       33     316.1 
+     2        24      2       24     83.81 
 
-     1        15      2       6      211.2 
+     3        24      1       26     270.7 
 
-     4         1      1       42     248.1 
+     3         3      1       26     233.4 
 
-     4        23      2       42     258.1 
+     3        17      2       25     332.9 
 
-     2        18      2       15     258.9 
+     1        20      2       12     268.2 
 
-     3        14      1       26     251.6 
+     3        14      2       27     170.3 
 
-     3        24      1       27      196  
+     2         7      1       20     208.8 
 
-     4        15      1       37     188.7 
+     1        22      1       9      248.7 
 
-     2        25      2       22     126.1 
+     2        17      1       24     187.5 
 -------------------------------------------
 
 
@@ -877,7 +971,13 @@ read.csv.and.add.filename <- function(filepath){
 }
 ```
 
-And we can use the helper function with `do()` like so:
+In English, you should read this as: 
+
+> "Create a new R function called `read.csv.and.add.filename` which expects to be passed a path to a csv file as an input. This function reads the csv file at the path (converting it to a dataframe), and adds a new column containing the original file path it read from. It then returns this dataframe."
+
+
+We can use our helper function with `do()` in place of the bare `read_csv` function we used before:
+
 
 
 ```r
@@ -886,29 +986,64 @@ raw.data.with.paths <- raw.file.paths %>%
   do(., read.csv.and.add.filename(.$filepath))
 
 raw.data.with.paths %>% 
-  head %>% 
-  pander
+  sample_n(10) %>%
+  pander()
 ```
 
 
-------------------------------------------------------------------------------------
- Condition   trial   time   person    RT                    filepath                
------------ ------- ------ -------- ------- ----------------------------------------
-     1         1      1       1      284.5   data/multiple-file-example/person1.csv 
+-------------------------------------------
+ Condition   trial   time   person    RT   
+----------- ------- ------ -------- -------
+     1        24      2       6      242.6 
 
-     1         2      1       1      309.3   data/multiple-file-example/person1.csv 
+     4        20      1       44      166  
 
-     1         3      1       1      346.7   data/multiple-file-example/person1.csv 
+     2         5      2       22     132.7 
 
-     1         4      1       1      291.1   data/multiple-file-example/person1.csv 
+     2         2      1       19     178.5 
 
-     1         5      1       1      281.6   data/multiple-file-example/person1.csv 
+     3        20      2       27     279.9 
 
-     1         6      1       1      292.1   data/multiple-file-example/person1.csv 
-------------------------------------------------------------------------------------
+     3         9      2       26     350.7 
+
+     1         4      2       8      215.1 
+
+     1         8      2       10     433.8 
+
+     3         7      2       27     275.6 
+
+     2        10      1       13     191.5 
+-------------------------------------------
+
+Table: Table continues below
+
+ 
+-----------------------------------------
+                filepath                 
+-----------------------------------------
+ data/multiple-file-example/person6.csv  
+
+ data/multiple-file-example/person44.csv 
+
+ data/multiple-file-example/person22.csv 
+
+ data/multiple-file-example/person19.csv 
+
+ data/multiple-file-example/person27.csv 
+
+ data/multiple-file-example/person26.csv 
+
+ data/multiple-file-example/person8.csv  
+
+ data/multiple-file-example/person10.csv 
+
+ data/multiple-file-example/person27.csv 
+
+ data/multiple-file-example/person13.csv 
+-----------------------------------------
 
 
-At this point you might want to [use the `extract()` or `separate()` functions](#extract-to-split-column-names) to post-process the filename and re-create the `person` variable from this (although here that's already been done for us).
+At this point you might need to [use the `extract()` or `separate()` functions](#extract-to-split-column-names) to post-process the filename and re-create the `person` variable from this (although in this case that's already been done for us).
 
 
 

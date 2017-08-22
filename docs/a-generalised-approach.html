@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="importing-data.html">
-<link rel="next" href="selecting-columns.html">
+<link rel="prev" href="quick-and-dirty.html">
+<link rel="next" href="fancy-reshaping.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -376,30 +376,193 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="working-with-dataframes" class="section level2 unnumbered">
-<h2>Working with dataframes</h2>
-<div id="tidyverse" class="section level3 unnumbered">
-<h3>Introducing the <code>tidyverse</code></h3>
-<p>R includes hundreds of built-in ways to select individual elements, rows or columns from a dataframe. This guide isn’t going to teach you many of them.</p>
-<p>The truth is that R can be overwhelming to new users, especially those new to programming. R is sometimes <em>too</em> powerful and flexible: there are too many different to accomplish the same end, and this can lead to confusion.</p>
-<p>Recently, a suite of packages has been developed for R which tries to provide a simple, consistent set of tools for working with data and graphics.</p>
-<p>This suite of packages is called the <em>tidyverse</em>, and you can load all of these packages by calling:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
-<p>In this guide we make much use of two components from the tidyverse:</p>
+<div id="a-generalised-approach" class="section level2 unnumbered">
+<h2>A generalised approach</h2>
+<div id="split-apply-combine" class="section level4 unnumbered">
+<h4>The ‘split, apply, combine’ model</h4>
+<p>The <code>dplyr::</code> package, and especially the <code>summarise()</code> function provides a generalised way to create dataframes of frequencies and other summary statistics, grouped and sorted however we like.</p>
+<p>For example, let’s say we want the mean of some of our variables across the whole dataframe:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">angry.moods <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(
+    <span class="dt">mean.anger.out=</span><span class="kw">mean</span>(Anger.Out), 
+    <span class="dt">sd.anger.out=</span><span class="kw">sd</span>(Anger.Out)
+  )
+## # A tibble: 1 × 2
+##   mean.anger.out sd.anger.out
+##            &lt;dbl&gt;        &lt;dbl&gt;
+## 1       16.07692      4.21737</code></pre></div>
+<p>The <code>summarise</code> function has returned a dataframe containing the statistics we need, although in this instance the dataframe only has one row.</p>
+<p>What if we want the numbers for men and women separately?</p>
+<p>Utility functions like <code>describeBy</code> have options to do this (you would specify grouping variables in that). But there’s a more general pattern at work — we want to:</p>
 <ul>
-<li><code>dplyr</code>: to select, filter and summarise data</li>
-<li><code>ggplot2</code>: to make plots</li>
+<li><em>Split</em> our data (into men and women, or some other categorisation)</li>
+<li><em>Apply</em> some function to them (e.g. calculate the mean) and then</li>
+<li><em>Combine</em> it into a single table again (for more processing or analysis)</li>
 </ul>
-<p>It’s strongly recommended that you use these in your own code.</p>
+<p>It’s helpful to think of this <em>split <span class="math inline">\(\rightarrow\)</span> apply <span class="math inline">\(\rightarrow\)</span> combine</em> pattern whenever we are processing data because it <em>makes explicit what we want to do</em>.</p>
 </div>
+<div id="split-breaking-the-data-into-groups" class="section level4 unnumbered">
+<h4>Split: breaking the data into groups</h4>
+<p>The first task is to organise our dataframe into the relevant groups. To do this we use <code>group_by()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">angry.moods <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Gender) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>head
+## Source: local data frame [6 x 7]
+## Groups: Gender [2]
+## 
+##   Gender Sports Anger.Out Anger.In Control.Out Control.In Anger.Expression
+##    &lt;int&gt;  &lt;int&gt;     &lt;int&gt;    &lt;int&gt;       &lt;int&gt;      &lt;int&gt;            &lt;int&gt;
+## 1      2      1        18       13          23         20               36
+## 2      2      1        14       17          25         24               30
+## 3      2      1        13       14          28         28               19
+## 4      2      1        17       24          23         23               43
+## 5      1      1        16       17          26         28               27
+## 6      1      1        16       22          25         23               38</code></pre></div>
+<p>Weirdly, this doesn’t seem to have done anything. The data aren’t sorted by <code>Gender</code>, and there is no visible sign of the grouping, but stick with it…</p>
+</div>
+<div id="apply-and-combine" class="section level4 unnumbered">
+<h4>Apply and combine</h4>
+<p>Continuing the example above, once we have grouped our data we can then <em>apply</em> a function to it — for exmaple, summarise:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">angry.moods <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Gender) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(
+    <span class="dt">mean.anger.out=</span><span class="kw">mean</span>(Anger.Out)
+  )
+## # A tibble: 2 × 2
+##   Gender mean.anger.out
+##    &lt;int&gt;          &lt;dbl&gt;
+## 1      1       16.56667
+## 2      2       15.77083</code></pre></div>
+<p>And R and <code>dplyr</code> have done as we asked:</p>
+<ul>
+<li><em>split</em> the data by <code>Gender</code>, using <code>group_by()</code></li>
+<li><em>apply</em> the <code>summarise()</code> function</li>
+<li><em>combine</em> the results into a new data frame</li>
+</ul>
+</div>
+<div id="a-real-example" class="section level4 unnumbered">
+<h4>A ‘real’ example</h4>
+<p>In the previous section on datasets, we saw some found some raw data from a study which had measured depression with the PHQ-9. Patients were measured on numerous occasions (<code>month</code> is recorded) and were split into treatment and control groups:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">phq9.df &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;phq.csv&quot;</span>)
+## Parsed with column specification:
+## cols(
+##   patient = col_integer(),
+##   phq9_01 = col_integer(),
+##   phq9_02 = col_integer(),
+##   phq9_03 = col_integer(),
+##   phq9_04 = col_integer(),
+##   phq9_05 = col_integer(),
+##   phq9_06 = col_integer(),
+##   phq9_07 = col_integer(),
+##   phq9_08 = col_integer(),
+##   phq9_09 = col_integer(),
+##   month = col_integer(),
+##   group = col_integer()
+## )
+<span class="kw">glimpse</span>(phq9.df)
+## Observations: 2,429
+## Variables: 12
+## $ patient &lt;int&gt; 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, ...
+## $ phq9_01 &lt;int&gt; 3, 1, 1, 2, 2, 2, 3, 2, 3, 3, 1, 3, 2, 1, 2, 3, 3, 3, ...
+## $ phq9_02 &lt;int&gt; 3, 2, 2, 2, 3, 3, 3, 2, 3, 3, 1, 3, 2, 1, 3, 3, 3, 3, ...
+## $ phq9_03 &lt;int&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 2, 3, 3, ...
+## $ phq9_04 &lt;int&gt; 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, ...
+## $ phq9_05 &lt;int&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 2, 1, 2, ...
+## $ phq9_06 &lt;int&gt; 3, 2, 2, 2, 3, 3, 2, 1, 2, 3, 3, 3, 2, 1, 3, 3, 3, 3, ...
+## $ phq9_07 &lt;int&gt; 3, 3, 1, 1, 2, 1, 2, 2, 1, 3, 2, 2, 2, 2, 3, 2, 1, 1, ...
+## $ phq9_08 &lt;int&gt; 0, 2, 2, 1, 1, 1, 1, 2, 1, 3, 1, 2, 1, 0, 2, 1, 0, 1, ...
+## $ phq9_09 &lt;int&gt; 2, 2, 1, 1, 2, 2, 2, 1, 1, 3, 1, 2, 1, 1, 3, 3, 3, 3, ...
+## $ month   &lt;int&gt; 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 18, 0, 1,...
+## $ group   &lt;int&gt; 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, ...</code></pre></div>
+<p>If this were our data we might want to:</p>
+<ul>
+<li>Calculate the sum of the PHQ-9 variables (the PHQ-9 <em>score</em>)</li>
+<li>Calculate the average PHQ-9 score at each month, and in each group</li>
+<li>Show these means by group for months 0, 7 and 12</li>
+</ul>
+<p>Using only the commands above<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a> we can write:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">phq9.summary.df &lt;-<span class="st"> </span>phq9.df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">phq9 =</span> phq9_<span class="dv">01</span> <span class="op">+</span><span class="st"> </span>phq9_<span class="dv">02</span> <span class="op">+</span><span class="st"> </span>phq9_<span class="dv">03</span> <span class="op">+</span><span class="st"> </span>
+<span class="st">                    </span>phq9_<span class="dv">04</span> <span class="op">+</span><span class="st"> </span>phq9_<span class="dv">05</span> <span class="op">+</span><span class="st"> </span>phq9_<span class="dv">06</span> <span class="op">+</span><span class="st"> </span>
+<span class="st">                    </span>phq9_<span class="dv">07</span> <span class="op">+</span><span class="st"> </span>phq9_<span class="dv">08</span> <span class="op">+</span><span class="st"> </span>phq9_<span class="dv">09</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+
+<span class="st">  </span><span class="kw">select</span>(patient, group, month, phq9) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># remove rows with missing values</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(phq9)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># split</span>
+<span class="st">  </span><span class="kw">group_by</span>(month, group) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># apply and combine</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">phq.mean =</span> <span class="kw">mean</span>(phq9))
+
+
+phq9.summary.df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(month <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">7</span>, <span class="dv">12</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>pander<span class="op">::</span><span class="kw">pandoc.table</span>()
+## 
+## --------------------------
+##  month   group   phq.mean 
+## ------- ------- ----------
+##    0       0     19.75904 
+## 
+##    0       1     18.97368 
+## 
+##    7       0     16.61818 
+## 
+##    7       1     13.42056 
+## 
+##   12       0     16.15385 
+## 
+##   12       1     12.54082 
+## --------------------------</code></pre></div>
+<div id="mutate-with-rowmeans" class="section level6 unnumbered">
+<h6>A ‘neater way’</h6>
+<p>You might have thought that typing out each variable in the above example (<code>phq9_01 + phq9_02...</code>) seemed a bit repetitive.</p>
+<p>In general, if you find yourself typing something repetitive in R then there <em>will</em> a better way of doing it, and this is true here.</p>
+<p>Stepping back, <em>what we want is the row mean of all the variables starting with <code>phq9_0</code></em>. We can write this more concisely like so:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">phq9.df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">phq9 =</span> <span class="kw">rowMeans</span>(
+    <span class="kw">select</span>(phq9.df, <span class="kw">starts_with</span>(<span class="st">&quot;phq9_0&quot;</span>))
+  )
+)
+## # A tibble: 2,429 × 13
+##    patient phq9_01 phq9_02 phq9_03 phq9_04 phq9_05 phq9_06 phq9_07 phq9_08
+##      &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;
+## 1        1       3       3       3       3       3       3       3       0
+## 2        2       1       2       3       3       3       2       3       2
+## 3        2       1       2       3       2       3       2       1       2
+## 4        2       2       2       3       3       3       2       1       1
+## 5        2       2       3       3       3       3       3       2       1
+## 6        2       2       3       3       3       3       3       1       1
+## 7        2       3       3       3       3       3       2       2       1
+## 8        2       2       2       3       3       3       1       2       2
+## 9        2       3       3       3       3       3       2       1       1
+## 10       2       3       3       3       3       3       3       3       3
+## # ... with 2,419 more rows, and 4 more variables: phq9_09 &lt;int&gt;,
+## #   month &lt;int&gt;, group &lt;int&gt;, phq9 &lt;dbl&gt;</code></pre></div>
+<p>I’ve broken the code into multiple lines to make it clearer to read. In English, this code means:</p>
+<ol style="list-style-type: decimal">
+<li>Take the the dataframe <code>phq9.df</code></li>
+<li>Add (using <code>mutate()</code>) a new variable called <code>phq</code> by</li>
+<li>Calculating the rowmeans of selected columns in <code>phq9.df</code> which</li>
+<li>Start with the letters: `phq9_0</li>
+</ol>
+<p><span class="explainer">Ignore this if you are found the last section confusing, but if you find pipes useful then note that I explicitly passed the <code>phq9.df</code> directly to the <code>select()</code> function. There are other tricks with pipes where you can pass the intermediate result of a series of pipes to a function by putting a <code>.</code> (a full stop or period) as the argument to the function. This can be very useful, so see the <a href="https://github.com/tidyverse/magrittr">package documentation for details</a>.</span></p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="8">
+<li id="fn8"><p>You might have noticed I sneaked something new in here: the call to <code>pander()</code>. This is from the <code>pander::</code> package, which contains is a useful set of functions function for when writing RMarkdown documents. They convert many R objects into more readable output: here it makes a nice table for us in the compiled document. We cover more tips and tricks for formatting RMarkdown documents in the chapter on <a href="sharing-and-publication.html#sharing-and-publication">sharing and publishing your data</a>. You might also want to check <a href="missing.html#missing">this page on missing values</a> to explain the filter which uses <code>!is.na()</code>, but you could equally leave this for later.<a href="a-generalised-approach.html#fnref8">↩</a></p></li>
+</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="importing-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="selecting-columns.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="quick-and-dirty.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="fancy-reshaping.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

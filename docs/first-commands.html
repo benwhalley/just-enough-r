@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="importing-data.html">
-<link rel="next" href="selecting-columns.html">
+<link rel="prev" href="rstudio.html">
+<link rel="next" href="variables.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -376,21 +376,40 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="working-with-dataframes" class="section level2 unnumbered">
-<h2>Working with dataframes</h2>
-<div id="tidyverse" class="section level3 unnumbered">
-<h3>Introducing the <code>tidyverse</code></h3>
-<p>R includes hundreds of built-in ways to select individual elements, rows or columns from a dataframe. This guide isn’t going to teach you many of them.</p>
-<p>The truth is that R can be overwhelming to new users, especially those new to programming. R is sometimes <em>too</em> powerful and flexible: there are too many different to accomplish the same end, and this can lead to confusion.</p>
-<p>Recently, a suite of packages has been developed for R which tries to provide a simple, consistent set of tools for working with data and graphics.</p>
-<p>This suite of packages is called the <em>tidyverse</em>, and you can load all of these packages by calling:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
-<p>In this guide we make much use of two components from the tidyverse:</p>
+<div id="first-commands" class="section level2 unnumbered">
+<h2>First commands</h2>
+<p>You can type R commands directly into the console and see the result there, but you should make a habit of working in an RMarkdown file. This keeps a record of everything you try, and makes it easy to edit/amend commands which don’t work as you expect.</p>
+<p>Now would be a good time to open an RMarkdown document to see how it works. A good place to start would be to open the source to this document. The best way to do this is to download the source code for the ‘Just Enough R’ project, and then open the file <code>start_here.Rmd</code>.</p>
+<div id="section-1" class="section level4 unnumbered exercise">
+<h4></h4>
+<p>The source for this RMarkdown file is available here: <a href="https://raw.githubusercontent.com/benwhalley/just-enough-r/master/start_here.Rmd" class="uri">https://raw.githubusercontent.com/benwhalley/just-enough-r/master/start_here.Rmd</a>.</p>
+<p>Or you can download the whole project here: <a href="https://github.com/benwhalley/just-enough-r/archive/master.zip" class="uri">https://github.com/benwhalley/just-enough-r/archive/master.zip</a>. This link downloads a ‘zip’ file, which is a compressed folder containing all the files in the project. To ‘unzip’ it on Mac or Windows just double-click the file in the Finder or Windows Explorer.</p>
+</div>
+<div id="section-2" class="section level4 unnumbered">
+<h4></h4>
+<p>To run code in the RStudio interface put your cursor on a line within an R Block (or select the code you want to run), and press <code>Ctrl-Enter</code>. The result will appear below the code block.</p>
+<p>The command in the R block below prints (shows on screen) the first few rows of the <code>mtcars</code> dataset, which is built in to R as an example.</p>
+<p>Place your cursor somewhere in the line the command is on and run it by typing <code>Ctrl-Enter</code>, shown in this brief video:</p>
+<iframe src="https://player.vimeo.com/video/225968925" width="640" height="480" frameborder="0">
+</iframe>
+<p>
+<a href="https://vimeo.com/225968925">Create an R block in RMarkdown, then run some simple commands.</a>
+</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(mtcars)
+##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre></div>
+<p>If you are reading this from within RStudio, running <code>head(mtcars)</code> will have included an interactive table in the document, which you can use this to view the <code>mtcars</code> dataset. If you are still reading the compiled html or pdf document you will see a table containing the same data, included within the body of the document.</p>
+<p>Hopefully at this point it’s obvious that RStudio and RMarkdown give you:</p>
 <ul>
-<li><code>dplyr</code>: to select, filter and summarise data</li>
-<li><code>ggplot2</code>: to make plots</li>
+<li>A nice place to work with R and explore your data</li>
+<li>A nice format to share your workings (e.g. with other researchers or your tutor)</li>
+<li>A mechanism to save reports of your analysis, to share with other people who don’t use RStudio</li>
 </ul>
-<p>It’s strongly recommended that you use these in your own code.</p>
 </div>
 </div>
             </section>
@@ -398,8 +417,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="importing-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="selecting-columns.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="rstudio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

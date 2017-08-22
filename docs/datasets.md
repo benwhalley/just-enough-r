@@ -242,7 +242,7 @@ Or slice it:
 
 
 
-[The problem with extracting individual columns in this way is that it's easy for data to be taken out of context: for example, if you sort individual columns then your data might get mixed up, leading to errors. In general if you are accessing individual columns of data in this way it's a sign your code may be brittle and vulnerable to errors. In later sections we introduce methods for working on the whole dataset, which tends to be safer.]{.admonition}
+[The problem with extracting individual columns in this way is that it's easy for data to be taken out of context: for example, if you sort individual columns then your data might get mixed up.  In general if you are accessing individual columns of data in this way it's a sign your code may be brittle and vulnerable to errors. In later sections we introduce methods for working on the whole dataset, which tends to be safer.]{.admonition}
 
 
 
@@ -258,7 +258,7 @@ Let's say we have file called `angry_moods.csv` in the same directory as our `.R
 
 
 [^readr]:
-  There are also standard functions built into R, such as `read.csv()` or `read.table()` for importing data. These are fine if you can't install the `readr` package for some reason, but they are quite old and the default behaviour is sometimes counterintuitive. I recommend using the `readr` equivalents: `readr::read_csv()` or `readr::read_tsv()`.
+  There are also standard functions built into R, such as `read.csv()` or `read.table()` for importing data. These are fine if you can't install the `readr` package for some reason, but they are quite old and the default behaviour is sometimes counterintuitive. I recommend using the `readr` equivalents: `read_csv()` or `read_tsv()`.
 
 
 

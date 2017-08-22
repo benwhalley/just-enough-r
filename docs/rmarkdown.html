@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="importing-data.html">
-<link rel="next" href="selecting-columns.html">
+<link rel="prev" href="r-basics.html">
+<link rel="next" href="rstudio.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -376,21 +376,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="working-with-dataframes" class="section level2 unnumbered">
-<h2>Working with dataframes</h2>
-<div id="tidyverse" class="section level3 unnumbered">
-<h3>Introducing the <code>tidyverse</code></h3>
-<p>R includes hundreds of built-in ways to select individual elements, rows or columns from a dataframe. This guide isn’t going to teach you many of them.</p>
-<p>The truth is that R can be overwhelming to new users, especially those new to programming. R is sometimes <em>too</em> powerful and flexible: there are too many different to accomplish the same end, and this can lead to confusion.</p>
-<p>Recently, a suite of packages has been developed for R which tries to provide a simple, consistent set of tools for working with data and graphics.</p>
-<p>This suite of packages is called the <em>tidyverse</em>, and you can load all of these packages by calling:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
-<p>In this guide we make much use of two components from the tidyverse:</p>
+<div id="rmarkdown" class="section level2 unnumbered">
+<h2>RMarkdown</h2>
+<p>This it might seem an odd place to start: we haven’t got anything to share yet!</p>
+<p>But the RStudio editor (<a href="rstudio.html#rstudio">see below</a>) includes important features which help us record and organise our work, and share it with colleagues. For many people this ability to keep a detailed record of your work, and revisit and review it later, turns out to be <em>the</em> major advantages of R over traditional statistics packages.</p>
+<p>You are currently reading the output of an ‘RMarkdown’ document.</p>
 <ul>
-<li><code>dplyr</code>: to select, filter and summarise data</li>
-<li><code>ggplot2</code>: to make plots</li>
+<li>R is a computer language designed for working with data.</li>
+<li>Markdown is a simple text-based format which can include prose, hypertext links, images, and code (see <a href="http://commonmark.org/help/" class="uri">http://commonmark.org/help/</a>).</li>
 </ul>
-<p>It’s strongly recommended that you use these in your own code.</p>
+<p>An RMarkdown document mixes R code with Markdown. This means you can combine your analysis with text that explains and interprets it. RMarkdown includes all the details neeed to reproduce an analysis.</p>
+<p>Like computer code, it can be ‘run’ or executed: in the language of RStudio, you ‘knit’ your RMarkdown to produce a finished document which combines analyses, graphs, and explanatory text in formats which can be shared.</p>
+<div id="writing-and-knitting-rmarkdown" class="section level4 unnumbered">
+<h4>Writing and ‘knitting’ RMarkdown</h4>
+<p>To include R code within RMarkdown we write 3 backticks (<code>```</code>), followed by <code>{r}</code>. We the include our R code, and close the block with 3 more backticks (<a href="getting-help.html#backtick-location">how to find the backtick on your keyboard</a>).</p>
+<div class="figure">
+<img src="media/r-code-chunk.png" alt="A code chunk in the RMarkdown editor" />
+<p class="caption">A code chunk in the RMarkdown editor</p>
+</div>
+<p>When a document including this chunk is run or ‘knitted’, the final result will include the the line <code>2+2</code> followed by the number <code>4</code> on the next line. We can use RMarkdown to ‘show our workings’: our analysis can be interleaved with narrative text to explain or interpret the calculations.</p>
 </div>
 </div>
             </section>
@@ -398,8 +402,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="importing-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="selecting-columns.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="r-basics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="rstudio.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
