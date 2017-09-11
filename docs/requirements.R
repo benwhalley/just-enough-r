@@ -39,6 +39,7 @@ pkgs <- c(
   'cowplot',
   'data.table',
   'devtools',
+  'DAAG',
   'DiagrammeR', 
   'DiagrammeRsvg',
   'ez',

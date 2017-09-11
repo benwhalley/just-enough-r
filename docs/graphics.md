@@ -17,8 +17,6 @@ output:
 <!-- TODO ADD @matejka2017sameand dino plots -->
 
 
-
-
 Graphics are the best thing about R. The base system alone provides lots of useful plotting functions, but the `ggplot2` package is exceptional in the consistent and powerful approach it takes to visualising data. This chapter focusses mostly on `ggplot`, but does include some pointers to other useful plotting functions.
 
 
@@ -177,13 +175,15 @@ mtcars %>%
 
 ##### Step 2: Map variables to axes, colours, and other features {-}
 
-Step 2 is to map the variables we want to axes or other features of the plot (e.g. the colours of points, or the linetypes used in line plots).
+Next we need to 'map' columns in our data to the X and Y axes, or other features of the plot (e.g. the colours of points, or the linetypes used in line plots).
 
-The specify these mappings we use the `aes()` function, which is slightly cryptic, but short for 'aesthetics mapping'. Depending on the plot type you will specify different aesthetics, and they can also have different effects depending on the plot type, but you will commonly specify:
+The specify these mappings we use the `aes()` function. The name is slightly cryptic, but short for 'aesthetics mapping'. 
 
-- `x` the variable to use as the x axis
-- `y` the variable to use as the y axis
-- `colour`: the variable to use to colour points or lines
+Depending on the plot type you will specify different aesthetics, and they can also have different effects depending on the plot type, but you will commonly specify:
+
+- `x`: the variable to use as the x axis
+- `y`: variable to use as the y axis
+- `colour`: which is the variable to use to colour points or lines (if you want blocks of solid colour, use `fill`)
 
 Here we tell `ggplot` to use `disp` (engine size) on the x axis, and `mpg` on the y axis. We also tell it to colour the points differently depending on the value of `hp` (engine horsepower). 
 
@@ -386,6 +386,8 @@ Or we might want to compare individuals against the combined distribution:
 sleep.repeat <- bind_rows(lme4::sleepstudy,
                           lme4::sleepstudy %>% mutate(Subject="All"))
 ## Warning in bind_rows_(x, .id): binding factor and character vector,
+## coercing into character vector
+## Warning in bind_rows_(x, .id): binding character and factor vector,
 ## coercing into character vector
 
 sleep.repeat %>% 

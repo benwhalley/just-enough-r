@@ -32,9 +32,11 @@ One of the biggest adjustments people need to make when moving away from SPSS or
 
 ## RMarkdown {- #rmarkdown}
 
-This it might seem an odd place to start: we haven't got anything to share yet! 
+A major weakness of traditional GUI stats packages is that there is no simple way to document and share your analyses, and so repeating or editing your work later is very hard.
 
-But the RStudio editor ([see below](#rstudio)) includes important features which help us record and organise our work, and share it with colleagues. For many people this ability to keep a detailed record of your work, and revisit and review it later, turns out to be *the* major advantages of R over traditional statistics packages.
+RMarkdown is a format for documenting and sharing statistical analyses, and is one of the first things we learn in this guide.
+This it might seem an odd place to start the guide: we haven't got anything to share yet!  But RMarkdown provides a really nice way to work with data interactively, and share results, and so it's worth starting as we mean to go on.
+
 
 You are currently reading the output of an 'RMarkdown' document. 
 
@@ -43,7 +45,8 @@ You are currently reading the output of an 'RMarkdown' document.
 
 An RMarkdown document mixes R code with Markdown. This means you can combine your analysis with text that explains and interprets it. RMarkdown includes all the details neeed to reproduce an analysis. 
 
-Like computer code, it can be 'run' or executed: in the language of RStudio, you 'knit' your RMarkdown to produce a finished document which combines analyses, graphs, and explanatory text in formats which can be shared. 
+Like computer code, RMarkdown can be 'run' or 'executed'. But in the language of RStudio, you 'knit' your RMarkdown to produce a finished document. This combines analyses, graphs, and explanatory text in a single pdf, html, or Word document which can be shared. 
+
 
 
 #### Writing and 'knitting' RMarkdown {-}
@@ -59,7 +62,7 @@ When a document including this chunk is run or 'knitted', the final result will 
 
 ## RStudio {- #rstudio}
 
-RStudio is a text editor which has been customised to make working with R easy. It can be installed on your own computer, or you can login to a shared RStudio server (for example, one run by your university) from a web browser. Either way the interface is largely the same.  
+RStudio is a text editor which has been customised to make working with R easy. It can be installed on your own computer, or you can login to a shared RStudio server (for example, one run by your university) from a web browser. Either way the interface is largely the same and contains 4 main panels:  
 
 
 <img src="media/rstudio-mainwindow.png" width="1495" />
@@ -172,7 +175,7 @@ Or you can download the whole project here: <https://github.com/benwhalley/just-
 
 To run code in the RStudio interface put your cursor on a line within an R Block (or select the code you want to run), and press `Ctrl-Enter`. The result will appear below the code block.
 
-The command in the R block below prints (shows on screen) the first few rows of the `mtcars` dataset, which is built in to R as an example. 
+The command in the R block below prints (shows on screen) the first few rows of the build-in `mtcars` example dataset. 
 
 Place your cursor somewhere in the line the command is on and run it by typing `Ctrl-Enter`, shown in this brief video:
 

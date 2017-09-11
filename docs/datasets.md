@@ -8,6 +8,8 @@ output:
 
 
 
+# (PART) Data {- #data}
+
 
 # Datasets and dataframes {#datasets-dataframes}
 
@@ -244,108 +246,6 @@ Or slice it:
 
 [The problem with extracting individual columns in this way is that it's easy for data to be taken out of context: for example, if you sort individual columns then your data might get mixed up.  In general if you are accessing individual columns of data in this way it's a sign your code may be brittle and vulnerable to errors. In later sections we introduce methods for working on the whole dataset, which tends to be safer.]{.admonition}
 
-
-
-
-
-
-
-## Importing and exporting data {- #importing-data}
-
-If you have data outside of R, *the simplest way to import it is to first save it as a comma or tab-separated text file*, normally with the file extension `.csv` or `.txt`^[This is easy to achieve in Excel and most other stats packages using the `Save As...` menu item].
-
-Let's say we have file called `angry_moods.csv` in the same directory as our `.Rmd` file. We can read this data using the `read_csv()` function from the `readr` package[^readr]:
-
-
-[^readr]:
-  There are also standard functions built into R, such as `read.csv()` or `read.table()` for importing data. These are fine if you can't install the `readr` package for some reason, but they are quite old and the default behaviour is sometimes counterintuitive. I recommend using the `readr` equivalents: `read_csv()` or `read_tsv()`.
-
-
-
-```r
-angry.moods <- readr::read_csv('data/angry_moods.csv')
-## Parsed with column specification:
-## cols(
-##   Gender = col_integer(),
-##   Sports = col_integer(),
-##   Anger.Out = col_integer(),
-##   Anger.In = col_integer(),
-##   Control.Out = col_integer(),
-##   Control.In = col_integer(),
-##   Anger.Expression = col_integer()
-## )
-head(angry.moods)
-## # A tibble: 6 x 7
-##   Gender Sports Anger.Out Anger.In Control.Out Control.In Anger.Expression
-##    <int>  <int>     <int>    <int>       <int>      <int>            <int>
-## 1      2      1        18       13          23         20               36
-## 2      2      1        14       17          25         24               30
-## 3      2      1        13       14          28         28               19
-## 4      2      1        17       24          23         23               43
-## 5      1      1        16       17          26         28               27
-## 6      1      1        16       22          25         23               38
-```
-
-
-
-As you can see, when loading the `.csv` file the `read_csv()` makes some assumptions about the *type*  of data the file contains. In this case, all the columns contain integer values. It's worth checking this message to make sure that stray cells in the file you are importing don't cause problems when importing. Excel won't complain about this sort of thing, but R is more strict and won't mix text and numbers in the same column.
-
-A common error is for stray notes or text values in a spreadsheet to cause a column which should be numeric to be converted to the `character` type.
-
-
-Once it's loaded, you can use this new dataset like any other:
-
-
-
-```r
-pairs(angry.moods)
-```
-
-<img src="datasets_files/figure-html/unnamed-chunk-14-1.png" width="672" />
-
-
-
-### Importing data over the web {- #importing-data-from-the-web}
-
-One neat feature of the `readr` package is that you can import data from the web, using a URL rather than a filename on your local computer. This can be really helpful when sharing data and code with colleagues. For example, we can load the `angry_moods.csv` file from a URL:
-
-
-
-```r
-angry.moods.from.url <- readr::read_csv(
-  "https://raw.githubusercontent.com/benwhalley/just-enough-r/master/angry_moods.csv")
-head(angry.moods.from.url)
-```
-
-
-
-
-### Importing from SPSS and other packages {- #importing-proprietary-formats}
-
-This is often more trouble than it's worth (just use a csv file!) but if you really must see <https://www.datacamp.com/community/tutorials/r-data-import-tutorial>.
-
-
-
-
-### Saving and exporting data {-}
-
-#### Saving for later use in R {-}
-
-If you are saving data to use again later in R, the best format is RDS. Saving files to RDS [is covered in a later section (click to see)](#rds-files).
-
-#### Saving for publication or sharing {-}
-
-If you want to share data with someone else, or open it in a different software package, using '.csv' format is strongly recommended.
-
-Saving a dataframe to .csv is as simple as:
-
-
-```r
-readr::write_csv(mtcars, 'mtcars.csv')
-```
-
-
-[You can also use the `write.csv()` function in base R, but this version from `readr` is faster and has more sensible defalts (e.g. it doesn't write rownames, but does save column names in the first row)]{.tip}
 
 
 

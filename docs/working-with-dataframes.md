@@ -112,9 +112,7 @@ You can also put a minus (`-`) sign in front of the column name to indicate whic
 
 
 ```r
-head(
-select(airquality, -Ozone, -Solar.R, -Wind)
-)
+head(select(airquality, -Ozone, -Solar.R, -Wind))
 ##   Temp Month Day
 ## 1   67     5   1
 ## 2   72     5   2
@@ -130,9 +128,7 @@ You can use a patterns to match a subset of the columns you want. For example, h
 
 
 ```r
-head(
-select(mtcars, contains("d"))
-)
+head(select(mtcars, contains("d")))
 ##                   disp drat
 ## Mazda RX4          160 3.90
 ## Mazda RX4 Wag      160 3.90
@@ -147,9 +143,7 @@ And you can combine these techniques to make more complex selections:
 
 
 ```r
-head(
-select(mtcars, contains("d"), -drat)
-)
+head(select(mtcars, contains("d"), -drat))
 ##                   disp
 ## Mazda RX4          160
 ## Mazda RX4 Wag      160
@@ -158,7 +152,6 @@ select(mtcars, contains("d"), -drat)
 ## Hornet Sportabout  360
 ## Valiant            225
 ```
-
 
 
 As a quick reference, you can use the following 'verbs' to select columns in different ways:
@@ -421,139 +414,6 @@ filter(mtcars, hp > 200 & (wt > 4 | cyl==8))
 
 
 
-## Pipes {-}
-
-We often want to combine `select` and `filter` (and other functions) to return a subset of our original data.
-
-As you might have noticed above, we can 'nest' function calls in R. For example, we might want to select specific columns and filter out some rows.
-
-Taking the `mtcars` data, we might want to select the weights of only those cars with low `mpg`:
-
-
-```r
-gas.guzzlers <- select(filter(mtcars, mpg < 15), wt)
-summary(gas.guzzlers)
-##        wt       
-##  Min.   :3.570  
-##  1st Qu.:3.840  
-##  Median :5.250  
-##  Mean   :4.686  
-##  3rd Qu.:5.345  
-##  Max.   :5.424
-```
-
-
-This is OK, but can get quite confusing to read, and the more deeply functions are nested the easier it is to make a mistake.
-
-
-### {- #pipes}
-
-> `dplyr` provides an alternative to nested function calls, called the pipe.
-
-Imagine your dataframe as a big bucket containing data. From this bucket, you can 'pour' your data down through a series of tubes and filters, until at the bottom of your screen you have a smaller bucket containing just the data you want.
-
-
-> Think of your data 'flowing' down the screen.
-
-To make data flow from one bucket to another, we use the 'pipe' operator: `%>%`
-
-
-```r
-big.bucket.of.data <- mtcars
-
-big.bucket.of.data %>%
-  filter(mpg <15) %>%
-  select(wt) %>%
-  summary
-##        wt       
-##  Min.   :3.570  
-##  1st Qu.:3.840  
-##  Median :5.250  
-##  Mean   :4.686  
-##  3rd Qu.:5.345  
-##  Max.   :5.424
-```
-
-
-So we have achieved the same outcome, but the code reads as a series of operations which the data flows through, connected by our pipes (the `%>%`). At the end of the last pipe, our data gets dumped into the `summary()` function^[You might notice that when we write the `select` function we don't explicitly name the dataframe to be used. This is because R *implicitly* passes the output of the pipe to the first argument of the function. So here, the output of `filter(mpg<15)` is used as the dataframe in the `select` function.]
-
-We could just as well have saved this smaller 'bucket' of data so we can use it later on:
-
-
-```r
-smaller.bucket <- big.bucket.of.data %>%
-  filter(mpg <15) %>%
-  select(wt)
-```
-
-
-This turns out to be an incredibly useful pattern when processing and working with data. We can pour data through a series of filters and other operations, saving intermediate states where necessary.
-
-
-[You can insert the `%>%` symbol in RStdudio by typing `cmd-shift-M`, which saves a lot of typing.]{.explainer}
-
-
-
-
-
-
-
-
-## Modifying and creating new columns {- #mutate}
-
-
-Often when working with data we want to compute new values from columns we already have. Let's say we have some data on the PHQ-9, which measures depression:
-
-
-```r
-phq9.df <- readr::read_csv("phq.csv")
-glimpse(phq9.df)
-## Observations: 2,429
-## Variables: 12
-## $ patient <int> 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, ...
-## $ phq9_01 <int> 3, 1, 1, 2, 2, 2, 3, 2, 3, 3, 1, 3, 2, 1, 2, 3, 3, 3, ...
-## $ phq9_02 <int> 3, 2, 2, 2, 3, 3, 3, 2, 3, 3, 1, 3, 2, 1, 3, 3, 3, 3, ...
-## $ phq9_03 <int> 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 2, 3, 3, ...
-## $ phq9_04 <int> 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, ...
-## $ phq9_05 <int> 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 2, 1, 2, ...
-## $ phq9_06 <int> 3, 2, 2, 2, 3, 3, 2, 1, 2, 3, 3, 3, 2, 1, 3, 3, 3, 3, ...
-## $ phq9_07 <int> 3, 3, 1, 1, 2, 1, 2, 2, 1, 3, 2, 2, 2, 2, 3, 2, 1, 1, ...
-## $ phq9_08 <int> 0, 2, 2, 1, 1, 1, 1, 2, 1, 3, 1, 2, 1, 0, 2, 1, 0, 1, ...
-## $ phq9_09 <int> 2, 2, 1, 1, 2, 2, 2, 1, 1, 3, 1, 2, 1, 1, 3, 3, 3, 3, ...
-## $ month   <int> 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 18, 0, 1,...
-## $ group   <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, ...
-```
-
-
-We want to calculate the PHQ-9 score for each patient, at each month. This is easy with `dplyr::mutate()`:
-
-
-```r
-phq9.scored.df <- phq9.df %>%
-mutate(phq9 = phq9_01 + phq9_02 + phq9_03 + phq9_04 +
-         phq9_05 + phq9_06 + phq9_07 + phq9_08 + phq9_09)
-
-phq9.scored.df %>%
-  select(patient, group, month, phq9) %>%
-  head
-## # A tibble: 6 x 4
-##   patient group month  phq9
-##     <int> <int> <int> <int>
-## 1       1     1     0    23
-## 2       2     0     0    21
-## 3       2     0     1    17
-## 4       2     0     2    18
-## 5       2     0     3    22
-## 6       2     0     4    21
-```
-
-Notice that we first stored the computed scores in `phq9.scored.df` and then used `select()` to get rid of the raw data columns to display only what we needed.
-
-See this section on [summarising and processing data](#split-apply-combine) for a [neater way to create summary scores](#mutate-with-rowmeans) in this sort of situation.
-
-
-
-
 
 
 ## Sorting {- #sorting}
@@ -628,73 +488,79 @@ airquality %>%
 
 
 
+## Pipes {-}
+
+We often want to combine `select` and `filter` (and other functions) to return a subset of our original data.
+
+As you might have noticed above, we can 'nest' function calls in R. For example, we might want to select specific columns and filter out some rows.
+
+Taking the `mtcars` data, we might want to select the weights of only those cars with low `mpg`:
+
+
+```r
+gas.guzzlers <- select(filter(mtcars, mpg < 15), wt)
+summary(gas.guzzlers)
+##        wt       
+##  Min.   :3.570  
+##  1st Qu.:3.840  
+##  Median :5.250  
+##  Mean   :4.686  
+##  3rd Qu.:5.345  
+##  Max.   :5.424
+```
+
+
+This is OK, but can get quite confusing to read, and the more deeply functions are nested the easier it is to make a mistake.
 
 
 
 
-## Reshaping {- #reshaping}
+### {- #pipes}
 
-<!-- <div style="width:100%;height:0;padding-bottom:75%;position:relative;"><iframe src="https://giphy.com/embed/J42u1BTrks9eU" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/funny-transformer-J42u1BTrks9eU">via GIPHY</a></p>
- -->
+#### `dplyr` provides an alternative to nested function calls, called the pipe. {-}
 
-This section will probably require more attention than any other in the guide, but will likely be the most useful thing you learn in R.
-
-
-As previously discussed, most things work best in R if you have data in *long format*. This means we prefer data that look like this:
+Imagine your dataframe as a big bucket containing data. From this bucket, you can 'pour' your data down through a series of tubes and filters, until at the bottom of your screen you have a smaller bucket containing just the data you want.
 
 
----------------------------
- person    time    outcome 
--------- -------- ---------
-   1      Time 1    22.22  
+> Think of your data 'flowing' down the screen.
 
-   2      Time 1    17.43  
-
-   3      Time 1    20.06  
-
-   1      Time 2    21.41  
-
-   2      Time 2    21.52  
-
-   3      Time 2    17.87  
-
-   1      Time 3    19.6   
-
-   2      Time 3    22.52  
-
-   3      Time 3    15.4   
-
-   1      Time 4    19.72  
-
-   2      Time 4    17.81  
-
-   3      Time 4    15.61  
----------------------------
+To make data flow from one bucket to another, we use the 'pipe' operator: `%>%`
 
 
+```r
+# dataframes are just 'buckets' of data
+big.bucket.of.data <- mtcars
 
-And NOT like this:
-
-
---------------------------------------------
- person   Time 1   Time 2   Time 3   Time 4 
--------- -------- -------- -------- --------
-   1      22.22    21.41     19.6    19.72  
-
-   2      17.43    21.52    22.52    17.81  
-
-   3      20.06    17.87     15.4    15.61  
---------------------------------------------
-
-
-
-In long format data:
-
-  - each row of the dataframe corresponds to a single measurement occasion
-  - each column corresponds to a variable which is measured
+big.bucket.of.data %>%
+  filter(mpg <15) %>%
+  select(wt) %>%
+  summary
+##        wt       
+##  Min.   :3.570  
+##  1st Qu.:3.840  
+##  Median :5.250  
+##  Mean   :4.686  
+##  3rd Qu.:5.345  
+##  Max.   :5.424
+```
 
 
-Fortunately it's fairly easy to move between the two formats, provided your variables are named in a consistent way.
+So we have achieved the same outcome, but the code reads as a series of operations which the data flows through, connected by our pipes (the `%>%`). At the end of the last pipe, our data gets dumped into the `summary()` function^[You might notice that when we write the `select` function we don't explicitly name the dataframe to be used. This is because R *implicitly* passes the output of the pipe to the first argument of the function. So here, the output of `filter(mpg<15)` is used as the dataframe in the `select` function.]
+
+We could just as well have saved this smaller 'bucket' of data so we can use it later on:
+
+
+```r
+smaller.bucket <- big.bucket.of.data %>%
+  filter(mpg <15) %>%
+  select(wt)
+```
+
+
+This turns out to be an incredibly useful pattern when processing and working with data. We can pour data through a series of filters and other operations, saving intermediate states where necessary.
+
+
+[You can insert the `%>%` symbol in RStdudio by typing `cmd-shift-M`, which saves a lot of typing.]{.explainer}
 
 
 
@@ -702,219 +568,62 @@ Fortunately it's fairly easy to move between the two formats, provided your vari
 
 
 
+## Modifying and creating new columns {- #mutate}
 
-#### Wide to long format {- #wide-to-long}
 
-This is the most common requirement. Often you will have several columns which actually measure the same thing, and you will need to convert these two two columns  - a 'key', and a value.
+Often when working with data we want to compute new values from columns we already have. 
 
-For example, let's say we measure patients on 10 days:
-
+Let's imagine we have collected data from patients using the [PHQ-9](http://www.nhs.uk/Tools/Documents/Mood%20self-assessment.htm) questionnaire, which [measures depression](http://onlinelibrary.wiley.com/doi/10.1046/j.1525-1497.2001.016009606.x/abstract):
 
 
 
 ```r
-sleep.wide %>% 
-  head(4) %>% 
-  pander(caption="Data for the first 4 subjects")
+phq9.df <- readr::read_csv("phq.csv")
+glimpse(phq9.df)
+## Observations: 2,429
+## Variables: 12
+## $ patient <int> 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, ...
+## $ phq9_01 <int> 3, 1, 1, 2, 2, 2, 3, 2, 3, 3, 1, 3, 2, 1, 2, 3, 3, 3, ...
+## $ phq9_02 <int> 3, 2, 2, 2, 3, 3, 3, 2, 3, 3, 1, 3, 2, 1, 3, 3, 3, 3, ...
+## $ phq9_03 <int> 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 2, 3, 3, ...
+## $ phq9_04 <int> 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, ...
+## $ phq9_05 <int> 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 2, 1, 2, ...
+## $ phq9_06 <int> 3, 2, 2, 2, 3, 3, 2, 1, 2, 3, 3, 3, 2, 1, 3, 3, 3, 3, ...
+## $ phq9_07 <int> 3, 3, 1, 1, 2, 1, 2, 2, 1, 3, 2, 2, 2, 2, 3, 2, 1, 1, ...
+## $ phq9_08 <int> 0, 2, 2, 1, 1, 1, 1, 2, 1, 3, 1, 2, 1, 0, 2, 1, 0, 1, ...
+## $ phq9_09 <int> 2, 2, 1, 1, 2, 2, 2, 1, 1, 3, 1, 2, 1, 1, 3, 3, 3, 3, ...
+## $ month   <int> 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 18, 0, 1,...
+## $ group   <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, ...
 ```
 
 
------------------------------------------------------------------------------------------
- Subject   Day.0   Day.1   Day.2   Day.3   Day.4   Day.5   Day.6   Day.7   Day.8   Day.9 
---------- ------- ------- ------- ------- ------- ------- ------- ------- ------- -------
-    1      249.6   258.7   250.8   321.4   356.9   414.7   382.2   290.1   430.6   466.4 
+Each patients' PHQ-9 score is calculated by summing all of the individual item scores. So - we want to create a new column containing the sum of each row.  This is fairly easy with the `dplyr::mutate()` function:
 
-    2      222.7   205.3    203    204.7   207.7    216    213.6   217.7   224.3   237.3 
-
-    3      199.1   194.3   234.3   232.8   229.3   220.5   235.4   255.8    261    247.5 
-
-    4      321.5   300.4   283.9   285.1   285.8   297.6   280.2   318.3   305.3    354  
------------------------------------------------------------------------------------------
-
-Table: Data for the first 4 subjects
-
-
-
-We want to convert RT measurements on each Day to a single variable, and create a new variable to keep track of what `Day` the measurement was taken:
-
-The `melt()` function in the `reshape2::` package does this for us:
 
 
 ```r
-library(reshape2)
-sleep.long <- sleep.wide %>% 
-  melt(id.var="Subject") %>%
-  arrange(Subject, variable)  
+phq9.scored.df <- phq9.df %>%
+mutate(phq9 = phq9_01 + phq9_02 + phq9_03 + phq9_04 +
+         phq9_05 + phq9_06 + phq9_07 + phq9_08 + phq9_09)
 
-sleep.long %>% 
-  head(12) %>% 
-  pander
+phq9.scored.df %>%
+  select(patient, group, month, phq9) %>%
+  head
+## # A tibble: 6 x 4
+##   patient group month  phq9
+##     <int> <int> <int> <int>
+## 1       1     1     0    23
+## 2       2     0     0    21
+## 3       2     0     1    17
+## 4       2     0     2    18
+## 5       2     0     3    22
+## 6       2     0     4    21
 ```
 
+Notice that we first stored the computed scores in `phq9.scored.df` and then used `select()` to get rid of the raw data columns to display only what we needed.
 
-----------------------------
- Subject   variable   value 
---------- ---------- -------
-    1       Day.0     249.6 
+See this section on [summarising and processing data](#split-apply-combine) for a [neater way to create summary scores](#mutate-with-rowmeans) in this sort of situation.
 
-    1       Day.1     258.7 
-
-    1       Day.2     250.8 
-
-    1       Day.3     321.4 
-
-    1       Day.4     356.9 
-
-    1       Day.5     414.7 
-
-    1       Day.6     382.2 
-
-    1       Day.7     290.1 
-
-    1       Day.8     430.6 
-
-    1       Day.9     466.4 
-
-    2       Day.0     222.7 
-
-    2       Day.1     205.3 
-----------------------------
-
-
-
-Here melt has created two new variable: `variable`, which keeps track of what was measured, and `value` which contains the score. This is the format we need when [plotting graphs](#graphics) and running [regression and Anova models](#linear-models-simple).
-
-
-
-#### Long to wide format {- #long-to-wide}
-
-To continue the example from above, these are long form data we just made:
-
-
-```r
-sleep.long %>% 
-  head(3) %>% 
-  pander(caption="First 3 rows in the long format dataset")
-```
-
-
-----------------------------
- Subject   variable   value 
---------- ---------- -------
-    1       Day.0     249.6 
-
-    1       Day.1     258.7 
-
-    1       Day.2     250.8 
-----------------------------
-
-Table: First 3 rows in the long format dataset
-
-We can convert these back to the original wide format using `dcast`, again in the `reshape2` package. The name of the `dcast` function indicates we can 'cast' a dataframe (the d prefix). So here, casting means the opposite of 'melting'.
-
-Using `dcast` is a little more fiddly than `melt` because we have to say *how* we want the data spread wide. In this example we could either have:
-
-- Columns for each day, with rows for each subject
-- Columns for each subject, with rows for each day
-
-Although it's obvious to us which we want, we have to be explicit. We do this using a [formula](#formulae), which we'll see again in the regression section. 
-
-Each formula has two sides, left and right, separated by the tilde (`~`) symbol. On the left hand side we say which variable we want to keep in rows. On the right hand side we say which variables to conver to columns. So, for example:
-
-
-```r
-# rows per subject, columns per day
-sleep.long %>%
-	dcast(Subject~variable) %>% 
-  head(3)
-##   Subject    Day.0    Day.1    Day.2    Day.3    Day.4    Day.5    Day.6
-## 1       1 249.5600 258.7047 250.8006 321.4398 356.8519 414.6901 382.2038
-## 2       2 222.7339 205.2658 202.9778 204.7070 207.7161 215.9618 213.6303
-## 3       3 199.0539 194.3322 234.3200 232.8416 229.3074 220.4579 235.4208
-##      Day.7    Day.8    Day.9
-## 1 290.1486 430.5853 466.3535
-## 2 217.7272 224.2957 237.3142
-## 3 255.7511 261.0125 247.5153
-```
-
-
-To compare, we can convert so each Subject has a column by reversing the formula:
-
-
-```r
-# note we select only the first 7 Subjects to 
-# keep the table to a manageable size
-sleep.long %>%
-  filter(Subject < 8) %>% 
-	dcast(variable~Subject)
-##    variable        1        2        3        4        5        6        7
-## 1     Day.0 249.5600 222.7339 199.0539 321.5426 287.6079 234.8606 283.8424
-## 2     Day.1 258.7047 205.2658 194.3322 300.4002 285.0000 242.8118 289.5550
-## 3     Day.2 250.8006 202.9778 234.3200 283.8565 301.8206 272.9613 276.7693
-## 4     Day.3 321.4398 204.7070 232.8416 285.1330 320.1153 309.7688 299.8097
-## 5     Day.4 356.8519 207.7161 229.3074 285.7973 316.2773 317.4629 297.1710
-## 6     Day.5 414.6901 215.9618 220.4579 297.5855 293.3187 309.9976 338.1665
-## 7     Day.6 382.2038 213.6303 235.4208 280.2396 290.0750 454.1619 332.0265
-## 8     Day.7 290.1486 217.7272 255.7511 318.2613 334.8177 346.8311 348.8399
-## 9     Day.8 430.5853 224.2957 261.0125 305.3495 293.7469 330.3003 333.3600
-## 10    Day.9 466.3535 237.3142 247.5153 354.0487 371.5811 253.8644 362.0428
-```
-
-
-
-###### {- .tip}
-One neat trick when casting is to use `paste` to  give your columns nicer names. So for example:
-
-
-```r
-sleep.long %>%
-  filter(Subject < 8) %>% 
-	dcast(variable~paste0("Participant.", Subject))
-##    variable Participant.1 Participant.2 Participant.3 Participant.4
-## 1     Day.0      249.5600      222.7339      199.0539      321.5426
-## 2     Day.1      258.7047      205.2658      194.3322      300.4002
-## 3     Day.2      250.8006      202.9778      234.3200      283.8565
-## 4     Day.3      321.4398      204.7070      232.8416      285.1330
-## 5     Day.4      356.8519      207.7161      229.3074      285.7973
-## 6     Day.5      414.6901      215.9618      220.4579      297.5855
-## 7     Day.6      382.2038      213.6303      235.4208      280.2396
-## 8     Day.7      290.1486      217.7272      255.7511      318.2613
-## 9     Day.8      430.5853      224.2957      261.0125      305.3495
-## 10    Day.9      466.3535      237.3142      247.5153      354.0487
-##    Participant.5 Participant.6 Participant.7
-## 1       287.6079      234.8606      283.8424
-## 2       285.0000      242.8118      289.5550
-## 3       301.8206      272.9613      276.7693
-## 4       320.1153      309.7688      299.8097
-## 5       316.2773      317.4629      297.1710
-## 6       293.3187      309.9976      338.1665
-## 7       290.0750      454.1619      332.0265
-## 8       334.8177      346.8311      348.8399
-## 9       293.7469      330.3003      333.3600
-## 10      371.5811      253.8644      362.0428
-```
-
-Notice we used `paste0` rather than `paste` to avoid spaces in variable names, which is allowed but can be a pain. [See more on working with character strings in a later section](#string-handling).
-
-
-
-
-##### {-}
-
-For a more detailed explanation and various other methods for reshaping data, see: http://r4ds.had.co.nz/tidy-data.html
-
-
-
-
-### Summarising and reshaping {-}
-
-
-One common trick when reshaping is to convert a datafile which has multiple rows and columns per person to one with only a single row. Although useful this isn't covered in this section, because it is combining two techniques:
-
-- Reshaping (i.e. from long to wide or back)
-- Aggregating or summarising (converting multiple rows to one)
-
-In the next section we cover [summarising data](#summarising-data), and introduce the 'split-apply-combine' method for summarising. Once you have a good grasp of this, you could check out the ['fancy reshaping' section](#fancy-reshaping) which does provide examples.
 
 
 

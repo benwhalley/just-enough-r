@@ -163,13 +163,13 @@ t.test(a, b, paired=TRUE)
 ## 	Paired t-test
 ## 
 ## data:  a and b
-## t = -3.7733, df = 49, p-value = 0.0004351
+## t = -3.3612, df = 49, p-value = 0.001511
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.7220555 -0.2202232
+##  -0.7333952 -0.1845678
 ## sample estimates:
 ## mean of the differences 
-##              -0.4711393
+##              -0.4589815
 ```
 
 
@@ -188,13 +188,13 @@ with(long.form.data, t.test(value~key, paired=TRUE))
 ## 	Paired t-test
 ## 
 ## data:  value by key
-## t = -3.7733, df = 49, p-value = 0.0004351
+## t = -3.3612, df = 49, p-value = 0.001511
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.7220555 -0.2202232
+##  -0.7333952 -0.1845678
 ## sample estimates:
 ## mean of the differences 
-##              -0.4711393
+##              -0.4589815
 ```
 
 
@@ -215,12 +215,12 @@ t.test(somedata, mu=2)
 ## 	One Sample t-test
 ## 
 ## data:  somedata
-## t = 0.84279, df = 49, p-value = 0.4034
+## t = 2.4607, df = 49, p-value = 0.01744
 ## alternative hypothesis: true mean is not equal to 2
 ## 95 percent confidence interval:
-##  1.774757 2.550637
+##  2.058378 2.578502
 ## sample estimates:
 ## mean of x 
-##  2.162697
+##   2.31844
 ```
 

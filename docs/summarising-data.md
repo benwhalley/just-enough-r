@@ -303,7 +303,7 @@ angry.moods %>%
     mean.anger.out=mean(Anger.Out), 
     sd.anger.out=sd(Anger.Out)
   )
-## # A tibble: 1 × 2
+## # A tibble: 1 x 2
 ##   mean.anger.out sd.anger.out
 ##            <dbl>        <dbl>
 ## 1       16.07692      4.21737
@@ -333,9 +333,8 @@ The first task is to organise our dataframe into the relevant groups. To do this
 angry.moods %>% 
   group_by(Gender) %>% 
   head
-## Source: local data frame [6 x 7]
-## Groups: Gender [2]
-## 
+## # A tibble: 6 x 7
+## # Groups:   Gender [2]
 ##   Gender Sports Anger.Out Anger.In Control.Out Control.In Anger.Expression
 ##    <int>  <int>     <int>    <int>       <int>      <int>            <int>
 ## 1      2      1        18       13          23         20               36
@@ -360,7 +359,7 @@ angry.moods %>%
   summarise(
     mean.anger.out=mean(Anger.Out)
   )
-## # A tibble: 2 × 2
+## # A tibble: 2 x 2
 ##   Gender mean.anger.out
 ##    <int>          <dbl>
 ## 1      1       16.56667
@@ -450,17 +449,17 @@ phq9.summary.df %>%
 ## --------------------------
 ##  month   group   phq.mean 
 ## ------- ------- ----------
-##    0       0     19.75904 
+##    0       0      19.76   
 ## 
-##    0       1     18.97368 
+##    0       1      18.97   
 ## 
-##    7       0     16.61818 
+##    7       0      16.62   
 ## 
-##    7       1     13.42056 
+##    7       1      13.42   
 ## 
-##   12       0     16.15385 
+##   12       0      16.15   
 ## 
-##   12       1     12.54082 
+##   12       1      12.54   
 ## --------------------------
 ```
 
@@ -472,7 +471,7 @@ You might have thought that typing out each variable in the above example (`phq9
 
 In general, if you find yourself typing something repetitive in R then there *will* a better way of doing it, and this is true here.
 
-Stepping back, *what we want is the row mean of all the variables starting with `phq9_0`*. We can write this more concisely like so:
+Stepping back, what we want is *the row mean of all the variables starting with `phq9_0`*. We can write this more concisely like so:
 
 
 ```r
@@ -481,18 +480,18 @@ phq9.df %>%
     select(phq9.df, starts_with("phq9_0"))
   )
 )
-## # A tibble: 2,429 × 13
+## # A tibble: 2,429 x 13
 ##    patient phq9_01 phq9_02 phq9_03 phq9_04 phq9_05 phq9_06 phq9_07 phq9_08
 ##      <int>   <int>   <int>   <int>   <int>   <int>   <int>   <int>   <int>
-## 1        1       3       3       3       3       3       3       3       0
-## 2        2       1       2       3       3       3       2       3       2
-## 3        2       1       2       3       2       3       2       1       2
-## 4        2       2       2       3       3       3       2       1       1
-## 5        2       2       3       3       3       3       3       2       1
-## 6        2       2       3       3       3       3       3       1       1
-## 7        2       3       3       3       3       3       2       2       1
-## 8        2       2       2       3       3       3       1       2       2
-## 9        2       3       3       3       3       3       2       1       1
+##  1       1       3       3       3       3       3       3       3       0
+##  2       2       1       2       3       3       3       2       3       2
+##  3       2       1       2       3       2       3       2       1       2
+##  4       2       2       2       3       3       3       2       1       1
+##  5       2       2       3       3       3       3       3       2       1
+##  6       2       2       3       3       3       3       3       1       1
+##  7       2       3       3       3       3       3       2       2       1
+##  8       2       2       2       3       3       3       1       2       2
+##  9       2       3       3       3       3       3       2       1       1
 ## 10       2       3       3       3       3       3       3       3       3
 ## # ... with 2,419 more rows, and 4 more variables: phq9_09 <int>,
 ## #   month <int>, group <int>, phq9 <dbl>
