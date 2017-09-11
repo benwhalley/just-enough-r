@@ -6,6 +6,8 @@ output:
 
 
 
+# (PART) Data {- #data}
+
 
 # 'Real' data {#real-data}
 
@@ -19,7 +21,7 @@ Most tutorials and textbooks use neatly formatted example datasets to illustrate
 - Incomplete, with values missing for many different reasons
 
 
-This chapter shows you how to address each of these problems.
+This chapter will give you techniques to address each of these problems.
 
 
 
@@ -827,7 +829,7 @@ restored.massive.df <-  readRDS('massive.RDS')
 
 
 
-## Dealing with multiple files {-}
+## Dealing with multiple files {- #multiple-raw-data-files}
 
 Oftentimes you will have multiple data files files (hopefully .csv format) to import and process - for example, those produced by experimental software like [PsychoPy](http://www.psychopy.org). This is one of the few times when you might have to do something resembling 'real programming', but it's still fairly straightforward.
 
@@ -932,25 +934,25 @@ raw.data %>%
 -------------------------------------------
  Condition   trial   time   person    RT   
 ----------- ------- ------ -------- -------
-     1         1      1       10     297.3 
+     2         7      2       15     346.6 
 
-     2        24      2       24     83.81 
+     3         5      2       30     321.5 
 
-     3        24      1       26     270.7 
+     4         7      2       41     256.1 
 
-     3         3      1       26     233.4 
+     3        18      1       27     247.5 
 
-     3        17      2       25     332.9 
+     2        24      1       19     172.6 
 
-     1        20      2       12     268.2 
+     1        21      1       4      198.5 
 
-     3        14      2       27     170.3 
+     1         2      1       5      345.1 
 
-     2         7      1       20     208.8 
+     4         9      1       43     227.9 
 
-     1        22      1       9      248.7 
+     3        13      1       36     354.1 
 
-     2        17      1       24     187.5 
+     3         5      1       32      225  
 -------------------------------------------
 
 
@@ -994,25 +996,25 @@ raw.data.with.paths %>%
 -------------------------------------------
  Condition   trial   time   person    RT   
 ----------- ------- ------ -------- -------
-     1        24      2       6      242.6 
+     2         2      1       16     231.3 
 
-     4        20      1       44      166  
+     4        22      1       38     302.7 
 
-     2         5      2       22     132.7 
+     4         8      1       40     181.5 
 
-     2         2      1       19     178.5 
+     2        17      1       21     192.5 
 
-     3        20      2       27     279.9 
+     4        15      2       38     121.5 
 
-     3         9      2       26     350.7 
+     3        22      1       34     271.8 
 
-     1         4      2       8      215.1 
+     1        22      1       1       177  
 
-     1         8      2       10     433.8 
+     3        13      1       36     354.1 
 
-     3         7      2       27     275.6 
+     4        23      1       38     161.1 
 
-     2        10      1       13     191.5 
+     4         9      1       44     217.5 
 -------------------------------------------
 
 Table: Table continues below
@@ -1021,25 +1023,25 @@ Table: Table continues below
 -----------------------------------------
                 filepath                 
 -----------------------------------------
- data/multiple-file-example/person6.csv  
+ data/multiple-file-example/person16.csv 
+
+ data/multiple-file-example/person38.csv 
+
+ data/multiple-file-example/person40.csv 
+
+ data/multiple-file-example/person21.csv 
+
+ data/multiple-file-example/person38.csv 
+
+ data/multiple-file-example/person34.csv 
+
+ data/multiple-file-example/person1.csv  
+
+ data/multiple-file-example/person36.csv 
+
+ data/multiple-file-example/person38.csv 
 
  data/multiple-file-example/person44.csv 
-
- data/multiple-file-example/person22.csv 
-
- data/multiple-file-example/person19.csv 
-
- data/multiple-file-example/person27.csv 
-
- data/multiple-file-example/person26.csv 
-
- data/multiple-file-example/person8.csv  
-
- data/multiple-file-example/person10.csv 
-
- data/multiple-file-example/person27.csv 
-
- data/multiple-file-example/person13.csv 
 -----------------------------------------
 
 

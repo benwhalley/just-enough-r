@@ -9,7 +9,7 @@ bibliography: bibliography.bib
 
 
 
-## Making predictions {- #predictions-and-margins}
+# Making predictions {#predictions-and-margins}
 
 
 
@@ -88,13 +88,6 @@ margins.plot <- inter.df %>%
     geom_line() + 
     ylab("Effect of being female")  + xlab("") +
     geom_hline(yintercept = 0)
-```
-
-```
-## Using severity.of.injury as value column: use value.var to override.
-```
-
-```r
 margins.plot
 ```
 
@@ -250,7 +243,7 @@ prediction.data
 ```
 
 ```
-## # A tibble: 4 × 2
+## # A tibble: 4 x 2
 ##   age.category gender
 ##          <chr>  <chr>
 ## 1        young   Male
@@ -299,19 +292,18 @@ mtcars.plus.predictions <- bind_cols(
   m.predictions %>% as_data_frame()
 )
 
-prediction.frame <- expand.grid(vs=0:1, wt=2) %>% as_data_frame()
+prediction.frame <- expand.grid(vs=0:1, wt=2) %>% 
+  as_data_frame()
+
 prediction.frame.plus.predictions <- bind_cols(
   prediction.frame,
   predict(m, newdata=prediction.frame, interval='confidence') %>% as_data_frame()
 )
 
 
-mtcars.plus.predictions %>% ggplot(aes(vs, fit, ymin=lwr, ymax=upr)) +
+mtcars.plus.predictions %>% 
+  ggplot(aes(vs, fit, ymin=lwr, ymax=upr)) +
   stat_summary(geom="pointrange")
-```
-
-```
-## No summary function supplied, defaulting to `mean_se()
 ```
 
 <img src="predictions-and-margins_files/figure-html/unnamed-chunk-13-1.png" width="672" />
@@ -329,9 +321,11 @@ prediction.frame.plus.predictions
 ```
 
 ```
-##   vs wt      fit      lwr      upr
-## 1  0  2 24.11860 21.61207 26.62514
-## 2  1  2 27.27297 25.57096 28.97499
+## # A tibble: 2 x 5
+##      vs    wt      fit      lwr      upr
+##   <int> <dbl>    <dbl>    <dbl>    <dbl>
+## 1     0     2 24.11860 21.61207 26.62514
+## 2     1     2 27.27297 25.57096 28.97499
 ```
 
 ```r
@@ -340,7 +334,7 @@ mtcars.plus.predictions %>% group_by(vs) %>%
 ```
 
 ```
-## # A tibble: 2 × 4
+## # A tibble: 2 x 4
 ##      vs      fit      lwr      upr
 ##   <dbl>    <dbl>    <dbl>    <dbl>
 ## 1     0 16.61667 14.93766 18.29568
@@ -366,19 +360,6 @@ Two ways of computing, depending on which of these two you hate least:
 ```r
 library(margins)
 margins(m, at = list(wt = 1:2))
-```
-
-```
-## Warning in check_values(data, at): A 'at' value for 'wt' is outside
-## observed data range (1.513,5.424)!
-```
-
-```
-## Average marginal effects at specified values
-```
-
-```
-## lm(formula = mpg ~ vs + wt, data = mtcars)
 ```
 
 ```
@@ -417,26 +398,19 @@ summary(m2)
 
 ```r
 m2.margins <- margins(m2, at = list(wt = 1.5:4.5))
-```
 
-```
-## Warning in check_values(data, at): A 'at' value for 'wt' is outside
-## observed data range (1.513,5.424)!
-```
-
-```r
 summary(m2.margins)
 ```
 
 ```
 ##  factor  wt     AME     SE       z      p   lower   upper
-##      vs 1.5  7.4021 2.0902  3.5414 0.0004  3.3054 11.4988
-##      vs 2.5  4.4924 1.2375  3.6303 0.0003  2.0670  6.9178
-##      vs 3.5  1.5827 1.2845  1.2321 0.2179 -0.9349  4.1003
-##      vs 4.5 -1.3270 2.1736 -0.6105 0.5415 -5.5871  2.9331
-##      wt 1.5 -4.7743 0.5853 -8.1569 0.0000 -5.9215 -3.6271
-##      wt 2.5 -4.7743 0.5854 -8.1563 0.0000 -5.9216 -3.6270
-##      wt 3.5 -4.7743 0.5854 -8.1560 0.0000 -5.9216 -3.6270
+##      vs 1.5  7.4021 2.0902  3.5413 0.0004  3.3054 11.4989
+##      vs 2.5  4.4924 1.2376  3.6299 0.0003  2.0667  6.9181
+##      vs 3.5  1.5827 1.2848  1.2319 0.2180 -0.9353  4.1008
+##      vs 4.5 -1.3270 2.1737 -0.6105 0.5416 -5.5874  2.9334
+##      wt 1.5 -4.7743 0.5854 -8.1560 0.0000 -5.9216 -3.6270
+##      wt 2.5 -4.7743 0.5854 -8.1556 0.0000 -5.9217 -3.6269
+##      wt 3.5 -4.7743 0.5854 -8.1562 0.0000 -5.9216 -3.6270
 ##      wt 4.5 -4.7743 0.5854 -8.1561 0.0000 -5.9216 -3.6270
 ```
 

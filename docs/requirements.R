@@ -45,15 +45,19 @@ pkgs <- c(
   'gapminder',
   'GGally',
   'granova',
+  'ggthemes',
+  'ggrepel',
   'gridExtra',
   'haven',
   'Hmisc',
+  'ggjoy',
   'knitr',
   'lavaan',
   'lmerTest',
   'lsr',
   'lubridate',
   'margins',
+  'mediation',
   'merTools',
   'mi',
   'mice',
@@ -80,8 +84,11 @@ install.packages(pkgs)
 
 
 
-devtools::install_github("hadley/colformat")
 devtools::install_github("ropenscilabs/skimr")
+devtools::install_github("mjskay/tidybayes")
+devtools::install_github("rmcelreath/rethinking")
+devtools::install_github('ralfer/apa_format_and_misc', subdir='apastats')
+
 
 # install dev version otherwise fails on R 3.3.3
 install.packages("MuMIn", repos="http://R-Forge.R-project.org")

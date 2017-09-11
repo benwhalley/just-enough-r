@@ -20,7 +20,7 @@ link-citations: yes
 
 
 
-#### Introduction
+# Introduction {-}
 
 R makes it easy to work with and learn from data. 
 

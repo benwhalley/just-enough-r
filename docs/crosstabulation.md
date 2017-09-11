@@ -26,7 +26,7 @@ lego.table
 ##   6 years    12   30
 ```
 
-We can easily run the inferential \chi^2^ (spelled "chi", but pronounced "kai"-squared) test on this table:
+We can easily run the inferential \chi^2^ (sometimes spelled "chi", but pronounced "kai"-squared) test on this table:
 
 
 
@@ -73,25 +73,24 @@ You can also use `table()` to get 3-way tables of frequencies. For example, usin
 with(mtcars, table(am, cyl, gear)) %>%
   as_data_frame() %>% 
   head() %>% 
-  pander()
+  pandoc.table()
+## 
+## ----------------------
+##  am   cyl   gear   n  
+## ---- ----- ------ ----
+##  0     4     3     1  
+## 
+##  1     4     3     0  
+## 
+##  0     6     3     2  
+## 
+##  1     6     3     0  
+## 
+##  0     8     3     12 
+## 
+##  1     8     3     0  
+## ----------------------
 ```
-
-
-----------------------
- am   cyl   gear   n  
----- ----- ------ ----
- 0     4     3     1  
-
- 1     4     3     0  
-
- 0     6     3     2  
-
- 1     6     3     0  
-
- 0     8     3     12 
-
- 1     8     3     0  
-----------------------
 
 
 

@@ -38,8 +38,9 @@ painmusic %>%
 ```r
 # set sum contrasts
 options(contrasts = c("contr.sum", "contr.poly"))
-
-pain.model <- lm(with.music ~ no.music + familiar*liked , data=painmusic)
+pain.model <- lm(with.music ~ 
+                   no.music + familiar * liked, 
+                 data=painmusic)
 summary(pain.model)
 ## 
 ## Call:
@@ -66,119 +67,18 @@ summary(pain.model)
 
 
 
+Do the same thing again, but with with MCMC using Stan:
+
+
 ```r
 library(rstanarm)
-## Loading required package: Rcpp
-## rstanarm (Version 2.15.3, packaged: 2017-04-29 06:18:44 UTC)
-## - Do not expect the default priors to remain the same in future rstanarm versions.
-## Thus, R scripts should specify priors explicitly, even if they are just the defaults.
-## - For execution on a local, multicore CPU with excess RAM we recommend calling
-## options(mc.cores = parallel::detectCores())
-
 options(contrasts = c("contr.sum", "contr.poly"))
-pain.model.mcmc <- stan_lm(with.music ~ no.music + familiar*liked , data=painmusic, prior=NULL)
-## 
-## SAMPLING FOR MODEL 'lm' NOW (CHAIN 1).
-## 
-## Gradient evaluation took 0.000629 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 6.29 seconds.
-## Adjust your expectations accordingly!
-## 
-## 
-## Iteration:    1 / 2000 [  0%]  (Warmup)
-## Iteration:  200 / 2000 [ 10%]  (Warmup)
-## Iteration:  400 / 2000 [ 20%]  (Warmup)
-## Iteration:  600 / 2000 [ 30%]  (Warmup)
-## Iteration:  800 / 2000 [ 40%]  (Warmup)
-## Iteration: 1000 / 2000 [ 50%]  (Warmup)
-## Iteration: 1001 / 2000 [ 50%]  (Sampling)
-## Iteration: 1200 / 2000 [ 60%]  (Sampling)
-## Iteration: 1400 / 2000 [ 70%]  (Sampling)
-## Iteration: 1600 / 2000 [ 80%]  (Sampling)
-## Iteration: 1800 / 2000 [ 90%]  (Sampling)
-## Iteration: 2000 / 2000 [100%]  (Sampling)
-## 
-##  Elapsed Time: 0.222017 seconds (Warm-up)
-##                0.267789 seconds (Sampling)
-##                0.489806 seconds (Total)
-## 
-## 
-## SAMPLING FOR MODEL 'lm' NOW (CHAIN 2).
-## 
-## Gradient evaluation took 1.4e-05 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 0.14 seconds.
-## Adjust your expectations accordingly!
-## 
-## 
-## Iteration:    1 / 2000 [  0%]  (Warmup)
-## Iteration:  200 / 2000 [ 10%]  (Warmup)
-## Iteration:  400 / 2000 [ 20%]  (Warmup)
-## Iteration:  600 / 2000 [ 30%]  (Warmup)
-## Iteration:  800 / 2000 [ 40%]  (Warmup)
-## Iteration: 1000 / 2000 [ 50%]  (Warmup)
-## Iteration: 1001 / 2000 [ 50%]  (Sampling)
-## Iteration: 1200 / 2000 [ 60%]  (Sampling)
-## Iteration: 1400 / 2000 [ 70%]  (Sampling)
-## Iteration: 1600 / 2000 [ 80%]  (Sampling)
-## Iteration: 1800 / 2000 [ 90%]  (Sampling)
-## Iteration: 2000 / 2000 [100%]  (Sampling)
-## 
-##  Elapsed Time: 0.200475 seconds (Warm-up)
-##                0.171597 seconds (Sampling)
-##                0.372072 seconds (Total)
-## 
-## 
-## SAMPLING FOR MODEL 'lm' NOW (CHAIN 3).
-## 
-## Gradient evaluation took 2e-05 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 0.2 seconds.
-## Adjust your expectations accordingly!
-## 
-## 
-## Iteration:    1 / 2000 [  0%]  (Warmup)
-## Iteration:  200 / 2000 [ 10%]  (Warmup)
-## Iteration:  400 / 2000 [ 20%]  (Warmup)
-## Iteration:  600 / 2000 [ 30%]  (Warmup)
-## Iteration:  800 / 2000 [ 40%]  (Warmup)
-## Iteration: 1000 / 2000 [ 50%]  (Warmup)
-## Iteration: 1001 / 2000 [ 50%]  (Sampling)
-## Iteration: 1200 / 2000 [ 60%]  (Sampling)
-## Iteration: 1400 / 2000 [ 70%]  (Sampling)
-## Iteration: 1600 / 2000 [ 80%]  (Sampling)
-## Iteration: 1800 / 2000 [ 90%]  (Sampling)
-## Iteration: 2000 / 2000 [100%]  (Sampling)
-## 
-##  Elapsed Time: 0.216848 seconds (Warm-up)
-##                0.27519 seconds (Sampling)
-##                0.492038 seconds (Total)
-## 
-## 
-## SAMPLING FOR MODEL 'lm' NOW (CHAIN 4).
-## 
-## Gradient evaluation took 4.3e-05 seconds
-## 1000 transitions using 10 leapfrog steps per transition would take 0.43 seconds.
-## Adjust your expectations accordingly!
-## 
-## 
-## Iteration:    1 / 2000 [  0%]  (Warmup)
-## Iteration:  200 / 2000 [ 10%]  (Warmup)
-## Iteration:  400 / 2000 [ 20%]  (Warmup)
-## Iteration:  600 / 2000 [ 30%]  (Warmup)
-## Iteration:  800 / 2000 [ 40%]  (Warmup)
-## Iteration: 1000 / 2000 [ 50%]  (Warmup)
-## Iteration: 1001 / 2000 [ 50%]  (Sampling)
-## Iteration: 1200 / 2000 [ 60%]  (Sampling)
-## Iteration: 1400 / 2000 [ 70%]  (Sampling)
-## Iteration: 1600 / 2000 [ 80%]  (Sampling)
-## Iteration: 1800 / 2000 [ 90%]  (Sampling)
-## Iteration: 2000 / 2000 [100%]  (Sampling)
-## 
-##  Elapsed Time: 0.244502 seconds (Warm-up)
-##                0.213128 seconds (Sampling)
-##                0.45763 seconds (Total)
-## Warning: There were 4 divergent transitions after warmup. Increasing adapt_delta above 0.95 may help. See
-## http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
-## Warning: Examine the pairs() plot to diagnose sampling problems
+pain.model.mcmc <- stan_lm(with.music ~ no.music + familiar * liked,
+                          data=painmusic, prior=NULL)
+```
+
+
+```r
 summary(pain.model.mcmc)
 ## 
 ## Model Info:
@@ -197,52 +97,53 @@ summary(pain.model.mcmc)
 ## no.music            0.7    0.1    0.6    0.7    0.7    0.8    0.9 
 ## familiar1           0.2    0.1   -0.1    0.1    0.2    0.3    0.5 
 ## liked1              0.3    0.1    0.0    0.2    0.3    0.4    0.6 
-## familiar1:liked1   -0.2    0.1   -0.4   -0.3   -0.2   -0.1    0.1 
+## familiar1:liked1   -0.2    0.1   -0.5   -0.3   -0.2   -0.1    0.1 
 ## sigma               1.5    0.1    1.3    1.4    1.5    1.5    1.7 
 ## log-fit_ratio       0.0    0.1   -0.1    0.0    0.0    0.0    0.1 
 ## R2                  0.5    0.1    0.4    0.4    0.5    0.5    0.6 
 ## mean_PPD            5.3    0.2    4.9    5.2    5.3    5.5    5.7 
-## log-posterior    -206.1    2.3 -211.6 -207.4 -205.8 -204.4 -202.6 
+## log-posterior    -205.9    2.3 -211.3 -207.3 -205.6 -204.3 -202.6 
 ## 
 ## Diagnostics:
 ##                  mcse Rhat n_eff
-## (Intercept)      0.0  1.0  1338 
-## no.music         0.0  1.0  1310 
+## (Intercept)      0.0  1.0  1176 
+## no.music         0.0  1.0  1156 
 ## familiar1        0.0  1.0  4000 
 ## liked1           0.0  1.0  4000 
-## familiar1:liked1 0.0  1.0  4000 
-## sigma            0.0  1.0  3657 
-## log-fit_ratio    0.0  1.0  1938 
-## R2               0.0  1.0  1626 
+## familiar1:liked1 0.0  1.0  3583 
+## sigma            0.0  1.0  2892 
+## log-fit_ratio    0.0  1.0  1718 
+## R2               0.0  1.0  1443 
 ## mean_PPD         0.0  1.0  4000 
-## log-posterior    0.1  1.0   940 
+## log-posterior    0.1  1.0  1025 
 ## 
 ## For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split chains (at convergence Rhat=1).
 ```
+
+
 
 
 ### Posterior probabilities for parameters {-}
 
 
 ```r
-params.of.interest <- 
-  pain.model.mcmc %>% 
-  as_data_frame() %>%
-  select(familiar1, liked1, `familiar1:liked1`) %>% 
-  reshape2::melt() 
-## No id variables; using all as measure variables
+library(bayesplot)
 
-params.of.interest %>% 
-    ggplot(aes(value, color=variable)) + 
-    geom_density() + 
-    geom_vline(xintercept = 0) +
-    scale_color_discrete("") +
-    xlab("Parameter value") + 
-    ylab("Posterior density") + 
-    theme(aspect.ratio = .5)
+mcmc_areas(as.matrix(pain.model.mcmc), regex_pars = 'familiar|liked', prob = .9)
 ```
 
-<img src="bayes-mcmc_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="bayes-mcmc_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+
+
+
+```r
+mcmc_intervals(as.matrix(pain.model.mcmc), regex_pars = 'familiar|liked', prob_outer = .9)
+```
+
+<img src="bayes-mcmc_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+
+
+
 
 
 ### Credible intervals {- #credible-intervals}
@@ -263,29 +164,36 @@ http://doingbayesiandataanalysis.blogspot.co.uk/2012/04/why-to-use-highest-densi
 
 
 ```r
-get_HPDI <- function(l){
+mHPDI <- function(l){
+  # median and HPDI
+  # this utility function used to return a dataframe, which is required when using 
+  # dplyr::do() below
   ci = rethinking::HPDI(l, prob=.95)
   data_frame(median=median(l), lower=ci[1], upper=ci[2])
 }
 
+params.of.interest <- 
+  pain.model.mcmc %>% 
+  as_tibble %>% 
+  reshape2::melt() %>% 
+  filter(stringr::str_detect(variable, "famil|liked")) %>% 
+  group_by(variable)
 
 params.of.interest %>% 
-  group_by(variable) %>% 
-  do(., get_HPDI(.$value)) %>% 
-  rename(Estimate=median) %>% 
-  pander::pandoc.table(caption="Estimates and 95% credible intervals for the effect of group 2 at months 6 and 12")
+  do(., mHPDI(.$value)) %>% 
+  pander::pandoc.table(caption="Estimates and 95% credible intervals for the parameters of interest")
 ## 
-## --------------------------------------------------
-##     variable      Estimate     lower      upper   
-## ---------------- ---------- ----------- ----------
-##    familiar1     0.1989966  -0.06631311 0.46888634
+## -------------------------------------------------
+##      variable       median     lower      upper  
+## ------------------ --------- ---------- ---------
+##     familiar1       0.1942    -0.07615   0.4441  
 ## 
-##      liked1      0.2976592  0.03733399  0.57809565
+##       liked1         0.299    0.02158    0.5685  
 ## 
-## familiar1:liked1 -0.1761959 -0.44440685 0.09406865
-## --------------------------------------------------
+##  familiar1:liked1   -0.1821   -0.4562    0.09123 
+## -------------------------------------------------
 ## 
-## Table: Estimates and 95% credible intervals for the effect of group 2 at months 6 and 12
+## Table: Estimates and 95% credible intervals for the parameters of interest
 ```
 
 
@@ -294,23 +202,56 @@ params.of.interest %>%
 
 ### Bayesian 'p values' for parameters {-}
 
+We can do simple arithmetic with the posterior draws to calculate the probability a parameter is greater than (or less than) zero:
 
 
 ```r
-params.of.interest %>% 
-  group_by(variable) %>% 
-  summarise(`p (x<0)` = mean(value < 0))
-## # A tibble: 3 × 2
-##           variable `p (x<0)`
-##             <fctr>     <dbl>
-## 1        familiar1   0.07225
-## 2           liked1   0.01425
-## 3 familiar1:liked1   0.90700
+params.of.interest %>%  
+  summarise(estimate=mean(value),
+            `p (x<0)` = mean(value < 0),
+            `p (x>0)` = mean(value > 0))
+## # A tibble: 3 x 4
+##           variable   estimate `p (x<0)` `p (x>0)`
+##             <fctr>      <dbl>     <dbl>     <dbl>
+## 1        familiar1  0.1954239   0.06725   0.93275
+## 2           liked1  0.2970875   0.01975   0.98025
+## 3 familiar1:liked1 -0.1808220   0.90250   0.09750
 ```
+
+
+Or if you'd like the Bayes Factor (evidence ratio) for one hypotheses vs another, for example comparing the hypotheses that a parameter is > vs. <= 0, then you can use the `hypothesis` function in the `brms` package:
+
+
+```r
+pain.model.mcmc.df <- 
+  pain.model.mcmc %>% 
+  as_tibble
+
+brms::hypothesis(pain.model.mcmc.df,  
+                 c("familiar1 > 0",
+                   "liked1 > 0",
+                   "familiar1:liked1 < 0"))
+## Hypothesis Tests for class :
+##                        Estimate Est.Error l-95% CI u-95% CI Evid.Ratio
+## (familiar1) > 0            0.20      0.13    -0.02      Inf      13.87
+## (liked1) > 0               0.30      0.14     0.07      Inf      49.63
+## (familiar1:liked1) < 0    -0.18      0.14     -Inf     0.05       9.26
+##                        Star
+## (familiar1) > 0            
+## (liked1) > 0              *
+## (familiar1:liked1) < 0     
+## ---
+## '*': The expected value under the hypothesis lies outside the 95% CI.
+```
+
+Here although we only have a 'significant' p value for one of the parameters, we can also see there is "very strong" evidence that familiarity also influences pain, and "strong" evidence for the interaction of familiarity and liking, according to [conventional rules of thumb when interpreting Bayes Factors](https://en.wikipedia.org/wiki/Bayes_factor#Interpretation).
+
+
 
 
 TODO - add a fuller explanation of why [multiple comparisons](#mutiple-comparisons) are not an issue for Bayesian analysis [@gelman2012we], because *p* values do not have the same interpretation in terms of long run frequencies of replication; they are a representation of the weight of the evidence in favour of a hypothesis.
 
+TODO: Also reference Zoltan Dienes Bayes paper.
 
 
 

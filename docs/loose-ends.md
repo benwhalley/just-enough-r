@@ -8,6 +8,5 @@ output:
 
 
 
-# R details
+# (PART) Loose Ends {-}
 
-This chapter contains some details omitted in the main text, covering how to install R and RStudio, and how to install and use useful packages.

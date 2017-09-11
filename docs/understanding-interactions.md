@@ -10,7 +10,7 @@ bibliography: bibliography.bib
 
 
 
-# Interactions {#understanding-interactions}
+## Interactions {- #understanding-interactions}
 
 
 Objectives of this section:
@@ -49,7 +49,7 @@ For an interaction to occur we have to show that, for example:
 
 
 
-## Visualising interactions from raw data  {-}
+### Visualising interactions from raw data  {-}
 
 In the previous section we established that interactions capture the idea that the *effect* of one predictor changes depending on the value of another predictor.
 
@@ -183,7 +183,7 @@ This plot doesn't include all of the information about the distribution of effec
 At this point, especially if your current data include only categorical predictors, you might want to move on to the section on [making predictions from models](predictions-and-margins.html) and visualising these.
 
 
-## Continuous predictors {-}
+### Continuous predictors {-}
 
 
 XXX TODO
