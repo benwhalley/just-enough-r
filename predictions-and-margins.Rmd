@@ -1,14 +1,12 @@
 ---
 title: 'Making predictions from models'
-output:
-  bookdown::tufte_html2
 bibliography: bibliography.bib
 ---
 
 ```{r, include=FALSE}
-# ignore all this for the moment
-knitr::opts_chunk$set(echo = TRUE, cache=T)
+knitr::opts_chunk$set(echo = TRUE, cache=T, message=F, warning=F)
 library(tidyverse)
+library(pander)
 library(tufte)
 library(ggthemes)
 
@@ -17,7 +15,7 @@ theme_set(theme_tufte(base_size = 18))
 
 
 
-## Making predictions {- #predictions-and-margins}
+# Making predictions {#predictions-and-margins}
 
 
 
@@ -46,7 +44,7 @@ Consider the example used in a previous section where we measured `injury.severi
 
 ```{r, echo=F}
 expand.grid(Age=c("Young", "Old"), Gender=c("Male", "Female")) %>% as_data_frame() %>% 
-  mutate(mean="?") %>% pander::pandoc.table()
+  mutate(mean="?") %>% pander()
 ```
 
 And as before, we might plot these data:
@@ -251,14 +249,17 @@ mtcars.plus.predictions <- bind_cols(
   m.predictions %>% as_data_frame()
 )
 
-prediction.frame <- expand.grid(vs=0:1, wt=2) %>% as_data_frame()
+prediction.frame <- expand.grid(vs=0:1, wt=2) %>% 
+  as_data_frame()
+
 prediction.frame.plus.predictions <- bind_cols(
   prediction.frame,
   predict(m, newdata=prediction.frame, interval='confidence') %>% as_data_frame()
 )
 
 
-mtcars.plus.predictions %>% ggplot(aes(vs, fit, ymin=lwr, ymax=upr)) +
+mtcars.plus.predictions %>% 
+  ggplot(aes(vs, fit, ymin=lwr, ymax=upr)) +
   stat_summary(geom="pointrange")
 ```
 

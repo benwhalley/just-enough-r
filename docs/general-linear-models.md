@@ -1,6 +1,6 @@
 ---
 title: 'General linear models'
-output: bookdown::tufte_html2
+
 ---
   
 
@@ -40,10 +40,7 @@ titanic %>%
   xlab("Ticket class")
 ```
 
-<div class="figure">
-<img src="general-linear-models_files/figure-html/unnamed-chunk-2-1.png" alt="Survival probabilities by Sex and ticket class." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-2)Survival probabilities by Sex and ticket class.</p>
-</div>
+![(\#fig:unnamed-chunk-2)Survival probabilities by Sex and ticket class.](general-linear-models_files/figure-latex/unnamed-chunk-2-1.pdf) 
 
 
 Given the plot above, it seems reasonable to predict survival from `Sex` and `Pclass`, and also to include the interaction between these variables. 
@@ -148,7 +145,7 @@ car::Anova(titanic.model, type=3)
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-[Note that the Anova table for a `glm` model provides \chi^2^ tests in place of F tests. Although they are calculated differently, you can interpret these \chi^2^ tests and *p* values as you would for F tests in a regular Anova.]{.explainer}
+[Note that the Anova table for a `glm` model provides $\chi^2$ tests in place of F tests. Although they are calculated differently, you can interpret these $\chi^2$ tests and *p* values as you would for F tests in a regular Anova.]{.explainer}
 
 
 
@@ -194,7 +191,7 @@ new.passengers %>%
   ylab("Probability of survival")
 ```
 
-<img src="general-linear-models_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+![](general-linear-models_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
 
 
 

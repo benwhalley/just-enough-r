@@ -1,64 +1,89 @@
+bibliography: [bibliography.bib]
+biblio-style: apalike
+link-citations: yes
+
 book_filename: "Just enough R"
 new_session: yes
 output_dir: "docs"
-
+delete_merged_file: true
 rmd_files:
 
-  [ "index.Rmd",
+  [
+    # GETTING STARTED
+    "index.Rmd",
     "start_here.Rmd",
 
-    "datasets.Rmd",
+
+    # PART DATA
+    "DATASETS.Rmd",
     "working-with-dataframes.Rmd",
+
     "real-data.Rmd",
+    "import-export.Rmd",
+    "column-types-and-missing.Rmd",
+    "tidy-data.Rmd",
+    "reshaping.Rmd",
     "summarising-data.Rmd",
-    "graphics.Rmd",
-    "graphics-ggplot-extras.Rmd",
+"fancy-reshaping.Rmd",
 
 
-    "basic-statistics.Rmd",
-    "crosstabulation.Rmd",
-    "correlations.Rmd",
-    "t-tests.Rmd",
+"graphics.Rmd",
+"graphics-ggplot-extras.Rmd",
+
+# "example.datasets.Rmd",
 
 
-    "linear-models.Rmd",
-    "anova.Rmd",
+# PART MODELS
+"MODELS.Rmd",
+"basic-statistics.Rmd",
+"crosstabulation.Rmd",
+"correlations.Rmd",
+"t-tests.Rmd",
+"linear-models.Rmd",
+"anova.Rmd",
+"general-linear-models.Rmd",
+"multilevel-models.Rmd",
+"mediation-and-covariance-models.Rmd",
+"cfa-sem.Rmd",
 
-    "understanding-interactions.Rmd",
-    "predictions-and-margins.Rmd",
+# "additional-stubs.Rmd",
+"bayes-mcmc.Rmd",
+"power-analysis.Rmd",
 
-    "general-linear-models.Rmd",
-    "mediation.Rmd",
-    "multilevel-models.Rmd",
-    "cfa-sem.Rmd",
-    "power-analysis.Rmd",
-    
-
-    # "additional-stubs.Rmd",
-    "bayes-mcmc.Rmd",
-
-    
-    "statistical-explanations.Rmd",
-    "confidence-vs-prediction-intervals.Rmd",
-    "multiple-comparisons.Rmd",
-    "clustering.Rmd",
-    "fixed-or-random.Rmd",
-    "link-functions.Rmd",
-    "over-fitting.Rmd",
-    "gof.Rmd",
+# PART Patterns
+"PATTERNS.Rmd",
+"interactions.Rmd",
+"predictions-and-margins.Rmd",
+"models-are-data.Rmd",
+"simplifying-and-reusing.Rmd",
 
 
-    "loose-ends.Rmd",
-    "installation.Rmd",
-    "packages.Rmd",
-    "rownames.Rmd",
-    "colours.Rmd",
-    "string-handling.Rmd",
-    "help.Rmd",
-    "functions.Rmd",
-    "example.datasets.Rmd",    
+# PART explanations
+"EXPLANATIONS.Rmd",
+"confidence-and-intervals.Rmd",
+"multiple-comparisons.Rmd",
+"clustering.Rmd",
+"fixed-or-random.Rmd",
+"link-functions.Rmd",
+"over-fitting.Rmd",
 
-    "sharing-and-publishing.Rmd",
+# PART everyday R
+"EVERYDAY.Rmd",
+"installation.Rmd",
+"packages.Rmd",
 
-    "references.Rmd"
+"quirks.Rmd",
+"string-handling.Rmd",
+"colours.Rmd",
+
+"help.Rmd",
+
+"sharing-and-publishing.Rmd",
+
+"writing-a-paper.Rmd",
+"cleaning-up-your-mess.Rmd",
+"making-table-1.Rmd",
+
+
+"references.Rmd"
   ]

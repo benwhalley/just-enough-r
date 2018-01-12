@@ -1,7 +1,5 @@
----
+--
 title: 'Summarising data'
-output: 
-  bookdown::tufte_html2
 ---
 
 
@@ -12,7 +10,7 @@ output:
 
 
 
-Before you begin this section, make sure you have fully understood the section on [datasets and dataframes](datasets.html), and in particular that you are happy using the `%>%` symbol to describe a flow of data.
+Before you begin this section, make sure you have fully understood the section on [datasets and dataframes](datasets.html), and in particular that you are happy using the `%>%` symbol to [describe a flow of data](#pipes).
 
 The chapter outlines several different approaches to obtaining summary statistics, and covers:
 
@@ -21,7 +19,9 @@ The chapter outlines several different approaches to obtaining summary statistic
 - Using `dplyr` as a generalisable tool to make any kind of summary
 
 
-In particular, we place an emphasis on functions *which return dataframes*, because this enables us to process and present our summaries in useful ways.
+In particular, we emphasise functions that *return dataframes*. 
+
+If a function returns a dataframe (rather than just printing output to the screen) then we can continue to process and present these results in useful ways.
 
 
 <!-- VIDEO COVERING THIS MATERIAL -->
@@ -32,13 +32,15 @@ In particular, we place an emphasis on functions *which return dataframes*, beca
 ## "Quick and dirty" {-}
 
 
-#### Using utility functions built into R {-}
+##### (Using utility functions built into R) {-}
 
 
 ### Frequency tables {- #frequency-tables}
 
 
-Let's say we ask 4 year olds and 6 year olds whether they prefer lego or duplo. We can use the `table()` command to get a cross tabulation of these `age` categories and what the child `prefers`. We wrap `table(...)` in the `with()` function to tell it which dataframe to use:
+Let's say we ask 4 year olds and 6 year olds whether they prefer lego or duplo. 
+
+We can use the `table()` command to get a cross tabulation of these `age` categories and what the child `prefers`. We wrap `table(...)` in the `with()` function to tell it which dataframe to use:
 
 
 
@@ -51,6 +53,40 @@ lego.table
 ##   4 years    38   20
 ##   6 years    12   30
 ```
+
+
+#### `xtab`
+
+`table` is a simple way of calculating frequencies, but you can also use the `xtabs` function to make more complex sumamries.
+
+`xtabs` uses a formula type syntax to describe the table ([formulas for linear models are explained here](#formulae)).
+
+In the simplest case, we just write a tilde symbol (`~`) and the the names of the variables we want to tablulate, separated with `+` symbols:
+
+
+```r
+xtabs(~age+prefers, lego.duplo.df)
+##          prefers
+## age       duplo lego
+##   4 years    38   20
+##   6 years    12   30
+```
+
+The order of the variables changes the orientation of the table:
+
+
+```r
+xtabs(~prefers+age, lego.duplo.df)
+##        age
+## prefers 4 years 6 years
+##   duplo      38      12
+##   lego       20      30
+```
+
+
+Tables like this are useful in their own right, but can also be passed to inferential tests, like [Chi squred](#crosstabs)
+
+
 
 
 
@@ -161,8 +197,36 @@ psych::describe(angry.moods, skew=FALSE) %>%
 ----------------------------------
 
 
+We can do the same with the output of [`table` or `xtabs`](#frequency-tables) too:
 
-##### Rownames are evil {.explainer}
+
+
+```r
+xtabs(~prefers+age, lego.duplo.df) %>%
+  as_data_frame %>%
+  pander(caption="Using `xtabs` to make a frequency table; converting to a dataframe for presentation using `pander`.")
+```
+
+
+------------------------
+ prefers     age     n  
+--------- --------- ----
+  duplo    4 years   38 
+
+  lego     4 years   20 
+
+  duplo    6 years   12 
+
+  lego     6 years   30 
+------------------------
+
+Table: Using `xtabs` to make a frequency table; converting to a dataframe for presentation using `pander`.
+
+
+
+
+
+##### Rownames are evil {- .explainer}
 
 Historically 'row names' were used on R to label individual rows in a dataframe. It turned out that this is generally a bad idea, because sorting and some summary functions would get very confused and mix up row names and the data itself.
 

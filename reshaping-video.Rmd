@@ -1,7 +1,5 @@
 ---
 title: 'Reshaping video'
-output:
-  bookdown::tufte_html2
 ---
 
 

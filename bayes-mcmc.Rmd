@@ -1,11 +1,11 @@
 ---
 title: 'Bayesian linear modelling via MCMC'
-output: bookdown::tufte_html2
+
 ---
 
 
 ```{r, include=F}
-knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE, message=F, warning=F)
 
 library(tidyverse)
 library(pander)
@@ -15,11 +15,12 @@ library(lmerTest)
 
 
 
-# Baysian linear model fitting with MCMC {#bayes-mcmc}
+# Baysian model fitting {#bayes-mcmc}
 
+
+### Baysian fitting of linear models via MCMC methods {-}
 
 This is a minimal guide to fitting and interpreting regression and multilevel models via MCMC. For _much_ more detail, and a much more comprehensive introduction to modern Bayesian analysis see [Jon Kruschke's *Doing Bayesian Data Analysis*](http://www.indiana.edu/~kruschke/DoingBayesianDataAnalysis/).
-
 
 
 Let's revisit our [previous example which investigated the effect of familiar and liked music on pain perception](#pain-music-data):
@@ -40,39 +41,45 @@ painmusic %>%
 ```{r}
 # set sum contrasts
 options(contrasts = c("contr.sum", "contr.poly"))
-
-pain.model <- lm(with.music ~ no.music + familiar*liked , data=painmusic)
+pain.model <- lm(with.music ~ 
+                   no.music + familiar * liked, 
+                 data=painmusic)
 summary(pain.model)
 ```
 
 
-```{r}
-library(rstanarm)
 
+Do the same thing again, but with with MCMC using Stan:
+
+```{r, echo=T, results="hide"}
+library(rstanarm)
 options(contrasts = c("contr.sum", "contr.poly"))
-pain.model.mcmc <- stan_lm(with.music ~ no.music + familiar*liked , data=painmusic, prior=NULL)
+pain.model.mcmc <- stan_lm(with.music ~ no.music + familiar * liked,
+                          data=painmusic, prior=NULL)
+```
+
+```{r}
 summary(pain.model.mcmc)
 ```
+
+
 
 
 ### Posterior probabilities for parameters {-}
 
 ```{r}
-params.of.interest <- 
-  pain.model.mcmc %>% 
-  as_data_frame() %>%
-  select(familiar1, liked1, `familiar1:liked1`) %>% 
-  reshape2::melt() 
+library(bayesplot)
 
-params.of.interest %>% 
-    ggplot(aes(value, color=variable)) + 
-    geom_density() + 
-    geom_vline(xintercept = 0) +
-    scale_color_discrete("") +
-    xlab("Parameter value") + 
-    ylab("Posterior density") + 
-    theme(aspect.ratio = .5)
+mcmc_areas(as.matrix(pain.model.mcmc), regex_pars = 'familiar|liked', prob = .9)
 ```
+
+
+```{r}
+mcmc_intervals(as.matrix(pain.model.mcmc), regex_pars = 'familiar|liked', prob_outer = .9)
+```
+
+
+
 
 
 ### Credible intervals {- #credible-intervals}
@@ -92,17 +99,24 @@ http://doingbayesiandataanalysis.blogspot.co.uk/2012/04/why-to-use-highest-densi
 -->
 
 ```{r}
-get_HPDI <- function(l){
+mHPDI <- function(l){
+  # median and HPDI
+  # this utility function used to return a dataframe, which is required when using 
+  # dplyr::do() below
   ci = rethinking::HPDI(l, prob=.95)
   data_frame(median=median(l), lower=ci[1], upper=ci[2])
 }
 
+params.of.interest <- 
+  pain.model.mcmc %>% 
+  as_tibble %>% 
+  reshape2::melt() %>% 
+  filter(stringr::str_detect(variable, "famil|liked")) %>% 
+  group_by(variable)
 
 params.of.interest %>% 
-  group_by(variable) %>% 
-  do(., get_HPDI(.$value)) %>% 
-  rename(Estimate=median) %>% 
-  pander::pandoc.table(caption="Estimates and 95% credible intervals for the effect of group 2 at months 6 and 12")
+  do(., mHPDI(.$value)) %>% 
+  pander::pandoc.table(caption="Estimates and 95% credible intervals for the parameters of interest")
 ```
 
 
@@ -111,16 +125,37 @@ params.of.interest %>%
 
 ### Bayesian 'p values' for parameters {-}
 
+We can do simple arithmetic with the posterior draws to calculate the probability a parameter is greater than (or less than) zero:
 
 ```{r}
-params.of.interest %>% 
-  group_by(variable) %>% 
-  summarise(`p (x<0)` = mean(value < 0))
+params.of.interest %>%  
+  summarise(estimate=mean(value),
+            `p (x<0)` = mean(value < 0),
+            `p (x>0)` = mean(value > 0))
 ```
+
+
+Or if you'd like the Bayes Factor (evidence ratio) for one hypotheses vs another, for example comparing the hypotheses that a parameter is > vs. <= 0, then you can use the `hypothesis` function in the `brms` package:
+
+```{r}
+pain.model.mcmc.df <- 
+  pain.model.mcmc %>% 
+  as_tibble
+
+brms::hypothesis(pain.model.mcmc.df,  
+                 c("familiar1 > 0",
+                   "liked1 > 0",
+                   "familiar1:liked1 < 0"))
+```
+
+Here although we only have a 'significant' p value for one of the parameters, we can also see there is "very strong" evidence that familiarity also influences pain, and "strong" evidence for the interaction of familiarity and liking, according to [conventional rules of thumb when interpreting Bayes Factors](https://en.wikipedia.org/wiki/Bayes_factor#Interpretation).
+
+
 
 
 TODO - add a fuller explanation of why [multiple comparisons](#mutiple-comparisons) are not an issue for Bayesian analysis [@gelman2012we], because *p* values do not have the same interpretation in terms of long run frequencies of replication; they are a representation of the weight of the evidence in favour of a hypothesis.
 
+TODO: Also reference Zoltan Dienes Bayes paper.
 
 
 

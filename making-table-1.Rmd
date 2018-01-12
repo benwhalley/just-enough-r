@@ -1,7 +1,5 @@
 ---
 title: 'Making "Table 1"'
-output: 
-  bookdown::tufte_html2
 ---
 
 
@@ -14,10 +12,10 @@ library(reshape2)
 library(broom)
 library(pander)
 ```
+ 
 
 
-
-## Making "Table 1" {#table1}
+## "Table 1" {- #table1}
 
 Table 1 in reports of clinical trials and many psychological studies reports characteristics of the sample. Typically, you will want to present information collected at baseline, split by experimental groups, including:
 
@@ -182,6 +180,8 @@ And we can print to markdown format for outputting. This is best done in a separ
 table1 %>% 
   # split.tables argument needed to avoid the table wrapping
   pander(split.tables=Inf,
+         missing="-",
+         justify=c("left", "left", rep("center", 5)),
          caption='Table presenting baseline differences between conditions. Categorical variables tested with Pearson χ2, continuous variables with two-sample t-test.')
 ```
 

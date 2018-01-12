@@ -1,15 +1,11 @@
 ---
 title: 'Working with character strings'
-output: 
-  bookdown::tufte_html2
 ---
 
 
 ## Working with character strings {- #string-handling}
 
 ```{r, include=FALSE}
-# ignore all this for the moment
-
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 library(tidyverse)
 library(tufte)

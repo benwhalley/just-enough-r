@@ -1,7 +1,5 @@
 ---
 title: 'Crosstabulation'
-output: 
-  bookdown::tufte_html2
 ---
 
 
@@ -10,7 +8,7 @@ output:
 
 
 
-## Crosstabulations and \chi^2^ {- #crosstabs}
+## Crosstabulations and $\chi^2$ {- #crosstabs}
 
 
 We saw in a previous section [how to create a frequency table of one or more variables](#frequency-tables). Using that previous example, assume  we already have a crosstabulation of `age` and `prefers`
@@ -26,7 +24,7 @@ lego.table
 ##   6 years    12   30
 ```
 
-We can easily run the inferential \chi^2^ (sometimes spelled "chi", but pronounced "kai"-squared) test on this table:
+We can easily run the inferential $\chi^2$ (sometimes spelled "chi", but pronounced "kai"-squared) test on this table:
 
 
 
@@ -52,11 +50,13 @@ lego.test$statistic
 ##  11.86371
 ```
 
-Even nicer,  you can use R to write up your results for you in APA format!
+Even nicer,  you can use an R package to write up your results for you in APA format!
+
 
 
 ```r
-apa::apa(lego.test, print_n=T)
+library(apa)
+apa(lego.test, print_n=T)
 ## [1] "$\\chi^2$(1, n = 100) = 11.86, *p* < .001"
 ```
 
@@ -66,31 +66,128 @@ apa::apa(lego.test, print_n=T)
 
 ### Three-way tables {-}
 
-You can also use `table()` to get 3-way tables of frequencies. For example, using the `mtcars` dataset we create a 3-way table, and then convert the result to a dataframe so we can print the table nicely in RMarkdown using the `pandoc.table()` function.
+You can also use `table()` or `xtabs()` to get 3-way tables of frequencies (`xtabs` is probably better for this than `table`). 
+
+For example, using the `mtcars` dataset we create a 3-way table, and then convert the result to a dataframe. This means we can print the table nicely in RMarkdown using the `pander.table()` function, or process it further (e.g. by [sorting](#sorting) or [reshaping](#reshaping) it).
 
 
 ```r
-with(mtcars, table(am, cyl, gear)) %>%
+xtabs(~am+gear+cyl, mtcars) %>%
   as_data_frame() %>% 
-  head() %>% 
-  pandoc.table()
-## 
-## ----------------------
-##  am   cyl   gear   n  
-## ---- ----- ------ ----
-##  0     4     3     1  
-## 
-##  1     4     3     0  
-## 
-##  0     6     3     2  
-## 
-##  1     6     3     0  
-## 
-##  0     8     3     12 
-## 
-##  1     8     3     0  
-## ----------------------
+  pander()
 ```
+
+
+----------------------
+ am   gear   cyl   n  
+---- ------ ----- ----
+ 0     3      4    1  
+
+ 1     3      4    0  
+
+ 0     4      4    2  
+
+ 1     4      4    6  
+
+ 0     5      4    0  
+
+ 1     5      4    2  
+
+ 0     3      6    2  
+
+ 1     3      6    0  
+
+ 0     4      6    2  
+
+ 1     4      6    2  
+
+ 0     5      6    0  
+
+ 1     5      6    1  
+
+ 0     3      8    12 
+
+ 1     3      8    0  
+
+ 0     4      8    0  
+
+ 1     4      8    0  
+
+ 0     5      8    0  
+
+ 1     5      8    2  
+----------------------
+
+
+
+Often, you will want to present a table in a wider format than this, to aid comparisons between categories. For example, we might want our table to make it easy to compare between US and non-US cars for each different number of cylinders:
+
+
+
+```r
+xtabs(~am+gear+cyl, mtcars) %>%
+  as_data_frame() %>% 
+  reshape2::dcast(am+gear~paste(cyl, "Cylinders")) %>% 
+  pander()
+## Using n as value column: use value.var to override.
+```
+
+
+-----------------------------------------------------
+ am   gear   4 Cylinders   6 Cylinders   8 Cylinders 
+---- ------ ------------- ------------- -------------
+ 0     3          1             2            12      
+
+ 0     4          2             2             0      
+
+ 0     5          0             0             0      
+
+ 1     3          0             0             0      
+
+ 1     4          6             2             0      
+
+ 1     5          2             1             2      
+-----------------------------------------------------
+
+
+
+Or our primary question might be related to the effect of `am`, in which case we might prefer to incude separate columns for US and non-US cars:
+
+
+```r
+xtabs(~am+gear+cyl, mtcars) %>%
+  as_data_frame() %>% 
+  reshape2::dcast(gear+cyl~paste0("US=", am)) %>% 
+  pander()
+## Using n as value column: use value.var to override.
+```
+
+
+--------------------------
+ gear   cyl   US=0   US=1 
+------ ----- ------ ------
+  3      4     1      0   
+
+  3      6     2      0   
+
+  3      8     12     0   
+
+  4      4     2      6   
+
+  4      6     2      2   
+
+  4      8     0      0   
+
+  5      4     0      2   
+
+  5      6     0      1   
+
+  5      8     0      2   
+--------------------------
+
+
+
+
 
 
 

@@ -1,11 +1,8 @@
 ---
 title: 'Loading packages (Teaching an old dog new tricks)'
-output:
-  bookdown::tufte_html2
 ---
 
 ```{r, include=FALSE}
-# ignore all this for the moment; it will be explained below
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 library(tidyverse)
 theme_set(theme_minimal())
@@ -13,7 +10,7 @@ theme_set(theme_minimal())
 
 
 
-## Loading packages {- #packages}
+## Packages {- #packages}
 
 R has been around for a very long time, but has remained popular because it is easy for people to add new functions to it. 
 

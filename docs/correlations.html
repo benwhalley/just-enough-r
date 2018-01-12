@@ -135,9 +135,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="selecting-rows.html"><a href="selecting-rows.html"><i class="fa fa-check"></i>Selecting rows</a></li>
 <li class="chapter" data-level="" data-path="operators.html"><a href="operators.html"><i class="fa fa-check"></i>‘Operators’</a></li>
 <li class="chapter" data-level="" data-path="sorting.html"><a href="sorting.html"><i class="fa fa-check"></i>Sorting</a></li>
-<li class="chapter" data-level="" data-path="pipes.html"><a href="pipes.html"><i class="fa fa-check"></i>Pipes</a><ul>
-<li><a href="pipes.html#pipes"></a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="pipes.html"><a href="pipes.html"><i class="fa fa-check"></i>Pipes</a></li>
 <li class="chapter" data-level="" data-path="mutate.html"><a href="mutate.html"><i class="fa fa-check"></i>Modifying and creating new columns</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="real-data.html"><a href="real-data.html"><i class="fa fa-check"></i><b>3</b> ‘Real’ data</a><ul>
@@ -150,16 +148,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="saving-and-exporting.html"><a href="saving-and-exporting.html#archiving-publication-and-sharing"><i class="fa fa-check"></i>Archiving, publication and sharing</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="multiple-raw-data-files.html"><a href="multiple-raw-data-files.html"><i class="fa fa-check"></i>Dealing with multiple files</a></li>
+<li class="chapter" data-level="3.1" data-path="joining-different-datasets.html"><a href="joining-different-datasets.html"><i class="fa fa-check"></i><b>3.1</b> Joining different datasets</a></li>
 <li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html"><i class="fa fa-check"></i>Types of variable</a><ul>
 <li><a href="factors-and-numerics.html#differences-in-quantity-numeric-variables">Differences in <em>quantity</em>: numeric variables</a></li>
 <li><a href="factors-and-numerics.html#character-and-factor">Differences in <em>quality or kind</em></a></li>
+<li class="chapter" data-level="3.1.1" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html#factors-for-categorical-data"><i class="fa fa-check"></i><b>3.1.1</b> Factors for categorical data</a></li>
 <li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html#dates"><i class="fa fa-check"></i>Dates</a></li>
-<li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html#missing-values"><i class="fa fa-check"></i>Missing values</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="missing.html"><a href="missing.html"><i class="fa fa-check"></i>Missing values</a></li>
 <li class="chapter" data-level="" data-path="tidying-data.html"><a href="tidying-data.html"><i class="fa fa-check"></i>Tidying data</a></li>
 <li class="chapter" data-level="" data-path="reshaping.html"><a href="reshaping.html"><i class="fa fa-check"></i>Reshaping</a><ul>
-<li class="chapter" data-level="" data-path="reshaping.html"><a href="reshaping.html#summarising-and-reshaping"><i class="fa fa-check"></i>Summarising and reshaping</a></li>
+<li class="chapter" data-level="" data-path="reshaping.html"><a href="reshaping.html#aggregating-and-reshaping-at-the-same-time"><i class="fa fa-check"></i>Aggregating and reshaping at the same time</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="summarising-data.html"><a href="summarising-data.html"><i class="fa fa-check"></i><b>4</b> Summaries</a><ul>
@@ -169,7 +168,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#creating-a-data-frame-of-summary-statistics"><i class="fa fa-check"></i>Creating a data frame of summary statistics</a></li>
 <li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#computing-statistics-by-groups"><i class="fa fa-check"></i>Computing statistics by-groups</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="a-generalised-approach.html"><a href="a-generalised-approach.html"><i class="fa fa-check"></i>A generalised approach</a></li>
+<li class="chapter" data-level="" data-path="a-generalised-approach.html"><a href="a-generalised-approach.html"><i class="fa fa-check"></i>A generalised approach</a><ul>
+<li class="chapter" data-level="" data-path="a-generalised-approach.html"><a href="a-generalised-approach.html#fancy-reshaping"><i class="fa fa-check"></i>Fancy reshaping</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>5</b> Graphics</a><ul>
 <li class="chapter" data-level="" data-path="graphics-benefits.html"><a href="graphics-benefits.html"><i class="fa fa-check"></i>Benefits of visualising data</a></li>
@@ -198,7 +199,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6" data-path="example-datasets.html"><a href="example-datasets.html"><i class="fa fa-check"></i><b>6</b> Example datasets</a></li>
 <li class="part"><span><b>III Models</b></span></li>
 <li class="chapter" data-level="7" data-path="common-inferential-stats.html"><a href="common-inferential-stats.html"><i class="fa fa-check"></i><b>7</b> Common inferential statistics</a><ul>
-<li><a href="crosstabs.html#crosstabs">Crosstabulations and <sup>2</sup></a><ul>
+<li><a href="crosstabs.html#crosstabs">Crosstabulations and <span class="math inline">\(\chi^2\)</span></a><ul>
 <li class="chapter" data-level="" data-path="crosstabs.html"><a href="crosstabs.html"><i class="fa fa-check"></i>Three-way tables</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html"><i class="fa fa-check"></i>Correlations</a><ul>
@@ -273,6 +274,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="sem.html"><a href="sem.html"><i class="fa fa-check"></i>Structural eqution modelling (SEM)</a></li>
 <li class="chapter" data-level="" data-path="identification.html"><a href="identification.html"><i class="fa fa-check"></i>‘Identification’ in CFA and SEM</a></li>
 <li class="chapter" data-level="" data-path="cfa-sem-missing-data.html"><a href="cfa-sem-missing-data.html"><i class="fa fa-check"></i>Missing data</a></li>
+<li class="chapter" data-level="" data-path="gof.html"><a href="gof.html"><i class="fa fa-check"></i>Goodness of fit statistics in CFA</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html"><i class="fa fa-check"></i><b>13</b> Baysian model fitting</a><ul>
 <li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#baysian-fitting-of-linear-models-via-mcmc-methods"><i class="fa fa-check"></i>Baysian fitting of linear models via MCMC methods</a></li>
@@ -280,16 +282,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#credible-intervals"><i class="fa fa-check"></i>Credible intervals</a></li>
 <li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#bayesian-p-values-for-parameters"><i class="fa fa-check"></i>Bayesian ‘p values’ for parameters</a></li>
 </ul></li>
-<li class="part"><span><b>IV Loose Ends</b></span></li>
 <li class="chapter" data-level="14" data-path="power-analysis.html"><a href="power-analysis.html"><i class="fa fa-check"></i><b>14</b> Power analysis</a><ul>
 <li class="chapter" data-level="" data-path="power-analysis.html"><a href="power-analysis.html#for-most-inferential-statistics"><i class="fa fa-check"></i>For most inferential statistics</a></li>
 <li class="chapter" data-level="" data-path="power-analysis.html"><a href="power-analysis.html#for-multilevel-or-generalised-linear-models"><i class="fa fa-check"></i>For multilevel or generalised linear models</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html"><i class="fa fa-check"></i><b>15</b> Making predictions</a><ul>
+<li class="part"><span><b>IV Patterns</b></span></li>
+<li class="chapter" data-level="15" data-path="learning-key-patterns.html"><a href="learning-key-patterns.html"><i class="fa fa-check"></i><b>15</b> Learning key patterns</a></li>
+<li class="chapter" data-level="16" data-path="understanding-interactions.html"><a href="understanding-interactions.html"><i class="fa fa-check"></i><b>16</b> Unpicking interactions</a><ul>
+<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#what-is-an-interaction"><i class="fa fa-check"></i>What is an interaction?</a></li>
+<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#visualising-interactions-from-raw-data"><i class="fa fa-check"></i>Visualising interactions from raw data</a></li>
+<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#pain-music-data"><i class="fa fa-check"></i>A painful example</a></li>
+<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#continuous-predictors"><i class="fa fa-check"></i>Continuous predictors</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html"><i class="fa fa-check"></i><b>17</b> Making predictions</a><ul>
 <li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predictions-vs-margins"><i class="fa fa-check"></i>Predictions vs margins</a></li>
 <li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predicted-means"><i class="fa fa-check"></i>Predicted means</a></li>
 <li><a href="predictions-and-margins.html#effects-margins"><em>Effects</em> (margins)</a></li>
-<li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#continuous-predictors"><i class="fa fa-check"></i>Continuous predictors</a></li>
+<li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#continuous-predictors-1"><i class="fa fa-check"></i>Continuous predictors</a></li>
 <li><a href="predicted-means-and-margins-using-lm.html#predicted-means-and-margins-using-lm">Predicted means and margins using <code>lm()</code></a><ul>
 <li class="chapter" data-level="" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html"><i class="fa fa-check"></i>Running the model</a></li>
 <li class="chapter" data-level="" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html#making-predictions-for-means"><i class="fa fa-check"></i>Making predictions for means</a></li>
@@ -299,60 +308,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="predictions-with-continuous-covariates.html"><a href="predictions-with-continuous-covariates.html"><i class="fa fa-check"></i>Predictions with continuous covariates</a></li>
 <li class="chapter" data-level="" data-path="visualising-interactions.html"><a href="visualising-interactions.html"><i class="fa fa-check"></i>Visualising interactions</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="explanations.html"><a href="explanations.html"><i class="fa fa-check"></i><b>16</b> Explanations</a><ul>
-<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html"><i class="fa fa-check"></i>Interactions</a><ul>
-<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#what-is-an-interaction"><i class="fa fa-check"></i>What is an interaction?</a></li>
-<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#visualising-interactions-from-raw-data"><i class="fa fa-check"></i>Visualising interactions from raw data</a></li>
-<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#pain-music-data"><i class="fa fa-check"></i>A painful example</a></li>
-<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#continuous-predictors-1"><i class="fa fa-check"></i>Continuous predictors</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html"><i class="fa fa-check"></i>Confidence and Intervals</a><ul>
-<li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html#the-problem-with-confidence-intervals"><i class="fa fa-check"></i>The problem with confidence intervals</a></li>
-<li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html#forgetting-that-the-ci-depends-on-sample-size."><i class="fa fa-check"></i>Forgetting that the CI depends on sample size.</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html"><i class="fa fa-check"></i>Multiple comparisons</a><ul>
-<li><a href="multiple-comparisons.html#p-values-and-false-discoveries"><em>p</em> values and ‘false discoveries’</a></li>
-<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#multiple-tests-on-the-same-data"><i class="fa fa-check"></i>Multiple tests on the same data</a></li>
-<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#what-to-do-about-it"><i class="fa fa-check"></i>What to do about it?</a></li>
-<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#contrasts-examples"><i class="fa fa-check"></i>Practical examples</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i>Non-independence</a></li>
-<li class="chapter" data-level="" data-path="fixed-or-random.html"><a href="fixed-or-random.html"><i class="fa fa-check"></i>Fixed and random effects</a></li>
-<li class="chapter" data-level="" data-path="link-functions.html"><a href="link-functions.html"><i class="fa fa-check"></i>Link functions</a><ul>
-<li class="chapter" data-level="" data-path="link-functions.html"><a href="link-functions.html#logistic-link-function"><i class="fa fa-check"></i>Logistic regression</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html"><i class="fa fa-check"></i>Building and choosing models</a><ul>
-<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#like-maps-models-are-imperfect-but-useful"><i class="fa fa-check"></i>Like maps, models are imperfect but useful</a></li>
-<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#over-fitting"><i class="fa fa-check"></i>Overfitting/underfitting</a></li>
-<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#variable-selection"><i class="fa fa-check"></i>Choosing the ‘right variables’</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="gof.html"><a href="gof.html"><i class="fa fa-check"></i>Goodness of fit statistics in CFA</a></li>
-</ul></li>
-<li class="chapter" data-level="17" data-path="r-details.html"><a href="r-details.html"><i class="fa fa-check"></i><b>17</b> R in daily life</a><ul>
-<li class="chapter" data-level="" data-path="r-details.html"><a href="r-details.html#installation-intro"><i class="fa fa-check"></i>Installation</a></li>
-<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i>Loading packages</a></li>
-<li class="chapter" data-level="" data-path="rownames.html"><a href="rownames.html"><i class="fa fa-check"></i>Rownames are evil</a></li>
-<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html"><i class="fa fa-check"></i>Colours</a><ul>
-<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#picking-colours"><i class="fa fa-check"></i>Picking colours for plots</a></li>
-<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#named-colours"><i class="fa fa-check"></i>Named colours in R</a></li>
-<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#color-brewer"><i class="fa fa-check"></i>ColourBrewer with ggplot</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="string-handling.html"><a href="string-handling.html"><i class="fa fa-check"></i>Working with character strings</a><ul>
-<li class="chapter" data-level="17.0.1" data-path="string-handling.html"><a href="string-handling.html#searching-and-replacing"><i class="fa fa-check"></i><b>17.0.1</b> Searching and replacing</a></li>
-<li><a href="processing-vectors.html#paste">Using <code>paste</code> to make labels</a></li>
-<li><a href="string-handling.html#separate-and-extract">Fixing up <code>variable</code> after melting</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="getting-help.html"><a href="getting-help.html"><i class="fa fa-check"></i>Getting help</a><ul>
-<li class="chapter" data-level="" data-path="getting-help.html"><a href="getting-help.html#backtick-location"><i class="fa fa-check"></i>Finding the backtick on your keyboard</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="18" data-path="advanced-patterns.html"><a href="advanced-patterns.html"><i class="fa fa-check"></i><b>18</b> Advanced patterns</a><ul>
-<li class="chapter" data-level="" data-path="fancy-reshaping.html"><a href="fancy-reshaping.html"><i class="fa fa-check"></i>Fancy reshaping</a></li>
-</ul></li>
-<li class="chapter" data-level="19" data-path="models-are-data-too.html"><a href="models-are-data-too.html"><i class="fa fa-check"></i><b>19</b> Models are data too</a><ul>
-<li class="chapter" data-level="" data-path="extract-results-from-models.html"><a href="extract-results-from-models.html"><i class="fa fa-check"></i>Extracting results from models</a><ul>
-<li class="chapter" data-level="" data-path="extract-results-from-models.html"><a href="extract-results-from-models.html#broom"><i class="fa fa-check"></i>Save yourself some work: use a Broom</a></li>
-</ul></li>
+<li class="chapter" data-level="18" data-path="models-are-data-too.html"><a href="models-are-data-too.html"><i class="fa fa-check"></i><b>18</b> Models are data</a><ul>
+<li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#storing-models-in-variables"><i class="fa fa-check"></i>Storing models in variables</a></li>
+<li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#extract-results-from-models"><i class="fa fa-check"></i>Extracting results from models</a></li>
+<li><a href="models-are-data-too.html#poking-around-with-and">‘Poking around’ with <code>$</code> and <code>@</code></a></li>
+<li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#broom"><i class="fa fa-check"></i>Save work: use a Broom</a></li>
 <li class="chapter" data-level="" data-path="process-model-results.html"><a href="process-model-results.html"><i class="fa fa-check"></i>‘Processing’ results</a></li>
 <li class="chapter" data-level="" data-path="output-tables.html"><a href="output-tables.html"><i class="fa fa-check"></i>Printing tables</a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html"><i class="fa fa-check"></i>APA formatting for free</a><ul>
@@ -361,21 +321,62 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#anova-1"><i class="fa fa-check"></i>Anova</a></li>
 <li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#multilevel-models"><i class="fa fa-check"></i>Multilevel models</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html"><i class="fa fa-check"></i>Re-using code</a><ul>
+<li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html"><i class="fa fa-check"></i>Simplifying and re-using</a><ul>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html#helper-functions"><i class="fa fa-check"></i>Writing helper functions</a></li>
 <li><a href="code-reuse.html#ggplot-reuse">Re-using code with <code>ggplot</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html"><i class="fa fa-check"></i><b>20</b> Sharing, publishing and archiving</a><ul>
-<li class="chapter" data-level="" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html#publication"><i class="fa fa-check"></i>Tips for dead tree journals</a></li>
-<li class="chapter" data-level="20.0.1" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html#registering-your-predictions---register-predictions"><i class="fa fa-check"></i><b>20.0.1</b> Registering your predictions (- #register-predictions)</a></li>
-<li class="chapter" data-level="" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html#archiving-data"><i class="fa fa-check"></i>Archiving data</a></li>
+<li class="chapter" data-level="19" data-path="part-explanations.html"><a href="part-explanations.html"><i class="fa fa-check"></i><b>19</b> (PART) Explanations</a></li>
+<li class="chapter" data-level="20" data-path="intervals.html"><a href="intervals.html"><i class="fa fa-check"></i><b>20</b> Confidence and Intervals</a><ul>
+<li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html#the-problem-with-confidence-intervals"><i class="fa fa-check"></i>The problem with confidence intervals</a></li>
+<li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html#forgetting-that-the-ci-depends-on-sample-size."><i class="fa fa-check"></i>Forgetting that the CI depends on sample size.</a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="writing-paper.html"><a href="writing-paper.html"><i class="fa fa-check"></i><b>21</b> Writing a paper</a><ul>
+<li class="chapter" data-level="21" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html"><i class="fa fa-check"></i><b>21</b> Multiple comparisons</a><ul>
+<li><a href="multiple-comparisons.html#p-values-and-false-discoveries"><em>p</em> values and ‘false discoveries’</a></li>
+<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#multiple-tests-on-the-same-data"><i class="fa fa-check"></i>Multiple tests on the same data</a></li>
+<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#what-to-do-about-it"><i class="fa fa-check"></i>What to do about it?</a></li>
+<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#contrasts-examples"><i class="fa fa-check"></i>Practical examples</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>22</b> Non-independence</a></li>
+<li class="chapter" data-level="23" data-path="fixed-or-random.html"><a href="fixed-or-random.html"><i class="fa fa-check"></i><b>23</b> Fixed and random effects</a></li>
+<li class="chapter" data-level="24" data-path="link-functions.html"><a href="link-functions.html"><i class="fa fa-check"></i><b>24</b> Link functions</a><ul>
+<li class="chapter" data-level="" data-path="link-functions.html"><a href="link-functions.html#logistic-link-function"><i class="fa fa-check"></i>Logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html"><i class="fa fa-check"></i><b>25</b> Building and choosing models</a><ul>
+<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#like-maps-models-are-imperfect-but-useful"><i class="fa fa-check"></i>Like maps, models are imperfect but useful</a></li>
+<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#over-fitting"><i class="fa fa-check"></i>Overfitting/underfitting</a></li>
+<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#variable-selection"><i class="fa fa-check"></i>Choosing the ‘right variables’</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="part-loose-ends.html"><a href="part-loose-ends.html"><i class="fa fa-check"></i><b>26</b> (PART) Loose ends</a></li>
+<li class="chapter" data-level="27" data-path="r-details.html"><a href="r-details.html"><i class="fa fa-check"></i><b>27</b> R in daily life</a><ul>
+<li class="chapter" data-level="" data-path="installation-intro.html"><a href="installation-intro.html"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i>Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="quirks.html"><a href="quirks.html"><i class="fa fa-check"></i><b>28</b> Quirks of R</a><ul>
+<li class="chapter" data-level="" data-path="rownames.html"><a href="rownames.html"><i class="fa fa-check"></i>Rownames are evil</a></li>
+<li class="chapter" data-level="" data-path="string-handling.html"><a href="string-handling.html"><i class="fa fa-check"></i>Working with character strings</a><ul>
+<li class="chapter" data-level="28.0.1" data-path="string-handling.html"><a href="string-handling.html#searching-and-replacing"><i class="fa fa-check"></i><b>28.0.1</b> Searching and replacing</a></li>
+<li><a href="processing-vectors.html#paste">Using <code>paste</code> to make labels</a></li>
+<li><a href="string-handling.html#separate-and-extract">Fixing up <code>variable</code> after melting</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html"><i class="fa fa-check"></i>Colours</a><ul>
+<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#picking-colours"><i class="fa fa-check"></i>Picking colours for plots</a></li>
+<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#named-colours"><i class="fa fa-check"></i>Named colours in R</a></li>
+<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#color-brewer"><i class="fa fa-check"></i>ColourBrewer with ggplot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="getting-help.html"><a href="getting-help.html"><i class="fa fa-check"></i><b>29</b> Getting help</a><ul>
+<li class="chapter" data-level="" data-path="getting-help.html"><a href="getting-help.html#backtick-location"><i class="fa fa-check"></i>Finding the backtick on your keyboard</a></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html"><i class="fa fa-check"></i><b>30</b> Sharing, publishing and archiving</a><ul>
+<li class="chapter" data-level="" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html#publication"><i class="fa fa-check"></i>Tips for dead tree journals</a></li>
+<li class="chapter" data-level="30.0.1" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html#registering-your-predictions---register-predictions"><i class="fa fa-check"></i><b>30.0.1</b> Registering your predictions (- #register-predictions)</a></li>
+<li class="chapter" data-level="" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html#archiving-data"><i class="fa fa-check"></i>Archiving data</a></li>
+<li class="chapter" data-level="30.1" data-path="writing-paper.html"><a href="writing-paper.html"><i class="fa fa-check"></i><b>30.1</b> Writing a complete paper in RMarkdown</a></li>
 <li class="chapter" data-level="" data-path="raw-data-mess.html"><a href="raw-data-mess.html"><i class="fa fa-check"></i>Cleaning up the mess: dealing with raw data</a></li>
 <li class="chapter" data-level="" data-path="table1.html"><a href="table1.html"><i class="fa fa-check"></i>“Table 1”</a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>22</b> References</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
       </nav>
@@ -460,40 +461,212 @@ mycorrelations
 <p>For example, as part of exploring your data, you might want to know whether correlations you observe in one sample are similar to those from another sample, when using the same questions. For example, let’s say we ran a survey measuring variables from the theory of planned behaviour first in students, and later in older adults:</p>
 <p>We could run correlations for each sample separately:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corr.students &lt;-<span class="st"> </span><span class="kw">cor</span>(students)
-corr.general.population &lt;-<span class="st"> </span><span class="kw">cor</span>(general.population)</code></pre></div>
+corr.public &lt;-<span class="st"> </span><span class="kw">cor</span>(public)</code></pre></div>
 <p>And we could ‘eyeball’ both of these correlation matrices and try and spot patterns or differences between them, but this is quite hard:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corr.students
-##              behaviour intention    control social.norm    attitude
-## behaviour   1.00000000 0.5514765 0.64787078  0.07185587  0.13179743
-## intention   0.55147645 1.0000000 0.39427210  0.29790114  0.43847665
-## control     0.64787078 0.3942721 1.00000000  0.01687272  0.01370568
-## social.norm 0.07185587 0.2979011 0.01687272  1.00000000 -0.01055921
-## attitude    0.13179743 0.4384766 0.01370568 -0.01055921  1.00000000
-
-corr.general.population
-##             behaviour intention social.norm    attitude    control
-## behaviour   1.0000000 0.5380706  0.28230551  0.23129188 0.14128284
-## intention   0.5380706 1.0000000  0.35597308  0.37583454 0.29027483
-## social.norm 0.2823055 0.3559731  1.00000000 -0.08050561 0.01012182
-## attitude    0.2312919 0.3758345 -0.08050561  1.00000000 0.04880911
-## control     0.1412828 0.2902748  0.01012182  0.04880911 1.00000000</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corr.students <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre></div>
+<table style="width:100%;">
+<colgroup>
+<col width="23%" />
+<col width="15%" />
+<col width="15%" />
+<col width="13%" />
+<col width="18%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">behaviour</th>
+<th align="center">intention</th>
+<th align="center">control</th>
+<th align="center">social.norm</th>
+<th align="center">attitude</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>behaviour</strong></td>
+<td align="center">1.000</td>
+<td align="center">0.55</td>
+<td align="center">0.648</td>
+<td align="center">0.072</td>
+<td align="center">0.132</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>intention</strong></td>
+<td align="center">0.551</td>
+<td align="center">1.00</td>
+<td align="center">0.394</td>
+<td align="center">0.298</td>
+<td align="center">0.438</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>control</strong></td>
+<td align="center">0.648</td>
+<td align="center">0.39</td>
+<td align="center">1.000</td>
+<td align="center">0.017</td>
+<td align="center">0.014</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>social.norm</strong></td>
+<td align="center">0.072</td>
+<td align="center">0.30</td>
+<td align="center">0.017</td>
+<td align="center">1.000</td>
+<td align="center">-0.011</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>attitude</strong></td>
+<td align="center">0.132</td>
+<td align="center">0.44</td>
+<td align="center">0.014</td>
+<td align="center">-0.011</td>
+<td align="center">1.000</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corr.public <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>pander</code></pre></div>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="15%" />
+<col width="15%" />
+<col width="17%" />
+<col width="14%" />
+<col width="14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">behaviour</th>
+<th align="center">intention</th>
+<th align="center">social.norm</th>
+<th align="center">attitude</th>
+<th align="center">control</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>behaviour</strong></td>
+<td align="center">1.00</td>
+<td align="center">0.54</td>
+<td align="center">0.282</td>
+<td align="center">0.231</td>
+<td align="center">0.141</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>intention</strong></td>
+<td align="center">0.54</td>
+<td align="center">1.00</td>
+<td align="center">0.356</td>
+<td align="center">0.376</td>
+<td align="center">0.290</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>social.norm</strong></td>
+<td align="center">0.28</td>
+<td align="center">0.36</td>
+<td align="center">1.000</td>
+<td align="center">-0.081</td>
+<td align="center">0.010</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>attitude</strong></td>
+<td align="center">0.23</td>
+<td align="center">0.38</td>
+<td align="center">-0.081</td>
+<td align="center">1.000</td>
+<td align="center">0.049</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>control</strong></td>
+<td align="center">0.14</td>
+<td align="center">0.29</td>
+<td align="center">0.010</td>
+<td align="center">0.049</td>
+<td align="center">1.000</td>
+</tr>
+</tbody>
+</table>
 <p>But we could also simply <em>subtract</em> one matrix from the other to show the difference directly:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corr.students <span class="op">-</span><span class="st"> </span>corr.general.population
-##                behaviour   intention    control social.norm     attitude
-## behaviour    0.000000000  0.01340583 0.36556527 -0.15943601 -0.009485413
-## intention    0.013405830  0.00000000 0.03829902 -0.07793340  0.148201816
-## control      0.365565268  0.03829902 0.00000000  0.09737834  0.003583860
-## social.norm -0.159436010 -0.07793340 0.09737834  0.00000000 -0.059368315
-## attitude    -0.009485413  0.14820182 0.00358386 -0.05936832  0.000000000</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(corr.students <span class="op">-</span><span class="st"> </span>corr.public) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre></div>
+<table style="width:100%;">
+<colgroup>
+<col width="23%" />
+<col width="15%" />
+<col width="15%" />
+<col width="13%" />
+<col width="18%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">behaviour</th>
+<th align="center">intention</th>
+<th align="center">control</th>
+<th align="center">social.norm</th>
+<th align="center">attitude</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>behaviour</strong></td>
+<td align="center">0.000</td>
+<td align="center">0.013</td>
+<td align="center">0.366</td>
+<td align="center">-0.159</td>
+<td align="center">-0.009</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>intention</strong></td>
+<td align="center">0.013</td>
+<td align="center">0.000</td>
+<td align="center">0.038</td>
+<td align="center">-0.078</td>
+<td align="center">0.148</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>control</strong></td>
+<td align="center">0.366</td>
+<td align="center">0.038</td>
+<td align="center">0.000</td>
+<td align="center">0.097</td>
+<td align="center">0.004</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>social.norm</strong></td>
+<td align="center">-0.159</td>
+<td align="center">-0.078</td>
+<td align="center">0.097</td>
+<td align="center">0.000</td>
+<td align="center">-0.059</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>attitude</strong></td>
+<td align="center">-0.009</td>
+<td align="center">0.148</td>
+<td align="center">0.004</td>
+<td align="center">-0.059</td>
+<td align="center">0.000</td>
+</tr>
+</tbody>
+</table>
 <p>Now it’s much more obvious that the behaviour/control correlation differs between the samples (it’s higher in the students).</p>
-<p>The point here is not that this is an analysis you are likely to actually report (although you might find it useful when exploring the data), but rather to show that a correlation matrix, in common with the results of all the statistical tests we run, are themselves <em>just data points</em>. We can do whatever we like with our results — storing them in data frames to display later, or process as we need.</p>
-<p>In reality, if you wanted to test the difference in correlations (slopes) in two groups you probably want to use <a href="#regression">multiple regression</a>, and if you wanted to test a complex model like the theory of planned behaviour, you might consider <a href="cfa.html#cfa">CFA</a> and/or <a href="sem.html#sem">SEM</a>).</p>
+<p>The point here is not that this is an analysis you are likely to actually report — although you might find it useful when exploring the data and interpreting your findings.</p>
+<p>But rather this show that a correlation matrix, in common with the results of all the statistical tests we run, are themselves <em>just data points</em>. We can do whatever we like with our results — storing them in data frames to display later, or process as we need.</p>
+<p>In reality, if you wanted to test the difference in correlations (slopes) in two groups for one outcome variable you probably want to use <a href="#regression">multiple regression</a>, and if you wanted to test a complex model like the theory of planned behaviour, you might consider <a href="cfa.html#cfa">CFA</a> and/or <a href="sem.html#sem">SEM</a>).</p>
 </div>
 <div id="correlation-tables-for-publication" class="section level3 unnumbered">
 <h3>Tables for publication</h3>
 <div id="using-apatables" class="section level4 unnumbered">
 <h4>Using <code>apaTables</code></h4>
-<p>If you want to produce output tables for publication the <code>apaTables</code> package might be useful. This block saves an APA formatted correlation table to an <a href="Table1_APA.doc">external Word document like this</a>.</p>
+<p>If you want to produce nice correlation tables for publication the <code>apaTables</code> package might be useful. This block saves an APA formatted correlation table to an <a href="Table1_APA.doc">external Word document like this</a>.</p>
+<p>Note though, that the APA table format does encourage ‘star gazing’ to some degree. Try to avoid interpreting correlation tables solely based on the significance (or not) of the <em>r</em> values. The <code>pairs</code> or <code>corrgram</code> plots shown above are a much better summary of the data, and are can be just as compact.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(apaTables)
 <span class="kw">apa.cor.table</span>(airquality, <span class="dt">filename=</span><span class="st">&quot;Table1_APA.doc&quot;</span>, <span class="dt">show.conf.interval=</span>F)
 ## 
@@ -521,60 +694,241 @@ corr.general.population
 </div>
 <div id="by-hand" class="section level4 unnumbered">
 <h4>By hand</h4>
-<p>If you’re not bothered about strict APA format, you might still want to extract <em>r</em> and <em>p</em> values as dataframes which can then be saved to a csv and opened in excel, or converted to a table by some other means.</p>
-<p>You can do this by storing the <code>corr.test</code> output in a variable, and the accessing the <code>$r</code> and <code>$p</code> values within it:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mycorrelations &lt;-<span class="st"> </span>psych<span class="op">::</span><span class="kw">corr.test</span>(airquality)
-<span class="kw">write.csv</span>(mycorrelations<span class="op">$</span>p, <span class="dt">file=</span><span class="st">&quot;airquality-r-values.csv&quot;</span>)
-mycorrelations<span class="op">$</span>p 
-##                Ozone      Solar.R         Wind         Temp        Month
-## Ozone   0.000000e+00 0.0019724194 1.298162e-11 0.000000e+00 5.617870e-01
-## Solar.R 1.793109e-04 0.0000000000 1.000000e+00 7.517729e-03 1.000000e+00
-## Wind    9.272583e-13 0.4959552068 0.000000e+00 3.434076e-08 2.471060e-01
-## Temp    0.000000e+00 0.0007517729 2.641597e-09 0.000000e+00 7.231443e-07
-## Month   7.760010e-02 0.3663533509 2.745622e-02 6.026202e-08 0.000000e+00
-## Day     8.879425e-01 0.0702233769 7.387466e-01 1.076164e-01 9.221900e-01
-##               Day
-## Ozone   1.0000000
-## Solar.R 0.5617870
-## Wind    1.0000000
-## Temp    0.6456986
-## Month   1.0000000
-## Day     0.0000000
-mycorrelations<span class="op">$</span>r 
-##               Ozone     Solar.R        Wind       Temp        Month
-## Ozone    1.00000000  0.34834169 -0.60154653  0.6983603  0.164519314
-## Solar.R  0.34834169  1.00000000 -0.05679167  0.2758403 -0.075300764
-## Wind    -0.60154653 -0.05679167  1.00000000 -0.4579879 -0.178292579
-## Temp     0.69836034  0.27584027 -0.45798788  1.0000000  0.420947252
-## Month    0.16451931 -0.07530076 -0.17829258  0.4209473  1.000000000
-## Day     -0.01322565 -0.15027498  0.02718090 -0.1305932 -0.007961763
-##                  Day
-## Ozone   -0.013225647
-## Solar.R -0.150274979
-## Wind     0.027180903
-## Temp    -0.130593175
-## Month   -0.007961763
-## Day      1.000000000</code></pre></div>
-<p>You can also access the CI for each pariwise correlation as a table:</p>
+<p>If you’re not bothered about strict APA format, you might still want to extract <em>r</em> and <em>p</em> values as dataframes which can then be saved to a csv and opened in Excel, or converted to a table some other way.</p>
+<p>You can do this by storing the <code>corr.test</code> output in a variable, and the accessing the <code>$r</code> and <code>$p</code> values within it.</p>
+<p>First, we create the <code>corr.test</code> object:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mycorrelations &lt;-<span class="st"> </span>psych<span class="op">::</span><span class="kw">corr.test</span>(airquality)</code></pre></div>
+<p>Then extract the <em>r</em> values as a table:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mycorrelations<span class="op">$</span>r <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre></div>
+<table style="width:94%;">
+<colgroup>
+<col width="19%" />
+<col width="12%" />
+<col width="13%" />
+<col width="12%" />
+<col width="11%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Ozone</th>
+<th align="center">Solar.R</th>
+<th align="center">Wind</th>
+<th align="center">Temp</th>
+<th align="center">Month</th>
+<th align="center">Day</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Ozone</strong></td>
+<td align="center">1.000</td>
+<td align="center">0.348</td>
+<td align="center">-0.602</td>
+<td align="center">0.70</td>
+<td align="center">0.165</td>
+<td align="center">-0.013</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Solar.R</strong></td>
+<td align="center">0.348</td>
+<td align="center">1.000</td>
+<td align="center">-0.057</td>
+<td align="center">0.28</td>
+<td align="center">-0.075</td>
+<td align="center">-0.150</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Wind</strong></td>
+<td align="center">-0.602</td>
+<td align="center">-0.057</td>
+<td align="center">1.000</td>
+<td align="center">-0.46</td>
+<td align="center">-0.178</td>
+<td align="center">0.027</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Temp</strong></td>
+<td align="center">0.698</td>
+<td align="center">0.276</td>
+<td align="center">-0.458</td>
+<td align="center">1.00</td>
+<td align="center">0.421</td>
+<td align="center">-0.131</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Month</strong></td>
+<td align="center">0.165</td>
+<td align="center">-0.075</td>
+<td align="center">-0.178</td>
+<td align="center">0.42</td>
+<td align="center">1.000</td>
+<td align="center">-0.008</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Day</strong></td>
+<td align="center">-0.013</td>
+<td align="center">-0.150</td>
+<td align="center">0.027</td>
+<td align="center">-0.13</td>
+<td align="center">-0.008</td>
+<td align="center">1.000</td>
+</tr>
+</tbody>
+</table>
+<p>And we can also extract p values:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mycorrelations<span class="op">$</span>p <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre></div>
+<table style="width:89%;">
+<colgroup>
+<col width="19%" />
+<col width="11%" />
+<col width="13%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Ozone</th>
+<th align="center">Solar.R</th>
+<th align="center">Wind</th>
+<th align="center">Temp</th>
+<th align="center">Month</th>
+<th align="center">Day</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Ozone</strong></td>
+<td align="center">0.000</td>
+<td align="center">0.002</td>
+<td align="center">0.000</td>
+<td align="center">0.000</td>
+<td align="center">0.56</td>
+<td align="center">1.00</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Solar.R</strong></td>
+<td align="center">0.000</td>
+<td align="center">0.000</td>
+<td align="center">1.000</td>
+<td align="center">0.008</td>
+<td align="center">1.00</td>
+<td align="center">0.56</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Wind</strong></td>
+<td align="center">0.000</td>
+<td align="center">0.496</td>
+<td align="center">0.000</td>
+<td align="center">0.000</td>
+<td align="center">0.25</td>
+<td align="center">1.00</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Temp</strong></td>
+<td align="center">0.000</td>
+<td align="center">0.001</td>
+<td align="center">0.000</td>
+<td align="center">0.000</td>
+<td align="center">0.00</td>
+<td align="center">0.65</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Month</strong></td>
+<td align="center">0.078</td>
+<td align="center">0.366</td>
+<td align="center">0.027</td>
+<td align="center">0.000</td>
+<td align="center">0.00</td>
+<td align="center">1.00</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Day</strong></td>
+<td align="center">0.888</td>
+<td align="center">0.070</td>
+<td align="center">0.739</td>
+<td align="center">0.108</td>
+<td align="center">0.92</td>
+<td align="center">0.00</td>
+</tr>
+</tbody>
+</table>
+<p>Saving as a .csv is the same as for other dataframes:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.csv</span>(mycorrelations<span class="op">$</span>r, <span class="dt">file=</span><span class="st">&quot;airquality-r-values.csv&quot;</span>)</code></pre></div>
+<p>And can also access the CI for each pariwise correlation as a table:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mycorrelations<span class="op">$</span>ci <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">head</span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">pandoc.table</span>()
-## 
-## ----------------------------------------------
-##      &amp;nbsp;        lower    r     upper    p  
-## ----------------- ------- ------ ------- -----
-##  **Ozone-Slr.R**   0.17    0.35    0.5     0  
-## 
-##  **Ozone-Wind**    -0.71   -0.6   -0.47    0  
-## 
-##  **Ozone-Temp**    0.59    0.7    0.78     0  
-## 
-##  **Ozone-Month**  -0.018   0.17   0.34   0.078
-## 
-##   **Ozone-Day**    -0.2   -0.013  0.17   0.89 
-## 
-##  **Slr.R-Wind**    -0.22  -0.057  0.11    0.5 
-## ----------------------------------------------</code></pre></div>
+<span class="st">  </span><span class="kw">pander</span>(<span class="dt">caption=</span><span class="st">&quot;First 6 rows of the table of CI&#39;s for the correlation matrix.&quot;</span>)</code></pre></div>
+<table style="width:72%;">
+<caption>First 6 rows of the table of CI’s for the correlation matrix.</caption>
+<colgroup>
+<col width="25%" />
+<col width="12%" />
+<col width="12%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">lower</th>
+<th align="center">r</th>
+<th align="center">upper</th>
+<th align="center">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Ozone-Slr.R</strong></td>
+<td align="center">0.173</td>
+<td align="center">0.348</td>
+<td align="center">0.50</td>
+<td align="center">0.000</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Ozone-Wind</strong></td>
+<td align="center">-0.706</td>
+<td align="center">-0.602</td>
+<td align="center">-0.47</td>
+<td align="center">0.000</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Ozone-Temp</strong></td>
+<td align="center">0.591</td>
+<td align="center">0.698</td>
+<td align="center">0.78</td>
+<td align="center">0.000</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Ozone-Month</strong></td>
+<td align="center">-0.018</td>
+<td align="center">0.165</td>
+<td align="center">0.34</td>
+<td align="center">0.078</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Ozone-Day</strong></td>
+<td align="center">-0.195</td>
+<td align="center">-0.013</td>
+<td align="center">0.17</td>
+<td align="center">0.888</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Slr.R-Wind</strong></td>
+<td align="center">-0.217</td>
+<td align="center">-0.057</td>
+<td align="center">0.11</td>
+<td align="center">0.496</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div id="correlation-methods" class="section level3 unnumbered">

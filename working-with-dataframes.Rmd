@@ -1,16 +1,12 @@
 ---
 title: 'Working with dataframes'
-output: 
-  bookdown::tufte_html2
 ---
 
 
 ## Working with dataframes {- #working-with-dataframes}
 
 ```{r, include=FALSE}
-# ignore all this for the moment
-
-knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE, message=F)
 library(tidyverse)
 library(tufte)
 library(pander)
@@ -25,7 +21,7 @@ The truth is that R can be overwhelming to new users, especially those new to pr
 
 Recently, a suite of packages has been developed for R which tries to provide a simple, consistent set of tools for working with data and graphics.
 
-This suite of packages is called the *tidyverse*, and you can load all of these pacakges by calling:
+This suite of packages is called the *tidyverse*, and you can load all of these packages by calling:
 
 ```{r, echo=T, message=F}
 library(tidyverse)
@@ -88,9 +84,7 @@ You can also put a minus (`-`) sign in front of the column name to indicate whic
 
 
 ```{r}
-head(
-select(airquality, -Ozone, -Solar.R, -Wind)
-)
+head(select(airquality, -Ozone, -Solar.R, -Wind))
 ```
 
 
@@ -98,20 +92,15 @@ select(airquality, -Ozone, -Solar.R, -Wind)
 You can use a patterns to match a subset of the columns you want. For example, here we select all the columns where the name contains the letter `d`:
 
 ```{r}
-head(
-select(mtcars, contains("d"))
-)
+head(select(mtcars, contains("d")))
 ```
 
 
 And you can combine these techniques to make more complex selections:
 
 ```{r}
-head(
-select(mtcars, contains("d"), -drat)
-)
+head(select(mtcars, contains("d"), -drat))
 ```
-
 
 
 As a quick reference, you can use the following 'verbs' to select columns in different ways:
@@ -129,13 +118,15 @@ There are other commands too, but these are probably the most useful to begin wi
 
 ## Selecting rows {- #selecting-rows}
 
-To select particular rows from a dataframe, `dplyr` provides the very useful `filter()` function. Let's say we just want the 6-cylindered cars from the `mtcars` dataframe:
+To select particular rows from a dataframe, `dplyr` provides the `filter()` function. 
+
+If we only want to see the 6-cylindered cars from the `mtcars` dataframe:
 
 ```{r}
 filter(mtcars, cyl==6)
 ```
 
-Here we used the `filter` function to select rows matching a particular criteria: in this case, that `cyl==6`. We can match two criteria at once if needed[^notesonoperators]:
+The `filter` function selects rows matching criteria you set: in this case, that `cyl==6`. We can match two criteria at once if needed:
 
 ```{r}
 filter(mtcars, cyl==6 & gear==3)
@@ -148,7 +139,9 @@ filter(mtcars, cyl==6 & gear==3)
 <!-- <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/4TYv2PhG89A?rel=0" frameborder="0" allowfullscreen></iframe>
  -->
 
-In the two examples above we used two equals signs `==` to compare values. There are other operators we can use though to create other filters. Rather than describe them, the examples below demonstrate what each of them do:
+When selecting rows in the [example above](#selecting-rows) we used two equals signs `==` to compare values. 
+
+However, there are other operators we can use to create filters. Rather than describe them, the examples below demonstrate what each of them do.
 
 
 
@@ -172,15 +165,16 @@ filter(mtcars, cyl==6)
 
 You might have noted above that we write `==` rather than just `=` to define the criteria. This is because most programming languages, including R, use two `=` symbols to distinguish: *comparison* from *assignment*.
 
-Here we are doing comparison, so we use `==`. In R it's normal to use `<-` to assign variables, which avoids any ambiguity.
 
+
+###### Presence/absence {-}
 
 
 To test if a value is in a vector of suitable matches we can use: `%in%`:
 
 ```{r}
-0 %in% 1:10
 2 %in% 1:10
+100 %in% 1:10
 ```
 
 And, perhaps less obviously, we can test whether each value in a vector is in a second vector. This returns a vector of `TRUE/FALSE` values as long as the first list:
@@ -284,11 +278,54 @@ filter(mtcars, hp > 200 & (wt > 4 | cyl==8))
 
 
 
-## Pipes {-}
 
-We are often going to want to combine both `select` and `filter` to return a subset of our original data.
 
-As you might have noticed above, we can 'nest' function calls in R. For example, we might want to both select some columns and filter rows.
+## Sorting {- #sorting}
+
+You can sort dataframes with `arrange()`:
+
+```{r}
+airquality %>% 
+  arrange(Ozone) %>% 
+  head
+```
+
+
+By default sorting is ascending, but you can use a minus sign to reverse this:
+
+```{r}
+airquality %>% 
+  arrange(-Ozone) %>% 
+  head
+```
+
+
+You can sort on multiple columns too, but the order of the variables makes a difference:
+
+```{r}
+airquality %>% 
+  select(Month, Ozone) %>% 
+  arrange(Month, -Ozone) %>% 
+  head
+
+
+airquality %>% 
+  select(Month, Ozone) %>% 
+  arrange(-Ozone, Month) %>% 
+  head
+```
+
+
+
+
+
+
+
+## Pipes {- #pipes}
+
+We often want to combine `select` and `filter` (and other functions) to return a subset of our original data.
+
+As you might have noticed above, we can 'nest' function calls in R. For example, we might want to select specific columns and filter out some rows.
 
 Taking the `mtcars` data, we might want to select the weights of only those cars with low `mpg`:
 
@@ -301,18 +338,19 @@ summary(gas.guzzlers)
 This is OK, but can get quite confusing to read, and the more deeply functions are nested the easier it is to make a mistake.
 
 
-### {- #pipes}
 
-`dplyr` provides an alternative to nested function calls, called the pipe.
+#### `dplyr` provides an alternative to nested function calls, called the pipe. {-}
 
 Imagine your dataframe as a big bucket containing data. From this bucket, you can 'pour' your data down through a series of tubes and filters, until at the bottom of your screen you have a smaller bucket containing just the data you want.
 
 
-Think of your data 'flowing' down the screen.
+![Think of your data 'flowing' down the screen.](media/tubes.jpg)
+
 
 To make data flow from one bucket to another, we use the 'pipe' operator: `%>%`
 
 ```{r}
+# dataframes are just 'buckets' of data
 big.bucket.of.data <- mtcars
 
 big.bucket.of.data %>%
@@ -324,7 +362,7 @@ big.bucket.of.data %>%
 
 So we have achieved the same outcome, but the code reads as a series of operations which the data flows through, connected by our pipes (the `%>%`). At the end of the last pipe, our data gets dumped into the `summary()` function^[You might notice that when we write the `select` function we don't explicitly name the dataframe to be used. This is because R *implicitly* passes the output of the pipe to the first argument of the function. So here, the output of `filter(mpg<15)` is used as the dataframe in the `select` function.]
 
-We could just has well have saved this smaller 'bucket' of data so we can use it later on:
+We could just as well have saved this smaller 'bucket' of data so we can use it later on:
 
 ```{r}
 smaller.bucket <- big.bucket.of.data %>%
@@ -344,11 +382,13 @@ This turns out to be an incredibly useful pattern when processing and working wi
 
 
 
-
 ## Modifying and creating new columns {- #mutate}
 
 
-Often when working with data we want to compute new values from columns we already have. Let's say we have some data on the PHQ-9, which measures depression:
+Often when working with data we want to compute new values from columns we already have. 
+
+Let's imagine we have collected data from patients using the [PHQ-9](http://www.nhs.uk/Tools/Documents/Mood%20self-assessment.htm) questionnaire, which [measures depression](http://onlinelibrary.wiley.com/doi/10.1046/j.1525-1497.2001.016009606.x/abstract):
+
 
 ```{r}
 phq9.df <- readr::read_csv("phq.csv")
@@ -356,7 +396,8 @@ glimpse(phq9.df)
 ```
 
 
-We want to calculate the PHQ-9 score for each patient, at each month. This is easy with `dplyr::mutate()`:
+Each patients' PHQ-9 score is calculated by summing all of the individual item scores. So - we want to create a new column containing the sum of each row.  This is fairly easy with the `dplyr::mutate()` function:
+
 
 ```{r}
 phq9.scored.df <- phq9.df %>%
@@ -370,212 +411,8 @@ phq9.scored.df %>%
 
 Notice that we first stored the computed scores in `phq9.scored.df` and then used `select()` to get rid of the raw data columns to display only what we needed.
 
-See this section on [summarising and processing data](#split-apply-combine) for nice ways to create summary scores from questionnaires.
+See this section on [summarising and processing data](#split-apply-combine) for a [neater way to create summary scores](#mutate-with-rowmeans) in this sort of situation.
 
-
-
-
-
-
-## Sorting {- #sorting}
-
-Sorting data is easy with `dplyr::arrange()`:
-
-```{r}
-airquality %>% 
-  arrange(Ozone) %>% 
-  head
-```
-
-
-By default sorting is ascending, but you can use a minus sign to reverse this:
-
-```{r}
-airquality %>% 
-  arrange(-Ozone) %>% 
-  head
-```
-
-
-You can sort on multiple columns too:
-
-```{r}
-airquality %>% 
-  select(Month, Ozone) %>% 
-  arrange(Month, -Ozone) %>% 
-  head
-```
-
-
-
-
-
-
-
-
-
-
-
-## Reshaping {- #reshaping}
-
-<div style="width:100%;height:0;padding-bottom:75%;position:relative;"><iframe src="https://giphy.com/embed/J42u1BTrks9eU" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/funny-transformer-J42u1BTrks9eU">via GIPHY</a></p>
-
-
-This section will probably require more attention than any other in the guide, but will likely be the most useful thing you learn in R.
-
-
-As previously discussed, most things work best in R if you have data in *long format*. This means we prefer data that look like this:
-
-```{r, echo=F}
-d <- expand.grid(person=1:3, time=paste("Time", 1:4)) %>%
-  mutate(outcome = rnorm(n(), 20, 3)) 
-d %>% pander
-```
-
-
-
-And NOT like this:
-
-```{r, echo=F}
-d %>% 
-  reshape2::dcast(person~time, value.var = "outcome") %>% 
-  pander
-```
-
-
-
-In long format data:
-
-  - each row of the dataframe corresponds to a single measurement occasion
-  - each column corresponds to a variable which is measured
-
-
-Fortunately it's fairly easy to move between the two formats, provided your variables are named in a consistent way.
-
-
-
-
-
-
-
-
-#### Wide to long format {- #wide-to-long}
-
-This is the most common requirement. Often you will have several columns which actually measure the same thing, and you will need to convert these two two columns  - a 'key', and a value.
-
-For example, let's say we measure patients on 10 days:
-
-```{r, include=F}
-sleep.wide <- lme4::sleepstudy %>%
-	reshape2::dcast(Subject~paste0("Day.", Days), value.var = "Reaction") %>% 
-  mutate(Subject=as.numeric(Subject)) %>% 
-  arrange(Subject) 
-
-saveRDS(sleep.wide, 'data/sleep.wide.RDS')
-```
-
-```{r}
-sleep.wide %>% 
-  head(4) %>% 
-  pander(caption="Data for the first 4 subjects")
-```
-
-
-
-We want to convert RT measurements on each Day to a single variable, and create a new variable to keep track of what `Day` the measurement was taken:
-
-The `melt()` function in the `reshape2::` package does this for us:
-
-```{r}
-library(reshape2)
-sleep.long <- sleep.wide %>% 
-  melt(id.var="Subject") %>%
-  arrange(Subject, variable)  
-
-sleep.long %>% 
-  head(12) %>% 
-  pander
-```
-```{r include=F}
-saveRDS(sleep.long, 'data/sleep.long.RDS')
-```
-
-
-Here melt has created two new variable: `variable`, which keeps track of what was measured, and `value` which contains the score. This is the format we need when [plotting graphs](#graphics) and running [regression and Anova models](#linear-models-simple).
-
-
-
-#### Long to wide format {- #long-to-wide}
-
-To continue the example from above, these are long form data we just made:
-
-```{r}
-sleep.long %>% 
-  head(3) %>% 
-  pander(caption="First 3 rows in the long format dataset")
-```
-
-We can convert these back to the original wide format using `dcast`, again in the `reshape2` package. The name of the `dcast` function indicates we can 'cast' a dataframe (the d prefix). So here, casting means the opposite of 'melting'.
-
-Using `dcast` is a little more fiddly than `melt` because we have to say *how* we want the data spread wide. In this example we could either have:
-
-- Columns for each day, with rows for each subject
-- Columns for each subject, with rows for each day
-
-Although it's obvious to us which we want, we have to be explicit. We do this using a [formula](#formulae), which we'll see again in the regression section. 
-
-Each formula has two sides, left and right, separated by the tilde (`~`) symbol. On the left hand side we say which variable we want to keep in rows. On the right hand side we say which variables to conver to columns. So, for example:
-
-```{r}
-# rows per subject, columns per day
-sleep.long %>%
-	dcast(Subject~variable) %>% 
-  head(3)
-```
-
-
-To compare, we can convert so each Subject has a column by reversing the formula:
-
-```{r}
-# note we select only the first 7 Subjects to 
-# keep the table to a manageable size
-sleep.long %>%
-  filter(Subject < 8) %>% 
-	dcast(variable~Subject)
-```
-
-
-
-###### {- .tip}
-One neat trick when casting is to use `paste` to  give your columns nicer names. So for example:
-
-```{r}
-sleep.long %>%
-  filter(Subject < 8) %>% 
-	dcast(variable~paste0("Participant.", Subject))
-```
-
-Notice we used `paste0` rather than `paste` to avoid spaces in variable names, which is allowed but can be a pain. [See more on working with character strings in a later section](#string-handling).
-
-
-
-
-##### {-}
-
-For a more detailed explanation and various other methods for reshaping data, see: http://r4ds.had.co.nz/tidy-data.html
-
-
-
-
-### Summarising and reshaping {-}
-
-
-One common trick when reshaping is to convert a datafile which has multiple rows and columns per person to one with only a single row. Although useful this isn't covered in this section, because it is combining two techniques:
-
-- Reshaping (i.e. from long to wide or back)
-- Aggregating or summarising (converting multiple rows to one)
-
-In the next section we cover [summarising data](#summarising-data), and introduce the 'split-apply-combine' method for summarising. Once you have a good grasp of this, you could check out the ['fancy reshaping' section](#fancy-reshaping) which does provide examples.
 
 
 

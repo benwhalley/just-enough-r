@@ -1,7 +1,5 @@
 ---
 title: 'Code hygiene'
-output: 
-  bookdown::tufte_html2
 ---
 
 

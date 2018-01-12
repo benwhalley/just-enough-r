@@ -1,7 +1,5 @@
 ---
 title: 'Working with dataframes'
-output: 
-  bookdown::tufte_html2
 ---
 
 
@@ -488,7 +486,7 @@ airquality %>%
 
 
 
-## Pipes {-}
+## Pipes {- #pipes}
 
 We often want to combine `select` and `filter` (and other functions) to return a subset of our original data.
 
@@ -514,15 +512,13 @@ This is OK, but can get quite confusing to read, and the more deeply functions a
 
 
 
-
-### {- #pipes}
-
 #### `dplyr` provides an alternative to nested function calls, called the pipe. {-}
 
 Imagine your dataframe as a big bucket containing data. From this bucket, you can 'pour' your data down through a series of tubes and filters, until at the bottom of your screen you have a smaller bucket containing just the data you want.
 
 
-> Think of your data 'flowing' down the screen.
+![Think of your data 'flowing' down the screen.](media/tubes.jpg)
+
 
 To make data flow from one bucket to another, we use the 'pipe' operator: `%>%`
 

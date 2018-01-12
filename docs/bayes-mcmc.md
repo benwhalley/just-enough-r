@@ -1,6 +1,6 @@
 ---
 title: 'Bayesian linear modelling via MCMC'
-output: bookdown::tufte_html2
+
 ---
 
 
@@ -32,7 +32,7 @@ painmusic %>%
   xlab("") 
 ```
 
-<img src="bayes-mcmc_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+![](bayes-mcmc_files/figure-latex/unnamed-chunk-2-1.pdf)<!-- --> 
 
 
 ```r
@@ -94,28 +94,28 @@ summary(pain.model.mcmc)
 ## Estimates:
 ##                    mean   sd     2.5%   25%    50%    75%    97.5%
 ## (Intercept)         1.7    0.4    0.9    1.4    1.7    2.0    2.5 
-## no.music            0.7    0.1    0.6    0.7    0.7    0.8    0.9 
+## no.music            0.7    0.1    0.6    0.7    0.7    0.8    0.8 
 ## familiar1           0.2    0.1   -0.1    0.1    0.2    0.3    0.5 
 ## liked1              0.3    0.1    0.0    0.2    0.3    0.4    0.6 
 ## familiar1:liked1   -0.2    0.1   -0.5   -0.3   -0.2   -0.1    0.1 
 ## sigma               1.5    0.1    1.3    1.4    1.5    1.5    1.7 
 ## log-fit_ratio       0.0    0.1   -0.1    0.0    0.0    0.0    0.1 
-## R2                  0.5    0.1    0.4    0.4    0.5    0.5    0.6 
-## mean_PPD            5.3    0.2    4.9    5.2    5.3    5.5    5.7 
-## log-posterior    -205.9    2.3 -211.3 -207.3 -205.6 -204.3 -202.6 
+## R2                  0.5    0.1    0.3    0.4    0.5    0.5    0.6 
+## mean_PPD            5.3    0.2    5.0    5.2    5.3    5.5    5.7 
+## log-posterior    -205.9    2.2 -211.0 -207.2 -205.5 -204.2 -202.4 
 ## 
 ## Diagnostics:
 ##                  mcse Rhat n_eff
-## (Intercept)      0.0  1.0  1176 
-## no.music         0.0  1.0  1156 
-## familiar1        0.0  1.0  4000 
+## (Intercept)      0.0  1.0  1637 
+## no.music         0.0  1.0  1611 
+## familiar1        0.0  1.0  3466 
 ## liked1           0.0  1.0  4000 
-## familiar1:liked1 0.0  1.0  3583 
-## sigma            0.0  1.0  2892 
-## log-fit_ratio    0.0  1.0  1718 
-## R2               0.0  1.0  1443 
+## familiar1:liked1 0.0  1.0  4000 
+## sigma            0.0  1.0  3449 
+## log-fit_ratio    0.0  1.0  1955 
+## R2               0.0  1.0  1930 
 ## mean_PPD         0.0  1.0  4000 
-## log-posterior    0.1  1.0  1025 
+## log-posterior    0.1  1.0   958 
 ## 
 ## For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split chains (at convergence Rhat=1).
 ```
@@ -132,7 +132,7 @@ library(bayesplot)
 mcmc_areas(as.matrix(pain.model.mcmc), regex_pars = 'familiar|liked', prob = .9)
 ```
 
-<img src="bayes-mcmc_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+![](bayes-mcmc_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
 
 
 
@@ -140,7 +140,7 @@ mcmc_areas(as.matrix(pain.model.mcmc), regex_pars = 'familiar|liked', prob = .9)
 mcmc_intervals(as.matrix(pain.model.mcmc), regex_pars = 'familiar|liked', prob_outer = .9)
 ```
 
-<img src="bayes-mcmc_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+![](bayes-mcmc_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
 
 
 
@@ -183,15 +183,15 @@ params.of.interest %>%
   do(., mHPDI(.$value)) %>% 
   pander::pandoc.table(caption="Estimates and 95% credible intervals for the parameters of interest")
 ## 
-## -------------------------------------------------
-##      variable       median     lower      upper  
-## ------------------ --------- ---------- ---------
-##     familiar1       0.1942    -0.07615   0.4441  
+## ------------------------------------------------
+##      variable       median     lower     upper  
+## ------------------ --------- ---------- --------
+##     familiar1       0.1994    -0.07244   0.4499 
 ## 
-##       liked1         0.299    0.02158    0.5685  
+##       liked1        0.2963    0.03015    0.5518 
 ## 
-##  familiar1:liked1   -0.1821   -0.4562    0.09123 
-## -------------------------------------------------
+##  familiar1:liked1   -0.1764   -0.4381    0.1026 
+## ------------------------------------------------
 ## 
 ## Table: Estimates and 95% credible intervals for the parameters of interest
 ```
@@ -213,9 +213,9 @@ params.of.interest %>%
 ## # A tibble: 3 x 4
 ##           variable   estimate `p (x<0)` `p (x>0)`
 ##             <fctr>      <dbl>     <dbl>     <dbl>
-## 1        familiar1  0.1954239   0.06725   0.93275
-## 2           liked1  0.2970875   0.01975   0.98025
-## 3 familiar1:liked1 -0.1808220   0.90250   0.09750
+## 1        familiar1  0.1992544   0.06625   0.93375
+## 2           liked1  0.2972446   0.01425   0.98575
+## 3 familiar1:liked1 -0.1795424   0.90775   0.09225
 ```
 
 
@@ -233,9 +233,9 @@ brms::hypothesis(pain.model.mcmc.df,
                    "familiar1:liked1 < 0"))
 ## Hypothesis Tests for class :
 ##                        Estimate Est.Error l-95% CI u-95% CI Evid.Ratio
-## (familiar1) > 0            0.20      0.13    -0.02      Inf      13.87
-## (liked1) > 0               0.30      0.14     0.07      Inf      49.63
-## (familiar1:liked1) < 0    -0.18      0.14     -Inf     0.05       9.26
+## (familiar1) > 0            0.20      0.13    -0.02      Inf      14.09
+## (liked1) > 0               0.30      0.13     0.07      Inf      69.18
+## (familiar1:liked1) < 0    -0.18      0.14     -Inf     0.04       9.84
 ##                        Star
 ## (familiar1) > 0            
 ## (liked1) > 0              *

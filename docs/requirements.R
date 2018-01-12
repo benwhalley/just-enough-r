@@ -74,6 +74,7 @@ pkgs <- c(
   'rstanarm',
   'rsvg',
   'semPlot',
+  'servr',
   'simr',
   'statcheck',
   'tidyverse', 

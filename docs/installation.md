@@ -1,14 +1,12 @@
 ---
 title: 'Installing R and RStudio'
-output:
-  bookdown::tufte_html2
 ---
 
 
 
 
 
-### Installation {- #installation-intro}
+## Installation {- #installation-intro}
 
 
 #### RStudio Server {- #rstudio-server}

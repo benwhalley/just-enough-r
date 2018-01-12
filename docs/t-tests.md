@@ -1,7 +1,5 @@
 ---
 title: 't-tests'
-output:
-  bookdown::tufte_html2
 ---
 
 
@@ -27,12 +25,9 @@ chicks.eating.beans %>%
   geom_boxplot()
 ```
 
-<div class="figure">
-<img src="t-tests_files/figure-html/boxplot-1.png" alt="The box in a boxplot indictes the IQR; the whisker indicates the min/max values or 1.5 * the IQR, whichever is the smaller. If there are outliers beyond 1.5 * the IQR then they are shown as points." width="672" />
-<p class="caption">(\#fig:boxplot)The box in a boxplot indictes the IQR; the whisker indicates the min/max values or 1.5 * the IQR, whichever is the smaller. If there are outliers beyond 1.5 * the IQR then they are shown as points.</p>
-</div>
+![(\#fig:boxplot)The box in a boxplot indictes the IQR; the whisker indicates the min/max values or 1.5 	imes the IQR, whichever is the smaller. If there are outliers beyond 1.5 	imes the IQR then they are shown as points.](t-tests_files/figure-latex/boxplot-1.pdf) 
 
-Or a violin or bottle plot, which shows the distributions within each group:
+Or a violin or bottle plot, which shows the distributions within each group and makes it relatively easy to check some of the main assumptions of the test:
 
 
 ```r
@@ -41,7 +36,7 @@ chicks.eating.beans %>%
   geom_violin()
 ```
 
-<img src="t-tests_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+![](t-tests_files/figure-latex/unnamed-chunk-2-1.pdf)<!-- --> 
 
 
 Layering boxes and bottles can work well too because it combines information about the distribution with key statistics like the median and IQR, and also because it scales reasonably well to multiple categories:
@@ -55,10 +50,10 @@ chickwts %>%
   geom_boxplot(width=.1)
 ```
 
-<img src="t-tests_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+![](t-tests_files/figure-latex/unnamed-chunk-3-1.pdf)<!-- --> 
 
 
-Bottleplots are just density plots, turned 90 degrees. Density plots might be more familiar to some, but it's hard to show more than 2 or 3 categories:
+<!-- Bottleplots are just density plots, turned 90 degrees. Density plots might be more familiar to some, but it's hard to show more than 2 or 3 categories:
 
 
 ```r
@@ -67,7 +62,7 @@ chicks.eating.beans %>%
   geom_density(alpha=.5)
 ```
 
-<img src="t-tests_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+![](t-tests_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
 
 
 
@@ -81,8 +76,8 @@ chicks.eating.beans %>%
   facet_grid(feed ~ .)
 ```
 
-<img src="t-tests_files/figure-html/unnamed-chunk-5-1.png" width="672" />
-
+![](t-tests_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
+ -->
 
 
 ### Running a t-test {-}
@@ -151,25 +146,31 @@ You can turn this correction off (for example, if you're trying to replcate an a
 
 ##### Paired samples {-}
 
+If you have repeated measures on a sample you need a paired samples test. 
+
 
 ```r
-a <- rnorm(50, 2.5, 1)
-b = a + rnorm(50, .5, 1)
-t.test(a, b, paired=TRUE)
+# simulate paired samples in pre-post design
+set.seed(1234)
+baseline <- rnorm(50, 2.5, 1)
+followup = baseline + rnorm(50, .5, 1)
+
+# run paired samples test
+t.test(baseline, followup, paired=TRUE)
 ```
 
 ```
 ## 
 ## 	Paired t-test
 ## 
-## data:  a and b
-## t = -3.3612, df = 49, p-value = 0.001511
+## data:  baseline and followup
+## t = -4.36, df = 49, p-value = 6.661e-05
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.7333952 -0.1845678
+##  -0.9342988 -0.3447602
 ## sample estimates:
 ## mean of the differences 
-##              -0.4589815
+##              -0.6395295
 ```
 
 
@@ -177,50 +178,57 @@ Note that we could also ['melt' the data into long format](#wide-to-long) and us
 
 
 ```r
-long.form.data <- data_frame(a=a, b=b) %>% 
-  tidyr::gather()
+long.form.data <- data_frame(baseline=baseline, follow=followup) %>% 
+  reshape2::melt()
+```
 
-with(long.form.data, t.test(value~key, paired=TRUE))
+```
+## No id variables; using all as measure variables
+```
+
+```r
+with(long.form.data, t.test(value~variable, paired=TRUE))
 ```
 
 ```
 ## 
 ## 	Paired t-test
 ## 
-## data:  value by key
-## t = -3.3612, df = 49, p-value = 0.001511
+## data:  value by variable
+## t = -4.36, df = 49, p-value = 6.661e-05
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.7333952 -0.1845678
+##  -0.9342988 -0.3447602
 ## sample estimates:
 ## mean of the differences 
-##              -0.4589815
+##              -0.6395295
 ```
 
 
 
 ##### One-sample test {-}
 
-i.e. comparing sample mean with a specific value:
+Sometimes you might want to compare a sample mean with a specific value:
 
 
 ```r
 # test if mean of `outcome` variable is different from 2
-somedata <- rnorm(50, 2.5, 1)
-t.test(somedata, mu=2)
+set.seed(1234)
+test.scores <- rnorm(50, 2.5, 1)
+t.test(test.scores, mu=2)
 ```
 
 ```
 ## 
 ## 	One Sample t-test
 ## 
-## data:  somedata
-## t = 2.4607, df = 49, p-value = 0.01744
+## data:  test.scores
+## t = 0.37508, df = 49, p-value = 0.7092
 ## alternative hypothesis: true mean is not equal to 2
 ## 95 percent confidence interval:
-##  2.058378 2.578502
+##  1.795420 2.298474
 ## sample estimates:
 ## mean of x 
-##   2.31844
+##  2.046947
 ```
 

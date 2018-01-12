@@ -1,9 +1,9 @@
 ---
 title: 'Clustered data'
-output: bookdown::tufte_html2
+
 ---
 
-## Clustered data {- #clustering}
+# Non-independence {#clustering}
 
 Psychological data often contains natural *groupings*. In intervention research, multiple patients may be treated by individual therapists, or children taught within classes, which are further nested within schools; in experimental research participants may respond on multiple occasions to a variety of stimuli.
 

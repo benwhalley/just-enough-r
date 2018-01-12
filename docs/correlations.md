@@ -1,7 +1,5 @@
 ---
 title: 'Correlations'
-output:
-  bookdown::tufte_html2
 ---
 
 
@@ -21,7 +19,7 @@ airquality %>%
   pairs
 ```
 
-<img src="correlations_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+![](correlations_files/figure-latex/unnamed-chunk-2-1.pdf)<!-- --> 
 
 
 If we were satisfied the relationships were (reasonably) linear, we could also visualise correlations themselves with a 'corrgram', using the `corrgram` library:
@@ -37,10 +35,7 @@ airquality %>%
          diag.panel=panel.density)
 ```
 
-<div class="figure">
-<img src="correlations_files/figure-html/unnamed-chunk-3-1.png" alt="A corrgram, showing pearson correlations (above the diagonal), variable distributions (on the diagonal) and ellipses and smoothed lines of best fit (below the diagnonal). Long, narrow ellipses denote large correlations; circular ellipses indicate small correlations." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-3)A corrgram, showing pearson correlations (above the diagonal), variable distributions (on the diagonal) and ellipses and smoothed lines of best fit (below the diagnonal). Long, narrow ellipses denote large correlations; circular ellipses indicate small correlations.</p>
-</div>
+![(\#fig:unnamed-chunk-3)A corrgram, showing pearson correlations (above the diagonal), variable distributions (on the diagonal) and ellipses and smoothed lines of best fit (below the diagnonal). Long, narrow ellipses denote large correlations; circular ellipses indicate small correlations.](correlations_files/figure-latex/unnamed-chunk-3-1.pdf) 
 
 
 The ggpairs function from the `GGally` package is also a nice way of plotting relationships between a combination of categorical and continuous data - it packs a lot of information into a limited space:
@@ -54,7 +49,7 @@ mtcars %>%
   GGally::ggpairs()
 ```
 
-<img src="correlations_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+![](correlations_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
 
 
 
@@ -115,7 +110,7 @@ We could run correlations for each sample separately:
 
 ```r
 corr.students <- cor(students)
-corr.general.population <- cor(general.population)
+corr.public <- cor(public)
 ```
 
 
@@ -123,42 +118,77 @@ And we could 'eyeball' both of these correlation matrices and try and spot patte
 
 
 ```r
-corr.students
-##              behaviour intention    control social.norm    attitude
-## behaviour   1.00000000 0.5514765 0.64787078  0.07185587  0.13179743
-## intention   0.55147645 1.0000000 0.39427210  0.29790114  0.43847665
-## control     0.64787078 0.3942721 1.00000000  0.01687272  0.01370568
-## social.norm 0.07185587 0.2979011 0.01687272  1.00000000 -0.01055921
-## attitude    0.13179743 0.4384766 0.01370568 -0.01055921  1.00000000
-
-corr.general.population
-##             behaviour intention social.norm    attitude    control
-## behaviour   1.0000000 0.5380706  0.28230551  0.23129188 0.14128284
-## intention   0.5380706 1.0000000  0.35597308  0.37583454 0.29027483
-## social.norm 0.2823055 0.3559731  1.00000000 -0.08050561 0.01012182
-## attitude    0.2312919 0.3758345 -0.08050561  1.00000000 0.04880911
-## control     0.1412828 0.2902748  0.01012182  0.04880911 1.00000000
+corr.students %>% 
+  pander()
 ```
+
+
+----------------------------------------------------------------------------
+     &nbsp;        behaviour   intention   control   social.norm   attitude 
+----------------- ----------- ----------- --------- ------------- ----------
+  **behaviour**      1.000       0.55       0.648       0.072       0.132   
+
+  **intention**      0.551       1.00       0.394       0.298       0.438   
+
+   **control**       0.648       0.39       1.000       0.017       0.014   
+
+ **social.norm**     0.072       0.30       0.017       1.000       -0.011  
+
+  **attitude**       0.132       0.44       0.014      -0.011       1.000   
+----------------------------------------------------------------------------
+
+
+```r
+corr.public %>% 
+  pander
+```
+
+
+----------------------------------------------------------------------------
+     &nbsp;        behaviour   intention   social.norm   attitude   control 
+----------------- ----------- ----------- ------------- ---------- ---------
+  **behaviour**      1.00        0.54         0.282       0.231      0.141  
+
+  **intention**      0.54        1.00         0.356       0.376      0.290  
+
+ **social.norm**     0.28        0.36         1.000       -0.081     0.010  
+
+  **attitude**       0.23        0.38        -0.081       1.000      0.049  
+
+   **control**       0.14        0.29         0.010       0.049      1.000  
+----------------------------------------------------------------------------
 
 
 But we could also simply *subtract* one matrix from the other to show the difference directly:
 
 
 ```r
-corr.students - corr.general.population
-##                behaviour   intention    control social.norm     attitude
-## behaviour    0.000000000  0.01340583 0.36556527 -0.15943601 -0.009485413
-## intention    0.013405830  0.00000000 0.03829902 -0.07793340  0.148201816
-## control      0.365565268  0.03829902 0.00000000  0.09737834  0.003583860
-## social.norm -0.159436010 -0.07793340 0.09737834  0.00000000 -0.059368315
-## attitude    -0.009485413  0.14820182 0.00358386 -0.05936832  0.000000000
+(corr.students - corr.public) %>% 
+  pander()
 ```
+
+
+----------------------------------------------------------------------------
+     &nbsp;        behaviour   intention   control   social.norm   attitude 
+----------------- ----------- ----------- --------- ------------- ----------
+  **behaviour**      0.000       0.013      0.366      -0.159       -0.009  
+
+  **intention**      0.013       0.000      0.038      -0.078       0.148   
+
+   **control**       0.366       0.038      0.000       0.097       0.004   
+
+ **social.norm**    -0.159      -0.078      0.097       0.000       -0.059  
+
+  **attitude**      -0.009       0.148      0.004      -0.059       0.000   
+----------------------------------------------------------------------------
 
 Now it's much more obvious that the behaviour/control correlation differs between the samples (it's higher in the students).
 
-The point here is not that this is an analysis you are likely to actually report (although you might find it useful when exploring the data), but rather to show that a correlation matrix, in common with the results of all the statistical tests we run, are themselves *just data points*. We can do whatever we like with our results — storing them in data frames to display later, or process as we need.
+The point here is not that this is an analysis you are likely to actually report --- although you might find it useful when exploring the data and interpreting your findings. 
 
-In reality, if you wanted to test the difference in correlations (slopes) in two groups you probably want to use [multiple regression](#regression), and if you wanted to test a complex model like the theory of planned behaviour, you might consider [CFA](#cfa) and/or [SEM](#sem)).
+But rather this show that a correlation matrix, in common with the results of all the statistical tests we run, are themselves *just data points*. We can do whatever we like with our results — storing them in data frames to display later, or process as we need.
+
+In reality, if you wanted to test the difference in correlations (slopes) in two groups for one outcome variable you probably want to use [multiple regression](#regression), and if you wanted to test a complex model like the theory of planned behaviour, you might consider [CFA](#cfa) and/or [SEM](#sem)).
 
 
 
@@ -168,7 +198,11 @@ In reality, if you wanted to test the difference in correlations (slopes) in two
 
 
 #### Using `apaTables` {-}
-If you want to produce output tables for publication the `apaTables` package might be useful. This block saves an APA formatted correlation table to an [external Word document like this](Table1_APA.doc).
+
+If you want to produce nice correlation tables for publication the `apaTables` package might be useful. This block saves an APA formatted correlation table to an [external Word document like this](Table1_APA.doc).
+
+Note though, that the APA table format does encourage 'star gazing' to some degree. Try to avoid interpreting correlation tables solely based on the significance (or not) of the *r* values. The `pairs` or `corrgram` plots shown above are a much better summary of the data, and are can be just as compact.
+
 
 
 ```r
@@ -201,72 +235,108 @@ apa.cor.table(airquality, filename="Table1_APA.doc", show.conf.interval=F)
 
 #### By hand {-}
 
-If you're not bothered about strict APA format, you might still want to extract *r* and *p* values as dataframes which can then be saved to a csv and opened in excel, or converted to a table by some other means. 
+If you're not bothered about strict APA format, you might still want to extract *r* and *p* values as dataframes which can then be saved to a csv and opened in Excel, or converted to a table  some other way. 
 
-You can do this by storing the `corr.test` output in a variable, and the accessing the `$r` and `$p` values within it:
+You can do this by storing the `corr.test` output in a variable, and the accessing the `$r` and `$p` values within it. 
+
+First, we create the `corr.test` object:
 
 
 
 ```r
 mycorrelations <- psych::corr.test(airquality)
-write.csv(mycorrelations$p, file="airquality-r-values.csv")
-mycorrelations$p 
-##                Ozone      Solar.R         Wind         Temp        Month
-## Ozone   0.000000e+00 0.0019724194 1.298162e-11 0.000000e+00 5.617870e-01
-## Solar.R 1.793109e-04 0.0000000000 1.000000e+00 7.517729e-03 1.000000e+00
-## Wind    9.272583e-13 0.4959552068 0.000000e+00 3.434076e-08 2.471060e-01
-## Temp    0.000000e+00 0.0007517729 2.641597e-09 0.000000e+00 7.231443e-07
-## Month   7.760010e-02 0.3663533509 2.745622e-02 6.026202e-08 0.000000e+00
-## Day     8.879425e-01 0.0702233769 7.387466e-01 1.076164e-01 9.221900e-01
-##               Day
-## Ozone   1.0000000
-## Solar.R 0.5617870
-## Wind    1.0000000
-## Temp    0.6456986
-## Month   1.0000000
-## Day     0.0000000
-mycorrelations$r 
-##               Ozone     Solar.R        Wind       Temp        Month
-## Ozone    1.00000000  0.34834169 -0.60154653  0.6983603  0.164519314
-## Solar.R  0.34834169  1.00000000 -0.05679167  0.2758403 -0.075300764
-## Wind    -0.60154653 -0.05679167  1.00000000 -0.4579879 -0.178292579
-## Temp     0.69836034  0.27584027 -0.45798788  1.0000000  0.420947252
-## Month    0.16451931 -0.07530076 -0.17829258  0.4209473  1.000000000
-## Day     -0.01322565 -0.15027498  0.02718090 -0.1305932 -0.007961763
-##                  Day
-## Ozone   -0.013225647
-## Solar.R -0.150274979
-## Wind     0.027180903
-## Temp    -0.130593175
-## Month   -0.007961763
-## Day      1.000000000
+```
+
+Then extract the *r* values as a table:
+
+
+```r
+mycorrelations$r %>% 
+  pander()
 ```
 
 
-You can also access the CI for each pariwise correlation as a table:
+-------------------------------------------------------------------
+   &nbsp;      Ozone    Solar.R    Wind    Temp    Month     Day   
+------------- -------- --------- -------- ------- -------- --------
+  **Ozone**    1.000     0.348    -0.602   0.70    0.165    -0.013 
+
+ **Solar.R**   0.348     1.000    -0.057   0.28    -0.075   -0.150 
+
+  **Wind**     -0.602   -0.057    1.000    -0.46   -0.178   0.027  
+
+  **Temp**     0.698     0.276    -0.458   1.00    0.421    -0.131 
+
+  **Month**    0.165    -0.075    -0.178   0.42    1.000    -0.008 
+
+   **Day**     -0.013   -0.150    0.027    -0.13   -0.008   1.000  
+-------------------------------------------------------------------
+
+
+
+And we can also extract p values:
+
+
+```r
+mycorrelations$p %>% 
+  pander()
+```
+
+
+--------------------------------------------------------------
+   &nbsp;      Ozone   Solar.R   Wind    Temp    Month   Day  
+------------- ------- --------- ------- ------- ------- ------
+  **Ozone**    0.000    0.002    0.000   0.000   0.56    1.00 
+
+ **Solar.R**   0.000    0.000    1.000   0.008   1.00    0.56 
+
+  **Wind**     0.000    0.496    0.000   0.000   0.25    1.00 
+
+  **Temp**     0.000    0.001    0.000   0.000   0.00    0.65 
+
+  **Month**    0.078    0.366    0.027   0.000   0.00    1.00 
+
+   **Day**     0.888    0.070    0.739   0.108   0.92    0.00 
+--------------------------------------------------------------
+
+
+Saving as a .csv is the same as for other dataframes:
+
+
+```r
+write.csv(mycorrelations$r, file="airquality-r-values.csv")
+```
+
+
+
+And can also access the CI for each pariwise correlation as a table:
 
 
 ```r
 mycorrelations$ci %>% 
   head() %>% 
-  pandoc.table()
-## 
-## ----------------------------------------------
-##      &nbsp;        lower    r     upper    p  
-## ----------------- ------- ------ ------- -----
-##  **Ozone-Slr.R**   0.17    0.35    0.5     0  
-## 
-##  **Ozone-Wind**    -0.71   -0.6   -0.47    0  
-## 
-##  **Ozone-Temp**    0.59    0.7    0.78     0  
-## 
-##  **Ozone-Month**  -0.018   0.17   0.34   0.078
-## 
-##   **Ozone-Day**    -0.2   -0.013  0.17   0.89 
-## 
-##  **Slr.R-Wind**    -0.22  -0.057  0.11    0.5 
-## ----------------------------------------------
+  pander(caption="First 6 rows of the table of CI's for the correlation matrix.")
 ```
+
+
+---------------------------------------------------
+     &nbsp;        lower      r      upper     p   
+----------------- -------- -------- ------- -------
+ **Ozone-Slr.R**   0.173    0.348    0.50    0.000 
+
+ **Ozone-Wind**    -0.706   -0.602   -0.47   0.000 
+
+ **Ozone-Temp**    0.591    0.698    0.78    0.000 
+
+ **Ozone-Month**   -0.018   0.165    0.34    0.078 
+
+  **Ozone-Day**    -0.195   -0.013   0.17    0.888 
+
+ **Slr.R-Wind**    -0.217   -0.057   0.11    0.496 
+---------------------------------------------------
+
+Table: First 6 rows of the table of CI's for the correlation matrix.
+
 
 
 ### Other methods for correlation {- #correlation-methods}

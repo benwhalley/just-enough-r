@@ -1,7 +1,5 @@
 ---
 title: 'Covariance modelling'
-output:
-  bookdown::tufte_html2
 ---
 
 
@@ -10,10 +8,12 @@ knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE, message=F, warning
 library(tufte)
 library(tidyverse)
 library(pander)
+library(huxtable)
+library(broom)
 ```
 
 
-# Covariance modelling
+## Covariance modelling {- #covariance-modelling}
 
 <!-- 
 Differences CFA EFA
@@ -33,7 +33,7 @@ Nice reference guide: https://www.scribd.com/document/238478414/Beaujean-Latent-
 This section covers path analysis (path models), confirmatory factor analysis (CFA) and structural equation modelling (SEM). You are encouraged to work through the path models and CFA sections, and especially the material on assessing model fit, before tacking SEM.
 
 
-Before you start this either section make sure you have the `lavaan` package installed (see [installing packages](#packages)]).
+Before you start this either section make sure you have the `lavaan` package installed (see [installing packages](#packages)).
 
 ```{r, eval=F}
 install.packages(lavaan)
@@ -59,16 +59,16 @@ library(lavaan)
 Path models are an extension of linear regression, but where 
 multiple observed variables can be considered as 'outcomes'.
 
-Because the terminology of outcomes v.s. predictors breaks down when variables can be both otucomes and predictors at the same time, it's normal to distinguish instead between:
+Because the terminology of outcomes v.s. predictors breaks down when variables can be both outcomes and predictors at the same time, it's normal to distinguish instead between:
 
-- *Exogenous* variables (those which are not predicted by any other)
+- *Exogenous* variables: those which are not predicted by any other
 
-- *Endogenous* variables (variables which do have predictors, and may or may not predict other variales)
-
-
+- *Endogenous* variables: variables which do have predictors, and may or may not predict other variales
 
 
-### Defining the model {-}
+
+
+### Defining a model {-}
 
 
 ```{r, include=F, echo=F}
@@ -85,7 +85,8 @@ mediation.df <- lavaan::simulateData(mm, sample.nobs=200,
 
 To define a path model, `lavaan` requires that you specify the relationships between variables in a text format.  A full [guide to this lavaan model syntax](http://lavaan.ugent.be/tutorial/syntax1.html) is available on the project website. 
 
-For path models the format is very simple, and resembles a series of linear models, written over several lines:
+For path models the format is very simple, and resembles a series of linear models, written over several lines, but in text rather than as a [model formula](#formulae):
+
 
 ```{r}
 # define the model over multiple lines for clarity
@@ -97,6 +98,9 @@ mediation.model <- "
 
 
 In this case the `~` symbols just means 'regressed on' or 'is predicted by'. The model in the example above defines that our outcome `y` is predicted by both `x` and `m`, and that `x` also predicts `m`. You might recognise this as a [mediation model](#mediation).
+
+[Make sure you include the closing quote symbol, and also be careful when running the code which defines the model. RStdudio can sometimes get confused and only run some of the lines, leading to errors. The simplest solution is to select the entire block explicitly and run that.]{.tip}
+
 
 To fit the model we pass the model specification and the data to the `sem()` function:
 
@@ -120,9 +124,9 @@ From this table we can see that both `x` and `m` are significant predictors of `
 
 #### Where's the intercept? {-}
 
-Path analysis is part of the set of techniques often termed 'covariance modelling', and as the name implies the primary focus here is the relationships between variables, and less so the mean-structure of the variables. In fact, by default the software first creates the covariance matrix of all the variables in the model, and the fit is based only on these values, plus the sample sizes (in early SEM software you typically had to provide the covariance matrix directly, rather than working with the raw data).
+Path analysis is part of the set of techniques often termed 'covariance modelling'. As the name implies the primary focus here is the relationships between variables, and less so the mean-structure of the variables. In fact, by default the software first creates the covariance matrix of all the variables in the model, and the fit is based only on these values, plus the sample sizes (in early SEM software you typically had to provide the covariance matrix directly, rather than working with the raw data).
 
-Nonetheless, because path analysis is an extension of regression techniques it is possible to request that intercepts are included in the model, and means estimates, by adding `meanstructure=TRUE` to the `sem()` function ([see the `lavaan` manual for details](http://lavaan.ugent.be/tutorial/means.html)). 
+Nonetheless, because path analysis is an extension of regression techniques it is possible to request that intercepts are included in the model, and means estimated, by adding `meanstructure=TRUE` to the `sem()` function ([see the `lavaan` manual for details](http://lavaan.ugent.be/tutorial/means.html)). 
 
 In the output below we now also see a table labelled 'Intercepts' which gives the mean values of each variable *when it's predictors are zero* (just like in linear regression):
 
@@ -143,11 +147,27 @@ If you want to present results from these models in table format, the `parameter
 In the example below we extract the parameter estimates, select only the regression parameters (`~`) and remove some of the columns to make the final output easier to read:
 
 ```{r}
+parameterEstimates(mediation.fit.means) %>% 
+  as_data_frame() %>% rownames_to_column() %>% 
+  mutate(term=paste(lhs, op, rhs)) %>% 
+  rename(estimate=est, 
+         std.error = se,
+         p.value=pvalue,
+         statistic = z,
+         conf.low=ci.lower,
+         conf.hi=ci.upper) %>% 
+  select(term, op, everything(), -lhs, -rhs)
+
+```
+
+```{r}
+lm(mpg~wt, data=mtcars) %>% tidy(conf.int=T) %>% names
+
 parameterEstimates(mediation.fit.means) %>%
   filter(op == "~") %>% 
   mutate(term = paste(lhs, op, rhs)) %>%  
   select(term, everything(), -se, -lhs, -rhs, -op) %>% 
-  pandoc.table(caption="Regression parameters from `mediation.fit`")
+  pander(caption="Regression parameters from `mediation.fit`")
 
 ```
 
@@ -272,8 +292,8 @@ But because this function produces a very long table of output, it can be helpfu
 
 The command below converts the output of `modificationindices()` to a dataframe. It then:
 
-- Sorts the rows by the `mi` column, which represents the change in model \chi^2^ we see if the path was included (see [sorting](#sorting))
-- Filters the results to show only those with \chi^2^ change > 5
+- Sorts the rows by the `mi` column, which represents the change in model $\chi^2$ we see if the path was included (see [sorting](#sorting))
+- Filters the results to show only those with $\chi^2$ change > 5
 - Selects only the `lhs`, `op`, `rhs`, `mi`, and `epc` columns.
 
 ```{r}
@@ -282,7 +302,7 @@ modificationindices(hz.fit) %>%
   arrange(-mi) %>% 
   filter(mi > 5) %>% 
   select(lhs, op, rhs, mi, epc) %>% 
-  pandoc.table(caption="Largest MI values for hz.fit")
+  pander(caption="Largest MI values for hz.fit")
 ```
 
 
@@ -625,15 +645,125 @@ sem.mod.fit.fiml <- sem(sem.mod, data=tpb.df, missing="ML")
 It doesn't look like the parameter estimates change much. To compare them explicitly we can extract the relevant coefficients from each (they don't look all that different):
 
 ```{r}
-library(apastats)
-bind_cols(
-  parameterestimates(sem.mod.fit) %>% 
+bind_cols(parameterestimates(sem.mod.fit) %>% 
     select(lhs, op, rhs, est, pvalue) %>% 
-    rename(ml=est, ml.p = pvalue),
+    rename(ml=est, ml.p = pvalue), 
   parameterestimates(sem.mod.fit.fiml) %>% 
-    transmute(fiml=est, fiml.p = round.p(pvalue))) %>% 
+    transmute(fiml=est, fiml.p = pvalue)) %>% 
+  # select only the regression paths
   filter(op=="~") %>% 
-  mutate(ml = t.round(ml), fiml = t.round(fiml), ml.p = round.p(ml.p)) %>% 
-  pander("Comparison of ML and MLM parameter estimates.")
+  as_huxtable() %>% 
+  set_caption("Comparison of ML and MLM parameter estimates.") %>% 
+  print_md()
 ```
+
+
+
+
+
+
+
+
+
+
+## Goodness of fit statistics in CFA {- #gof}
+
+
+It's worth noting that many 'goodness of fit' statistics are misnamed and are in fact indexing 'badness of fit'. This applies to RMSEA, $\chi^2$, BIC, AIC and others.
+
+However all of these indices are trying to solve similar problems in subtly different ways. The problem is that we would like a model which:
+
+- Fits the data we have *and also*
+- Predicts new data 
+
+You might think that these goals would be aligned and that a model which fits the data we have would also be good ad predicting new data, but this isn't the case. In fact, if we [overfit](#over-fitting) our current data we won't be able to predict new observations very accurately.
+
+
+#### How fit indices work {-}
+
+There is a tradeoff involved to avoid over-fitting the data, and most fit indices attempt to:
+
+- Quantify how well the model fits the current data but
+- Penalise models which use many parameters (i.e. those in danger of overfitting)
+
+Each formula for a goodness of fit statistic represents a different tradeoff between these goals.
+
+
+
+#### {- .tip }
+
+Model fit statistics are useful but can be misleading and misused. See David Kenny's page on model fit for more details:
+<http://davidakenny.net/cm/fit.htm>
+
+
+
+#### {- #common-fit-indices}
+Below are some of the most useful and commonly reported GOF statistics for CFA and SEM models:
+
+
+
+#### Root Mean Square Error of Approximation (RMSEA) {-}
+
+MacCallum, Browne and Sugawara (1996) have used 0.01, 0.05, and 0.08 to indicate excellent, good, and mediocre fit, respectively.
+
+RMSEA &lt; .05 often used as a cutoff for a reasonably fitting model, athough others suggest .1.
+
+RMSEA is also used to calculate the 'probability of a close fit' or pclose statistic — this is the probability that the RMSEA is under 0.05.
+
+
+
+
+#### Comparative fit index (CFI) {-}
+
+CFI (and the related TLI) assesses the relative improvement in fit of your model compared with the baseline model.
+
+CFI ranges between 0 and 1.
+
+The conventional (rule of thumb) threshold for a good fitting model is for CFI to be > .9
+
+
+
+
+
+#### Akaike Information Criterion (AIC) and Bayesian Information Criterion (BIC) {-}
+
+The AIC and BIC are measures of comparative fit, so can be used when models are non-nested (and therefore otherwise not easily comparable).
+
+AIC is particularly attractive because it corresponds to a measure of *predictive* accuracy. That is, selecting the model with the smallest AIC is one way of asking: "which model is most likely to accurately predict new data?"
+
+
+
+
+#### Factors which can influence fit statistics {-}
+
+All of the following can influence or bias fit statistics:
+
+-   Number of variables (although note RMSEA trends to reduce with more parameters included, but other fit statistics will increase).
+-   Model complexity (different statistics reward parsimony to
+    different degrees).
+-   Sample size (varies by statistic: some increase and others decrease
+    with sample size).
+-   Non-normality of outcome data will (tend to) worsen fit.
+
+
+
+
+#### Which statistics should you report? {-}
+
+When reporting absolute model fit, RMSEA and CFI are the most widely
+reported, and are probably sufficient.
+
+However, you should almost never just report a single model, and so:
+
+- When comparing nested models you should report the $\chi^2$ `lrtest`.
+- When comparing non-nested models you should also report differences in BIC and AIC.
+
+
+
+#### Further reading {-}
+
+This set of slides on model fit provides all fo the formulae and an
+explanation for many different fit indices:
+<http://www.psych.umass.edu/uploads/people/79/Fit_Indices.pdf>
+
 

@@ -1,21 +1,18 @@
 ---
 title: 'Model comparison and selection'
-output: bookdown::tufte_html2
+
 ---
 
 
-## Model comparison and selection {- #comparison-and-selection}
+# Building and choosing models {#comparison-and-selection}
 
 
-### Models are imperfect {-}
+### Like maps, models are imperfect but useful {-}
 
 
 ![](media/map_projections.png)
 
 
-
-
-#### Think of models like maps {-}
 
 Maps are always imperfect, and the decisons we make as we build them entail different visions of how the world is.
 
@@ -61,6 +58,11 @@ In other disciplines where inference from observational data are more common (e.
 
 
 See @mcelreath2016rethinking, chapter 6, for a good introduction. [This video explains the concept well](https://www.youtube.com/watch?v=LQb7l5IfS0s).  The R package [MuMln package](https://cran.r-project.org/web/packages/MuMIn/index.html) implements most of the methods needed. See also this [interesting post on model selection problems](https://www.r-bloggers.com/model-selection-and-multi-model-inference/).
+
+
+
+
+
 
 
 

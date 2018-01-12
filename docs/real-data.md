@@ -1,7 +1,5 @@
 ---
 title: 'Real data'
-output:
-  bookdown::tufte_html2
 ---
 
 

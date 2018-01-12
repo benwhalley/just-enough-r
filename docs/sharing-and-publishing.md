@@ -1,7 +1,5 @@
 ---
 title: 'Sharing and publishing analyses'
-output:
-  bookdown::tufte_html2
 ---
 
 

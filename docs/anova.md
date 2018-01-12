@@ -1,6 +1,6 @@
 ---
 title: 'Anova'
-output: bookdown::tufte_html2
+
 ---
 
 
@@ -57,17 +57,17 @@ df %>%
 -------------------------------------
  person   time   predictor   outcome 
 -------- ------ ----------- ---------
-   1       1         2          7    
+   1       1         6          7    
 
-   1       2         2         17    
+   1       2         6          9    
 
-   1       3         2          9    
+   1       3         6          2    
 
-   2       1         5         16    
+   2       1         1          9    
 
-   2       2         5          8    
+   2       2         1          5    
 
-   2       3         5          7    
+   2       3         1         11    
 -------------------------------------
 
 
@@ -86,17 +86,17 @@ df.wide %>%
 -----------------------------------------------
  person   predictor   Time 1   Time 2   Time 3 
 -------- ----------- -------- -------- --------
-   1          2         7        17       9    
+   1          6         7        9        2    
 
-   2          5         16       8        7    
+   2          1         9        5        11   
 
-   3          6         7        10       7    
+   3          1         9        13       9    
 
-   4          4         8        6        9    
+   4          8         12       11       13   
 
-   5          2         9        8        12   
+   5          1         5        5        13   
 
-   6          3         12       9        13   
+   6          3         9        11       12   
 -----------------------------------------------
 
 
@@ -198,7 +198,7 @@ If your design has more than 2 groups then you should use oneway Anova.
 
 Let's say we asked people to taste 1 of 4 fruit juices, and rate how tasty it was on a scale from 0 to 10:
 
-<img src="anova_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](anova_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
 
 
 We can run a oneway Anova with [type 3 sums of squares](#sums-squares) using the `Anova` function from the `car::` package:
@@ -262,7 +262,7 @@ eysenck %>%
   xlab("")
 ```
 
-<img src="anova_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+![](anova_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
 
 
 [Visual inspection of the data (see Figure X) suggested that older adults recalled more words than younger adults, and that this difference was greatest for the intention, imagery, and adjective conditions. Recall peformance was worst in the counting and rhyming conditions.]{.apa-example}
@@ -281,10 +281,7 @@ eysenck %>%
   xlab("")
 ```
 
-<div class="figure">
-<img src="anova_files/figure-html/unnamed-chunk-10-1.png" alt="Boxplot for recall in older and young adults, by condition." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-10)Boxplot for recall in older and young adults, by condition.</p>
-</div>
+![(\#fig:unnamed-chunk-10)Boxplot for recall in older and young adults, by condition.](anova_files/figure-latex/unnamed-chunk-10-1.pdf) 
 
 
 We can run a linear model including the effect of `Age` and `Condition` and the interaction of these variables, and calculate the Anova:
@@ -380,7 +377,7 @@ lme4::sleepstudy %>%
   geom_label(aes(y=450, x=9, label="imagine how bad\nyou feel by this point"), color="red") 
 ```
 
-<img src="anova_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+![](anova_files/figure-latex/unnamed-chunk-13-1.pdf)<!-- --> 
 
 
 If we want to test whether there are significant differences in RTs between `Days`, we could fit something very similar to a traditional repeat measures Anova using the `lme4::lmer()` function, and obtain an Anova table for the model using the special `lmerTest::anova()` function:
@@ -419,7 +416,7 @@ expt.data %>%
   facet_wrap(~paste("Time", time))
 ```
 
-<img src="anova_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+![](anova_files/figure-latex/unnamed-chunk-16-1.pdf)<!-- --> 
 
 
 We want to use our repeated measurements before and after the experimental interventions to increase the precision of our estimate of the between-condition differences.
@@ -433,9 +430,8 @@ expt.data.agg <- expt.data %>%
   summarise(RT=mean(RT))
 
 head(expt.data.agg)
-## Source: local data frame [6 x 4]
-## Groups: Condition, person [3]
-## 
+## # A tibble: 6 x 4
+## # Groups:   Condition, person [3]
 ##   Condition person   time       RT
 ##      <fctr> <fctr> <fctr>    <dbl>
 ## 1         1      1      1 260.8600
@@ -459,15 +455,15 @@ expt.afex$anova_table %>%
 ```
 
 
--------------------------------------------------------------------
-       &nbsp;         num Df   den Df   MSE    F    ges    Pr(>F)  
--------------------- -------- -------- ----- ----- ------ ---------
-   **Condition**        3        44    158.6 159.4 0.8504 1.193e-23
+---------------------------------------------------------------------------
+       &nbsp;         num Df   den Df    MSE      F      ges      Pr(>F)   
+-------------------- -------- -------- ------- ------- -------- -----------
+   **Condition**        3        44     158.6   159.4   0.8504   1.193e-23 
 
-      **time**          1        44    144.6 11.87 0.114  0.001266 
+      **time**          1        44     144.6   11.87   0.114    0.001266  
 
- **Condition:time**     3        44    144.6 37.79 0.5513 3.073e-12
--------------------------------------------------------------------
+ **Condition:time**     3        44     144.6   37.79   0.5513   3.073e-12 
+---------------------------------------------------------------------------
 
 Table: `afex::aov_car` output.
 
@@ -486,15 +482,15 @@ expt.ez$ANOVA %>%
 ```
 
 
------------------------------------------------------------------
-&nbsp;      Effect      DFn   DFd    F       p      p<.05   ges  
-------- -------------- ----- ----- ----- --------- ------- ------
- **2**    Condition      3    44   159.4 1.193e-23    *    0.8504
+--------------------------------------------------------------------------
+ &nbsp;       Effect       DFn   DFd     F         p       p<.05    ges   
+-------- ---------------- ----- ----- ------- ----------- ------- --------
+ **2**      Condition       3    44    159.4   1.193e-23     *     0.8504 
 
- **3**       time        1    44   11.87 0.001266     *    0.114 
+ **3**         time         1    44    11.87   0.001266      *     0.114  
 
- **4**  Condition:time   3    44   37.79 3.073e-12    *    0.5513
------------------------------------------------------------------
+ **4**    Condition:time    3    44    37.79   3.073e-12     *     0.5513 
+--------------------------------------------------------------------------
 
 Table: `ez::ezANOVA` output.
 
@@ -530,15 +526,15 @@ anova(expt.mlm) %>%
 ```
 
 
----------------------------------------------------------------------------
-       &nbsp;         Sum Sq   Mean Sq   NumDF   DenDF   F.value   Pr(>F)  
--------------------- -------- --------- ------- ------- --------- ---------
-   **Condition**      69154     23051      3      44      159.4       0    
+-----------------------------------------------------------------------------
+       &nbsp;         Sum Sq   Mean Sq   NumDF   DenDF   F.value    Pr(>F)   
+-------------------- -------- --------- ------- ------- --------- -----------
+   **Condition**      69154     23051      3      44      159.4        0     
 
-      **time**         1716     1716       1      44      11.87   0.001266 
+      **time**         1716     1716       1      44      11.87    0.001266  
 
- **Condition:time**   16394     5465       3      44      37.79   3.073e-12
----------------------------------------------------------------------------
+ **Condition:time**   16394     5465       3      44      37.79    3.073e-12 
+-----------------------------------------------------------------------------
 
 Table: Analysis of Variance Table of type III  with  Satterthwaite 
 
@@ -552,7 +548,7 @@ ggplot(expt.data,
   facet_wrap(~paste("Condition", Condition))
 ```
 
-<img src="anova_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+![](anova_files/figure-latex/unnamed-chunk-21-1.pdf)<!-- --> 
 
 
 If we wanted to replicate the aggregated RM Anova models shown above we could write:
@@ -607,7 +603,7 @@ We found a significant interaction between condition and the linear term for tri
 
 
 
-<img src="anova_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+![](anova_files/figure-latex/unnamed-chunk-25-1.pdf)<!-- --> 
 
 
 
@@ -667,10 +663,7 @@ Then a QQ-plot of the model residuals to assess normality:
 car::qqPlot(eysenck.model)
 ```
 
-<div class="figure">
-<img src="anova_files/figure-html/unnamed-chunk-27-1.png" alt="QQ plot to assess normality of model residuals" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-27)QQ plot to assess normality of model residuals</p>
-</div>
+![(\#fig:unnamed-chunk-27)QQ plot to assess normality of model residuals](anova_files/figure-latex/unnamed-chunk-27-1.pdf) 
 
 
 And finally a residual-vs-fitted plot:
@@ -687,10 +680,7 @@ data_frame(
     geom_smooth(se=F)
 ```
 
-<div class="figure">
-<img src="anova_files/figure-html/unnamed-chunk-28-1.png" alt="Residual vs fitted (spread vs. level) plot to check homogeneity of variance." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-28)Residual vs fitted (spread vs. level) plot to check homogeneity of variance.</p>
-</div>
+![(\#fig:unnamed-chunk-28)Residual vs fitted (spread vs. level) plot to check homogeneity of variance.](anova_files/figure-latex/unnamed-chunk-28-1.pdf) 
 
 
 

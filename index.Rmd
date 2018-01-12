@@ -1,10 +1,6 @@
 ---
-title: '''Just enough'' R'
-output: tufte::tufte_html
+title: 'Just Enough R'
 site: bookdown::bookdown_site
-bibliography: [bibliography.bib]
-biblio-style: apalike
-link-citations: yes
 ---
 
 
@@ -14,24 +10,22 @@ link-citations: yes
 # (PART) Getting started {-} 
 
 
-![](media/keepcalm.png)
+![](media/keepcalm.png){.cup}
 
-<!-- 
-
-https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/
-
--->
+<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
 
 
 
+# Introduction {-}
 
-# Introduction
-
-R is software which makes it easy to work with and learn from data. 
+R makes it easy to work with and learn from data. 
 
 It also happens to be a complete programmming language, but if you're reading this guide then that might not be of interest to you. That's OK — the goal here is *not* to teach you how to program in R^[This is actually a lie, but I'm hoping you won't notice until it's too late.].  The goal is to teach you *just enough R* to be confident to explore your data.
 
-We are going to use R the same way we use any other statistics software: To check and visualise data, run statistical analyses, and share our results with others.  To do that it's worth learning the *absolute basics* of the R language. The next few chapters walk you through those basics: what you need to know to be productive in R and RStudio. By analogy, imagine going on holiday and learning enough French to introduce yourself, count from one to ten, and order a baguette. You won't be fluent - but you won't starve, and your trip will be more fun.
+
+In this guide, we use R in the same way we use any other statistics software: To check and visualise data, run statistical analyses, and share our results with others.   To do that it's worth learning the *absolute basics* of the R language. The next few chapters walk you through those basics: what you need to know to be productive in R and RStudio. 
+
+By analogy, imagine going on holiday and learning enough French to introduce yourself, count from one to ten, and order a baguette. You won't be fluent - but you won't starve, and your trip will be more fun.
 
 
 

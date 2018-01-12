@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Just Enough R</title>
   <meta name="description" content="Just Enough R">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Just Enough R" />
   <meta property="og:type" content="book" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="bayes-mcmc.html">
-<link rel="next" href="predictions-and-margins.html">
+<link rel="prev" href="comparison-and-selection.html">
+<link rel="next" href="r-details.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -104,6 +104,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="divider"></li>
 <li><a href="index.html#section"></a></li>
 <li class="part"><span><b>I Getting started</b></span></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
 <li class="chapter" data-level="1" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>1</b> Working with R</a><ul>
 <li class="chapter" data-level="" data-path="r-basics.html"><a href="r-basics.html#start-here"><i class="fa fa-check"></i>Workflow</a></li>
 <li class="chapter" data-level="" data-path="rmarkdown.html"><a href="rmarkdown.html"><i class="fa fa-check"></i>RMarkdown</a></li>
@@ -122,14 +123,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="functions-to-learn-now.html"><a href="functions-to-learn-now.html"><i class="fa fa-check"></i>Functions to learn now</a></li>
 <li class="chapter" data-level="" data-path="lists.html"><a href="lists.html"><i class="fa fa-check"></i>Lists</a></li>
 </ul></li>
+<li class="part"><span><b>II Data</b></span></li>
 <li class="chapter" data-level="2" data-path="datasets-dataframes.html"><a href="datasets-dataframes.html"><i class="fa fa-check"></i><b>2</b> Datasets and dataframes</a><ul>
 <li class="chapter" data-level="" data-path="looking-at-data.html"><a href="looking-at-data.html"><i class="fa fa-check"></i>Looking at data</a><ul>
 <li class="chapter" data-level="" data-path="looking-at-data.html"><a href="looking-at-data.html#using-individual-columns"><i class="fa fa-check"></i>Using individual columns</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html"><i class="fa fa-check"></i>Importing and exporting data</a><ul>
-<li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html#importing-data-from-the-web"><i class="fa fa-check"></i>Importing data over the web</a></li>
-<li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html#importing-proprietary-formats"><i class="fa fa-check"></i>Importing from SPSS and other packages</a></li>
-<li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html#saving-and-exporting-data"><i class="fa fa-check"></i>Saving and exporting data</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html"><i class="fa fa-check"></i>Working with dataframes</a><ul>
 <li><a href="working-with-dataframes.html#tidyverse">Introducing the <code>tidyverse</code></a></li>
@@ -137,26 +134,32 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="selecting-columns.html"><a href="selecting-columns.html"><i class="fa fa-check"></i>Selecting columns</a></li>
 <li class="chapter" data-level="" data-path="selecting-rows.html"><a href="selecting-rows.html"><i class="fa fa-check"></i>Selecting rows</a></li>
 <li class="chapter" data-level="" data-path="operators.html"><a href="operators.html"><i class="fa fa-check"></i>‘Operators’</a></li>
-<li class="chapter" data-level="" data-path="pipes.html"><a href="pipes.html"><i class="fa fa-check"></i>Pipes</a><ul>
-<li><a href="pipes.html#pipes"></a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="mutate.html"><a href="mutate.html"><i class="fa fa-check"></i>Modifying and creating new columns</a></li>
 <li class="chapter" data-level="" data-path="sorting.html"><a href="sorting.html"><i class="fa fa-check"></i>Sorting</a></li>
-<li class="chapter" data-level="" data-path="reshaping.html"><a href="reshaping.html"><i class="fa fa-check"></i>Reshaping</a><ul>
-<li class="chapter" data-level="" data-path="reshaping.html"><a href="reshaping.html#summarising-and-reshaping"><i class="fa fa-check"></i>Summarising and reshaping</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="pipes.html"><a href="pipes.html"><i class="fa fa-check"></i>Pipes</a></li>
+<li class="chapter" data-level="" data-path="mutate.html"><a href="mutate.html"><i class="fa fa-check"></i>Modifying and creating new columns</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="real-data.html"><a href="real-data.html"><i class="fa fa-check"></i><b>3</b> ‘Real’ data</a><ul>
+<li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html"><i class="fa fa-check"></i>Importing data</a><ul>
+<li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html#importing-data-from-the-web"><i class="fa fa-check"></i>Importing data over the web</a></li>
+<li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html#importing-proprietary-formats"><i class="fa fa-check"></i>Importing from SPSS and other packages</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="saving-and-exporting.html"><a href="saving-and-exporting.html"><i class="fa fa-check"></i>Saving and exporting</a><ul>
+<li class="chapter" data-level="" data-path="saving-and-exporting.html"><a href="saving-and-exporting.html#use-csv"><i class="fa fa-check"></i>Use CSV files</a></li>
+<li class="chapter" data-level="" data-path="saving-and-exporting.html"><a href="saving-and-exporting.html#archiving-publication-and-sharing"><i class="fa fa-check"></i>Archiving, publication and sharing</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="multiple-raw-data-files.html"><a href="multiple-raw-data-files.html"><i class="fa fa-check"></i>Dealing with multiple files</a></li>
+<li class="chapter" data-level="3.1" data-path="joining-different-datasets.html"><a href="joining-different-datasets.html"><i class="fa fa-check"></i><b>3.1</b> Joining different datasets</a></li>
 <li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html"><i class="fa fa-check"></i>Types of variable</a><ul>
 <li><a href="factors-and-numerics.html#differences-in-quantity-numeric-variables">Differences in <em>quantity</em>: numeric variables</a></li>
 <li><a href="factors-and-numerics.html#character-and-factor">Differences in <em>quality or kind</em></a></li>
+<li class="chapter" data-level="3.1.1" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html#factors-for-categorical-data"><i class="fa fa-check"></i><b>3.1.1</b> Factors for categorical data</a></li>
 <li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html#dates"><i class="fa fa-check"></i>Dates</a></li>
-<li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html#missing-values"><i class="fa fa-check"></i>Missing values</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="missing.html"><a href="missing.html"><i class="fa fa-check"></i>Missing values</a></li>
 <li class="chapter" data-level="" data-path="tidying-data.html"><a href="tidying-data.html"><i class="fa fa-check"></i>Tidying data</a></li>
-<li class="chapter" data-level="" data-path="storing-data.html"><a href="storing-data.html"><i class="fa fa-check"></i>Saving things</a></li>
-<li class="chapter" data-level="" data-path="multiple-raw-data-files.html"><a href="multiple-raw-data-files.html"><i class="fa fa-check"></i>Dealing with multiple files</a></li>
+<li class="chapter" data-level="" data-path="reshaping.html"><a href="reshaping.html"><i class="fa fa-check"></i>Reshaping</a><ul>
+<li class="chapter" data-level="" data-path="reshaping.html"><a href="reshaping.html#aggregating-and-reshaping-at-the-same-time"><i class="fa fa-check"></i>Aggregating and reshaping at the same time</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="summarising-data.html"><a href="summarising-data.html"><i class="fa fa-check"></i><b>4</b> Summaries</a><ul>
 <li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html"><i class="fa fa-check"></i>“Quick and dirty”</a><ul>
@@ -165,8 +168,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#creating-a-data-frame-of-summary-statistics"><i class="fa fa-check"></i>Creating a data frame of summary statistics</a></li>
 <li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#computing-statistics-by-groups"><i class="fa fa-check"></i>Computing statistics by-groups</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="a-generalised-approach.html"><a href="a-generalised-approach.html"><i class="fa fa-check"></i>A generalised approach</a></li>
-<li class="chapter" data-level="" data-path="fancy-reshaping.html"><a href="fancy-reshaping.html"><i class="fa fa-check"></i>Fancy reshaping</a></li>
+<li class="chapter" data-level="" data-path="a-generalised-approach.html"><a href="a-generalised-approach.html"><i class="fa fa-check"></i>A generalised approach</a><ul>
+<li class="chapter" data-level="" data-path="a-generalised-approach.html"><a href="a-generalised-approach.html#fancy-reshaping"><i class="fa fa-check"></i>Fancy reshaping</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>5</b> Graphics</a><ul>
 <li class="chapter" data-level="" data-path="graphics-benefits.html"><a href="graphics-benefits.html"><i class="fa fa-check"></i>Benefits of visualising data</a></li>
@@ -192,9 +196,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="" data-path="exporting-graphics.html"><a href="exporting-graphics.html"><i class="fa fa-check"></i>Exporting for print</a></li>
 </ul></li>
-<li class="part"><span><b>II Analysis</b></span></li>
-<li class="chapter" data-level="6" data-path="basic-inferential-statistics.html"><a href="basic-inferential-statistics.html"><i class="fa fa-check"></i><b>6</b> Basic inferential statistics</a><ul>
-<li><a href="crosstabs.html#crosstabs">Crosstabulations and <sup>2</sup></a><ul>
+<li class="chapter" data-level="6" data-path="example-datasets.html"><a href="example-datasets.html"><i class="fa fa-check"></i><b>6</b> Example datasets</a></li>
+<li class="part"><span><b>III Models</b></span></li>
+<li class="chapter" data-level="7" data-path="common-inferential-stats.html"><a href="common-inferential-stats.html"><i class="fa fa-check"></i><b>7</b> Common inferential statistics</a><ul>
+<li><a href="crosstabs.html#crosstabs">Crosstabulations and <span class="math inline">\(\chi^2\)</span></a><ul>
 <li class="chapter" data-level="" data-path="crosstabs.html"><a href="crosstabs.html"><i class="fa fa-check"></i>Three-way tables</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html"><i class="fa fa-check"></i>Correlations</a><ul>
@@ -208,7 +213,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="t-tests.html"><a href="t-tests.html#running-a-t-test"><i class="fa fa-check"></i>Running a t-test</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="linear-models-simple.html"><a href="linear-models-simple.html"><i class="fa fa-check"></i><b>7</b> Regression</a><ul>
+<li class="chapter" data-level="8" data-path="linear-models-simple.html"><a href="linear-models-simple.html"><i class="fa fa-check"></i><b>8</b> Regression</a><ul>
 <li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#formulae"><i class="fa fa-check"></i>Describing statistical models using formulae</a></li>
 <li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#running-a-linear-model"><i class="fa fa-check"></i>Running a linear model</a></li>
 <li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#more-on-formulas"><i class="fa fa-check"></i>More on formulas</a></li>
@@ -221,7 +226,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#what-next"><i class="fa fa-check"></i>What next</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>8</b> Anova</a><ul>
+<li class="chapter" data-level="9" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>9</b> Anova</a><ul>
 <li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#rules-for-using-anova-in-r"><i class="fa fa-check"></i>Rules for using Anova in R</a></li>
 <li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#anova-recommendations"><i class="fa fa-check"></i>Recommendations for doing Anova</a></li>
 <li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html"><i class="fa fa-check"></i>Anova ‘Cookbook’</a><ul>
@@ -233,10 +238,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="checking-assumptions.html"><a href="checking-assumptions.html"><i class="fa fa-check"></i>Checking assumptions</a></li>
 <li class="chapter" data-level="" data-path="followup-tests.html"><a href="followup-tests.html"><i class="fa fa-check"></i>Followup tests</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="general-linear-models.html"><a href="general-linear-models.html"><i class="fa fa-check"></i><b>9</b> General linear models</a><ul>
+<li class="chapter" data-level="10" data-path="general-linear-models.html"><a href="general-linear-models.html"><i class="fa fa-check"></i><b>10</b> General linear models</a><ul>
 <li class="chapter" data-level="" data-path="general-linear-models.html"><a href="general-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>10</b> Multilevel models</a><ul>
+<li class="chapter" data-level="11" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>11</b> Multilevel models</a><ul>
 <li class="chapter" data-level="" data-path="fitting-models.html"><a href="fitting-models.html"><i class="fa fa-check"></i>Fitting multilevel models in R</a><ul>
 <li><a href="fitting-models.html#use-lmer-and-glmer">Use <code>lmer</code> and <code>glmer</code></a></li>
 <li><a href="fitting-models.html#p-values-in-multilevel-models"><em>p</em> values in multilevel models</a></li>
@@ -248,13 +253,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="" data-path="icc-and-vpc.html"><a href="icc-and-vpc.html"><i class="fa fa-check"></i>Variance partition coefficients and intraclass correlations</a></li>
 <li class="chapter" data-level="" data-path="threelevel.html"><a href="threelevel.html"><i class="fa fa-check"></i>3 level models with ‘partially crossed’ random effects</a></li>
+<li><a href="contrasts-lmer.html#contrasts-lmer">Contrasts and followup tests using <code>lmer</code></a></li>
 <li class="chapter" data-level="" data-path="troubleshooting-multilevel-models.html"><a href="troubleshooting-multilevel-models.html"><i class="fa fa-check"></i>Troubleshooting</a><ul>
 <li class="chapter" data-level="" data-path="troubleshooting-multilevel-models.html"><a href="troubleshooting-multilevel-models.html#simplifying-mixed-models"><i class="fa fa-check"></i>Convergence problems and simplifying the random effects structure</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="multilevel-bayes-reasons.html"><a href="multilevel-bayes-reasons.html"><i class="fa fa-check"></i>Bayesian multilevel models</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="mediation.html"><a href="mediation.html"><i class="fa fa-check"></i><b>11</b> Mediation</a></li>
-<li class="chapter" data-level="12" data-path="covariance-modelling.html"><a href="covariance-modelling.html"><i class="fa fa-check"></i><b>12</b> Covariance modelling</a><ul>
+<li class="chapter" data-level="12" data-path="mediation-and-covariance-modelling.html"><a href="mediation-and-covariance-modelling.html"><i class="fa fa-check"></i><b>12</b> Mediation and covariance modelling</a><ul>
+<li class="chapter" data-level="" data-path="mediation.html"><a href="mediation.html"><i class="fa fa-check"></i>Mediation</a></li>
+<li class="chapter" data-level="" data-path="covariance-modelling.html"><a href="covariance-modelling.html"><i class="fa fa-check"></i>Covariance modelling</a></li>
 <li class="chapter" data-level="" data-path="path-models.html"><a href="path-models.html"><i class="fa fa-check"></i>Path models</a><ul>
 <li class="chapter" data-level="" data-path="path-models.html"><a href="path-models.html#defining-a-model"><i class="fa fa-check"></i>Defining a model</a></li>
 </ul></li>
@@ -267,24 +274,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="sem.html"><a href="sem.html"><i class="fa fa-check"></i>Structural eqution modelling (SEM)</a></li>
 <li class="chapter" data-level="" data-path="identification.html"><a href="identification.html"><i class="fa fa-check"></i>‘Identification’ in CFA and SEM</a></li>
 <li class="chapter" data-level="" data-path="cfa-sem-missing-data.html"><a href="cfa-sem-missing-data.html"><i class="fa fa-check"></i>Missing data</a></li>
+<li class="chapter" data-level="" data-path="gof.html"><a href="gof.html"><i class="fa fa-check"></i>Goodness of fit statistics in CFA</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="power-analysis.html"><a href="power-analysis.html"><i class="fa fa-check"></i><b>13</b> Power analysis</a><ul>
-<li class="chapter" data-level="" data-path="power-analysis.html"><a href="power-analysis.html#for-most-inferential-statistics"><i class="fa fa-check"></i>For most inferential statistics</a></li>
-<li class="chapter" data-level="" data-path="power-analysis.html"><a href="power-analysis.html#for-multilevel-or-generalised-linear-models"><i class="fa fa-check"></i>For multilevel or generalised linear models</a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html"><i class="fa fa-check"></i><b>14</b> Baysian model fitting</a><ul>
+<li class="chapter" data-level="13" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html"><i class="fa fa-check"></i><b>13</b> Baysian model fitting</a><ul>
 <li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#baysian-fitting-of-linear-models-via-mcmc-methods"><i class="fa fa-check"></i>Baysian fitting of linear models via MCMC methods</a></li>
 <li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#posterior-probabilities-for-parameters"><i class="fa fa-check"></i>Posterior probabilities for parameters</a></li>
 <li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#credible-intervals"><i class="fa fa-check"></i>Credible intervals</a></li>
 <li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#bayesian-p-values-for-parameters"><i class="fa fa-check"></i>Bayesian ‘p values’ for parameters</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="part-loose-ends.html"><a href="part-loose-ends.html"><i class="fa fa-check"></i><b>15</b> (PART) Loose Ends</a><ul>
-<li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html"><i class="fa fa-check"></i>Making predictions</a><ul>
+<li class="chapter" data-level="14" data-path="power-analysis.html"><a href="power-analysis.html"><i class="fa fa-check"></i><b>14</b> Power analysis</a><ul>
+<li class="chapter" data-level="" data-path="power-analysis.html"><a href="power-analysis.html#for-most-inferential-statistics"><i class="fa fa-check"></i>For most inferential statistics</a></li>
+<li class="chapter" data-level="" data-path="power-analysis.html"><a href="power-analysis.html#for-multilevel-or-generalised-linear-models"><i class="fa fa-check"></i>For multilevel or generalised linear models</a></li>
+</ul></li>
+<li class="part"><span><b>IV Patterns</b></span></li>
+<li class="chapter" data-level="15" data-path="learning-key-patterns.html"><a href="learning-key-patterns.html"><i class="fa fa-check"></i><b>15</b> Learning key patterns</a></li>
+<li class="chapter" data-level="16" data-path="understanding-interactions.html"><a href="understanding-interactions.html"><i class="fa fa-check"></i><b>16</b> Unpicking interactions</a><ul>
+<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#what-is-an-interaction"><i class="fa fa-check"></i>What is an interaction?</a></li>
+<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#visualising-interactions-from-raw-data"><i class="fa fa-check"></i>Visualising interactions from raw data</a></li>
+<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#pain-music-data"><i class="fa fa-check"></i>A painful example</a></li>
+<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#continuous-predictors"><i class="fa fa-check"></i>Continuous predictors</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html"><i class="fa fa-check"></i><b>17</b> Making predictions</a><ul>
 <li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predictions-vs-margins"><i class="fa fa-check"></i>Predictions vs margins</a></li>
 <li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predicted-means"><i class="fa fa-check"></i>Predicted means</a></li>
 <li><a href="predictions-and-margins.html#effects-margins"><em>Effects</em> (margins)</a></li>
-<li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#continuous-predictors"><i class="fa fa-check"></i>Continuous predictors</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#continuous-predictors-1"><i class="fa fa-check"></i>Continuous predictors</a></li>
 <li><a href="predicted-means-and-margins-using-lm.html#predicted-means-and-margins-using-lm">Predicted means and margins using <code>lm()</code></a><ul>
 <li class="chapter" data-level="" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html"><i class="fa fa-check"></i>Running the model</a></li>
 <li class="chapter" data-level="" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html#making-predictions-for-means"><i class="fa fa-check"></i>Making predictions for means</a></li>
@@ -294,63 +308,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="predictions-with-continuous-covariates.html"><a href="predictions-with-continuous-covariates.html"><i class="fa fa-check"></i>Predictions with continuous covariates</a></li>
 <li class="chapter" data-level="" data-path="visualising-interactions.html"><a href="visualising-interactions.html"><i class="fa fa-check"></i>Visualising interactions</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="explanations.html"><a href="explanations.html"><i class="fa fa-check"></i>Explanations</a><ul>
-<li class="chapter" data-level="15.1" data-path="understanding-interactions.html"><a href="understanding-interactions.html"><i class="fa fa-check"></i><b>15.1</b> Interactions</a><ul>
-<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#what-is-an-interaction"><i class="fa fa-check"></i>What is an interaction?</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="visualising-interactions-from-raw-data.html"><a href="visualising-interactions-from-raw-data.html"><i class="fa fa-check"></i>Visualising interactions from raw data</a><ul>
-<li class="chapter" data-level="" data-path="visualising-interactions-from-raw-data.html"><a href="visualising-interactions-from-raw-data.html#pain-music-data"><i class="fa fa-check"></i>A painful example</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="continuous-predictors-1.html"><a href="continuous-predictors-1.html"><i class="fa fa-check"></i>Continuous predictors</a></li>
-<li class="chapter" data-level="15.2" data-path="intervals.html"><a href="intervals.html"><i class="fa fa-check"></i><b>15.2</b> Confidence and Intervals</a><ul>
-<li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html#the-problem-with-confidence-intervals"><i class="fa fa-check"></i>The problem with confidence intervals</a></li>
-<li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html#forgetting-that-the-ci-depends-on-sample-size."><i class="fa fa-check"></i>Forgetting that the CI depends on sample size.</a></li>
-</ul></li>
-<li class="chapter" data-level="15.3" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html"><i class="fa fa-check"></i><b>15.3</b> Multiple comparisons</a><ul>
-<li class="chapter" data-level="15.3.1" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#p-values-and-false-discoveries"><i class="fa fa-check"></i><b>15.3.1</b> <em>p</em> values and ‘false discoveries’</a></li>
-<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#multiple-tests-on-the-same-data"><i class="fa fa-check"></i>Multiple tests on the same data</a></li>
-<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#what-to-do-about-it"><i class="fa fa-check"></i>What to do about it?</a></li>
-<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#practical-examples"><i class="fa fa-check"></i>Practical examples</a></li>
-<li><a href="multiple-comparisons.html#contrasts-lmer">Followup tests using <code>lmer</code></a></li>
-</ul></li>
-<li class="chapter" data-level="15.4" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>15.4</b> Non-independence</a></li>
-<li class="chapter" data-level="15.5" data-path="fixed-or-random.html"><a href="fixed-or-random.html"><i class="fa fa-check"></i><b>15.5</b> Fixed and random effects</a></li>
-<li class="chapter" data-level="15.6" data-path="link-functions.html"><a href="link-functions.html"><i class="fa fa-check"></i><b>15.6</b> Link functions</a><ul>
-<li class="chapter" data-level="" data-path="link-functions.html"><a href="link-functions.html#logistic-link-function"><i class="fa fa-check"></i>Logistic regression</a></li>
-</ul></li>
-<li class="chapter" data-level="15.7" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html"><i class="fa fa-check"></i><b>15.7</b> Building and choosing models</a><ul>
-<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#like-maps-models-are-imperfect-but-useful"><i class="fa fa-check"></i>Like maps, models are imperfect but useful</a></li>
-<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#over-fitting"><i class="fa fa-check"></i>Overfitting/underfitting</a></li>
-<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#variable-selection"><i class="fa fa-check"></i>Choosing the ‘right variables’</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="gof.html"><a href="gof.html"><i class="fa fa-check"></i>Goodness of fit statistics in CFA</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="r-details.html"><a href="r-details.html"><i class="fa fa-check"></i>R in daily life</a><ul>
-<li class="chapter" data-level="" data-path="r-details.html"><a href="r-details.html#installation-intro"><i class="fa fa-check"></i>Installation</a></li>
-<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i>Loading packages</a></li>
-<li class="chapter" data-level="" data-path="rownames.html"><a href="rownames.html"><i class="fa fa-check"></i>Rownames are evil</a></li>
-<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html"><i class="fa fa-check"></i>Colours</a><ul>
-<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#picking-colours"><i class="fa fa-check"></i>Picking colours for plots</a></li>
-<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#named-colours"><i class="fa fa-check"></i>Named colours in R</a></li>
-<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#color-brewer"><i class="fa fa-check"></i>ColourBrewer with ggplot</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="string-handling.html"><a href="string-handling.html"><i class="fa fa-check"></i>Working with character strings</a><ul>
-<li class="chapter" data-level="15.7.1" data-path="string-handling.html"><a href="string-handling.html#searching-and-replacing"><i class="fa fa-check"></i><b>15.7.1</b> Searching and replacing</a></li>
-<li><a href="processing-vectors.html#paste">Using <code>paste</code> to make labels</a></li>
-<li><a href="string-handling.html#separate-and-extract">Fixing up <code>variable</code> after melting</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="getting-help.html"><a href="getting-help.html"><i class="fa fa-check"></i>Getting help</a><ul>
-<li class="chapter" data-level="" data-path="getting-help.html"><a href="getting-help.html#backtick-location"><i class="fa fa-check"></i>Finding the backtick on your keyboard</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html"><i class="fa fa-check"></i>Re-using code</a><ul>
-<li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html#helper-functions"><i class="fa fa-check"></i>Writing helper functions</a></li>
-<li><a href="code-reuse.html#ggplot-reuse">Re-using code with <code>ggplot</code></a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="example-datasets.html"><a href="example-datasets.html"><i class="fa fa-check"></i>Example datasets</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html"><i class="fa fa-check"></i>Models are data too</a><ul>
-<li class="chapter" data-level="" data-path="extract-results-from-models.html"><a href="extract-results-from-models.html"><i class="fa fa-check"></i>Extracting results from models</a></li>
-<li class="chapter" data-level="" data-path="process-model-results.html"><a href="process-model-results.html"><i class="fa fa-check"></i>Process your results</a></li>
+<li class="chapter" data-level="18" data-path="models-are-data-too.html"><a href="models-are-data-too.html"><i class="fa fa-check"></i><b>18</b> Models are data</a><ul>
+<li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#storing-models-in-variables"><i class="fa fa-check"></i>Storing models in variables</a></li>
+<li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#extract-results-from-models"><i class="fa fa-check"></i>Extracting results from models</a></li>
+<li><a href="models-are-data-too.html#poking-around-with-and">‘Poking around’ with <code>$</code> and <code>@</code></a></li>
+<li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#broom"><i class="fa fa-check"></i>Save work: use a Broom</a></li>
+<li class="chapter" data-level="" data-path="process-model-results.html"><a href="process-model-results.html"><i class="fa fa-check"></i>‘Processing’ results</a></li>
 <li class="chapter" data-level="" data-path="output-tables.html"><a href="output-tables.html"><i class="fa fa-check"></i>Printing tables</a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html"><i class="fa fa-check"></i>APA formatting for free</a><ul>
 <li><a href="apa-output.html#chi2">Chi<sup>2</sup></a></li>
@@ -358,16 +321,62 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#anova-1"><i class="fa fa-check"></i>Anova</a></li>
 <li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#multilevel-models"><i class="fa fa-check"></i>Multilevel models</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html"><i class="fa fa-check"></i>Simplifying and re-using</a><ul>
+<li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html#helper-functions"><i class="fa fa-check"></i>Writing helper functions</a></li>
+<li><a href="code-reuse.html#ggplot-reuse">Re-using code with <code>ggplot</code></a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html"><i class="fa fa-check"></i><b>16</b> Sharing and publishing your work</a><ul>
-<li class="chapter" data-level="16.0.1" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html#publication"><i class="fa fa-check"></i><b>16.0.1</b> Tips for dead tree journals</a></li>
-<li class="chapter" data-level="16.0.2" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html#archiving-data"><i class="fa fa-check"></i><b>16.0.2</b> Archiving data</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="writing-a-paper.html"><a href="writing-a-paper.html"><i class="fa fa-check"></i>Writing a paper</a><ul>
+<li class="chapter" data-level="19" data-path="part-explanations.html"><a href="part-explanations.html"><i class="fa fa-check"></i><b>19</b> (PART) Explanations</a></li>
+<li class="chapter" data-level="20" data-path="intervals.html"><a href="intervals.html"><i class="fa fa-check"></i><b>20</b> Confidence and Intervals</a><ul>
+<li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html#the-problem-with-confidence-intervals"><i class="fa fa-check"></i>The problem with confidence intervals</a></li>
+<li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html#forgetting-that-the-ci-depends-on-sample-size."><i class="fa fa-check"></i>Forgetting that the CI depends on sample size.</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html"><i class="fa fa-check"></i><b>21</b> Multiple comparisons</a><ul>
+<li><a href="multiple-comparisons.html#p-values-and-false-discoveries"><em>p</em> values and ‘false discoveries’</a></li>
+<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#multiple-tests-on-the-same-data"><i class="fa fa-check"></i>Multiple tests on the same data</a></li>
+<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#what-to-do-about-it"><i class="fa fa-check"></i>What to do about it?</a></li>
+<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#contrasts-examples"><i class="fa fa-check"></i>Practical examples</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>22</b> Non-independence</a></li>
+<li class="chapter" data-level="23" data-path="fixed-or-random.html"><a href="fixed-or-random.html"><i class="fa fa-check"></i><b>23</b> Fixed and random effects</a></li>
+<li class="chapter" data-level="24" data-path="link-functions.html"><a href="link-functions.html"><i class="fa fa-check"></i><b>24</b> Link functions</a><ul>
+<li class="chapter" data-level="" data-path="link-functions.html"><a href="link-functions.html#logistic-link-function"><i class="fa fa-check"></i>Logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html"><i class="fa fa-check"></i><b>25</b> Building and choosing models</a><ul>
+<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#like-maps-models-are-imperfect-but-useful"><i class="fa fa-check"></i>Like maps, models are imperfect but useful</a></li>
+<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#over-fitting"><i class="fa fa-check"></i>Overfitting/underfitting</a></li>
+<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#variable-selection"><i class="fa fa-check"></i>Choosing the ‘right variables’</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="part-loose-ends.html"><a href="part-loose-ends.html"><i class="fa fa-check"></i><b>26</b> (PART) Loose ends</a></li>
+<li class="chapter" data-level="27" data-path="r-details.html"><a href="r-details.html"><i class="fa fa-check"></i><b>27</b> R in daily life</a><ul>
+<li class="chapter" data-level="" data-path="installation-intro.html"><a href="installation-intro.html"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i>Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="quirks.html"><a href="quirks.html"><i class="fa fa-check"></i><b>28</b> Quirks of R</a><ul>
+<li class="chapter" data-level="" data-path="rownames.html"><a href="rownames.html"><i class="fa fa-check"></i>Rownames are evil</a></li>
+<li class="chapter" data-level="" data-path="string-handling.html"><a href="string-handling.html"><i class="fa fa-check"></i>Working with character strings</a><ul>
+<li class="chapter" data-level="28.0.1" data-path="string-handling.html"><a href="string-handling.html#searching-and-replacing"><i class="fa fa-check"></i><b>28.0.1</b> Searching and replacing</a></li>
+<li><a href="processing-vectors.html#paste">Using <code>paste</code> to make labels</a></li>
+<li><a href="string-handling.html#separate-and-extract">Fixing up <code>variable</code> after melting</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html"><i class="fa fa-check"></i>Colours</a><ul>
+<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#picking-colours"><i class="fa fa-check"></i>Picking colours for plots</a></li>
+<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#named-colours"><i class="fa fa-check"></i>Named colours in R</a></li>
+<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#color-brewer"><i class="fa fa-check"></i>ColourBrewer with ggplot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="getting-help.html"><a href="getting-help.html"><i class="fa fa-check"></i><b>29</b> Getting help</a><ul>
+<li class="chapter" data-level="" data-path="getting-help.html"><a href="getting-help.html#backtick-location"><i class="fa fa-check"></i>Finding the backtick on your keyboard</a></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html"><i class="fa fa-check"></i><b>30</b> Sharing, publishing and archiving</a><ul>
+<li class="chapter" data-level="" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html#publication"><i class="fa fa-check"></i>Tips for dead tree journals</a></li>
+<li class="chapter" data-level="30.0.1" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html#registering-your-predictions---register-predictions"><i class="fa fa-check"></i><b>30.0.1</b> Registering your predictions (- #register-predictions)</a></li>
+<li class="chapter" data-level="" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html#archiving-data"><i class="fa fa-check"></i>Archiving data</a></li>
+<li class="chapter" data-level="30.1" data-path="writing-paper.html"><a href="writing-paper.html"><i class="fa fa-check"></i><b>30.1</b> Writing a complete paper in RMarkdown</a></li>
 <li class="chapter" data-level="" data-path="raw-data-mess.html"><a href="raw-data-mess.html"><i class="fa fa-check"></i>Cleaning up the mess: dealing with raw data</a></li>
 <li class="chapter" data-level="" data-path="table1.html"><a href="table1.html"><i class="fa fa-check"></i>“Table 1”</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>17</b> References</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
       </nav>
@@ -386,15 +395,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="part-loose-ends" class="section level1">
-<h1><span class="header-section-number">15</span> (PART) Loose Ends</h1>
-
+<h1><span class="header-section-number">26</span> (PART) Loose ends</h1>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="bayes-mcmc.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="predictions-and-margins.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="comparison-and-selection.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-details.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -405,7 +414,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,

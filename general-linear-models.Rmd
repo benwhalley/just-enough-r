@@ -1,6 +1,6 @@
 ---
 title: 'General linear models'
-output: bookdown::tufte_html2
+
 ---
   
 ```{r, include=FALSE}
@@ -93,7 +93,7 @@ Where there are categorical predictors we can also reuse the `car::Anova` functi
 car::Anova(titanic.model, type=3)
 ```
 
-[Note that the Anova table for a `glm` model provides \chi^2^ tests in place of F tests. Although they are calculated differently, you can interpret these \chi^2^ tests and *p* values as you would for F tests in a regular Anova.]{.explainer}
+[Note that the Anova table for a `glm` model provides $\chi^2$ tests in place of F tests. Although they are calculated differently, you can interpret these $\chi^2$ tests and *p* values as you would for F tests in a regular Anova.]{.explainer}
 
 
 

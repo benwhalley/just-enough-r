@@ -1,6 +1,6 @@
 ---
 title: 'Multilevel models'
-output: bookdown::tufte_html2
+
 ---
 
 
@@ -179,7 +179,7 @@ lme4::sleepstudy %>%
 ## `geom_smooth()` using method = 'loess'
 ```
 
-<img src="multilevel-models_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+![](multilevel-models_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
 
 
 ```r
@@ -214,7 +214,7 @@ lme4::sleepstudy %>%
   theme_minimal()
 ```
 
-<img src="multilevel-models_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+![](multilevel-models_files/figure-latex/unnamed-chunk-8-1.pdf)<!-- --> 
 
 
 If we wanted to test whether there was significant variation in the effects of sleep deprivation between subjects, by adding a [random slope](#random-slopes-intercepts) to the model. 
@@ -293,7 +293,7 @@ residual.fitted.data %>%
 ## `geom_smooth()` using method = 'loess'
 ```
 
-<img src="multilevel-models_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+![](multilevel-models_files/figure-latex/unnamed-chunk-13-1.pdf)<!-- --> 
 
 
 
@@ -315,7 +315,7 @@ ranef(random.slope.model)$Subject %>%
   scale_y_continuous(limits=c(-100, 100)) 
 ```
 
-<img src="multilevel-models_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+![](multilevel-models_files/figure-latex/unnamed-chunk-14-1.pdf)<!-- --> 
 
 
 
@@ -386,7 +386,7 @@ lme4::sleepstudy %>%
 ## `geom_smooth()` using method = 'loess'
 ```
 
-<img src="multilevel-models_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+![](multilevel-models_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
 
 If we insisted on testing a curved (quadratic) function of `Days`, we could:
 
@@ -470,7 +470,7 @@ VarCorr(random.intercepts.model) %>%
 ## 2 Residual 0.4106911
 ```
 
-[Intraclass correlations were computed from the mixed effects mode. 59% of the variation in outcome was attributable to differences between subjects, \chi^2^(1) = 107, *p* < .001.]{.apa-example}
+[Intraclass correlations were computed from the mixed effects mode. 59% of the variation in outcome was attributable to differences between subjects, $\chi^2(1) = 107$, *p* < .001.]{.apa-example}
 
 
 [It's not straightforward to put an confidence interval around the VPC estimate from an lmer model. If this is important to you, you should explore [re-fitting the same model in a Bayesian framework](#bayes-mcmc)]
@@ -522,7 +522,7 @@ summary(lectures.model)
 ## 
 ## Scaled residuals: 
 ##      Min       1Q   Median       3Q      Max 
-## -2.55587 -0.73732  0.05425  0.76974  2.46973 
+## -2.55587 -0.73732  0.05425  0.76974  2.46972 
 ## 
 ## Random effects:
 ##  Groups   Name        Variance Std.Dev.
@@ -547,9 +547,9 @@ VarCorr(lectures.model) %>% as_data_frame() %>%
 ## # A tibble: 3 x 3
 ##        grp       vcov        icc
 ##      <chr>      <dbl>      <dbl>
-## 1        s 0.08245431 0.04716828
-## 2        d 0.28066190 0.16055362
-## 3 Residual 1.38497203 0.79227810
+## 1        s 0.08245434 0.04716829
+## 2        d 0.28066185 0.16055360
+## 3 Residual 1.38497202 0.79227811
 ```
 
 
@@ -563,7 +563,7 @@ anova(lectures.model.2)
 ## approximation for degrees of freedom
 ##              Sum Sq Mean Sq NumDF  DenDF F.value   Pr(>F)   
 ## service      10.521 10.5212     1 7351.4  7.6046 0.005836 **
-## dept         15.671  1.2054    13 1153.4  0.8713 0.583610   
+## dept         15.671  1.2054    13 1153.4  0.8713 0.583611   
 ## service:dept 25.361  1.9509    13 6399.7  1.4101 0.145724   
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -589,11 +589,11 @@ VarCorr(lectures.model.2) %>% as_data_frame() %>%
   mutate(icc=vcov/sum(vcov)) %>% 
   select(grp, vcov, icc)
 ## # A tibble: 3 x 3
-##        grp       vcov        icc
-##      <chr>      <dbl>      <dbl>
-## 1        s 0.08133698 0.04677067
-## 2        d 0.27419184 0.15766674
-## 3 Residual 1.38353063 0.79556258
+##        grp      vcov        icc
+##      <chr>     <dbl>      <dbl>
+## 1        s 0.0813370 0.04677069
+## 2        d 0.2741918 0.15766675
+## 3 Residual 1.3835306 0.79556257
 ```
 
 
@@ -669,7 +669,7 @@ m.lsm.df %>%
   ylab("RT")
 ```
 
-<img src="multilevel-models_files/figure-html/unnamed-chunk-32-1.png" width="672" />
+![](multilevel-models_files/figure-latex/unnamed-chunk-32-1.pdf)<!-- --> 
 
 
 If we wanted to compare each day against every other day (i.e. all the pairwise comparisons) we can use `contrast()`:

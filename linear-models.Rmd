@@ -1,10 +1,9 @@
 ---
 title: 'Regression in R'
-output: bookdown::tufte_html2
+
 ---
   
 ```{r, include=FALSE}
-# ignore all this for the moment; it will be explained below
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE, message=FALSE)
 library(tidyverse)
 ```
@@ -12,7 +11,8 @@ library(tidyverse)
 
 # Regression {#linear-models-simple}
 
-This section assumes most readers will have done an introductory statistics course and had practce running multiple regression and or Anova in SPSS or a similar package. 
+#### {- .tip}
+This section assumes most readers will have done an introductory statistics course and had some practice running multiple regression and or Anova in SPSS or a similar package. 
 
 
 

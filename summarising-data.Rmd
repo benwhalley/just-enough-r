@@ -1,23 +1,21 @@
----
+--
 title: 'Summarising data'
-output: 
-  bookdown::tufte_html2
 ---
 
 
 
-# Summarising data {#summarising-data}
+# Summaries {#summarising-data}
+
 
 ```{r, include=FALSE, message=F}
-# ignore all this for the moment; it will be explained below
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 library(tidyverse)
 library(pander)
-angry.moods <- readr::read_csv('data/angry_moods.csv')
+angry.moods <- read_csv('data/angry_moods.csv')
 ```
 
 
-Before you begin this section, make sure you have fully understood the section on [datasets and dataframes](datasets.html), and in particular that you are happy using the `%>%` symbol to describe a flow of data.
+Before you begin this section, make sure you have fully understood the section on [datasets and dataframes](datasets.html), and in particular that you are happy using the `%>%` symbol to [describe a flow of data](#pipes).
 
 The chapter outlines several different approaches to obtaining summary statistics, and covers:
 
@@ -26,7 +24,9 @@ The chapter outlines several different approaches to obtaining summary statistic
 - Using `dplyr` as a generalisable tool to make any kind of summary
 
 
-In particular, we place an emphasis on functions *which return dataframes*, because this enables us to process and present our summaries in useful ways.
+In particular, we emphasise functions that *return dataframes*. 
+
+If a function returns a dataframe (rather than just printing output to the screen) then we can continue to process and present these results in useful ways.
 
 
 <!-- VIDEO COVERING THIS MATERIAL -->
@@ -34,14 +34,18 @@ In particular, we place an emphasis on functions *which return dataframes*, beca
 
 
 
-## Utility functions for descriptive statistics {-}
+## "Quick and dirty" {-}
 
+
+##### (Using utility functions built into R) {-}
 
 
 ### Frequency tables {- #frequency-tables}
 
 
-Let's say we ask 4 year olds and 6 year olds whether they prefer lego or duplo. We use the `table()` command to get a cross tabulation of these `age` categories and what the child `prefers`. We wrap `table(...)` in the `with()` function to tell it which dataframe to use:
+Let's say we ask 4 year olds and 6 year olds whether they prefer lego or duplo. 
+
+We can use the `table()` command to get a cross tabulation of these `age` categories and what the child `prefers`. We wrap `table(...)` in the `with()` function to tell it which dataframe to use:
 
 ```{r, include=F, echo=F}
 set.seed(1234)
@@ -55,11 +59,35 @@ lego.table
 ```
 
 
+#### `xtab`
+
+`table` is a simple way of calculating frequencies, but you can also use the `xtabs` function to make more complex sumamries.
+
+`xtabs` uses a formula type syntax to describe the table ([formulas for linear models are explained here](#formulae)).
+
+In the simplest case, we just write a tilde symbol (`~`) and the the names of the variables we want to tablulate, separated with `+` symbols:
+
+```{r}
+xtabs(~age+prefers, lego.duplo.df)
+```
+
+The order of the variables changes the orientation of the table:
+
+```{r}
+xtabs(~prefers+age, lego.duplo.df)
+```
+
+
+Tables like this are useful in their own right, but can also be passed to inferential tests, like [Chi squred](#crosstabs)
+
+
+
+
 
 ### Summary statistics {-}
 
 
-In this guide so far you might have notices functions which provide summaries of an entire dataframe. For example:
+In this guide so far you might have noticed functions which provide summaries of an entire dataframe. For example:
 
 ```{r}
 summary(angry.moods)
@@ -90,7 +118,7 @@ In this example, we create summary statistics with the `psych::describe()` funct
 ```{r}
 psych::describe(angry.moods, skew=FALSE) %>% 
   as_data_frame %>% 
-  pandoc.table()
+  pander()
 ```
 
 
@@ -103,12 +131,24 @@ psych::describe(angry.moods, skew=FALSE) %>%
   rownames_to_column(var="variable") %>% 
   select(variable, mean, sd) %>% 
   filter(mean > 20) %>% 
-  pandoc.table
+  pander
+```
+
+
+We can do the same with the output of [`table` or `xtabs`](#frequency-tables) too:
+
+
+```{r}
+xtabs(~prefers+age, lego.duplo.df) %>%
+  as_data_frame %>%
+  pander(caption="Using `xtabs` to make a frequency table; converting to a dataframe for presentation using `pander`.")
 ```
 
 
 
-##### Rownames are evil {.explainer}
+
+
+##### Rownames are evil {- .explainer}
 
 Historically 'row names' were used on R to label individual rows in a dataframe. It turned out that this is generally a bad idea, because sorting and some summary functions would get very confused and mix up row names and the data itself.
 
@@ -144,9 +184,12 @@ Thankfully there is much nicer and more consistent way to compute exactly the su
 
 
 
-## A generalised approach: Split, apply, combine {- #split-apply-combine}
+## A generalised approach {-}
 
-The  `dplyr::` package, and especially the `summarise()` function provides a generalised way to create dataframes of frequencies and other summary statistics, grouped and sorted however we like.
+
+#### The 'split, apply, combine' model {- #split-apply-combine}
+
+The `dplyr::` package, and especially the `summarise()` function provides a generalised way to create dataframes of frequencies and other summary statistics, grouped and sorted however we like.
 
 For example, let's say we want the mean of some of our variables across the whole dataframe:
 
@@ -158,8 +201,9 @@ angry.moods %>%
   )
 ```
 
+The `summarise` function has returned a dataframe containing the statistics we need, although in this instance the dataframe only has one row. 
 
-This has returned a dataframe containing the statistics we need, although in this instance the dataframe only has one row. What if we want the numbers for men and women separately?
+What if we want the numbers for men and women separately?
 
 Utility functions like `describeBy` have options to do this (you would specify grouping variables in that). But there's a more general pattern at work --- we want to:
 
@@ -224,7 +268,7 @@ If this were our data we might want to:
 
 Using only the commands above[^sneaked]  we can write:
 
-[^sneaked]: You might have noticed I sneaked something new in here: the call to `pandoc.table()`. This is from the `pander::` package, which contains is a useful set of functions function for when writing RMarkdown documents. They convert many R objects into more readable output: here it makes a nice table for us in the compiled document.  We cover more [tips and tricks for formatting RMarkdown documents here](rmarkdown-tricks.html). You might also want to check [this page on missing values](missing-values.html) to explain the filter which uses `!is.na()`, but you could leave it for later.
+[^sneaked]: You might have noticed I sneaked something new in here: the call to `pander()`. This is from the `pander::` package, which contains is a useful set of functions function for when writing RMarkdown documents. They convert many R objects into more readable output: here it makes a nice table for us in the compiled document.  We cover more tips and tricks for formatting RMarkdown documents in the chapter on [sharing and publishing your data](#sharing-and-publication). You might also want to check [this page on missing values](#missing) to explain the filter which uses `!is.na()`, but you could equally leave this for later.
 
 
 ```{r}
@@ -249,13 +293,13 @@ phq9.summary.df %>%
 
 
 
-###### A 'neater way' {-}
+###### A 'neater way' {- #mutate-with-rowmeans}
 
 You might have thought that typing out each variable in the above example (`phq9_01 + phq9_02...`) seemed a bit repetitive.
 
-In general, if you find yourself typing something repetitive in R then there will a better way of doing it, and this is true here.
+In general, if you find yourself typing something repetitive in R then there *will* a better way of doing it, and this is true here.
 
-Stepping back, *what we want is the row mean of all the variables starting with `phq9_0`*. We can write this more concisely like so:
+Stepping back, what we want is *the row mean of all the variables starting with `phq9_0`*. We can write this more concisely like so:
 
 ```{r}
 phq9.df %>% 
@@ -281,46 +325,5 @@ I've broken the code into multiple lines to make it clearer to read. In English,
 
 
 
-## Fancy reshaping {- #fancy-reshaping}
 
-As noted in the section on [reshaping](#reshaping) above, it's common to combine the process of reshaping and aggregating or summarising in the same step. 
-
-For example here we have multiple rows per person, 3 trial at time 1, and 3 more trials at time 2:
-
-```{r, include=F}
-expt.data <- readRDS("data/expt.data.RDS") %>% filter(trial < 4)
-```
-
-```{r}
-expt.data %>% 
-  arrange(person, time, trial) %>% 
-  head %>% 
-  pander
-```
-
-
-We can reshape and aggregate this in a single step using `dcast`. Here we request the mean for each person at each time, with observations for each time split across two columns:
-
-```{r, message=T, warning=T}
-library(reshape2)
-expt.data %>%
-	dcast(person~paste0('time',time), 
-	      fun.aggregate=mean) %>% 
-  head %>% 
-  pander
-```
-
-Here `dcast` has correctly guessed that `RT` is the value we want to aggregate (you can specify explicitly with the `value.var=` parameter).
-
-`dcast` knows to aggregate using the mean because we set this with the `agg.function` parameter; this just stands for 'aggregation function'.
-
-We don't have to request the mean though: any function will do. Here we request the SD instead:
-
-```{r, message=T, warning=T}
-expt.data %>%
-	dcast(person~time, 
-	      fun.aggregate=sd) %>% 
-  head %>% 
-  pander
-```
 

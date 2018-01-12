@@ -1,6 +1,6 @@
 ---
 title: 'Anova'
-output: bookdown::tufte_html2
+
 ---
 
 

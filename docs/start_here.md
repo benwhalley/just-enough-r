@@ -1,7 +1,5 @@
 ---
 title: 'Starting out'
-output: 
-  bookdown::tufte_html2
 ---
   
 
@@ -65,7 +63,8 @@ When a document including this chunk is run or 'knitted', the final result will 
 RStudio is a text editor which has been customised to make working with R easy. It can be installed on your own computer, or you can login to a shared RStudio server (for example, one run by your university) from a web browser. Either way the interface is largely the same and contains 4 main panels:  
 
 
-<img src="media/rstudio-mainwindow.png" width="1495" />
+
+\includegraphics[width=41.53in]{media/rstudio-mainwindow} 
 
 
 The figure above shows the main RStudio interface, comprising:
@@ -435,7 +434,7 @@ But other functions process a vector without returning any numbers. For example,
 hist(heights)
 ```
 
-<img src="start_here_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+![](start_here_files/figure-latex/unnamed-chunk-19-1.pdf)<!-- --> 
 
 We'll cover lots more plotting and visualisation later on.
 
@@ -540,21 +539,21 @@ We can also use random number-generating functions built into R to create vector
 ```r
 # 10 uniformly distributed random numbers between 0 and 1
 runif(10)
-##  [1] 0.24286994 0.17523228 0.05899854 0.36021067 0.23732466 0.49818123
-##  [7] 0.15009582 0.87234990 0.06308135 0.16701757
+##  [1] 0.4045490 0.5345472 0.4414659 0.4832063 0.2562126 0.2040762 0.6876566
+##  [8] 0.4578561 0.1847851 0.8843672
 
 # 1,000 uniformly distributed random numbers between 1 and 100
 my.numbers <- runif(1000, 1, 10)
 
 # 10 random-normal numbers with mean 10 and SD=1
 rnorm(10, mean=10)
-##  [1]  9.123508  9.803758  8.528340  8.667840 11.115023  9.529525  8.384174
-##  [8] 10.208620  9.170439 11.156358
+##  [1] 11.342605 11.115379  9.036358  9.062017 10.748910  9.390587 10.194291
+##  [8] 10.306759 10.127122  8.247792
 
 # 10 random-normal numbers with mean 10 and SD=5
 rnorm(10, 10, 5)
-##  [1] 10.449631  8.899558  8.970688 24.198560  7.328819 15.203273 12.129459
-##  [8]  9.480256  6.589127 11.159354
+##  [1]  7.9126611 14.3523243 22.7525075 11.2225728  1.9833647 13.1075665
+##  [7]  6.0708431  9.4363061  0.2478268 11.1413276
 ```
 
 We can then use these numbers in our code, for example plotting them:
@@ -565,7 +564,7 @@ random.numbers <- rnorm(10000)
 hist(random.numbers)
 ```
 
-<img src="start_here_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+![](start_here_files/figure-latex/unnamed-chunk-28-1.pdf)<!-- --> 
 
 
 
@@ -631,9 +630,9 @@ ages <- round(rnorm(10, mean=40, sd=10))
 
 # get the rank order of elements (i.e. what their positions would be if the vector was sorted)
 ages
-##  [1] 50 57 45 38 39 42 52 40 38 40
+##  [1] 39 32 36 27 26 11 21 38 40 47
 rank(ages, ties.method="first")
-##  [1]  8 10  7  1  3  6  9  4  2  5
+##  [1]  8  5  6  4  3  1  2  7  9 10
 ```
 
 

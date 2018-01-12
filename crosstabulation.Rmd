@@ -1,7 +1,5 @@
 ---
 title: 'Crosstabulation'
-output: 
-  bookdown::tufte_html2
 ---
 
 
@@ -14,14 +12,14 @@ library(pander)
 
 
 
-## Crosstabulations and \chi^2^ {- #crosstabs}
+## Crosstabulations and $\chi^2$ {- #crosstabs}
 
 
 We saw in a previous section [how to create a frequency table of one or more variables](#frequency-tables). Using that previous example, assume  we already have a crosstabulation of `age` and `prefers`
 
 ```{r, include=F}
 lego.duplo.df <- readRDS("data/lego.RDS")
-lego.table <- with(lego.duplo.df, table(age, prefers))
+lego.table <- xtabs(~age+prefers, lego.duplo.df)
 lego.duplo.df %>% glimpse
 ```
 
@@ -29,7 +27,7 @@ lego.duplo.df %>% glimpse
 lego.table
 ```
 
-We can easily run the inferential \chi^2^ (sometimes spelled "chi", but pronounced "kai"-squared) test on this table:
+We can easily run the inferential $\chi^2$ (sometimes spelled "chi", but pronounced "kai"-squared) test on this table:
 
 
 ```{r}
@@ -46,10 +44,12 @@ Note that we can access each number in this output individually because the `chi
 lego.test$statistic
 ```
 
-Even nicer,  you can use R to write up your results for you in APA format!
+Even nicer,  you can use an R package to write up your results for you in APA format!
+
 
 ```{r}
-apa::apa(lego.test, print_n=T)
+library(apa)
+apa(lego.test, print_n=T)
 ```
 
 [See more on automatically displaying statistics in APA format](#apa-output)
@@ -58,14 +58,42 @@ apa::apa(lego.test, print_n=T)
 
 ### Three-way tables {-}
 
-You can also use `table()` to get 3-way tables of frequencies. For example, using the `mtcars` dataset we create a 3-way table, and then convert the result to a dataframe so we can print the table nicely in RMarkdown using the `pandoc.table()` function.
+You can also use `table()` or `xtabs()` to get 3-way tables of frequencies (`xtabs` is probably better for this than `table`). 
+
+For example, using the `mtcars` dataset we create a 3-way table, and then convert the result to a dataframe. This means we can print the table nicely in RMarkdown using the `pander.table()` function, or process it further (e.g. by [sorting](#sorting) or [reshaping](#reshaping) it).
 
 ```{r}
-with(mtcars, table(am, cyl, gear)) %>%
+xtabs(~am+gear+cyl, mtcars) %>%
   as_data_frame() %>% 
-  head() %>% 
-  pandoc.table()
+  pander()
 ```
+
+
+
+Often, you will want to present a table in a wider format than this, to aid comparisons between categories. For example, we might want our table to make it easy to compare between US and non-US cars for each different number of cylinders:
+
+
+```{r}
+xtabs(~am+gear+cyl, mtcars) %>%
+  as_data_frame() %>% 
+  reshape2::dcast(am+gear~paste(cyl, "Cylinders")) %>% 
+  pander()
+```
+
+
+
+Or our primary question might be related to the effect of `am`, in which case we might prefer to incude separate columns for US and non-US cars:
+
+```{r}
+xtabs(~am+gear+cyl, mtcars) %>%
+  as_data_frame() %>% 
+  reshape2::dcast(gear+cyl~paste0("US=", am)) %>% 
+  pander()
+```
+
+
+
+
 
 
 

@@ -1,7 +1,5 @@
 ---
 title: 't-tests'
-output:
-  bookdown::tufte_html2
 ---
 
 ```{r, include=F}
@@ -23,7 +21,7 @@ Before you run any tests it's worth plotting your data.
 
 Assuming you have a continuous outcome and categorical (binary) predictor (here we use a subset of the built in `chickwts` data), a boxplot can work well:
 
-```{r boxplot, fig.cap="The box in a boxplot indictes the IQR; the whisker indicates the min/max values or 1.5 * the IQR, whichever is the smaller. If there are outliers beyond 1.5 * the IQR then they are shown as points."}
+```{r boxplot, fig.cap="The box in a boxplot indictes the IQR; the whisker indicates the min/max values or 1.5 \times the IQR, whichever is the smaller. If there are outliers beyond 1.5 \times the IQR then they are shown as points."}
 chicks.eating.beans <- chickwts %>% 
   filter(feed %in% c("horsebean", "soybean"))
 
@@ -32,7 +30,7 @@ chicks.eating.beans %>%
   geom_boxplot()
 ```
 
-Or a violin or bottle plot, which shows the distributions within each group:
+Or a violin or bottle plot, which shows the distributions within each group and makes it relatively easy to check some of the main assumptions of the test:
 
 ```{r}
 chicks.eating.beans %>% 
@@ -52,7 +50,7 @@ chickwts %>%
 ```
 
 
-Bottleplots are just density plots, turned 90 degrees. Density plots might be more familiar to some, but it's hard to show more than 2 or 3 categories:
+<!-- Bottleplots are just density plots, turned 90 degrees. Density plots might be more familiar to some, but it's hard to show more than 2 or 3 categories:
 
 ```{r}
 chicks.eating.beans %>% 
@@ -70,7 +68,7 @@ chicks.eating.beans %>%
   geom_histogram(bins=7) + 
   facet_grid(feed ~ .)
 ```
-
+ -->
 
 
 ### Running a t-test {-}
@@ -113,31 +111,38 @@ You can turn this correction off (for example, if you're trying to replcate an a
 
 ##### Paired samples {-}
 
+If you have repeated measures on a sample you need a paired samples test. 
+
 ```{r}
-a <- rnorm(50, 2.5, 1)
-b = a + rnorm(50, .5, 1)
-t.test(a, b, paired=TRUE)
+# simulate paired samples in pre-post design
+set.seed(1234)
+baseline <- rnorm(50, 2.5, 1)
+followup = baseline + rnorm(50, .5, 1)
+
+# run paired samples test
+t.test(baseline, followup, paired=TRUE)
 ```
 
 
 Note that we could also ['melt' the data into long format](#wide-to-long) and use the `paired=TRUE` argument with a formula:
 
 ```{r}
-long.form.data <- data_frame(a=a, b=b) %>% 
-  tidyr::gather()
+long.form.data <- data_frame(baseline=baseline, follow=followup) %>% 
+  reshape2::melt()
 
-with(long.form.data, t.test(value~key, paired=TRUE))
+with(long.form.data, t.test(value~variable, paired=TRUE))
 ```
 
 
 
 ##### One-sample test {-}
 
-i.e. comparing sample mean with a specific value:
+Sometimes you might want to compare a sample mean with a specific value:
 
 ```{r}
 # test if mean of `outcome` variable is different from 2
-somedata <- rnorm(50, 2.5, 1)
-t.test(somedata, mu=2)
+set.seed(1234)
+test.scores <- rnorm(50, 2.5, 1)
+t.test(test.scores, mu=2)
 ```
 

@@ -1,7 +1,5 @@
 ---
 title: 'More example datasets'
-output:
-  bookdown::tufte_html2
 ---
 
 ```{r, include=FALSE}
@@ -11,6 +9,13 @@ library(tidyverse)
 library(pander)
 library(lubridate)
 ```
+
+
+
+# Example datasets {#example-datasets}
+
+
+The 
 
 
 

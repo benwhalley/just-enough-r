@@ -1,6 +1,6 @@
 ---
 title: 'Power analysis'
-output: bookdown::tufte_html2
+
 ---
 
 
@@ -35,7 +35,7 @@ simulated.df <- data_frame(
 GGally::ggpairs(simulated.df)
 ```
 
-<img src="power-analysis_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+![](power-analysis_files/figure-latex/unnamed-chunk-2-1.pdf)<!-- --> 
 
 
 
@@ -91,7 +91,7 @@ power.sim
 ## Based on 100 simulations, (0 warnings, 0 errors)
 ## alpha = 0.05, nrow = 100
 ## 
-## Time elapsed: 0 h 0 m 26 s
+## Time elapsed: 0 h 0 m 17 s
 ```
 
 Our observed power (proportion of times we get a significant *p* value) is very low here, so we might want increase our hypothesised effect of `x`, for example to see what power we have to detect an effect of x = .8:
@@ -111,7 +111,7 @@ power.sim
 ## Based on 100 simulations, (0 warnings, 0 errors)
 ## alpha = 0.05, nrow = 100
 ## 
-## Time elapsed: 0 h 0 m 27 s
+## Time elapsed: 0 h 0 m 14 s
 ```
 
 
@@ -142,7 +142,7 @@ power.sim
 ## Based on 100 simulations, (0 warnings, 0 errors)
 ## alpha = 0.05, nrow = 100
 ## 
-## Time elapsed: 0 h 0 m 26 s
+## Time elapsed: 0 h 0 m 14 s
 ```
 
 Because the amount of clustering in our data has increased our statistical power has gone down. This is because, when clustering is present, each new observation (row) in the dataset provides less new *information* to estimate our treatment effect. Note that in this example we increased the variance associated with `g` by quite a lot: setting the variance of `g` to 0.5 equates to an ICC for `g` of .33 (because .5 / (.5 + 1) = .33; see the section on [calculating ICCs and VPCs]{#icc-and-vpc})

@@ -1,15 +1,13 @@
 ---
 title: 'Graphics'
-output: 
-  bookdown::tufte_html2
 ---
   
 ```{r, include=FALSE}
-# ignore all this for the moment; it will be explained below
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE, message=F)
 library(tidyverse)
 library(pander)
 library(knitr)
+
 ```
 
 
@@ -25,8 +23,6 @@ data_frame(pictures = abs(rnorm(100, 30, 10)), words = pictures*1000+rnorm(100, 
 
 
 <!-- TODO ADD @matejka2017sameand dino plots -->
-
-
 
 
 Graphics are the best thing about R. The base system alone provides lots of useful plotting functions, but the `ggplot2` package is exceptional in the consistent and powerful approach it takes to visualising data. This chapter focusses mostly on `ggplot`, but does include some pointers to other useful plotting functions.

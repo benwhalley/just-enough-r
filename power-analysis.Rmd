@@ -1,20 +1,18 @@
 ---
 title: 'Power analysis'
-output: bookdown::tufte_html2
+
 ---
 
 
 ```{r, include=FALSE}
-# ignore all this for the moment
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 library(tidyverse)
 library(pander)
 library(simr)
-
 ```
 
 
-# Power analysis in R {#power-analysis}
+# Power analysis {#power-analysis}
 
 
 ### For most inferential statistics {-}
