@@ -8,7 +8,7 @@ title: 'Graphics'
 # Graphics {#graphics}
 
 
-![](graphics_files/figure-latex/unnamed-chunk-2-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
 
 
@@ -99,7 +99,10 @@ The `ggplot` library makes it easy to produce high quality graphics which serve 
 
 
 
-![(\#fig:unnamed-chunk-3)Examples of charts showing comaprisons, relationships, distribution and composition. The comparison, distribution and composition plots show 2 variables, but the relationship plot includes 3, increasing the density of the information displayed. ](graphics_files/figure-latex/unnamed-chunk-3-1.pdf) 
+<div class="figure">
+<img src="graphics_files/figure-html/unnamed-chunk-3-1.png" alt="Examples of charts showing comaprisons, relationships, distribution and composition. The comparison, distribution and composition plots show 2 variables, but the relationship plot includes 3, increasing the density of the information displayed. " width="768" />
+<p class="caption">(\#fig:unnamed-chunk-3)Examples of charts showing comaprisons, relationships, distribution and composition. The comparison, distribution and composition plots show 2 variables, but the relationship plot includes 3, increasing the density of the information displayed. </p>
+</div>
 
 
 ### A thought on 'chart chooser' guides {- .explainer}
@@ -188,7 +191,7 @@ mtcars %>%
   ggplot(aes(x = disp, y = mpg, colour=hp))
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 
 ###### Other aesthetics {- #aesthetics .explainer}
@@ -226,7 +229,7 @@ mtcars %>%
   geom_point()
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 
 And we have a pretty slick graph: `ggplot` has now added points for each pair of `disp` and `mpg` values, and coloured them according to the value of `hp` (see choosing colours below XXX).
@@ -249,7 +252,7 @@ mtcars %>%
   geom_smooth(se=F, colour="grey") 
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-8-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 
 
@@ -275,7 +278,7 @@ mtcars %>%
   facet_wrap("am")
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 
 One trick is to make sure factors are labelled nicely, because these labels appear on the final plot. Here the `mutate()` call [relabels the factor](real-data.html#factors-and-numerics) which makes the plot easier to read:
@@ -292,7 +295,7 @@ mtcars %>%
   facet_wrap("american")
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-10-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 
 [See the ggplot documentation on facetting for more details](http://ggplot2.tidyverse.org/reference/#section-facetting).
@@ -309,7 +312,7 @@ lme4::sleepstudy %>%
   ggplot(aes(Reaction)) + geom_density()
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 Imagine we wanted to compare distributions for individuals. Simply overlaying the lines is confusing:
 
@@ -319,7 +322,7 @@ lme4::sleepstudy %>%
   ggplot(aes(Reaction, group=Subject)) + geom_density()
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-12-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 
 Facetting produces a nicer result:
@@ -330,7 +333,7 @@ lme4::sleepstudy %>%
   ggplot(aes(Reaction)) + geom_density() + facet_wrap("Subject")
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-13-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 
 But we could present the same information more compactly, and with better facility to compare between subjects, if we use a bottleplot:
@@ -343,7 +346,7 @@ lme4::sleepstudy %>%
   geom_violin() 
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-14-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 
 
@@ -367,7 +370,7 @@ mean.ranked.sleep %>%
   theme(aspect.ratio = .33)  # change the aspect ratio to make long and wide
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-15-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 
 
@@ -391,7 +394,7 @@ sleep.repeat %>%
   theme(aspect.ratio = .25)  # change the aspect ratio to make long and wide
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-16-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 
 
@@ -405,7 +408,7 @@ mean.ranked.sleep %>%
   geom_boxplot() 
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-17-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 
 
@@ -418,7 +421,7 @@ lme4::sleepstudy %>%
   geom_boxplot() 
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
 
 
@@ -436,53 +439,53 @@ DAAG::bomregions %>%
 ```
 
 
-------------------------------------------------------------------------------------
-    &nbsp;       vars    n      mean        sd      min      max    range     se    
---------------- ------ ----- ----------- -------- -------- ------- ------- ---------
-   **Year**       1     109     1954      31.61     1900    2008     108     3.028  
+------------------------------------------------------------------------
+    &nbsp;       vars   n    mean      sd    min    max   range    se   
+--------------- ------ --- --------- ------ ------ ----- ------- -------
+   **Year**       1    109   1954    31.61   1900  2008    108    3.028 
 
-  **eastAVt**     2     99      20.43     0.4585   19.35    21.61   2.255   0.04608 
+  **eastAVt**     2    99    20.43   0.4585 19.35  21.61  2.255  0.04608
 
-   **seAVt**      3     99      14.59     0.4547   13.62    15.94   2.32    0.0457  
+   **seAVt**      3    99    14.59   0.4547 13.62  15.94  2.32   0.0457 
 
- **southAVt**     4     99      18.48     0.4584   17.43    19.53    2.1    0.04607 
+ **southAVt**     4    99    18.48   0.4584 17.43  19.53   2.1   0.04607
 
-   **swAVt**      5     99      16.18     0.4734   15.08    17.05   1.97    0.04758 
+   **swAVt**      5    99    16.18   0.4734 15.08  17.05  1.97   0.04758
 
-  **westAVt**     6     99      22.33     0.4548   21.22    23.39   2.165   0.04571 
+  **westAVt**     6    99    22.33   0.4548 21.22  23.39  2.165  0.04571
 
- **northAVt**     7     99      24.6      0.5042   23.57    25.94   2.365   0.05067 
+ **northAVt**     7    99    24.6    0.5042 23.57  25.94  2.365  0.05067
 
-  **mdbAVt**      8     99      17.59     0.4958   16.36    18.79   2.425   0.04983 
+  **mdbAVt**      8    99    17.59   0.4958 16.36  18.79  2.425  0.04983
 
-   **auAVt**      9     99      21.71     0.4429   20.67    22.87   2.195   0.04452 
+   **auAVt**      9    99    21.71   0.4429 20.67  22.87  2.195  0.04452
 
- **eastRain**     10    109     601.6     123.8    315.3    1030     715     11.85  
+ **eastRain**     10   109   601.6   123.8  315.3  1030    715    11.85 
 
-  **seRain**      11    109     598.1     104.6    354.9    900.6   545.7    10.02  
+  **seRain**      11   109   598.1   104.6  354.9  900.6  545.7   10.02 
 
- **southRain**    12    109     381.7     68.63     236     618.2   382.1    6.574  
+ **southRain**    12   109   381.7   68.63   236   618.2  382.1   6.574 
 
-  **swRain**      13    109     657.8      103     420.5    988.8   568.4    9.861  
+  **swRain**      13   109   657.8    103   420.5  988.8  568.4   9.861 
 
- **westRain**     14    109     352.2     84.55    173.5    646.5    473     8.098  
+ **westRain**     14   109   352.2   84.55  173.5  646.5   473    8.098 
 
- **northRain**    15    109     520.7     110.2    312.8    946.9    634     10.55  
+ **northRain**    15   109   520.7   110.2  312.8  946.9   634    10.55 
 
-  **mdbRain**     16    109      476      110.9    255.8     821    565.2    10.62  
+  **mdbRain**     16   109    476    110.9  255.8   821   565.2   10.62 
 
-  **auRain**      17    109     457.1     82.55    317.2    785.3   468.1    7.906  
+  **auRain**      17   109   457.1   82.55  317.2  785.3  468.1   7.906 
 
-    **SOI**       18    109   -0.002676   6.845    -20.01   20.79   40.8    0.6556  
+    **SOI**       18   109 -0.002676 6.845  -20.01 20.79  40.8   0.6556 
 
-  **co2mlo**      19    50      345.6     21.01     316     385.4   69.47    2.972  
+  **co2mlo**      19   50    345.6   21.01   316   385.4  69.47   2.972 
 
-  **co2law**      20    79      310.4     9.586    295.8    333.7   37.9     1.078  
+  **co2law**      20   79    310.4   9.586  295.8  333.7  37.9    1.078 
 
-    **CO2**       21    109     324.3     24.59    296.3    385.4   89.19    2.355  
+    **CO2**       21   109   324.3   24.59  296.3  385.4  89.19   2.355 
 
-  **sunspot**     22    109     60.08     47.69     1.4     190.2   188.8    4.568  
-------------------------------------------------------------------------------------
+  **sunspot**     22   109   60.08   47.69   1.4   190.2  188.8   4.568 
+------------------------------------------------------------------------
 
 
 ##### {- #extract-to-split-column-names}
@@ -532,7 +535,7 @@ rain %>%
   ylab('Rainfall (mm)')
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-21-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
 
 There are many ways to extract structure from these data, and make comparisons over time. One is to use colour:
@@ -545,7 +548,7 @@ rain %>%
   ylab('Rainfall (mm)')
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-22-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 
 
@@ -561,7 +564,7 @@ rain %>%
   ylab('Rainfall (mm)')
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-23-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-23-1.png" width="672" />
 
 
 
@@ -577,7 +580,7 @@ rain %>%
   ylab('Rainfall (mm)')
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-24-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 
 If we weren't interested in the time series and just wanted to focus on the most recent year, we might take a different approach. Here a bar plot is used to compare between regions, with the national average (au) highlighted in blue:
@@ -592,7 +595,7 @@ rain %>%
   guides(fill=F)
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-25-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-25-1.png" width="672" />
 
 
 
@@ -610,7 +613,7 @@ weather.data.long %>%
 ## Warning: Removed 70 rows containing non-finite values (stat_smooth).
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-26-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
 
 
@@ -648,7 +651,7 @@ outcomes <- c("gained weight"=13,
 waffle::waffle(outcomes)
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-27-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-27-1.png" width="672" />
 
 
 [Calculating these summary figures is left as an exercise to for the reader, but see the section on [summarising data with dplyr](#split-apply-combine).]{.tip}
@@ -662,7 +665,7 @@ weight.loss.colours <- c('firebrick2', 'darkgoldenrod1', 'palegreen3', 'palegree
 waffle::waffle(outcomes, colors = weight.loss.colours)
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-28-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-28-1.png" width="672" />
 
 
 Selecting colours by hand isn't always the best way though: the [`colourbrewer` library provides some nice shortcuts](#color-brewer) for using palletes from the excellent [ColourBrewer website](http://colorbrewer2.org).
@@ -683,21 +686,21 @@ reshape2::tips %>%
 ```
 
 
------------------------------------------------------------
- total_bill   tip     sex     smoker   day    time    size 
------------- ------ -------- -------- ----- -------- ------
-   16.99      1.01   Female     No     Sun   Dinner    2   
+------------------------------------------------------
+ total_bill   tip   sex    smoker   day   time   size 
+------------ ----- ------ -------- ----- ------ ------
+   16.99     1.01  Female    No     Sun  Dinner   2   
 
-   10.34      1.66    Male      No     Sun   Dinner    3   
+   10.34     1.66   Male     No     Sun  Dinner   3   
 
-   21.01      3.5     Male      No     Sun   Dinner    3   
+   21.01      3.5   Male     No     Sun  Dinner   3   
 
-   23.68      3.31    Male      No     Sun   Dinner    2   
+   23.68     3.31   Male     No     Sun  Dinner   2   
 
-   24.59      3.61   Female     No     Sun   Dinner    4   
+   24.59     3.61  Female    No     Sun  Dinner   4   
 
-   25.29      4.71    Male      No     Sun   Dinner    4   
------------------------------------------------------------
+   25.29     4.71   Male     No     Sun  Dinner   4   
+------------------------------------------------------
 
 
 
@@ -710,7 +713,7 @@ reshape2::tips %>%
   stat_summary(geom="bar")
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-30-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-30-1.png" width="672" />
 
 
 And to facilitate the comparison between men and women we could colour portions of the bars using `position_stack()`: 
@@ -723,7 +726,7 @@ reshape2::tips %>%
   xlab("") + ylab("Tip ($)")
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-31-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-31-1.png" width="672" />
 
 
 Or to reverse the comparisons:
@@ -736,7 +739,7 @@ reshape2::tips %>%
   xlab("") + ylab("Tip ($)")
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-32-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-32-1.png" width="672" />
 
 
 
@@ -759,25 +762,25 @@ When exploring a dataset, often useful to use built in functions or helpers from
 hist(mtcars$mpg)
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-33-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-33-1.png" width="672" />
 
 ```r
 plot(density(mtcars$mpg))
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-33-2.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-33-2.png" width="672" />
 
 ```r
 boxplot(mpg~cyl, data=mtcars)
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-33-3.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-33-3.png" width="672" />
 
 ```r
 Hmisc::hist.data.frame(mtcars)
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-33-4.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-33-4.png" width="672" />
 
 
 Even for simple plots, ggplot has some useful helper functions though:
@@ -787,13 +790,13 @@ Even for simple plots, ggplot has some useful helper functions though:
 qplot(mpg, data=mtcars, geom="density") + xlab("Miles per gallon")
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-34-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-34-1.png" width="672" />
 
 ```r
 qplot(x=factor(cyl), y=mpg, data=mtcars, geom="boxplot") 
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-34-2.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-34-2.png" width="672" />
 
 
 
@@ -805,13 +808,13 @@ qplot(x=factor(cyl), y=mpg, data=mtcars, geom="boxplot")
 with(mtcars, plot(mpg, wt))
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-35-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-35-1.png" width="672" />
 
 ```r
 pairs(select(mtcars, wt, disp, mpg))
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-35-2.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-35-2.png" width="672" />
 
 
 Again, for quick plots ggplot also has useful shortcut functions:
@@ -821,7 +824,7 @@ Again, for quick plots ggplot also has useful shortcut functions:
 qplot(mpg, wt, color=factor(cyl), data = mtcars)
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-36-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-36-1.png" width="672" />
 
 
 
@@ -835,7 +838,7 @@ ggplot(mtcars, aes(factor(cyl), mpg)) +
   stat_summary(geom="bar")
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-37-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-37-1.png" width="672" />
 
 
 And if you are plotting quantities, as disussed above, showing a range is sensible (a boxplot would also fill both definitions):
@@ -846,7 +849,7 @@ ggplot(mtcars, aes(factor(cyl), mpg)) +
   stat_summary(geom="pointrange")
 ```
 
-![](graphics_files/figure-latex/unnamed-chunk-38-1.pdf)<!-- --> 
+<img src="graphics_files/figure-html/unnamed-chunk-38-1.png" width="672" />
 
 
 

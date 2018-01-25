@@ -25,7 +25,10 @@ chicks.eating.beans %>%
   geom_boxplot()
 ```
 
-![(\#fig:boxplot)The box in a boxplot indictes the IQR; the whisker indicates the min/max values or 1.5 	imes the IQR, whichever is the smaller. If there are outliers beyond 1.5 	imes the IQR then they are shown as points.](t-tests_files/figure-latex/boxplot-1.pdf) 
+<div class="figure">
+<img src="t-tests_files/figure-html/boxplot-1.png" alt="The box in a boxplot indictes the IQR; the whisker indicates the min/max values or 1.5 	imes the IQR, whichever is the smaller. If there are outliers beyond 1.5 	imes the IQR then they are shown as points." width="672" />
+<p class="caption">(\#fig:boxplot)The box in a boxplot indictes the IQR; the whisker indicates the min/max values or 1.5 	imes the IQR, whichever is the smaller. If there are outliers beyond 1.5 	imes the IQR then they are shown as points.</p>
+</div>
 
 Or a violin or bottle plot, which shows the distributions within each group and makes it relatively easy to check some of the main assumptions of the test:
 
@@ -36,7 +39,7 @@ chicks.eating.beans %>%
   geom_violin()
 ```
 
-![](t-tests_files/figure-latex/unnamed-chunk-2-1.pdf)<!-- --> 
+<img src="t-tests_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
 
 Layering boxes and bottles can work well too because it combines information about the distribution with key statistics like the median and IQR, and also because it scales reasonably well to multiple categories:
@@ -50,7 +53,7 @@ chickwts %>%
   geom_boxplot(width=.1)
 ```
 
-![](t-tests_files/figure-latex/unnamed-chunk-3-1.pdf)<!-- --> 
+<img src="t-tests_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 
 <!-- Bottleplots are just density plots, turned 90 degrees. Density plots might be more familiar to some, but it's hard to show more than 2 or 3 categories:
@@ -62,7 +65,7 @@ chicks.eating.beans %>%
   geom_density(alpha=.5)
 ```
 
-![](t-tests_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
+<img src="t-tests_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 
 
@@ -76,7 +79,7 @@ chicks.eating.beans %>%
   facet_grid(feed ~ .)
 ```
 
-![](t-tests_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
+<img src="t-tests_files/figure-html/unnamed-chunk-5-1.png" width="672" />
  -->
 
 

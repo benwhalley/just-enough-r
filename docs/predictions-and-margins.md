@@ -49,7 +49,10 @@ Consider the example used in a previous section where we measured `injury.severi
 
 And as before, we might plot these data:
 
-![(\#fig:unnamed-chunk-3)Point and line plot of injury severity by age and gender.](predictions-and-margins_files/figure-latex/unnamed-chunk-3-1.pdf) 
+<div class="figure">
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-3-1.png" alt="Point and line plot of injury severity by age and gender." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-3)Point and line plot of injury severity by age and gender.</p>
+</div>
 
 
 
@@ -86,7 +89,7 @@ margins.plot <- inter.df %>%
 margins.plot
 ```
 
-![](predictions-and-margins_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 
 
@@ -113,7 +116,7 @@ injuries %>%
   scale_color_discrete(name="")
 ```
 
-![](predictions-and-margins_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 
 But to make predictions from this continuous data we need to fit a line through the points (i.e. run a model). We can do this graphically by calling `geom_smooth()` which attempts to fit a smooth line through the data we observe:
@@ -127,7 +130,10 @@ injuries %>%
   scale_color_discrete(name="")
 ```
 
-![(\#fig:unnamed-chunk-7)Scatter plot overlaid with smooth best-fit lines](predictions-and-margins_files/figure-latex/unnamed-chunk-7-1.pdf) 
+<div class="figure">
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-7-1.png" alt="Scatter plot overlaid with smooth best-fit lines" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-7)Scatter plot overlaid with smooth best-fit lines</p>
+</div>
 
 
 
@@ -143,7 +149,10 @@ injuries %>%
   scale_color_discrete(name="")
 ```
 
-![(\#fig:unnamed-chunk-8)Scatter plot overlaid with smoothed lines (dotted) and linear predictions (coloured)](predictions-and-margins_files/figure-latex/unnamed-chunk-8-1.pdf) 
+<div class="figure">
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-8-1.png" alt="Scatter plot overlaid with smoothed lines (dotted) and linear predictions (coloured)" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-8)Scatter plot overlaid with smoothed lines (dotted) and linear predictions (coloured)</p>
+</div>
 
 
 What these plots illustrate is the steps a researcher might take *before* fitting a regression model. The straight lines in the final plot represent our best guess for a person of a given age and gender, assuming a linear regression. 
@@ -170,7 +179,10 @@ The section above details two types of predictions: predictions for means, and p
 gridExtra::grid.arrange(means.plot+ggtitle("Means"), margins.plot+ggtitle("Margins"), ncol=2)
 ```
 
-![(\#fig:unnamed-chunk-9)Example of predicted means vs. margins. Note, the margin plotted in the second panel is the difference between the coloured lines in the first. A horizontal line is added at zero in panel 2 by convention.](predictions-and-margins_files/figure-latex/unnamed-chunk-9-1.pdf) 
+<div class="figure">
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-9-1.png" alt="Example of predicted means vs. margins. Note, the margin plotted in the second panel is the difference between the coloured lines in the first. A horizontal line is added at zero in panel 2 by convention." width="384" />
+<p class="caption">(\#fig:unnamed-chunk-9)Example of predicted means vs. margins. Note, the margin plotted in the second panel is the difference between the coloured lines in the first. A horizontal line is added at zero in panel 2 by convention.</p>
+</div>
 
 
 
@@ -292,14 +304,14 @@ mtcars.plus.predictions %>%
   stat_summary(geom="pointrange")
 ```
 
-![](predictions-and-margins_files/figure-latex/unnamed-chunk-13-1.pdf)<!-- --> 
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 
 ```r
 prediction.frame.plus.predictions %>% ggplot(aes(vs, fit, ymin=lwr, ymax=upr)) + geom_pointrange()
 ```
 
-![](predictions-and-margins_files/figure-latex/unnamed-chunk-14-1.pdf)<!-- --> 
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 
 ```r
@@ -390,13 +402,13 @@ summary(m2.margins)
 
 ```
 ##  factor  wt     AME     SE       z      p   lower   upper
-##      vs 1.5  7.4021 2.0900  3.5417 0.0004  3.3058 11.4985
-##      vs 2.5  4.4924 1.2374  3.6305 0.0003  2.0671  6.9177
-##      vs 3.5  1.5827 1.2847  1.2320 0.2180 -0.9352  4.1007
-##      vs 4.5 -1.3270 2.1738 -0.6105 0.5416 -5.5875  2.9335
+##      vs 1.5  7.4021 2.0902  3.5413 0.0004  3.3054 11.4989
+##      vs 2.5  4.4924 1.2376  3.6299 0.0003  2.0667  6.9181
+##      vs 3.5  1.5827 1.2848  1.2319 0.2180 -0.9353  4.1008
+##      vs 4.5 -1.3270 2.1737 -0.6105 0.5416 -5.5874  2.9334
 ##      wt 1.5 -4.7743 0.5854 -8.1560 0.0000 -5.9216 -3.6270
-##      wt 2.5 -4.7743 0.5854 -8.1560 0.0000 -5.9216 -3.6270
-##      wt 3.5 -4.7743 0.5854 -8.1560 0.0000 -5.9216 -3.6270
+##      wt 2.5 -4.7743 0.5854 -8.1556 0.0000 -5.9217 -3.6269
+##      wt 3.5 -4.7743 0.5854 -8.1562 0.0000 -5.9216 -3.6270
 ##      wt 4.5 -4.7743 0.5854 -8.1561 0.0000 -5.9216 -3.6270
 ```
 
@@ -407,7 +419,7 @@ summary(m2.margins) %>% as_data_frame() %>%
   geom_point() + geom_line()
 ```
 
-![](predictions-and-margins_files/figure-latex/unnamed-chunk-16-1.pdf)<!-- --> 
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 
 

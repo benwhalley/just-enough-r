@@ -45,7 +45,7 @@ mtcars %>%
 	pairs
 ```
 
-![](linear-models_files/figure-latex/unnamed-chunk-2-1.pdf)<!-- --> 
+<img src="linear-models_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
 Before running any model, we should ask outselves: "what question we are trying to answer?" 
 
@@ -373,7 +373,10 @@ aurora.image %>%
   geom_point(size=.5)
 ```
 
-![(\#fig:unnamed-chunk-13)Plot of the intensity of light in the single pixel slice from the Aurora image. Intensity of 1 corresponds to white, and 0 to black in the original image.](linear-models_files/figure-latex/unnamed-chunk-13-1.pdf) 
+<div class="figure">
+<img src="linear-models_files/figure-html/unnamed-chunk-13-1.png" alt="Plot of the intensity of light in the single pixel slice from the Aurora image. Intensity of 1 corresponds to white, and 0 to black in the original image." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-13)Plot of the intensity of light in the single pixel slice from the Aurora image. Intensity of 1 corresponds to white, and 0 to black in the original image.</p>
+</div>
 
 
 
@@ -397,7 +400,7 @@ aurora.image %>%
 ## be dropped
 ```
 
-![](linear-models_files/figure-latex/unnamed-chunk-15-1.pdf)<!-- --> 
+<img src="linear-models_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 As we can see, our predictions are pretty terrible, because the linear model only allows for a simple slope over the range of `x`.
 
@@ -432,7 +435,7 @@ aurora.image %>%
 ## be dropped
 ```
 
-![](linear-models_files/figure-latex/unnamed-chunk-16-1.pdf)<!-- --> 
+<img src="linear-models_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 That's somewhat better, although we can still see that the extremes of our observed data are not well predicted by either the linear model (the flat line) or the chunked model.
 
@@ -460,7 +463,7 @@ aurora.image %>%
 ## be dropped
 ```
 
-![](linear-models_files/figure-latex/unnamed-chunk-17-1.pdf)<!-- --> 
+<img src="linear-models_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 
 Or we could increase the number of parameters in our curve to allow a tighter fit with the raw data and plot all the models together:
@@ -485,7 +488,7 @@ all.predictions %>%
   geom_point(size=.5)
 ```
 
-![](linear-models_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
+<img src="linear-models_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
 We can see that this curved model is a better approximation to the raw data than our 'chunked' model in some places (e.g. x = 100), but worse in others (e.g. x = 625). Overall though, the R^2^ is much higher for the curves model here:
 
@@ -513,7 +516,7 @@ length(coef(aurora.curve))
 
 For fun, we can even plot our data back in image form and see which is closest to matching the original:
 
-![](linear-models_files/figure-latex/unnamed-chunk-21-1.pdf)<!-- --> 
+<img src="linear-models_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
 [There is no 'right answer' here: each model has pros and cons. You need to think about what the purpose of your model is, how you want to simplify your data, and then set up your models appropriately.]{.admonition}
 
@@ -608,7 +611,7 @@ We can plot these data to show the effect of age, and gender:
 ggplot(incomes, aes(age, income, group=gender, color=gender)) + geom_point() + geom_smooth(se=F, method="lm")
 ```
 
-![](linear-models_files/figure-latex/unnamed-chunk-24-1.pdf)<!-- --> 
+<img src="linear-models_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 Older people earn more than younger people, and men earn slighly more than women (in this simulated dataset), but this gender gap doesn't change with age.
 

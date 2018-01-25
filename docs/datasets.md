@@ -197,14 +197,20 @@ There are also some helpful plotting functions which accept a whole dataframe:
 boxplot(airquality)
 ```
 
-![(\#fig:unnamed-chunk-9)Box plot of all variables in a dataset.](DATASETS_files/figure-latex/unnamed-chunk-9-1.pdf) 
+<div class="figure">
+<img src="DATASETS_files/figure-html/unnamed-chunk-9-1.png" alt="Box plot of all variables in a dataset." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-9)Box plot of all variables in a dataset.</p>
+</div>
 
 
 ```r
 psych::cor.plot(airquality)
 ```
 
-![(\#fig:unnamed-chunk-10)Correlation heatmap of all variables in a dataset. Colours indicate size of the correlation between pairs of variables.](DATASETS_files/figure-latex/unnamed-chunk-10-1.pdf) 
+<div class="figure">
+<img src="DATASETS_files/figure-html/unnamed-chunk-10-1.png" alt="Correlation heatmap of all variables in a dataset. Colours indicate size of the correlation between pairs of variables." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-10)Correlation heatmap of all variables in a dataset. Colours indicate size of the correlation between pairs of variables.</p>
+</div>
 
 These plots might not be worth including in a final write-up, but are very useful when exploring your data.
 

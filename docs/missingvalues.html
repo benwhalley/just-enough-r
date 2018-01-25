@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Just Enough R</title>
+  <meta name="description" content="Just Enough R">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Just Enough R" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="factors-and-numerics.html">
+<link rel="next" href="tidyingdata.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="https://hypothes.is/embed.js" async></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Just enough R</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section"></a></li>
+<li class="part"><span><b>I Getting started</b></span></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>1</b> Working with R</a><ul>
+<li class="chapter" data-level="" data-path="r-basics.html"><a href="r-basics.html#start-here"><i class="fa fa-check"></i>Workflow</a></li>
+<li class="chapter" data-level="" data-path="rmarkdown.html"><a href="rmarkdown.html"><i class="fa fa-check"></i>RMarkdown</a></li>
+<li class="chapter" data-level="" data-path="rstudio.html"><a href="rstudio.html"><i class="fa fa-check"></i>RStudio</a></li>
+<li class="chapter" data-level="" data-path="first-commands.html"><a href="first-commands.html"><i class="fa fa-check"></i>First commands</a></li>
+<li class="chapter" data-level="" data-path="variables.html"><a href="variables.html"><i class="fa fa-check"></i>Naming things</a></li>
+<li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html"><i class="fa fa-check"></i>Vectors and lists</a><ul>
+<li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html#vector"><i class="fa fa-check"></i>Vectors</a></li>
+<li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html#access-vector-elements"><i class="fa fa-check"></i>Accessing elements</a></li>
+<li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html#selecting-more-than-one-element"><i class="fa fa-check"></i>Selecting more than one element</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="processing-vectors.html"><a href="processing-vectors.html"><i class="fa fa-check"></i>Processing vectors</a><ul>
+<li class="chapter" data-level="" data-path="processing-vectors.html"><a href="processing-vectors.html#making-new-vectors"><i class="fa fa-check"></i>Making new vectors</a></li>
+<li class="chapter" data-level="" data-path="processing-vectors.html"><a href="processing-vectors.html#making-up-data-new-vectors"><i class="fa fa-check"></i>Making up data (new vectors)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="functions-to-learn-now.html"><a href="functions-to-learn-now.html"><i class="fa fa-check"></i>Functions to learn now</a></li>
+<li class="chapter" data-level="" data-path="lists.html"><a href="lists.html"><i class="fa fa-check"></i>Lists</a></li>
+</ul></li>
+<li class="part"><span><b>II Data</b></span></li>
+<li class="chapter" data-level="2" data-path="datasets-dataframes.html"><a href="datasets-dataframes.html"><i class="fa fa-check"></i><b>2</b> Datasets and dataframes</a><ul>
+<li class="chapter" data-level="" data-path="looking-at-data.html"><a href="looking-at-data.html"><i class="fa fa-check"></i>Looking at data</a><ul>
+<li class="chapter" data-level="" data-path="looking-at-data.html"><a href="looking-at-data.html#using-individual-columns"><i class="fa fa-check"></i>Using individual columns</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html"><i class="fa fa-check"></i>Working with dataframes</a><ul>
+<li><a href="working-with-dataframes.html#tidyverse">Introducing the <code>tidyverse</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="selecting-columns.html"><a href="selecting-columns.html"><i class="fa fa-check"></i>Selecting columns</a></li>
+<li class="chapter" data-level="" data-path="selecting-rows.html"><a href="selecting-rows.html"><i class="fa fa-check"></i>Selecting rows</a></li>
+<li class="chapter" data-level="" data-path="operators.html"><a href="operators.html"><i class="fa fa-check"></i>‘Operators’</a></li>
+<li class="chapter" data-level="" data-path="sorting.html"><a href="sorting.html"><i class="fa fa-check"></i>Sorting</a></li>
+<li class="chapter" data-level="" data-path="pipes.html"><a href="pipes.html"><i class="fa fa-check"></i>Pipes</a></li>
+<li class="chapter" data-level="" data-path="mutate.html"><a href="mutate.html"><i class="fa fa-check"></i>Modifying and creating new columns</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="real-data.html"><a href="real-data.html"><i class="fa fa-check"></i><b>3</b> ‘Real’ data</a><ul>
+<li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html"><i class="fa fa-check"></i>Importing data</a><ul>
+<li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html#importing-data-from-the-web"><i class="fa fa-check"></i>Importing data over the web</a></li>
+<li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html#importing-proprietary-formats"><i class="fa fa-check"></i>Importing from SPSS and other packages</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="saving-and-exporting.html"><a href="saving-and-exporting.html"><i class="fa fa-check"></i>Saving and exporting</a><ul>
+<li class="chapter" data-level="" data-path="saving-and-exporting.html"><a href="saving-and-exporting.html#use-csv"><i class="fa fa-check"></i>Use CSV files</a></li>
+<li class="chapter" data-level="" data-path="saving-and-exporting.html"><a href="saving-and-exporting.html#archiving-publication-and-sharing"><i class="fa fa-check"></i>Archiving, publication and sharing</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="multiple-raw-data-files.html"><a href="multiple-raw-data-files.html"><i class="fa fa-check"></i>Dealing with multiple files</a></li>
+<li class="chapter" data-level="3.1" data-path="joining-different-datasets.html"><a href="joining-different-datasets.html"><i class="fa fa-check"></i><b>3.1</b> Joining different datasets</a></li>
+<li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html"><i class="fa fa-check"></i>Types of variable</a><ul>
+<li><a href="factors-and-numerics.html#diffsinquantity">Differences in <em>quantity</em>: numeric variables</a></li>
+<li><a href="factors-and-numerics.html#character-and-factor">Differences in <em>quality or kind</em></a></li>
+<li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html#facsforcategs"><i class="fa fa-check"></i>Factors for categorical data</a></li>
+<li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html#storingdates"><i class="fa fa-check"></i>Dates</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="missingvalues.html"><a href="missingvalues.html"><i class="fa fa-check"></i>Missing values</a></li>
+<li class="chapter" data-level="" data-path="tidyingdata.html"><a href="tidyingdata.html"><i class="fa fa-check"></i>Tidying data</a></li>
+<li class="chapter" data-level="" data-path="reshaping.html"><a href="reshaping.html"><i class="fa fa-check"></i>Reshaping</a><ul>
+<li class="chapter" data-level="" data-path="reshaping.html"><a href="reshaping.html#which-reshape-package"><i class="fa fa-check"></i>Which package should you use to reshape data?</a></li>
+<li class="chapter" data-level="" data-path="reshaping.html"><a href="reshaping.html#aggregating-and-reshaping-at-the-same-time"><i class="fa fa-check"></i>Aggregating and reshaping at the same time</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="summarising-data.html"><a href="summarising-data.html"><i class="fa fa-check"></i><b>4</b> Summaries</a><ul>
+<li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html"><i class="fa fa-check"></i>“Quick and dirty”</a><ul>
+<li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#frequency-tables"><i class="fa fa-check"></i>Frequency tables</a></li>
+<li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#summary-statistics"><i class="fa fa-check"></i>Summary statistics</a></li>
+<li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#creating-a-data-frame-of-summary-statistics"><i class="fa fa-check"></i>Creating a data frame of summary statistics</a></li>
+<li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#computing-statistics-by-groups"><i class="fa fa-check"></i>Computing statistics by-groups</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="a-generalised-approach.html"><a href="a-generalised-approach.html"><i class="fa fa-check"></i>A generalised approach</a><ul>
+<li class="chapter" data-level="" data-path="a-generalised-approach.html"><a href="a-generalised-approach.html#fancy-reshaping"><i class="fa fa-check"></i>Fancy reshaping</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>5</b> Graphics</a><ul>
+<li class="chapter" data-level="" data-path="graphics-benefits.html"><a href="graphics-benefits.html"><i class="fa fa-check"></i>Benefits of visualising data</a></li>
+<li class="chapter" data-level="" data-path="graphics-approaches.html"><a href="graphics-approaches.html"><i class="fa fa-check"></i>Which tool to use?</a></li>
+<li><a href="layered-graphics.html#layered-graphics">Layered graphics with <code>ggplot</code></a><ul>
+<li class="chapter" data-level="" data-path="layered-graphics.html"><a href="layered-graphics.html"><i class="fa fa-check"></i>A thought on ‘chart chooser’ guides</a></li>
+<li><a href="layered-graphics.html#thinking-like-ggplot">Thinking like <code>ggplot</code></a></li>
+<li class="chapter" data-level="" data-path="layered-graphics.html"><a href="layered-graphics.html#relationships"><i class="fa fa-check"></i>‘Relationships’</a></li>
+<li class="chapter" data-level="" data-path="layered-graphics.html"><a href="layered-graphics.html#distributions"><i class="fa fa-check"></i>‘Distributions’</a></li>
+<li class="chapter" data-level="" data-path="layered-graphics.html"><a href="layered-graphics.html#comparisons"><i class="fa fa-check"></i>‘Comparisons’</a></li>
+<li class="chapter" data-level="" data-path="layered-graphics.html"><a href="layered-graphics.html#composition"><i class="fa fa-check"></i>‘Composition’</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html"><i class="fa fa-check"></i>‘Quick and dirty’ (utility) plots</a><ul>
+<li class="chapter" data-level="5.0.1" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html#distributions-1"><i class="fa fa-check"></i><b>5.0.1</b> Distributions</a></li>
+<li class="chapter" data-level="5.0.2" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html#relationships-1"><i class="fa fa-check"></i><b>5.0.2</b> Relationships</a></li>
+<li class="chapter" data-level="5.0.3" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html#quantities"><i class="fa fa-check"></i><b>5.0.3</b> Quantities</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ggplot-details.html"><a href="ggplot-details.html"><i class="fa fa-check"></i>Tricks with ggplot</a><ul>
+<li class="chapter" data-level="" data-path="ggplot-details.html"><a href="ggplot-details.html#facetting-plots"><i class="fa fa-check"></i>More ways to facet a plot</a></li>
+<li><a href="ggplot-details.html#facet_wrap"><code>facet_wrap</code></a></li>
+<li><a href="ggplot-details.html#facet_grid"><code>facet_grid</code></a></li>
+<li class="chapter" data-level="" data-path="ggplot-details.html"><a href="ggplot-details.html#combining-plots"><i class="fa fa-check"></i>Combining separate plots in a grid</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exporting-graphics.html"><a href="exporting-graphics.html"><i class="fa fa-check"></i>Exporting for print</a></li>
+</ul></li>
+<li class="part"><span><b>III Models</b></span></li>
+<li class="chapter" data-level="6" data-path="common-inferential-stats.html"><a href="common-inferential-stats.html"><i class="fa fa-check"></i><b>6</b> Common inferential statistics</a><ul>
+<li><a href="crosstabs.html#crosstabs">Crosstabulations and <span class="math inline">\(\chi^2\)</span></a><ul>
+<li class="chapter" data-level="" data-path="crosstabs.html"><a href="crosstabs.html"><i class="fa fa-check"></i>Three-way tables</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html"><i class="fa fa-check"></i>Correlations</a><ul>
+<li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html#correlation-matrix"><i class="fa fa-check"></i>Creating a correlation matrix</a></li>
+<li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html#working-with-correlation-matrices"><i class="fa fa-check"></i>Working with correlation matrices</a></li>
+<li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html#correlation-tables-for-publication"><i class="fa fa-check"></i>Tables for publication</a></li>
+<li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html#correlation-methods"><i class="fa fa-check"></i>Other methods for correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="t-tests.html"><a href="t-tests.html"><i class="fa fa-check"></i>t-tests</a><ul>
+<li class="chapter" data-level="" data-path="t-tests.html"><a href="t-tests.html#visualising-your-data-first"><i class="fa fa-check"></i>Visualising your data first</a></li>
+<li class="chapter" data-level="" data-path="t-tests.html"><a href="t-tests.html#running-a-t-test"><i class="fa fa-check"></i>Running a t-test</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="linear-models-simple.html"><a href="linear-models-simple.html"><i class="fa fa-check"></i><b>7</b> Regression</a><ul>
+<li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#formulae"><i class="fa fa-check"></i>Describing statistical models using formulae</a></li>
+<li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#running-a-linear-model"><i class="fa fa-check"></i>Running a linear model</a></li>
+<li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#more-on-formulas"><i class="fa fa-check"></i>More on formulas</a></li>
+<li class="chapter" data-level="" data-path="factors-and-variable-codings.html"><a href="factors-and-variable-codings.html"><i class="fa fa-check"></i>Factors and variable codings</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html"><i class="fa fa-check"></i>Model specification</a><ul>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#regression-coding"><i class="fa fa-check"></i>Effect/dummy coding and contrasts</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#centering"><i class="fa fa-check"></i>Centering (is often helpful)</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#scaling-regression-inputs"><i class="fa fa-check"></i>Scaling inputs</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#alternatives-to-rescaling"><i class="fa fa-check"></i>Alternatives to rescaling</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#what-next"><i class="fa fa-check"></i>What next</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>8</b> Anova</a><ul>
+<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#rules-for-using-anova-in-r"><i class="fa fa-check"></i>Rules for using Anova in R</a></li>
+<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#anova-recommendations"><i class="fa fa-check"></i>Recommendations for doing Anova</a></li>
+<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html"><i class="fa fa-check"></i>Anova ‘Cookbook’</a><ul>
+<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#between-subjects-anova"><i class="fa fa-check"></i>Between-subjects Anova</a></li>
+<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#repeated-measures"><i class="fa fa-check"></i>Repeated measures or ‘split plot’ designs</a></li>
+<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#trad-rm-anova"><i class="fa fa-check"></i>Traditional repeated measures Anova</a></li>
+<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#comparison-with-a-multilevel-model"><i class="fa fa-check"></i>Comparison with a multilevel model</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="checking-assumptions.html"><a href="checking-assumptions.html"><i class="fa fa-check"></i>Checking assumptions</a></li>
+<li class="chapter" data-level="" data-path="followup-tests.html"><a href="followup-tests.html"><i class="fa fa-check"></i>Followup tests</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="general-linear-models.html"><a href="general-linear-models.html"><i class="fa fa-check"></i><b>9</b> General linear models</a><ul>
+<li class="chapter" data-level="" data-path="general-linear-models.html"><a href="general-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>10</b> Multilevel models</a><ul>
+<li class="chapter" data-level="" data-path="fitting-models.html"><a href="fitting-models.html"><i class="fa fa-check"></i>Fitting multilevel models in R</a><ul>
+<li><a href="fitting-models.html#use-lmer-and-glmer">Use <code>lmer</code> and <code>glmer</code></a></li>
+<li><a href="fitting-models.html#p-values-in-multilevel-models"><em>p</em> values in multilevel models</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="extending-traditional-rm-anova.html"><a href="extending-traditional-rm-anova.html"><i class="fa fa-check"></i>Extending traditional RM Anova</a><ul>
+<li><a href="extending-traditional-rm-anova.html#fit-a-simple-slope-for-days">Fit a simple slope for <code>Days</code></a></li>
+<li class="chapter" data-level="" data-path="extending-traditional-rm-anova.html"><a href="extending-traditional-rm-anova.html#allow-the-effect-of-sleep-deprivation-to-vary-for-different-participants"><i class="fa fa-check"></i>Allow the effect of sleep deprivation to vary for different participants</a></li>
+<li><a href="extending-traditional-rm-anova.html#growth-curve-sleep-example">Fitting a curve for the effect of <code>Days</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="icc-and-vpc.html"><a href="icc-and-vpc.html"><i class="fa fa-check"></i>Variance partition coefficients and intraclass correlations</a></li>
+<li class="chapter" data-level="" data-path="threelevel.html"><a href="threelevel.html"><i class="fa fa-check"></i>3 level models with ‘partially crossed’ random effects</a></li>
+<li><a href="contrasts-lmer.html#contrasts-lmer">Contrasts and followup tests using <code>lmer</code></a></li>
+<li class="chapter" data-level="" data-path="troubleshooting-multilevel-models.html"><a href="troubleshooting-multilevel-models.html"><i class="fa fa-check"></i>Troubleshooting</a><ul>
+<li class="chapter" data-level="" data-path="troubleshooting-multilevel-models.html"><a href="troubleshooting-multilevel-models.html#simplifying-mixed-models"><i class="fa fa-check"></i>Convergence problems and simplifying the random effects structure</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="multilevel-bayes-reasons.html"><a href="multilevel-bayes-reasons.html"><i class="fa fa-check"></i>Bayesian multilevel models</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="mediation-and-covariance-modelling.html"><a href="mediation-and-covariance-modelling.html"><i class="fa fa-check"></i><b>11</b> Mediation and covariance modelling</a><ul>
+<li class="chapter" data-level="" data-path="mediation.html"><a href="mediation.html"><i class="fa fa-check"></i>Mediation</a></li>
+<li class="chapter" data-level="" data-path="covariance-modelling.html"><a href="covariance-modelling.html"><i class="fa fa-check"></i>Covariance modelling</a></li>
+<li class="chapter" data-level="" data-path="path-models.html"><a href="path-models.html"><i class="fa fa-check"></i>Path models</a><ul>
+<li class="chapter" data-level="" data-path="path-models.html"><a href="path-models.html#defining-a-model"><i class="fa fa-check"></i>Defining a model</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cfa.html"><a href="cfa.html"><i class="fa fa-check"></i>Confirmatory factor analysis (CFA)</a><ul>
+<li class="chapter" data-level="" data-path="cfa.html"><a href="cfa.html#defining-the-model"><i class="fa fa-check"></i>Defining the model</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="model-fit.html"><a href="model-fit.html"><i class="fa fa-check"></i>Model fit</a></li>
+<li class="chapter" data-level="" data-path="modification-indices.html"><a href="modification-indices.html"><i class="fa fa-check"></i>Modification indices</a></li>
+<li class="chapter" data-level="" data-path="model-improvement.html"><a href="model-improvement.html"><i class="fa fa-check"></i>Model modification and improvement</a></li>
+<li class="chapter" data-level="" data-path="sem.html"><a href="sem.html"><i class="fa fa-check"></i>Structural eqution modelling (SEM)</a></li>
+<li class="chapter" data-level="" data-path="identification.html"><a href="identification.html"><i class="fa fa-check"></i>‘Identification’ in CFA and SEM</a></li>
+<li class="chapter" data-level="" data-path="cfa-sem-missing-data.html"><a href="cfa-sem-missing-data.html"><i class="fa fa-check"></i>Missing data</a></li>
+<li class="chapter" data-level="" data-path="gof.html"><a href="gof.html"><i class="fa fa-check"></i>Goodness of fit statistics in CFA</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html"><i class="fa fa-check"></i><b>12</b> Baysian model fitting</a><ul>
+<li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#baysian-fitting-of-linear-models-via-mcmc-methods"><i class="fa fa-check"></i>Baysian fitting of linear models via MCMC methods</a></li>
+<li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#posterior-probabilities-for-parameters"><i class="fa fa-check"></i>Posterior probabilities for parameters</a></li>
+<li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#credible-intervals"><i class="fa fa-check"></i>Credible intervals</a></li>
+<li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#bayesian-p-values-for-parameters"><i class="fa fa-check"></i>Bayesian ‘p values’ for parameters</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="power-analysis.html"><a href="power-analysis.html"><i class="fa fa-check"></i><b>13</b> Power analysis</a><ul>
+<li class="chapter" data-level="" data-path="power-analysis.html"><a href="power-analysis.html#for-most-inferential-statistics"><i class="fa fa-check"></i>For most inferential statistics</a></li>
+<li class="chapter" data-level="" data-path="power-analysis.html"><a href="power-analysis.html#for-multilevel-or-generalised-linear-models"><i class="fa fa-check"></i>For multilevel or generalised linear models</a></li>
+</ul></li>
+<li class="part"><span><b>IV Patterns</b></span></li>
+<li class="chapter" data-level="14" data-path="learning-key-patterns.html"><a href="learning-key-patterns.html"><i class="fa fa-check"></i><b>14</b> Learning key patterns</a></li>
+<li class="chapter" data-level="15" data-path="understanding-interactions.html"><a href="understanding-interactions.html"><i class="fa fa-check"></i><b>15</b> Unpicking interactions</a><ul>
+<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#what-is-an-interaction"><i class="fa fa-check"></i>What is an interaction?</a></li>
+<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#visualising-interactions-from-raw-data"><i class="fa fa-check"></i>Visualising interactions from raw data</a></li>
+<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#pain-music-data"><i class="fa fa-check"></i>A painful example</a></li>
+<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#continuous-predictors"><i class="fa fa-check"></i>Continuous predictors</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html"><i class="fa fa-check"></i><b>16</b> Making predictions</a><ul>
+<li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predictions-vs-margins"><i class="fa fa-check"></i>Predictions vs margins</a></li>
+<li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predicted-means"><i class="fa fa-check"></i>Predicted means</a></li>
+<li><a href="predictions-and-margins.html#effects-margins"><em>Effects</em> (margins)</a></li>
+<li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#continuous-predictors-1"><i class="fa fa-check"></i>Continuous predictors</a></li>
+<li><a href="predicted-means-and-margins-using-lm.html#predicted-means-and-margins-using-lm">Predicted means and margins using <code>lm()</code></a><ul>
+<li class="chapter" data-level="" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html"><i class="fa fa-check"></i>Running the model</a></li>
+<li class="chapter" data-level="" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html#making-predictions-for-means"><i class="fa fa-check"></i>Making predictions for means</a></li>
+<li><a href="predicted-means-and-margins-using-lm.html#making-prdictions-for-margins-effects-of-predictors">Making prdictions for margins (<em>effects</em> of predictors)</a></li>
+<li class="chapter" data-level="" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html#marginal-effects"><i class="fa fa-check"></i>Marginal effects</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="predictions-with-continuous-covariates.html"><a href="predictions-with-continuous-covariates.html"><i class="fa fa-check"></i>Predictions with continuous covariates</a></li>
+<li class="chapter" data-level="" data-path="visualising-interactions.html"><a href="visualising-interactions.html"><i class="fa fa-check"></i>Visualising interactions</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="models-are-data-too.html"><a href="models-are-data-too.html"><i class="fa fa-check"></i><b>17</b> Models are data</a><ul>
+<li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#storing-models-in-variables"><i class="fa fa-check"></i>Storing models in variables</a></li>
+<li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#extract-results-from-models"><i class="fa fa-check"></i>Extracting results from models</a></li>
+<li><a href="models-are-data-too.html#poking-around-with-and">‘Poking around’ with <code>$</code> and <code>@</code></a></li>
+<li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#broom"><i class="fa fa-check"></i>Save work: use a Broom</a></li>
+<li class="chapter" data-level="" data-path="process-model-results.html"><a href="process-model-results.html"><i class="fa fa-check"></i>‘Processing’ results</a></li>
+<li class="chapter" data-level="" data-path="output-tables.html"><a href="output-tables.html"><i class="fa fa-check"></i>Printing tables</a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html"><i class="fa fa-check"></i>APA formatting for free</a><ul>
+<li><a href="apa-output.html#chi2">Chi<sup>2</sup></a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#t-test"><i class="fa fa-check"></i>T-test</a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#anova-1"><i class="fa fa-check"></i>Anova</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#multilevel-models"><i class="fa fa-check"></i>Multilevel models</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html"><i class="fa fa-check"></i>Simplifying and re-using</a><ul>
+<li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html#helper-functions"><i class="fa fa-check"></i>Writing helper functions</a></li>
+<li><a href="code-reuse.html#ggplot-reuse">Re-using code with <code>ggplot</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="part-explanations.html"><a href="part-explanations.html"><i class="fa fa-check"></i><b>18</b> (PART) Explanations</a></li>
+<li class="chapter" data-level="19" data-path="intervals.html"><a href="intervals.html"><i class="fa fa-check"></i><b>19</b> Confidence and Intervals</a><ul>
+<li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html#the-problem-with-confidence-intervals"><i class="fa fa-check"></i>The problem with confidence intervals</a></li>
+<li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html#forgetting-that-the-ci-depends-on-sample-size."><i class="fa fa-check"></i>Forgetting that the CI depends on sample size.</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html"><i class="fa fa-check"></i><b>20</b> Multiple comparisons</a><ul>
+<li><a href="multiple-comparisons.html#p-values-and-false-discoveries"><em>p</em> values and ‘false discoveries’</a></li>
+<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#multiple-tests-on-the-same-data"><i class="fa fa-check"></i>Multiple tests on the same data</a></li>
+<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#what-to-do-about-it"><i class="fa fa-check"></i>What to do about it?</a></li>
+<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#contrasts-examples"><i class="fa fa-check"></i>Practical examples</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>21</b> Non-independence</a></li>
+<li class="chapter" data-level="22" data-path="fixed-or-random.html"><a href="fixed-or-random.html"><i class="fa fa-check"></i><b>22</b> Fixed and random effects</a></li>
+<li class="chapter" data-level="23" data-path="link-functions.html"><a href="link-functions.html"><i class="fa fa-check"></i><b>23</b> Link functions</a><ul>
+<li class="chapter" data-level="" data-path="link-functions.html"><a href="link-functions.html#logistic-link-function"><i class="fa fa-check"></i>Logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html"><i class="fa fa-check"></i><b>24</b> Building and choosing models</a><ul>
+<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#like-maps-models-are-imperfect-but-useful"><i class="fa fa-check"></i>Like maps, models are imperfect but useful</a></li>
+<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#over-fitting"><i class="fa fa-check"></i>Overfitting/underfitting</a></li>
+<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#variable-selection"><i class="fa fa-check"></i>Choosing the ‘right variables’</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="part-loose-ends.html"><a href="part-loose-ends.html"><i class="fa fa-check"></i><b>25</b> (PART) Loose ends</a></li>
+<li class="chapter" data-level="26" data-path="r-details.html"><a href="r-details.html"><i class="fa fa-check"></i><b>26</b> R in daily life</a><ul>
+<li class="chapter" data-level="" data-path="installation-intro.html"><a href="installation-intro.html"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i>Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="quirks.html"><a href="quirks.html"><i class="fa fa-check"></i><b>27</b> Quirks of R</a><ul>
+<li class="chapter" data-level="" data-path="rownames.html"><a href="rownames.html"><i class="fa fa-check"></i>Rownames are evil</a></li>
+<li class="chapter" data-level="" data-path="string-handling.html"><a href="string-handling.html"><i class="fa fa-check"></i>Working with character strings</a><ul>
+<li class="chapter" data-level="27.0.1" data-path="string-handling.html"><a href="string-handling.html#searching-and-replacing"><i class="fa fa-check"></i><b>27.0.1</b> Searching and replacing</a></li>
+<li><a href="processing-vectors.html#paste">Using <code>paste</code> to make labels</a></li>
+<li><a href="string-handling.html#separate-and-extract">Fixing up <code>variable</code> after melting</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html"><i class="fa fa-check"></i>Colours</a><ul>
+<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#picking-colours"><i class="fa fa-check"></i>Picking colours for plots</a></li>
+<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#named-colours"><i class="fa fa-check"></i>Named colours in R</a></li>
+<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#color-brewer"><i class="fa fa-check"></i>ColourBrewer with ggplot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="getting-help.html"><a href="getting-help.html"><i class="fa fa-check"></i><b>28</b> Getting help</a><ul>
+<li class="chapter" data-level="" data-path="getting-help.html"><a href="getting-help.html#backtick-location"><i class="fa fa-check"></i>Finding the backtick on your keyboard</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html"><i class="fa fa-check"></i><b>29</b> Sharing, publishing and archiving</a><ul>
+<li class="chapter" data-level="" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html#publication"><i class="fa fa-check"></i>Tips for dead tree journals</a></li>
+<li class="chapter" data-level="29.0.1" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html#registering-your-predictions---register-predictions"><i class="fa fa-check"></i><b>29.0.1</b> Registering your predictions (- #register-predictions)</a></li>
+<li class="chapter" data-level="" data-path="sharing-and-publication.html"><a href="sharing-and-publication.html#archiving-data"><i class="fa fa-check"></i>Archiving data</a></li>
+<li class="chapter" data-level="29.1" data-path="writing-paper.html"><a href="writing-paper.html"><i class="fa fa-check"></i><b>29.1</b> Writing a complete paper in RMarkdown</a></li>
+<li class="chapter" data-level="" data-path="raw-data-mess.html"><a href="raw-data-mess.html"><i class="fa fa-check"></i>Cleaning up the mess: dealing with raw data</a></li>
+<li class="chapter" data-level="" data-path="table1.html"><a href="table1.html"><i class="fa fa-check"></i>“Table 1”</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Just Enough R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="missingvalues" class="section level2 unnumbered">
+<h2>Missing values</h2>
+<p>Missing values aren’t a data type as such, but are an important concept in R; the way different functions handle missing values can be both helpful and frustrating in equal measure.</p>
+<p>Missing values in a vector are denoted by the letters <code>NA</code>, but notice that these letters are unquoted. That is to say <code>NA</code> is not the same as <code>&quot;NA&quot;</code>!</p>
+<p>To check for missing values in a vector (or dataframe column) we use the <code>is.na()</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nums.with.missing &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>)
+nums.with.missing
+## [1]  1  2 NA
+
+<span class="kw">is.na</span>(nums.with.missing)
+## [1] FALSE FALSE  TRUE</code></pre></div>
+<p>Here the <code>is.na()</code> function has tested whether each item in our vector called <code>nums.with.missing</code> is missing. It returns a new vector with the results of each test: either <code>TRUE</code> or <code>FALSE</code>.</p>
+<p>We can also use the negation operator, the <code>!</code> symbol to reverse the meaning of <code>is.na</code>. So we can read <code>!is.na(nums)</code> as “test whether the values in <code>nums</code> are NOT missing”:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test if missing</span>
+<span class="kw">is.na</span>(nums.with.missing)
+## [1] FALSE FALSE  TRUE
+
+<span class="co"># test if NOT missing (note the exclamation mark in front of the function)</span>
+<span class="op">!</span><span class="kw">is.na</span>(nums.with.missing)
+## [1]  TRUE  TRUE FALSE</code></pre></div>
+<p>We can use the <code>is.na()</code> function as part of dplyr filters:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(Solar.R)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>pander</code></pre></div>
+<table style="width:62%;">
+<colgroup>
+<col width="11%" />
+<col width="13%" />
+<col width="9%" />
+<col width="9%" />
+<col width="11%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Ozone</th>
+<th align="center">Solar.R</th>
+<th align="center">Wind</th>
+<th align="center">Temp</th>
+<th align="center">Month</th>
+<th align="center">Day</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">14.3</td>
+<td align="center">56</td>
+<td align="center">5</td>
+<td align="center">5</td>
+</tr>
+<tr class="even">
+<td align="center">28</td>
+<td align="center">NA</td>
+<td align="center">14.9</td>
+<td align="center">66</td>
+<td align="center">5</td>
+<td align="center">6</td>
+</tr>
+<tr class="odd">
+<td align="center">7</td>
+<td align="center">NA</td>
+<td align="center">6.9</td>
+<td align="center">74</td>
+<td align="center">5</td>
+<td align="center">11</td>
+</tr>
+</tbody>
+</table>
+<p>Or to select only cases without missing values for a particular variable:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Solar.R)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>pander</code></pre></div>
+<table style="width:62%;">
+<colgroup>
+<col width="11%" />
+<col width="13%" />
+<col width="9%" />
+<col width="9%" />
+<col width="11%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Ozone</th>
+<th align="center">Solar.R</th>
+<th align="center">Wind</th>
+<th align="center">Temp</th>
+<th align="center">Month</th>
+<th align="center">Day</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">41</td>
+<td align="center">190</td>
+<td align="center">7.4</td>
+<td align="center">67</td>
+<td align="center">5</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">36</td>
+<td align="center">118</td>
+<td align="center">8</td>
+<td align="center">72</td>
+<td align="center">5</td>
+<td align="center">2</td>
+</tr>
+<tr class="odd">
+<td align="center">12</td>
+<td align="center">149</td>
+<td align="center">12.6</td>
+<td align="center">74</td>
+<td align="center">5</td>
+<td align="center">3</td>
+</tr>
+</tbody>
+</table>
+<div id="complete-cases" class="section level4 unnumbered">
+<h4>Complete cases</h4>
+<p>Sometimes we want to select only rows which have no missing values — i.e. <em>complete cases</em>.</p>
+<p>The <code>complete.cases</code> function accepts a dataframe (or matrix) and tests whether each <em>row</em> is complete. It returns a vector with a <code>TRUE/FALSE</code> result for each row:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">complete.cases</span>(airquality) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>head
+## [1]  TRUE  TRUE  TRUE  TRUE FALSE FALSE</code></pre></div>
+<p>This can also be useful in dplyr filters. Here we show all the rows which are <em>not</em> complete (note the exclamation mark):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">complete.cases</span>(airquality))
+##    Ozone Solar.R Wind Temp Month Day
+## 1     NA      NA 14.3   56     5   5
+## 2     28      NA 14.9   66     5   6
+## 3     NA     194  8.6   69     5  10
+## 4      7      NA  6.9   74     5  11
+## 5     NA      66 16.6   57     5  25
+## 6     NA     266 14.9   58     5  26
+## 7     NA      NA  8.0   57     5  27
+## 8     NA     286  8.6   78     6   1
+## 9     NA     287  9.7   74     6   2
+## 10    NA     242 16.1   67     6   3
+## 11    NA     186  9.2   84     6   4
+## 12    NA     220  8.6   85     6   5
+## 13    NA     264 14.3   79     6   6
+## 14    NA     273  6.9   87     6   8
+## 15    NA     259 10.9   93     6  11
+## 16    NA     250  9.2   92     6  12
+## 17    NA     332 13.8   80     6  14
+## 18    NA     322 11.5   79     6  15
+## 19    NA     150  6.3   77     6  21
+## 20    NA      59  1.7   76     6  22
+## 21    NA      91  4.6   76     6  23
+## 22    NA     250  6.3   76     6  24
+## 23    NA     135  8.0   75     6  25
+## 24    NA     127  8.0   78     6  26
+## 25    NA      47 10.3   73     6  27
+## 26    NA      98 11.5   80     6  28
+## 27    NA      31 14.9   77     6  29
+## 28    NA     138  8.0   83     6  30
+## 29    NA     101 10.9   84     7   4
+## 30    NA     139  8.6   82     7  11
+## 31    NA     291 14.9   91     7  14
+## 32    NA     258  9.7   81     7  22
+## 33    NA     295 11.5   82     7  23
+## 34    78      NA  6.9   86     8   4
+## 35    35      NA  7.4   85     8   5
+## 36    66      NA  4.6   87     8   6
+## 37    NA     222  8.6   92     8  10
+## 38    NA     137 11.5   86     8  11
+## 39    NA      64 11.5   79     8  15
+## 40    NA     255 12.6   75     8  23
+## 41    NA     153  5.7   88     8  27
+## 42    NA     145 13.2   77     9  27</code></pre></div>
+</div>
+<div id="section-9" class="section level4 unnumbered tip">
+<h4></h4>
+<p>Sometimes it’s convenient to use the <code>.</code> (period) to represent the output from the previous pipe command. For example, we could rewrite the previous example as:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">complete.cases</span>(.))  <span class="co"># note the . (period) here in place of `airmiles`</span>
+##    Ozone Solar.R Wind Temp Month Day
+## 1     NA      NA 14.3   56     5   5
+## 2     28      NA 14.9   66     5   6
+## 3     NA     194  8.6   69     5  10
+## 4      7      NA  6.9   74     5  11
+## 5     NA      66 16.6   57     5  25
+## 6     NA     266 14.9   58     5  26
+## 7     NA      NA  8.0   57     5  27
+## 8     NA     286  8.6   78     6   1
+## 9     NA     287  9.7   74     6   2
+## 10    NA     242 16.1   67     6   3
+## 11    NA     186  9.2   84     6   4
+## 12    NA     220  8.6   85     6   5
+## 13    NA     264 14.3   79     6   6
+## 14    NA     273  6.9   87     6   8
+## 15    NA     259 10.9   93     6  11
+## 16    NA     250  9.2   92     6  12
+## 17    NA     332 13.8   80     6  14
+## 18    NA     322 11.5   79     6  15
+## 19    NA     150  6.3   77     6  21
+## 20    NA      59  1.7   76     6  22
+## 21    NA      91  4.6   76     6  23
+## 22    NA     250  6.3   76     6  24
+## 23    NA     135  8.0   75     6  25
+## 24    NA     127  8.0   78     6  26
+## 25    NA      47 10.3   73     6  27
+## 26    NA      98 11.5   80     6  28
+## 27    NA      31 14.9   77     6  29
+## 28    NA     138  8.0   83     6  30
+## 29    NA     101 10.9   84     7   4
+## 30    NA     139  8.6   82     7  11
+## 31    NA     291 14.9   91     7  14
+## 32    NA     258  9.7   81     7  22
+## 33    NA     295 11.5   82     7  23
+## 34    78      NA  6.9   86     8   4
+## 35    35      NA  7.4   85     8   5
+## 36    66      NA  4.6   87     8   6
+## 37    NA     222  8.6   92     8  10
+## 38    NA     137 11.5   86     8  11
+## 39    NA      64 11.5   79     8  15
+## 40    NA     255 12.6   75     8  23
+## 41    NA     153  5.7   88     8  27
+## 42    NA     145 13.2   77     9  27</code></pre></div>
+<p>This is nice because we can apply the <code>complete.cases</code> function to the output of the previous pipe. For example, if we wanted to select complete cases for a subset of the variables we could write:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(Ozone, Solar.R) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">complete.cases</span>(.))
+##    Ozone Solar.R
+## 1     NA      NA
+## 2     28      NA
+## 3     NA     194
+## 4      7      NA
+## 5     NA      66
+## 6     NA     266
+## 7     NA      NA
+## 8     NA     286
+## 9     NA     287
+## 10    NA     242
+## 11    NA     186
+## 12    NA     220
+## 13    NA     264
+## 14    NA     273
+## 15    NA     259
+## 16    NA     250
+## 17    NA     332
+## 18    NA     322
+## 19    NA     150
+## 20    NA      59
+## 21    NA      91
+## 22    NA     250
+## 23    NA     135
+## 24    NA     127
+## 25    NA      47
+## 26    NA      98
+## 27    NA      31
+## 28    NA     138
+## 29    NA     101
+## 30    NA     139
+## 31    NA     291
+## 32    NA     258
+## 33    NA     295
+## 34    78      NA
+## 35    35      NA
+## 36    66      NA
+## 37    NA     222
+## 38    NA     137
+## 39    NA      64
+## 40    NA     255
+## 41    NA     153
+## 42    NA     145</code></pre></div>
+<p>Or alternatively:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rows.to.keep &lt;-<span class="st"> </span><span class="op">!</span><span class="kw">complete.cases</span>(<span class="kw">select</span>(airquality, Ozone, Solar.R))
+airquality <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(rows.to.keep) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>pander</code></pre></div>
+<table style="width:62%;">
+<colgroup>
+<col width="11%" />
+<col width="13%" />
+<col width="9%" />
+<col width="9%" />
+<col width="11%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Ozone</th>
+<th align="center">Solar.R</th>
+<th align="center">Wind</th>
+<th align="center">Temp</th>
+<th align="center">Month</th>
+<th align="center">Day</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">14.3</td>
+<td align="center">56</td>
+<td align="center">5</td>
+<td align="center">5</td>
+</tr>
+<tr class="even">
+<td align="center">28</td>
+<td align="center">NA</td>
+<td align="center">14.9</td>
+<td align="center">66</td>
+<td align="center">5</td>
+<td align="center">6</td>
+</tr>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center">194</td>
+<td align="center">8.6</td>
+<td align="center">69</td>
+<td align="center">5</td>
+<td align="center">10</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="narm" class="section level4 unnumbered">
+<h4>Missing data and R functions</h4>
+<p>It’s normally good practice to pre-process your data and select the rows you want to analyse <em>before</em> passing dataframes to R functions.</p>
+<p>The reason for this is that different functions behave differently with missing data.</p>
+<p>For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(airquality<span class="op">$</span>Solar.R)
+## [1] NA</code></pre></div>
+<p>Here the default for <code>mean()</code> is to return NA if any of the values are missing. We can explicitly tell R to ignore missing values by setting <code>na.rm=TRUE</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(airquality<span class="op">$</span>Solar.R, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
+## [1] 185.9315</code></pre></div>
+<p>In contrast some other functions, for example the <code>lm()</code> which runs a linear regression will ignore missing values by default. If we run <code>summary</code> on the call to <code>lm</code> then we can see the line near the bottom of the output which reads: “(7 observations deleted due to missingness)”</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(Solar.R <span class="op">~</span><span class="st"> </span>Temp, <span class="dt">data=</span>airquality) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>summary
+## 
+## Call:
+## lm(formula = Solar.R ~ Temp, data = airquality)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -169.697  -59.315    6.224   67.685  186.083 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  -24.431     61.508  -0.397 0.691809    
+## Temp           2.693      0.782   3.444 0.000752 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 86.86 on 144 degrees of freedom
+##   (7 observations deleted due to missingness)
+## Multiple R-squared:  0.07609,    Adjusted R-squared:  0.06967 
+## F-statistic: 11.86 on 1 and 144 DF,  p-value: 0.0007518</code></pre></div>
+<p><span class="tip">Normally R will do the ‘sensible thing’ when there are missing values, but it’s always worth checking whether you do have any missing data, and addressing this explicitly in your code</span></p>
+</div>
+<div id="patterns-of-missingness" class="section level4 unnumbered">
+<h4>Patterns of missingness</h4>
+<p>The <code>mice</code> package has some nice functions to describe patterns of missingness in the data. These can be useful both at the exploratory stage, when you are checking and validating your data, but can also be used to create tables of missingness for publication:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mice<span class="op">::</span><span class="kw">md.pattern</span>(airquality) 
+##     Wind Temp Month Day Solar.R Ozone   
+## 111    1    1     1   1       1     1  0
+##  35    1    1     1   1       1     0  1
+##   5    1    1     1   1       0     1  1
+##   2    1    1     1   1       0     0  2
+##        0    0     0   0       7    37 44</code></pre></div>
+<p>In this table, <code>md.pattern</code> list the number of cases with particular patterns of missing data. - Each row describes a misisng data ‘pattern’ - The first column indicates the number of cases - The central columns indicate whether a particular variable is missing for the pattern (0=missing) - The last column counts the number of values missing for the pattern - The final row counts the number of missing values for each variable.</p>
+<div id="visualising-missingness" class="section level5 unnumbered">
+<h5>Visualising missingness</h5>
+<p>Graphics can also be useful to explore patterns in missingness.</p>
+<p><code>rct.data</code> contains data from an RCT of functional imagery training (FIT) for weight loss, which measured outcome (weight in kg) at baseline and two followups (<code>kg1</code>, <code>kg2</code>, <code>kg3</code>). The trial also measured global quality of life (<code>gqol</code>).</p>
+<p>As is common, there were some missing data at the follouwp:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit.data &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;data/fit-weight.RDS&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(kg1, kg2, kg3, age, gqol1)
+
+mice<span class="op">::</span><span class="kw">md.pattern</span>(fit.data)
+##     kg1 age gqol1 kg2 kg3   
+## 112   1   1     1   1   1  0
+##   2   1   1     1   1   0  1
+##   7   1   1     1   0   0  2
+##   8   0   0     0   0   0  5
+##       8   8     8  15  17 56</code></pre></div>
+<p>We might be interested to explore patterns in which observations were missing. Here we use colour to identify missing observations as a function of the data recorded at baseline:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit.data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">missing.followup =</span> <span class="kw">is.na</span>(kg2)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(kg1, age, <span class="dt">color=</span>missing.followup)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="column-types-and-missing_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>There’s a clear trend here for lighter patients (at baseline) to have more missing data at followup. There’s also a suggestion that younger patients are more likely to have been lost to followup.</p>
+<p>If needed, we could perform <a href="common-inferential-stats.html#common-inferential-stats">inferential tests</a> for these differences:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(kg1 <span class="op">~</span><span class="st"> </span><span class="kw">is.na</span>(kg2), <span class="dt">data=</span>fit.data)
+## 
+##  Welch Two Sample t-test
+## 
+## data:  kg1 by is.na(kg2)
+## t = 4.7153, df = 11.132, p-value = 0.000614
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##   7.005116 19.236238
+## sample estimates:
+## mean in group FALSE  mean in group TRUE 
+##            90.59211            77.47143
+<span class="kw">t.test</span>(age <span class="op">~</span><span class="st"> </span><span class="kw">is.na</span>(kg2), <span class="dt">data=</span>fit.data)
+## 
+##  Welch Two Sample t-test
+## 
+## data:  age by is.na(kg2)
+## t = 1.2418, df = 6.5246, p-value = 0.2571
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -7.39455 23.25169
+## sample estimates:
+## mean in group FALSE  mean in group TRUE 
+##            43.50000            35.57143</code></pre></div>
+<p>However, given the small number of missing values and the post-hoc nature of these analyses these tests are rather underpowered and we might prefer to report and comment on the plot alone.</p>
+<p>For some nice missing data visualisation techniques, including those for repeated measures data, see <span class="citation">@zhang2015missing</span>.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="factors-and-numerics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tidyingdata.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
