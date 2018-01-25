@@ -684,7 +684,7 @@ sqrt(first.element)
 ```
 
 
-Take a minute to try and make a guess at what went wrong. Why does R complain that the '`1`' is non-numeric?
+Take a minute to try and make a guess at what went wrong. Why does R complain that the `1` is non-numeric?
 
 When we built the vector we used `c` to combine the elements `1`, `2`, `3` and `"Wibble"`. Although our first three elements are numbers, `"Wibble"` is not - it's made up of letters (this is called a character string).
 
