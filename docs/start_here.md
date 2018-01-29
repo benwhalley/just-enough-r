@@ -7,6 +7,47 @@ title: 'Starting out'
 # Working with R {#r-basics}
 
 
+
+
+
+
+## Installation {- #installation-intro}
+
+
+#### RStudio Server {- #rstudio-server}
+
+The simplest way to get started with RStudio is to get an account on a server installation of the software (if you are a Plymouth University student please see the guidance on the DLE).
+
+
+
+
+#### Installing on your own machine. {- #local-install}
+
+
+1. [Download RStudio 1.01 or later](https://www.rstudio.com/products/rstudio/download/) (I'd suggest using whatever version is most recent and upgrading as new versions become available because the software is fairly actively developed).
+
+2. Install the [packages listed below](#dependencies)
+
+3. If you want to 'knit' your work into a pdf format, you should also install LaTeX. On [windows use this installer](https://miktex.org/download). Make sure to do a 'full install', not just a basic install. On a Mac install [homebrew](https://brew.sh) and type `brew cask install mactex`.
+
+
+
+
+#### Package dependencies {- #dependencies}
+
+As noted, this guide uses a number of recent R packages to make learning R simpler and more consistent. This requires that the packages are installed first.
+
+To install some of the recommended packages you will need a working C compiler. 
+
+[This script](requirements.R) installs all dependencies on a recent Linux or Mac system. 
+
+
+
+
+
+
+
+
 ### Workflow {- #start-here}
 
 <!-- <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/k56UXc4paIM?rel=0" frameborder="0" allowfullscreen></iframe>
@@ -363,9 +404,104 @@ first.two.elements
 
 
 
+### Making and slicing with sequences {- #making-sequences}
+
+One common task in R is to create sequences of numbers, letters or dates.
+
+The simplest way of doing this is to define a range, with the colon:
+
+
+```r
+onetoten <- 1:10
+onetoten
+##  [1]  1  2  3  4  5  6  7  8  9 10
+```
+
+This creates a vector which can be sliced like any other:
+
+
+```r
+onetoten[8]
+## [1] 8
+```
+
+
+One common use of sequences is to slice other vectors:
+
+
+```r
+onetoten[1:3]
+## [1] 1 2 3
+```
+
+
+Or the first 10 values in the `heights` vector we defined above:
+
+
+```r
+heights[1:10]
+##  [1] 203 148 156 158 167 162 172 164 172 187
+```
+
+
+This works backwards, and with negative numbers too:
+
+
+```r
+5:-5
+##  [1]  5  4  3  2  1  0 -1 -2 -3 -4 -5
+```
+
+
+
+
+When your sequence doesn't contain only whole numbers, or non-consecutive numbers, you can use the `seq` function:
+
+
+```r
+seq(1,10,by=2)
+## [1] 1 3 5 7 9
+seq(0, 1, by=.2)
+## [1] 0.0 0.2 0.4 0.6 0.8 1.0
+```
+
+
+
+
+### Conditional slicing {- #conditional-slices}
+
+One neat feature of R is that you can create a sequence of `TRUE` or `FALSE` values, by asking whether each value in a sequence matches a particular condition. For example:
+
+
+```r
+1:10 > 5
+##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
+```
+
+
+Re-using the heights vector from above, we can then use this to select values that are above the average:
+
+
+```r
+heights > mean(heights)
+##  [1]  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE
+## [12]  TRUE  TRUE
+```
+
+And we can use the vector of `TRUE` and `FALSE` values to select from the actual scores:
+
+
+```r
+heights[heights > mean(heights)]
+## [1] 203 172 172 187 182 175
+```
+
+
+
+
 ## Processing vectors {-}
 
-Many of R's most useful functions process *vectors of numbers* in some way. For example, if we want to calculate the average of our vector of heights we just type:
+Many of R's most useful functions process *vectors of numbers* in some way. For example (as we've already seen) if we want to calculate the average of our vector of heights we just type:
 
 
 ```r
@@ -433,7 +569,7 @@ But other functions process a vector without returning any numbers. For example,
 hist(heights)
 ```
 
-<img src="start_here_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+<img src="start_here_files/figure-html/unnamed-chunk-28-1.png" width="672" />
 
 We'll cover lots more plotting and visualisation later on.
 
@@ -538,21 +674,21 @@ We can also use random number-generating functions built into R to create vector
 ```r
 # 10 uniformly distributed random numbers between 0 and 1
 runif(10)
-##  [1] 0.24286994 0.17523228 0.05899854 0.36021067 0.23732466 0.49818123
-##  [7] 0.15009582 0.87234990 0.06308135 0.16701757
+##  [1] 0.55039790 0.56671130 0.12170090 0.56943814 0.69115807 0.21251599
+##  [7] 0.05639159 0.09458552 0.91188579 0.01170227
 
 # 1,000 uniformly distributed random numbers between 1 and 100
 my.numbers <- runif(1000, 1, 10)
 
 # 10 random-normal numbers with mean 10 and SD=1
 rnorm(10, mean=10)
-##  [1]  9.123508  9.803758  8.528340  8.667840 11.115023  9.529525  8.384174
-##  [8] 10.208620  9.170439 11.156358
+##  [1] 10.181492  9.828023  8.510946  9.787780  8.293745 10.873080 11.512254
+##  [8] 10.535196 10.429489  8.632022
 
 # 10 random-normal numbers with mean 10 and SD=5
 rnorm(10, 10, 5)
-##  [1] 10.449631  8.899558  8.970688 24.198560  7.328819 15.203273 12.129459
-##  [8]  9.480256  6.589127 11.159354
+##  [1] 21.728540  2.915083  3.672261 15.874733 14.784080  8.720487 13.412209
+##  [8] 12.094219  3.084931  8.405639
 ```
 
 We can then use these numbers in our code, for example plotting them:
@@ -563,7 +699,7 @@ random.numbers <- rnorm(10000)
 hist(random.numbers)
 ```
 
-<img src="start_here_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+<img src="start_here_files/figure-html/unnamed-chunk-37-1.png" width="672" />
 
 
 
@@ -629,9 +765,9 @@ ages <- round(rnorm(10, mean=40, sd=10))
 
 # get the rank order of elements (i.e. what their positions would be if the vector was sorted)
 ages
-##  [1] 50 57 45 38 39 42 52 40 38 40
+##  [1] 31 54 52 14 32 29 30 44 38 39
 rank(ages, ties.method="first")
-##  [1]  8 10  7  1  3  6  9  4  2  5
+##  [1]  4 10  9  1  5  2  3  8  6  7
 ```
 
 

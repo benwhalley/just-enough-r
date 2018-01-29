@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="rownames.html">
-<link rel="next" href="colours.html">
+<link rel="prev" href="multiple-raw-data-files.html">
+<link rel="next" href="factors-and-numerics.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -387,112 +387,382 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="string-handling" class="section level2 unnumbered">
-<h2>Working with character strings</h2>
-<div id="searching-and-replacing" class="section level3">
-<h3><span class="header-section-number">18.0.1</span> Searching and replacing</h3>
-<p>If you want to search inside a string there are lots of useful functions in the <code>stringr::</code> library. These replicate some functionality in base R, but like other packages in the ‘tidyverse’ they tend to be more consistent and easier to use. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cheese &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Stilton&quot;</span>, <span class="st">&quot;Brie&quot;</span>, <span class="st">&quot;Cheddar&quot;</span>)
-stringr<span class="op">::</span><span class="kw">str_detect</span>(cheese, <span class="st">&quot;Br&quot;</span>)
-## [1] FALSE  TRUE FALSE
-stringr<span class="op">::</span><span class="kw">str_locate</span>(cheese, <span class="st">&quot;i&quot;</span>)
-##      start end
-## [1,]     3   3
-## [2,]     3   3
-## [3,]    NA  NA
-stringr<span class="op">::</span><span class="kw">str_replace</span>(cheese, <span class="st">&quot;Stil&quot;</span>, <span class="st">&quot;Mil&quot;</span>)
-## [1] &quot;Milton&quot;  &quot;Brie&quot;    &quot;Cheddar&quot;</code></pre></div>
-</div>
-<div id="paste" class="section level3 unnumbered">
-<h3>Using <code>paste</code> to make labels</h3>
-<p>Paste can combine character strings with other types of variable to produce a new vector:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(mtcars<span class="op">$</span>cyl, <span class="st">&quot;cylinders&quot;</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]
-##  [1] &quot;6 cylinders&quot; &quot;6 cylinders&quot; &quot;4 cylinders&quot; &quot;6 cylinders&quot; &quot;8 cylinders&quot;
-##  [6] &quot;6 cylinders&quot; &quot;8 cylinders&quot; &quot;4 cylinders&quot; &quot;4 cylinders&quot; &quot;6 cylinders&quot;</code></pre></div>
-<p>Which can be a useful way to label graphs:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">paste</span>(mtcars<span class="op">$</span>cyl, <span class="st">&quot;cylinders&quot;</span>), mpg)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>)</code></pre></div>
-<p><img src="string-handling_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-</div>
-<div id="separate-and-extract" class="section level3 unnumbered">
-<h3>Fixing up <code>variable</code> after melting</h3>
-<p>In this example <code>melt()</code> creates a new column called <code>variable</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sleep.wide <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">melt</span>(<span class="dt">id.var=</span><span class="st">&quot;Subject&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">arrange</span>(Subject, variable)  <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>head
-##   Subject variable    value
-## 1       1    Day.0 249.5600
-## 2       1    Day.1 258.7047
-## 3       1    Day.2 250.8006
-## 4       1    Day.3 321.4398
-## 5       1    Day.4 356.8519
-## 6       1    Day.5 414.6901</code></pre></div>
-<p>However the contents of <code>variable</code> are now a character string (i.e. a list of letters and numbers) rather than numeric values (see <a href="factors-and-numerics.html#factors-and-numerics">column types</a>) but in this instance we know that the values <code>Day.1</code>, <code>Day.2</code>… are not really separate categories but actually form a linear sequence, from 1 to 9.</p>
-<p>We can use the <code>extract</code> or <code>separate</code> functions to split up <code>variable</code> and create a numeric column for <code>Day</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sleep.long <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">separate</span>(variable, <span class="kw">c</span>(<span class="st">&quot;variable&quot;</span>, <span class="st">&quot;Day&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Day=</span><span class="kw">as.numeric</span>(Day)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">arrange</span>(Subject) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>head <span class="op">%&gt;%</span><span class="st"> </span>pander</code></pre></div>
-<table style="width:47%;">
+<div id="joining-data" class="section level2 unnumbered">
+<h2>Joining different datasets</h2>
+<p>Many analyses combine data from different sources.</p>
+<p>Even within a single study, you may find that you have different datafiles (e.g. spreadsheets) for different sorts of information. For example you might have</p>
+<ol style="list-style-type: decimal">
+<li><p>Multiple csv files output by experimental software.</p></li>
+<li><p>A spreadsheet of demographic characteristics of participants (e.g. their age, gender, handedness)</p></li>
+<li><p>Questionnaire data, collected before the reaction time task.</p></li>
+</ol>
+<p>Your main analysis might want to model individual RTs using predictors including age, handedness or some personality variable. Thus, you probably want data which look something like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre></div>
+<table>
 <colgroup>
-<col width="13%" />
+<col width="11%" />
+<col width="10%" />
 <col width="15%" />
+<col width="11%" />
+<col width="17%" />
+<col width="7%" />
+<col width="18%" />
 <col width="8%" />
-<col width="9%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center">Subject</th>
-<th align="center">variable</th>
-<th align="center">Day</th>
-<th align="center">value</th>
+<th align="center">person</th>
+<th align="center">trial</th>
+<th align="center">condition</th>
+<th align="center">female</th>
+<th align="center">left.handed</th>
+<th align="center">age</th>
+<th align="center">extraversion</th>
+<th align="center">RT</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="center">1</td>
-<td align="center">Day</td>
-<td align="center">0</td>
-<td align="center">249.6</td>
+<td align="center">1</td>
+<td align="center">A</td>
+<td align="center">TRUE</td>
+<td align="center">FALSE</td>
+<td align="center">19</td>
+<td align="center">50</td>
+<td align="center">251.7</td>
 </tr>
 <tr class="even">
 <td align="center">1</td>
-<td align="center">Day</td>
-<td align="center">1</td>
-<td align="center">258.7</td>
-</tr>
-<tr class="odd">
-<td align="center">1</td>
-<td align="center">Day</td>
 <td align="center">2</td>
-<td align="center">250.8</td>
-</tr>
-<tr class="even">
-<td align="center">1</td>
-<td align="center">Day</td>
-<td align="center">3</td>
-<td align="center">321.4</td>
+<td align="center">A</td>
+<td align="center">TRUE</td>
+<td align="center">FALSE</td>
+<td align="center">19</td>
+<td align="center">50</td>
+<td align="center">311.1</td>
 </tr>
 <tr class="odd">
 <td align="center">1</td>
-<td align="center">Day</td>
-<td align="center">4</td>
-<td align="center">356.9</td>
+<td align="center">3</td>
+<td align="center">A</td>
+<td align="center">TRUE</td>
+<td align="center">FALSE</td>
+<td align="center">19</td>
+<td align="center">50</td>
+<td align="center">343.4</td>
 </tr>
 <tr class="even">
 <td align="center">1</td>
-<td align="center">Day</td>
-<td align="center">5</td>
-<td align="center">414.7</td>
+<td align="center">…</td>
+<td align="center">A</td>
+<td align="center">TRUE</td>
+<td align="center">FALSE</td>
+<td align="center">19</td>
+<td align="center">50</td>
+<td align="center">206.2</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">B</td>
+<td align="center">FALSE</td>
+<td align="center">FALSE</td>
+<td align="center">24</td>
+<td align="center">34</td>
+<td align="center">317.2</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="center">B</td>
+<td align="center">FALSE</td>
+<td align="center">FALSE</td>
+<td align="center">24</td>
+<td align="center">34</td>
+<td align="center">320.2</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">B</td>
+<td align="center">FALSE</td>
+<td align="center">FALSE</td>
+<td align="center">24</td>
+<td align="center">34</td>
+<td align="center">277</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">…</td>
+<td align="center">B</td>
+<td align="center">FALSE</td>
+<td align="center">FALSE</td>
+<td align="center">24</td>
+<td align="center">34</td>
+<td align="center">278.1</td>
 </tr>
 </tbody>
 </table>
-<p>See the user guide for <code>separate</code> and <code>extract</code> for more details.</p>
-<p><span class="explainer">If you are familiar with <a href="https://code.tutsplus.com/tutorials/you-dont-know-anything-about-regular-expressions-a-complete-guide--net-7869">regular expressions</a> you will be happy to know that you can use regex to separate variables using <code>extract</code> and <code>separate</code>. <a href="https://rpubs.com/bradleyboehmke/data_wrangling">See this guide for more details on how <code>separate</code> and <code>extract</code> work</a></span></p>
+<div id="the-raw-data" class="section level4 unnumbered">
+<h4>The raw data</h4>
+<p>In this example, we could imagine our raw data files looking like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rts <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre></div>
+<table style="width:35%;">
+<colgroup>
+<col width="12%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">person</th>
+<th align="center">trial</th>
+<th align="center">RT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">251.7</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">311.1</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">343.4</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">…</td>
+<td align="center">206.2</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">317.2</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="center">320.2</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">277</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">…</td>
+<td align="center">278.1</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">demographics <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre></div>
+<table style="width:51%;">
+<colgroup>
+<col width="12%" />
+<col width="8%" />
+<col width="19%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">person</th>
+<th align="center">age</th>
+<th align="center">left.handed</th>
+<th align="center">female</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">19</td>
+<td align="center">FALSE</td>
+<td align="center">TRUE</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">24</td>
+<td align="center">FALSE</td>
+<td align="center">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">33</td>
+<td align="center">TRUE</td>
+<td align="center">FALSE</td>
+</tr>
+</tbody>
+</table>
+<p>And:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">personality <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre></div>
+<table style="width:32%;">
+<colgroup>
+<col width="12%" />
+<col width="19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">person</th>
+<th align="center">extraversion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">50</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">34</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">47</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="joining-the-parts" class="section level4 unnumbered">
+<h4>Joining the parts</h4>
+<p>To create the combined data file we want, we have to <em>join</em> the different files together.</p>
+<p>As you might have noticed, though, the RT’s file has many observations per participant, whereas the demographics and personality data has one row per person.</p>
+<p>What we need is to smush this wide format data into the RTs file, such that values get repeated for every row of each participants’ data.</p>
+<p>To do this, the simplest method is to use the <code>dplyr::left_join()</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">left_join</span>(rts, demographics, <span class="dt">by=</span><span class="st">&quot;person&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>pander</code></pre></div>
+<table style="width:74%;">
+<colgroup>
+<col width="12%" />
+<col width="11%" />
+<col width="11%" />
+<col width="8%" />
+<col width="19%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">person</th>
+<th align="center">trial</th>
+<th align="center">RT</th>
+<th align="center">age</th>
+<th align="center">left.handed</th>
+<th align="center">female</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">251.7</td>
+<td align="center">19</td>
+<td align="center">FALSE</td>
+<td align="center">TRUE</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">311.1</td>
+<td align="center">19</td>
+<td align="center">FALSE</td>
+<td align="center">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">343.4</td>
+<td align="center">19</td>
+<td align="center">FALSE</td>
+<td align="center">TRUE</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">…</td>
+<td align="center">206.2</td>
+<td align="center">19</td>
+<td align="center">FALSE</td>
+<td align="center">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">317.2</td>
+<td align="center">24</td>
+<td align="center">FALSE</td>
+<td align="center">FALSE</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="center">320.2</td>
+<td align="center">24</td>
+<td align="center">FALSE</td>
+<td align="center">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">277</td>
+<td align="center">24</td>
+<td align="center">FALSE</td>
+<td align="center">FALSE</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">…</td>
+<td align="center">278.1</td>
+<td align="center">24</td>
+<td align="center">FALSE</td>
+<td align="center">FALSE</td>
+</tr>
+</tbody>
+</table>
+<p>In this example I explicitly set <code>id=&quot;person&quot;</code> to let R know which variable to use to match the rows of data, although you don’t <em>have</em> to, and <code>dplyr</code> can normally guess. You <em>do</em> have to use the same variable name in both files though (so, <code>person</code> and <code>participant</code> couldn’t be matched, for example).</p>
+<div id="other-types-of-joins" class="section level5 unnumbered tip">
+<h5>Other types of joins</h5>
+<p>As the dplyr manual states: left joins return for two dataframes, x and y will return all rows from x, and all columns from both x and y. Rows in x with no match in y will have NA values in the new columns. If there are multiple matches between x and y, all combinations of the matches are returned.</p>
+<p>Left joins are probably the most useful, but there are other types which can be useful. To see all of them look at the help files (<code>help('join', 'dplyr')</code>).</p>
+<p>To show one common example, if we wanted to check whether we were missing RT data for one of our participants, we could use an <code>anti_join</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anti_join</span>(demographics, rts, <span class="dt">by=</span><span class="st">&quot;person&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>pander</code></pre></div>
+<table style="width:51%;">
+<colgroup>
+<col width="12%" />
+<col width="8%" />
+<col width="19%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">person</th>
+<th align="center">age</th>
+<th align="center">left.handed</th>
+<th align="center">female</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">33</td>
+<td align="center">TRUE</td>
+<td align="center">FALSE</td>
+</tr>
+</tbody>
+</table>
+<p>This table lists the data for <em>all the people in the demographics file, for whom we don’t have RT data</em>. This can be a useful way of checking you haven’t mislaid a raw datafile (e.g. forgot to copy it from the lab machine!).</p>
 
+</div>
 </div>
 </div>
             </section>
@@ -500,8 +770,8 @@ stringr<span class="op">::</span><span class="kw">str_replace</span>(cheese, <sp
           </div>
         </div>
       </div>
-<a href="rownames.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="colours.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="multiple-raw-data-files.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="factors-and-numerics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
