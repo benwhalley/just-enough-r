@@ -403,9 +403,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="dependencies" class="section level4 unnumbered">
 <h4>Package dependencies</h4>
-<p>As noted, this guide uses a number of recent R packages to make learning R simpler and more consistent. This requires that the packages are installed first.</p>
-<p>To install some of the recommended packages you will need a working C compiler.</p>
-<p><a href="requirements.R">This script</a> installs all dependencies on a recent Linux or Mac system.</p>
+<p><a href="requirements.R">This script</a> installs all dependencies on a recent Linux or Mac system (excluding <code>rstan</code> and <code>rstanarm</code> which are additionally needed to work through the examples on Baysian estimation, but not the majority of the material).</p>
+<p><a href="install-bayes-tools.R">This script</a> installs <code>rstan</code> and related tools. If you have problems with it however, refer to the latest installation guides for the relevant packages. <code>rstan</code> does require you to install a C++ compiler first.</p>
 </div>
 <div id="start-here" class="section level3 unnumbered">
 <h3>Workflow</h3>
