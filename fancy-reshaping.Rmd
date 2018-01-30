@@ -1,0 +1,58 @@
+---
+title: 'Fancy reshaping'
+---
+
+
+
+```{r, include=FALSE, message=F}
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+library(tidyverse)
+library(reshape2)
+library(pander)
+```
+
+
+
+### Fancy reshaping {- #fancy-reshaping}
+
+
+As noted  above, it's common to combine the process of reshaping and aggregating or summarising in the same step. 
+
+For example here we have multiple rows per person, 3 trial at time 1, and 3 more trials at time 2:
+
+```{r, include=F}
+expt.data <- readRDS("data/expt.data.RDS") %>% filter(trial < 4)
+```
+
+```{r}
+expt.data %>% 
+  arrange(person, time, trial) %>% 
+  head %>% 
+  pander
+```
+
+
+We can reshape and aggregate this in a single step using `dcast`. Here we request the mean for each person at each time, with observations for each time split across two columns:
+
+```{r, message=T, warning=T}
+library(reshape2)
+expt.data %>%
+	dcast(person~paste0('time',time), 
+	      fun.aggregate=mean) %>% 
+  head %>% 
+  pander
+```
+
+Here `dcast` has correctly guessed that `RT` is the value we want to aggregate (you can specify explicitly with the `value.var=` parameter).
+
+`dcast` knows to aggregate using the mean because we set this with the `agg.function` parameter; this just stands for 'aggregation function'.
+
+We don't have to request the mean though: any function will do. Here we request the SD instead:
+
+```{r, message=T, warning=T}
+expt.data %>%
+	dcast(person~time, 
+	      fun.aggregate=sd) %>% 
+  head %>% 
+  pander
+```
