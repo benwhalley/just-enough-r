@@ -1,0 +1,38 @@
+---
+title: 'Patterns'
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+```
+
+
+
+# (PART) Patterns {-}
+
+
+# Learning key patterns 
+
+
+![](media/patterns.png)
+
+Statistics courses teach statistics, and software training or programming courses can teach you the fundamentals of a particular package  --- for example R.
+
+However, a large part of learning how to analyse data is actually not about particular statistical techniques, nor the detals of implementing them in a particular package.
+
+Instead, the most useful things to take away from a course can be how to think about different types of problem, and general strategies for tackling them. One label applied to these approaches and strategies are 'patterns'.
+
+
+We've already come across one pattern in the section on [summarising data](summarising-data): the [split, apply, combine method](#split-apply-combine).
+
+This section outlines some other patterns or ways of working that may be helpful.
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,36 @@
+---
+title: 'Analysing mediation'
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
+```
+
+
+# Mediation and covariance modelling 
+
+
+
+## Mediation {- #mediation}
+
+XXX TODO EXPAND
+
+This chapter will assume:
+
+- You know what mediation analyses are and why you want to run them
+- You a basic understanding of the Baron and Kenny approach, but an inkling that there are more up to date ways of testing mediation hypotheses.
+
+
+
+<!-- 
+
+http://lavaan.ugent.be/tutorial/mediation.html
+
+
+# indirect effect (a*b)
+             ab := a*b
+           # total effect
+             total := c + (a*b) 
+
+
+-->
