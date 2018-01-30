@@ -45,29 +45,6 @@ For a fascinating history and exploration of the good, the bad and the ugly in d
 
 
 
-<!-- 
-
-### Good graph, bad graph
-
-In a word association game, the first word to mind when someone says 'statistics' can sometimes be 'lies', but the unscrupulous can tell tall takes no matter what the medium, and data visualisations are no exception here.
-
-
-
-The other key consideration when visualisation is the integrity of the finished product. Does the figure fairly represent the
-
-
- -->
-
-<!-- 
-TODO  XXX
-
-- Psychology and human factors of graphics + Tufte. 
-- Importance of graphs to communicate.
-- Motivating examples from RCTs.
- -->
-
-
-
 ## Which tool to use? {- #graphics-approaches}
 
 Typically when setting out to plot data in R it pays to ask yourself whether you need:
@@ -232,7 +209,7 @@ mtcars %>%
 <img src="graphics_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 
-And we have a pretty slick graph: `ggplot` has now added points for each pair of `disp` and `mpg` values, and coloured them according to the value of `hp` (see choosing colours below XXX).
+And we have a pretty slick graph: `ggplot` has now added points for each pair of `disp` and `mpg` values, and coloured them according to the value of `hp` (see [choosing colours below](#picking-colours)).
 
 [Use the `airquality` dataset and create your own scatterplot and try to colour the points using the `Month` variable. Should `Month` be used as a factor or a numeric variable when colouring the points?]{.exercise}
 

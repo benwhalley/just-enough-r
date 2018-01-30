@@ -14,10 +14,11 @@ library(apastats)
 # Sharing, publishing and archiving {#sharing-and-publication}
 
 
+RMarkdown is an excellent format to collaborate on with other people. Because it's plain text it works well with version control systems like git (e.g. using <github.com>).
 
-XXX TODO flesh this out 
+You can also knit documents into formats that journals and 
 
-- tips on collaborating with people with rmarkdown
+
 
 
 ### Tips for dead tree journals {- #publication}
@@ -31,34 +32,9 @@ XXX TODO flesh this out
 
 
 
-### Registering your predictions (- #register-predictions)
+### Registering your predictions {- #register-predictions}
 
-XXX add link and explanation for aspredicted.org
-
-
-
-
-
-##### Weirdnesses/workflow in exporting RMarkdown to Word docs {-}
-
-XXX e.g. use of Style .doc to format as APA
-
-
-
-### Archiving data {- #archiving-data}
-
-XXX TODO overview of the relevant online services
-
-
-
-
-
-
-
-
-
-
-
+An RMarkdown file which produced simulated data to illustrate your predictions, and then run the analysis you propose, would be an excellent document to upload to a service like <aspredicted.org>
 
 
 

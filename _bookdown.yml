@@ -12,7 +12,7 @@ rmd_files:
     # GETTING STARTED
     "index.Rmd",
     "start_here.Rmd",
-
+    "packages.Rmd",
 
     # PART DATA
     "DATASETS.Rmd",
@@ -56,6 +56,12 @@ rmd_files:
 "predictions-and-margins.Rmd",
 "models-are-data.Rmd",
 "simplifying-and-reusing.Rmd",
+"making-table-1.Rmd",
+"quirks.Rmd",
+    "string-handling.Rmd",
+    "colours.Rmd",
+
+"help.Rmd",
 
 
 # PART explanations
@@ -67,22 +73,15 @@ rmd_files:
 "link-functions.Rmd",
 "over-fitting.Rmd",
 
-# PART everyday R
-"EVERYDAY.Rmd",
-"installation.Rmd",
-"packages.Rmd",
 
-"quirks.Rmd",
-"string-handling.Rmd",
-"colours.Rmd",
 
-"help.Rmd",
 
-"sharing-and-publishing.Rmd",
 
-"writing-a-paper.Rmd",
-"cleaning-up-your-mess.Rmd",
-"making-table-1.Rmd",
+
+# "sharing-and-publishing.Rmd",
+# "writing-a-paper.Rmd",
+# "cleaning-up-your-mess.Rmd",
+
 
 
 "references.Rmd"

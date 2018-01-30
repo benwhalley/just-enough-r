@@ -7,7 +7,7 @@ bookdown::gitbook:
       collapse: section
       before: |
         <li><a href="./">Just enough R</a></li>
-    download: ["pdf", "epub"]
+    download: null
   split_by: section
 
 bookdown::pdf_book:
@@ -16,5 +16,3 @@ bookdown::pdf_book:
   latex_engine: xelatex
   citation_package: natbib
   keep_tex: yes
-
-# bookdown::epub_book: default

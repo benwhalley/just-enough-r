@@ -8,6 +8,7 @@ build.R
 *_cache
 *.md
 *_files/
+!docs/*_files/
 *.acorn
 *.mov
 myplot.pdf

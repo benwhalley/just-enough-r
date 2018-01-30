@@ -389,7 +389,7 @@ Nonetheless, with these caveats in mind, SEM can be a useful technique to quanti
 
 4. Test alternative models (e.g. with paths removed or reversed). Report where alternatives also fit the data.
 
-5. In writing up, provide sufficient detail for other researchers to replicate your analyses, and to follow the logic of the ammendments you make. Ideally share your raw data, but at a minimum share the covariance matrix. Report GOF statistics, and [follow published reporting guidelines for SEM](#XXXTODO). Always include a diagram of your final model (at the least).
+5. In writing up, provide sufficient detail for other researchers to replicate your analyses, and to follow the logic of the ammendments you make. Ideally share your raw data, but at a minimum share the covariance matrix. Report GOF statistics, and follow published reporting guidelines for SEM [@schreiber_reporting_2006]. Always include a diagram of your final model (at the very least).
 
 
 

@@ -11,6 +11,46 @@ library(tufte)
 # Working with R {#r-basics}
 
 
+
+
+
+
+## Installation {- #installation-intro}
+
+
+#### RStudio Server {- #rstudio-server}
+
+The simplest way to get started with RStudio is to get an account on a server installation of the software (if you are a Plymouth University student please see the guidance on the DLE).
+
+
+
+
+#### Installing on your own machine. {- #local-install}
+
+
+1. [Download RStudio 1.01 or later](https://www.rstudio.com/products/rstudio/download/) (I'd suggest using whatever version is most recent and upgrading as new versions become available because the software is fairly actively developed).
+
+2. Install the [packages listed below](#dependencies)
+
+3. If you want to 'knit' your work into a pdf format, you should also install LaTeX. On [windows use this installer](https://miktex.org/download). Make sure to do a 'full install', not just a basic install. On a Mac install [homebrew](https://brew.sh) and type `brew cask install mactex`.
+
+
+
+
+#### Package dependencies {- #dependencies}
+
+
+[This script](requirements.R) installs all dependencies on a recent Linux or Mac system (excluding `rstan` and `rstanarm` which are additionally needed to work through the examples on Baysian estimation, but not the majority of the material).
+
+[This script](install-bayes-tools.R) installs `rstan` and related tools. If you have problems with it however, refer to the latest installation guides for the relevant packages. `rstan` does require you to install a C++ compiler first.
+
+
+
+
+
+
+
+
 ### Workflow {- #start-here}
 
 <!-- <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/k56UXc4paIM?rel=0" frameborder="0" allowfullscreen></iframe>
@@ -343,9 +383,84 @@ first.two.elements
 
 
 
+### Making and slicing with sequences {- #making-sequences}
+
+One common task in R is to create sequences of numbers, letters or dates.
+
+The simplest way of doing this is to define a range, with the colon:
+
+```{r}
+onetoten <- 1:10
+onetoten
+```
+
+This creates a vector which can be sliced like any other:
+
+```{r}
+onetoten[8]
+```
+
+
+One common use of sequences is to slice other vectors:
+
+```{r}
+onetoten[1:3]
+```
+
+
+Or the first 10 values in the `heights` vector we defined above:
+
+```{r}
+heights[1:10]
+```
+
+
+This works backwards, and with negative numbers too:
+
+```{r}
+5:-5
+```
+
+
+
+
+When your sequence doesn't contain only whole numbers, or non-consecutive numbers, you can use the `seq` function:
+
+```{r}
+seq(1,10,by=2)
+seq(0, 1, by=.2)
+```
+
+
+
+
+### Conditional slicing {- #conditional-slices}
+
+One neat feature of R is that you can create a sequence of `TRUE` or `FALSE` values, by asking whether each value in a sequence matches a particular condition. For example:
+
+```{r}
+1:10 > 5
+```
+
+
+Re-using the heights vector from above, we can then use this to select values that are above the average:
+
+```{r}
+heights > mean(heights)
+```
+
+And we can use the vector of `TRUE` and `FALSE` values to select from the actual scores:
+
+```{r}
+heights[heights > mean(heights)]
+```
+
+
+
+
 ## Processing vectors {-}
 
-Many of R's most useful functions process *vectors of numbers* in some way. For example, if we want to calculate the average of our vector of heights we just type:
+Many of R's most useful functions process *vectors of numbers* in some way. For example (as we've already seen) if we want to calculate the average of our vector of heights we just type:
 
 ```{r}
 mean(heights)
@@ -585,7 +700,7 @@ sqrt(first.element)
 ```
 
 
-Take a minute to try and make a guess at what went wrong. Why does R complain that the '`1`' is non-numeric?
+Take a minute to try and make a guess at what went wrong. Why does R complain that the `1` is non-numeric?
 
 When we built the vector we used `c` to combine the elements `1`, `2`, `3` and `"Wibble"`. Although our first three elements are numbers, `"Wibble"` is not - it's made up of letters (this is called a character string).
 
