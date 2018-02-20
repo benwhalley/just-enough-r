@@ -401,34 +401,34 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>We calculate the VPC woth some simple arithmetic on the variance estimates from the lmer model. We can extract the variance estimates from the VarCorr function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">random.intercepts.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>Subject),  <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
 <span class="kw">VarCorr</span>(random.intercepts.model)
-##  Groups   Name        Std.Dev.
-##  Subject  (Intercept) 37.124  
-##  Residual             30.991</code></pre></div>
+ Groups   Name        Std.Dev.
+ <span class="kw">Subject</span>  (Intercept) <span class="fl">37.124</span>  
+ Residual             <span class="fl">30.991</span>  </code></pre></div>
 <p>And we can test the variance parameter using the <code>rand()</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rand</span>(random.intercepts.model)
-## Analysis of Random effects Table:
-##         Chi.sq Chi.DF p.value    
-## Subject    107      1  &lt;2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre></div>
+Analysis of Random effects Table<span class="op">:</span>
+<span class="st">        </span>Chi.sq Chi.DF p.value    
+Subject    <span class="dv">107</span>      <span class="dv">1</span>  <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
 <p>Helpfully, if we convert the result of <code>VarCorr</code> to a dataframe, we are provided with the columns <code>vcov</code> which stands for <code>variance or covariance</code>, as well as the <code>sdcor</code> (standard deviation or correlation) which is provided in the printed summary:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">VarCorr</span>(random.intercepts.model) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">as_data_frame</span>()
-## # A tibble: 2 x 5
-##        grp        var1  var2      vcov    sdcor
-##      &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1  Subject (Intercept)  &lt;NA&gt; 1378.1785 37.12383
-## 2 Residual        &lt;NA&gt;  &lt;NA&gt;  960.4566 30.99123</code></pre></div>
+<span class="co"># A tibble: 2 x 5</span>
+       grp        var1  var2      vcov    sdcor
+     <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">       </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">    </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span>  <span class="kw">Subject</span> (Intercept)  <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st"> </span><span class="fl">1378.1785</span> <span class="fl">37.12383</span>
+<span class="dv">2</span> Residual        <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">  </span><span class="fl">960.4566</span> <span class="fl">30.99123</span></code></pre></div>
 <p>The variance partition coefficient is simply the variance at a given level of the model, divided by the total variance (the sum of the variance parameters). So we can write:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">VarCorr</span>(random.intercepts.model) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">as_data_frame</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">icc=</span>vcov<span class="op">/</span><span class="kw">sum</span>(vcov)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(grp, icc)
-## # A tibble: 2 x 2
-##        grp       icc
-##      &lt;chr&gt;     &lt;dbl&gt;
-## 1  Subject 0.5893089
-## 2 Residual 0.4106911</code></pre></div>
+<span class="co"># A tibble: 2 x 2</span>
+       grp       icc
+     <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span>  Subject <span class="fl">0.5893089</span>
+<span class="dv">2</span> Residual <span class="fl">0.4106911</span></code></pre></div>
 <p><span class="apa-example">Intraclass correlations were computed from the mixed effects mode. 59% of the variation in outcome was attributable to differences between subjects, <span class="math inline">\(\chi^2(1) = 107\)</span>, <em>p</em> &lt; .001.</span></p>
 <p>[It’s not straightforward to put an confidence interval around the VPC estimate from an lmer model. If this is important to you, you should explore <a href="bayes-mcmc.html#bayes-mcmc">re-fitting the same model in a Bayesian framework</a>]</p>
 </div>

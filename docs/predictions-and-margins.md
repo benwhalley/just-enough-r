@@ -1,3 +1,4 @@
+
 ---
 title: 'Making predictions from models'
 bibliography: bibliography.bib
@@ -50,8 +51,8 @@ Consider the example used in a previous section where we measured `injury.severi
 And as before, we might plot these data:
 
 <div class="figure">
-<img src="predictions-and-margins_files/figure-html/unnamed-chunk-3-1.png" alt="Point and line plot of injury severity by age and gender." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-3)Point and line plot of injury severity by age and gender.</p>
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-4-1.png" alt="Point and line plot of injury severity by age and gender." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-4)Point and line plot of injury severity by age and gender.</p>
 </div>
 
 
@@ -89,7 +90,7 @@ margins.plot <- inter.df %>%
 margins.plot
 ```
 
-<img src="predictions-and-margins_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 
 
@@ -116,7 +117,7 @@ injuries %>%
   scale_color_discrete(name="")
 ```
 
-<img src="predictions-and-margins_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 
 But to make predictions from this continuous data we need to fit a line through the points (i.e. run a model). We can do this graphically by calling `geom_smooth()` which attempts to fit a smooth line through the data we observe:
@@ -131,8 +132,8 @@ injuries %>%
 ```
 
 <div class="figure">
-<img src="predictions-and-margins_files/figure-html/unnamed-chunk-7-1.png" alt="Scatter plot overlaid with smooth best-fit lines" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-7)Scatter plot overlaid with smooth best-fit lines</p>
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-8-1.png" alt="Scatter plot overlaid with smooth best-fit lines" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-8)Scatter plot overlaid with smooth best-fit lines</p>
 </div>
 
 
@@ -150,8 +151,8 @@ injuries %>%
 ```
 
 <div class="figure">
-<img src="predictions-and-margins_files/figure-html/unnamed-chunk-8-1.png" alt="Scatter plot overlaid with smoothed lines (dotted) and linear predictions (coloured)" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-8)Scatter plot overlaid with smoothed lines (dotted) and linear predictions (coloured)</p>
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-9-1.png" alt="Scatter plot overlaid with smoothed lines (dotted) and linear predictions (coloured)" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-9)Scatter plot overlaid with smoothed lines (dotted) and linear predictions (coloured)</p>
 </div>
 
 
@@ -180,8 +181,8 @@ gridExtra::grid.arrange(means.plot+ggtitle("Means"), margins.plot+ggtitle("Margi
 ```
 
 <div class="figure">
-<img src="predictions-and-margins_files/figure-html/unnamed-chunk-9-1.png" alt="Example of predicted means vs. margins. Note, the margin plotted in the second panel is the difference between the coloured lines in the first. A horizontal line is added at zero in panel 2 by convention." width="384" />
-<p class="caption">(\#fig:unnamed-chunk-9)Example of predicted means vs. margins. Note, the margin plotted in the second panel is the difference between the coloured lines in the first. A horizontal line is added at zero in panel 2 by convention.</p>
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-10-1.png" alt="Example of predicted means vs. margins. Note, the margin plotted in the second panel is the difference between the coloured lines in the first. A horizontal line is added at zero in panel 2 by convention." width="384" />
+<p class="caption">(\#fig:unnamed-chunk-10)Example of predicted means vs. margins. Note, the margin plotted in the second panel is the difference between the coloured lines in the first. A horizontal line is added at zero in panel 2 by convention.</p>
 </div>
 
 
@@ -197,19 +198,16 @@ Our model formula would be: `severity.of.injury ~ age.category * gender`. Here w
 ```r
 injurymodel <- lm(severity.of.injury ~ age.category * gender,  data=injuries)
 anova(injurymodel)
-```
+Analysis of Variance Table
 
-```
-## Analysis of Variance Table
-## 
-## Response: severity.of.injury
-##                      Df  Sum Sq Mean Sq F value    Pr(>F)    
-## age.category          1  4173.3  4173.3 154.573 < 2.2e-16 ***
-## gender                1  8488.5  8488.5 314.404 < 2.2e-16 ***
-## age.category:gender   1  1141.5  1141.5  42.279  1.25e-10 ***
-## Residuals           996 26890.8    27.0                      
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Response: severity.of.injury
+                     Df  Sum Sq Mean Sq F value    Pr(>F)    
+age.category          1  4173.3  4173.3 154.573 < 2.2e-16 ***
+gender                1  8488.5  8488.5 314.404 < 2.2e-16 ***
+age.category:gender   1  1141.5  1141.5  42.279  1.25e-10 ***
+Residuals           996 26890.8    27.0                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 Having saved the regression model in the variable `injurymodel` we can use this to make predictions for means and estimate marginal effects:
@@ -238,16 +236,13 @@ prediction.data <- data_frame(
   gender = c("Male", "Male", "Female", "Female")
 )
 prediction.data
-```
-
-```
-## # A tibble: 4 x 2
-##   age.category gender
-##          <chr>  <chr>
-## 1        young   Male
-## 2        older   Male
-## 3        young Female
-## 4        older Female
+# A tibble: 4 x 2
+  age.category gender
+         <chr>  <chr>
+1        young   Male
+2        older   Male
+3        young Female
+4        older Female
 ```
 
 
@@ -264,14 +259,11 @@ The R `predict()` function has two useful arguments:
 ```r
 injury.predictions <- predict(injurymodel, newdata=prediction.data, interval="confidence")
 injury.predictions
-```
-
-```
-##        fit      lwr      upr
-## 1 57.14239 56.49360 57.79117
-## 2 59.19682 58.56688 59.82676
-## 3 60.79554 60.14278 61.44830
-## 4 67.12521 66.47642 67.77399
+       fit      lwr      upr
+1 57.14239 56.49360 57.79117
+2 59.19682 58.56688 59.82676
+3 60.79554 60.14278 61.44830
+4 67.12521 66.47642 67.77399
 ```
 
 
@@ -304,39 +296,30 @@ mtcars.plus.predictions %>%
   stat_summary(geom="pointrange")
 ```
 
-<img src="predictions-and-margins_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 
 ```r
 prediction.frame.plus.predictions %>% ggplot(aes(vs, fit, ymin=lwr, ymax=upr)) + geom_pointrange()
 ```
 
-<img src="predictions-and-margins_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 
 ```r
 prediction.frame.plus.predictions
-```
-
-```
-## # A tibble: 2 x 5
-##      vs    wt      fit      lwr      upr
-##   <int> <dbl>    <dbl>    <dbl>    <dbl>
-## 1     0     2 24.11860 21.61207 26.62514
-## 2     1     2 27.27297 25.57096 28.97499
-```
-
-```r
+# A tibble: 2 x 5
+     vs    wt      fit      lwr      upr
+  <int> <dbl>    <dbl>    <dbl>    <dbl>
+1     0     2 24.11860 21.61207 26.62514
+2     1     2 27.27297 25.57096 28.97499
 mtcars.plus.predictions %>% group_by(vs) %>%
   summarise_each(funs(mean), fit, lwr, upr)
-```
-
-```
-## # A tibble: 2 x 4
-##      vs      fit      lwr      upr
-##   <dbl>    <dbl>    <dbl>    <dbl>
-## 1     0 16.61667 14.93766 18.29568
-## 2     1 24.55714 22.81586 26.29843
+# A tibble: 2 x 4
+     vs      fit      lwr      upr
+  <dbl>    <dbl>    <dbl>    <dbl>
+1     0 16.61667 14.93766 18.29568
+2     1 24.55714 22.81586 26.29843
 ```
 
 
@@ -358,68 +341,52 @@ Two ways of computing, depending on which of these two you hate least:
 ```r
 library(margins)
 margins(m, at = list(wt = 1:2))
-```
+ at(wt)    vs     wt
+      1 3.154 -4.443
+      2 3.154 -4.443
 
-```
-##  at(wt)    vs     wt
-##       1 3.154 -4.443
-##       2 3.154 -4.443
-```
-
-```r
 m2 <- lm(mpg~vs*wt, data=mtcars)
 summary(m2)
-```
 
-```
-## 
-## Call:
-## lm(formula = mpg ~ vs * wt, data = mtcars)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -3.9950 -1.7881 -0.3423  1.2935  5.2061 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)  29.5314     2.6221  11.263 6.55e-12 ***
-## vs           11.7667     3.7638   3.126   0.0041 ** 
-## wt           -3.5013     0.6915  -5.063 2.33e-05 ***
-## vs:wt        -2.9097     1.2157  -2.393   0.0236 *  
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 2.578 on 28 degrees of freedom
-## Multiple R-squared:  0.8348,	Adjusted R-squared:  0.8171 
-## F-statistic: 47.16 on 3 and 28 DF,  p-value: 4.497e-11
-```
+Call:
+lm(formula = mpg ~ vs * wt, data = mtcars)
 
-```r
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.9950 -1.7881 -0.3423  1.2935  5.2061 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  29.5314     2.6221  11.263 6.55e-12 ***
+vs           11.7667     3.7638   3.126   0.0041 ** 
+wt           -3.5013     0.6915  -5.063 2.33e-05 ***
+vs:wt        -2.9097     1.2157  -2.393   0.0236 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.578 on 28 degrees of freedom
+Multiple R-squared:  0.8348,	Adjusted R-squared:  0.8171 
+F-statistic: 47.16 on 3 and 28 DF,  p-value: 4.497e-11
 m2.margins <- margins(m2, at = list(wt = 1.5:4.5))
 
 summary(m2.margins)
-```
+ factor  wt     AME     SE       z      p   lower   upper
+     vs 1.5  7.4021 2.0900  3.5417 0.0004  3.3058 11.4985
+     vs 2.5  4.4924 1.2374  3.6305 0.0003  2.0671  6.9177
+     vs 3.5  1.5827 1.2847  1.2320 0.2180 -0.9352  4.1007
+     vs 4.5 -1.3270 2.1738 -0.6105 0.5416 -5.5875  2.9335
+     wt 1.5 -4.7743 0.5854 -8.1560 0.0000 -5.9216 -3.6270
+     wt 2.5 -4.7743 0.5854 -8.1560 0.0000 -5.9216 -3.6270
+     wt 3.5 -4.7743 0.5854 -8.1560 0.0000 -5.9216 -3.6270
+     wt 4.5 -4.7743 0.5854 -8.1561 0.0000 -5.9216 -3.6270
 
-```
-##  factor  wt     AME     SE       z      p   lower   upper
-##      vs 1.5  7.4021 2.0902  3.5413 0.0004  3.3054 11.4989
-##      vs 2.5  4.4924 1.2376  3.6299 0.0003  2.0667  6.9181
-##      vs 3.5  1.5827 1.2848  1.2319 0.2180 -0.9353  4.1008
-##      vs 4.5 -1.3270 2.1737 -0.6105 0.5416 -5.5874  2.9334
-##      wt 1.5 -4.7743 0.5854 -8.1560 0.0000 -5.9216 -3.6270
-##      wt 2.5 -4.7743 0.5854 -8.1556 0.0000 -5.9217 -3.6269
-##      wt 3.5 -4.7743 0.5854 -8.1562 0.0000 -5.9216 -3.6270
-##      wt 4.5 -4.7743 0.5854 -8.1561 0.0000 -5.9216 -3.6270
-```
-
-```r
 summary(m2.margins) %>% as_data_frame() %>%
   filter(factor=="vs") %>%
   ggplot(aes(wt, AME)) +
   geom_point() + geom_line()
 ```
 
-<img src="predictions-and-margins_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 
 

@@ -415,13 +415,13 @@ Figure 6.1: The box in a boxplot indictes the IQR; the whisker indicates the min
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chicks.eating.beans <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(feed, weight)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_violin</span>()</code></pre></div>
-<p><img src="t-tests_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="t-tests_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Layering boxes and bottles can work well too because it combines information about the distribution with key statistics like the median and IQR, and also because it scales reasonably well to multiple categories:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chickwts <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(feed, weight)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_violin</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">width=</span>.<span class="dv">1</span>)</code></pre></div>
-<p><img src="t-tests_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="t-tests_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <!-- Bottleplots are just density plots, turned 90 degrees. Density plots might be more familiar to some, but it's hard to show more than 2 or 3 categories:
 
 
@@ -431,7 +431,7 @@ chicks.eating.beans %>%
   geom_density(alpha=.5)
 ```
 
-<img src="t-tests_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="t-tests_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 
 
@@ -445,7 +445,7 @@ chicks.eating.beans %>%
   facet_grid(feed ~ .)
 ```
 
-<img src="t-tests_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="t-tests_files/figure-html/unnamed-chunk-6-1.png" width="672" />
  -->
 </div>
 <div id="running-a-t-test" class="section level3 unnumbered">
@@ -454,31 +454,31 @@ chicks.eating.beans %>%
 <div id="independent-groups" class="section level5 unnumbered">
 <h5>2 independent groups</h5>
 <p>Assuming your data are in long format:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(weight <span class="op">~</span><span class="st"> </span>feed, <span class="dt">data=</span>chicks.eating.beans)</code></pre></div>
-<pre><code>## 
-##  Welch Two Sample t-test
-## 
-## data:  weight by feed
-## t = -4.5543, df = 21.995, p-value = 0.0001559
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -125.49476  -46.96238
-## sample estimates:
-## mean in group horsebean   mean in group soybean 
-##                160.2000                246.4286</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(weight <span class="op">~</span><span class="st"> </span>feed, <span class="dt">data=</span>chicks.eating.beans)
+
+    Welch Two Sample t<span class="op">-</span>test
+
+data<span class="op">:</span><span class="st">  </span>weight by feed
+t =<span class="st"> </span><span class="op">-</span><span class="fl">4.5543</span>, df =<span class="st"> </span><span class="fl">21.995</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.0001559</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span>
+<span class="dv">95</span> percent confidence interval<span class="op">:</span>
+<span class="st"> </span><span class="op">-</span><span class="fl">125.49476</span>  <span class="op">-</span><span class="fl">46.96238</span>
+sample estimates<span class="op">:</span>
+mean <span class="cf">in</span> group horsebean   mean <span class="cf">in</span> group soybean 
+               <span class="fl">160.2000</span>                <span class="fl">246.4286</span> </code></pre></div>
 <p>Or equivalently, if your <a href="#tidying-data">data are untidy</a> and each group has it’s own column (e.g. chicks eating soybeans in one column and those eating horsebeans in another):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(untidy.chicks, <span class="kw">t.test</span>(horsebean, soybean))</code></pre></div>
-<pre><code>## 
-##  Welch Two Sample t-test
-## 
-## data:  horsebean and soybean
-## t = -4.5543, df = 21.995, p-value = 0.0001559
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -125.49476  -46.96238
-## sample estimates:
-## mean of x mean of y 
-##  160.2000  246.4286</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(untidy.chicks, <span class="kw">t.test</span>(horsebean, soybean))
+
+    Welch Two Sample t<span class="op">-</span>test
+
+data<span class="op">:</span><span class="st">  </span>horsebean and soybean
+t =<span class="st"> </span><span class="op">-</span><span class="fl">4.5543</span>, df =<span class="st"> </span><span class="fl">21.995</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.0001559</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span>
+<span class="dv">95</span> percent confidence interval<span class="op">:</span>
+<span class="st"> </span><span class="op">-</span><span class="fl">125.49476</span>  <span class="op">-</span><span class="fl">46.96238</span>
+sample estimates<span class="op">:</span>
+mean of x mean of y 
+ <span class="fl">160.2000</span>  <span class="fl">246.4286</span> </code></pre></div>
 </div>
 <div id="equal-variances" class="section level5 unnumbered admonition">
 <h5>Equal or unequal variances?</h5>
@@ -494,34 +494,35 @@ baseline &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class
 followup =<span class="st"> </span>baseline <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">50</span>, .<span class="dv">5</span>, <span class="dv">1</span>)
 
 <span class="co"># run paired samples test</span>
-<span class="kw">t.test</span>(baseline, followup, <span class="dt">paired=</span><span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## 
-##  Paired t-test
-## 
-## data:  baseline and followup
-## t = -4.36, df = 49, p-value = 6.661e-05
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -0.9342988 -0.3447602
-## sample estimates:
-## mean of the differences 
-##              -0.6395295</code></pre>
+<span class="kw">t.test</span>(baseline, followup, <span class="dt">paired=</span><span class="ot">TRUE</span>)
+
+    Paired t<span class="op">-</span>test
+
+data<span class="op">:</span><span class="st">  </span>baseline and followup
+t =<span class="st"> </span><span class="op">-</span><span class="fl">4.36</span>, df =<span class="st"> </span><span class="dv">49</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">6.661e-05</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span>
+<span class="dv">95</span> percent confidence interval<span class="op">:</span>
+<span class="st"> </span><span class="op">-</span><span class="fl">0.9342988</span> <span class="op">-</span><span class="fl">0.3447602</span>
+sample estimates<span class="op">:</span>
+mean of the differences 
+             <span class="op">-</span><span class="fl">0.6395295</span> </code></pre></div>
 <p>Note that we could also <a href="reshaping.html#wide-to-long">‘melt’ the data into long format</a> and use the <code>paired=TRUE</code> argument with a formula:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">long.form.data &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">baseline=</span>baseline, <span class="dt">follow=</span>followup) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>()</code></pre></div>
-<pre><code>## No id variables; using all as measure variables</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(long.form.data, <span class="kw">t.test</span>(value<span class="op">~</span>variable, <span class="dt">paired=</span><span class="ot">TRUE</span>))</code></pre></div>
-<pre><code>## 
-##  Paired t-test
-## 
-## data:  value by variable
-## t = -4.36, df = 49, p-value = 6.661e-05
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -0.9342988 -0.3447602
-## sample estimates:
-## mean of the differences 
-##              -0.6395295</code></pre>
+<span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>()
+No id variables; using all as measure variables
+
+<span class="kw">with</span>(long.form.data, <span class="kw">t.test</span>(value<span class="op">~</span>variable, <span class="dt">paired=</span><span class="ot">TRUE</span>))
+
+    Paired t<span class="op">-</span>test
+
+data<span class="op">:</span><span class="st">  </span>value by variable
+t =<span class="st"> </span><span class="op">-</span><span class="fl">4.36</span>, df =<span class="st"> </span><span class="dv">49</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">6.661e-05</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span>
+<span class="dv">95</span> percent confidence interval<span class="op">:</span>
+<span class="st"> </span><span class="op">-</span><span class="fl">0.9342988</span> <span class="op">-</span><span class="fl">0.3447602</span>
+sample estimates<span class="op">:</span>
+mean of the differences 
+             <span class="op">-</span><span class="fl">0.6395295</span> </code></pre></div>
 </div>
 <div id="one-sample-test" class="section level5 unnumbered">
 <h5>One-sample test</h5>
@@ -529,18 +530,18 @@ followup =<span class="st"> </span>baseline <span class="op">+</span><span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test if mean of `outcome` variable is different from 2</span>
 <span class="kw">set.seed</span>(<span class="dv">1234</span>)
 test.scores &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">50</span>, <span class="fl">2.5</span>, <span class="dv">1</span>)
-<span class="kw">t.test</span>(test.scores, <span class="dt">mu=</span><span class="dv">2</span>)</code></pre></div>
-<pre><code>## 
-##  One Sample t-test
-## 
-## data:  test.scores
-## t = 0.37508, df = 49, p-value = 0.7092
-## alternative hypothesis: true mean is not equal to 2
-## 95 percent confidence interval:
-##  1.795420 2.298474
-## sample estimates:
-## mean of x 
-##  2.046947</code></pre>
+<span class="kw">t.test</span>(test.scores, <span class="dt">mu=</span><span class="dv">2</span>)
+
+    One Sample t<span class="op">-</span>test
+
+data<span class="op">:</span><span class="st">  </span>test.scores
+t =<span class="st"> </span><span class="fl">0.37508</span>, df =<span class="st"> </span><span class="dv">49</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.7092</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true mean is not equal to <span class="dv">2</span>
+<span class="dv">95</span> percent confidence interval<span class="op">:</span>
+<span class="st"> </span><span class="fl">1.795420</span> <span class="fl">2.298474</span>
+sample estimates<span class="op">:</span>
+mean of x 
+ <span class="fl">2.046947</span> </code></pre></div>
 
 </div>
 </div>

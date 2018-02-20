@@ -400,7 +400,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Month, <span class="op">-</span>Day) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>pairs</code></pre></div>
-<p><img src="correlations_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="correlations_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>If we were satisfied the relationships were (reasonably) linear, we could also visualise correlations themselves with a ‘corrgram’, using the <code>corrgram</code> library:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;corrgram&quot;</span>)
 airquality <span class="op">%&gt;%</span><span class="st"> </span>
@@ -408,8 +408,8 @@ airquality <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">corrgram</span>(<span class="dt">lower.panel=</span>corrgram<span class="op">::</span>panel.ellipse,
          <span class="dt">upper.panel=</span>panel.cor,
          <span class="dt">diag.panel=</span>panel.density)</code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-3"></span>
-<img src="correlations_files/figure-html/unnamed-chunk-3-1.png" alt="A corrgram, showing pearson correlations (above the diagonal), variable distributions (on the diagonal) and ellipses and smoothed lines of best fit (below the diagnonal). Long, narrow ellipses denote large correlations; circular ellipses indicate small correlations." width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="correlations_files/figure-html/unnamed-chunk-4-1.png" alt="A corrgram, showing pearson correlations (above the diagonal), variable distributions (on the diagonal) and ellipses and smoothed lines of best fit (below the diagnonal). Long, narrow ellipses denote large correlations; circular ellipses indicate small correlations." width="672" />
 <p class="caption">
 Figure 5.1: A corrgram, showing pearson correlations (above the diagonal), variable distributions (on the diagonal) and ellipses and smoothed lines of best fit (below the diagnonal). Long, narrow ellipses denote large correlations; circular ellipses indicate small correlations.
 </p>
@@ -419,39 +419,39 @@ Figure 5.1: A corrgram, showing pearson correlations (above the diagonal), varia
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cyl =</span> <span class="kw">factor</span>(cyl)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(mpg, wt, drat, cyl) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>GGally<span class="op">::</span><span class="kw">ggpairs</span>()</code></pre></div>
-<p><img src="correlations_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="correlations_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <div id="correlation-matrix" class="section level3 unnumbered">
 <h3>Creating a correlation matrix</h3>
 <p>The <code>psych::corr.test()</code> function is a quick way to obtain a pairwise correlation matrix for an entire dataset, along with p values and confidence intervals which the base R <code>cor()</code> function will not provide:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mycorrelations &lt;-<span class="st"> </span>psych<span class="op">::</span><span class="kw">corr.test</span>(airquality)
 mycorrelations
-## Call:psych::corr.test(x = airquality)
-## Correlation matrix 
-##         Ozone Solar.R  Wind  Temp Month   Day
-## Ozone    1.00    0.35 -0.60  0.70  0.16 -0.01
-## Solar.R  0.35    1.00 -0.06  0.28 -0.08 -0.15
-## Wind    -0.60   -0.06  1.00 -0.46 -0.18  0.03
-## Temp     0.70    0.28 -0.46  1.00  0.42 -0.13
-## Month    0.16   -0.08 -0.18  0.42  1.00 -0.01
-## Day     -0.01   -0.15  0.03 -0.13 -0.01  1.00
-## Sample Size 
-##         Ozone Solar.R Wind Temp Month Day
-## Ozone     116     111  116  116   116 116
-## Solar.R   111     146  146  146   146 146
-## Wind      116     146  153  153   153 153
-## Temp      116     146  153  153   153 153
-## Month     116     146  153  153   153 153
-## Day       116     146  153  153   153 153
-## Probability values (Entries above the diagonal are adjusted for multiple tests.) 
-##         Ozone Solar.R Wind Temp Month  Day
-## Ozone    0.00    0.00 0.00 0.00  0.56 1.00
-## Solar.R  0.00    0.00 1.00 0.01  1.00 0.56
-## Wind     0.00    0.50 0.00 0.00  0.25 1.00
-## Temp     0.00    0.00 0.00 0.00  0.00 0.65
-## Month    0.08    0.37 0.03 0.00  0.00 1.00
-## Day      0.89    0.07 0.74 0.11  0.92 0.00
-## 
-##  To see confidence intervals of the correlations, print with the short=FALSE option</code></pre></div>
+Call<span class="op">:</span>psych<span class="op">::</span><span class="kw">corr.test</span>(<span class="dt">x =</span> airquality)
+Correlation matrix 
+        Ozone Solar.R  Wind  Temp Month   Day
+Ozone    <span class="fl">1.00</span>    <span class="fl">0.35</span> <span class="op">-</span><span class="fl">0.60</span>  <span class="fl">0.70</span>  <span class="fl">0.16</span> <span class="op">-</span><span class="fl">0.01</span>
+Solar.R  <span class="fl">0.35</span>    <span class="fl">1.00</span> <span class="op">-</span><span class="fl">0.06</span>  <span class="fl">0.28</span> <span class="op">-</span><span class="fl">0.08</span> <span class="op">-</span><span class="fl">0.15</span>
+Wind    <span class="op">-</span><span class="fl">0.60</span>   <span class="op">-</span><span class="fl">0.06</span>  <span class="fl">1.00</span> <span class="op">-</span><span class="fl">0.46</span> <span class="op">-</span><span class="fl">0.18</span>  <span class="fl">0.03</span>
+Temp     <span class="fl">0.70</span>    <span class="fl">0.28</span> <span class="op">-</span><span class="fl">0.46</span>  <span class="fl">1.00</span>  <span class="fl">0.42</span> <span class="op">-</span><span class="fl">0.13</span>
+Month    <span class="fl">0.16</span>   <span class="op">-</span><span class="fl">0.08</span> <span class="op">-</span><span class="fl">0.18</span>  <span class="fl">0.42</span>  <span class="fl">1.00</span> <span class="op">-</span><span class="fl">0.01</span>
+Day     <span class="op">-</span><span class="fl">0.01</span>   <span class="op">-</span><span class="fl">0.15</span>  <span class="fl">0.03</span> <span class="op">-</span><span class="fl">0.13</span> <span class="op">-</span><span class="fl">0.01</span>  <span class="fl">1.00</span>
+Sample Size 
+        Ozone Solar.R Wind Temp Month Day
+Ozone     <span class="dv">116</span>     <span class="dv">111</span>  <span class="dv">116</span>  <span class="dv">116</span>   <span class="dv">116</span> <span class="dv">116</span>
+Solar.R   <span class="dv">111</span>     <span class="dv">146</span>  <span class="dv">146</span>  <span class="dv">146</span>   <span class="dv">146</span> <span class="dv">146</span>
+Wind      <span class="dv">116</span>     <span class="dv">146</span>  <span class="dv">153</span>  <span class="dv">153</span>   <span class="dv">153</span> <span class="dv">153</span>
+Temp      <span class="dv">116</span>     <span class="dv">146</span>  <span class="dv">153</span>  <span class="dv">153</span>   <span class="dv">153</span> <span class="dv">153</span>
+Month     <span class="dv">116</span>     <span class="dv">146</span>  <span class="dv">153</span>  <span class="dv">153</span>   <span class="dv">153</span> <span class="dv">153</span>
+Day       <span class="dv">116</span>     <span class="dv">146</span>  <span class="dv">153</span>  <span class="dv">153</span>   <span class="dv">153</span> <span class="dv">153</span>
+Probability <span class="kw">values</span> (Entries above the diagonal are adjusted <span class="cf">for</span> multiple tests.) 
+        Ozone Solar.R Wind Temp Month  Day
+Ozone    <span class="fl">0.00</span>    <span class="fl">0.00</span> <span class="fl">0.00</span> <span class="fl">0.00</span>  <span class="fl">0.56</span> <span class="fl">1.00</span>
+Solar.R  <span class="fl">0.00</span>    <span class="fl">0.00</span> <span class="fl">1.00</span> <span class="fl">0.01</span>  <span class="fl">1.00</span> <span class="fl">0.56</span>
+Wind     <span class="fl">0.00</span>    <span class="fl">0.50</span> <span class="fl">0.00</span> <span class="fl">0.00</span>  <span class="fl">0.25</span> <span class="fl">1.00</span>
+Temp     <span class="fl">0.00</span>    <span class="fl">0.00</span> <span class="fl">0.00</span> <span class="fl">0.00</span>  <span class="fl">0.00</span> <span class="fl">0.65</span>
+Month    <span class="fl">0.08</span>    <span class="fl">0.37</span> <span class="fl">0.03</span> <span class="fl">0.00</span>  <span class="fl">0.00</span> <span class="fl">1.00</span>
+Day      <span class="fl">0.89</span>    <span class="fl">0.07</span> <span class="fl">0.74</span> <span class="fl">0.11</span>  <span class="fl">0.92</span> <span class="fl">0.00</span>
+
+ To see confidence intervals of the correlations, print with the short=<span class="ot">FALSE</span> option</code></pre></div>
 <p>One thing to be aware of is that by default <code>corr.test()</code> produces p values that are adjusted for multiple comparisons in the top right hand triangle (i.e. above the diagonal). If you want the uncorrected values use the values below the diagonal (or pass <code>adjust=FALSE</code> when calling the function).</p>
 </div>
 <div id="working-with-correlation-matrices" class="section level3 unnumbered">
@@ -668,28 +668,28 @@ corr.public &lt;-<span class="st"> </span><span class="kw">cor</span>(public)</c
 <p>Note though, that the APA table format does encourage ‘star gazing’ to some degree. Try to avoid interpreting correlation tables solely based on the significance (or not) of the <em>r</em> values. The <code>pairs</code> or <code>corrgram</code> plots shown above are a much better summary of the data, and are can be just as compact.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(apaTables)
 <span class="kw">apa.cor.table</span>(airquality, <span class="dt">filename=</span><span class="st">&quot;Table1_APA.doc&quot;</span>, <span class="dt">show.conf.interval=</span>F)
-## 
-## 
-## Means, standard deviations, and correlations
-##  
-## 
-##   Variable   M      SD    1      2     3      4     5   
-##   1. Ozone   42.13  32.99                               
-##                                                         
-##   2. Solar.R 185.93 90.06 .35**                         
-##                                                         
-##   3. Wind    9.96   3.52  -.60** -.06                   
-##                                                         
-##   4. Temp    77.88  9.47  .70**  .28** -.46**           
-##                                                         
-##   5. Month   6.99   1.42  .16    -.08  -.18*  .42**     
-##                                                         
-##   6. Day     15.80  8.86  -.01   -.15  .03    -.13  -.01
-##                                                         
-## 
-## Note. * indicates p &lt; .05; ** indicates p &lt; .01.
-## M and SD are used to represent mean and standard deviation, respectively.
-## </code></pre></div>
+
+
+Means, standard deviations, and correlations
+ 
+
+  Variable   M      SD    <span class="dv">1</span>      <span class="dv">2</span>     <span class="dv">3</span>      <span class="dv">4</span>     <span class="dv">5</span>   
+  <span class="dv">1</span>. Ozone   <span class="fl">42.13</span>  <span class="fl">32.99</span>                               
+                                                        
+  <span class="dv">2</span>. Solar.R <span class="fl">185.93</span> <span class="fl">90.06</span> .<span class="dv">35</span><span class="op">**</span><span class="st">                         </span>
+<span class="st">                                                        </span>
+<span class="st">  </span><span class="dv">3</span>. Wind    <span class="fl">9.96</span>   <span class="fl">3.52</span>  <span class="op">-</span>.<span class="dv">60</span><span class="op">**</span><span class="st"> </span><span class="op">-</span>.<span class="dv">06</span>                   
+                                                        
+  <span class="dv">4</span>. Temp    <span class="fl">77.88</span>  <span class="fl">9.47</span>  .<span class="dv">70</span><span class="op">**</span><span class="st">  </span>.<span class="dv">28</span><span class="op">**</span><span class="st"> </span><span class="op">-</span>.<span class="dv">46</span><span class="op">**</span><span class="st">           </span>
+<span class="st">                                                        </span>
+<span class="st">  </span><span class="dv">5</span>. Month   <span class="fl">6.99</span>   <span class="fl">1.42</span>  .<span class="dv">16</span>    <span class="op">-</span>.<span class="dv">08</span>  <span class="op">-</span>.<span class="dv">18</span><span class="op">*</span><span class="st">  </span>.<span class="dv">42</span><span class="op">**</span><span class="st">     </span>
+<span class="st">                                                        </span>
+<span class="st">  </span><span class="dv">6</span>. Day     <span class="fl">15.80</span>  <span class="fl">8.86</span>  <span class="op">-</span>.<span class="dv">01</span>   <span class="op">-</span>.<span class="dv">15</span>  .<span class="dv">03</span>    <span class="op">-</span>.<span class="dv">13</span>  <span class="op">-</span>.<span class="dv">01</span>
+                                                        
+
+Note. <span class="op">*</span><span class="st"> </span>indicates p <span class="op">&lt;</span><span class="st"> </span>.<span class="dv">05</span>; <span class="op">**</span><span class="st"> </span>indicates p <span class="op">&lt;</span><span class="st"> </span>.<span class="dv">01</span>.
+M and SD are used to represent mean and standard deviation, respectively.
+ </code></pre></div>
 </div>
 <div id="by-hand" class="section level4 unnumbered">
 <h4>By hand</h4>

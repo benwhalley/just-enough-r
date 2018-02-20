@@ -403,17 +403,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h6>Equality and matching</h6>
 <p>To compare a single value we use <code>==</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">2</span>
-## [1] TRUE</code></pre></div>
+[<span class="dv">1</span>] <span class="ot">TRUE</span></code></pre></div>
 <p>And in a filter:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(mtcars, cyl<span class="op">==</span><span class="dv">6</span>)
-##    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-## 1 21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
-## 2 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
-## 3 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
-## 4 18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
-## 5 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
-## 6 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
-## 7 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6</code></pre></div>
+   mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+<span class="dv">1</span> <span class="fl">21.0</span>   <span class="dv">6</span> <span class="fl">160.0</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.620</span> <span class="fl">16.46</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span>
+<span class="dv">2</span> <span class="fl">21.0</span>   <span class="dv">6</span> <span class="fl">160.0</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.875</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span>
+<span class="dv">3</span> <span class="fl">21.4</span>   <span class="dv">6</span> <span class="fl">258.0</span> <span class="dv">110</span> <span class="fl">3.08</span> <span class="fl">3.215</span> <span class="fl">19.44</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span>
+<span class="dv">4</span> <span class="fl">18.1</span>   <span class="dv">6</span> <span class="fl">225.0</span> <span class="dv">105</span> <span class="fl">2.76</span> <span class="fl">3.460</span> <span class="fl">20.22</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span>
+<span class="dv">5</span> <span class="fl">19.2</span>   <span class="dv">6</span> <span class="fl">167.6</span> <span class="dv">123</span> <span class="fl">3.92</span> <span class="fl">3.440</span> <span class="fl">18.30</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">4</span>    <span class="dv">4</span>
+<span class="dv">6</span> <span class="fl">17.8</span>   <span class="dv">6</span> <span class="fl">167.6</span> <span class="dv">123</span> <span class="fl">3.92</span> <span class="fl">3.440</span> <span class="fl">18.90</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">4</span>    <span class="dv">4</span>
+<span class="dv">7</span> <span class="fl">19.7</span>   <span class="dv">6</span> <span class="fl">145.0</span> <span class="dv">175</span> <span class="fl">3.62</span> <span class="fl">2.770</span> <span class="fl">15.50</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">5</span>    <span class="dv">6</span></code></pre></div>
 </div>
 <div id="section-7" class="section level6 unnumbered explainer">
 <h6></h6>
@@ -423,21 +423,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h6>Presence/absence</h6>
 <p>To test if a value is in a vector of suitable matches we can use: <code>%in%</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span> <span class="op">%in%</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>
-## [1] TRUE
+[<span class="dv">1</span>] <span class="ot">TRUE</span>
 <span class="dv">100</span> <span class="op">%in%</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>
-## [1] FALSE</code></pre></div>
+[<span class="dv">1</span>] <span class="ot">FALSE</span></code></pre></div>
 <p>And, perhaps less obviously, we can test whether each value in a vector is in a second vector. This returns a vector of <code>TRUE/FALSE</code> values as long as the first list:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)
-## [1] FALSE  TRUE</code></pre></div>
+[<span class="dv">1</span>] <span class="ot">FALSE</span>  <span class="ot">TRUE</span></code></pre></div>
 <p>And this is very useful in a dataframe filter:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">filter</span>(mtcars, cyl <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">6</span>)))
-##    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-## 1 21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
-## 2 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
-## 3 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
-## 4 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
-## 5 18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
-## 6 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2</code></pre></div>
+   mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+<span class="dv">1</span> <span class="fl">21.0</span>   <span class="dv">6</span> <span class="fl">160.0</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.620</span> <span class="fl">16.46</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span>
+<span class="dv">2</span> <span class="fl">21.0</span>   <span class="dv">6</span> <span class="fl">160.0</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.875</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span>
+<span class="dv">3</span> <span class="fl">22.8</span>   <span class="dv">4</span> <span class="fl">108.0</span>  <span class="dv">93</span> <span class="fl">3.85</span> <span class="fl">2.320</span> <span class="fl">18.61</span>  <span class="dv">1</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">1</span>
+<span class="dv">4</span> <span class="fl">21.4</span>   <span class="dv">6</span> <span class="fl">258.0</span> <span class="dv">110</span> <span class="fl">3.08</span> <span class="fl">3.215</span> <span class="fl">19.44</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span>
+<span class="dv">5</span> <span class="fl">18.1</span>   <span class="dv">6</span> <span class="fl">225.0</span> <span class="dv">105</span> <span class="fl">2.76</span> <span class="fl">3.460</span> <span class="fl">20.22</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span>
+<span class="dv">6</span> <span class="fl">24.4</span>   <span class="dv">4</span> <span class="fl">146.7</span>  <span class="dv">62</span> <span class="fl">3.69</span> <span class="fl">3.190</span> <span class="fl">20.00</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">4</span>    <span class="dv">2</span></code></pre></div>
 </div>
 <div id="greaterless-than" class="section level6 unnumbered">
 <h6>Greater/less than</h6>
@@ -452,12 +452,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h6>Negation (opposite of)</h6>
 <p>The <code>!</code> is very useful to tell R to reverse an expression; that is, take the opposite of the value. In the simplest example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">!</span><span class="ot">TRUE</span>
-## [1] FALSE</code></pre></div>
+[<span class="dv">1</span>] <span class="ot">FALSE</span></code></pre></div>
 <p>This is helpful because we can reverse the meaning of other expressions:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.na</span>(<span class="ot">NA</span>)
-## [1] TRUE
+[<span class="dv">1</span>] <span class="ot">TRUE</span>
 <span class="op">!</span><span class="kw">is.na</span>(<span class="ot">NA</span>)
-## [1] FALSE</code></pre></div>
+[<span class="dv">1</span>] <span class="ot">FALSE</span></code></pre></div>
 <p>And we can use in filters. Here we select rows where <code>Ozone</code> is missing (<code>NA</code>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(airquality, <span class="kw">is.na</span>(Ozone))</code></pre></div>
 <p>And here we use <code>!</code> to reverse the expression and select rows which are not missing:</p>
@@ -468,50 +468,50 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h6>Other logical operators</h6>
 <p>There are operators for ‘and’/‘or’ which can combine other filters</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(mtcars, hp <span class="op">&gt;</span><span class="st"> </span><span class="dv">200</span> <span class="op">|</span><span class="st"> </span>wt <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>)
-##    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-## 1 14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
-## 2 16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
-## 3 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
-## 4 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
-## 5 14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
-## 6 13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
-## 7 15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
-## 8 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8</code></pre></div>
+   mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+<span class="dv">1</span> <span class="fl">14.3</span>   <span class="dv">8</span> <span class="fl">360.0</span> <span class="dv">245</span> <span class="fl">3.21</span> <span class="fl">3.570</span> <span class="fl">15.84</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">2</span> <span class="fl">16.4</span>   <span class="dv">8</span> <span class="fl">275.8</span> <span class="dv">180</span> <span class="fl">3.07</span> <span class="fl">4.070</span> <span class="fl">17.40</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">3</span>
+<span class="dv">3</span> <span class="fl">10.4</span>   <span class="dv">8</span> <span class="fl">472.0</span> <span class="dv">205</span> <span class="fl">2.93</span> <span class="fl">5.250</span> <span class="fl">17.98</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">4</span> <span class="fl">10.4</span>   <span class="dv">8</span> <span class="fl">460.0</span> <span class="dv">215</span> <span class="fl">3.00</span> <span class="fl">5.424</span> <span class="fl">17.82</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">5</span> <span class="fl">14.7</span>   <span class="dv">8</span> <span class="fl">440.0</span> <span class="dv">230</span> <span class="fl">3.23</span> <span class="fl">5.345</span> <span class="fl">17.42</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">6</span> <span class="fl">13.3</span>   <span class="dv">8</span> <span class="fl">350.0</span> <span class="dv">245</span> <span class="fl">3.73</span> <span class="fl">3.840</span> <span class="fl">15.41</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">7</span> <span class="fl">15.8</span>   <span class="dv">8</span> <span class="fl">351.0</span> <span class="dv">264</span> <span class="fl">4.22</span> <span class="fl">3.170</span> <span class="fl">14.50</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">5</span>    <span class="dv">4</span>
+<span class="dv">8</span> <span class="fl">15.0</span>   <span class="dv">8</span> <span class="fl">301.0</span> <span class="dv">335</span> <span class="fl">3.54</span> <span class="fl">3.570</span> <span class="fl">14.60</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">5</span>    <span class="dv">8</span></code></pre></div>
 <p>Using <code>&amp;</code> (and) makes the filter more restrictive:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(mtcars, hp <span class="op">&gt;</span><span class="st"> </span><span class="dv">200</span> <span class="op">&amp;</span><span class="st"> </span>wt <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>)
-##    mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## 1 10.4   8  472 205 2.93 5.250 17.98  0  0    3    4
-## 2 10.4   8  460 215 3.00 5.424 17.82  0  0    3    4
-## 3 14.7   8  440 230 3.23 5.345 17.42  0  0    3    4</code></pre></div>
+   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+<span class="dv">1</span> <span class="fl">10.4</span>   <span class="dv">8</span>  <span class="dv">472</span> <span class="dv">205</span> <span class="fl">2.93</span> <span class="fl">5.250</span> <span class="fl">17.98</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">2</span> <span class="fl">10.4</span>   <span class="dv">8</span>  <span class="dv">460</span> <span class="dv">215</span> <span class="fl">3.00</span> <span class="fl">5.424</span> <span class="fl">17.82</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">3</span> <span class="fl">14.7</span>   <span class="dv">8</span>  <span class="dv">440</span> <span class="dv">230</span> <span class="fl">3.23</span> <span class="fl">5.345</span> <span class="fl">17.42</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span></code></pre></div>
 <p>Finally, you can set the order in which operators are applied by using parentheses. This means these expressions are subtly different:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first</span>
 <span class="kw">filter</span>(mtcars, (hp <span class="op">&gt;</span><span class="st"> </span><span class="dv">200</span> <span class="op">&amp;</span><span class="st"> </span>wt <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>) <span class="op">|</span><span class="st"> </span>cyl<span class="op">==</span><span class="dv">8</span>)
-##     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-## 1  18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
-## 2  14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
-## 3  16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
-## 4  17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
-## 5  15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
-## 6  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
-## 7  10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
-## 8  14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
-## 9  15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
-## 10 15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
-## 11 13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
-## 12 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
-## 13 15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
-## 14 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+<span class="dv">1</span>  <span class="fl">18.7</span>   <span class="dv">8</span> <span class="fl">360.0</span> <span class="dv">175</span> <span class="fl">3.15</span> <span class="fl">3.440</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">2</span>
+<span class="dv">2</span>  <span class="fl">14.3</span>   <span class="dv">8</span> <span class="fl">360.0</span> <span class="dv">245</span> <span class="fl">3.21</span> <span class="fl">3.570</span> <span class="fl">15.84</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">3</span>  <span class="fl">16.4</span>   <span class="dv">8</span> <span class="fl">275.8</span> <span class="dv">180</span> <span class="fl">3.07</span> <span class="fl">4.070</span> <span class="fl">17.40</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">3</span>
+<span class="dv">4</span>  <span class="fl">17.3</span>   <span class="dv">8</span> <span class="fl">275.8</span> <span class="dv">180</span> <span class="fl">3.07</span> <span class="fl">3.730</span> <span class="fl">17.60</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">3</span>
+<span class="dv">5</span>  <span class="fl">15.2</span>   <span class="dv">8</span> <span class="fl">275.8</span> <span class="dv">180</span> <span class="fl">3.07</span> <span class="fl">3.780</span> <span class="fl">18.00</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">3</span>
+<span class="dv">6</span>  <span class="fl">10.4</span>   <span class="dv">8</span> <span class="fl">472.0</span> <span class="dv">205</span> <span class="fl">2.93</span> <span class="fl">5.250</span> <span class="fl">17.98</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">7</span>  <span class="fl">10.4</span>   <span class="dv">8</span> <span class="fl">460.0</span> <span class="dv">215</span> <span class="fl">3.00</span> <span class="fl">5.424</span> <span class="fl">17.82</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">8</span>  <span class="fl">14.7</span>   <span class="dv">8</span> <span class="fl">440.0</span> <span class="dv">230</span> <span class="fl">3.23</span> <span class="fl">5.345</span> <span class="fl">17.42</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">9</span>  <span class="fl">15.5</span>   <span class="dv">8</span> <span class="fl">318.0</span> <span class="dv">150</span> <span class="fl">2.76</span> <span class="fl">3.520</span> <span class="fl">16.87</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">2</span>
+<span class="dv">10</span> <span class="fl">15.2</span>   <span class="dv">8</span> <span class="fl">304.0</span> <span class="dv">150</span> <span class="fl">3.15</span> <span class="fl">3.435</span> <span class="fl">17.30</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">2</span>
+<span class="dv">11</span> <span class="fl">13.3</span>   <span class="dv">8</span> <span class="fl">350.0</span> <span class="dv">245</span> <span class="fl">3.73</span> <span class="fl">3.840</span> <span class="fl">15.41</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">12</span> <span class="fl">19.2</span>   <span class="dv">8</span> <span class="fl">400.0</span> <span class="dv">175</span> <span class="fl">3.08</span> <span class="fl">3.845</span> <span class="fl">17.05</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">2</span>
+<span class="dv">13</span> <span class="fl">15.8</span>   <span class="dv">8</span> <span class="fl">351.0</span> <span class="dv">264</span> <span class="fl">4.22</span> <span class="fl">3.170</span> <span class="fl">14.50</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">5</span>    <span class="dv">4</span>
+<span class="dv">14</span> <span class="fl">15.0</span>   <span class="dv">8</span> <span class="fl">301.0</span> <span class="dv">335</span> <span class="fl">3.54</span> <span class="fl">3.570</span> <span class="fl">14.60</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">5</span>    <span class="dv">8</span>
 
 <span class="co"># second reordered evaluation</span>
 <span class="kw">filter</span>(mtcars, hp <span class="op">&gt;</span><span class="st"> </span><span class="dv">200</span> <span class="op">&amp;</span><span class="st"> </span>(wt <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span> <span class="op">|</span><span class="st"> </span>cyl<span class="op">==</span><span class="dv">8</span>))
-##    mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## 1 14.3   8  360 245 3.21 3.570 15.84  0  0    3    4
-## 2 10.4   8  472 205 2.93 5.250 17.98  0  0    3    4
-## 3 10.4   8  460 215 3.00 5.424 17.82  0  0    3    4
-## 4 14.7   8  440 230 3.23 5.345 17.42  0  0    3    4
-## 5 13.3   8  350 245 3.73 3.840 15.41  0  0    3    4
-## 6 15.8   8  351 264 4.22 3.170 14.50  0  1    5    4
-## 7 15.0   8  301 335 3.54 3.570 14.60  0  1    5    8</code></pre></div>
+   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+<span class="dv">1</span> <span class="fl">14.3</span>   <span class="dv">8</span>  <span class="dv">360</span> <span class="dv">245</span> <span class="fl">3.21</span> <span class="fl">3.570</span> <span class="fl">15.84</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">2</span> <span class="fl">10.4</span>   <span class="dv">8</span>  <span class="dv">472</span> <span class="dv">205</span> <span class="fl">2.93</span> <span class="fl">5.250</span> <span class="fl">17.98</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">3</span> <span class="fl">10.4</span>   <span class="dv">8</span>  <span class="dv">460</span> <span class="dv">215</span> <span class="fl">3.00</span> <span class="fl">5.424</span> <span class="fl">17.82</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">4</span> <span class="fl">14.7</span>   <span class="dv">8</span>  <span class="dv">440</span> <span class="dv">230</span> <span class="fl">3.23</span> <span class="fl">5.345</span> <span class="fl">17.42</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">5</span> <span class="fl">13.3</span>   <span class="dv">8</span>  <span class="dv">350</span> <span class="dv">245</span> <span class="fl">3.73</span> <span class="fl">3.840</span> <span class="fl">15.41</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">6</span> <span class="fl">15.8</span>   <span class="dv">8</span>  <span class="dv">351</span> <span class="dv">264</span> <span class="fl">4.22</span> <span class="fl">3.170</span> <span class="fl">14.50</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">5</span>    <span class="dv">4</span>
+<span class="dv">7</span> <span class="fl">15.0</span>   <span class="dv">8</span>  <span class="dv">301</span> <span class="dv">335</span> <span class="fl">3.54</span> <span class="fl">3.570</span> <span class="fl">14.60</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">5</span>    <span class="dv">8</span></code></pre></div>
 <p><span class="exercise">Try writing in plain English the meaning of the two filter expressions above</span></p>
 </div>
 </div>

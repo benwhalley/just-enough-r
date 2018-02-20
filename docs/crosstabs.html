@@ -397,27 +397,27 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Crosstabulations and <span class="math inline">\(\chi^2\)</span></h2>
 <p>We saw in a previous section <a href="quick-and-dirty.html#frequency-tables">how to create a frequency table of one or more variables</a>. Using that previous example, assume we already have a crosstabulation of <code>age</code> and <code>prefers</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lego.table
-##          prefers
-## age       duplo lego
-##   4 years    38   20
-##   6 years    12   30</code></pre></div>
+         prefers
+age       duplo lego
+  <span class="dv">4</span> years    <span class="dv">38</span>   <span class="dv">20</span>
+  <span class="dv">6</span> years    <span class="dv">12</span>   <span class="dv">30</span></code></pre></div>
 <p>We can easily run the inferential <span class="math inline">\(\chi^2\)</span> (sometimes spelled “chi”, but pronounced “kai”-squared) test on this table:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lego.test &lt;-<span class="st"> </span><span class="kw">chisq.test</span>(lego.table)
 lego.test
-## 
-##  Pearson&#39;s Chi-squared test with Yates&#39; continuity correction
-## 
-## data:  lego.table
-## X-squared = 11.864, df = 1, p-value = 0.0005724</code></pre></div>
+
+    Pearson<span class="st">&#39;s Chi-squared test with Yates&#39;</span> continuity correction
+
+data<span class="op">:</span><span class="st">  </span>lego.table
+X<span class="op">-</span>squared =<span class="st"> </span><span class="fl">11.864</span>, df =<span class="st"> </span><span class="dv">1</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.0005724</span></code></pre></div>
 <p>Note that we can access each number in this output individually because the <code>chisq.test</code> function returns <a href="lists.html#lists">a list</a>. We do this by using the <code>$</code> syntax:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># access the chi2 value alone</span>
 lego.test<span class="op">$</span>statistic
-## X-squared 
-##  11.86371</code></pre></div>
+X<span class="op">-</span>squared 
+ <span class="fl">11.86371</span> </code></pre></div>
 <p>Even nicer, you can use an R package to write up your results for you in APA format!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(apa)
 <span class="kw">apa</span>(lego.test, <span class="dt">print_n=</span>T)
-## [1] &quot;$\\chi^2$(1, n = 100) = 11.86, *p* &lt; .001&quot;</code></pre></div>
+[<span class="dv">1</span>] <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">chi^2$(1, n = 100) = 11.86, *p* &lt; .001&quot;</span></code></pre></div>
 <p><a href="apa-output.html#apa-output">See more on automatically displaying statistics in APA format</a></p>
 <div id="three-way-tables" class="section level3 unnumbered">
 <h3>Three-way tables</h3>
@@ -557,7 +557,7 @@ lego.test<span class="op">$</span>statistic
 <span class="st">  </span><span class="kw">as_data_frame</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>reshape2<span class="op">::</span><span class="kw">dcast</span>(am<span class="op">+</span>gear<span class="op">~</span><span class="kw">paste</span>(cyl, <span class="st">&quot;Cylinders&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">pander</span>()
-## Using n as value column: use value.var to override.</code></pre></div>
+Using n as value column<span class="op">:</span><span class="st"> </span>use value.var to override.</code></pre></div>
 <table style="width:75%;">
 <colgroup>
 <col width="6%" />
@@ -625,7 +625,7 @@ lego.test<span class="op">$</span>statistic
 <span class="st">  </span><span class="kw">as_data_frame</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>reshape2<span class="op">::</span><span class="kw">dcast</span>(gear<span class="op">+</span>cyl<span class="op">~</span><span class="kw">paste0</span>(<span class="st">&quot;US=&quot;</span>, am)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">pander</span>()
-## Using n as value column: use value.var to override.</code></pre></div>
+Using n as value column<span class="op">:</span><span class="st"> </span>use value.var to override.</code></pre></div>
 <table style="width:38%;">
 <colgroup>
 <col width="9%" />

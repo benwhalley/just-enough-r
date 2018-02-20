@@ -403,24 +403,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>For example, in an experiment where you have multiple <code>stimuli</code> and different experimental <code>condition</code>s, with many repeated <code>trial</code>s, you might end up with data like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">head</span>()
-## # A tibble: 6 x 5
-##   trial condition block subject       RT
-##   &lt;int&gt;     &lt;int&gt; &lt;int&gt;   &lt;int&gt;    &lt;dbl&gt;
-## 1     1         1     1       1 300.8379
-## 2     2         1     1       1 299.2759
-## 3     3         1     1       1 300.6742
-## 4     4         1     1       1 299.5173
-## 5     5         1     1       1 299.7643
-## 6     6         1     1       1 300.3312</code></pre></div>
+<span class="co"># A tibble: 6 x 5</span>
+  trial condition block subject       RT
+  <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">    </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span>     <span class="dv">1</span>         <span class="dv">1</span>     <span class="dv">1</span>       <span class="dv">1</span> <span class="fl">300.8379</span>
+<span class="dv">2</span>     <span class="dv">2</span>         <span class="dv">1</span>     <span class="dv">1</span>       <span class="dv">1</span> <span class="fl">299.2759</span>
+<span class="dv">3</span>     <span class="dv">3</span>         <span class="dv">1</span>     <span class="dv">1</span>       <span class="dv">1</span> <span class="fl">300.6742</span>
+<span class="dv">4</span>     <span class="dv">4</span>         <span class="dv">1</span>     <span class="dv">1</span>       <span class="dv">1</span> <span class="fl">299.5173</span>
+<span class="dv">5</span>     <span class="dv">5</span>         <span class="dv">1</span>     <span class="dv">1</span>       <span class="dv">1</span> <span class="fl">299.7643</span>
+<span class="dv">6</span>     <span class="dv">6</span>         <span class="dv">1</span>     <span class="dv">1</span>       <span class="dv">1</span> <span class="fl">300.3312</span></code></pre></div>
 <p>Which you could model with <code>lmer</code> like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(RT <span class="op">~</span><span class="st"> </span>block <span class="op">*</span><span class="st"> </span>trial <span class="op">*</span><span class="st"> </span>condition <span class="op">+</span><span class="st"> </span>(block<span class="op">+</span>condition<span class="op">|</span>subject), <span class="dt">data=</span>df)</code></pre></div>
 <p>You can list the random effects from the model using the <code>VarCorr</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">VarCorr</span>(m1)
-##  Groups   Name        Std.Dev.  Corr         
-##  subject  (Intercept) 0.9923367              
-##           block       0.0071373 -0.312       
-##           condition   0.0160946 -0.403 -0.744
-##  Residual             0.9973866</code></pre></div>
+ Groups   Name        Std.Dev.  Corr         
+ <span class="kw">subject</span>  (Intercept) <span class="fl">0.9923367</span>              
+          block       <span class="fl">0.0071373</span> <span class="op">-</span><span class="fl">0.312</span>       
+          condition   <span class="fl">0.0160946</span> <span class="op">-</span><span class="fl">0.403</span> <span class="op">-</span><span class="fl">0.744</span>
+ Residual             <span class="fl">0.9973866</span>              </code></pre></div>
 <p>As <code>VarCorr</code> shows, this model estimates: - random intercepts for <code>subject</code>, - random slopes for <code>trial</code> and <code>condition</code>, and - three covariances between these random effects.</p>
 <p>If these covariances are very close to zero though, as is often the case, this can cause convergence issues, especially if insufficient data are available.</p>
 <p>If this occurs, you might want to simplify the model. For example, to remove all the covariances between random effects you might rewrite the model this way:</p>

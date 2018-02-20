@@ -5,7 +5,6 @@ title: 'Crosstabulation'
 
 
 ```{r, include=FALSE, message=F}
-knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 library(tidyverse)
 library(pander)
 ```

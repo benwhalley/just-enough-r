@@ -3,8 +3,6 @@ title: 'Models are data too'
 ---
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
-
 library(tidyverse)
 library(lmerTest)
 library(apastats)

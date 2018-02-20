@@ -401,12 +401,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)</code></pre></div>
 <p>Will load the <code>ggplot2</code> package. You can then call the <code>qplot</code> function it provides:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(mtcars<span class="op">$</span>mpg, <span class="dt">bins=</span><span class="dv">7</span>)</code></pre></div>
-<p><img src="packages_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="packages_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <div id="package-namespacing" class="section level4 unnumbered">
 <h4></h4>
 <p>You don’t strictly <em>need</em> to load packages to use the features within them though. If a package is installed on your system you can also call a function it provides directly. In the example below we call the <code>hist.data.frame</code> from the <code>Hmisc</code> package, and obtain histograms of all the variables in the <code>mtcars</code> dataset:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Hmisc<span class="op">::</span><span class="kw">hist.data.frame</span>(mtcars)</code></pre></div>
-<p><img src="packages_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="packages_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>The rule is to type <code>package::function(parameters)</code>, where <code>::</code> separates the package and function names. Parameters are just the inputs to the function.</p>
 <p>There are two reasons not to load a package before using it:</p>
 <ol style="list-style-type: decimal">

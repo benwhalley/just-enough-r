@@ -451,8 +451,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tbody>
 </table>
 <p>And as before, we might plot these data:</p>
-<div class="figure"><span id="fig:unnamed-chunk-3"></span>
-<img src="predictions-and-margins_files/figure-html/unnamed-chunk-3-1.png" alt="Point and line plot of injury severity by age and gender." width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-4-1.png" alt="Point and line plot of injury severity by age and gender." width="672" />
 <p class="caption">
 Figure 5.1: Point and line plot of injury severity by age and gender.
 </p>
@@ -481,7 +481,7 @@ Figure 5.1: Point and line plot of injury severity by age and gender.
 <span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Effect of being female&quot;</span>)  <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>)
 margins.plot</code></pre></div>
-<p><img src="predictions-and-margins_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="predictions-and-margins_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>As before, these differences use the raw data, but <em>could</em> have been calculated from a statistical model. In the section below we do this, making predictions for means and marginal effects from a <code>lm()</code>.</p>
 </div>
 <div id="continuous-predictors-1" class="section level3 unnumbered">
@@ -492,15 +492,15 @@ margins.plot</code></pre></div>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(age, severity.of.injury, <span class="dt">group=</span>gender, <span class="dt">color=</span>gender)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">1</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name=</span><span class="st">&quot;&quot;</span>)</code></pre></div>
-<p><img src="predictions-and-margins_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="predictions-and-margins_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>But to make predictions from this continuous data we need to fit a line through the points (i.e. run a model). We can do this graphically by calling <code>geom_smooth()</code> which attempts to fit a smooth line through the data we observe:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">injuries <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(age, severity.of.injury, <span class="dt">group=</span>gender, <span class="dt">color=</span>gender)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span>.<span class="dv">2</span>, <span class="dt">size=</span><span class="dv">1</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span>F)<span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name=</span><span class="st">&quot;&quot;</span>)</code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-7"></span>
-<img src="predictions-and-margins_files/figure-html/unnamed-chunk-7-1.png" alt="Scatter plot overlaid with smooth best-fit lines" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-8"></span>
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-8-1.png" alt="Scatter plot overlaid with smooth best-fit lines" width="672" />
 <p class="caption">
 Figure 16.1: Scatter plot overlaid with smooth best-fit lines
 </p>
@@ -512,8 +512,8 @@ Figure 16.1: Scatter plot overlaid with smooth best-fit lines
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> F, <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name=</span><span class="st">&quot;&quot;</span>)</code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-8"></span>
-<img src="predictions-and-margins_files/figure-html/unnamed-chunk-8-1.png" alt="Scatter plot overlaid with smoothed lines (dotted) and linear predictions (coloured)" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-9"></span>
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-9-1.png" alt="Scatter plot overlaid with smoothed lines (dotted) and linear predictions (coloured)" width="672" />
 <p class="caption">
 Figure 16.2: Scatter plot overlaid with smoothed lines (dotted) and linear predictions (coloured)
 </p>

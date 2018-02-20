@@ -2,16 +2,8 @@
 title: 'Starting out'
 ---
   
-```{r, include=FALSE}
-#  Ignore all this for the moment
-knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
-library(tufte)
-```
 
 # Working with R {#r-basics}
-
-
-
 
 
 

@@ -404,10 +404,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     <span class="dt">mean.anger.out=</span><span class="kw">mean</span>(Anger.Out), 
     <span class="dt">sd.anger.out=</span><span class="kw">sd</span>(Anger.Out)
   )
-## # A tibble: 1 x 2
-##   mean.anger.out sd.anger.out
-##            &lt;dbl&gt;        &lt;dbl&gt;
-## 1       16.07692      4.21737</code></pre></div>
+<span class="co"># A tibble: 1 x 2</span>
+  mean.anger.out sd.anger.out
+           <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st">        </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span>       <span class="fl">16.07692</span>      <span class="fl">4.21737</span></code></pre></div>
 <p>The <code>summarise</code> function has returned a dataframe containing the statistics we need, although in this instance the dataframe only has one row.</p>
 <p>What if we want the numbers for men and women separately?</p>
 <p>Utility functions like <code>describeBy</code> have options to do this (you would specify grouping variables in that). But there’s a more general pattern at work — we want to:</p>
@@ -424,16 +424,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">angry.moods <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(Gender) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>head
-## # A tibble: 6 x 7
-## # Groups:   Gender [2]
-##   Gender Sports Anger.Out Anger.In Control.Out Control.In Anger.Expression
-##    &lt;int&gt;  &lt;int&gt;     &lt;int&gt;    &lt;int&gt;       &lt;int&gt;      &lt;int&gt;            &lt;int&gt;
-## 1      2      1        18       13          23         20               36
-## 2      2      1        14       17          25         24               30
-## 3      2      1        13       14          28         28               19
-## 4      2      1        17       24          23         23               43
-## 5      1      1        16       17          26         28               27
-## 6      1      1        16       22          25         23               38</code></pre></div>
+<span class="co"># A tibble: 6 x 7</span>
+<span class="co"># Groups:   Gender [2]</span>
+  Gender Sports Anger.Out Anger.In Control.Out Control.In Anger.Expression
+   <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">    </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">       </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">      </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">            </span><span class="er">&lt;</span>int<span class="op">&gt;</span>
+<span class="dv">1</span>      <span class="dv">2</span>      <span class="dv">1</span>        <span class="dv">18</span>       <span class="dv">13</span>          <span class="dv">23</span>         <span class="dv">20</span>               <span class="dv">36</span>
+<span class="dv">2</span>      <span class="dv">2</span>      <span class="dv">1</span>        <span class="dv">14</span>       <span class="dv">17</span>          <span class="dv">25</span>         <span class="dv">24</span>               <span class="dv">30</span>
+<span class="dv">3</span>      <span class="dv">2</span>      <span class="dv">1</span>        <span class="dv">13</span>       <span class="dv">14</span>          <span class="dv">28</span>         <span class="dv">28</span>               <span class="dv">19</span>
+<span class="dv">4</span>      <span class="dv">2</span>      <span class="dv">1</span>        <span class="dv">17</span>       <span class="dv">24</span>          <span class="dv">23</span>         <span class="dv">23</span>               <span class="dv">43</span>
+<span class="dv">5</span>      <span class="dv">1</span>      <span class="dv">1</span>        <span class="dv">16</span>       <span class="dv">17</span>          <span class="dv">26</span>         <span class="dv">28</span>               <span class="dv">27</span>
+<span class="dv">6</span>      <span class="dv">1</span>      <span class="dv">1</span>        <span class="dv">16</span>       <span class="dv">22</span>          <span class="dv">25</span>         <span class="dv">23</span>               <span class="dv">38</span></code></pre></div>
 <p>Weirdly, this doesn’t seem to have done anything. The data aren’t sorted by <code>Gender</code>, and there is no visible sign of the grouping, but stick with it…</p>
 </div>
 <div id="apply-and-combine" class="section level4 unnumbered">
@@ -444,11 +444,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="st">  </span><span class="kw">summarise</span>(
     <span class="dt">mean.anger.out=</span><span class="kw">mean</span>(Anger.Out)
   )
-## # A tibble: 2 x 2
-##   Gender mean.anger.out
-##    &lt;int&gt;          &lt;dbl&gt;
-## 1      1       16.56667
-## 2      2       15.77083</code></pre></div>
+<span class="co"># A tibble: 2 x 2</span>
+  Gender mean.anger.out
+   <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st">          </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span>      <span class="dv">1</span>       <span class="fl">16.56667</span>
+<span class="dv">2</span>      <span class="dv">2</span>       <span class="fl">15.77083</span></code></pre></div>
 <p>And R and <code>dplyr</code> have done as we asked:</p>
 <ul>
 <li><em>split</em> the data by <code>Gender</code>, using <code>group_by()</code></li>
@@ -460,36 +460,36 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h4>A ‘real’ example</h4>
 <p>In the previous section on datasets, we saw some found some raw data from a study which had measured depression with the PHQ-9. Patients were measured on numerous occasions (<code>month</code> is recorded) and were split into treatment and control groups:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">phq9.df &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;phq.csv&quot;</span>)
-## Parsed with column specification:
-## cols(
-##   patient = col_integer(),
-##   phq9_01 = col_integer(),
-##   phq9_02 = col_integer(),
-##   phq9_03 = col_integer(),
-##   phq9_04 = col_integer(),
-##   phq9_05 = col_integer(),
-##   phq9_06 = col_integer(),
-##   phq9_07 = col_integer(),
-##   phq9_08 = col_integer(),
-##   phq9_09 = col_integer(),
-##   month = col_integer(),
-##   group = col_integer()
-## )
+Parsed with column specification<span class="op">:</span>
+<span class="kw">cols</span>(
+  <span class="dt">patient =</span> <span class="kw">col_integer</span>(),
+  <span class="dt">phq9_01 =</span> <span class="kw">col_integer</span>(),
+  <span class="dt">phq9_02 =</span> <span class="kw">col_integer</span>(),
+  <span class="dt">phq9_03 =</span> <span class="kw">col_integer</span>(),
+  <span class="dt">phq9_04 =</span> <span class="kw">col_integer</span>(),
+  <span class="dt">phq9_05 =</span> <span class="kw">col_integer</span>(),
+  <span class="dt">phq9_06 =</span> <span class="kw">col_integer</span>(),
+  <span class="dt">phq9_07 =</span> <span class="kw">col_integer</span>(),
+  <span class="dt">phq9_08 =</span> <span class="kw">col_integer</span>(),
+  <span class="dt">phq9_09 =</span> <span class="kw">col_integer</span>(),
+  <span class="dt">month =</span> <span class="kw">col_integer</span>(),
+  <span class="dt">group =</span> <span class="kw">col_integer</span>()
+)
 <span class="kw">glimpse</span>(phq9.df)
-## Observations: 2,429
-## Variables: 12
-## $ patient &lt;int&gt; 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, ...
-## $ phq9_01 &lt;int&gt; 3, 1, 1, 2, 2, 2, 3, 2, 3, 3, 1, 3, 2, 1, 2, 3, 3, 3, ...
-## $ phq9_02 &lt;int&gt; 3, 2, 2, 2, 3, 3, 3, 2, 3, 3, 1, 3, 2, 1, 3, 3, 3, 3, ...
-## $ phq9_03 &lt;int&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 2, 3, 3, ...
-## $ phq9_04 &lt;int&gt; 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, ...
-## $ phq9_05 &lt;int&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 2, 1, 2, ...
-## $ phq9_06 &lt;int&gt; 3, 2, 2, 2, 3, 3, 2, 1, 2, 3, 3, 3, 2, 1, 3, 3, 3, 3, ...
-## $ phq9_07 &lt;int&gt; 3, 3, 1, 1, 2, 1, 2, 2, 1, 3, 2, 2, 2, 2, 3, 2, 1, 1, ...
-## $ phq9_08 &lt;int&gt; 0, 2, 2, 1, 1, 1, 1, 2, 1, 3, 1, 2, 1, 0, 2, 1, 0, 1, ...
-## $ phq9_09 &lt;int&gt; 2, 2, 1, 1, 2, 2, 2, 1, 1, 3, 1, 2, 1, 1, 3, 3, 3, 3, ...
-## $ month   &lt;int&gt; 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 18, 0, 1,...
-## $ group   &lt;int&gt; 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, ...</code></pre></div>
+Observations<span class="op">:</span><span class="st"> </span><span class="dv">2</span>,<span class="dv">429</span>
+Variables<span class="op">:</span><span class="st"> </span><span class="dv">12</span>
+<span class="op">$</span><span class="st"> </span>patient <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, ...
+<span class="op">$</span><span class="st"> </span>phq9_<span class="dv">01</span> <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, ...
+<span class="op">$</span><span class="st"> </span>phq9_<span class="dv">02</span> <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, ...
+<span class="op">$</span><span class="st"> </span>phq9_<span class="dv">03</span> <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, ...
+<span class="op">$</span><span class="st"> </span>phq9_<span class="dv">04</span> <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, ...
+<span class="op">$</span><span class="st"> </span>phq9_<span class="dv">05</span> <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, ...
+<span class="op">$</span><span class="st"> </span>phq9_<span class="dv">06</span> <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, ...
+<span class="op">$</span><span class="st"> </span>phq9_<span class="dv">07</span> <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, ...
+<span class="op">$</span><span class="st"> </span>phq9_<span class="dv">08</span> <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, ...
+<span class="op">$</span><span class="st"> </span>phq9_<span class="dv">09</span> <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, ...
+<span class="op">$</span><span class="st"> </span>month   <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">0</span>, <span class="dv">1</span>,...
+<span class="op">$</span><span class="st"> </span>group   <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, ...</code></pre></div>
 <p>If this were our data we might want to:</p>
 <ul>
 <li>Calculate the sum of the PHQ-9 variables (the PHQ-9 <em>score</em>)</li>
@@ -514,22 +514,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 phq9.summary.df <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(month <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">7</span>, <span class="dv">12</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>pander<span class="op">::</span><span class="kw">pandoc.table</span>()
-## 
-## --------------------------
-##  month   group   phq.mean 
-## ------- ------- ----------
-##    0       0      19.76   
-## 
-##    0       1      18.97   
-## 
-##    7       0      16.62   
-## 
-##    7       1      13.42   
-## 
-##   12       0      16.15   
-## 
-##   12       1      12.54   
-## --------------------------</code></pre></div>
+
+<span class="op">--------------------------</span>
+<span class="st"> </span>month   group   phq.mean 
+<span class="op">-------</span><span class="st"> </span><span class="op">-------</span><span class="st"> </span><span class="op">----------</span>
+<span class="st">   </span><span class="dv">0</span>       <span class="dv">0</span>      <span class="fl">19.76</span>   
+
+   <span class="dv">0</span>       <span class="dv">1</span>      <span class="fl">18.97</span>   
+
+   <span class="dv">7</span>       <span class="dv">0</span>      <span class="fl">16.62</span>   
+
+   <span class="dv">7</span>       <span class="dv">1</span>      <span class="fl">13.42</span>   
+
+  <span class="dv">12</span>       <span class="dv">0</span>      <span class="fl">16.15</span>   
+
+  <span class="dv">12</span>       <span class="dv">1</span>      <span class="fl">12.54</span>   
+<span class="op">--------------------------</span></code></pre></div>
 <div id="mutate-with-rowmeans" class="section level6 unnumbered">
 <h6>A ‘neater way’</h6>
 <p>You might have thought that typing out each variable in the above example (<code>phq9_01 + phq9_02...</code>) seemed a bit repetitive.</p>
@@ -540,21 +540,21 @@ phq9.summary.df <span class="op">%&gt;%</span><span class="st"> </span>
     <span class="kw">select</span>(phq9.df, <span class="kw">starts_with</span>(<span class="st">&quot;phq9_0&quot;</span>))
   )
 )
-## # A tibble: 2,429 x 13
-##    patient phq9_01 phq9_02 phq9_03 phq9_04 phq9_05 phq9_06 phq9_07 phq9_08
-##      &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt;
-##  1       1       3       3       3       3       3       3       3       0
-##  2       2       1       2       3       3       3       2       3       2
-##  3       2       1       2       3       2       3       2       1       2
-##  4       2       2       2       3       3       3       2       1       1
-##  5       2       2       3       3       3       3       3       2       1
-##  6       2       2       3       3       3       3       3       1       1
-##  7       2       3       3       3       3       3       2       2       1
-##  8       2       2       2       3       3       3       1       2       2
-##  9       2       3       3       3       3       3       2       1       1
-## 10       2       3       3       3       3       3       3       3       3
-## # ... with 2,419 more rows, and 4 more variables: phq9_09 &lt;int&gt;,
-## #   month &lt;int&gt;, group &lt;int&gt;, phq9 &lt;dbl&gt;</code></pre></div>
+<span class="co"># A tibble: 2,429 x 13</span>
+   patient phq9_<span class="dv">01</span> phq9_<span class="dv">02</span> phq9_<span class="dv">03</span> phq9_<span class="dv">04</span> phq9_<span class="dv">05</span> phq9_<span class="dv">06</span> phq9_<span class="dv">07</span> phq9_<span class="dv">08</span>
+     <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>int<span class="op">&gt;</span>
+<span class="st"> </span><span class="dv">1</span>       <span class="dv">1</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">0</span>
+ <span class="dv">2</span>       <span class="dv">2</span>       <span class="dv">1</span>       <span class="dv">2</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">2</span>       <span class="dv">3</span>       <span class="dv">2</span>
+ <span class="dv">3</span>       <span class="dv">2</span>       <span class="dv">1</span>       <span class="dv">2</span>       <span class="dv">3</span>       <span class="dv">2</span>       <span class="dv">3</span>       <span class="dv">2</span>       <span class="dv">1</span>       <span class="dv">2</span>
+ <span class="dv">4</span>       <span class="dv">2</span>       <span class="dv">2</span>       <span class="dv">2</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">2</span>       <span class="dv">1</span>       <span class="dv">1</span>
+ <span class="dv">5</span>       <span class="dv">2</span>       <span class="dv">2</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">2</span>       <span class="dv">1</span>
+ <span class="dv">6</span>       <span class="dv">2</span>       <span class="dv">2</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">1</span>       <span class="dv">1</span>
+ <span class="dv">7</span>       <span class="dv">2</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">2</span>       <span class="dv">2</span>       <span class="dv">1</span>
+ <span class="dv">8</span>       <span class="dv">2</span>       <span class="dv">2</span>       <span class="dv">2</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">1</span>       <span class="dv">2</span>       <span class="dv">2</span>
+ <span class="dv">9</span>       <span class="dv">2</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">2</span>       <span class="dv">1</span>       <span class="dv">1</span>
+<span class="dv">10</span>       <span class="dv">2</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>       <span class="dv">3</span>
+<span class="co"># ... with 2,419 more rows, and 4 more variables: phq9_09 &lt;int&gt;,</span>
+<span class="co">#   month &lt;int&gt;, group &lt;int&gt;, phq9 &lt;dbl&gt;</span></code></pre></div>
 <p>I’ve broken the code into multiple lines to make it clearer to read. In English, this code means:</p>
 <ol style="list-style-type: decimal">
 <li>Take the the dataframe <code>phq9.df</code></li>
@@ -643,7 +643,7 @@ expt.data <span class="op">%&gt;%</span>
           <span class="dt">fun.aggregate=</span>mean) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>head <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>pander
-## Using RT as value column: use value.var to override.</code></pre></div>
+Using RT as value column<span class="op">:</span><span class="st"> </span>use value.var to override.</code></pre></div>
 <table style="width:35%;">
 <colgroup>
 <col width="12%" />
@@ -698,7 +698,7 @@ expt.data <span class="op">%&gt;%</span>
           <span class="dt">fun.aggregate=</span>sd) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>head <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>pander
-## Using RT as value column: use value.var to override.</code></pre></div>
+Using RT as value column<span class="op">:</span><span class="st"> </span>use value.var to override.</code></pre></div>
 <table style="width:35%;">
 <colgroup>
 <col width="12%" />

@@ -397,42 +397,42 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Lists</h2>
 <p>Try running the code below:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(confusing.vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&quot;Wibble&quot;</span>))
-## [1] &quot;1&quot;      &quot;2&quot;      &quot;3&quot;      &quot;Wibble&quot;
+[<span class="dv">1</span>] <span class="st">&quot;1&quot;</span>      <span class="st">&quot;2&quot;</span>      <span class="st">&quot;3&quot;</span>      <span class="st">&quot;Wibble&quot;</span>
 (first.element &lt;-<span class="st"> </span>confusing.vector[<span class="dv">1</span>])
-## [1] &quot;1&quot;
+[<span class="dv">1</span>] <span class="st">&quot;1&quot;</span>
 <span class="kw">sqrt</span>(first.element)
-## Error in sqrt(first.element): non-numeric argument to mathematical function</code></pre></div>
+Error <span class="cf">in</span> <span class="kw">sqrt</span>(first.element)<span class="op">:</span><span class="st"> </span>non<span class="op">-</span>numeric argument to mathematical <span class="cf">function</span></code></pre></div>
 <p>Take a minute to try and make a guess at what went wrong. Why does R complain that the <code>1</code> is non-numeric?</p>
 <p>When we built the vector we used <code>c</code> to combine the elements <code>1</code>, <code>2</code>, <code>3</code> and <code>&quot;Wibble&quot;</code>. Although our first three elements are numbers, <code>&quot;Wibble&quot;</code> is not - it’s made up of letters (this is called a character string).</p>
 <p>Vectors can only contain one <em>type</em> of thing so R automatically converts all the elements to the same type, if it can.</p>
 <p>Because R can’t reliably convert <code>&quot;Wibble&quot;</code> to a number, everything in the vector was converted to the <code>character</code> type instead. We get an error because R can’t mutiply words together.</p>
 <p>If you’re not sure what type of thing your vector contains, you can use the <code>typeof</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)
-## [1] &quot;integer&quot;
+[<span class="dv">1</span>] <span class="st">&quot;integer&quot;</span>
 <span class="kw">typeof</span>(<span class="kw">runif</span>(<span class="dv">10</span>))
-## [1] &quot;double&quot;
+[<span class="dv">1</span>] <span class="st">&quot;double&quot;</span>
 <span class="kw">typeof</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="st">&quot;Wibble&quot;</span>))
-## [1] &quot;character&quot;</code></pre></div>
+[<span class="dv">1</span>] <span class="st">&quot;character&quot;</span></code></pre></div>
 <p>Here the meaning of <em>integer</em> should be self explanatory. The vector <code>runif(10)</code> has type <em>double</em>, because it contains ‘double-precision’ floating point numbers. For our purposes you can just think of <code>double</code> as meaning any number with decimal places.</p>
 <p>The last vector has the type <code>character</code> because it includes the character string <code>Wibble</code>, and all the other numbers in it were coerced to become character strings too.</p>
 <p>If we want to (safely) mix up different types of object without them being converted we need a proper <code>list</code>, rather than a vector. In R we would write:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my.list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="st">&quot;Wibble&quot;</span>)</code></pre></div>
 <p>We can still access elements from lists as we do for vectors, although now we need to use double square brackets, for example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my.list[[<span class="dv">1</span>]]
-## [1] 2</code></pre></div>
+[<span class="dv">1</span>] <span class="dv">2</span></code></pre></div>
 <p>But now our numbers haven’t been converted to character strings, and we can still multiply them.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my.list[[<span class="dv">1</span>]] <span class="op">*</span><span class="st"> </span>my.list[[<span class="dv">2</span>]]
-## [1] 4</code></pre></div>
+[<span class="dv">1</span>] <span class="dv">4</span></code></pre></div>
 <p>Square brackets are ugly and can be confusing though, so we often give names to the elements of our list when we create it:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my.party &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">number.guests=</span><span class="dv">8</span>, 
                  <span class="dt">when=</span><span class="st">&quot;Friday&quot;</span>, 
                  <span class="dt">drinks =</span> <span class="kw">c</span>(<span class="st">&quot;Juice&quot;</span>, <span class="st">&quot;Beer&quot;</span>, <span class="st">&quot;Whisky&quot;</span>))</code></pre></div>
 <p>Which means we can then access the elements <em>by name</em> later on. To do this, you write the name of the vector, then a <code>$</code> sign, and then the name of the element you want to access:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my.party<span class="op">$</span>when
-## [1] &quot;Friday&quot;</code></pre></div>
+[<span class="dv">1</span>] <span class="st">&quot;Friday&quot;</span></code></pre></div>
 <p>You might have spotted that we included a vector inside the party list. This is not a problem, and we can still access individual elements of this vector too:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my.party<span class="op">$</span>drinks[<span class="dv">1</span>]
-## [1] &quot;Juice&quot;</code></pre></div>
+[<span class="dv">1</span>] <span class="st">&quot;Juice&quot;</span></code></pre></div>
 <div id="section-5" class="section level4 unnumbered exercise">
 <h4></h4>
 <ol style="list-style-type: decimal">
@@ -452,8 +452,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Run the following R code and explain what has happened:</li>
 </ol>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) <span class="op">*</span><span class="st"> </span><span class="dv">10</span>
-##  [1] 10.00000 14.14214 17.32051 20.00000 22.36068 24.49490 26.45751
-##  [8] 28.28427 30.00000 31.62278</code></pre></div>
+ [<span class="dv">1</span>] <span class="fl">10.00000</span> <span class="fl">14.14214</span> <span class="fl">17.32051</span> <span class="fl">20.00000</span> <span class="fl">22.36068</span> <span class="fl">24.49490</span> <span class="fl">26.45751</span>
+ [<span class="dv">8</span>] <span class="fl">28.28427</span> <span class="fl">30.00000</span> <span class="fl">31.62278</span></code></pre></div>
 </div>
 <div id="section-6" class="section level4 unnumbered exercise">
 <h4></h4>

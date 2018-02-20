@@ -398,19 +398,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>To select particular rows from a dataframe, <code>dplyr</code> provides the <code>filter()</code> function.</p>
 <p>If we only want to see the 6-cylindered cars from the <code>mtcars</code> dataframe:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(mtcars, cyl<span class="op">==</span><span class="dv">6</span>)
-##    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-## 1 21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
-## 2 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
-## 3 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
-## 4 18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
-## 5 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
-## 6 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
-## 7 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6</code></pre></div>
+   mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+<span class="dv">1</span> <span class="fl">21.0</span>   <span class="dv">6</span> <span class="fl">160.0</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.620</span> <span class="fl">16.46</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span>
+<span class="dv">2</span> <span class="fl">21.0</span>   <span class="dv">6</span> <span class="fl">160.0</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.875</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span>
+<span class="dv">3</span> <span class="fl">21.4</span>   <span class="dv">6</span> <span class="fl">258.0</span> <span class="dv">110</span> <span class="fl">3.08</span> <span class="fl">3.215</span> <span class="fl">19.44</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span>
+<span class="dv">4</span> <span class="fl">18.1</span>   <span class="dv">6</span> <span class="fl">225.0</span> <span class="dv">105</span> <span class="fl">2.76</span> <span class="fl">3.460</span> <span class="fl">20.22</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span>
+<span class="dv">5</span> <span class="fl">19.2</span>   <span class="dv">6</span> <span class="fl">167.6</span> <span class="dv">123</span> <span class="fl">3.92</span> <span class="fl">3.440</span> <span class="fl">18.30</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">4</span>    <span class="dv">4</span>
+<span class="dv">6</span> <span class="fl">17.8</span>   <span class="dv">6</span> <span class="fl">167.6</span> <span class="dv">123</span> <span class="fl">3.92</span> <span class="fl">3.440</span> <span class="fl">18.90</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">4</span>    <span class="dv">4</span>
+<span class="dv">7</span> <span class="fl">19.7</span>   <span class="dv">6</span> <span class="fl">145.0</span> <span class="dv">175</span> <span class="fl">3.62</span> <span class="fl">2.770</span> <span class="fl">15.50</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">5</span>    <span class="dv">6</span></code></pre></div>
 <p>The <code>filter</code> function selects rows matching criteria you set: in this case, that <code>cyl==6</code>. We can match two criteria at once if needed:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(mtcars, cyl<span class="op">==</span><span class="dv">6</span> <span class="op">&amp;</span><span class="st"> </span>gear<span class="op">==</span><span class="dv">3</span>)
-##    mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## 1 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-## 2 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre></div>
+   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+<span class="dv">1</span> <span class="fl">21.4</span>   <span class="dv">6</span>  <span class="dv">258</span> <span class="dv">110</span> <span class="fl">3.08</span> <span class="fl">3.215</span> <span class="fl">19.44</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span>
+<span class="dv">2</span> <span class="fl">18.1</span>   <span class="dv">6</span>  <span class="dv">225</span> <span class="dv">105</span> <span class="fl">2.76</span> <span class="fl">3.460</span> <span class="fl">20.22</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span></code></pre></div>
 </div>
             </section>
 

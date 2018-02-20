@@ -398,23 +398,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Open some data and check that all looks well:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hz &lt;-<span class="st"> </span>lavaan<span class="op">::</span>HolzingerSwineford1939
 hz <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">glimpse</span>()
-## Observations: 301
-## Variables: 15
-## $ id     &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, ...
-## $ sex    &lt;int&gt; 1, 2, 2, 1, 2, 2, 1, 2, 2, 2, 1, 1, 2, 2, 1, 2, 2, 1, 2...
-## $ ageyr  &lt;int&gt; 13, 13, 13, 13, 12, 14, 12, 12, 13, 12, 12, 12, 12, 12,...
-## $ agemo  &lt;int&gt; 1, 7, 1, 2, 2, 1, 1, 2, 0, 5, 2, 11, 7, 8, 6, 1, 11, 5,...
-## $ school &lt;fctr&gt; Pasteur, Pasteur, Pasteur, Pasteur, Pasteur, Pasteur, ...
-## $ grade  &lt;int&gt; 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7...
-## $ x1     &lt;dbl&gt; 3.333333, 5.333333, 4.500000, 5.333333, 4.833333, 5.333...
-## $ x2     &lt;dbl&gt; 7.75, 5.25, 5.25, 7.75, 4.75, 5.00, 6.00, 6.25, 5.75, 5...
-## $ x3     &lt;dbl&gt; 0.375, 2.125, 1.875, 3.000, 0.875, 2.250, 1.000, 1.875,...
-## $ x4     &lt;dbl&gt; 2.333333, 1.666667, 1.000000, 2.666667, 2.666667, 1.000...
-## $ x5     &lt;dbl&gt; 5.75, 3.00, 1.75, 4.50, 4.00, 3.00, 6.00, 4.25, 5.75, 5...
-## $ x6     &lt;dbl&gt; 1.2857143, 1.2857143, 0.4285714, 2.4285714, 2.5714286, ...
-## $ x7     &lt;dbl&gt; 3.391304, 3.782609, 3.260870, 3.000000, 3.695652, 4.347...
-## $ x8     &lt;dbl&gt; 5.75, 6.25, 3.90, 5.30, 6.30, 6.65, 6.20, 5.15, 4.65, 4...
-## $ x9     &lt;dbl&gt; 6.361111, 7.916667, 4.416667, 4.861111, 5.916667, 7.500...</code></pre></div>
+Observations<span class="op">:</span><span class="st"> </span><span class="dv">301</span>
+Variables<span class="op">:</span><span class="st"> </span><span class="dv">15</span>
+<span class="op">$</span><span class="st"> </span>id     <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">15</span>, <span class="dv">16</span>, <span class="dv">17</span>, ...
+<span class="op">$</span><span class="st"> </span>sex    <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>...
+<span class="op">$</span><span class="st"> </span>ageyr  <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">13</span>, <span class="dv">13</span>, <span class="dv">13</span>, <span class="dv">13</span>, <span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">12</span>,...
+<span class="op">$</span><span class="st"> </span>agemo  <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">11</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">11</span>, <span class="dv">5</span>,...
+<span class="op">$</span><span class="st"> </span>school <span class="op">&lt;</span>fctr<span class="op">&gt;</span><span class="st"> </span>Pasteur, Pasteur, Pasteur, Pasteur, Pasteur, Pasteur, ...
+<span class="op">$</span><span class="st"> </span>grade  <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>...
+<span class="op">$</span><span class="st"> </span>x1     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">3.333333</span>, <span class="fl">5.333333</span>, <span class="fl">4.500000</span>, <span class="fl">5.333333</span>, <span class="fl">4.833333</span>, <span class="fl">5.333</span>...
+<span class="op">$</span><span class="st"> </span>x2     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">7.75</span>, <span class="fl">5.25</span>, <span class="fl">5.25</span>, <span class="fl">7.75</span>, <span class="fl">4.75</span>, <span class="fl">5.00</span>, <span class="fl">6.00</span>, <span class="fl">6.25</span>, <span class="fl">5.75</span>, <span class="dv">5</span>...
+<span class="op">$</span><span class="st"> </span>x3     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">0.375</span>, <span class="fl">2.125</span>, <span class="fl">1.875</span>, <span class="fl">3.000</span>, <span class="fl">0.875</span>, <span class="fl">2.250</span>, <span class="fl">1.000</span>, <span class="fl">1.875</span>,...
+<span class="op">$</span><span class="st"> </span>x4     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">2.333333</span>, <span class="fl">1.666667</span>, <span class="fl">1.000000</span>, <span class="fl">2.666667</span>, <span class="fl">2.666667</span>, <span class="fl">1.000</span>...
+<span class="op">$</span><span class="st"> </span>x5     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">5.75</span>, <span class="fl">3.00</span>, <span class="fl">1.75</span>, <span class="fl">4.50</span>, <span class="fl">4.00</span>, <span class="fl">3.00</span>, <span class="fl">6.00</span>, <span class="fl">4.25</span>, <span class="fl">5.75</span>, <span class="dv">5</span>...
+<span class="op">$</span><span class="st"> </span>x6     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">1.2857143</span>, <span class="fl">1.2857143</span>, <span class="fl">0.4285714</span>, <span class="fl">2.4285714</span>, <span class="fl">2.5714286</span>, ...
+<span class="op">$</span><span class="st"> </span>x7     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">3.391304</span>, <span class="fl">3.782609</span>, <span class="fl">3.260870</span>, <span class="fl">3.000000</span>, <span class="fl">3.695652</span>, <span class="fl">4.347</span>...
+<span class="op">$</span><span class="st"> </span>x8     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">5.75</span>, <span class="fl">6.25</span>, <span class="fl">3.90</span>, <span class="fl">5.30</span>, <span class="fl">6.30</span>, <span class="fl">6.65</span>, <span class="fl">6.20</span>, <span class="fl">5.15</span>, <span class="fl">4.65</span>, <span class="dv">4</span>...
+<span class="op">$</span><span class="st"> </span>x9     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">6.361111</span>, <span class="fl">7.916667</span>, <span class="fl">4.416667</span>, <span class="fl">4.861111</span>, <span class="fl">5.916667</span>, <span class="fl">7.500</span>...</code></pre></div>
 <div id="defining-the-model" class="section level3 unnumbered">
 <h3>Defining the model</h3>
 <p>As noted above, to define models in <code>lavaan</code> you must specify the relationships between variables in a text format. A full <a href="http://lavaan.ugent.be/tutorial/syntax1.html">guide to this lavaan model syntax</a> is available on the project website.</p>
@@ -433,57 +433,57 @@ hz <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">glimp
 <p>To run the analysis we again pass the model specification and the data to the <code>cfa()</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hz.fit &lt;-<span class="st"> </span><span class="kw">cfa</span>(hz.model, <span class="dt">data=</span>hz)
 <span class="kw">summary</span>(hz.fit, <span class="dt">standardized=</span><span class="ot">TRUE</span>)
-## lavaan (0.5-23.1097) converged normally after  35 iterations
-## 
-##   Number of observations                           301
-## 
-##   Estimator                                         ML
-##   Minimum Function Test Statistic               85.306
-##   Degrees of freedom                                24
-##   P-value (Chi-square)                           0.000
-## 
-## Parameter Estimates:
-## 
-##   Information                                 Expected
-##   Standard Errors                             Standard
-## 
-## Latent Variables:
-##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
-##   visual =~                                                             
-##     x1                1.000                               0.900    0.772
-##     x2                0.554    0.100    5.554    0.000    0.498    0.424
-##     x3                0.729    0.109    6.685    0.000    0.656    0.581
-##   writing =~                                                            
-##     x4                1.000                               0.990    0.852
-##     x5                1.113    0.065   17.014    0.000    1.102    0.855
-##     x6                0.926    0.055   16.703    0.000    0.917    0.838
-##   maths =~                                                              
-##     x7                1.000                               0.619    0.570
-##     x8                1.180    0.165    7.152    0.000    0.731    0.723
-##     x9                1.082    0.151    7.155    0.000    0.670    0.665
-## 
-## Covariances:
-##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
-##   visual ~~                                                             
-##     writing           0.408    0.074    5.552    0.000    0.459    0.459
-##     maths             0.262    0.056    4.660    0.000    0.471    0.471
-##   writing ~~                                                            
-##     maths             0.173    0.049    3.518    0.000    0.283    0.283
-## 
-## Variances:
-##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
-##    .x1                0.549    0.114    4.833    0.000    0.549    0.404
-##    .x2                1.134    0.102   11.146    0.000    1.134    0.821
-##    .x3                0.844    0.091    9.317    0.000    0.844    0.662
-##    .x4                0.371    0.048    7.779    0.000    0.371    0.275
-##    .x5                0.446    0.058    7.642    0.000    0.446    0.269
-##    .x6                0.356    0.043    8.277    0.000    0.356    0.298
-##    .x7                0.799    0.081    9.823    0.000    0.799    0.676
-##    .x8                0.488    0.074    6.573    0.000    0.488    0.477
-##    .x9                0.566    0.071    8.003    0.000    0.566    0.558
-##     visual            0.809    0.145    5.564    0.000    1.000    1.000
-##     writing           0.979    0.112    8.737    0.000    1.000    1.000
-##     maths             0.384    0.086    4.451    0.000    1.000    1.000</code></pre></div>
+<span class="kw">lavaan</span> (<span class="fl">0.5</span><span class="op">-</span><span class="fl">23.1097</span>) converged normally after  <span class="dv">35</span> iterations
+
+  Number of observations                           <span class="dv">301</span>
+
+  Estimator                                         ML
+  Minimum Function Test Statistic               <span class="fl">85.306</span>
+  Degrees of freedom                                <span class="dv">24</span>
+  P<span class="op">-</span><span class="kw">value</span> (Chi<span class="op">-</span>square)                           <span class="fl">0.000</span>
+
+Parameter Estimates<span class="op">:</span>
+
+<span class="st">  </span>Information                                 Expected
+  Standard Errors                             Standard
+
+Latent Variables<span class="op">:</span>
+<span class="st">                   </span>Estimate  Std.Err  z<span class="op">-</span>value  <span class="kw">P</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)   Std.lv  Std.all
+  visual =<span class="er">~</span><span class="st">                                                             </span>
+<span class="st">    </span>x1                <span class="fl">1.000</span>                               <span class="fl">0.900</span>    <span class="fl">0.772</span>
+    x2                <span class="fl">0.554</span>    <span class="fl">0.100</span>    <span class="fl">5.554</span>    <span class="fl">0.000</span>    <span class="fl">0.498</span>    <span class="fl">0.424</span>
+    x3                <span class="fl">0.729</span>    <span class="fl">0.109</span>    <span class="fl">6.685</span>    <span class="fl">0.000</span>    <span class="fl">0.656</span>    <span class="fl">0.581</span>
+  writing =<span class="er">~</span><span class="st">                                                            </span>
+<span class="st">    </span>x4                <span class="fl">1.000</span>                               <span class="fl">0.990</span>    <span class="fl">0.852</span>
+    x5                <span class="fl">1.113</span>    <span class="fl">0.065</span>   <span class="fl">17.014</span>    <span class="fl">0.000</span>    <span class="fl">1.102</span>    <span class="fl">0.855</span>
+    x6                <span class="fl">0.926</span>    <span class="fl">0.055</span>   <span class="fl">16.703</span>    <span class="fl">0.000</span>    <span class="fl">0.917</span>    <span class="fl">0.838</span>
+  maths =<span class="er">~</span><span class="st">                                                              </span>
+<span class="st">    </span>x7                <span class="fl">1.000</span>                               <span class="fl">0.619</span>    <span class="fl">0.570</span>
+    x8                <span class="fl">1.180</span>    <span class="fl">0.165</span>    <span class="fl">7.152</span>    <span class="fl">0.000</span>    <span class="fl">0.731</span>    <span class="fl">0.723</span>
+    x9                <span class="fl">1.082</span>    <span class="fl">0.151</span>    <span class="fl">7.155</span>    <span class="fl">0.000</span>    <span class="fl">0.670</span>    <span class="fl">0.665</span>
+
+Covariances<span class="op">:</span>
+<span class="st">                   </span>Estimate  Std.Err  z<span class="op">-</span>value  <span class="kw">P</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)   Std.lv  Std.all
+  visual <span class="op">~</span><span class="er">~</span><span class="st">                                                             </span>
+<span class="st">    </span>writing           <span class="fl">0.408</span>    <span class="fl">0.074</span>    <span class="fl">5.552</span>    <span class="fl">0.000</span>    <span class="fl">0.459</span>    <span class="fl">0.459</span>
+    maths             <span class="fl">0.262</span>    <span class="fl">0.056</span>    <span class="fl">4.660</span>    <span class="fl">0.000</span>    <span class="fl">0.471</span>    <span class="fl">0.471</span>
+  writing <span class="op">~</span><span class="er">~</span><span class="st">                                                            </span>
+<span class="st">    </span>maths             <span class="fl">0.173</span>    <span class="fl">0.049</span>    <span class="fl">3.518</span>    <span class="fl">0.000</span>    <span class="fl">0.283</span>    <span class="fl">0.283</span>
+
+Variances<span class="op">:</span>
+<span class="st">                   </span>Estimate  Std.Err  z<span class="op">-</span>value  <span class="kw">P</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)   Std.lv  Std.all
+   .x1                <span class="fl">0.549</span>    <span class="fl">0.114</span>    <span class="fl">4.833</span>    <span class="fl">0.000</span>    <span class="fl">0.549</span>    <span class="fl">0.404</span>
+   .x2                <span class="fl">1.134</span>    <span class="fl">0.102</span>   <span class="fl">11.146</span>    <span class="fl">0.000</span>    <span class="fl">1.134</span>    <span class="fl">0.821</span>
+   .x3                <span class="fl">0.844</span>    <span class="fl">0.091</span>    <span class="fl">9.317</span>    <span class="fl">0.000</span>    <span class="fl">0.844</span>    <span class="fl">0.662</span>
+   .x4                <span class="fl">0.371</span>    <span class="fl">0.048</span>    <span class="fl">7.779</span>    <span class="fl">0.000</span>    <span class="fl">0.371</span>    <span class="fl">0.275</span>
+   .x5                <span class="fl">0.446</span>    <span class="fl">0.058</span>    <span class="fl">7.642</span>    <span class="fl">0.000</span>    <span class="fl">0.446</span>    <span class="fl">0.269</span>
+   .x6                <span class="fl">0.356</span>    <span class="fl">0.043</span>    <span class="fl">8.277</span>    <span class="fl">0.000</span>    <span class="fl">0.356</span>    <span class="fl">0.298</span>
+   .x7                <span class="fl">0.799</span>    <span class="fl">0.081</span>    <span class="fl">9.823</span>    <span class="fl">0.000</span>    <span class="fl">0.799</span>    <span class="fl">0.676</span>
+   .x8                <span class="fl">0.488</span>    <span class="fl">0.074</span>    <span class="fl">6.573</span>    <span class="fl">0.000</span>    <span class="fl">0.488</span>    <span class="fl">0.477</span>
+   .x9                <span class="fl">0.566</span>    <span class="fl">0.071</span>    <span class="fl">8.003</span>    <span class="fl">0.000</span>    <span class="fl">0.566</span>    <span class="fl">0.558</span>
+    visual            <span class="fl">0.809</span>    <span class="fl">0.145</span>    <span class="fl">5.564</span>    <span class="fl">0.000</span>    <span class="fl">1.000</span>    <span class="fl">1.000</span>
+    writing           <span class="fl">0.979</span>    <span class="fl">0.112</span>    <span class="fl">8.737</span>    <span class="fl">0.000</span>    <span class="fl">1.000</span>    <span class="fl">1.000</span>
+    maths             <span class="fl">0.384</span>    <span class="fl">0.086</span>    <span class="fl">4.451</span>    <span class="fl">0.000</span>    <span class="fl">1.000</span>    <span class="fl">1.000</span></code></pre></div>
 <div id="model-output" class="section level4 unnumbered">
 <h4>Model output</h4>
 <p>The output has three parts:</p>
@@ -497,12 +497,12 @@ hz <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">glimp
 <h4>Plotting models</h4>
 <p>As before, we can use the <code>semPaths()</code> function to visualise the model. This is an important step because it helps explain the model to others, and also gives you an opportunity to check you have specified your model correctly.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">semPlot<span class="op">::</span><span class="kw">semPaths</span>(hz.fit)</code></pre></div>
-<p><img src="cfa-sem_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="cfa-sem_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>And for ‘final’ models we might want to overplot model parameter estimates (in this case, standardised):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># std refers to standardised estimates. &quot;par&quot; would plot</span>
 <span class="co"># the unstandardised estimates</span>
 semPlot<span class="op">::</span><span class="kw">semPaths</span>(hz.fit, <span class="st">&quot;std&quot;</span>)</code></pre></div>
-<p><img src="cfa-sem_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="cfa-sem_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 </div>
 </div>
 </div>

@@ -3,9 +3,7 @@ title: 'Loading packages (Teaching an old dog new tricks)'
 ---
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 library(tidyverse)
-theme_set(theme_minimal())
 ```
 
 

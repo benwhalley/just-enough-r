@@ -2,9 +2,6 @@
 title: 'Getting help'
 ---
 
-```{r, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
-```
 
 
 # Getting help {#getting-help}

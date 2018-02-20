@@ -398,8 +398,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>To examine the model fit we use <code>fitmeasures()</code> and pass a list of the names of the fit indices we would like calculated:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lavaan)
 <span class="kw">fitmeasures</span>(hz.fit, <span class="kw">c</span>(<span class="st">&#39;cfi&#39;</span>, <span class="st">&#39;rmsea&#39;</span>, <span class="st">&#39;rmsea.ci.upper&#39;</span>, <span class="st">&#39;bic&#39;</span>)) 
-##            cfi          rmsea rmsea.ci.upper            bic 
-##          0.931          0.092          0.114       7595.339</code></pre></div>
+           cfi          rmsea rmsea.ci.upper            bic 
+         <span class="fl">0.931</span>          <span class="fl">0.092</span>          <span class="fl">0.114</span>       <span class="fl">7595.339</span> </code></pre></div>
 <p>This looks OK, but the fit indices indicate the model could be improved. In particular the RMSEA figure is above 0.05. See the <a href="gof.html#gof">notes on goodness of fit statistics</a> for more detail.</p>
 </div>
             </section>

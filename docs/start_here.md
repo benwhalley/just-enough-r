@@ -1,3 +1,4 @@
+
 ---
 title: 'Starting out'
 ---
@@ -225,13 +226,13 @@ Place your cursor somewhere in the line the command is on and run it by typing `
 
 ```r
 head(mtcars)
-##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
 ```
 
 
@@ -262,7 +263,7 @@ This assigns the value `3` to the variable `the_magic_number`. This block wouldn
 ```r
 the_magic_number <- 3
 the_magic_number
-## [1] 3
+[1] 3
 ```
 
 
@@ -273,7 +274,7 @@ Or we can use a shortcut: if we wrap the line in parentheses this both makes the
 
 ```r
 (i_am_a_new_variable <- 22)
-## [1] 22
+[1] 22
 ```
 
 
@@ -285,7 +286,7 @@ Helpfully, we can do  calculations as we assign variables:
 ```r
 one_score <- 20
 (four_score_years_and_ten <- one_score * 4 + 10)
-## [1] 90
+[1] 90
 ```
 
 
@@ -336,7 +337,7 @@ And we can check the values stored in these variables by printing them. You can 
 
 ```r
 heights 
-##  [1] 203 148 156 158 167 162 172 164 172 187 134 182 175
+ [1] 203 148 156 158 167 162 172 164 172 187 134 182 175
 ```
 
 
@@ -364,7 +365,7 @@ We can display the whole vector by just typing its name, as we saw above. But if
 
 ```r
 my.vector[1]
-## [1] 10
+[1] 10
 ```
 
 
@@ -383,7 +384,7 @@ It might seem obvious, but the first element has position 1, the second has posi
 ```r
 elements.to.grab <- c(4, 5)
 heights[elements.to.grab]
-## [1] 158 167
+[1] 158 167
 ```
 
 We can also make a subset of the original vector and assign it to a *new* variable:
@@ -392,7 +393,7 @@ We can also make a subset of the original vector and assign it to a *new* variab
 ```r
 first.two.elements <- heights[c(1, 2)]
 first.two.elements
-## [1] 203 148
+[1] 203 148
 ```
 
 
@@ -413,7 +414,7 @@ The simplest way of doing this is to define a range, with the colon:
 ```r
 onetoten <- 1:10
 onetoten
-##  [1]  1  2  3  4  5  6  7  8  9 10
+ [1]  1  2  3  4  5  6  7  8  9 10
 ```
 
 This creates a vector which can be sliced like any other:
@@ -421,7 +422,7 @@ This creates a vector which can be sliced like any other:
 
 ```r
 onetoten[8]
-## [1] 8
+[1] 8
 ```
 
 
@@ -430,7 +431,7 @@ One common use of sequences is to slice other vectors:
 
 ```r
 onetoten[1:3]
-## [1] 1 2 3
+[1] 1 2 3
 ```
 
 
@@ -439,7 +440,7 @@ Or the first 10 values in the `heights` vector we defined above:
 
 ```r
 heights[1:10]
-##  [1] 203 148 156 158 167 162 172 164 172 187
+ [1] 203 148 156 158 167 162 172 164 172 187
 ```
 
 
@@ -448,7 +449,7 @@ This works backwards, and with negative numbers too:
 
 ```r
 5:-5
-##  [1]  5  4  3  2  1  0 -1 -2 -3 -4 -5
+ [1]  5  4  3  2  1  0 -1 -2 -3 -4 -5
 ```
 
 
@@ -459,9 +460,9 @@ When your sequence doesn't contain only whole numbers, or non-consecutive number
 
 ```r
 seq(1,10,by=2)
-## [1] 1 3 5 7 9
+[1] 1 3 5 7 9
 seq(0, 1, by=.2)
-## [1] 0.0 0.2 0.4 0.6 0.8 1.0
+[1] 0.0 0.2 0.4 0.6 0.8 1.0
 ```
 
 
@@ -474,7 +475,7 @@ One neat feature of R is that you can create a sequence of `TRUE` or `FALSE` val
 
 ```r
 1:10 > 5
-##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
+ [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
 ```
 
 
@@ -483,8 +484,8 @@ Re-using the heights vector from above, we can then use this to select values th
 
 ```r
 heights > mean(heights)
-##  [1]  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE
-## [12]  TRUE  TRUE
+ [1]  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE
+[12]  TRUE  TRUE
 ```
 
 And we can use the vector of `TRUE` and `FALSE` values to select from the actual scores:
@@ -492,7 +493,7 @@ And we can use the vector of `TRUE` and `FALSE` values to select from the actual
 
 ```r
 heights[heights > mean(heights)]
-## [1] 203 172 172 187 182 175
+[1] 203 172 172 187 182 175
 ```
 
 
@@ -505,7 +506,7 @@ Many of R's most useful functions process *vectors of numbers* in some way. For 
 
 ```r
 mean(heights)
-## [1] 167.6923
+[1] 167.6923
 ```
 
 R contains *lots* of built in functions which we can use to summarise a vector of numbers. For example:
@@ -513,19 +514,19 @@ R contains *lots* of built in functions which we can use to summarise a vector o
 
 ```r
 median(heights)
-## [1] 167
+[1] 167
 sd(heights)
-## [1] 17.59443
+[1] 17.59443
 min(heights)
-## [1] 134
+[1] 134
 max(heights)
-## [1] 203
+[1] 203
 range(heights)
-## [1] 134 203
+[1] 134 203
 IQR(heights)
-## [1] 17
+[1] 17
 length(heights)
-## [1] 13
+[1] 13
 ```
 
 
@@ -538,8 +539,8 @@ But not all functions return a single number in the way that `mean` did above. S
 ```r
 height.quantiles <- quantile(heights)
 height.quantiles
-##   0%  25%  50%  75% 100% 
-##  134  158  167  175  203
+  0%  25%  50%  75% 100% 
+ 134  158  167  175  203 
 ```
 
 
@@ -551,14 +552,14 @@ height.quantiles <- quantile(heights)
 
 # grab the third element, which is the median
 height.quantiles[3]
-## 50% 
-## 167
+50% 
+167 
 
 # assign the first element to a variable
 min.height <- height.quantiles[1]
 min.height
-##  0% 
-## 134
+ 0% 
+134 
 ```
 
 But other functions process a vector without returning any numbers. For example, the `hist` function returns a histogram:
@@ -568,7 +569,7 @@ But other functions process a vector without returning any numbers. For example,
 hist(heights)
 ```
 
-<img src="start_here_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+<img src="start_here_files/figure-html/unnamed-chunk-29-1.png" width="672" />
 
 We'll cover lots more plotting and visualisation later on.
 
@@ -589,12 +590,12 @@ This turns out to be very useful. For example, let's say we want the square root
 ```r
 # these are the raw values
 heights
-##  [1] 203 148 156 158 167 162 172 164 172 187 134 182 175
+ [1] 203 148 156 158 167 162 172 164 172 187 134 182 175
 
 # takes the sqrt of each value and returns a vector of all the square roots
 sqrt(heights)
-##  [1] 14.24781 12.16553 12.49000 12.56981 12.92285 12.72792 13.11488
-##  [8] 12.80625 13.11488 13.67479 11.57584 13.49074 13.22876
+ [1] 14.24781 12.16553 12.49000 12.56981 12.92285 12.72792 13.11488
+ [8] 12.80625 13.11488 13.67479 11.57584 13.49074 13.22876
 ```
 
 This also works with simple arithmetic So, if we wanted to convert all the heights from cm to meters we could just type:
@@ -602,7 +603,7 @@ This also works with simple arithmetic So, if we wanted to convert all the heigh
 
 ```r
 heights / 100
-##  [1] 2.03 1.48 1.56 1.58 1.67 1.62 1.72 1.64 1.72 1.87 1.34 1.82 1.75
+ [1] 2.03 1.48 1.56 1.58 1.67 1.62 1.72 1.64 1.72 1.87 1.34 1.82 1.75
 ```
 
 
@@ -613,7 +614,7 @@ This trick also works with other functions like `paste`, which combines the inpu
 
 ```r
 paste("Once", "upon", "a", "time")
-## [1] "Once upon a time"
+[1] "Once upon a time"
 ```
 
 If we send a vector to `paste` it assumes we want a vector of results, with each element in the vector pasted next to each other:
@@ -622,10 +623,10 @@ If we send a vector to `paste` it assumes we want a vector of results, with each
 ```r
 bottles <- c(100, 99, 98, "...")
 paste(bottles, "green bottles hanging on the wall")
-## [1] "100 green bottles hanging on the wall"
-## [2] "99 green bottles hanging on the wall" 
-## [3] "98 green bottles hanging on the wall" 
-## [4] "... green bottles hanging on the wall"
+[1] "100 green bottles hanging on the wall"
+[2] "99 green bottles hanging on the wall" 
+[3] "98 green bottles hanging on the wall" 
+[4] "... green bottles hanging on the wall"
 ```
 
 In other programming languages we might have had to write a 'loop' to create each line of the song, but R lets us write short statements to summarise *what* needs to be done; we don't need to worry worrying about *how* it gets done.
@@ -638,7 +639,7 @@ The `paste0` function does much the same, but leaves no spaces in the combined s
 
 ```r
 paste0("N=", 1:10)
-##  [1] "N=1"  "N=2"  "N=3"  "N=4"  "N=5"  "N=6"  "N=7"  "N=8"  "N=9"  "N=10"
+ [1] "N=1"  "N=2"  "N=3"  "N=4"  "N=5"  "N=6"  "N=7"  "N=8"  "N=9"  "N=10"
 ```
 
 
@@ -653,7 +654,7 @@ To create regular sequences a convenient shortcut is the 'colon' operator. For e
 
 ```r
 1:10
-##  [1]  1  2  3  4  5  6  7  8  9 10
+ [1]  1  2  3  4  5  6  7  8  9 10
 ```
 
 The `seq` function allows you to create more specific sequences:
@@ -662,8 +663,8 @@ The `seq` function allows you to create more specific sequences:
 ```r
 # make a sequence, specifying the interval between them
 seq(from=0.1, to=2, by=.1)
-##  [1] 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7
-## [18] 1.8 1.9 2.0
+ [1] 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7
+[18] 1.8 1.9 2.0
 ```
 
 
@@ -673,21 +674,21 @@ We can also use random number-generating functions built into R to create vector
 ```r
 # 10 uniformly distributed random numbers between 0 and 1
 runif(10)
-##  [1] 0.55039790 0.56671130 0.12170090 0.56943814 0.69115807 0.21251599
-##  [7] 0.05639159 0.09458552 0.91188579 0.01170227
+ [1] 0.1790159 0.5043922 0.4721015 0.6482539 0.5121343 0.1253847 0.4577949
+ [8] 0.9653722 0.9547195 0.5690736
 
 # 1,000 uniformly distributed random numbers between 1 and 100
 my.numbers <- runif(1000, 1, 10)
 
 # 10 random-normal numbers with mean 10 and SD=1
 rnorm(10, mean=10)
-##  [1] 10.181492  9.828023  8.510946  9.787780  8.293745 10.873080 11.512254
-##  [8] 10.535196 10.429489  8.632022
+ [1] 10.154931 10.057710  9.551226  9.980110  7.845520 11.787558  8.746357
+ [8]  7.478703 10.786122 10.409197
 
 # 10 random-normal numbers with mean 10 and SD=5
 rnorm(10, 10, 5)
-##  [1] 21.728540  2.915083  3.672261 15.874733 14.784080  8.720487 13.412209
-##  [8] 12.094219  3.084931  8.405639
+ [1]  9.3794197 14.0484652 15.2923370  8.3775159 10.4907522 12.7248470
+ [7] 10.9435927  0.4207705  6.1512915 17.8045256
 ```
 
 We can then use these numbers in our code, for example plotting them:
@@ -698,7 +699,7 @@ random.numbers <- rnorm(10000)
 hist(random.numbers)
 ```
 
-<img src="start_here_files/figure-html/unnamed-chunk-37-1.png" width="672" />
+<img src="start_here_files/figure-html/unnamed-chunk-38-1.png" width="672" />
 
 
 
@@ -713,16 +714,16 @@ There are *thousands* of functions built into R. Below are just a few examples w
 ```r
 # repeat something N times
 rep("Apple pie", 10)
-##  [1] "Apple pie" "Apple pie" "Apple pie" "Apple pie" "Apple pie"
-##  [6] "Apple pie" "Apple pie" "Apple pie" "Apple pie" "Apple pie"
+ [1] "Apple pie" "Apple pie" "Apple pie" "Apple pie" "Apple pie"
+ [6] "Apple pie" "Apple pie" "Apple pie" "Apple pie" "Apple pie"
 ```
 
 
 ```r
 # repeat a short vector, combining into a single longer vector
 rep(c("Custard", "Gravy"), 5)
-##  [1] "Custard" "Gravy"   "Custard" "Gravy"   "Custard" "Gravy"   "Custard"
-##  [8] "Gravy"   "Custard" "Gravy"
+ [1] "Custard" "Gravy"   "Custard" "Gravy"   "Custard" "Gravy"   "Custard"
+ [8] "Gravy"   "Custard" "Gravy"  
 ```
 
 
@@ -732,12 +733,12 @@ rep(c("Custard", "Gravy"), 5)
 ```r
 # make a sequence 
 (countdown <- 100:1)
-##   [1] 100  99  98  97  96  95  94  93  92  91  90  89  88  87  86  85  84
-##  [18]  83  82  81  80  79  78  77  76  75  74  73  72  71  70  69  68  67
-##  [35]  66  65  64  63  62  61  60  59  58  57  56  55  54  53  52  51  50
-##  [52]  49  48  47  46  45  44  43  42  41  40  39  38  37  36  35  34  33
-##  [69]  32  31  30  29  28  27  26  25  24  23  22  21  20  19  18  17  16
-##  [86]  15  14  13  12  11  10   9   8   7   6   5   4   3   2   1
+  [1] 100  99  98  97  96  95  94  93  92  91  90  89  88  87  86  85  84
+ [18]  83  82  81  80  79  78  77  76  75  74  73  72  71  70  69  68  67
+ [35]  66  65  64  63  62  61  60  59  58  57  56  55  54  53  52  51  50
+ [52]  49  48  47  46  45  44  43  42  41  40  39  38  37  36  35  34  33
+ [69]  32  31  30  29  28  27  26  25  24  23  22  21  20  19  18  17  16
+ [86]  15  14  13  12  11  10   9   8   7   6   5   4   3   2   1
 ```
 
 
@@ -746,11 +747,11 @@ Make sequences with steps of a particular size:
 
 ```r
 (tenths  <- seq(from=0, to=1, by=.1))
-##  [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+ [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
 
 (twelfths <- seq(from=0, to=10, length.out=12))
-##  [1]  0.0000000  0.9090909  1.8181818  2.7272727  3.6363636  4.5454545
-##  [7]  5.4545455  6.3636364  7.2727273  8.1818182  9.0909091 10.0000000
+ [1]  0.0000000  0.9090909  1.8181818  2.7272727  3.6363636  4.5454545
+ [7]  5.4545455  6.3636364  7.2727273  8.1818182  9.0909091 10.0000000
 ```
 
 
@@ -764,9 +765,9 @@ ages <- round(rnorm(10, mean=40, sd=10))
 
 # get the rank order of elements (i.e. what their positions would be if the vector was sorted)
 ages
-##  [1] 31 54 52 14 32 29 30 44 38 39
+ [1] 44 38 36 34 54 37 49 52 29 47
 rank(ages, ties.method="first")
-##  [1]  4 10  9  1  5  2  3  8  6  7
+ [1]  6  5  3  2 10  4  8  9  1  7
 ```
 
 
@@ -777,7 +778,7 @@ rank(ages, ties.method="first")
 ```r
 # return the unique values in a vector
 unique(rep(1:10, 100))
-##  [1]  1  2  3  4  5  6  7  8  9 10
+ [1]  1  2  3  4  5  6  7  8  9 10
 ```
 
 
@@ -788,7 +789,7 @@ unique(rep(1:10, 100))
 ```r
 # return the unique values in a vector
 length(seq(1,100, 2))
-## [1] 50
+[1] 50
 ```
 
 
@@ -811,11 +812,11 @@ Try running the code below:
 
 ```r
 (confusing.vector <- c(1, 2, 3, "Wibble"))
-## [1] "1"      "2"      "3"      "Wibble"
+[1] "1"      "2"      "3"      "Wibble"
 (first.element <- confusing.vector[1])
-## [1] "1"
+[1] "1"
 sqrt(first.element)
-## Error in sqrt(first.element): non-numeric argument to mathematical function
+Error in sqrt(first.element): non-numeric argument to mathematical function
 ```
 
 
@@ -832,11 +833,11 @@ If you're not sure what type of thing your vector contains, you can use the `typ
 
 ```r
 typeof(1:10)
-## [1] "integer"
+[1] "integer"
 typeof(runif(10))
-## [1] "double"
+[1] "double"
 typeof(c(1, 2, "Wibble"))
-## [1] "character"
+[1] "character"
 ```
 
 Here the meaning of *integer* should be self explanatory. The vector `runif(10)` has type *double*, because it contains 'double-precision' floating point numbers. For our purposes you can just think of `double` as meaning any number with decimal places.
@@ -857,7 +858,7 @@ We can still access elements from lists as we do for vectors, although now we ne
 
 ```r
 my.list[[1]]
-## [1] 2
+[1] 2
 ```
 
 But now our numbers haven't been converted to character strings, and we can still multiply them.
@@ -865,7 +866,7 @@ But now our numbers haven't been converted to character strings, and we can stil
 
 ```r
 my.list[[1]] * my.list[[2]]
-## [1] 4
+[1] 4
 ```
 
 Square brackets are ugly and can be confusing though, so we often give names to the elements of our list when we create it:
@@ -882,7 +883,7 @@ Which means we can then access the elements *by name* later on. To do this, you 
 
 ```r
 my.party$when
-## [1] "Friday"
+[1] "Friday"
 ```
 
 You might have spotted that we included a vector inside the party list. This is not a problem, and we can still access individual elements of this vector too:
@@ -890,7 +891,7 @@ You might have spotted that we included a vector inside the party list. This is 
 
 ```r
 my.party$drinks[1]
-## [1] "Juice"
+[1] "Juice"
 ```
 
 
@@ -910,8 +911,8 @@ my.party$drinks[1]
 
 ```r
 sqrt(1:10) * 10
-##  [1] 10.00000 14.14214 17.32051 20.00000 22.36068 24.49490 26.45751
-##  [8] 28.28427 30.00000 31.62278
+ [1] 10.00000 14.14214 17.32051 20.00000 22.36068 24.49490 26.45751
+ [8] 28.28427 30.00000 31.62278
 ```
 
 

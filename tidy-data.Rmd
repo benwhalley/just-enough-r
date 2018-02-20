@@ -4,7 +4,6 @@ title: '"Tidy" data'
   
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 library(tidyverse)
 library(tufte)
 ```

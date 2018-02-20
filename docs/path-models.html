@@ -417,32 +417,32 @@ mediation.model &lt;-<span class="st"> &quot;</span>
 <p>As we did for <a href="linear-models-simple.html#linear-models-simple">linear regression models</a>, we have saved the model fit object into a variable, here named <code>mediation.fit</code>.</p>
 <p>To display the model results we can use <code>summary()</code>. The key section of the output to check is the table listed ‘Regressions’, which lists the regression parameters for the predictors for each of the endogenous variables.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(mediation.fit)
-## lavaan (0.5-23.1097) converged normally after  12 iterations
-## 
-##   Number of observations                           200
-## 
-##   Estimator                                         ML
-##   Minimum Function Test Statistic                0.000
-##   Degrees of freedom                                 0
-##   Minimum Function Value               0.0000000000000
-## 
-## Parameter Estimates:
-## 
-##   Information                                 Expected
-##   Standard Errors                             Standard
-## 
-## Regressions:
-##                    Estimate  Std.Err  z-value  P(&gt;|z|)
-##   y ~                                                 
-##     x                 0.166    0.075    2.198    0.028
-##     m                 0.190    0.070    2.721    0.007
-##   m ~                                                 
-##     x                 0.530    0.067    7.958    0.000
-## 
-## Variances:
-##                    Estimate  Std.Err  z-value  P(&gt;|z|)
-##    .y                 0.967    0.097   10.000    0.000
-##    .m                 0.993    0.099   10.000    0.000</code></pre></div>
+<span class="kw">lavaan</span> (<span class="fl">0.5</span><span class="op">-</span><span class="fl">23.1097</span>) converged normally after  <span class="dv">12</span> iterations
+
+  Number of observations                           <span class="dv">200</span>
+
+  Estimator                                         ML
+  Minimum Function Test Statistic                <span class="fl">0.000</span>
+  Degrees of freedom                                 <span class="dv">0</span>
+  Minimum Function Value               <span class="fl">0.0000000000000</span>
+
+Parameter Estimates<span class="op">:</span>
+
+<span class="st">  </span>Information                                 Expected
+  Standard Errors                             Standard
+
+Regressions<span class="op">:</span>
+<span class="st">                   </span>Estimate  Std.Err  z<span class="op">-</span>value  <span class="kw">P</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)
+  y <span class="op">~</span><span class="st">                                                 </span>
+<span class="st">    </span>x                 <span class="fl">0.166</span>    <span class="fl">0.075</span>    <span class="fl">2.198</span>    <span class="fl">0.028</span>
+    m                 <span class="fl">0.190</span>    <span class="fl">0.070</span>    <span class="fl">2.721</span>    <span class="fl">0.007</span>
+  m <span class="op">~</span><span class="st">                                                 </span>
+<span class="st">    </span>x                 <span class="fl">0.530</span>    <span class="fl">0.067</span>    <span class="fl">7.958</span>    <span class="fl">0.000</span>
+
+Variances<span class="op">:</span>
+<span class="st">                   </span>Estimate  Std.Err  z<span class="op">-</span>value  <span class="kw">P</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)
+   .y                 <span class="fl">0.967</span>    <span class="fl">0.097</span>   <span class="fl">10.000</span>    <span class="fl">0.000</span>
+   .m                 <span class="fl">0.993</span>    <span class="fl">0.099</span>   <span class="fl">10.000</span>    <span class="fl">0.000</span></code></pre></div>
 <p>From this table we can see that both <code>x</code> and <code>m</code> are significant predictors of <code>y</code>, and that <code>x</code> also predicts <code>m</code>. This implie that mediation is taking place, but <a href="mediation.html#mediation">see the mediation chapter</a> for details of testing indirect effects in <code>lavaan</code>.</p>
 <div id="wheres-the-intercept" class="section level4 unnumbered">
 <h4>Where’s the intercept?</h4>
@@ -454,37 +454,37 @@ mediation.model &lt;-<span class="st"> &quot;</span>
                            <span class="dt">data=</span>mediation.df)
 
 <span class="kw">summary</span>(mediation.fit.means)
-## lavaan (0.5-23.1097) converged normally after  16 iterations
-## 
-##   Number of observations                           200
-## 
-##   Estimator                                         ML
-##   Minimum Function Test Statistic                0.000
-##   Degrees of freedom                                 0
-##   Minimum Function Value               0.0000000000000
-## 
-## Parameter Estimates:
-## 
-##   Information                                 Expected
-##   Standard Errors                             Standard
-## 
-## Regressions:
-##                    Estimate  Std.Err  z-value  P(&gt;|z|)
-##   y ~                                                 
-##     x                 0.166    0.075    2.198    0.028
-##     m                 0.190    0.070    2.721    0.007
-##   m ~                                                 
-##     x                 0.530    0.067    7.958    0.000
-## 
-## Intercepts:
-##                    Estimate  Std.Err  z-value  P(&gt;|z|)
-##    .y                10.629    0.362   29.323    0.000
-##    .m                 5.097    0.070   72.298    0.000
-## 
-## Variances:
-##                    Estimate  Std.Err  z-value  P(&gt;|z|)
-##    .y                 0.967    0.097   10.000    0.000
-##    .m                 0.993    0.099   10.000    0.000</code></pre></div>
+<span class="kw">lavaan</span> (<span class="fl">0.5</span><span class="op">-</span><span class="fl">23.1097</span>) converged normally after  <span class="dv">16</span> iterations
+
+  Number of observations                           <span class="dv">200</span>
+
+  Estimator                                         ML
+  Minimum Function Test Statistic                <span class="fl">0.000</span>
+  Degrees of freedom                                 <span class="dv">0</span>
+  Minimum Function Value               <span class="fl">0.0000000000000</span>
+
+Parameter Estimates<span class="op">:</span>
+
+<span class="st">  </span>Information                                 Expected
+  Standard Errors                             Standard
+
+Regressions<span class="op">:</span>
+<span class="st">                   </span>Estimate  Std.Err  z<span class="op">-</span>value  <span class="kw">P</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)
+  y <span class="op">~</span><span class="st">                                                 </span>
+<span class="st">    </span>x                 <span class="fl">0.166</span>    <span class="fl">0.075</span>    <span class="fl">2.198</span>    <span class="fl">0.028</span>
+    m                 <span class="fl">0.190</span>    <span class="fl">0.070</span>    <span class="fl">2.721</span>    <span class="fl">0.007</span>
+  m <span class="op">~</span><span class="st">                                                 </span>
+<span class="st">    </span>x                 <span class="fl">0.530</span>    <span class="fl">0.067</span>    <span class="fl">7.958</span>    <span class="fl">0.000</span>
+
+Intercepts<span class="op">:</span>
+<span class="st">                   </span>Estimate  Std.Err  z<span class="op">-</span>value  <span class="kw">P</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)
+   .y                <span class="fl">10.629</span>    <span class="fl">0.362</span>   <span class="fl">29.323</span>    <span class="fl">0.000</span>
+   .m                 <span class="fl">5.097</span>    <span class="fl">0.070</span>   <span class="fl">72.298</span>    <span class="fl">0.000</span>
+
+Variances<span class="op">:</span>
+<span class="st">                   </span>Estimate  Std.Err  z<span class="op">-</span>value  <span class="kw">P</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)
+   .y                 <span class="fl">0.967</span>    <span class="fl">0.097</span>   <span class="fl">10.000</span>    <span class="fl">0.000</span>
+   .m                 <span class="fl">0.993</span>    <span class="fl">0.099</span>   <span class="fl">10.000</span>    <span class="fl">0.000</span></code></pre></div>
 </div>
 <div id="tables-of-model-coefficients" class="section level4 unnumbered">
 <h4>Tables of model coefficients</h4>
@@ -500,22 +500,22 @@ mediation.model &lt;-<span class="st"> &quot;</span>
          <span class="dt">conf.low=</span>ci.lower,
          <span class="dt">conf.hi=</span>ci.upper) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(term, op, <span class="kw">everything</span>(), <span class="op">-</span>lhs, <span class="op">-</span>rhs)
-## # A tibble: 9 x 9
-##     term    op rowname    estimate  std.error statistic      p.value
-##    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
-## 1  y ~ x     ~       1  0.16570565 0.07539776  2.197753 2.796671e-02
-## 2  y ~ m     ~       2  0.18989637 0.06979726  2.720685 6.514674e-03
-## 3  m ~ x     ~       3  0.52976119 0.06656841  7.958147 1.776357e-15
-## 4 y ~~ y    ~~       4  0.96727307 0.09672731 10.000000 0.000000e+00
-## 5 m ~~ m    ~~       5  0.99275572 0.09927557 10.000000 0.000000e+00
-## 6 x ~~ x    ~~       6  1.12014957 0.00000000        NA           NA
-## 7  y ~1     ~1       7 10.62875295 0.36247576 29.322658 0.000000e+00
-## 8  m ~1     ~1       8  5.09667420 0.07049575 72.297607 0.000000e+00
-## 9  x ~1     ~1       9 -0.03640346 0.00000000        NA           NA
-## # ... with 2 more variables: conf.low &lt;dbl&gt;, conf.hi &lt;dbl&gt;</code></pre></div>
+<span class="co"># A tibble: 9 x 9</span>
+    term    op rowname    estimate  std.error statistic      p.value
+   <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">       </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">      </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">        </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span>  y <span class="op">~</span><span class="st"> </span>x     <span class="op">~</span><span class="st">       </span><span class="dv">1</span>  <span class="fl">0.16570565</span> <span class="fl">0.07539776</span>  <span class="fl">2.197753</span> <span class="fl">2.796671e-02</span>
+<span class="dv">2</span>  y <span class="op">~</span><span class="st"> </span>m     <span class="op">~</span><span class="st">       </span><span class="dv">2</span>  <span class="fl">0.18989637</span> <span class="fl">0.06979726</span>  <span class="fl">2.720685</span> <span class="fl">6.514674e-03</span>
+<span class="dv">3</span>  m <span class="op">~</span><span class="st"> </span>x     <span class="op">~</span><span class="st">       </span><span class="dv">3</span>  <span class="fl">0.52976119</span> <span class="fl">0.06656841</span>  <span class="fl">7.958147</span> <span class="fl">1.776357e-15</span>
+<span class="dv">4</span> y <span class="op">~</span><span class="er">~</span><span class="st"> </span>y    <span class="op">~</span><span class="er">~</span><span class="st">       </span><span class="dv">4</span>  <span class="fl">0.96727307</span> <span class="fl">0.09672731</span> <span class="fl">10.000000</span> <span class="fl">0.000000e+00</span>
+<span class="dv">5</span> m <span class="op">~</span><span class="er">~</span><span class="st"> </span>m    <span class="op">~</span><span class="er">~</span><span class="st">       </span><span class="dv">5</span>  <span class="fl">0.99275572</span> <span class="fl">0.09927557</span> <span class="fl">10.000000</span> <span class="fl">0.000000e+00</span>
+<span class="dv">6</span> x <span class="op">~</span><span class="er">~</span><span class="st"> </span>x    <span class="op">~</span><span class="er">~</span><span class="st">       </span><span class="dv">6</span>  <span class="fl">1.12014957</span> <span class="fl">0.00000000</span>        <span class="ot">NA</span>           <span class="ot">NA</span>
+<span class="dv">7</span>  y <span class="op">~</span><span class="dv">1</span>     <span class="op">~</span><span class="dv">1</span>       <span class="dv">7</span> <span class="fl">10.62875295</span> <span class="fl">0.36247576</span> <span class="fl">29.322658</span> <span class="fl">0.000000e+00</span>
+<span class="dv">8</span>  m <span class="op">~</span><span class="dv">1</span>     <span class="op">~</span><span class="dv">1</span>       <span class="dv">8</span>  <span class="fl">5.09667420</span> <span class="fl">0.07049575</span> <span class="fl">72.297607</span> <span class="fl">0.000000e+00</span>
+<span class="dv">9</span>  x <span class="op">~</span><span class="dv">1</span>     <span class="op">~</span><span class="dv">1</span>       <span class="dv">9</span> <span class="op">-</span><span class="fl">0.03640346</span> <span class="fl">0.00000000</span>        <span class="ot">NA</span>           <span class="ot">NA</span>
+<span class="co"># ... with 2 more variables: conf.low &lt;dbl&gt;, conf.hi &lt;dbl&gt;</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(mpg<span class="op">~</span>wt, <span class="dt">data=</span>mtcars) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tidy</span>(<span class="dt">conf.int=</span>T) <span class="op">%&gt;%</span><span class="st"> </span>names
-## [1] &quot;term&quot;      &quot;estimate&quot;  &quot;std.error&quot; &quot;statistic&quot; &quot;p.value&quot;   &quot;conf.low&quot; 
-## [7] &quot;conf.high&quot;
+[<span class="dv">1</span>] <span class="st">&quot;term&quot;</span>      <span class="st">&quot;estimate&quot;</span>  <span class="st">&quot;std.error&quot;</span> <span class="st">&quot;statistic&quot;</span> <span class="st">&quot;p.value&quot;</span>   <span class="st">&quot;conf.low&quot;</span> 
+[<span class="dv">7</span>] <span class="st">&quot;conf.high&quot;</span>
 
 <span class="kw">parameterEstimates</span>(mediation.fit.means) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(op <span class="op">==</span><span class="st"> &quot;~&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -580,7 +580,7 @@ semPlot<span class="op">::</span><span class="kw">semPaths</span>(mediation.fit,
              <span class="dt">sizeMan =</span> <span class="dv">15</span>, <span class="dt">sizeInt =</span> <span class="dv">15</span>, <span class="dt">sizeLat =</span> <span class="dv">15</span>,
              <span class="dt">edge.label.cex=</span><span class="fl">1.5</span>, 
              <span class="dt">fade=</span><span class="ot">FALSE</span>)</code></pre></div>
-<p><img src="cfa-sem_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="cfa-sem_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
 </div>
 </div>

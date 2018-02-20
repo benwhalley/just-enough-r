@@ -1,3 +1,4 @@
+
 ---
 title: 'Regression in R'
 
@@ -45,7 +46,7 @@ mtcars %>%
 	pairs
 ```
 
-<img src="linear-models_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<img src="linear-models_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 Before running any model, we should ask outselves: "what question we are trying to answer?" 
 
@@ -56,13 +57,13 @@ To answer this, we could use multiple regression, including both `wt` and `disp`
 
 ```r
 lm(mpg ~ wt + disp, data=mtcars)
-## 
-## Call:
-## lm(formula = mpg ~ wt + disp, data = mtcars)
-## 
-## Coefficients:
-## (Intercept)           wt         disp  
-##    34.96055     -3.35083     -0.01772
+
+Call:
+lm(formula = mpg ~ wt + disp, data = mtcars)
+
+Coefficients:
+(Intercept)           wt         disp  
+   34.96055     -3.35083     -0.01772  
 ```
 
 For readers used to wading through reams of SPSS output R might seem concise to the point of rudeness. By default, the `lm` commands displays very little, only repeating the formula and listing the coefficients for each predictor in the model.
@@ -83,25 +84,25 @@ We can then use other functions to get more information about the model. For exa
 
 ```r
 summary(m.1)
-## 
-## Call:
-## lm(formula = mpg ~ wt + disp, data = mtcars)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -3.4087 -2.3243 -0.7683  1.7721  6.3484 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) 34.96055    2.16454  16.151 4.91e-16 ***
-## wt          -3.35082    1.16413  -2.878  0.00743 ** 
-## disp        -0.01773    0.00919  -1.929  0.06362 .  
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 2.917 on 29 degrees of freedom
-## Multiple R-squared:  0.7809,	Adjusted R-squared:  0.7658 
-## F-statistic: 51.69 on 2 and 29 DF,  p-value: 2.744e-10
+
+Call:
+lm(formula = mpg ~ wt + disp, data = mtcars)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.4087 -2.3243 -0.7683  1.7721  6.3484 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 34.96055    2.16454  16.151 4.91e-16 ***
+wt          -3.35082    1.16413  -2.878  0.00743 ** 
+disp        -0.01773    0.00919  -1.929  0.06362 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.917 on 29 degrees of freedom
+Multiple R-squared:  0.7809,	Adjusted R-squared:  0.7658 
+F-statistic: 51.69 on 2 and 29 DF,  p-value: 2.744e-10
 ```
 
 Although still compact, the `summary` function provides some familiar output, including the estimate, *SE*, and *p* value for each parameter.
@@ -138,26 +139,26 @@ Below, we define and run a linear model with both `vs` and `am` as predictors, a
 ```r
 m.2 <- lm(mpg ~ vs + am + vs:am, data=mtcars)
 summary(m.2)
-## 
-## Call:
-## lm(formula = mpg ~ vs + am + vs:am, data = mtcars)
-## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -6.971 -1.973  0.300  2.036  6.250 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)   15.050      1.002  15.017 6.34e-15 ***
-## vs             5.693      1.651   3.448   0.0018 ** 
-## am             4.700      1.736   2.708   0.0114 *  
-## vs:am          2.929      2.541   1.153   0.2589    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 3.472 on 28 degrees of freedom
-## Multiple R-squared:  0.7003,	Adjusted R-squared:  0.6682 
-## F-statistic: 21.81 on 3 and 28 DF,  p-value: 1.735e-07
+
+Call:
+lm(formula = mpg ~ vs + am + vs:am, data = mtcars)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-6.971 -1.973  0.300  2.036  6.250 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   15.050      1.002  15.017 6.34e-15 ***
+vs             5.693      1.651   3.448   0.0018 ** 
+am             4.700      1.736   2.708   0.0114 *  
+vs:am          2.929      2.541   1.153   0.2589    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.472 on 28 degrees of freedom
+Multiple R-squared:  0.7003,	Adjusted R-squared:  0.6682 
+F-statistic: 21.81 on 3 and 28 DF,  p-value: 1.735e-07
 ```
 
 
@@ -167,16 +168,16 @@ We'd normally want to see the Anova table for this model, including the F-tests:
 
 ```r
 car::Anova(m.2)
-## Anova Table (Type II tests)
-## 
-## Response: mpg
-##           Sum Sq Df F value    Pr(>F)    
-## vs        367.41  1 30.4836 6.687e-06 ***
-## am        276.03  1 22.9021 4.984e-05 ***
-## vs:am      16.01  1  1.3283    0.2589    
-## Residuals 337.48 28                      
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Anova Table (Type II tests)
+
+Response: mpg
+          Sum Sq Df F value    Pr(>F)    
+vs        367.41  1 30.4836 6.687e-06 ***
+am        276.03  1 22.9021 4.984e-05 ***
+vs:am      16.01  1  1.3283    0.2589    
+Residuals 337.48 28                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 
@@ -241,13 +242,13 @@ For example, here we specify `cyl` is a factor within the model formula:
 
 ```r
 lm(mpg ~ factor(cyl), data=mtcars)
-## 
-## Call:
-## lm(formula = mpg ~ factor(cyl), data = mtcars)
-## 
-## Coefficients:
-##  (Intercept)  factor(cyl)6  factor(cyl)8  
-##       26.664        -6.921       -11.564
+
+Call:
+lm(formula = mpg ~ factor(cyl), data = mtcars)
+
+Coefficients:
+ (Intercept)  factor(cyl)6  factor(cyl)8  
+      26.664        -6.921       -11.564  
 ```
 
 
@@ -257,13 +258,13 @@ Whereas here we convert to a factor in the original dataset:
 ```r
 mtcars$cyl.factor <- factor(mtcars$cyl)
 lm(mpg ~ cyl.factor, data=mtcars)
-## 
-## Call:
-## lm(formula = mpg ~ cyl.factor, data = mtcars)
-## 
-## Coefficients:
-## (Intercept)  cyl.factor6  cyl.factor8  
-##      26.664       -6.921      -11.564
+
+Call:
+lm(formula = mpg ~ cyl.factor, data = mtcars)
+
+Coefficients:
+(Intercept)  cyl.factor6  cyl.factor8  
+     26.664       -6.921      -11.564  
 ```
 
 
@@ -302,8 +303,8 @@ The second set of rugs are inversions of the first, *but the patterns remain the
 
 ```r
 coef(lm(mpg ~ wt, data=mtcars))
-## (Intercept)          wt 
-##   37.285126   -5.344472
+(Intercept)          wt 
+  37.285126   -5.344472 
 ```
 
 We can run a completely equivalent model if we 'flip' the weight (`wt`) coefficient by multiplying by `-1`:
@@ -313,8 +314,8 @@ We can run a completely equivalent model if we 'flip' the weight (`wt`) coeffici
 ```r
 mtcars$wt.reversed  <- -1 * mtcars$wt
 coef(lm(mpg ~ wt.reversed, data=mtcars))
-## (Intercept) wt.reversed 
-##   37.285126    5.344472
+(Intercept) wt.reversed 
+  37.285126    5.344472 
 ```
 
 These models are equivalent in all the important ways: the test statistics, p values are all the same: only the sign of the coefficient for weight has changed. 
@@ -374,8 +375,8 @@ aurora.image %>%
 ```
 
 <div class="figure">
-<img src="linear-models_files/figure-html/unnamed-chunk-13-1.png" alt="Plot of the intensity of light in the single pixel slice from the Aurora image. Intensity of 1 corresponds to white, and 0 to black in the original image." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-13)Plot of the intensity of light in the single pixel slice from the Aurora image. Intensity of 1 corresponds to white, and 0 to black in the original image.</p>
+<img src="linear-models_files/figure-html/unnamed-chunk-14-1.png" alt="Plot of the intensity of light in the single pixel slice from the Aurora image. Intensity of 1 corresponds to white, and 0 to black in the original image." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-14)Plot of the intensity of light in the single pixel slice from the Aurora image. Intensity of 1 corresponds to white, and 0 to black in the original image.</p>
 </div>
 
 
@@ -396,11 +397,11 @@ aurora.image %>%
   reshape2::melt(id.var='x') %>% 
   ggplot(aes(x, value, group=variable, color=variable)) + 
   geom_point(size=.5)
-## Warning: attributes are not identical across measure variables; they will
-## be dropped
+Warning: attributes are not identical across measure variables; they will
+be dropped
 ```
 
-<img src="linear-models_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="linear-models_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 As we can see, our predictions are pretty terrible, because the linear model only allows for a simple slope over the range of `x`.
 
@@ -431,11 +432,11 @@ aurora.image %>%
   reshape2::melt(id.var='x') %>% 
   ggplot(aes(x, value, group=variable, color=variable)) + 
   geom_point(size=.5)
-## Warning: attributes are not identical across measure variables; they will
-## be dropped
+Warning: attributes are not identical across measure variables; they will
+be dropped
 ```
 
-<img src="linear-models_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="linear-models_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 That's somewhat better, although we can still see that the extremes of our observed data are not well predicted by either the linear model (the flat line) or the chunked model.
 
@@ -459,11 +460,11 @@ aurora.image %>%
   reshape2::melt(id.var='x') %>% 
   ggplot(aes(x, value, group=variable, color=variable)) + 
   geom_point(size=.5)
-## Warning: attributes are not identical across measure variables; they will
-## be dropped
+Warning: attributes are not identical across measure variables; they will
+be dropped
 ```
 
-<img src="linear-models_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="linear-models_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
 
 Or we could increase the number of parameters in our curve to allow a tighter fit with the raw data and plot all the models together:
@@ -480,15 +481,15 @@ all.predictions <- aurora.image %>%
     curve.prediction = predict(aurora.curve)
   ) %>% 
   reshape2::melt(id.var='x')
-## Warning: attributes are not identical across measure variables; they will
-## be dropped
+Warning: attributes are not identical across measure variables; they will
+be dropped
 
 all.predictions %>% 
   ggplot(aes(x, value, group=variable, color=variable)) + 
   geom_point(size=.5)
 ```
 
-<img src="linear-models_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+<img src="linear-models_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
 We can see that this curved model is a better approximation to the raw data than our 'chunked' model in some places (e.g. x = 100), but worse in others (e.g. x = 625). Overall though, the R^2^ is much higher for the curves model here:
 
@@ -496,9 +497,9 @@ We can see that this curved model is a better approximation to the raw data than
 
 ```r
 summary(aurora.chunks)$r.squared
-## [1] 0.4463338
+[1] 0.4463338
 summary(aurora.curve)$r.squared
-## [1] 0.6162421
+[1] 0.6162421
 ```
 
 And this is the case even though our model contains only 8 parameters, and so is just as parsimonious as the chunked model above.
@@ -507,16 +508,16 @@ And this is the case even though our model contains only 8 parameters, and so is
 ```r
 # count the number of parameters in the chunked and curved models
 length(coef(aurora.chunks))
-## [1] 8
+[1] 8
 length(coef(aurora.curve))
-## [1] 8
+[1] 8
 ```
 
 [Try to plot a curve that fits even more closely to the data. There are 1200 pixels in our original image. How many parameters would you need for the model to fit the image exactly? What happens in practice if you try and fit this model?]{.exercise}
 
 For fun, we can even plot our data back in image form and see which is closest to matching the original:
 
-<img src="linear-models_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+<img src="linear-models_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 [There is no 'right answer' here: each model has pros and cons. You need to think about what the purpose of your model is, how you want to simplify your data, and then set up your models appropriately.]{.admonition}
 
@@ -530,23 +531,23 @@ TODO: Explain this:
 ```r
 options(contrasts = c("contr.treatment", "contr.poly"))
 lm(mpg~factor(cyl), data=mtcars)
-## 
-## Call:
-## lm(formula = mpg ~ factor(cyl), data = mtcars)
-## 
-## Coefficients:
-##  (Intercept)  factor(cyl)6  factor(cyl)8  
-##       26.664        -6.921       -11.564
+
+Call:
+lm(formula = mpg ~ factor(cyl), data = mtcars)
+
+Coefficients:
+ (Intercept)  factor(cyl)6  factor(cyl)8  
+      26.664        -6.921       -11.564  
 
 options(contrasts = c("contr.sum", "contr.poly"))
 lm(mpg~factor(cyl), data=mtcars)
-## 
-## Call:
-## lm(formula = mpg ~ factor(cyl), data = mtcars)
-## 
-## Coefficients:
-##  (Intercept)  factor(cyl)1  factor(cyl)2  
-##      20.5022        6.1615       -0.7593
+
+Call:
+lm(formula = mpg ~ factor(cyl), data = mtcars)
+
+Coefficients:
+ (Intercept)  factor(cyl)1  factor(cyl)2  
+     20.5022        6.1615       -0.7593  
 ```
 
 
@@ -611,7 +612,7 @@ We can plot these data to show the effect of age, and gender:
 ggplot(incomes, aes(age, income, group=gender, color=gender)) + geom_point() + geom_smooth(se=F, method="lm")
 ```
 
-<img src="linear-models_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+<img src="linear-models_files/figure-html/unnamed-chunk-25-1.png" width="672" />
 
 Older people earn more than younger people, and men earn slighly more than women (in this simulated dataset), but this gender gap doesn't change with age.
 
@@ -622,8 +623,8 @@ We can model this and print the effects of `age` and `gender`:
 ```r
 m1 <- lm(income~age+gender, data=incomes)
 coef(m1)
-## (Intercept)         age     gender1 
-## 30494.75486    30.75124  -486.30867
+(Intercept)         age     gender1 
+30494.75486    30.75124  -486.30867 
 ```
 
 And we can standardize these effects using the `stadardize` function:
@@ -631,8 +632,8 @@ And we can standardize these effects using the `stadardize` function:
 
 ```r
 coef(arm::standardize(m1))
-## (Intercept)       z.age    c.gender 
-##  31727.1240    920.5955    972.6173
+(Intercept)       z.age    c.gender 
+ 31727.1240    920.5955    972.6173 
 ```
 
 Based on these standardised coefficients we migth say that age and gender are of roughly equal importance in predicting income.
@@ -647,8 +648,8 @@ younger.incomes <- incomes %>%
 
 m2 <- lm(income~age+gender, data=younger.incomes)
 coef(m2)
-## (Intercept)         age     gender1 
-##  30522.7491     29.6859   -525.4932
+(Intercept)         age     gender1 
+ 30522.7491     29.6859   -525.4932 
 ```
 
 But, the standardised coefficients *do* change, because we have restricted the range of ages in the sample:
@@ -657,8 +658,8 @@ But, the standardised coefficients *do* change, because we have restricted the r
 
 ```r
 coef(arm::standardize(m2))
-## (Intercept)       z.age    c.gender 
-##  31372.5885    542.2628   1050.9863
+(Intercept)       z.age    c.gender 
+ 31372.5885    542.2628   1050.9863 
 ```
 
 The standardised effect of `age` is now roughly half that of `gender`.

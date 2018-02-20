@@ -400,19 +400,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>To check for missing values in a vector (or dataframe column) we use the <code>is.na()</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nums.with.missing &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>)
 nums.with.missing
-## [1]  1  2 NA
+[<span class="dv">1</span>]  <span class="dv">1</span>  <span class="dv">2</span> <span class="ot">NA</span>
 
 <span class="kw">is.na</span>(nums.with.missing)
-## [1] FALSE FALSE  TRUE</code></pre></div>
+[<span class="dv">1</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span>  <span class="ot">TRUE</span></code></pre></div>
 <p>Here the <code>is.na()</code> function has tested whether each item in our vector called <code>nums.with.missing</code> is missing. It returns a new vector with the results of each test: either <code>TRUE</code> or <code>FALSE</code>.</p>
 <p>We can also use the negation operator, the <code>!</code> symbol to reverse the meaning of <code>is.na</code>. So we can read <code>!is.na(nums)</code> as “test whether the values in <code>nums</code> are NOT missing”:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test if missing</span>
 <span class="kw">is.na</span>(nums.with.missing)
-## [1] FALSE FALSE  TRUE
+[<span class="dv">1</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span>  <span class="ot">TRUE</span>
 
 <span class="co"># test if NOT missing (note the exclamation mark in front of the function)</span>
 <span class="op">!</span><span class="kw">is.na</span>(nums.with.missing)
-## [1]  TRUE  TRUE FALSE</code></pre></div>
+[<span class="dv">1</span>]  <span class="ot">TRUE</span>  <span class="ot">TRUE</span> <span class="ot">FALSE</span></code></pre></div>
 <p>We can use the <code>is.na()</code> function as part of dplyr filters:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(Solar.R)) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -521,149 +521,149 @@ nums.with.missing
 <p>The <code>complete.cases</code> function accepts a dataframe (or matrix) and tests whether each <em>row</em> is complete. It returns a vector with a <code>TRUE/FALSE</code> result for each row:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">complete.cases</span>(airquality) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>head
-## [1]  TRUE  TRUE  TRUE  TRUE FALSE FALSE</code></pre></div>
+[<span class="dv">1</span>]  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></code></pre></div>
 <p>This can also be useful in dplyr filters. Here we show all the rows which are <em>not</em> complete (note the exclamation mark):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">complete.cases</span>(airquality))
-##    Ozone Solar.R Wind Temp Month Day
-## 1     NA      NA 14.3   56     5   5
-## 2     28      NA 14.9   66     5   6
-## 3     NA     194  8.6   69     5  10
-## 4      7      NA  6.9   74     5  11
-## 5     NA      66 16.6   57     5  25
-## 6     NA     266 14.9   58     5  26
-## 7     NA      NA  8.0   57     5  27
-## 8     NA     286  8.6   78     6   1
-## 9     NA     287  9.7   74     6   2
-## 10    NA     242 16.1   67     6   3
-## 11    NA     186  9.2   84     6   4
-## 12    NA     220  8.6   85     6   5
-## 13    NA     264 14.3   79     6   6
-## 14    NA     273  6.9   87     6   8
-## 15    NA     259 10.9   93     6  11
-## 16    NA     250  9.2   92     6  12
-## 17    NA     332 13.8   80     6  14
-## 18    NA     322 11.5   79     6  15
-## 19    NA     150  6.3   77     6  21
-## 20    NA      59  1.7   76     6  22
-## 21    NA      91  4.6   76     6  23
-## 22    NA     250  6.3   76     6  24
-## 23    NA     135  8.0   75     6  25
-## 24    NA     127  8.0   78     6  26
-## 25    NA      47 10.3   73     6  27
-## 26    NA      98 11.5   80     6  28
-## 27    NA      31 14.9   77     6  29
-## 28    NA     138  8.0   83     6  30
-## 29    NA     101 10.9   84     7   4
-## 30    NA     139  8.6   82     7  11
-## 31    NA     291 14.9   91     7  14
-## 32    NA     258  9.7   81     7  22
-## 33    NA     295 11.5   82     7  23
-## 34    78      NA  6.9   86     8   4
-## 35    35      NA  7.4   85     8   5
-## 36    66      NA  4.6   87     8   6
-## 37    NA     222  8.6   92     8  10
-## 38    NA     137 11.5   86     8  11
-## 39    NA      64 11.5   79     8  15
-## 40    NA     255 12.6   75     8  23
-## 41    NA     153  5.7   88     8  27
-## 42    NA     145 13.2   77     9  27</code></pre></div>
+   Ozone Solar.R Wind Temp Month Day
+<span class="dv">1</span>     <span class="ot">NA</span>      <span class="ot">NA</span> <span class="fl">14.3</span>   <span class="dv">56</span>     <span class="dv">5</span>   <span class="dv">5</span>
+<span class="dv">2</span>     <span class="dv">28</span>      <span class="ot">NA</span> <span class="fl">14.9</span>   <span class="dv">66</span>     <span class="dv">5</span>   <span class="dv">6</span>
+<span class="dv">3</span>     <span class="ot">NA</span>     <span class="dv">194</span>  <span class="fl">8.6</span>   <span class="dv">69</span>     <span class="dv">5</span>  <span class="dv">10</span>
+<span class="dv">4</span>      <span class="dv">7</span>      <span class="ot">NA</span>  <span class="fl">6.9</span>   <span class="dv">74</span>     <span class="dv">5</span>  <span class="dv">11</span>
+<span class="dv">5</span>     <span class="ot">NA</span>      <span class="dv">66</span> <span class="fl">16.6</span>   <span class="dv">57</span>     <span class="dv">5</span>  <span class="dv">25</span>
+<span class="dv">6</span>     <span class="ot">NA</span>     <span class="dv">266</span> <span class="fl">14.9</span>   <span class="dv">58</span>     <span class="dv">5</span>  <span class="dv">26</span>
+<span class="dv">7</span>     <span class="ot">NA</span>      <span class="ot">NA</span>  <span class="fl">8.0</span>   <span class="dv">57</span>     <span class="dv">5</span>  <span class="dv">27</span>
+<span class="dv">8</span>     <span class="ot">NA</span>     <span class="dv">286</span>  <span class="fl">8.6</span>   <span class="dv">78</span>     <span class="dv">6</span>   <span class="dv">1</span>
+<span class="dv">9</span>     <span class="ot">NA</span>     <span class="dv">287</span>  <span class="fl">9.7</span>   <span class="dv">74</span>     <span class="dv">6</span>   <span class="dv">2</span>
+<span class="dv">10</span>    <span class="ot">NA</span>     <span class="dv">242</span> <span class="fl">16.1</span>   <span class="dv">67</span>     <span class="dv">6</span>   <span class="dv">3</span>
+<span class="dv">11</span>    <span class="ot">NA</span>     <span class="dv">186</span>  <span class="fl">9.2</span>   <span class="dv">84</span>     <span class="dv">6</span>   <span class="dv">4</span>
+<span class="dv">12</span>    <span class="ot">NA</span>     <span class="dv">220</span>  <span class="fl">8.6</span>   <span class="dv">85</span>     <span class="dv">6</span>   <span class="dv">5</span>
+<span class="dv">13</span>    <span class="ot">NA</span>     <span class="dv">264</span> <span class="fl">14.3</span>   <span class="dv">79</span>     <span class="dv">6</span>   <span class="dv">6</span>
+<span class="dv">14</span>    <span class="ot">NA</span>     <span class="dv">273</span>  <span class="fl">6.9</span>   <span class="dv">87</span>     <span class="dv">6</span>   <span class="dv">8</span>
+<span class="dv">15</span>    <span class="ot">NA</span>     <span class="dv">259</span> <span class="fl">10.9</span>   <span class="dv">93</span>     <span class="dv">6</span>  <span class="dv">11</span>
+<span class="dv">16</span>    <span class="ot">NA</span>     <span class="dv">250</span>  <span class="fl">9.2</span>   <span class="dv">92</span>     <span class="dv">6</span>  <span class="dv">12</span>
+<span class="dv">17</span>    <span class="ot">NA</span>     <span class="dv">332</span> <span class="fl">13.8</span>   <span class="dv">80</span>     <span class="dv">6</span>  <span class="dv">14</span>
+<span class="dv">18</span>    <span class="ot">NA</span>     <span class="dv">322</span> <span class="fl">11.5</span>   <span class="dv">79</span>     <span class="dv">6</span>  <span class="dv">15</span>
+<span class="dv">19</span>    <span class="ot">NA</span>     <span class="dv">150</span>  <span class="fl">6.3</span>   <span class="dv">77</span>     <span class="dv">6</span>  <span class="dv">21</span>
+<span class="dv">20</span>    <span class="ot">NA</span>      <span class="dv">59</span>  <span class="fl">1.7</span>   <span class="dv">76</span>     <span class="dv">6</span>  <span class="dv">22</span>
+<span class="dv">21</span>    <span class="ot">NA</span>      <span class="dv">91</span>  <span class="fl">4.6</span>   <span class="dv">76</span>     <span class="dv">6</span>  <span class="dv">23</span>
+<span class="dv">22</span>    <span class="ot">NA</span>     <span class="dv">250</span>  <span class="fl">6.3</span>   <span class="dv">76</span>     <span class="dv">6</span>  <span class="dv">24</span>
+<span class="dv">23</span>    <span class="ot">NA</span>     <span class="dv">135</span>  <span class="fl">8.0</span>   <span class="dv">75</span>     <span class="dv">6</span>  <span class="dv">25</span>
+<span class="dv">24</span>    <span class="ot">NA</span>     <span class="dv">127</span>  <span class="fl">8.0</span>   <span class="dv">78</span>     <span class="dv">6</span>  <span class="dv">26</span>
+<span class="dv">25</span>    <span class="ot">NA</span>      <span class="dv">47</span> <span class="fl">10.3</span>   <span class="dv">73</span>     <span class="dv">6</span>  <span class="dv">27</span>
+<span class="dv">26</span>    <span class="ot">NA</span>      <span class="dv">98</span> <span class="fl">11.5</span>   <span class="dv">80</span>     <span class="dv">6</span>  <span class="dv">28</span>
+<span class="dv">27</span>    <span class="ot">NA</span>      <span class="dv">31</span> <span class="fl">14.9</span>   <span class="dv">77</span>     <span class="dv">6</span>  <span class="dv">29</span>
+<span class="dv">28</span>    <span class="ot">NA</span>     <span class="dv">138</span>  <span class="fl">8.0</span>   <span class="dv">83</span>     <span class="dv">6</span>  <span class="dv">30</span>
+<span class="dv">29</span>    <span class="ot">NA</span>     <span class="dv">101</span> <span class="fl">10.9</span>   <span class="dv">84</span>     <span class="dv">7</span>   <span class="dv">4</span>
+<span class="dv">30</span>    <span class="ot">NA</span>     <span class="dv">139</span>  <span class="fl">8.6</span>   <span class="dv">82</span>     <span class="dv">7</span>  <span class="dv">11</span>
+<span class="dv">31</span>    <span class="ot">NA</span>     <span class="dv">291</span> <span class="fl">14.9</span>   <span class="dv">91</span>     <span class="dv">7</span>  <span class="dv">14</span>
+<span class="dv">32</span>    <span class="ot">NA</span>     <span class="dv">258</span>  <span class="fl">9.7</span>   <span class="dv">81</span>     <span class="dv">7</span>  <span class="dv">22</span>
+<span class="dv">33</span>    <span class="ot">NA</span>     <span class="dv">295</span> <span class="fl">11.5</span>   <span class="dv">82</span>     <span class="dv">7</span>  <span class="dv">23</span>
+<span class="dv">34</span>    <span class="dv">78</span>      <span class="ot">NA</span>  <span class="fl">6.9</span>   <span class="dv">86</span>     <span class="dv">8</span>   <span class="dv">4</span>
+<span class="dv">35</span>    <span class="dv">35</span>      <span class="ot">NA</span>  <span class="fl">7.4</span>   <span class="dv">85</span>     <span class="dv">8</span>   <span class="dv">5</span>
+<span class="dv">36</span>    <span class="dv">66</span>      <span class="ot">NA</span>  <span class="fl">4.6</span>   <span class="dv">87</span>     <span class="dv">8</span>   <span class="dv">6</span>
+<span class="dv">37</span>    <span class="ot">NA</span>     <span class="dv">222</span>  <span class="fl">8.6</span>   <span class="dv">92</span>     <span class="dv">8</span>  <span class="dv">10</span>
+<span class="dv">38</span>    <span class="ot">NA</span>     <span class="dv">137</span> <span class="fl">11.5</span>   <span class="dv">86</span>     <span class="dv">8</span>  <span class="dv">11</span>
+<span class="dv">39</span>    <span class="ot">NA</span>      <span class="dv">64</span> <span class="fl">11.5</span>   <span class="dv">79</span>     <span class="dv">8</span>  <span class="dv">15</span>
+<span class="dv">40</span>    <span class="ot">NA</span>     <span class="dv">255</span> <span class="fl">12.6</span>   <span class="dv">75</span>     <span class="dv">8</span>  <span class="dv">23</span>
+<span class="dv">41</span>    <span class="ot">NA</span>     <span class="dv">153</span>  <span class="fl">5.7</span>   <span class="dv">88</span>     <span class="dv">8</span>  <span class="dv">27</span>
+<span class="dv">42</span>    <span class="ot">NA</span>     <span class="dv">145</span> <span class="fl">13.2</span>   <span class="dv">77</span>     <span class="dv">9</span>  <span class="dv">27</span></code></pre></div>
 </div>
 <div id="section-9" class="section level4 unnumbered tip">
 <h4></h4>
 <p>Sometimes it’s convenient to use the <code>.</code> (period) to represent the output from the previous pipe command. For example, we could rewrite the previous example as:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">complete.cases</span>(.))  <span class="co"># note the . (period) here in place of `airmiles`</span>
-##    Ozone Solar.R Wind Temp Month Day
-## 1     NA      NA 14.3   56     5   5
-## 2     28      NA 14.9   66     5   6
-## 3     NA     194  8.6   69     5  10
-## 4      7      NA  6.9   74     5  11
-## 5     NA      66 16.6   57     5  25
-## 6     NA     266 14.9   58     5  26
-## 7     NA      NA  8.0   57     5  27
-## 8     NA     286  8.6   78     6   1
-## 9     NA     287  9.7   74     6   2
-## 10    NA     242 16.1   67     6   3
-## 11    NA     186  9.2   84     6   4
-## 12    NA     220  8.6   85     6   5
-## 13    NA     264 14.3   79     6   6
-## 14    NA     273  6.9   87     6   8
-## 15    NA     259 10.9   93     6  11
-## 16    NA     250  9.2   92     6  12
-## 17    NA     332 13.8   80     6  14
-## 18    NA     322 11.5   79     6  15
-## 19    NA     150  6.3   77     6  21
-## 20    NA      59  1.7   76     6  22
-## 21    NA      91  4.6   76     6  23
-## 22    NA     250  6.3   76     6  24
-## 23    NA     135  8.0   75     6  25
-## 24    NA     127  8.0   78     6  26
-## 25    NA      47 10.3   73     6  27
-## 26    NA      98 11.5   80     6  28
-## 27    NA      31 14.9   77     6  29
-## 28    NA     138  8.0   83     6  30
-## 29    NA     101 10.9   84     7   4
-## 30    NA     139  8.6   82     7  11
-## 31    NA     291 14.9   91     7  14
-## 32    NA     258  9.7   81     7  22
-## 33    NA     295 11.5   82     7  23
-## 34    78      NA  6.9   86     8   4
-## 35    35      NA  7.4   85     8   5
-## 36    66      NA  4.6   87     8   6
-## 37    NA     222  8.6   92     8  10
-## 38    NA     137 11.5   86     8  11
-## 39    NA      64 11.5   79     8  15
-## 40    NA     255 12.6   75     8  23
-## 41    NA     153  5.7   88     8  27
-## 42    NA     145 13.2   77     9  27</code></pre></div>
+   Ozone Solar.R Wind Temp Month Day
+<span class="dv">1</span>     <span class="ot">NA</span>      <span class="ot">NA</span> <span class="fl">14.3</span>   <span class="dv">56</span>     <span class="dv">5</span>   <span class="dv">5</span>
+<span class="dv">2</span>     <span class="dv">28</span>      <span class="ot">NA</span> <span class="fl">14.9</span>   <span class="dv">66</span>     <span class="dv">5</span>   <span class="dv">6</span>
+<span class="dv">3</span>     <span class="ot">NA</span>     <span class="dv">194</span>  <span class="fl">8.6</span>   <span class="dv">69</span>     <span class="dv">5</span>  <span class="dv">10</span>
+<span class="dv">4</span>      <span class="dv">7</span>      <span class="ot">NA</span>  <span class="fl">6.9</span>   <span class="dv">74</span>     <span class="dv">5</span>  <span class="dv">11</span>
+<span class="dv">5</span>     <span class="ot">NA</span>      <span class="dv">66</span> <span class="fl">16.6</span>   <span class="dv">57</span>     <span class="dv">5</span>  <span class="dv">25</span>
+<span class="dv">6</span>     <span class="ot">NA</span>     <span class="dv">266</span> <span class="fl">14.9</span>   <span class="dv">58</span>     <span class="dv">5</span>  <span class="dv">26</span>
+<span class="dv">7</span>     <span class="ot">NA</span>      <span class="ot">NA</span>  <span class="fl">8.0</span>   <span class="dv">57</span>     <span class="dv">5</span>  <span class="dv">27</span>
+<span class="dv">8</span>     <span class="ot">NA</span>     <span class="dv">286</span>  <span class="fl">8.6</span>   <span class="dv">78</span>     <span class="dv">6</span>   <span class="dv">1</span>
+<span class="dv">9</span>     <span class="ot">NA</span>     <span class="dv">287</span>  <span class="fl">9.7</span>   <span class="dv">74</span>     <span class="dv">6</span>   <span class="dv">2</span>
+<span class="dv">10</span>    <span class="ot">NA</span>     <span class="dv">242</span> <span class="fl">16.1</span>   <span class="dv">67</span>     <span class="dv">6</span>   <span class="dv">3</span>
+<span class="dv">11</span>    <span class="ot">NA</span>     <span class="dv">186</span>  <span class="fl">9.2</span>   <span class="dv">84</span>     <span class="dv">6</span>   <span class="dv">4</span>
+<span class="dv">12</span>    <span class="ot">NA</span>     <span class="dv">220</span>  <span class="fl">8.6</span>   <span class="dv">85</span>     <span class="dv">6</span>   <span class="dv">5</span>
+<span class="dv">13</span>    <span class="ot">NA</span>     <span class="dv">264</span> <span class="fl">14.3</span>   <span class="dv">79</span>     <span class="dv">6</span>   <span class="dv">6</span>
+<span class="dv">14</span>    <span class="ot">NA</span>     <span class="dv">273</span>  <span class="fl">6.9</span>   <span class="dv">87</span>     <span class="dv">6</span>   <span class="dv">8</span>
+<span class="dv">15</span>    <span class="ot">NA</span>     <span class="dv">259</span> <span class="fl">10.9</span>   <span class="dv">93</span>     <span class="dv">6</span>  <span class="dv">11</span>
+<span class="dv">16</span>    <span class="ot">NA</span>     <span class="dv">250</span>  <span class="fl">9.2</span>   <span class="dv">92</span>     <span class="dv">6</span>  <span class="dv">12</span>
+<span class="dv">17</span>    <span class="ot">NA</span>     <span class="dv">332</span> <span class="fl">13.8</span>   <span class="dv">80</span>     <span class="dv">6</span>  <span class="dv">14</span>
+<span class="dv">18</span>    <span class="ot">NA</span>     <span class="dv">322</span> <span class="fl">11.5</span>   <span class="dv">79</span>     <span class="dv">6</span>  <span class="dv">15</span>
+<span class="dv">19</span>    <span class="ot">NA</span>     <span class="dv">150</span>  <span class="fl">6.3</span>   <span class="dv">77</span>     <span class="dv">6</span>  <span class="dv">21</span>
+<span class="dv">20</span>    <span class="ot">NA</span>      <span class="dv">59</span>  <span class="fl">1.7</span>   <span class="dv">76</span>     <span class="dv">6</span>  <span class="dv">22</span>
+<span class="dv">21</span>    <span class="ot">NA</span>      <span class="dv">91</span>  <span class="fl">4.6</span>   <span class="dv">76</span>     <span class="dv">6</span>  <span class="dv">23</span>
+<span class="dv">22</span>    <span class="ot">NA</span>     <span class="dv">250</span>  <span class="fl">6.3</span>   <span class="dv">76</span>     <span class="dv">6</span>  <span class="dv">24</span>
+<span class="dv">23</span>    <span class="ot">NA</span>     <span class="dv">135</span>  <span class="fl">8.0</span>   <span class="dv">75</span>     <span class="dv">6</span>  <span class="dv">25</span>
+<span class="dv">24</span>    <span class="ot">NA</span>     <span class="dv">127</span>  <span class="fl">8.0</span>   <span class="dv">78</span>     <span class="dv">6</span>  <span class="dv">26</span>
+<span class="dv">25</span>    <span class="ot">NA</span>      <span class="dv">47</span> <span class="fl">10.3</span>   <span class="dv">73</span>     <span class="dv">6</span>  <span class="dv">27</span>
+<span class="dv">26</span>    <span class="ot">NA</span>      <span class="dv">98</span> <span class="fl">11.5</span>   <span class="dv">80</span>     <span class="dv">6</span>  <span class="dv">28</span>
+<span class="dv">27</span>    <span class="ot">NA</span>      <span class="dv">31</span> <span class="fl">14.9</span>   <span class="dv">77</span>     <span class="dv">6</span>  <span class="dv">29</span>
+<span class="dv">28</span>    <span class="ot">NA</span>     <span class="dv">138</span>  <span class="fl">8.0</span>   <span class="dv">83</span>     <span class="dv">6</span>  <span class="dv">30</span>
+<span class="dv">29</span>    <span class="ot">NA</span>     <span class="dv">101</span> <span class="fl">10.9</span>   <span class="dv">84</span>     <span class="dv">7</span>   <span class="dv">4</span>
+<span class="dv">30</span>    <span class="ot">NA</span>     <span class="dv">139</span>  <span class="fl">8.6</span>   <span class="dv">82</span>     <span class="dv">7</span>  <span class="dv">11</span>
+<span class="dv">31</span>    <span class="ot">NA</span>     <span class="dv">291</span> <span class="fl">14.9</span>   <span class="dv">91</span>     <span class="dv">7</span>  <span class="dv">14</span>
+<span class="dv">32</span>    <span class="ot">NA</span>     <span class="dv">258</span>  <span class="fl">9.7</span>   <span class="dv">81</span>     <span class="dv">7</span>  <span class="dv">22</span>
+<span class="dv">33</span>    <span class="ot">NA</span>     <span class="dv">295</span> <span class="fl">11.5</span>   <span class="dv">82</span>     <span class="dv">7</span>  <span class="dv">23</span>
+<span class="dv">34</span>    <span class="dv">78</span>      <span class="ot">NA</span>  <span class="fl">6.9</span>   <span class="dv">86</span>     <span class="dv">8</span>   <span class="dv">4</span>
+<span class="dv">35</span>    <span class="dv">35</span>      <span class="ot">NA</span>  <span class="fl">7.4</span>   <span class="dv">85</span>     <span class="dv">8</span>   <span class="dv">5</span>
+<span class="dv">36</span>    <span class="dv">66</span>      <span class="ot">NA</span>  <span class="fl">4.6</span>   <span class="dv">87</span>     <span class="dv">8</span>   <span class="dv">6</span>
+<span class="dv">37</span>    <span class="ot">NA</span>     <span class="dv">222</span>  <span class="fl">8.6</span>   <span class="dv">92</span>     <span class="dv">8</span>  <span class="dv">10</span>
+<span class="dv">38</span>    <span class="ot">NA</span>     <span class="dv">137</span> <span class="fl">11.5</span>   <span class="dv">86</span>     <span class="dv">8</span>  <span class="dv">11</span>
+<span class="dv">39</span>    <span class="ot">NA</span>      <span class="dv">64</span> <span class="fl">11.5</span>   <span class="dv">79</span>     <span class="dv">8</span>  <span class="dv">15</span>
+<span class="dv">40</span>    <span class="ot">NA</span>     <span class="dv">255</span> <span class="fl">12.6</span>   <span class="dv">75</span>     <span class="dv">8</span>  <span class="dv">23</span>
+<span class="dv">41</span>    <span class="ot">NA</span>     <span class="dv">153</span>  <span class="fl">5.7</span>   <span class="dv">88</span>     <span class="dv">8</span>  <span class="dv">27</span>
+<span class="dv">42</span>    <span class="ot">NA</span>     <span class="dv">145</span> <span class="fl">13.2</span>   <span class="dv">77</span>     <span class="dv">9</span>  <span class="dv">27</span></code></pre></div>
 <p>This is nice because we can apply the <code>complete.cases</code> function to the output of the previous pipe. For example, if we wanted to select complete cases for a subset of the variables we could write:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(Ozone, Solar.R) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">complete.cases</span>(.))
-##    Ozone Solar.R
-## 1     NA      NA
-## 2     28      NA
-## 3     NA     194
-## 4      7      NA
-## 5     NA      66
-## 6     NA     266
-## 7     NA      NA
-## 8     NA     286
-## 9     NA     287
-## 10    NA     242
-## 11    NA     186
-## 12    NA     220
-## 13    NA     264
-## 14    NA     273
-## 15    NA     259
-## 16    NA     250
-## 17    NA     332
-## 18    NA     322
-## 19    NA     150
-## 20    NA      59
-## 21    NA      91
-## 22    NA     250
-## 23    NA     135
-## 24    NA     127
-## 25    NA      47
-## 26    NA      98
-## 27    NA      31
-## 28    NA     138
-## 29    NA     101
-## 30    NA     139
-## 31    NA     291
-## 32    NA     258
-## 33    NA     295
-## 34    78      NA
-## 35    35      NA
-## 36    66      NA
-## 37    NA     222
-## 38    NA     137
-## 39    NA      64
-## 40    NA     255
-## 41    NA     153
-## 42    NA     145</code></pre></div>
+   Ozone Solar.R
+<span class="dv">1</span>     <span class="ot">NA</span>      <span class="ot">NA</span>
+<span class="dv">2</span>     <span class="dv">28</span>      <span class="ot">NA</span>
+<span class="dv">3</span>     <span class="ot">NA</span>     <span class="dv">194</span>
+<span class="dv">4</span>      <span class="dv">7</span>      <span class="ot">NA</span>
+<span class="dv">5</span>     <span class="ot">NA</span>      <span class="dv">66</span>
+<span class="dv">6</span>     <span class="ot">NA</span>     <span class="dv">266</span>
+<span class="dv">7</span>     <span class="ot">NA</span>      <span class="ot">NA</span>
+<span class="dv">8</span>     <span class="ot">NA</span>     <span class="dv">286</span>
+<span class="dv">9</span>     <span class="ot">NA</span>     <span class="dv">287</span>
+<span class="dv">10</span>    <span class="ot">NA</span>     <span class="dv">242</span>
+<span class="dv">11</span>    <span class="ot">NA</span>     <span class="dv">186</span>
+<span class="dv">12</span>    <span class="ot">NA</span>     <span class="dv">220</span>
+<span class="dv">13</span>    <span class="ot">NA</span>     <span class="dv">264</span>
+<span class="dv">14</span>    <span class="ot">NA</span>     <span class="dv">273</span>
+<span class="dv">15</span>    <span class="ot">NA</span>     <span class="dv">259</span>
+<span class="dv">16</span>    <span class="ot">NA</span>     <span class="dv">250</span>
+<span class="dv">17</span>    <span class="ot">NA</span>     <span class="dv">332</span>
+<span class="dv">18</span>    <span class="ot">NA</span>     <span class="dv">322</span>
+<span class="dv">19</span>    <span class="ot">NA</span>     <span class="dv">150</span>
+<span class="dv">20</span>    <span class="ot">NA</span>      <span class="dv">59</span>
+<span class="dv">21</span>    <span class="ot">NA</span>      <span class="dv">91</span>
+<span class="dv">22</span>    <span class="ot">NA</span>     <span class="dv">250</span>
+<span class="dv">23</span>    <span class="ot">NA</span>     <span class="dv">135</span>
+<span class="dv">24</span>    <span class="ot">NA</span>     <span class="dv">127</span>
+<span class="dv">25</span>    <span class="ot">NA</span>      <span class="dv">47</span>
+<span class="dv">26</span>    <span class="ot">NA</span>      <span class="dv">98</span>
+<span class="dv">27</span>    <span class="ot">NA</span>      <span class="dv">31</span>
+<span class="dv">28</span>    <span class="ot">NA</span>     <span class="dv">138</span>
+<span class="dv">29</span>    <span class="ot">NA</span>     <span class="dv">101</span>
+<span class="dv">30</span>    <span class="ot">NA</span>     <span class="dv">139</span>
+<span class="dv">31</span>    <span class="ot">NA</span>     <span class="dv">291</span>
+<span class="dv">32</span>    <span class="ot">NA</span>     <span class="dv">258</span>
+<span class="dv">33</span>    <span class="ot">NA</span>     <span class="dv">295</span>
+<span class="dv">34</span>    <span class="dv">78</span>      <span class="ot">NA</span>
+<span class="dv">35</span>    <span class="dv">35</span>      <span class="ot">NA</span>
+<span class="dv">36</span>    <span class="dv">66</span>      <span class="ot">NA</span>
+<span class="dv">37</span>    <span class="ot">NA</span>     <span class="dv">222</span>
+<span class="dv">38</span>    <span class="ot">NA</span>     <span class="dv">137</span>
+<span class="dv">39</span>    <span class="ot">NA</span>      <span class="dv">64</span>
+<span class="dv">40</span>    <span class="ot">NA</span>     <span class="dv">255</span>
+<span class="dv">41</span>    <span class="ot">NA</span>     <span class="dv">153</span>
+<span class="dv">42</span>    <span class="ot">NA</span>     <span class="dv">145</span></code></pre></div>
 <p>Or alternatively:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rows.to.keep &lt;-<span class="st"> </span><span class="op">!</span><span class="kw">complete.cases</span>(<span class="kw">select</span>(airquality, Ozone, Solar.R))
 airquality <span class="op">%&gt;%</span><span class="st"> </span>
@@ -723,44 +723,44 @@ airquality <span class="op">%&gt;%</span><span class="st"> </span>
 <p>The reason for this is that different functions behave differently with missing data.</p>
 <p>For example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(airquality<span class="op">$</span>Solar.R)
-## [1] NA</code></pre></div>
+[<span class="dv">1</span>] <span class="ot">NA</span></code></pre></div>
 <p>Here the default for <code>mean()</code> is to return NA if any of the values are missing. We can explicitly tell R to ignore missing values by setting <code>na.rm=TRUE</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(airquality<span class="op">$</span>Solar.R, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
-## [1] 185.9315</code></pre></div>
+[<span class="dv">1</span>] <span class="fl">185.9315</span></code></pre></div>
 <p>In contrast some other functions, for example the <code>lm()</code> which runs a linear regression will ignore missing values by default. If we run <code>summary</code> on the call to <code>lm</code> then we can see the line near the bottom of the output which reads: “(7 observations deleted due to missingness)”</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(Solar.R <span class="op">~</span><span class="st"> </span>Temp, <span class="dt">data=</span>airquality) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>summary
-## 
-## Call:
-## lm(formula = Solar.R ~ Temp, data = airquality)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -169.697  -59.315    6.224   67.685  186.083 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  -24.431     61.508  -0.397 0.691809    
-## Temp           2.693      0.782   3.444 0.000752 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 86.86 on 144 degrees of freedom
-##   (7 observations deleted due to missingness)
-## Multiple R-squared:  0.07609,    Adjusted R-squared:  0.06967 
-## F-statistic: 11.86 on 1 and 144 DF,  p-value: 0.0007518</code></pre></div>
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> Solar.R <span class="op">~</span><span class="st"> </span>Temp, <span class="dt">data =</span> airquality)
+
+Residuals<span class="op">:</span>
+<span class="st">     </span>Min       1Q   Median       3Q      Max 
+<span class="op">-</span><span class="fl">169.697</span>  <span class="op">-</span><span class="fl">59.315</span>    <span class="fl">6.224</span>   <span class="fl">67.685</span>  <span class="fl">186.083</span> 
+
+Coefficients<span class="op">:</span>
+<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept)  <span class="op">-</span><span class="fl">24.431</span>     <span class="fl">61.508</span>  <span class="op">-</span><span class="fl">0.397</span> <span class="fl">0.691809</span>    
+Temp           <span class="fl">2.693</span>      <span class="fl">0.782</span>   <span class="fl">3.444</span> <span class="fl">0.000752</span> <span class="op">**</span><span class="er">*</span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">86.86</span> on <span class="dv">144</span> degrees of freedom
+  (<span class="dv">7</span> observations deleted due to missingness)
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.07609</span>,   Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.06967</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">11.86</span> on <span class="dv">1</span> and <span class="dv">144</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">0.0007518</span></code></pre></div>
 <p><span class="tip">Normally R will do the ‘sensible thing’ when there are missing values, but it’s always worth checking whether you do have any missing data, and addressing this explicitly in your code</span></p>
 </div>
 <div id="patterns-of-missingness" class="section level4 unnumbered">
 <h4>Patterns of missingness</h4>
 <p>The <code>mice</code> package has some nice functions to describe patterns of missingness in the data. These can be useful both at the exploratory stage, when you are checking and validating your data, but can also be used to create tables of missingness for publication:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mice<span class="op">::</span><span class="kw">md.pattern</span>(airquality) 
-##     Wind Temp Month Day Solar.R Ozone   
-## 111    1    1     1   1       1     1  0
-##  35    1    1     1   1       1     0  1
-##   5    1    1     1   1       0     1  1
-##   2    1    1     1   1       0     0  2
-##        0    0     0   0       7    37 44</code></pre></div>
+    Wind Temp Month Day Solar.R Ozone   
+<span class="dv">111</span>    <span class="dv">1</span>    <span class="dv">1</span>     <span class="dv">1</span>   <span class="dv">1</span>       <span class="dv">1</span>     <span class="dv">1</span>  <span class="dv">0</span>
+ <span class="dv">35</span>    <span class="dv">1</span>    <span class="dv">1</span>     <span class="dv">1</span>   <span class="dv">1</span>       <span class="dv">1</span>     <span class="dv">0</span>  <span class="dv">1</span>
+  <span class="dv">5</span>    <span class="dv">1</span>    <span class="dv">1</span>     <span class="dv">1</span>   <span class="dv">1</span>       <span class="dv">0</span>     <span class="dv">1</span>  <span class="dv">1</span>
+  <span class="dv">2</span>    <span class="dv">1</span>    <span class="dv">1</span>     <span class="dv">1</span>   <span class="dv">1</span>       <span class="dv">0</span>     <span class="dv">0</span>  <span class="dv">2</span>
+       <span class="dv">0</span>    <span class="dv">0</span>     <span class="dv">0</span>   <span class="dv">0</span>       <span class="dv">7</span>    <span class="dv">37</span> <span class="dv">44</span></code></pre></div>
 <p>In this table, <code>md.pattern</code> list the number of cases with particular patterns of missing data. - Each row describes a misisng data ‘pattern’ - The first column indicates the number of cases - The central columns indicate whether a particular variable is missing for the pattern (0=missing) - The last column counts the number of values missing for the pattern - The final row counts the number of missing values for each variable.</p>
 <div id="visualising-missingness" class="section level5 unnumbered">
 <h5>Visualising missingness</h5>
@@ -771,44 +771,44 @@ airquality <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(kg1, kg2, kg3, age, gqol1)
 
 mice<span class="op">::</span><span class="kw">md.pattern</span>(fit.data)
-##     kg1 age gqol1 kg2 kg3   
-## 112   1   1     1   1   1  0
-##   2   1   1     1   1   0  1
-##   7   1   1     1   0   0  2
-##   8   0   0     0   0   0  5
-##       8   8     8  15  17 56</code></pre></div>
+    kg1 age gqol1 kg2 kg3   
+<span class="dv">112</span>   <span class="dv">1</span>   <span class="dv">1</span>     <span class="dv">1</span>   <span class="dv">1</span>   <span class="dv">1</span>  <span class="dv">0</span>
+  <span class="dv">2</span>   <span class="dv">1</span>   <span class="dv">1</span>     <span class="dv">1</span>   <span class="dv">1</span>   <span class="dv">0</span>  <span class="dv">1</span>
+  <span class="dv">7</span>   <span class="dv">1</span>   <span class="dv">1</span>     <span class="dv">1</span>   <span class="dv">0</span>   <span class="dv">0</span>  <span class="dv">2</span>
+  <span class="dv">8</span>   <span class="dv">0</span>   <span class="dv">0</span>     <span class="dv">0</span>   <span class="dv">0</span>   <span class="dv">0</span>  <span class="dv">5</span>
+      <span class="dv">8</span>   <span class="dv">8</span>     <span class="dv">8</span>  <span class="dv">15</span>  <span class="dv">17</span> <span class="dv">56</span></code></pre></div>
 <p>We might be interested to explore patterns in which observations were missing. Here we use colour to identify missing observations as a function of the data recorded at baseline:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit.data <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">missing.followup =</span> <span class="kw">is.na</span>(kg2)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(kg1, age, <span class="dt">color=</span>missing.followup)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
-<p><img src="column-types-and-missing_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="column-types-and-missing_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>There’s a clear trend here for lighter patients (at baseline) to have more missing data at followup. There’s also a suggestion that younger patients are more likely to have been lost to followup.</p>
 <p>If needed, we could perform <a href="common-inferential-stats.html#common-inferential-stats">inferential tests</a> for these differences:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(kg1 <span class="op">~</span><span class="st"> </span><span class="kw">is.na</span>(kg2), <span class="dt">data=</span>fit.data)
-## 
-##  Welch Two Sample t-test
-## 
-## data:  kg1 by is.na(kg2)
-## t = 4.7153, df = 11.132, p-value = 0.000614
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##   7.005116 19.236238
-## sample estimates:
-## mean in group FALSE  mean in group TRUE 
-##            90.59211            77.47143
+
+    Welch Two Sample t<span class="op">-</span>test
+
+data<span class="op">:</span><span class="st">  </span>kg1 by <span class="kw">is.na</span>(kg2)
+t =<span class="st"> </span><span class="fl">4.7153</span>, df =<span class="st"> </span><span class="fl">11.132</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.000614</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span>
+<span class="dv">95</span> percent confidence interval<span class="op">:</span>
+<span class="st">  </span><span class="fl">7.005116</span> <span class="fl">19.236238</span>
+sample estimates<span class="op">:</span>
+mean <span class="cf">in</span> group <span class="ot">FALSE</span>  mean <span class="cf">in</span> group <span class="ot">TRUE</span> 
+           <span class="fl">90.59211</span>            <span class="fl">77.47143</span> 
 <span class="kw">t.test</span>(age <span class="op">~</span><span class="st"> </span><span class="kw">is.na</span>(kg2), <span class="dt">data=</span>fit.data)
-## 
-##  Welch Two Sample t-test
-## 
-## data:  age by is.na(kg2)
-## t = 1.2418, df = 6.5246, p-value = 0.2571
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -7.39455 23.25169
-## sample estimates:
-## mean in group FALSE  mean in group TRUE 
-##            43.50000            35.57143</code></pre></div>
+
+    Welch Two Sample t<span class="op">-</span>test
+
+data<span class="op">:</span><span class="st">  </span>age by <span class="kw">is.na</span>(kg2)
+t =<span class="st"> </span><span class="fl">1.2418</span>, df =<span class="st"> </span><span class="fl">6.5246</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.2571</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span>
+<span class="dv">95</span> percent confidence interval<span class="op">:</span>
+<span class="st"> </span><span class="op">-</span><span class="fl">7.39455</span> <span class="fl">23.25169</span>
+sample estimates<span class="op">:</span>
+mean <span class="cf">in</span> group <span class="ot">FALSE</span>  mean <span class="cf">in</span> group <span class="ot">TRUE</span> 
+           <span class="fl">43.50000</span>            <span class="fl">35.57143</span> </code></pre></div>
 <p>However, given the small number of missing values and the post-hoc nature of these analyses these tests are rather underpowered and we might prefer to report and comment on the plot alone.</p>
 <p>For some nice missing data visualisation techniques, including those for repeated measures data, see <span class="citation">@zhang2015missing</span>.</p>
 

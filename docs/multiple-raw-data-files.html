@@ -400,18 +400,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>In the <a href="anova-cookbook.html#trad-rm-anova">repeated measures Anova example later on in this guide</a> we encounter some data from an experiment where reaction times were recorded in 25 trials (<code>Trial</code>) before and after (<code>Time</code>) one of 4 experimental manipulations (<code>Condition = {1,2,3,4}</code>). There were 48 participants in total:</p>
 <p>Let’s say all the files are in a single directory, and numbered sequentially. Using the <code>list.files()</code> function we can list the contents of a directory on the hard drive:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>(<span class="st">&#39;data/multiple-file-example/&#39;</span>)
-##  [1] &quot;person1.csv&quot;  &quot;person10.csv&quot; &quot;person11.csv&quot; &quot;person12.csv&quot;
-##  [5] &quot;person13.csv&quot; &quot;person14.csv&quot; &quot;person15.csv&quot; &quot;person16.csv&quot;
-##  [9] &quot;person17.csv&quot; &quot;person18.csv&quot; &quot;person19.csv&quot; &quot;person2.csv&quot; 
-## [13] &quot;person20.csv&quot; &quot;person21.csv&quot; &quot;person22.csv&quot; &quot;person23.csv&quot;
-## [17] &quot;person24.csv&quot; &quot;person25.csv&quot; &quot;person26.csv&quot; &quot;person27.csv&quot;
-## [21] &quot;person28.csv&quot; &quot;person29.csv&quot; &quot;person3.csv&quot;  &quot;person30.csv&quot;
-## [25] &quot;person31.csv&quot; &quot;person32.csv&quot; &quot;person33.csv&quot; &quot;person34.csv&quot;
-## [29] &quot;person35.csv&quot; &quot;person36.csv&quot; &quot;person37.csv&quot; &quot;person38.csv&quot;
-## [33] &quot;person39.csv&quot; &quot;person4.csv&quot;  &quot;person40.csv&quot; &quot;person41.csv&quot;
-## [37] &quot;person42.csv&quot; &quot;person43.csv&quot; &quot;person44.csv&quot; &quot;person45.csv&quot;
-## [41] &quot;person46.csv&quot; &quot;person47.csv&quot; &quot;person48.csv&quot; &quot;person5.csv&quot; 
-## [45] &quot;person6.csv&quot;  &quot;person7.csv&quot;  &quot;person8.csv&quot;  &quot;person9.csv&quot;</code></pre></div>
+ [<span class="dv">1</span>] <span class="st">&quot;person1.csv&quot;</span>  <span class="st">&quot;person10.csv&quot;</span> <span class="st">&quot;person11.csv&quot;</span> <span class="st">&quot;person12.csv&quot;</span>
+ [<span class="dv">5</span>] <span class="st">&quot;person13.csv&quot;</span> <span class="st">&quot;person14.csv&quot;</span> <span class="st">&quot;person15.csv&quot;</span> <span class="st">&quot;person16.csv&quot;</span>
+ [<span class="dv">9</span>] <span class="st">&quot;person17.csv&quot;</span> <span class="st">&quot;person18.csv&quot;</span> <span class="st">&quot;person19.csv&quot;</span> <span class="st">&quot;person2.csv&quot;</span> 
+[<span class="dv">13</span>] <span class="st">&quot;person20.csv&quot;</span> <span class="st">&quot;person21.csv&quot;</span> <span class="st">&quot;person22.csv&quot;</span> <span class="st">&quot;person23.csv&quot;</span>
+[<span class="dv">17</span>] <span class="st">&quot;person24.csv&quot;</span> <span class="st">&quot;person25.csv&quot;</span> <span class="st">&quot;person26.csv&quot;</span> <span class="st">&quot;person27.csv&quot;</span>
+[<span class="dv">21</span>] <span class="st">&quot;person28.csv&quot;</span> <span class="st">&quot;person29.csv&quot;</span> <span class="st">&quot;person3.csv&quot;</span>  <span class="st">&quot;person30.csv&quot;</span>
+[<span class="dv">25</span>] <span class="st">&quot;person31.csv&quot;</span> <span class="st">&quot;person32.csv&quot;</span> <span class="st">&quot;person33.csv&quot;</span> <span class="st">&quot;person34.csv&quot;</span>
+[<span class="dv">29</span>] <span class="st">&quot;person35.csv&quot;</span> <span class="st">&quot;person36.csv&quot;</span> <span class="st">&quot;person37.csv&quot;</span> <span class="st">&quot;person38.csv&quot;</span>
+[<span class="dv">33</span>] <span class="st">&quot;person39.csv&quot;</span> <span class="st">&quot;person4.csv&quot;</span>  <span class="st">&quot;person40.csv&quot;</span> <span class="st">&quot;person41.csv&quot;</span>
+[<span class="dv">37</span>] <span class="st">&quot;person42.csv&quot;</span> <span class="st">&quot;person43.csv&quot;</span> <span class="st">&quot;person44.csv&quot;</span> <span class="st">&quot;person45.csv&quot;</span>
+[<span class="dv">41</span>] <span class="st">&quot;person46.csv&quot;</span> <span class="st">&quot;person47.csv&quot;</span> <span class="st">&quot;person48.csv&quot;</span> <span class="st">&quot;person5.csv&quot;</span> 
+[<span class="dv">45</span>] <span class="st">&quot;person6.csv&quot;</span>  <span class="st">&quot;person7.csv&quot;</span>  <span class="st">&quot;person8.csv&quot;</span>  <span class="st">&quot;person9.csv&quot;</span> </code></pre></div>
 <p><code>list.files()</code> creates a <a href="#vectors">vector</a> of the names of all the files in the directory.</p>
 <p>At this point, there are many, many ways of importing the contents of these files, but below we use a technique which is concise, reliable, and less error-prone than many others. It also continues to use the <code>dplyr</code> library.</p>
 <p>This approach has 3 steps:</p>
@@ -430,12 +430,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 raw.file.paths <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>)
-## # A tibble: 3 x 2
-##       filename                                filepath
-##          &lt;chr&gt;                                   &lt;chr&gt;
-## 1  person1.csv  data/multiple-file-example/person1.csv
-## 2 person10.csv data/multiple-file-example/person10.csv
-## 3 person11.csv data/multiple-file-example/person11.csv</code></pre></div>
+<span class="co"># A tibble: 3 x 2</span>
+      filename                                filepath
+         <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">                                   </span><span class="er">&lt;</span>chr<span class="op">&gt;</span>
+<span class="dv">1</span>  person1.csv  data<span class="op">/</span>multiple<span class="op">-</span>file<span class="op">-</span>example<span class="op">/</span>person1.csv
+<span class="dv">2</span> person10.csv data<span class="op">/</span>multiple<span class="op">-</span>file<span class="op">-</span>example<span class="op">/</span>person10.csv
+<span class="dv">3</span> person11.csv data<span class="op">/</span>multiple<span class="op">-</span>file<span class="op">-</span>example<span class="op">/</span>person11.csv</code></pre></div>
 </div>
 <div id="dplyr-do" class="section level6 unnumbered">
 <h6>Using <code>do()</code></h6>
@@ -471,74 +471,74 @@ raw.file.paths <span class="op">%&gt;%</span><span class="st"> </span>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">1</td>
-<td align="center">8</td>
-<td align="center">2</td>
 <td align="center">4</td>
-<td align="center">435.3</td>
-</tr>
-<tr class="even">
-<td align="center">3</td>
-<td align="center">4</td>
-<td align="center">1</td>
-<td align="center">26</td>
-<td align="center">283.1</td>
-</tr>
-<tr class="odd">
-<td align="center">1</td>
-<td align="center">12</td>
-<td align="center">2</td>
-<td align="center">10</td>
-<td align="center">280.4</td>
-</tr>
-<tr class="even">
-<td align="center">2</td>
-<td align="center">7</td>
-<td align="center">2</td>
 <td align="center">19</td>
-<td align="center">149.9</td>
+<td align="center">2</td>
+<td align="center">43</td>
+<td align="center">236.3</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">25</td>
+<td align="center">1</td>
+<td align="center">4</td>
+<td align="center">217.1</td>
 </tr>
 <tr class="odd">
+<td align="center">2</td>
+<td align="center">18</td>
 <td align="center">1</td>
 <td align="center">15</td>
-<td align="center">2</td>
-<td align="center">4</td>
-<td align="center">322.2</td>
+<td align="center">234.6</td>
 </tr>
 <tr class="even">
+<td align="center">4</td>
+<td align="center">21</td>
 <td align="center">1</td>
-<td align="center">23</td>
-<td align="center">2</td>
-<td align="center">1</td>
-<td align="center">261.2</td>
+<td align="center">37</td>
+<td align="center">231.5</td>
 </tr>
 <tr class="odd">
-<td align="center">2</td>
-<td align="center">7</td>
-<td align="center">2</td>
-<td align="center">20</td>
-<td align="center">309.5</td>
-</tr>
-<tr class="even">
 <td align="center">1</td>
-<td align="center">13</td>
+<td align="center">20</td>
 <td align="center">1</td>
 <td align="center">9</td>
-<td align="center">224</td>
-</tr>
-<tr class="odd">
-<td align="center">3</td>
-<td align="center">8</td>
-<td align="center">2</td>
-<td align="center">29</td>
-<td align="center">437.9</td>
+<td align="center">217.5</td>
 </tr>
 <tr class="even">
-<td align="center">4</td>
-<td align="center">5</td>
+<td align="center">3</td>
+<td align="center">24</td>
 <td align="center">2</td>
-<td align="center">46</td>
-<td align="center">212.3</td>
+<td align="center">35</td>
+<td align="center">288.5</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">9</td>
+<td align="center">205.6</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">24</td>
+<td align="center">2</td>
+<td align="center">7</td>
+<td align="center">240.1</td>
+</tr>
+<tr class="odd">
+<td align="center">4</td>
+<td align="center">9</td>
+<td align="center">2</td>
+<td align="center">45</td>
+<td align="center">210.7</td>
+</tr>
+<tr class="even">
+<td align="center">3</td>
+<td align="center">16</td>
+<td align="center">2</td>
+<td align="center">31</td>
+<td align="center">204.3</td>
 </tr>
 </tbody>
 </table>
@@ -584,74 +584,74 @@ raw.data.with.paths <span class="op">%&gt;%</span><span class="st"> </span>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">4</td>
-<td align="center">22</td>
-<td align="center">1</td>
-<td align="center">42</td>
-<td align="center">346.8</td>
-</tr>
-<tr class="even">
 <td align="center">3</td>
-<td align="center">8</td>
-<td align="center">1</td>
-<td align="center">36</td>
-<td align="center">256.8</td>
-</tr>
-<tr class="odd">
-<td align="center">4</td>
-<td align="center">22</td>
-<td align="center">1</td>
-<td align="center">45</td>
-<td align="center">277.1</td>
-</tr>
-<tr class="even">
-<td align="center">4</td>
-<td align="center">18</td>
-<td align="center">1</td>
-<td align="center">42</td>
-<td align="center">236.6</td>
-</tr>
-<tr class="odd">
-<td align="center">1</td>
-<td align="center">21</td>
-<td align="center">1</td>
-<td align="center">11</td>
-<td align="center">230.6</td>
-</tr>
-<tr class="even">
-<td align="center">3</td>
-<td align="center">25</td>
-<td align="center">2</td>
-<td align="center">31</td>
-<td align="center">299.3</td>
-</tr>
-<tr class="odd">
-<td align="center">4</td>
-<td align="center">13</td>
-<td align="center">2</td>
-<td align="center">44</td>
-<td align="center">212.6</td>
-</tr>
-<tr class="even">
-<td align="center">1</td>
-<td align="center">2</td>
-<td align="center">2</td>
-<td align="center">4</td>
-<td align="center">246.2</td>
-</tr>
-<tr class="odd">
-<td align="center">2</td>
-<td align="center">6</td>
-<td align="center">2</td>
-<td align="center">20</td>
-<td align="center">297.3</td>
-</tr>
-<tr class="even">
-<td align="center">3</td>
-<td align="center">4</td>
+<td align="center">12</td>
 <td align="center">2</td>
 <td align="center">34</td>
-<td align="center">358.3</td>
+<td align="center">230</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">23</td>
+<td align="center">1</td>
+<td align="center">45</td>
+<td align="center">187.4</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">9</td>
+<td align="center">2</td>
+<td align="center">24</td>
+<td align="center">131.7</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">25</td>
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="center">216.9</td>
+</tr>
+<tr class="odd">
+<td align="center">4</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">37</td>
+<td align="center">218.7</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">10</td>
+<td align="center">2</td>
+<td align="center">47</td>
+<td align="center">278.5</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">4</td>
+<td align="center">1</td>
+<td align="center">8</td>
+<td align="center">253.7</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">18</td>
+<td align="center">1</td>
+<td align="center">11</td>
+<td align="center">174.4</td>
+</tr>
+<tr class="odd">
+<td align="center">4</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">40</td>
+<td align="center">182.3</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">12</td>
+<td align="center">2</td>
+<td align="center">15</td>
+<td align="center">159.4</td>
 </tr>
 </tbody>
 </table>
@@ -666,34 +666,34 @@ raw.data.with.paths <span class="op">%&gt;%</span><span class="st"> </span>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">data/multiple-file-example/person42.csv</td>
+<td align="center">data/multiple-file-example/person34.csv</td>
 </tr>
 <tr class="even">
-<td align="center">data/multiple-file-example/person36.csv</td>
-</tr>
-<tr class="odd">
 <td align="center">data/multiple-file-example/person45.csv</td>
 </tr>
+<tr class="odd">
+<td align="center">data/multiple-file-example/person24.csv</td>
+</tr>
 <tr class="even">
-<td align="center">data/multiple-file-example/person42.csv</td>
+<td align="center">data/multiple-file-example/person2.csv</td>
 </tr>
 <tr class="odd">
+<td align="center">data/multiple-file-example/person37.csv</td>
+</tr>
+<tr class="even">
+<td align="center">data/multiple-file-example/person47.csv</td>
+</tr>
+<tr class="odd">
+<td align="center">data/multiple-file-example/person8.csv</td>
+</tr>
+<tr class="even">
 <td align="center">data/multiple-file-example/person11.csv</td>
 </tr>
-<tr class="even">
-<td align="center">data/multiple-file-example/person31.csv</td>
-</tr>
 <tr class="odd">
-<td align="center">data/multiple-file-example/person44.csv</td>
+<td align="center">data/multiple-file-example/person40.csv</td>
 </tr>
 <tr class="even">
-<td align="center">data/multiple-file-example/person4.csv</td>
-</tr>
-<tr class="odd">
-<td align="center">data/multiple-file-example/person20.csv</td>
-</tr>
-<tr class="even">
-<td align="center">data/multiple-file-example/person34.csv</td>
+<td align="center">data/multiple-file-example/person15.csv</td>
 </tr>
 </tbody>
 </table>

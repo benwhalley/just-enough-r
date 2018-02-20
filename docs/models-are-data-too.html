@@ -426,32 +426,32 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Thankfully, there is almost always a method to extract results to a <a href="datasets-dataframes.html#datasets-dataframes"><code>dataframe</code></a>. For example, if we run a linear model:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model.fit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data=</span>mtcars)
 <span class="kw">summary</span>(model.fit)
-## 
-## Call:
-## lm(formula = mpg ~ wt + disp, data = mtcars)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -3.4087 -2.3243 -0.7683  1.7721  6.3484 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 34.96055    2.16454  16.151 4.91e-16 ***
-## wt          -3.35082    1.16413  -2.878  0.00743 ** 
-## disp        -0.01773    0.00919  -1.929  0.06362 .  
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 2.917 on 29 degrees of freedom
-## Multiple R-squared:  0.7809, Adjusted R-squared:  0.7658 
-## F-statistic: 51.69 on 2 and 29 DF,  p-value: 2.744e-10</code></pre></div>
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data =</span> mtcars)
+
+Residuals<span class="op">:</span>
+<span class="st">    </span>Min      1Q  Median      3Q     Max 
+<span class="op">-</span><span class="fl">3.4087</span> <span class="op">-</span><span class="fl">2.3243</span> <span class="op">-</span><span class="fl">0.7683</span>  <span class="fl">1.7721</span>  <span class="fl">6.3484</span> 
+
+Coefficients<span class="op">:</span>
+<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept) <span class="fl">34.96055</span>    <span class="fl">2.16454</span>  <span class="fl">16.151</span> <span class="fl">4.91e-16</span> <span class="op">**</span><span class="er">*</span>
+wt          <span class="op">-</span><span class="fl">3.35082</span>    <span class="fl">1.16413</span>  <span class="op">-</span><span class="fl">2.878</span>  <span class="fl">0.00743</span> <span class="op">**</span><span class="st"> </span>
+disp        <span class="op">-</span><span class="fl">0.01773</span>    <span class="fl">0.00919</span>  <span class="op">-</span><span class="fl">1.929</span>  <span class="fl">0.06362</span> .  
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">2.917</span> on <span class="dv">29</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7809</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7658</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">51.69</span> on <span class="dv">2</span> and <span class="dv">29</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">2.744e-10</span></code></pre></div>
 <p>We can extract the parameter table from this model by saving the <code>summary()</code> of it, and then using the <code>$</code> operator to access the <code>coefficients</code> table (actually a matrix), which is stored within the summary object.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model.fit.summary &lt;-<span class="st"> </span><span class="kw">summary</span>(model.fit)
 model.fit.summary<span class="op">$</span>coefficients
-##                Estimate  Std. Error   t value     Pr(&gt;|t|)
-## (Intercept) 34.96055404 2.164539504 16.151497 4.910746e-16
-## wt          -3.35082533 1.164128079 -2.878399 7.430725e-03
-## disp        -0.01772474 0.009190429 -1.928609 6.361981e-02</code></pre></div>
+               Estimate  Std. Error   t value     <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)
+(Intercept) <span class="fl">34.96055404</span> <span class="fl">2.164539504</span> <span class="fl">16.151497</span> <span class="fl">4.910746e-16</span>
+wt          <span class="op">-</span><span class="fl">3.35082533</span> <span class="fl">1.164128079</span> <span class="op">-</span><span class="fl">2.878399</span> <span class="fl">7.430725e-03</span>
+disp        <span class="op">-</span><span class="fl">0.01772474</span> <span class="fl">0.009190429</span> <span class="op">-</span><span class="fl">1.928609</span> <span class="fl">6.361981e-02</span></code></pre></div>
 </div>
 <div id="poking-around-with-and" class="section level3 unnumbered">
 <h3>‘Poking around’ with <code>$</code> and <code>@</code></h3>
@@ -463,12 +463,12 @@ model.fit.summary<span class="op">$</span>coefficients
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model.fit.summary &lt;-<span class="st"> </span><span class="kw">summary</span>(model.fit)
 model.fit.summary<span class="op">$</span>coefficients <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">as_data_frame</span>()
-## # A tibble: 3 x 4
-##      Estimate `Std. Error` `t value`   `Pr(&gt;|t|)`
-##         &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
-## 1 34.96055404  2.164539504 16.151497 4.910746e-16
-## 2 -3.35082533  1.164128079 -2.878399 7.430725e-03
-## 3 -0.01772474  0.009190429 -1.928609 6.361981e-02</code></pre></div>
+<span class="co"># A tibble: 3 x 4</span>
+     Estimate <span class="st">`</span><span class="dt">Std. Error</span><span class="st">`</span> <span class="st">`</span><span class="dt">t value</span><span class="st">`</span>   <span class="st">`</span><span class="dt">Pr(&gt;|t|)</span><span class="st">`</span>
+        <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st">        </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">        </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span> <span class="fl">34.96055404</span>  <span class="fl">2.164539504</span> <span class="fl">16.151497</span> <span class="fl">4.910746e-16</span>
+<span class="dv">2</span> <span class="op">-</span><span class="fl">3.35082533</span>  <span class="fl">1.164128079</span> <span class="op">-</span><span class="fl">2.878399</span> <span class="fl">7.430725e-03</span>
+<span class="dv">3</span> <span class="op">-</span><span class="fl">0.01772474</span>  <span class="fl">0.009190429</span> <span class="op">-</span><span class="fl">1.928609</span> <span class="fl">6.361981e-02</span></code></pre></div>
 </div>
 <div id="broom" class="section level3 unnumbered">
 <h3>Save work: use a Broom</h3>
@@ -477,19 +477,19 @@ model.fit.summary<span class="op">$</span>coefficients <span class="op">%&gt;%</
 <p>For example, the <code>lm()</code> or <code>car::Anova</code> functions display results in the console, but don’t make it easy to extract results as a dataframe. <code>broom::</code> provides a consistent way of extracting the key numbers from most R objects.</p>
 <p>Let’s say we have a regression model:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(model.<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(cyl) <span class="op">+</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data=</span>mtcars))
-## 
-## Call:
-## lm(formula = mpg ~ factor(cyl) + wt + disp, data = mtcars)
-## 
-## Coefficients:
-##  (Intercept)  factor(cyl)6  factor(cyl)8            wt          disp  
-##    34.041673     -4.305559     -6.322786     -3.306751      0.001715</code></pre></div>
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(cyl) <span class="op">+</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data =</span> mtcars)
+
+Coefficients<span class="op">:</span>
+<span class="st"> </span>(Intercept)  <span class="kw">factor</span>(cyl)<span class="dv">6</span>  <span class="kw">factor</span>(cyl)<span class="dv">8</span>            wt          disp  
+   <span class="fl">34.041673</span>     <span class="op">-</span><span class="fl">4.305559</span>     <span class="op">-</span><span class="fl">6.322786</span>     <span class="op">-</span><span class="fl">3.306751</span>      <span class="fl">0.001715</span>  </code></pre></div>
 <p>We can extract model fit statistics — that is, attributes of the model as a whole — with <code>glance()</code>. This produces a dataframe:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glance</span>(model.<span class="dv">1</span>)
-##   r.squared adj.r.squared    sigma statistic      p.value df    logLik
-## 1 0.8375299     0.8134602 2.603054   34.7961 2.726351e-10  5 -73.30158
-##        AIC      BIC deviance df.residual
-## 1 158.6032 167.3976  182.949          27</code></pre></div>
+  r.squared adj.r.squared    sigma statistic      p.value df    logLik
+<span class="dv">1</span> <span class="fl">0.8375299</span>     <span class="fl">0.8134602</span> <span class="fl">2.603054</span>   <span class="fl">34.7961</span> <span class="fl">2.726351e-10</span>  <span class="dv">5</span> <span class="op">-</span><span class="fl">73.30158</span>
+       AIC      BIC deviance df.residual
+<span class="dv">1</span> <span class="fl">158.6032</span> <span class="fl">167.3976</span>  <span class="fl">182.949</span>          <span class="dv">27</span></code></pre></div>
 <p>If we want to extract information about the model coefficients we can use <code>tidy</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tidy</span>(model.<span class="dv">1</span>, <span class="dt">conf.int =</span> T) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>pander</code></pre></div>
@@ -567,16 +567,11 @@ model.fit.summary<span class="op">$</span>coefficients <span class="op">%&gt;%</
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(term, estimate, <span class="dt">ymin=</span>conf.low, <span class="dt">ymax=</span>conf.high)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_pointrange</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>)</code></pre></div>
-<p><img src="models-are-data_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="models-are-data_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Finally, we can use the <code>augment</code> function to get information on individual rows in the modelled data: namely the fitted and residual values, plus common diagnostic metrics like Cooks distances:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">augment</span>(model.<span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">head</span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">pander</span>(<span class="dt">split.tables=</span><span class="ot">Inf</span>)
-## Warning: Deprecated: please use `purrr::possibly()` instead
-## Warning: Deprecated: please use `purrr::possibly()` instead
-## Warning: Deprecated: please use `purrr::possibly()` instead
-## Warning: Deprecated: please use `purrr::possibly()` instead
-## Warning: Deprecated: please use `purrr::possibly()` instead</code></pre></div>
+<span class="st">  </span><span class="kw">pander</span>(<span class="dt">split.tables=</span><span class="ot">Inf</span>)</code></pre></div>
 <table>
 <colgroup>
 <col width="15%" />
@@ -700,25 +695,20 @@ model.fit.summary<span class="op">$</span>coefficients <span class="op">%&gt;%</
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>.fitted, <span class="dt">y=</span>.resid)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_smooth</span>()
-## Warning: Deprecated: please use `purrr::possibly()` instead
-## Warning: Deprecated: please use `purrr::possibly()` instead
-## Warning: Deprecated: please use `purrr::possibly()` instead
-## Warning: Deprecated: please use `purrr::possibly()` instead
-## Warning: Deprecated: please use `purrr::possibly()` instead
-## `geom_smooth()` using method = &#39;loess&#39;</code></pre></div>
-<p><img src="models-are-data_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<span class="st">`</span><span class="dt">geom_smooth()</span><span class="st">`</span> using method =<span class="st"> &#39;loess&#39;</span></code></pre></div>
+<p><img src="models-are-data_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Because <code>broom</code> always returns a dataframe with a consistent set of column names we can also combine model results into tables for comparison. In this plot we see what happens to the regression coefficients in model 1 when we add <code>disp</code>, <code>carb</code> and <code>drat</code> in model 2. We plot the coefficients side by side for ease of comparison, and can see that the estimates for cyl1 and wt both shrink slightly with the addition of these variables:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># run a new model with more predictors</span>
 (model.<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(cyl) <span class="op">+</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp <span class="op">+</span><span class="st"> </span>carb <span class="op">+</span><span class="st"> </span>drat, <span class="dt">data=</span>mtcars))
-## 
-## Call:
-## lm(formula = mpg ~ factor(cyl) + wt + disp + carb + drat, data = mtcars)
-## 
-## Coefficients:
-##  (Intercept)  factor(cyl)6  factor(cyl)8            wt          disp  
-##    29.849209     -2.796142     -4.116561     -2.748229     -0.002826  
-##         carb          drat  
-##    -0.587422      1.056532
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(cyl) <span class="op">+</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp <span class="op">+</span><span class="st"> </span>carb <span class="op">+</span><span class="st"> </span>drat, <span class="dt">data =</span> mtcars)
+
+Coefficients<span class="op">:</span>
+<span class="st"> </span>(Intercept)  <span class="kw">factor</span>(cyl)<span class="dv">6</span>  <span class="kw">factor</span>(cyl)<span class="dv">8</span>            wt          disp  
+   <span class="fl">29.849209</span>     <span class="op">-</span><span class="fl">2.796142</span>     <span class="op">-</span><span class="fl">4.116561</span>     <span class="op">-</span><span class="fl">2.748229</span>     <span class="op">-</span><span class="fl">0.002826</span>  
+        carb          drat  
+   <span class="op">-</span><span class="fl">0.587422</span>      <span class="fl">1.056532</span>  
 
 <span class="co"># make a single dataframe from both models</span>
 <span class="co"># addin a new `model` column with mutate to </span>
@@ -732,7 +722,7 @@ combined.results &lt;-<span class="st"> </span><span class="kw">bind_rows</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(term, estimate, <span class="dt">ymin=</span>conf.low, <span class="dt">ymax=</span>conf.high, <span class="dt">color=</span>model)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_pointrange</span>(<span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="dt">width=</span>.<span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>)</code></pre></div>
-<p><img src="models-are-data_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="models-are-data_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 </div> 
 </div>
             </section>

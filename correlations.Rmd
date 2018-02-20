@@ -3,7 +3,6 @@ title: 'Correlations'
 ---
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 library(tidyverse)
 library(pander)
 library(lavaan)

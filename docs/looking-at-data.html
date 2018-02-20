@@ -398,28 +398,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>As we’ve already seen, using <code>print(df)</code> within an RMarkdown document creates a nice interactive table you can use to look at your data.</p>
 <p>However you won’t want to print your whole data file when you Knit your RMarkdown document. The <code>head</code> function can be useful if you just want to show a few rows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(mtcars)
-##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre></div>
+                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         <span class="fl">21.0</span>   <span class="dv">6</span>  <span class="dv">160</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.620</span> <span class="fl">16.46</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span>
+Mazda RX4 Wag     <span class="fl">21.0</span>   <span class="dv">6</span>  <span class="dv">160</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.875</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span>
+Datsun <span class="dv">710</span>        <span class="fl">22.8</span>   <span class="dv">4</span>  <span class="dv">108</span>  <span class="dv">93</span> <span class="fl">3.85</span> <span class="fl">2.320</span> <span class="fl">18.61</span>  <span class="dv">1</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">1</span>
+Hornet <span class="dv">4</span> Drive    <span class="fl">21.4</span>   <span class="dv">6</span>  <span class="dv">258</span> <span class="dv">110</span> <span class="fl">3.08</span> <span class="fl">3.215</span> <span class="fl">19.44</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span>
+Hornet Sportabout <span class="fl">18.7</span>   <span class="dv">8</span>  <span class="dv">360</span> <span class="dv">175</span> <span class="fl">3.15</span> <span class="fl">3.440</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">2</span>
+Valiant           <span class="fl">18.1</span>   <span class="dv">6</span>  <span class="dv">225</span> <span class="dv">105</span> <span class="fl">2.76</span> <span class="fl">3.460</span> <span class="fl">20.22</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span></code></pre></div>
 <p>Or we can use <code>glimpse()</code> function from the <code>dplyr::</code> package (see the <a href="packages.html#packages">section on loading and using packages</a>) for a different view of the first few rows of the <code>mtcars</code> data. This flips the dataframe so the variables are listed in the first column of the output:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glimpse</span>(mtcars)
-## Observations: 32
-## Variables: 11
-## $ mpg  &lt;dbl&gt; 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19....
-## $ cyl  &lt;dbl&gt; 6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, ...
-## $ disp &lt;dbl&gt; 160.0, 160.0, 108.0, 258.0, 360.0, 225.0, 360.0, 146.7, 1...
-## $ hp   &lt;dbl&gt; 110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, ...
-## $ drat &lt;dbl&gt; 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.9...
-## $ wt   &lt;dbl&gt; 2.620, 2.875, 2.320, 3.215, 3.440, 3.460, 3.570, 3.190, 3...
-## $ qsec &lt;dbl&gt; 16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84, 20.00, 2...
-## $ vs   &lt;dbl&gt; 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, ...
-## $ am   &lt;dbl&gt; 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, ...
-## $ gear &lt;dbl&gt; 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, ...
-## $ carb &lt;dbl&gt; 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, ...</code></pre></div>
+Observations<span class="op">:</span><span class="st"> </span><span class="dv">32</span>
+Variables<span class="op">:</span><span class="st"> </span><span class="dv">11</span>
+<span class="op">$</span><span class="st"> </span>mpg  <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">21.0</span>, <span class="fl">21.0</span>, <span class="fl">22.8</span>, <span class="fl">21.4</span>, <span class="fl">18.7</span>, <span class="fl">18.1</span>, <span class="fl">14.3</span>, <span class="fl">24.4</span>, <span class="fl">22.8</span>, <span class="dv">19</span>....
+<span class="op">$</span><span class="st"> </span>cyl  <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">4</span>, <span class="dv">4</span>, ...
+<span class="op">$</span><span class="st"> </span>disp <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">160.0</span>, <span class="fl">160.0</span>, <span class="fl">108.0</span>, <span class="fl">258.0</span>, <span class="fl">360.0</span>, <span class="fl">225.0</span>, <span class="fl">360.0</span>, <span class="fl">146.7</span>, <span class="dv">1</span>...
+<span class="op">$</span><span class="st"> </span>hp   <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">110</span>, <span class="dv">110</span>, <span class="dv">93</span>, <span class="dv">110</span>, <span class="dv">175</span>, <span class="dv">105</span>, <span class="dv">245</span>, <span class="dv">62</span>, <span class="dv">95</span>, <span class="dv">123</span>, <span class="dv">123</span>, <span class="dv">180</span>, ...
+<span class="op">$</span><span class="st"> </span>drat <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">3.90</span>, <span class="fl">3.90</span>, <span class="fl">3.85</span>, <span class="fl">3.08</span>, <span class="fl">3.15</span>, <span class="fl">2.76</span>, <span class="fl">3.21</span>, <span class="fl">3.69</span>, <span class="fl">3.92</span>, <span class="fl">3.9</span>...
+<span class="op">$</span><span class="st"> </span>wt   <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">2.620</span>, <span class="fl">2.875</span>, <span class="fl">2.320</span>, <span class="fl">3.215</span>, <span class="fl">3.440</span>, <span class="fl">3.460</span>, <span class="fl">3.570</span>, <span class="fl">3.190</span>, <span class="dv">3</span>...
+<span class="op">$</span><span class="st"> </span>qsec <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">16.46</span>, <span class="fl">17.02</span>, <span class="fl">18.61</span>, <span class="fl">19.44</span>, <span class="fl">17.02</span>, <span class="fl">20.22</span>, <span class="fl">15.84</span>, <span class="fl">20.00</span>, <span class="dv">2</span>...
+<span class="op">$</span><span class="st"> </span>vs   <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, ...
+<span class="op">$</span><span class="st"> </span>am   <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, ...
+<span class="op">$</span><span class="st"> </span>gear <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>, ...
+<span class="op">$</span><span class="st"> </span>carb <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">2</span>, ...</code></pre></div>
 <p>You can use the <code>pander()</code> function (from the <code>pander::</code> package) to format tables nicely, for when you Knit a document to HTML, Word or PDF. For example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pander)
 <span class="kw">pander</span>(<span class="kw">head</span>(airquality), <span class="dt">caption=</span><span class="st">&quot;Tables always need a caption.&quot;</span>)</code></pre></div>
@@ -497,22 +497,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>See the section on <a href="#sharing-and-publication">sharing and publishing for more ways to format and present tables</a>.</p>
 <p>Other useful functions for looking at and exploring datasets include:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(airquality)
-##      Ozone           Solar.R           Wind             Temp      
-##  Min.   :  1.00   Min.   :  7.0   Min.   : 1.700   Min.   :56.00  
-##  1st Qu.: 18.00   1st Qu.:115.8   1st Qu.: 7.400   1st Qu.:72.00  
-##  Median : 31.50   Median :205.0   Median : 9.700   Median :79.00  
-##  Mean   : 42.13   Mean   :185.9   Mean   : 9.958   Mean   :77.88  
-##  3rd Qu.: 63.25   3rd Qu.:258.8   3rd Qu.:11.500   3rd Qu.:85.00  
-##  Max.   :168.00   Max.   :334.0   Max.   :20.700   Max.   :97.00  
-##  NA&#39;s   :37       NA&#39;s   :7                                       
-##      Month            Day      
-##  Min.   :5.000   Min.   : 1.0  
-##  1st Qu.:6.000   1st Qu.: 8.0  
-##  Median :7.000   Median :16.0  
-##  Mean   :6.993   Mean   :15.8  
-##  3rd Qu.:8.000   3rd Qu.:23.0  
-##  Max.   :9.000   Max.   :31.0  
-## </code></pre></div>
+     Ozone           Solar.R           Wind             Temp      
+ Min.   <span class="op">:</span><span class="st">  </span><span class="fl">1.00</span>   Min.   <span class="op">:</span><span class="st">  </span><span class="fl">7.0</span>   Min.   <span class="op">:</span><span class="st"> </span><span class="fl">1.700</span>   Min.   <span class="op">:</span><span class="fl">56.00</span>  
+ 1st Qu.<span class="op">:</span><span class="st"> </span><span class="fl">18.00</span>   1st Qu.<span class="op">:</span><span class="fl">115.8</span>   1st Qu.<span class="op">:</span><span class="st"> </span><span class="fl">7.400</span>   1st Qu.<span class="op">:</span><span class="fl">72.00</span>  
+ Median <span class="op">:</span><span class="st"> </span><span class="fl">31.50</span>   Median <span class="op">:</span><span class="fl">205.0</span>   Median <span class="op">:</span><span class="st"> </span><span class="fl">9.700</span>   Median <span class="op">:</span><span class="fl">79.00</span>  
+ Mean   <span class="op">:</span><span class="st"> </span><span class="fl">42.13</span>   Mean   <span class="op">:</span><span class="fl">185.9</span>   Mean   <span class="op">:</span><span class="st"> </span><span class="fl">9.958</span>   Mean   <span class="op">:</span><span class="fl">77.88</span>  
+ 3rd Qu.<span class="op">:</span><span class="st"> </span><span class="fl">63.25</span>   3rd Qu.<span class="op">:</span><span class="fl">258.8</span>   3rd Qu.<span class="op">:</span><span class="fl">11.500</span>   3rd Qu.<span class="op">:</span><span class="fl">85.00</span>  
+ Max.   <span class="op">:</span><span class="fl">168.00</span>   Max.   <span class="op">:</span><span class="fl">334.0</span>   Max.   <span class="op">:</span><span class="fl">20.700</span>   Max.   <span class="op">:</span><span class="fl">97.00</span>  
+ NA<span class="st">&#39;s   :37       NA&#39;</span>s   <span class="op">:</span><span class="dv">7</span>                                       
+     Month            Day      
+ Min.   <span class="op">:</span><span class="fl">5.000</span>   Min.   <span class="op">:</span><span class="st"> </span><span class="fl">1.0</span>  
+ 1st Qu.<span class="op">:</span><span class="fl">6.000</span>   1st Qu.<span class="op">:</span><span class="st"> </span><span class="fl">8.0</span>  
+ Median <span class="op">:</span><span class="fl">7.000</span>   Median <span class="op">:</span><span class="fl">16.0</span>  
+ Mean   <span class="op">:</span><span class="fl">6.993</span>   Mean   <span class="op">:</span><span class="fl">15.8</span>  
+ 3rd Qu.<span class="op">:</span><span class="fl">8.000</span>   3rd Qu.<span class="op">:</span><span class="fl">23.0</span>  
+ Max.   <span class="op">:</span><span class="fl">9.000</span>   Max.   <span class="op">:</span><span class="fl">31.0</span>  
+                               </code></pre></div>
 <p>Or the more compact and useful output from <code>describe()</code> which is in the <code>pysch</code> package:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># fast = T just skips some of the available stats (e.g. kurtosis)</span>
 psych<span class="op">::</span><span class="kw">describe</span>(airquality, <span class="dt">fast =</span> T) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -614,15 +614,15 @@ psych<span class="op">::</span><span class="kw">describe</span>(airquality, <spa
 </table>
 <p>There are also some helpful plotting functions which accept a whole dataframe:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(airquality)</code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-9"></span>
-<img src="datasets_files/figure-html/unnamed-chunk-9-1.png" alt="Box plot of all variables in a dataset." width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-10"></span>
+<img src="datasets_files/figure-html/unnamed-chunk-10-1.png" alt="Box plot of all variables in a dataset." width="672" />
 <p class="caption">
 Figure 2.1: Box plot of all variables in a dataset.
 </p>
 </div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">cor.plot</span>(airquality)</code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-10"></span>
-<img src="datasets_files/figure-html/unnamed-chunk-10-1.png" alt="Correlation heatmap of all variables in a dataset. Colours indicate size of the correlation between pairs of variables." width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-11"></span>
+<img src="datasets_files/figure-html/unnamed-chunk-11-1.png" alt="Correlation heatmap of all variables in a dataset. Colours indicate size of the correlation between pairs of variables." width="672" />
 <p class="caption">
 Figure 2.2: Correlation heatmap of all variables in a dataset. Colours indicate size of the correlation between pairs of variables.
 </p>
@@ -632,14 +632,14 @@ Figure 2.2: Correlation heatmap of all variables in a dataset. Colours indicate 
 <h3>Using individual columns</h3>
 <p>Because dataframes are like a list of vectors, we can access individual columns using the <code>$</code> symbol. This extracts the column as a vector, so we can pass it to functions:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(mtcars<span class="op">$</span>mpg)
-## [1] 20.09062</code></pre></div>
+[<span class="dv">1</span>] <span class="fl">20.09062</span></code></pre></div>
 <p>Or slice it:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(first.mpg &lt;-<span class="st"> </span>mtcars<span class="op">$</span>mpg[<span class="dv">1</span>])
-## [1] 21
+[<span class="dv">1</span>] <span class="dv">21</span>
 (worst.mpg &lt;-<span class="st"> </span><span class="kw">sort</span>(mtcars<span class="op">$</span>mpg)[<span class="dv">1</span>])
-## [1] 10.4
+[<span class="dv">1</span>] <span class="fl">10.4</span>
 (best.mpg &lt;-<span class="st"> </span><span class="kw">rev</span>(<span class="kw">sort</span>(mtcars<span class="op">$</span>mpg))[<span class="dv">1</span>])
-## [1] 33.9</code></pre></div>
+[<span class="dv">1</span>] <span class="fl">33.9</span></code></pre></div>
 <p><span class="admonition">The problem with extracting individual columns in this way is that it’s easy for data to be taken out of context: for example, if you sort individual columns then your data might get mixed up. In general if you are accessing individual columns of data in this way it’s a sign your code may be brittle and vulnerable to errors. In later sections we introduce methods for working on the whole dataset, which tends to be safer.</span></p>
 
 </div>

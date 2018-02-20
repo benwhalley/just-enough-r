@@ -398,70 +398,70 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><span class="tip">The text below continues on from <a href="anova-cookbook.html#howell-factorial-example">this example of factorial Anova</a>.</span></p>
 <p>If we want to look at post-hoc pairwise tests we can use the the <code>lsmeans()</code> function from the <code>lsmeans::</code> package. By default Tukey correction is applied for multiple comparisons, which is a reasonable default:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">lsmeans</span>(eysenck.model, pairwise<span class="op">~</span>Age<span class="op">:</span>Condition)
-## $lsmeans
-##  Age   Condition lsmean        SE df  lower.CL  upper.CL
-##  Young Counting     7.0 0.8958547 90  5.220228  8.779772
-##  Older Counting     6.5 0.8958547 90  4.720228  8.279772
-##  Young Rhyming      6.9 0.8958547 90  5.120228  8.679772
-##  Older Rhyming      7.6 0.8958547 90  5.820228  9.379772
-##  Young Adjective   11.0 0.8958547 90  9.220228 12.779772
-##  Older Adjective   14.8 0.8958547 90 13.020228 16.579772
-##  Young Imagery     13.4 0.8958547 90 11.620228 15.179772
-##  Older Imagery     17.6 0.8958547 90 15.820228 19.379772
-##  Young Intention   12.0 0.8958547 90 10.220228 13.779772
-##  Older Intention   19.3 0.8958547 90 17.520228 21.079772
-## 
-## Confidence level used: 0.95 
-## 
-## $contrasts
-##  contrast                          estimate      SE df t.ratio p.value
-##  Young,Counting - Older,Counting        0.5 1.26693 90   0.395  1.0000
-##  Young,Counting - Young,Rhyming         0.1 1.26693 90   0.079  1.0000
-##  Young,Counting - Older,Rhyming        -0.6 1.26693 90  -0.474  1.0000
-##  Young,Counting - Young,Adjective      -4.0 1.26693 90  -3.157  0.0633
-##  Young,Counting - Older,Adjective      -7.8 1.26693 90  -6.157  &lt;.0001
-##  Young,Counting - Young,Imagery        -6.4 1.26693 90  -5.052  0.0001
-##  Young,Counting - Older,Imagery       -10.6 1.26693 90  -8.367  &lt;.0001
-##  Young,Counting - Young,Intention      -5.0 1.26693 90  -3.947  0.0058
-##  Young,Counting - Older,Intention     -12.3 1.26693 90  -9.709  &lt;.0001
-##  Older,Counting - Young,Rhyming        -0.4 1.26693 90  -0.316  1.0000
-##  Older,Counting - Older,Rhyming        -1.1 1.26693 90  -0.868  0.9970
-##  Older,Counting - Young,Adjective      -4.5 1.26693 90  -3.552  0.0205
-##  Older,Counting - Older,Adjective      -8.3 1.26693 90  -6.551  &lt;.0001
-##  Older,Counting - Young,Imagery        -6.9 1.26693 90  -5.446  &lt;.0001
-##  Older,Counting - Older,Imagery       -11.1 1.26693 90  -8.761  &lt;.0001
-##  Older,Counting - Young,Intention      -5.5 1.26693 90  -4.341  0.0015
-##  Older,Counting - Older,Intention     -12.8 1.26693 90 -10.103  &lt;.0001
-##  Young,Rhyming - Older,Rhyming         -0.7 1.26693 90  -0.553  0.9999
-##  Young,Rhyming - Young,Adjective       -4.1 1.26693 90  -3.236  0.0511
-##  Young,Rhyming - Older,Adjective       -7.9 1.26693 90  -6.236  &lt;.0001
-##  Young,Rhyming - Young,Imagery         -6.5 1.26693 90  -5.131  0.0001
-##  Young,Rhyming - Older,Imagery        -10.7 1.26693 90  -8.446  &lt;.0001
-##  Young,Rhyming - Young,Intention       -5.1 1.26693 90  -4.025  0.0044
-##  Young,Rhyming - Older,Intention      -12.4 1.26693 90  -9.787  &lt;.0001
-##  Older,Rhyming - Young,Adjective       -3.4 1.26693 90  -2.684  0.1963
-##  Older,Rhyming - Older,Adjective       -7.2 1.26693 90  -5.683  &lt;.0001
-##  Older,Rhyming - Young,Imagery         -5.8 1.26693 90  -4.578  0.0006
-##  Older,Rhyming - Older,Imagery        -10.0 1.26693 90  -7.893  &lt;.0001
-##  Older,Rhyming - Young,Intention       -4.4 1.26693 90  -3.473  0.0260
-##  Older,Rhyming - Older,Intention      -11.7 1.26693 90  -9.235  &lt;.0001
-##  Young,Adjective - Older,Adjective     -3.8 1.26693 90  -2.999  0.0950
-##  Young,Adjective - Young,Imagery       -2.4 1.26693 90  -1.894  0.6728
-##  Young,Adjective - Older,Imagery       -6.6 1.26693 90  -5.209  0.0001
-##  Young,Adjective - Young,Intention     -1.0 1.26693 90  -0.789  0.9986
-##  Young,Adjective - Older,Intention     -8.3 1.26693 90  -6.551  &lt;.0001
-##  Older,Adjective - Young,Imagery        1.4 1.26693 90   1.105  0.9830
-##  Older,Adjective - Older,Imagery       -2.8 1.26693 90  -2.210  0.4578
-##  Older,Adjective - Young,Intention      2.8 1.26693 90   2.210  0.4578
-##  Older,Adjective - Older,Intention     -4.5 1.26693 90  -3.552  0.0205
-##  Young,Imagery - Older,Imagery         -4.2 1.26693 90  -3.315  0.0411
-##  Young,Imagery - Young,Intention        1.4 1.26693 90   1.105  0.9830
-##  Young,Imagery - Older,Intention       -5.9 1.26693 90  -4.657  0.0005
-##  Older,Imagery - Young,Intention        5.6 1.26693 90   4.420  0.0011
-##  Older,Imagery - Older,Intention       -1.7 1.26693 90  -1.342  0.9409
-##  Young,Intention - Older,Intention     -7.3 1.26693 90  -5.762  &lt;.0001
-## 
-## P value adjustment: tukey method for comparing a family of 10 estimates</code></pre></div>
+<span class="op">$</span>lsmeans
+ Age   Condition lsmean        SE df  lower.CL  upper.CL
+ Young Counting     <span class="fl">7.0</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="fl">5.220228</span>  <span class="fl">8.779772</span>
+ Older Counting     <span class="fl">6.5</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="fl">4.720228</span>  <span class="fl">8.279772</span>
+ Young Rhyming      <span class="fl">6.9</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="fl">5.120228</span>  <span class="fl">8.679772</span>
+ Older Rhyming      <span class="fl">7.6</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="fl">5.820228</span>  <span class="fl">9.379772</span>
+ Young Adjective   <span class="fl">11.0</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="fl">9.220228</span> <span class="fl">12.779772</span>
+ Older Adjective   <span class="fl">14.8</span> <span class="fl">0.8958547</span> <span class="dv">90</span> <span class="fl">13.020228</span> <span class="fl">16.579772</span>
+ Young Imagery     <span class="fl">13.4</span> <span class="fl">0.8958547</span> <span class="dv">90</span> <span class="fl">11.620228</span> <span class="fl">15.179772</span>
+ Older Imagery     <span class="fl">17.6</span> <span class="fl">0.8958547</span> <span class="dv">90</span> <span class="fl">15.820228</span> <span class="fl">19.379772</span>
+ Young Intention   <span class="fl">12.0</span> <span class="fl">0.8958547</span> <span class="dv">90</span> <span class="fl">10.220228</span> <span class="fl">13.779772</span>
+ Older Intention   <span class="fl">19.3</span> <span class="fl">0.8958547</span> <span class="dv">90</span> <span class="fl">17.520228</span> <span class="fl">21.079772</span>
+
+Confidence level used<span class="op">:</span><span class="st"> </span><span class="fl">0.95</span> 
+
+<span class="op">$</span>contrasts
+ contrast                          estimate      SE df t.ratio p.value
+ Young,Counting <span class="op">-</span><span class="st"> </span>Older,Counting        <span class="fl">0.5</span> <span class="fl">1.26693</span> <span class="dv">90</span>   <span class="fl">0.395</span>  <span class="fl">1.0000</span>
+ Young,Counting <span class="op">-</span><span class="st"> </span>Young,Rhyming         <span class="fl">0.1</span> <span class="fl">1.26693</span> <span class="dv">90</span>   <span class="fl">0.079</span>  <span class="fl">1.0000</span>
+ Young,Counting <span class="op">-</span><span class="st"> </span>Older,Rhyming        <span class="op">-</span><span class="fl">0.6</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">0.474</span>  <span class="fl">1.0000</span>
+ Young,Counting <span class="op">-</span><span class="st"> </span>Young,Adjective      <span class="op">-</span><span class="fl">4.0</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">3.157</span>  <span class="fl">0.0633</span>
+ Young,Counting <span class="op">-</span><span class="st"> </span>Older,Adjective      <span class="op">-</span><span class="fl">7.8</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">6.157</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Young,Counting <span class="op">-</span><span class="st"> </span>Young,Imagery        <span class="op">-</span><span class="fl">6.4</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">5.052</span>  <span class="fl">0.0001</span>
+ Young,Counting <span class="op">-</span><span class="st"> </span>Older,Imagery       <span class="op">-</span><span class="fl">10.6</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">8.367</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Young,Counting <span class="op">-</span><span class="st"> </span>Young,Intention      <span class="op">-</span><span class="fl">5.0</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">3.947</span>  <span class="fl">0.0058</span>
+ Young,Counting <span class="op">-</span><span class="st"> </span>Older,Intention     <span class="op">-</span><span class="fl">12.3</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">9.709</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Older,Counting <span class="op">-</span><span class="st"> </span>Young,Rhyming        <span class="op">-</span><span class="fl">0.4</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">0.316</span>  <span class="fl">1.0000</span>
+ Older,Counting <span class="op">-</span><span class="st"> </span>Older,Rhyming        <span class="op">-</span><span class="fl">1.1</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">0.868</span>  <span class="fl">0.9970</span>
+ Older,Counting <span class="op">-</span><span class="st"> </span>Young,Adjective      <span class="op">-</span><span class="fl">4.5</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">3.552</span>  <span class="fl">0.0205</span>
+ Older,Counting <span class="op">-</span><span class="st"> </span>Older,Adjective      <span class="op">-</span><span class="fl">8.3</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">6.551</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Older,Counting <span class="op">-</span><span class="st"> </span>Young,Imagery        <span class="op">-</span><span class="fl">6.9</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">5.446</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Older,Counting <span class="op">-</span><span class="st"> </span>Older,Imagery       <span class="op">-</span><span class="fl">11.1</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">8.761</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Older,Counting <span class="op">-</span><span class="st"> </span>Young,Intention      <span class="op">-</span><span class="fl">5.5</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">4.341</span>  <span class="fl">0.0015</span>
+ Older,Counting <span class="op">-</span><span class="st"> </span>Older,Intention     <span class="op">-</span><span class="fl">12.8</span> <span class="fl">1.26693</span> <span class="dv">90</span> <span class="op">-</span><span class="fl">10.103</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Young,Rhyming <span class="op">-</span><span class="st"> </span>Older,Rhyming         <span class="op">-</span><span class="fl">0.7</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">0.553</span>  <span class="fl">0.9999</span>
+ Young,Rhyming <span class="op">-</span><span class="st"> </span>Young,Adjective       <span class="op">-</span><span class="fl">4.1</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">3.236</span>  <span class="fl">0.0511</span>
+ Young,Rhyming <span class="op">-</span><span class="st"> </span>Older,Adjective       <span class="op">-</span><span class="fl">7.9</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">6.236</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Young,Rhyming <span class="op">-</span><span class="st"> </span>Young,Imagery         <span class="op">-</span><span class="fl">6.5</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">5.131</span>  <span class="fl">0.0001</span>
+ Young,Rhyming <span class="op">-</span><span class="st"> </span>Older,Imagery        <span class="op">-</span><span class="fl">10.7</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">8.446</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Young,Rhyming <span class="op">-</span><span class="st"> </span>Young,Intention       <span class="op">-</span><span class="fl">5.1</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">4.025</span>  <span class="fl">0.0044</span>
+ Young,Rhyming <span class="op">-</span><span class="st"> </span>Older,Intention      <span class="op">-</span><span class="fl">12.4</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">9.787</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Older,Rhyming <span class="op">-</span><span class="st"> </span>Young,Adjective       <span class="op">-</span><span class="fl">3.4</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">2.684</span>  <span class="fl">0.1963</span>
+ Older,Rhyming <span class="op">-</span><span class="st"> </span>Older,Adjective       <span class="op">-</span><span class="fl">7.2</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">5.683</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Older,Rhyming <span class="op">-</span><span class="st"> </span>Young,Imagery         <span class="op">-</span><span class="fl">5.8</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">4.578</span>  <span class="fl">0.0006</span>
+ Older,Rhyming <span class="op">-</span><span class="st"> </span>Older,Imagery        <span class="op">-</span><span class="fl">10.0</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">7.893</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Older,Rhyming <span class="op">-</span><span class="st"> </span>Young,Intention       <span class="op">-</span><span class="fl">4.4</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">3.473</span>  <span class="fl">0.0260</span>
+ Older,Rhyming <span class="op">-</span><span class="st"> </span>Older,Intention      <span class="op">-</span><span class="fl">11.7</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">9.235</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Young,Adjective <span class="op">-</span><span class="st"> </span>Older,Adjective     <span class="op">-</span><span class="fl">3.8</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">2.999</span>  <span class="fl">0.0950</span>
+ Young,Adjective <span class="op">-</span><span class="st"> </span>Young,Imagery       <span class="op">-</span><span class="fl">2.4</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">1.894</span>  <span class="fl">0.6728</span>
+ Young,Adjective <span class="op">-</span><span class="st"> </span>Older,Imagery       <span class="op">-</span><span class="fl">6.6</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">5.209</span>  <span class="fl">0.0001</span>
+ Young,Adjective <span class="op">-</span><span class="st"> </span>Young,Intention     <span class="op">-</span><span class="fl">1.0</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">0.789</span>  <span class="fl">0.9986</span>
+ Young,Adjective <span class="op">-</span><span class="st"> </span>Older,Intention     <span class="op">-</span><span class="fl">8.3</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">6.551</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Older,Adjective <span class="op">-</span><span class="st"> </span>Young,Imagery        <span class="fl">1.4</span> <span class="fl">1.26693</span> <span class="dv">90</span>   <span class="fl">1.105</span>  <span class="fl">0.9830</span>
+ Older,Adjective <span class="op">-</span><span class="st"> </span>Older,Imagery       <span class="op">-</span><span class="fl">2.8</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">2.210</span>  <span class="fl">0.4578</span>
+ Older,Adjective <span class="op">-</span><span class="st"> </span>Young,Intention      <span class="fl">2.8</span> <span class="fl">1.26693</span> <span class="dv">90</span>   <span class="fl">2.210</span>  <span class="fl">0.4578</span>
+ Older,Adjective <span class="op">-</span><span class="st"> </span>Older,Intention     <span class="op">-</span><span class="fl">4.5</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">3.552</span>  <span class="fl">0.0205</span>
+ Young,Imagery <span class="op">-</span><span class="st"> </span>Older,Imagery         <span class="op">-</span><span class="fl">4.2</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">3.315</span>  <span class="fl">0.0411</span>
+ Young,Imagery <span class="op">-</span><span class="st"> </span>Young,Intention        <span class="fl">1.4</span> <span class="fl">1.26693</span> <span class="dv">90</span>   <span class="fl">1.105</span>  <span class="fl">0.9830</span>
+ Young,Imagery <span class="op">-</span><span class="st"> </span>Older,Intention       <span class="op">-</span><span class="fl">5.9</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">4.657</span>  <span class="fl">0.0005</span>
+ Older,Imagery <span class="op">-</span><span class="st"> </span>Young,Intention        <span class="fl">5.6</span> <span class="fl">1.26693</span> <span class="dv">90</span>   <span class="fl">4.420</span>  <span class="fl">0.0011</span>
+ Older,Imagery <span class="op">-</span><span class="st"> </span>Older,Intention       <span class="op">-</span><span class="fl">1.7</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">1.342</span>  <span class="fl">0.9409</span>
+ Young,Intention <span class="op">-</span><span class="st"> </span>Older,Intention     <span class="op">-</span><span class="fl">7.3</span> <span class="fl">1.26693</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">5.762</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+
+P value adjustment<span class="op">:</span><span class="st"> </span>tukey method <span class="cf">for</span> comparing a family of <span class="dv">10</span> estimates </code></pre></div>
 <p>Both cell means and pairwise contrasts are shown here. There is much more detail on computing pairwise comparisons and other types of contrasts in the section on <a href="multiple-comparisons.html#multiple-comparisons">multiple comparisons</a>, including ways to <a href="multiple-comparisons.html#extract-contrasts">extract</a> and present your comparisons in APA format.</p>
 
 </div>

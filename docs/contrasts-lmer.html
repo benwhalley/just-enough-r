@@ -400,12 +400,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sleep &lt;-<span class="st"> </span>lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Days=</span><span class="kw">factor</span>(Days))
 m &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction<span class="op">~</span>Days<span class="op">+</span>(<span class="dv">1</span><span class="op">|</span>Subject), <span class="dt">data=</span>sleep)
 <span class="kw">anova</span>(m)
-## Analysis of Variance Table of type III  with  Satterthwaite 
-## approximation for degrees of freedom
-##      Sum Sq Mean Sq NumDF DenDF F.value    Pr(&gt;F)    
-## Days 166235   18471     9   153  18.703 &lt; 2.2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre></div>
+Analysis of Variance Table of type III  with  Satterthwaite 
+approximation <span class="cf">for</span> degrees of freedom
+     Sum Sq Mean Sq NumDF DenDF F.value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    
+Days <span class="dv">166235</span>   <span class="dv">18471</span>     <span class="dv">9</span>   <span class="dv">153</span>  <span class="fl">18.703</span> <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
 <div id="a-quirk-of-lsmeanslt-and-factors" class="section level5 unnumbered explainer">
 <h5>A quirk of <code>lsmeansLT</code> and factors</h5>
 <p>[One quirk of <code>lsmeansLT</code> is that you can’t tell R that a variable is a factor <em>within</em> a formula.</p>
@@ -417,20 +417,20 @@ m &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction<span class
 <p>To first estimate cell means and create an <code>lsmeans</code> object, you can use the <code>lsmeans()</code> function in the <code>lsmeans::</code> package:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m.lsm &lt;-<span class="st"> </span>lsmeans<span class="op">::</span><span class="kw">lsmeans</span>(m, <span class="st">&quot;Days&quot;</span>)
 m.lsm
-##  Days   lsmean       SE    df lower.CL upper.CL
-##  0    256.6518 11.45778 41.98 233.5288 279.7748
-##  1    264.4958 11.45778 41.98 241.3727 287.6188
-##  2    265.3619 11.45778 41.98 242.2389 288.4849
-##  3    282.9920 11.45778 41.98 259.8690 306.1150
-##  4    288.6494 11.45778 41.98 265.5264 311.7724
-##  5    308.5185 11.45778 41.98 285.3954 331.6415
-##  6    312.1783 11.45778 41.98 289.0552 335.3013
-##  7    318.7506 11.45778 41.98 295.6276 341.8736
-##  8    336.6295 11.45778 41.98 313.5065 359.7525
-##  9    350.8512 11.45778 41.98 327.7282 373.9742
-## 
-## Degrees-of-freedom method: satterthwaite 
-## Confidence level used: 0.95</code></pre></div>
+ Days   lsmean       SE    df lower.CL upper.CL
+ <span class="dv">0</span>    <span class="fl">256.6518</span> <span class="fl">11.45778</span> <span class="fl">41.98</span> <span class="fl">233.5288</span> <span class="fl">279.7748</span>
+ <span class="dv">1</span>    <span class="fl">264.4958</span> <span class="fl">11.45778</span> <span class="fl">41.98</span> <span class="fl">241.3727</span> <span class="fl">287.6188</span>
+ <span class="dv">2</span>    <span class="fl">265.3619</span> <span class="fl">11.45778</span> <span class="fl">41.98</span> <span class="fl">242.2389</span> <span class="fl">288.4849</span>
+ <span class="dv">3</span>    <span class="fl">282.9920</span> <span class="fl">11.45778</span> <span class="fl">41.98</span> <span class="fl">259.8690</span> <span class="fl">306.1150</span>
+ <span class="dv">4</span>    <span class="fl">288.6494</span> <span class="fl">11.45778</span> <span class="fl">41.98</span> <span class="fl">265.5264</span> <span class="fl">311.7724</span>
+ <span class="dv">5</span>    <span class="fl">308.5185</span> <span class="fl">11.45778</span> <span class="fl">41.98</span> <span class="fl">285.3954</span> <span class="fl">331.6415</span>
+ <span class="dv">6</span>    <span class="fl">312.1783</span> <span class="fl">11.45778</span> <span class="fl">41.98</span> <span class="fl">289.0552</span> <span class="fl">335.3013</span>
+ <span class="dv">7</span>    <span class="fl">318.7506</span> <span class="fl">11.45778</span> <span class="fl">41.98</span> <span class="fl">295.6276</span> <span class="fl">341.8736</span>
+ <span class="dv">8</span>    <span class="fl">336.6295</span> <span class="fl">11.45778</span> <span class="fl">41.98</span> <span class="fl">313.5065</span> <span class="fl">359.7525</span>
+ <span class="dv">9</span>    <span class="fl">350.8512</span> <span class="fl">11.45778</span> <span class="fl">41.98</span> <span class="fl">327.7282</span> <span class="fl">373.9742</span>
+
+Degrees<span class="op">-</span>of<span class="op">-</span>freedom method<span class="op">:</span><span class="st"> </span>satterthwaite 
+Confidence level used<span class="op">:</span><span class="st"> </span><span class="fl">0.95</span> </code></pre></div>
 <p>It might be nice to extract these estimates and plot them:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m.lsm.df &lt;-<span class="st"> </span>
 <span class="st">  </span>m.lsm <span class="op">%&gt;%</span>
@@ -440,7 +440,7 @@ m.lsm.df <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Days, estimate, <span class="dt">ymin=</span>conf.low, <span class="dt">ymax=</span>conf.high)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_pointrange</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;RT&quot;</span>)</code></pre></div>
-<p><img src="multilevel-models_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p><img src="multilevel-models_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <p>If we wanted to compare each day against every other day (i.e. all the pairwise comparisons) we can use <code>contrast()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># results not shown to save space</span>
 lsmeans<span class="op">::</span><span class="kw">contrast</span>(m.lsm, <span class="st">&#39;tukey&#39;</span>) </code></pre></div>

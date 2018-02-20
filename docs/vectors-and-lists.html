@@ -412,7 +412,7 @@ heights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv"
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">names &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Ben&quot;</span>, <span class="st">&quot;Joe&quot;</span>, <span class="st">&quot;Sue&quot;</span>, <span class="st">&quot;Rosa&quot;</span>)</code></pre></div>
 <p>And we can check the values stored in these variables by printing them. You can either type <code>print(heights)</code>, or just write the name of the variable alone, which will print it by default. E.g.:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights 
-##  [1] 203 148 156 158 167 162 172 164 172 187 134 182 175</code></pre></div>
+ [<span class="dv">1</span>] <span class="dv">203</span> <span class="dv">148</span> <span class="dv">156</span> <span class="dv">158</span> <span class="dv">167</span> <span class="dv">162</span> <span class="dv">172</span> <span class="dv">164</span> <span class="dv">172</span> <span class="dv">187</span> <span class="dv">134</span> <span class="dv">182</span> <span class="dv">175</span></code></pre></div>
 <div id="section-3" class="section level4 unnumbered exercise">
 <h4></h4>
 <p>Try creating your own vector of numbers in a new code block below<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> using the <code>c(...)</code> command. Then change the name of the variable you assign it to.</p>
@@ -425,7 +425,7 @@ heights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv"
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my.vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>)</code></pre></div>
 <p>We can display the whole vector by just typing its name, as we saw above. But if we want to show only the <em>first</em> element of this vector, we type:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my.vector[<span class="dv">1</span>]
-## [1] 10</code></pre></div>
+[<span class="dv">1</span>] <span class="dv">10</span></code></pre></div>
 <p>Here, the square brackets specify a <em>subset</em> of the vector we want - in this case, just the first element.</p>
 </div>
 <div id="selecting-more-than-one-element" class="section level3 unnumbered">
@@ -435,11 +435,11 @@ heights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv"
 <p>It might seem obvious, but the first element has position 1, the second has position 2, and so on. So, if we wanted to extract the 4th and 5th elements from the vector of heights we saw above we would type:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">elements.to.grab &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>)
 heights[elements.to.grab]
-## [1] 158 167</code></pre></div>
+[<span class="dv">1</span>] <span class="dv">158</span> <span class="dv">167</span></code></pre></div>
 <p>We can also make a subset of the original vector and assign it to a <em>new</em> variable:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">first.two.elements &lt;-<span class="st"> </span>heights[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)]
 first.two.elements
-## [1] 203 148</code></pre></div>
+[<span class="dv">1</span>] <span class="dv">203</span> <span class="dv">148</span></code></pre></div>
 <!-- There are lots of other neat tricks you can use when subsetting, but we don't need them all right now.  -->
 <!-- If you want to know more see <http://www.statmethods.net/management/subset.html> -->
 </div>
@@ -449,37 +449,37 @@ first.two.elements
 <p>The simplest way of doing this is to define a range, with the colon:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">onetoten &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>
 onetoten
-##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre></div>
+ [<span class="dv">1</span>]  <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">4</span>  <span class="dv">5</span>  <span class="dv">6</span>  <span class="dv">7</span>  <span class="dv">8</span>  <span class="dv">9</span> <span class="dv">10</span></code></pre></div>
 <p>This creates a vector which can be sliced like any other:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">onetoten[<span class="dv">8</span>]
-## [1] 8</code></pre></div>
+[<span class="dv">1</span>] <span class="dv">8</span></code></pre></div>
 <p>One common use of sequences is to slice other vectors:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">onetoten[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]
-## [1] 1 2 3</code></pre></div>
+[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span></code></pre></div>
 <p>Or the first 10 values in the <code>heights</code> vector we defined above:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]
-##  [1] 203 148 156 158 167 162 172 164 172 187</code></pre></div>
+ [<span class="dv">1</span>] <span class="dv">203</span> <span class="dv">148</span> <span class="dv">156</span> <span class="dv">158</span> <span class="dv">167</span> <span class="dv">162</span> <span class="dv">172</span> <span class="dv">164</span> <span class="dv">172</span> <span class="dv">187</span></code></pre></div>
 <p>This works backwards, and with negative numbers too:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span><span class="op">:-</span><span class="dv">5</span>
-##  [1]  5  4  3  2  1  0 -1 -2 -3 -4 -5</code></pre></div>
+ [<span class="dv">1</span>]  <span class="dv">5</span>  <span class="dv">4</span>  <span class="dv">3</span>  <span class="dv">2</span>  <span class="dv">1</span>  <span class="dv">0</span> <span class="op">-</span><span class="dv">1</span> <span class="op">-</span><span class="dv">2</span> <span class="op">-</span><span class="dv">3</span> <span class="op">-</span><span class="dv">4</span> <span class="op">-</span><span class="dv">5</span></code></pre></div>
 <p>When your sequence doesn’t contain only whole numbers, or non-consecutive numbers, you can use the <code>seq</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">10</span>,<span class="dt">by=</span><span class="dv">2</span>)
-## [1] 1 3 5 7 9
+[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">3</span> <span class="dv">5</span> <span class="dv">7</span> <span class="dv">9</span>
 <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by=</span>.<span class="dv">2</span>)
-## [1] 0.0 0.2 0.4 0.6 0.8 1.0</code></pre></div>
+[<span class="dv">1</span>] <span class="fl">0.0</span> <span class="fl">0.2</span> <span class="fl">0.4</span> <span class="fl">0.6</span> <span class="fl">0.8</span> <span class="fl">1.0</span></code></pre></div>
 </div>
 <div id="conditional-slices" class="section level3 unnumbered">
 <h3>Conditional slicing</h3>
 <p>One neat feature of R is that you can create a sequence of <code>TRUE</code> or <code>FALSE</code> values, by asking whether each value in a sequence matches a particular condition. For example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>
-##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre></div>
+ [<span class="dv">1</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span></code></pre></div>
 <p>Re-using the heights vector from above, we can then use this to select values that are above the average:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(heights)
-##  [1]  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE
-## [12]  TRUE  TRUE</code></pre></div>
+ [<span class="dv">1</span>]  <span class="ot">TRUE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span>  <span class="ot">TRUE</span> <span class="ot">FALSE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span> <span class="ot">FALSE</span>
+[<span class="dv">12</span>]  <span class="ot">TRUE</span>  <span class="ot">TRUE</span></code></pre></div>
 <p>And we can use the vector of <code>TRUE</code> and <code>FALSE</code> values to select from the actual scores:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights[heights <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(heights)]
-## [1] 203 172 172 187 182 175</code></pre></div>
+[<span class="dv">1</span>] <span class="dv">203</span> <span class="dv">172</span> <span class="dv">172</span> <span class="dv">187</span> <span class="dv">182</span> <span class="dv">175</span></code></pre></div>
 </div>
 </div>
 <div class="footnotes">

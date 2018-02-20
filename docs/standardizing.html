@@ -400,32 +400,32 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>First, we run the linear model:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m1 &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>am, <span class="dt">data=</span>mtcars)
 m1
-## 
-## Call:
-## lm(formula = mpg ~ wt + am, data = mtcars)
-## 
-## Coefficients:
-## (Intercept)           wt           am  
-##    37.32155     -5.35281     -0.02362</code></pre></div>
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>am, <span class="dt">data =</span> mtcars)
+
+Coefficients<span class="op">:</span>
+(Intercept)           wt           am  
+   <span class="fl">37.32155</span>     <span class="op">-</span><span class="fl">5.35281</span>     <span class="op">-</span><span class="fl">0.02362</span>  </code></pre></div>
 <p>And then use <code>arm::standardize</code> to standardize the coefficients:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">arm<span class="op">::</span><span class="kw">standardize</span>(m1)
-## 
-## Call:
-## lm(formula = mpg ~ z.wt + c.am, data = mtcars)
-## 
-## Coefficients:
-## (Intercept)         z.wt         c.am  
-##    20.09062    -10.47500     -0.02362</code></pre></div>
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>z.wt <span class="op">+</span><span class="st"> </span>c.am, <span class="dt">data =</span> mtcars)
+
+Coefficients<span class="op">:</span>
+(Intercept)         z.wt         c.am  
+   <span class="fl">20.09062</span>    <span class="op">-</span><span class="fl">10.47500</span>     <span class="op">-</span><span class="fl">0.02362</span>  </code></pre></div>
 <p>This automatically scales the data for <code>m1</code> and re-fits the model.</p>
 <p>An alternative is to use the <code>MuMIn::stdizeFit</code> although this applies scaling rules slightly differently to <code>arm</code>, in this case standardising by a single SD:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MuMIn<span class="op">::</span><span class="kw">stdizeFit</span>(m1, mtcars)
-## 
-## Call:
-## lm(formula = mpg ~ wt + am, data = mtcars)
-## 
-## Coefficients:
-## (Intercept)           wt           am  
-##    37.32155     -5.35281     -0.02362</code></pre></div>
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>am, <span class="dt">data =</span> mtcars)
+
+Coefficients<span class="op">:</span>
+(Intercept)           wt           am  
+   <span class="fl">37.32155</span>     <span class="op">-</span><span class="fl">5.35281</span>     <span class="op">-</span><span class="fl">0.02362</span>  </code></pre></div>
 <p>Check the help file for <code>MuMIn::stdize</code> for a detailed discussion of the differences with <code>arm::standardize</code>.</p>
 </div>
             </section>

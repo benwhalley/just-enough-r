@@ -405,31 +405,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Examples of both are shown below, using the following plot as a starting point:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">base.plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(mpg, wt)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()
 base.plot</code></pre></div>
-<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
 <div id="facet_wrap" class="section level3 unnumbered">
 <h3><code>facet_wrap</code></h3>
 <p>If we want one facet we just type the tilde (<code>~</code>) symbol and then the name of the variable. This is like typing the right hand side of a <a href="formulae">formula for a regression model</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">base.plot <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>cyl)</code></pre></div>
-<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>If we want two facets we extend the formula, using the <code>+</code> sign:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">base.plot <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>cyl<span class="op">+</span>am)</code></pre></div>
-<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Note, the order of variables in the formula makes a difference:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">base.plot <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>am<span class="op">+</span>cyl)</code></pre></div>
-<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="facet_grid" class="section level3 unnumbered">
 <h3><code>facet_grid</code></h3>
 <p>With one variable <code>facet_grid</code> produces similar output. Note the <code>.</code> (period) on the left hand side of the formula now to make explicit we only have one variable, and we want it on the x axis:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">base.plot <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(.<span class="op">~</span>cyl)</code></pre></div>
-<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>We can flip the facets around by putting the <code>cyl</code> variable on the left hand side of the <code>~</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">base.plot <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(cyl<span class="op">~</span>.)</code></pre></div>
-<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>And <code>facet_grid</code> can also create facets for two or more variables:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">base.plot <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(am<span class="op">~</span>cyl)</code></pre></div>
-<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Here the labelling and the arrangement of plots is perhaps nicer because it is clearer that plots for <code>cyl</code> are arrange left to right, and for <code>am</code> they are top to bottom.</p>
 </div>
 <div id="combining-plots" class="section level3 unnumbered">
@@ -442,7 +442,7 @@ distributions &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mtcar
 composition &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(<span class="kw">factor</span>(cyl), <span class="dt">fill =</span> <span class="kw">factor</span>(gear))) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Composition&quot;</span>)
 mm &lt;-<span class="st"> </span><span class="kw">theme</span>(<span class="dt">plot.margin=</span><span class="kw">unit</span>(<span class="kw">rep</span>(<span class="fl">1.5</span>,<span class="dv">4</span>), <span class="st">&quot;line&quot;</span>))
 gridExtra<span class="op">::</span><span class="kw">grid.arrange</span>(relationships<span class="op">+</span>mm, distributions<span class="op">+</span>mm, comparison<span class="op">+</span>mm, composition<span class="op">+</span>mm, <span class="dt">ncol=</span><span class="dv">2</span>)</code></pre></div>
-<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 </div>
             </section>

@@ -411,13 +411,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <p>The second set of rugs are inversions of the first, <em>but the patterns remain the same</em>. The same sort of thing happens when we recode variables before entering them in our regression models. For example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(<span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data=</span>mtcars))
-## (Intercept)          wt 
-##   37.285126   -5.344472</code></pre></div>
+(Intercept)          wt 
+  <span class="fl">37.285126</span>   <span class="op">-</span><span class="fl">5.344472</span> </code></pre></div>
 <p>We can run a completely equivalent model if we ‘flip’ the weight (<code>wt</code>) coefficient by multiplying by <code>-1</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars<span class="op">$</span>wt.reversed  &lt;-<span class="st"> </span><span class="op">-</span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span>mtcars<span class="op">$</span>wt
 <span class="kw">coef</span>(<span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt.reversed, <span class="dt">data=</span>mtcars))
-## (Intercept) wt.reversed 
-##   37.285126    5.344472</code></pre></div>
+(Intercept) wt.reversed 
+  <span class="fl">37.285126</span>    <span class="fl">5.344472</span> </code></pre></div>
 <p>These models are equivalent in all the important ways: the test statistics, p values are all the same: only the sign of the coefficient for weight has changed.</p>
 <p>The same kind of thing happens when we choose a <a href="parameterisation.html#regression-coding">different <em>coding scheme</em> for categorical variables (see section below)</a>: although the parameter estimates change when the coding format thcnages, the <em>underlying model is equivalent because it would make the same predictions for new data</em>.</p>
 </div>
@@ -458,8 +458,8 @@ aurora.image &lt;-<span class="st"> </span><span class="kw">data_frame</span>(
 aurora.image <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x, Intensity)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span>.<span class="dv">5</span>)</code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-13"></span>
-<img src="linear-models_files/figure-html/unnamed-chunk-13-1.png" alt="Plot of the intensity of light in the single pixel slice from the Aurora image. Intensity of 1 corresponds to white, and 0 to black in the original image." width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-14"></span>
+<img src="linear-models_files/figure-html/unnamed-chunk-14-1.png" alt="Plot of the intensity of light in the single pixel slice from the Aurora image. Intensity of 1 corresponds to white, and 0 to black in the original image." width="672" />
 <p class="caption">
 Figure 7.1: Plot of the intensity of light in the single pixel slice from the Aurora image. Intensity of 1 corresponds to white, and 0 to black in the original image.
 </p>
@@ -472,9 +472,9 @@ Figure 7.1: Plot of the intensity of light in the single pixel slice from the Au
 <span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>(<span class="dt">id.var=</span><span class="st">&#39;x&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x, value, <span class="dt">group=</span>variable, <span class="dt">color=</span>variable)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span>.<span class="dv">5</span>)
-## Warning: attributes are not identical across measure variables; they will
-## be dropped</code></pre></div>
-<p><img src="linear-models_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+Warning<span class="op">:</span><span class="st"> </span>attributes are not identical across measure variables; they will
+be dropped</code></pre></div>
+<p><img src="linear-models_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>As we can see, our predictions are pretty terrible, because the linear model only allows for a simple slope over the range of <code>x</code>.</p>
 <p>To improve the model, we can go in one of two ways:</p>
 <ol style="list-style-type: decimal">
@@ -499,9 +499,9 @@ aurora.image <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>(<span class="dt">id.var=</span><span class="st">&#39;x&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x, value, <span class="dt">group=</span>variable, <span class="dt">color=</span>variable)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span>.<span class="dv">5</span>)
-## Warning: attributes are not identical across measure variables; they will
-## be dropped</code></pre></div>
-<p><img src="linear-models_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+Warning<span class="op">:</span><span class="st"> </span>attributes are not identical across measure variables; they will
+be dropped</code></pre></div>
+<p><img src="linear-models_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>That’s somewhat better, although we can still see that the extremes of our observed data are not well predicted by either the linear model (the flat line) or the chunked model.</p>
 <p><span class="exercise">Try cutting the <code>x</code> variable into more chunks. What are the pros and cons of doing this? How many chunks would you need to reproduce the original data faithfully?</span></p>
 </div>
@@ -518,9 +518,9 @@ aurora.image <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>(<span class="dt">id.var=</span><span class="st">&#39;x&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x, value, <span class="dt">group=</span>variable, <span class="dt">color=</span>variable)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span>.<span class="dv">5</span>)
-## Warning: attributes are not identical across measure variables; they will
-## be dropped</code></pre></div>
-<p><img src="linear-models_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+Warning<span class="op">:</span><span class="st"> </span>attributes are not identical across measure variables; they will
+be dropped</code></pre></div>
+<p><img src="linear-models_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>Or we could increase the number of parameters in our curve to allow a tighter fit with the raw data and plot all the models together:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aurora.curve &lt;-<span class="st"> </span><span class="kw">lm</span>(Intensity <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dv">7</span>), <span class="dt">data=</span>aurora.image)
 
@@ -531,27 +531,27 @@ all.predictions &lt;-<span class="st"> </span>aurora.image <span class="op">%&gt
     <span class="dt">curve.prediction =</span> <span class="kw">predict</span>(aurora.curve)
   ) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>(<span class="dt">id.var=</span><span class="st">&#39;x&#39;</span>)
-## Warning: attributes are not identical across measure variables; they will
-## be dropped
+Warning<span class="op">:</span><span class="st"> </span>attributes are not identical across measure variables; they will
+be dropped
 
 all.predictions <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(x, value, <span class="dt">group=</span>variable, <span class="dt">color=</span>variable)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span>.<span class="dv">5</span>)</code></pre></div>
-<p><img src="linear-models_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="linear-models_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>We can see that this curved model is a better approximation to the raw data than our ‘chunked’ model in some places (e.g. x = 100), but worse in others (e.g. x = 625). Overall though, the R<sup>2</sup> is much higher for the curves model here:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(aurora.chunks)<span class="op">$</span>r.squared
-## [1] 0.4463338
+[<span class="dv">1</span>] <span class="fl">0.4463338</span>
 <span class="kw">summary</span>(aurora.curve)<span class="op">$</span>r.squared
-## [1] 0.6162421</code></pre></div>
+[<span class="dv">1</span>] <span class="fl">0.6162421</span></code></pre></div>
 <p>And this is the case even though our model contains only 8 parameters, and so is just as parsimonious as the chunked model above.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># count the number of parameters in the chunked and curved models</span>
 <span class="kw">length</span>(<span class="kw">coef</span>(aurora.chunks))
-## [1] 8
+[<span class="dv">1</span>] <span class="dv">8</span>
 <span class="kw">length</span>(<span class="kw">coef</span>(aurora.curve))
-## [1] 8</code></pre></div>
+[<span class="dv">1</span>] <span class="dv">8</span></code></pre></div>
 <p><span class="exercise">Try to plot a curve that fits even more closely to the data. There are 1200 pixels in our original image. How many parameters would you need for the model to fit the image exactly? What happens in practice if you try and fit this model?</span></p>
 <p>For fun, we can even plot our data back in image form and see which is closest to matching the original:</p>
-<p><img src="linear-models_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="linear-models_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p><span class="admonition">There is no ‘right answer’ here: each model has pros and cons. You need to think about what the purpose of your model is, how you want to simplify your data, and then set up your models appropriately.</span></p>
 </div>
 <div id="regression-coding" class="section level3 unnumbered">
@@ -559,23 +559,23 @@ all.predictions <span class="op">%&gt;%</span><span class="st"> </span>
 <p>TODO: Explain this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">contrasts =</span> <span class="kw">c</span>(<span class="st">&quot;contr.treatment&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))
 <span class="kw">lm</span>(mpg<span class="op">~</span><span class="kw">factor</span>(cyl), <span class="dt">data=</span>mtcars)
-## 
-## Call:
-## lm(formula = mpg ~ factor(cyl), data = mtcars)
-## 
-## Coefficients:
-##  (Intercept)  factor(cyl)6  factor(cyl)8  
-##       26.664        -6.921       -11.564
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(cyl), <span class="dt">data =</span> mtcars)
+
+Coefficients<span class="op">:</span>
+<span class="st"> </span>(Intercept)  <span class="kw">factor</span>(cyl)<span class="dv">6</span>  <span class="kw">factor</span>(cyl)<span class="dv">8</span>  
+      <span class="fl">26.664</span>        <span class="op">-</span><span class="fl">6.921</span>       <span class="op">-</span><span class="fl">11.564</span>  
 
 <span class="kw">options</span>(<span class="dt">contrasts =</span> <span class="kw">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))
 <span class="kw">lm</span>(mpg<span class="op">~</span><span class="kw">factor</span>(cyl), <span class="dt">data=</span>mtcars)
-## 
-## Call:
-## lm(formula = mpg ~ factor(cyl), data = mtcars)
-## 
-## Coefficients:
-##  (Intercept)  factor(cyl)1  factor(cyl)2  
-##      20.5022        6.1615       -0.7593</code></pre></div>
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(cyl), <span class="dt">data =</span> mtcars)
+
+Coefficients<span class="op">:</span>
+<span class="st"> </span>(Intercept)  <span class="kw">factor</span>(cyl)<span class="dv">1</span>  <span class="kw">factor</span>(cyl)<span class="dv">2</span>  
+     <span class="fl">20.5022</span>        <span class="fl">6.1615</span>       <span class="op">-</span><span class="fl">0.7593</span>  </code></pre></div>
 </div>
 <div id="centering" class="section level3 unnumbered">
 <h3>Centering (is often helpful)</h3>
@@ -610,17 +610,17 @@ all.predictions <span class="op">%&gt;%</span><span class="st"> </span>
 <p>The main problem is that you don’t always know whether you have a full range of values of predictors in your sample. For example, imagine a case where the a regression coefficient for <code>age</code> was linear, and = .5 in a sample from the general population.</p>
 <p>We can plot these data to show the effect of age, and gender:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(incomes, <span class="kw">aes</span>(age, income, <span class="dt">group=</span>gender, <span class="dt">color=</span>gender)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span>F, <span class="dt">method=</span><span class="st">&quot;lm&quot;</span>)</code></pre></div>
-<p><img src="linear-models_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="linear-models_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>Older people earn more than younger people, and men earn slighly more than women (in this simulated dataset), but this gender gap doesn’t change with age.</p>
 <p>We can model this and print the effects of <code>age</code> and <code>gender</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m1 &lt;-<span class="st"> </span><span class="kw">lm</span>(income<span class="op">~</span>age<span class="op">+</span>gender, <span class="dt">data=</span>incomes)
 <span class="kw">coef</span>(m1)
-## (Intercept)         age     gender1 
-## 30494.75486    30.75124  -486.30867</code></pre></div>
+(Intercept)         age     gender1 
+<span class="fl">30494.75486</span>    <span class="fl">30.75124</span>  <span class="op">-</span><span class="fl">486.30867</span> </code></pre></div>
 <p>And we can standardize these effects using the <code>stadardize</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(arm<span class="op">::</span><span class="kw">standardize</span>(m1))
-## (Intercept)       z.age    c.gender 
-##  31727.1240    920.5955    972.6173</code></pre></div>
+(Intercept)       z.age    c.gender 
+ <span class="fl">31727.1240</span>    <span class="fl">920.5955</span>    <span class="fl">972.6173</span> </code></pre></div>
 <p>Based on these standardised coefficients we migth say that age and gender are of roughly equal importance in predicting income.</p>
 <p>If we re-fit the model on a subset of the data, for example only individuals under 40, the regression coefficients won’t change much because the effect was constant across the range of ages:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">younger.incomes &lt;-<span class="st"> </span>incomes <span class="op">%&gt;%</span>
@@ -628,12 +628,12 @@ all.predictions <span class="op">%&gt;%</span><span class="st"> </span>
 
 m2 &lt;-<span class="st"> </span><span class="kw">lm</span>(income<span class="op">~</span>age<span class="op">+</span>gender, <span class="dt">data=</span>younger.incomes)
 <span class="kw">coef</span>(m2)
-## (Intercept)         age     gender1 
-##  30522.7491     29.6859   -525.4932</code></pre></div>
+(Intercept)         age     gender1 
+ <span class="fl">30522.7491</span>     <span class="fl">29.6859</span>   <span class="op">-</span><span class="fl">525.4932</span> </code></pre></div>
 <p>But, the standardised coefficients <em>do</em> change, because we have restricted the range of ages in the sample:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(arm<span class="op">::</span><span class="kw">standardize</span>(m2))
-## (Intercept)       z.age    c.gender 
-##  31372.5885    542.2628   1050.9863</code></pre></div>
+(Intercept)       z.age    c.gender 
+ <span class="fl">31372.5885</span>    <span class="fl">542.2628</span>   <span class="fl">1050.9863</span> </code></pre></div>
 <p>The standardised effect of <code>age</code> is now roughly half that of <code>gender</code>.</p>
 <p><span class="admonition">The take home message here is that standardisation can be useful to put predictors on a similar scale, but it’s not a panacea and can’t be interpreted as a simple measure of ‘importance’. You still need to think!</span></p>
 </div>

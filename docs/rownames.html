@@ -399,43 +399,43 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>It’s now considered best practice to avoid row names for this reason. Consequently, the functions in the <code>dplyr</code> library remove row names when processing dataframes. For example here we see the row names in the <code>mtcars</code> data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>)
-##                mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## Mazda RX4     21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-## Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-## Datsun 710    22.8   4  108  93 3.85 2.320 18.61  1  1    4    1</code></pre></div>
+               mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4     <span class="fl">21.0</span>   <span class="dv">6</span>  <span class="dv">160</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.620</span> <span class="fl">16.46</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span>
+Mazda RX4 Wag <span class="fl">21.0</span>   <span class="dv">6</span>  <span class="dv">160</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.875</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span>
+Datsun <span class="dv">710</span>    <span class="fl">22.8</span>   <span class="dv">4</span>  <span class="dv">108</span>  <span class="dv">93</span> <span class="fl">3.85</span> <span class="fl">2.320</span> <span class="fl">18.61</span>  <span class="dv">1</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">1</span></code></pre></div>
 <p>But here we don’t because <code>arrange</code> has stripped them:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">arrange</span>(mpg) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>)
-##    mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## 1 10.4   8  472 205 2.93 5.250 17.98  0  0    3    4
-## 2 10.4   8  460 215 3.00 5.424 17.82  0  0    3    4
-## 3 13.3   8  350 245 3.73 3.840 15.41  0  0    3    4</code></pre></div>
+   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+<span class="dv">1</span> <span class="fl">10.4</span>   <span class="dv">8</span>  <span class="dv">472</span> <span class="dv">205</span> <span class="fl">2.93</span> <span class="fl">5.250</span> <span class="fl">17.98</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">2</span> <span class="fl">10.4</span>   <span class="dv">8</span>  <span class="dv">460</span> <span class="dv">215</span> <span class="fl">3.00</span> <span class="fl">5.424</span> <span class="fl">17.82</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">3</span> <span class="fl">13.3</span>   <span class="dv">8</span>  <span class="dv">350</span> <span class="dv">245</span> <span class="fl">3.73</span> <span class="fl">3.840</span> <span class="fl">15.41</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span></code></pre></div>
 <p>Converting the results of <code>psych::describe()</code> also returns rownames, which can get lots if we sort the data.</p>
 <p>We see row names here:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">describe</span>(mtcars) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">as_data_frame</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>)
-## # A tibble: 3 x 13
-##    vars     n      mean         sd median    trimmed       mad   min   max
-##   &lt;int&gt; &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     1    32  20.09062   6.026948   19.2  19.696154   5.41149  10.4  33.9
-## 2     2    32   6.18750   1.785922    6.0   6.230769   2.96520   4.0   8.0
-## 3     3    32 230.72188 123.938694  196.3 222.523077 140.47635  71.1 472.0
-## # ... with 4 more variables: range &lt;dbl&gt;, skew &lt;dbl&gt;, kurtosis &lt;dbl&gt;,
-## #   se &lt;dbl&gt;</code></pre></div>
+<span class="co"># A tibble: 3 x 13</span>
+   vars     n      mean         sd median    trimmed       mad   min   max
+  <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">      </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">      </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span>     <span class="dv">1</span>    <span class="dv">32</span>  <span class="fl">20.09062</span>   <span class="fl">6.026948</span>   <span class="fl">19.2</span>  <span class="fl">19.696154</span>   <span class="fl">5.41149</span>  <span class="fl">10.4</span>  <span class="fl">33.9</span>
+<span class="dv">2</span>     <span class="dv">2</span>    <span class="dv">32</span>   <span class="fl">6.18750</span>   <span class="fl">1.785922</span>    <span class="fl">6.0</span>   <span class="fl">6.230769</span>   <span class="fl">2.96520</span>   <span class="fl">4.0</span>   <span class="fl">8.0</span>
+<span class="dv">3</span>     <span class="dv">3</span>    <span class="dv">32</span> <span class="fl">230.72188</span> <span class="fl">123.938694</span>  <span class="fl">196.3</span> <span class="fl">222.523077</span> <span class="fl">140.47635</span>  <span class="fl">71.1</span> <span class="fl">472.0</span>
+<span class="co"># ... with 4 more variables: range &lt;dbl&gt;, skew &lt;dbl&gt;, kurtosis &lt;dbl&gt;,</span>
+<span class="co">#   se &lt;dbl&gt;</span></code></pre></div>
 <p>But not here (just numbers in their place):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">describe</span>(mtcars) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">as_data_frame</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">arrange</span>(mean) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>)
-## # A tibble: 3 x 13
-##    vars     n    mean        sd median   trimmed    mad   min   max range
-##   &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     9    32 0.40625 0.4989909      0 0.3846154 0.0000     0     1     1
-## 2     8    32 0.43750 0.5040161      0 0.4230769 0.0000     0     1     1
-## 3    11    32 2.81250 1.6152000      2 2.6538462 1.4826     1     8     7
-## # ... with 3 more variables: skew &lt;dbl&gt;, kurtosis &lt;dbl&gt;, se &lt;dbl&gt;</code></pre></div>
+<span class="co"># A tibble: 3 x 13</span>
+   vars     n    mean        sd median   trimmed    mad   min   max range
+  <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span>     <span class="dv">9</span>    <span class="dv">32</span> <span class="fl">0.40625</span> <span class="fl">0.4989909</span>      <span class="dv">0</span> <span class="fl">0.3846154</span> <span class="fl">0.0000</span>     <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">1</span>
+<span class="dv">2</span>     <span class="dv">8</span>    <span class="dv">32</span> <span class="fl">0.43750</span> <span class="fl">0.5040161</span>      <span class="dv">0</span> <span class="fl">0.4230769</span> <span class="fl">0.0000</span>     <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">1</span>
+<span class="dv">3</span>    <span class="dv">11</span>    <span class="dv">32</span> <span class="fl">2.81250</span> <span class="fl">1.6152000</span>      <span class="dv">2</span> <span class="fl">2.6538462</span> <span class="fl">1.4826</span>     <span class="dv">1</span>     <span class="dv">8</span>     <span class="dv">7</span>
+<span class="co"># ... with 3 more variables: skew &lt;dbl&gt;, kurtosis &lt;dbl&gt;, se &lt;dbl&gt;</span></code></pre></div>
 <div id="preserving-row-names" class="section level5 unnumbered">
 <h5>Preserving row names</h5>
 <p>If you want to preserve row names, it’s best to convert the names to an extra colum in the data. So, the example below does what we probably want:</p>
@@ -444,10 +444,10 @@ mtcars <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">rownames_to_column</span>(<span class="dt">var=</span><span class="st">&quot;car.name&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">arrange</span>(mpg) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>)
-##              car.name  mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## 1  Cadillac Fleetwood 10.4   8  472 205 2.93 5.250 17.98  0  0    3    4
-## 2 Lincoln Continental 10.4   8  460 215 3.00 5.424 17.82  0  0    3    4
-## 3          Camaro Z28 13.3   8  350 245 3.73 3.840 15.41  0  0    3    4</code></pre></div>
+             car.name  mpg cyl disp  hp drat    wt  qsec vs am gear carb
+<span class="dv">1</span>  Cadillac Fleetwood <span class="fl">10.4</span>   <span class="dv">8</span>  <span class="dv">472</span> <span class="dv">205</span> <span class="fl">2.93</span> <span class="fl">5.250</span> <span class="fl">17.98</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">2</span> Lincoln Continental <span class="fl">10.4</span>   <span class="dv">8</span>  <span class="dv">460</span> <span class="dv">215</span> <span class="fl">3.00</span> <span class="fl">5.424</span> <span class="fl">17.82</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">3</span>          Camaro Z28 <span class="fl">13.3</span>   <span class="dv">8</span>  <span class="dv">350</span> <span class="dv">245</span> <span class="fl">3.73</span> <span class="fl">3.840</span> <span class="fl">15.41</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span></code></pre></div>
 <!-- TODO ADD THIS BACK WHEN THIS BUG FIXED: https://github.com/tidyverse/broom/issues/231 -->
 <!-- Another good way of preserving row names when converting R objects to dataframes is to use the `broom` library. Its `tidy()` function often does something sensible to convert an object to a dataframe, and has other benefits too, like extracting the relevant parts of the output, and naming columns consistently. -->
 <!-- Some example of `broom` in action: -->

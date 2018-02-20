@@ -1,3 +1,4 @@
+
 ---
 title: 'Correlations'
 ---
@@ -19,7 +20,7 @@ airquality %>%
   pairs
 ```
 
-<img src="correlations_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<img src="correlations_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 
 If we were satisfied the relationships were (reasonably) linear, we could also visualise correlations themselves with a 'corrgram', using the `corrgram` library:
@@ -36,8 +37,8 @@ airquality %>%
 ```
 
 <div class="figure">
-<img src="correlations_files/figure-html/unnamed-chunk-3-1.png" alt="A corrgram, showing pearson correlations (above the diagonal), variable distributions (on the diagonal) and ellipses and smoothed lines of best fit (below the diagnonal). Long, narrow ellipses denote large correlations; circular ellipses indicate small correlations." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-3)A corrgram, showing pearson correlations (above the diagonal), variable distributions (on the diagonal) and ellipses and smoothed lines of best fit (below the diagnonal). Long, narrow ellipses denote large correlations; circular ellipses indicate small correlations.</p>
+<img src="correlations_files/figure-html/unnamed-chunk-4-1.png" alt="A corrgram, showing pearson correlations (above the diagonal), variable distributions (on the diagonal) and ellipses and smoothed lines of best fit (below the diagnonal). Long, narrow ellipses denote large correlations; circular ellipses indicate small correlations." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-4)A corrgram, showing pearson correlations (above the diagonal), variable distributions (on the diagonal) and ellipses and smoothed lines of best fit (below the diagnonal). Long, narrow ellipses denote large correlations; circular ellipses indicate small correlations.</p>
 </div>
 
 
@@ -52,7 +53,7 @@ mtcars %>%
   GGally::ggpairs()
 ```
 
-<img src="correlations_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="correlations_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 
 
@@ -66,33 +67,33 @@ The `psych::corr.test()` function is a quick way to obtain a pairwise correlatio
 ```r
 mycorrelations <- psych::corr.test(airquality)
 mycorrelations
-## Call:psych::corr.test(x = airquality)
-## Correlation matrix 
-##         Ozone Solar.R  Wind  Temp Month   Day
-## Ozone    1.00    0.35 -0.60  0.70  0.16 -0.01
-## Solar.R  0.35    1.00 -0.06  0.28 -0.08 -0.15
-## Wind    -0.60   -0.06  1.00 -0.46 -0.18  0.03
-## Temp     0.70    0.28 -0.46  1.00  0.42 -0.13
-## Month    0.16   -0.08 -0.18  0.42  1.00 -0.01
-## Day     -0.01   -0.15  0.03 -0.13 -0.01  1.00
-## Sample Size 
-##         Ozone Solar.R Wind Temp Month Day
-## Ozone     116     111  116  116   116 116
-## Solar.R   111     146  146  146   146 146
-## Wind      116     146  153  153   153 153
-## Temp      116     146  153  153   153 153
-## Month     116     146  153  153   153 153
-## Day       116     146  153  153   153 153
-## Probability values (Entries above the diagonal are adjusted for multiple tests.) 
-##         Ozone Solar.R Wind Temp Month  Day
-## Ozone    0.00    0.00 0.00 0.00  0.56 1.00
-## Solar.R  0.00    0.00 1.00 0.01  1.00 0.56
-## Wind     0.00    0.50 0.00 0.00  0.25 1.00
-## Temp     0.00    0.00 0.00 0.00  0.00 0.65
-## Month    0.08    0.37 0.03 0.00  0.00 1.00
-## Day      0.89    0.07 0.74 0.11  0.92 0.00
-## 
-##  To see confidence intervals of the correlations, print with the short=FALSE option
+Call:psych::corr.test(x = airquality)
+Correlation matrix 
+        Ozone Solar.R  Wind  Temp Month   Day
+Ozone    1.00    0.35 -0.60  0.70  0.16 -0.01
+Solar.R  0.35    1.00 -0.06  0.28 -0.08 -0.15
+Wind    -0.60   -0.06  1.00 -0.46 -0.18  0.03
+Temp     0.70    0.28 -0.46  1.00  0.42 -0.13
+Month    0.16   -0.08 -0.18  0.42  1.00 -0.01
+Day     -0.01   -0.15  0.03 -0.13 -0.01  1.00
+Sample Size 
+        Ozone Solar.R Wind Temp Month Day
+Ozone     116     111  116  116   116 116
+Solar.R   111     146  146  146   146 146
+Wind      116     146  153  153   153 153
+Temp      116     146  153  153   153 153
+Month     116     146  153  153   153 153
+Day       116     146  153  153   153 153
+Probability values (Entries above the diagonal are adjusted for multiple tests.) 
+        Ozone Solar.R Wind Temp Month  Day
+Ozone    0.00    0.00 0.00 0.00  0.56 1.00
+Solar.R  0.00    0.00 1.00 0.01  1.00 0.56
+Wind     0.00    0.50 0.00 0.00  0.25 1.00
+Temp     0.00    0.00 0.00 0.00  0.00 0.65
+Month    0.08    0.37 0.03 0.00  0.00 1.00
+Day      0.89    0.07 0.74 0.11  0.92 0.00
+
+ To see confidence intervals of the correlations, print with the short=FALSE option
 ```
 
 
@@ -211,28 +212,28 @@ Note though, that the APA table format does encourage 'star gazing' to some degr
 ```r
 library(apaTables)
 apa.cor.table(airquality, filename="Table1_APA.doc", show.conf.interval=F)
-## 
-## 
-## Means, standard deviations, and correlations
-##  
-## 
-##   Variable   M      SD    1      2     3      4     5   
-##   1. Ozone   42.13  32.99                               
-##                                                         
-##   2. Solar.R 185.93 90.06 .35**                         
-##                                                         
-##   3. Wind    9.96   3.52  -.60** -.06                   
-##                                                         
-##   4. Temp    77.88  9.47  .70**  .28** -.46**           
-##                                                         
-##   5. Month   6.99   1.42  .16    -.08  -.18*  .42**     
-##                                                         
-##   6. Day     15.80  8.86  -.01   -.15  .03    -.13  -.01
-##                                                         
-## 
-## Note. * indicates p < .05; ** indicates p < .01.
-## M and SD are used to represent mean and standard deviation, respectively.
-## 
+
+
+Means, standard deviations, and correlations
+ 
+
+  Variable   M      SD    1      2     3      4     5   
+  1. Ozone   42.13  32.99                               
+                                                        
+  2. Solar.R 185.93 90.06 .35**                         
+                                                        
+  3. Wind    9.96   3.52  -.60** -.06                   
+                                                        
+  4. Temp    77.88  9.47  .70**  .28** -.46**           
+                                                        
+  5. Month   6.99   1.42  .16    -.08  -.18*  .42**     
+                                                        
+  6. Day     15.80  8.86  -.01   -.15  .03    -.13  -.01
+                                                        
+
+Note. * indicates p < .05; ** indicates p < .01.
+M and SD are used to represent mean and standard deviation, respectively.
+ 
 ```
 
 

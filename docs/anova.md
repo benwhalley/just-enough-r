@@ -1,3 +1,4 @@
+
 ---
 title: 'Anova'
 
@@ -57,17 +58,17 @@ df %>%
 -------------------------------------
  person   time   predictor   outcome 
 -------- ------ ----------- ---------
-   1       1         2          7    
+   1       1         4         10    
 
-   1       2         2         17    
+   1       2         4          8    
 
-   1       3         2          9    
+   1       3         4          5    
 
-   2       1         5         16    
+   2       1         3         14    
 
-   2       2         5          8    
+   2       2         3         11    
 
-   2       3         5          7    
+   2       3         3         13    
 -------------------------------------
 
 
@@ -86,17 +87,17 @@ df.wide %>%
 -----------------------------------------------
  person   predictor   Time 1   Time 2   Time 3 
 -------- ----------- -------- -------- --------
-   1          2         7        17       9    
+   1          4         10       8        5    
 
-   2          5         16       8        7    
+   2          3         14       11       13   
 
-   3          6         7        10       7    
+   3          1         9        5        10   
 
-   4          4         8        6        9    
+   4          4         6        11       7    
 
-   5          2         9        8        12   
+   5          4         6        8        12   
 
-   6          3         12       9        13   
+   6          2         10       9        6    
 -----------------------------------------------
 
 
@@ -198,7 +199,7 @@ If your design has more than 2 groups then you should use oneway Anova.
 
 Let's say we asked people to taste 1 of 4 fruit juices, and rate how tasty it was on a scale from 0 to 10:
 
-<img src="anova_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="anova_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 
 We can run a oneway Anova with [type 3 sums of squares](#sums-squares) using the `Anova` function from the `car::` package:
@@ -208,15 +209,15 @@ We can run a oneway Anova with [type 3 sums of squares](#sums-squares) using the
 juice.lm <- lm(tastiness ~ juice, data=tasty.juice)
 juice.anova <- car::Anova(juice.lm, type=3)
 juice.anova
-## Anova Table (Type III tests)
-## 
-## Response: tastiness
-##             Sum Sq Df  F value    Pr(>F)    
-## (Intercept) 615.04  1 114.4793 < 2.2e-16 ***
-## juice       128.83  3   7.9932 8.231e-05 ***
-## Residuals   515.76 96                       
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Anova Table (Type III tests)
+
+Response: tastiness
+            Sum Sq Df  F value    Pr(>F)    
+(Intercept) 615.04  1 114.4793 < 2.2e-16 ***
+juice       128.83  3   7.9932 8.231e-05 ***
+Residuals   515.76 96                       
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 And we could [compute the contasts](#contrasts) for each fruit against the others (the grand mean):
@@ -226,13 +227,13 @@ And we could [compute the contasts](#contrasts) for each fruit against the other
 juice.lsm <- lsmeans::lsmeans(juice.lm, pairwise~juice, adjust="fdr")
 juice.contrasts <- summary(lsmeans::contrast(juice.lsm, "eff"))
 juice.contrasts
-##  contrast      estimate        SE df t.ratio p.value
-##  Mango effect      0.25 0.4014661 96   0.623  0.5349
-##  Apple effect      1.01 0.4014661 96   2.516  0.0271
-##  Orange effect     0.65 0.4014661 96   1.619  0.1450
-##  Durian effect    -1.91 0.4014661 96  -4.758  <.0001
-## 
-## P value adjustment: fdr method for 4 tests
+ contrast      estimate        SE df t.ratio p.value
+ Mango effect      0.25 0.4014661 96   0.623  0.5349
+ Apple effect      1.01 0.4014661 96   2.516  0.0271
+ Orange effect     0.65 0.4014661 96   1.619  0.1450
+ Durian effect    -1.91 0.4014661 96  -4.758  <.0001
+
+P value adjustment: fdr method for 4 tests 
 ```
 
 
@@ -262,7 +263,7 @@ eysenck %>%
   xlab("")
 ```
 
-<img src="anova_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="anova_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 
 [Visual inspection of the data (see Figure X) suggested that older adults recalled more words than younger adults, and that this difference was greatest for the intention, imagery, and adjective conditions. Recall peformance was worst in the counting and rhyming conditions.]{.apa-example}
@@ -282,8 +283,8 @@ eysenck %>%
 ```
 
 <div class="figure">
-<img src="anova_files/figure-html/unnamed-chunk-10-1.png" alt="Boxplot for recall in older and young adults, by condition." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-10)Boxplot for recall in older and young adults, by condition.</p>
+<img src="anova_files/figure-html/unnamed-chunk-11-1.png" alt="Boxplot for recall in older and young adults, by condition." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-11)Boxplot for recall in older and young adults, by condition.</p>
 </div>
 
 
@@ -293,17 +294,17 @@ We can run a linear model including the effect of `Age` and `Condition` and the 
 ```r
 eysenck.model <- lm(Recall~Age*Condition, data=eysenck)
 car::Anova(eysenck.model, type=3)
-## Anova Table (Type III tests)
-## 
-## Response: Recall
-##               Sum Sq Df F value    Pr(>F)    
-## (Intercept)   490.00  1 61.0550  9.85e-12 ***
-## Age             1.25  1  0.1558 0.6940313    
-## Condition     351.52  4 10.9500  2.80e-07 ***
-## Age:Condition 190.30  4  5.9279 0.0002793 ***
-## Residuals     722.30 90                      
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Anova Table (Type III tests)
+
+Response: Recall
+              Sum Sq Df F value    Pr(>F)    
+(Intercept)   490.00  1 61.0550  9.85e-12 ***
+Age             1.25  1  0.1558 0.6940313    
+Condition     351.52  4 10.9500  2.80e-07 ***
+Age:Condition 190.30  4  5.9279 0.0002793 ***
+Residuals     722.30 90                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 
@@ -380,7 +381,7 @@ lme4::sleepstudy %>%
   geom_label(aes(y=450, x=9, label="imagine how bad\nyou feel by this point"), color="red") 
 ```
 
-<img src="anova_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="anova_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 
 If we want to test whether there are significant differences in RTs between `Days`, we could fit something very similar to a traditional repeat measures Anova using the `lme4::lmer()` function, and obtain an Anova table for the model using the special `lmerTest::anova()` function:
@@ -389,12 +390,12 @@ If we want to test whether there are significant differences in RTs between `Day
 ```r
 sleep.model <- lmer(Reaction ~ factor(Days) + (1 | Subject), data=lme4::sleepstudy)
 lmerTest::anova(sleep.model)
-## Analysis of Variance Table of type III  with  Satterthwaite 
-## approximation for degrees of freedom
-##              Sum Sq Mean Sq NumDF DenDF F.value    Pr(>F)    
-## factor(Days) 166235   18471     9   153  18.703 < 2.2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Analysis of Variance Table of type III  with  Satterthwaite 
+approximation for degrees of freedom
+             Sum Sq Mean Sq NumDF DenDF F.value    Pr(>F)    
+factor(Days) 166235   18471     9   153  18.703 < 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 
@@ -419,7 +420,7 @@ expt.data %>%
   facet_wrap(~paste("Time", time))
 ```
 
-<img src="anova_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="anova_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 
 We want to use our repeated measurements before and after the experimental interventions to increase the precision of our estimate of the between-condition differences.
@@ -433,17 +434,16 @@ expt.data.agg <- expt.data %>%
   summarise(RT=mean(RT))
 
 head(expt.data.agg)
-## Source: local data frame [6 x 4]
-## Groups: Condition, person [3]
-## 
-##   Condition person   time       RT
-##      <fctr> <fctr> <fctr>    <dbl>
-## 1         1      1      1 260.8600
-## 2         1      1      2 265.6524
-## 3         1      2      1 279.1190
-## 4         1      2      2 267.0095
-## 5         1      3      1 254.3760
-## 6         1      3      2 256.4459
+# A tibble: 6 x 4
+# Groups:   Condition, person [3]
+  Condition person   time       RT
+     <fctr> <fctr> <fctr>    <dbl>
+1         1      1      1 260.8600
+2         1      1      2 265.6524
+3         1      2      1 279.1190
+4         1      2      2 267.0095
+5         1      3      1 254.3760
+6         1      3      2 256.4459
 ```
 
 
@@ -459,15 +459,15 @@ expt.afex$anova_table %>%
 ```
 
 
--------------------------------------------------------------------
-       &nbsp;         num Df   den Df   MSE    F    ges    Pr(>F)  
--------------------- -------- -------- ----- ----- ------ ---------
-   **Condition**        3        44    158.6 159.4 0.8504 1.193e-23
+---------------------------------------------------------------------------
+       &nbsp;         num Df   den Df    MSE      F      ges      Pr(>F)   
+-------------------- -------- -------- ------- ------- -------- -----------
+   **Condition**        3        44     158.6   159.4   0.8504   1.193e-23 
 
-      **time**          1        44    144.6 11.87 0.114  0.001266 
+      **time**          1        44     144.6   11.87   0.114    0.001266  
 
- **Condition:time**     3        44    144.6 37.79 0.5513 3.073e-12
--------------------------------------------------------------------
+ **Condition:time**     3        44     144.6   37.79   0.5513   3.073e-12 
+---------------------------------------------------------------------------
 
 Table: `afex::aov_car` output.
 
@@ -486,15 +486,15 @@ expt.ez$ANOVA %>%
 ```
 
 
------------------------------------------------------------------
-&nbsp;      Effect      DFn   DFd    F       p      p<.05   ges  
-------- -------------- ----- ----- ----- --------- ------- ------
- **2**    Condition      3    44   159.4 1.193e-23    *    0.8504
+--------------------------------------------------------------------------
+ &nbsp;       Effect       DFn   DFd     F         p       p<.05    ges   
+-------- ---------------- ----- ----- ------- ----------- ------- --------
+ **2**      Condition       3    44    159.4   1.193e-23     *     0.8504 
 
- **3**       time        1    44   11.87 0.001266     *    0.114 
+ **3**         time         1    44    11.87   0.001266      *     0.114  
 
- **4**  Condition:time   3    44   37.79 3.073e-12    *    0.5513
------------------------------------------------------------------
+ **4**    Condition:time    3    44    37.79   3.073e-12     *     0.5513 
+--------------------------------------------------------------------------
 
 Table: `ez::ezANOVA` output.
 
@@ -530,15 +530,15 @@ anova(expt.mlm) %>%
 ```
 
 
----------------------------------------------------------------------------
-       &nbsp;         Sum Sq   Mean Sq   NumDF   DenDF   F.value   Pr(>F)  
--------------------- -------- --------- ------- ------- --------- ---------
-   **Condition**      69154     23051      3      44      159.4       0    
+-----------------------------------------------------------------------------
+       &nbsp;         Sum Sq   Mean Sq   NumDF   DenDF   F.value    Pr(>F)   
+-------------------- -------- --------- ------- ------- --------- -----------
+   **Condition**      69154     23051      3      44      159.4        0     
 
-      **time**         1716     1716       1      44      11.87   0.001266 
+      **time**         1716     1716       1      44      11.87    0.001266  
 
- **Condition:time**   16394     5465       3      44      37.79   3.073e-12
----------------------------------------------------------------------------
+ **Condition:time**   16394     5465       3      44      37.79    3.073e-12 
+-----------------------------------------------------------------------------
 
 Table: Analysis of Variance Table of type III  with  Satterthwaite 
 
@@ -552,7 +552,7 @@ ggplot(expt.data,
   facet_wrap(~paste("Condition", Condition))
 ```
 
-<img src="anova_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+<img src="anova_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 
 If we wanted to replicate the aggregated RM Anova models shown above we could write:
@@ -562,14 +562,14 @@ If we wanted to replicate the aggregated RM Anova models shown above we could wr
 options(contrasts = c("contr.sum", "contr.poly"))
 expt.mlm2 <- lmer(RT ~ Condition * time + (time|person), data=expt.data)
 anova(expt.mlm2)
-## Analysis of Variance Table of type III  with  Satterthwaite 
-## approximation for degrees of freedom
-##                 Sum Sq Mean Sq NumDF  DenDF F.value    Pr(>F)    
-## Condition      1391631  463877     3 64.082 129.803 < 2.2e-16 ***
-## time             32791   32791     1 71.596   9.176   0.00341 ** 
-## Condition:time  313212  104404     3 71.596  29.215 1.911e-12 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Analysis of Variance Table of type III  with  Satterthwaite 
+approximation for degrees of freedom
+                Sum Sq Mean Sq NumDF  DenDF F.value    Pr(>F)    
+Condition      1391631  463877     3 64.082 129.803 < 2.2e-16 ***
+time             32791   32791     1 71.596   9.176   0.00341 ** 
+Condition:time  313212  104404     3 71.596  29.215 1.911e-12 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 
@@ -583,18 +583,18 @@ expt.mlm.bytrial <- lmer(RT ~ Condition * time * trial +
     data=expt.data)
 
 anova(expt.mlm.bytrial)
-## Analysis of Variance Table of type III  with  Satterthwaite 
-## approximation for degrees of freedom
-##                      Sum Sq Mean Sq NumDF   DenDF F.value    Pr(>F)    
-## Condition            181589   60530     3  591.06 17.3653 8.114e-11 ***
-## time                   7744    7744     1  670.24  2.2218   0.13655    
-## trial                 81015   81015     1 2339.99 23.2424 1.520e-06 ***
-## Condition:time        94032   31344     3  670.24  8.9923 7.612e-06 ***
-## Condition:trial      126361   42120     3 2339.99 12.0839 7.557e-08 ***
-## time:trial              109     109     1 2339.99  0.0314   0.85943    
-## Condition:time:trial  27086    9029     3 2339.99  2.5902   0.05125 .  
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Analysis of Variance Table of type III  with  Satterthwaite 
+approximation for degrees of freedom
+                     Sum Sq Mean Sq NumDF   DenDF F.value    Pr(>F)    
+Condition            181589   60530     3  591.06 17.3653 8.114e-11 ***
+time                   7744    7744     1  670.24  2.2218   0.13655    
+trial                 81015   81015     1 2339.99 23.2424 1.520e-06 ***
+Condition:time        94032   31344     3  670.24  8.9923 7.612e-06 ***
+Condition:trial      126361   42120     3 2339.99 12.0839 7.557e-08 ***
+time:trial              109     109     1 2339.99  0.0314   0.85943    
+Condition:time:trial  27086    9029     3 2339.99  2.5902   0.05125 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 
@@ -607,7 +607,7 @@ We found a significant interaction between condition and the linear term for tri
 
 
 
-<img src="anova_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+<img src="anova_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
 
 
@@ -668,8 +668,8 @@ car::qqPlot(eysenck.model)
 ```
 
 <div class="figure">
-<img src="anova_files/figure-html/unnamed-chunk-27-1.png" alt="QQ plot to assess normality of model residuals" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-27)QQ plot to assess normality of model residuals</p>
+<img src="anova_files/figure-html/unnamed-chunk-28-1.png" alt="QQ plot to assess normality of model residuals" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-28)QQ plot to assess normality of model residuals</p>
 </div>
 
 
@@ -688,8 +688,8 @@ data_frame(
 ```
 
 <div class="figure">
-<img src="anova_files/figure-html/unnamed-chunk-28-1.png" alt="Residual vs fitted (spread vs. level) plot to check homogeneity of variance." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-28)Residual vs fitted (spread vs. level) plot to check homogeneity of variance.</p>
+<img src="anova_files/figure-html/unnamed-chunk-29-1.png" alt="Residual vs fitted (spread vs. level) plot to check homogeneity of variance." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-29)Residual vs fitted (spread vs. level) plot to check homogeneity of variance.</p>
 </div>
 
 
@@ -709,70 +709,70 @@ If we want to look at post-hoc pairwise tests we can use the the `lsmeans()` fun
 
 ```r
 lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition)
-## $lsmeans
-##  Age   Condition lsmean        SE df  lower.CL  upper.CL
-##  Young Counting     7.0 0.8958547 90  5.220228  8.779772
-##  Older Counting     6.5 0.8958547 90  4.720228  8.279772
-##  Young Rhyming      6.9 0.8958547 90  5.120228  8.679772
-##  Older Rhyming      7.6 0.8958547 90  5.820228  9.379772
-##  Young Adjective   11.0 0.8958547 90  9.220228 12.779772
-##  Older Adjective   14.8 0.8958547 90 13.020228 16.579772
-##  Young Imagery     13.4 0.8958547 90 11.620228 15.179772
-##  Older Imagery     17.6 0.8958547 90 15.820228 19.379772
-##  Young Intention   12.0 0.8958547 90 10.220228 13.779772
-##  Older Intention   19.3 0.8958547 90 17.520228 21.079772
-## 
-## Confidence level used: 0.95 
-## 
-## $contrasts
-##  contrast                          estimate      SE df t.ratio p.value
-##  Young,Counting - Older,Counting        0.5 1.26693 90   0.395  1.0000
-##  Young,Counting - Young,Rhyming         0.1 1.26693 90   0.079  1.0000
-##  Young,Counting - Older,Rhyming        -0.6 1.26693 90  -0.474  1.0000
-##  Young,Counting - Young,Adjective      -4.0 1.26693 90  -3.157  0.0633
-##  Young,Counting - Older,Adjective      -7.8 1.26693 90  -6.157  <.0001
-##  Young,Counting - Young,Imagery        -6.4 1.26693 90  -5.052  0.0001
-##  Young,Counting - Older,Imagery       -10.6 1.26693 90  -8.367  <.0001
-##  Young,Counting - Young,Intention      -5.0 1.26693 90  -3.947  0.0058
-##  Young,Counting - Older,Intention     -12.3 1.26693 90  -9.709  <.0001
-##  Older,Counting - Young,Rhyming        -0.4 1.26693 90  -0.316  1.0000
-##  Older,Counting - Older,Rhyming        -1.1 1.26693 90  -0.868  0.9970
-##  Older,Counting - Young,Adjective      -4.5 1.26693 90  -3.552  0.0205
-##  Older,Counting - Older,Adjective      -8.3 1.26693 90  -6.551  <.0001
-##  Older,Counting - Young,Imagery        -6.9 1.26693 90  -5.446  <.0001
-##  Older,Counting - Older,Imagery       -11.1 1.26693 90  -8.761  <.0001
-##  Older,Counting - Young,Intention      -5.5 1.26693 90  -4.341  0.0015
-##  Older,Counting - Older,Intention     -12.8 1.26693 90 -10.103  <.0001
-##  Young,Rhyming - Older,Rhyming         -0.7 1.26693 90  -0.553  0.9999
-##  Young,Rhyming - Young,Adjective       -4.1 1.26693 90  -3.236  0.0511
-##  Young,Rhyming - Older,Adjective       -7.9 1.26693 90  -6.236  <.0001
-##  Young,Rhyming - Young,Imagery         -6.5 1.26693 90  -5.131  0.0001
-##  Young,Rhyming - Older,Imagery        -10.7 1.26693 90  -8.446  <.0001
-##  Young,Rhyming - Young,Intention       -5.1 1.26693 90  -4.025  0.0044
-##  Young,Rhyming - Older,Intention      -12.4 1.26693 90  -9.787  <.0001
-##  Older,Rhyming - Young,Adjective       -3.4 1.26693 90  -2.684  0.1963
-##  Older,Rhyming - Older,Adjective       -7.2 1.26693 90  -5.683  <.0001
-##  Older,Rhyming - Young,Imagery         -5.8 1.26693 90  -4.578  0.0006
-##  Older,Rhyming - Older,Imagery        -10.0 1.26693 90  -7.893  <.0001
-##  Older,Rhyming - Young,Intention       -4.4 1.26693 90  -3.473  0.0260
-##  Older,Rhyming - Older,Intention      -11.7 1.26693 90  -9.235  <.0001
-##  Young,Adjective - Older,Adjective     -3.8 1.26693 90  -2.999  0.0950
-##  Young,Adjective - Young,Imagery       -2.4 1.26693 90  -1.894  0.6728
-##  Young,Adjective - Older,Imagery       -6.6 1.26693 90  -5.209  0.0001
-##  Young,Adjective - Young,Intention     -1.0 1.26693 90  -0.789  0.9986
-##  Young,Adjective - Older,Intention     -8.3 1.26693 90  -6.551  <.0001
-##  Older,Adjective - Young,Imagery        1.4 1.26693 90   1.105  0.9830
-##  Older,Adjective - Older,Imagery       -2.8 1.26693 90  -2.210  0.4578
-##  Older,Adjective - Young,Intention      2.8 1.26693 90   2.210  0.4578
-##  Older,Adjective - Older,Intention     -4.5 1.26693 90  -3.552  0.0205
-##  Young,Imagery - Older,Imagery         -4.2 1.26693 90  -3.315  0.0411
-##  Young,Imagery - Young,Intention        1.4 1.26693 90   1.105  0.9830
-##  Young,Imagery - Older,Intention       -5.9 1.26693 90  -4.657  0.0005
-##  Older,Imagery - Young,Intention        5.6 1.26693 90   4.420  0.0011
-##  Older,Imagery - Older,Intention       -1.7 1.26693 90  -1.342  0.9409
-##  Young,Intention - Older,Intention     -7.3 1.26693 90  -5.762  <.0001
-## 
-## P value adjustment: tukey method for comparing a family of 10 estimates
+$lsmeans
+ Age   Condition lsmean        SE df  lower.CL  upper.CL
+ Young Counting     7.0 0.8958547 90  5.220228  8.779772
+ Older Counting     6.5 0.8958547 90  4.720228  8.279772
+ Young Rhyming      6.9 0.8958547 90  5.120228  8.679772
+ Older Rhyming      7.6 0.8958547 90  5.820228  9.379772
+ Young Adjective   11.0 0.8958547 90  9.220228 12.779772
+ Older Adjective   14.8 0.8958547 90 13.020228 16.579772
+ Young Imagery     13.4 0.8958547 90 11.620228 15.179772
+ Older Imagery     17.6 0.8958547 90 15.820228 19.379772
+ Young Intention   12.0 0.8958547 90 10.220228 13.779772
+ Older Intention   19.3 0.8958547 90 17.520228 21.079772
+
+Confidence level used: 0.95 
+
+$contrasts
+ contrast                          estimate      SE df t.ratio p.value
+ Young,Counting - Older,Counting        0.5 1.26693 90   0.395  1.0000
+ Young,Counting - Young,Rhyming         0.1 1.26693 90   0.079  1.0000
+ Young,Counting - Older,Rhyming        -0.6 1.26693 90  -0.474  1.0000
+ Young,Counting - Young,Adjective      -4.0 1.26693 90  -3.157  0.0633
+ Young,Counting - Older,Adjective      -7.8 1.26693 90  -6.157  <.0001
+ Young,Counting - Young,Imagery        -6.4 1.26693 90  -5.052  0.0001
+ Young,Counting - Older,Imagery       -10.6 1.26693 90  -8.367  <.0001
+ Young,Counting - Young,Intention      -5.0 1.26693 90  -3.947  0.0058
+ Young,Counting - Older,Intention     -12.3 1.26693 90  -9.709  <.0001
+ Older,Counting - Young,Rhyming        -0.4 1.26693 90  -0.316  1.0000
+ Older,Counting - Older,Rhyming        -1.1 1.26693 90  -0.868  0.9970
+ Older,Counting - Young,Adjective      -4.5 1.26693 90  -3.552  0.0205
+ Older,Counting - Older,Adjective      -8.3 1.26693 90  -6.551  <.0001
+ Older,Counting - Young,Imagery        -6.9 1.26693 90  -5.446  <.0001
+ Older,Counting - Older,Imagery       -11.1 1.26693 90  -8.761  <.0001
+ Older,Counting - Young,Intention      -5.5 1.26693 90  -4.341  0.0015
+ Older,Counting - Older,Intention     -12.8 1.26693 90 -10.103  <.0001
+ Young,Rhyming - Older,Rhyming         -0.7 1.26693 90  -0.553  0.9999
+ Young,Rhyming - Young,Adjective       -4.1 1.26693 90  -3.236  0.0511
+ Young,Rhyming - Older,Adjective       -7.9 1.26693 90  -6.236  <.0001
+ Young,Rhyming - Young,Imagery         -6.5 1.26693 90  -5.131  0.0001
+ Young,Rhyming - Older,Imagery        -10.7 1.26693 90  -8.446  <.0001
+ Young,Rhyming - Young,Intention       -5.1 1.26693 90  -4.025  0.0044
+ Young,Rhyming - Older,Intention      -12.4 1.26693 90  -9.787  <.0001
+ Older,Rhyming - Young,Adjective       -3.4 1.26693 90  -2.684  0.1963
+ Older,Rhyming - Older,Adjective       -7.2 1.26693 90  -5.683  <.0001
+ Older,Rhyming - Young,Imagery         -5.8 1.26693 90  -4.578  0.0006
+ Older,Rhyming - Older,Imagery        -10.0 1.26693 90  -7.893  <.0001
+ Older,Rhyming - Young,Intention       -4.4 1.26693 90  -3.473  0.0260
+ Older,Rhyming - Older,Intention      -11.7 1.26693 90  -9.235  <.0001
+ Young,Adjective - Older,Adjective     -3.8 1.26693 90  -2.999  0.0950
+ Young,Adjective - Young,Imagery       -2.4 1.26693 90  -1.894  0.6728
+ Young,Adjective - Older,Imagery       -6.6 1.26693 90  -5.209  0.0001
+ Young,Adjective - Young,Intention     -1.0 1.26693 90  -0.789  0.9986
+ Young,Adjective - Older,Intention     -8.3 1.26693 90  -6.551  <.0001
+ Older,Adjective - Young,Imagery        1.4 1.26693 90   1.105  0.9830
+ Older,Adjective - Older,Imagery       -2.8 1.26693 90  -2.210  0.4578
+ Older,Adjective - Young,Intention      2.8 1.26693 90   2.210  0.4578
+ Older,Adjective - Older,Intention     -4.5 1.26693 90  -3.552  0.0205
+ Young,Imagery - Older,Imagery         -4.2 1.26693 90  -3.315  0.0411
+ Young,Imagery - Young,Intention        1.4 1.26693 90   1.105  0.9830
+ Young,Imagery - Older,Intention       -5.9 1.26693 90  -4.657  0.0005
+ Older,Imagery - Young,Intention        5.6 1.26693 90   4.420  0.0011
+ Older,Imagery - Older,Intention       -1.7 1.26693 90  -1.342  0.9409
+ Young,Intention - Older,Intention     -7.3 1.26693 90  -5.762  <.0001
+
+P value adjustment: tukey method for comparing a family of 10 estimates 
 ```
 
 Both cell means and pairwise contrasts are shown here. There is much more detail on computing pairwise comparisons and other types of contrasts in the section on [multiple comparisons](#multiple-comparisons), including ways to [extract](#extract-contrasts) and present your comparisons in APA format.

@@ -1,3 +1,4 @@
+
 ---
 title: 'Multiple comparisons'
 
@@ -23,19 +24,19 @@ In frequentist statistics, *p* values are defined as *the probability of obtaini
 
 Let's pretend we are creative researchers and, over the course of our career, we will develop 100 hypotheses, each of which we test in an experiment, represented by squares in the plot below:
 
-<img src="multiple-comparisons_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<img src="multiple-comparisons_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 We are concientious and use [sample size calculations](#power) for our studies, setting our desired power = .8, and use *p* = .05 as our criterion for rejecting the null hypotheses. As is common, we report tests which reject the null hypothesis *as if our predictions had been supported, and the alternative hypotheses were true* (this is a bad idea, but run with it for the moment).
 
 Let's be generous and say that, in reality, 50% of our hypotheses are true (the other 50% are nice ideas, but are not correct). Because we set our power to be .8 in our sample size calculation, this means that over the course of our career we will detect around 40 'true' effects, and publish them. These are shown in blue in the figure below:
 
 
-<img src="multiple-comparisons_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+<img src="multiple-comparisons_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 Because we set our alpha level to 0.05, we will also have some false positives, shown in red:
 
 
-<img src="multiple-comparisons_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="multiple-comparisons_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 But what that means is that *for the effects we publish as supporting our hypotheses* (i.e. the blue and red squares) then we will be making false claims 5/40 = 12.5% of the time. This is obviously much higher than the nominal alpha level implies. What's more, if we're not hotshot theorists (or work in an area where theories are less rigorously developed) and only 20% of our hypotheses are in fact true then we will make even more false claims: 5/20 = 25%.
 
@@ -54,7 +55,7 @@ This works like a lucky dip or lottery: if you buy more tickets you have a large
 Assuming each of our 100 experiments allows for 3 tests, any of which would be 'interesting' if significant (and we would therefore publish them), then our plot looks like this:
 
 
-<img src="multiple-comparisons_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="multiple-comparisons_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 And our 'false discovery rate' (at the level of our published papers) is now over one third: 15/40 = 37.5%.
 
@@ -205,7 +206,7 @@ Let's say you have a complex complex factorial design and so multiple pairwise c
 
 In the [Anova cookbook](#howell-factorial-example), we used a dataset from Howell's textbook which recorded `Recall` among young v.s. older adults (`Age`) for each of 5 conditions:
 
-<img src="multiple-comparisons_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="multiple-comparisons_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 In an ideal world we would have published a trial protocol before collecting data, or at the least [specified which comparisons were of interest to us](#register-predictions). However for the purposes of this example I'll assume you didn't do this, and need to address the potential for mutliple comparisons accordingly.
 
@@ -251,24 +252,24 @@ Because the plot of the raw data (see above) suggested that the counting and rhy
 ```r
 # use the lsmeans function which returns an lsm.list object.
 eysenck.lsm <- lsmeans::lsmeans(eysenck.model, pairwise~Condition) 
-## NOTE: Results may be misleading due to involvement in interactions
+NOTE: Results may be misleading due to involvement in interactions
 
 # the `contrasts` element in this list is what we want for now
 eysenck.lsm$contrasts 
-##  contrast              estimate        SE df t.ratio p.value
-##  Counting - Rhyming       -0.50 0.8958547 90  -0.558  0.9807
-##  Counting - Adjective     -6.15 0.8958547 90  -6.865  <.0001
-##  Counting - Imagery       -8.75 0.8958547 90  -9.767  <.0001
-##  Counting - Intention     -8.90 0.8958547 90  -9.935  <.0001
-##  Rhyming - Adjective      -5.65 0.8958547 90  -6.307  <.0001
-##  Rhyming - Imagery        -8.25 0.8958547 90  -9.209  <.0001
-##  Rhyming - Intention      -8.40 0.8958547 90  -9.377  <.0001
-##  Adjective - Imagery      -2.60 0.8958547 90  -2.902  0.0367
-##  Adjective - Intention    -2.75 0.8958547 90  -3.070  0.0231
-##  Imagery - Intention      -0.15 0.8958547 90  -0.167  0.9998
-## 
-## Results are averaged over the levels of: Age 
-## P value adjustment: tukey method for comparing a family of 5 estimates
+ contrast              estimate        SE df t.ratio p.value
+ Counting - Rhyming       -0.50 0.8958547 90  -0.558  0.9807
+ Counting - Adjective     -6.15 0.8958547 90  -6.865  <.0001
+ Counting - Imagery       -8.75 0.8958547 90  -9.767  <.0001
+ Counting - Intention     -8.90 0.8958547 90  -9.935  <.0001
+ Rhyming - Adjective      -5.65 0.8958547 90  -6.307  <.0001
+ Rhyming - Imagery        -8.25 0.8958547 90  -9.209  <.0001
+ Rhyming - Intention      -8.40 0.8958547 90  -9.377  <.0001
+ Adjective - Imagery      -2.60 0.8958547 90  -2.902  0.0367
+ Adjective - Intention    -2.75 0.8958547 90  -3.070  0.0231
+ Imagery - Intention      -0.15 0.8958547 90  -0.167  0.9998
+
+Results are averaged over the levels of: Age 
+P value adjustment: tukey method for comparing a family of 5 estimates 
 ```
 
 By default Tukey correction is applied for multiple comparisons, which is a reasonable choice. If you wanted to adjust for the false discovery rate instead, you can use the `adjust` argument:
@@ -367,8 +368,8 @@ Table: Randomly generated 'p values', with and without FDR correction applied.
 We can plot these values to see the effect the adjustment has:
 
 <div class="figure">
-<img src="multiple-comparisons_files/figure-html/unnamed-chunk-14-1.png" alt="Example of the adjustments made to p values by FDR and Bonferroni methods. Unadjusted p values are shown in black. Note how conservative Bonferroni is with even this small number of comparisons to correct for." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-14)Example of the adjustments made to p values by FDR and Bonferroni methods. Unadjusted p values are shown in black. Note how conservative Bonferroni is with even this small number of comparisons to correct for.</p>
+<img src="multiple-comparisons_files/figure-html/unnamed-chunk-15-1.png" alt="Example of the adjustments made to p values by FDR and Bonferroni methods. Unadjusted p values are shown in black. Note how conservative Bonferroni is with even this small number of comparisons to correct for." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-15)Example of the adjustments made to p values by FDR and Bonferroni methods. Unadjusted p values are shown in black. Note how conservative Bonferroni is with even this small number of comparisons to correct for.</p>
 </div>
 
 
@@ -409,18 +410,18 @@ We can use this `lsm` object to calculate various contrasts we might want to see
 
 ```r
 lsmeans::contrast(slope.model.lsm, "consec")
-##  contrast   estimate       SE     df t.ratio p.value
-##  1 - 0     7.8439500 10.47531 152.99   0.749  0.9887
-##  2 - 1     0.8661444 10.47531 152.99   0.083  1.0000
-##  3 - 2    17.6301111 10.47531 152.99   1.683  0.5278
-##  4 - 3     5.6574111 10.47531 152.99   0.540  0.9988
-##  5 - 4    19.8690333 10.47531 152.99   1.897  0.3777
-##  6 - 5     3.6598000 10.47531 152.99   0.349  1.0000
-##  7 - 6     6.5723278 10.47531 152.99   0.627  0.9965
-##  8 - 7    17.8789222 10.47531 152.99   1.707  0.5103
-##  9 - 8    14.2217167 10.47531 152.99   1.358  0.7627
-## 
-## P value adjustment: mvt method for 9 tests
+ contrast   estimate       SE     df t.ratio p.value
+ 1 - 0     7.8439500 10.47531 152.99   0.749  0.9887
+ 2 - 1     0.8661444 10.47531 152.99   0.083  1.0000
+ 3 - 2    17.6301111 10.47531 152.99   1.683  0.5276
+ 4 - 3     5.6574111 10.47531 152.99   0.540  0.9988
+ 5 - 4    19.8690333 10.47531 152.99   1.897  0.3777
+ 6 - 5     3.6598000 10.47531 152.99   0.349  1.0000
+ 7 - 6     6.5723278 10.47531 152.99   0.627  0.9965
+ 8 - 7    17.8789222 10.47531 152.99   1.707  0.5102
+ 9 - 8    14.2217167 10.47531 152.99   1.358  0.7626
+
+P value adjustment: mvt method for 9 tests 
 ```
 
 
@@ -429,12 +430,12 @@ Polynomial contrasts allow us to test whether the increase in RT's over the days
 
 ```r
 lsmeans::contrast(slope.model.lsm, "poly", adjust="fdr", max.degree=3)
-##  contrast    estimate       SE     df t.ratio p.value
-##  linear    1727.10218 134.5578 152.99  12.835  <.0001
-##  quadratic   88.97389  85.1018 152.99   1.045  0.4462
-##  cubic      -65.30289 686.1126 152.99  -0.095  0.9243
-## 
-## P value adjustment: fdr method for 3 tests
+ contrast    estimate       SE     df t.ratio p.value
+ linear    1727.10218 134.5578 152.99  12.835  <.0001
+ quadratic   88.97389  85.1018 152.99   1.045  0.4462
+ cubic      -65.30289 686.1126 152.99  -0.095  0.9243
+
+P value adjustment: fdr method for 3 tests 
 ```
 
 
@@ -452,18 +453,18 @@ If we want to compare particular levels of `Days` with a specific reference leve
 
 ```r
 lsmeans::contrast(slope.model.lsm, "trt.vs.ctrl", ref=1, adjust="fdr")
-##  contrast  estimate       SE     df t.ratio p.value
-##  1 - 0     7.843950 10.47531 152.99   0.749  0.4551
-##  2 - 0     8.710094 10.47531 152.99   0.831  0.4551
-##  3 - 0    26.340206 10.47531 152.99   2.515  0.0167
-##  4 - 0    31.997617 10.47531 152.99   3.055  0.0040
-##  5 - 0    51.866650 10.47531 152.99   4.951  <.0001
-##  6 - 0    55.526450 10.47531 152.99   5.301  <.0001
-##  7 - 0    62.098778 10.47531 152.99   5.928  <.0001
-##  8 - 0    79.977700 10.47531 152.99   7.635  <.0001
-##  9 - 0    94.199417 10.47531 152.99   8.993  <.0001
-## 
-## P value adjustment: fdr method for 9 tests
+ contrast  estimate       SE     df t.ratio p.value
+ 1 - 0     7.843950 10.47531 152.99   0.749  0.4551
+ 2 - 0     8.710094 10.47531 152.99   0.831  0.4551
+ 3 - 0    26.340206 10.47531 152.99   2.515  0.0167
+ 4 - 0    31.997617 10.47531 152.99   3.055  0.0040
+ 5 - 0    51.866650 10.47531 152.99   4.951  <.0001
+ 6 - 0    55.526450 10.47531 152.99   5.301  <.0001
+ 7 - 0    62.098778 10.47531 152.99   5.928  <.0001
+ 8 - 0    79.977700 10.47531 152.99   7.635  <.0001
+ 9 - 0    94.199417 10.47531 152.99   8.993  <.0001
+
+P value adjustment: fdr method for 9 tests 
 ```
 
 
@@ -473,19 +474,19 @@ And if we want to compare each level against the grand mean of the sample, the `
 
 ```r
 lsmeans::contrast(slope.model.lsm, "eff", adjust="fdr")
-##  contrast   estimate       SE     df t.ratio p.value
-##  0 effect -41.856086 7.027049 152.99  -5.956  <.0001
-##  1 effect -34.012136 7.027049 152.99  -4.840  <.0001
-##  2 effect -33.145992 7.027049 152.99  -4.717  <.0001
-##  3 effect -15.515881 7.027049 152.99  -2.208  0.0410
-##  4 effect  -9.858469 7.027049 152.99  -1.403  0.1627
-##  5 effect  10.010564 7.027049 152.99   1.425  0.1627
-##  6 effect  13.670364 7.027049 152.99   1.945  0.0670
-##  7 effect  20.242692 7.027049 152.99   2.881  0.0076
-##  8 effect  38.121614 7.027049 152.99   5.425  <.0001
-##  9 effect  52.343331 7.027049 152.99   7.449  <.0001
-## 
-## P value adjustment: fdr method for 10 tests
+ contrast   estimate       SE     df t.ratio p.value
+ 0 effect -41.856086 7.027049 152.99  -5.956  <.0001
+ 1 effect -34.012136 7.027049 152.99  -4.840  <.0001
+ 2 effect -33.145992 7.027049 152.99  -4.717  <.0001
+ 3 effect -15.515881 7.027049 152.99  -2.208  0.0410
+ 4 effect  -9.858469 7.027049 152.99  -1.403  0.1627
+ 5 effect  10.010564 7.027049 152.99   1.425  0.1627
+ 6 effect  13.670364 7.027049 152.99   1.945  0.0670
+ 7 effect  20.242692 7.027049 152.99   2.881  0.0076
+ 8 effect  38.121614 7.027049 152.99   5.425  <.0001
+ 9 effect  52.343331 7.027049 152.99   7.449  <.0001
+
+P value adjustment: fdr method for 10 tests 
 ```
 
 To list all the availble contrast types, or see the relevant help files, you can type:
@@ -542,19 +543,19 @@ And the various contrasts, here comparing each cell agains the grand mean:
 
 ```r
 lsmeans::contrast(eysenck.lsm, "eff", adjust="fdr")
-##  contrast               estimate        SE df t.ratio p.value
-##  Young,Counting effect     -4.61 0.8498823 90  -5.424  <.0001
-##  Older,Counting effect     -5.11 0.8498823 90  -6.013  <.0001
-##  Young,Rhyming effect      -4.71 0.8498823 90  -5.542  <.0001
-##  Older,Rhyming effect      -4.01 0.8498823 90  -4.718  <.0001
-##  Young,Adjective effect    -0.61 0.8498823 90  -0.718  0.5275
-##  Older,Adjective effect     3.19 0.8498823 90   3.753  0.0004
-##  Young,Imagery effect       1.79 0.8498823 90   2.106  0.0475
-##  Older,Imagery effect       5.99 0.8498823 90   7.048  <.0001
-##  Young,Intention effect     0.39 0.8498823 90   0.459  0.6474
-##  Older,Intention effect     7.69 0.8498823 90   9.048  <.0001
-## 
-## P value adjustment: fdr method for 10 tests
+ contrast               estimate        SE df t.ratio p.value
+ Young,Counting effect     -4.61 0.8498823 90  -5.424  <.0001
+ Older,Counting effect     -5.11 0.8498823 90  -6.013  <.0001
+ Young,Rhyming effect      -4.71 0.8498823 90  -5.542  <.0001
+ Older,Rhyming effect      -4.01 0.8498823 90  -4.718  <.0001
+ Young,Adjective effect    -0.61 0.8498823 90  -0.718  0.5275
+ Older,Adjective effect     3.19 0.8498823 90   3.753  0.0004
+ Young,Imagery effect       1.79 0.8498823 90   2.106  0.0475
+ Older,Imagery effect       5.99 0.8498823 90   7.048  <.0001
+ Young,Intention effect     0.39 0.8498823 90   0.459  0.6474
+ Older,Intention effect     7.69 0.8498823 90   9.048  <.0001
+
+P value adjustment: fdr method for 10 tests 
 ```
 
 

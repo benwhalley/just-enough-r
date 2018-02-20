@@ -402,12 +402,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3><em>p</em> values and ‘false discoveries’</h3>
 <p>In frequentist statistics, <em>p</em> values are defined as *the probability of obtaining a test statistic at least as large as that observed, if the null hypothesis is true. That is, it’s the chance that the data we have collected are atypical and will mislead us into thinking there is a difference, when the true effect is zero.</p>
 <p>Let’s pretend we are creative researchers and, over the course of our career, we will develop 100 hypotheses, each of which we test in an experiment, represented by squares in the plot below:</p>
-<p><img src="multiple-comparisons_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="multiple-comparisons_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>We are concientious and use <a href="#power">sample size calculations</a> for our studies, setting our desired power = .8, and use <em>p</em> = .05 as our criterion for rejecting the null hypotheses. As is common, we report tests which reject the null hypothesis <em>as if our predictions had been supported, and the alternative hypotheses were true</em> (this is a bad idea, but run with it for the moment).</p>
 <p>Let’s be generous and say that, in reality, 50% of our hypotheses are true (the other 50% are nice ideas, but are not correct). Because we set our power to be .8 in our sample size calculation, this means that over the course of our career we will detect around 40 ‘true’ effects, and publish them. These are shown in blue in the figure below:</p>
-<p><img src="multiple-comparisons_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>Because we set our alpha level to 0.05, we will also have some false positives, shown in red:</p>
 <p><img src="multiple-comparisons_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Because we set our alpha level to 0.05, we will also have some false positives, shown in red:</p>
+<p><img src="multiple-comparisons_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>But what that means is that <em>for the effects we publish as supporting our hypotheses</em> (i.e. the blue and red squares) then we will be making false claims 5/40 = 12.5% of the time. This is obviously much higher than the nominal alpha level implies. What’s more, if we’re not hotshot theorists (or work in an area where theories are less rigorously developed) and only 20% of our hypotheses are in fact true then we will make even more false claims: 5/20 = 25%.</p>
 </div>
 <div id="multiple-tests-on-the-same-data" class="section level3 unnumbered">
@@ -417,7 +417,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <!-- TODO Add wonka ticket image -->
 <p>This works like a lucky dip or lottery: if you buy more tickets you have a larger change of winning a prize. In this case, with three comparisons between the groups (tickets) we have a 15% chance of winning a prize, rather than the 5% we intended.</p>
 <p>Assuming each of our 100 experiments allows for 3 tests, any of which would be ‘interesting’ if significant (and we would therefore publish them), then our plot looks like this:</p>
-<p><img src="multiple-comparisons_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="multiple-comparisons_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>And our ‘false discovery rate’ (at the level of our published papers) is now over one third: 15/40 = 37.5%.</p>
 <div id="false-discovery-rates-for-single-experiments" class="section level5 unnumbered">
 <h5>False discovery rates for single experiments</h5>
@@ -605,7 +605,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="factorial-anova-and-pairwise-comparisons" class="section level4 unnumbered">
 <h4>Factorial Anova and pairwise comparisons</h4>
 <p>In the <a href="anova-cookbook.html#howell-factorial-example">Anova cookbook</a>, we used a dataset from Howell’s textbook which recorded <code>Recall</code> among young v.s. older adults (<code>Age</code>) for each of 5 conditions:</p>
-<p><img src="multiple-comparisons_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="multiple-comparisons_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>In an ideal world we would have published a trial protocol before collecting data, or at the least <a href="#register-predictions">specified which comparisons were of interest to us</a>. However for the purposes of this example I’ll assume you didn’t do this, and need to address the potential for mutliple comparisons accordingly.</p>
 <p>The design of the study suggests that we were interested in the effect of the experimental conditions on recall, and we might have predicted that these experimental manipulations would affect older and younder adults differently. Because we didn’t pre-specify our analyses, we should acknowledge that we would likly report any differences between any of the 5 experimental conditions (10 possible comparisons) and any differences between younger and older adults in any of those conditions (45 possible pairwise comparisons).</p>
 <p>Because replicating this experiment is relatively cheap (testing might only take 30 minutes per participant), and we are confident that other labs would want to replicate any significant findings we report, we are less concerned with the absolute rate of type 1 errors, but would like to limit our ‘false discovery rate’ (we have a repututation to maintain). We set our acceptable false discovery rate to 5%.</p>
@@ -675,24 +675,24 @@ car<span class="op">::</span><span class="kw">Anova</span>(eysenck.model, <span 
 <p>Because the plot of the raw data (see above) suggested that the counting and rhyming conditions produced lower recall rates than the other conditions, we might want to report the relevant pairwise tests. We can use the the <code>lsmeans()</code> function from the <code>lsmeans::</code> package to compute these:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># use the lsmeans function which returns an lsm.list object.</span>
 eysenck.lsm &lt;-<span class="st"> </span>lsmeans<span class="op">::</span><span class="kw">lsmeans</span>(eysenck.model, pairwise<span class="op">~</span>Condition) 
-## <span class="al">NOTE</span>: Results may be misleading due to involvement in interactions
+NOTE<span class="op">:</span><span class="st"> </span>Results may be misleading due to involvement <span class="cf">in</span> interactions
 
 <span class="co"># the `contrasts` element in this list is what we want for now</span>
 eysenck.lsm<span class="op">$</span>contrasts 
-##  contrast              estimate        SE df t.ratio p.value
-##  Counting - Rhyming       -0.50 0.8958547 90  -0.558  0.9807
-##  Counting - Adjective     -6.15 0.8958547 90  -6.865  &lt;.0001
-##  Counting - Imagery       -8.75 0.8958547 90  -9.767  &lt;.0001
-##  Counting - Intention     -8.90 0.8958547 90  -9.935  &lt;.0001
-##  Rhyming - Adjective      -5.65 0.8958547 90  -6.307  &lt;.0001
-##  Rhyming - Imagery        -8.25 0.8958547 90  -9.209  &lt;.0001
-##  Rhyming - Intention      -8.40 0.8958547 90  -9.377  &lt;.0001
-##  Adjective - Imagery      -2.60 0.8958547 90  -2.902  0.0367
-##  Adjective - Intention    -2.75 0.8958547 90  -3.070  0.0231
-##  Imagery - Intention      -0.15 0.8958547 90  -0.167  0.9998
-## 
-## Results are averaged over the levels of: Age 
-## P value adjustment: tukey method for comparing a family of 5 estimates</code></pre></div>
+ contrast              estimate        SE df t.ratio p.value
+ Counting <span class="op">-</span><span class="st"> </span>Rhyming       <span class="op">-</span><span class="fl">0.50</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">0.558</span>  <span class="fl">0.9807</span>
+ Counting <span class="op">-</span><span class="st"> </span>Adjective     <span class="op">-</span><span class="fl">6.15</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">6.865</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Counting <span class="op">-</span><span class="st"> </span>Imagery       <span class="op">-</span><span class="fl">8.75</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">9.767</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Counting <span class="op">-</span><span class="st"> </span>Intention     <span class="op">-</span><span class="fl">8.90</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">9.935</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Rhyming <span class="op">-</span><span class="st"> </span>Adjective      <span class="op">-</span><span class="fl">5.65</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">6.307</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Rhyming <span class="op">-</span><span class="st"> </span>Imagery        <span class="op">-</span><span class="fl">8.25</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">9.209</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Rhyming <span class="op">-</span><span class="st"> </span>Intention      <span class="op">-</span><span class="fl">8.40</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">9.377</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Adjective <span class="op">-</span><span class="st"> </span>Imagery      <span class="op">-</span><span class="fl">2.60</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">2.902</span>  <span class="fl">0.0367</span>
+ Adjective <span class="op">-</span><span class="st"> </span>Intention    <span class="op">-</span><span class="fl">2.75</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">3.070</span>  <span class="fl">0.0231</span>
+ Imagery <span class="op">-</span><span class="st"> </span>Intention      <span class="op">-</span><span class="fl">0.15</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">0.167</span>  <span class="fl">0.9998</span>
+
+Results are averaged over the levels of<span class="op">:</span><span class="st"> </span>Age 
+P value adjustment<span class="op">:</span><span class="st"> </span>tukey method <span class="cf">for</span> comparing a family of <span class="dv">5</span> estimates </code></pre></div>
 <p>By default Tukey correction is applied for multiple comparisons, which is a reasonable choice. If you wanted to adjust for the false discovery rate instead, you can use the <code>adjust</code> argument:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># not run, just shown as an example</span>
 lsmeans<span class="op">::</span><span class="kw">lsmeans</span>(eysenck.model, pairwise<span class="op">~</span>Condition, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>) </code></pre></div>
@@ -874,8 +874,8 @@ p.examples <span class="op">%&gt;%</span><span class="st"> </span>
 </tbody>
 </table>
 <p>We can plot these values to see the effect the adjustment has:</p>
-<div class="figure"><span id="fig:unnamed-chunk-14"></span>
-<img src="multiple-comparisons_files/figure-html/unnamed-chunk-14-1.png" alt="Example of the adjustments made to p values by FDR and Bonferroni methods. Unadjusted p values are shown in black. Note how conservative Bonferroni is with even this small number of comparisons to correct for." width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-15"></span>
+<img src="multiple-comparisons_files/figure-html/unnamed-chunk-15-1.png" alt="Example of the adjustments made to p values by FDR and Bonferroni methods. Unadjusted p values are shown in black. Note how conservative Bonferroni is with even this small number of comparisons to correct for." width="672" />
 <p class="caption">
 Figure 21.1: Example of the adjustments made to p values by FDR and Bonferroni methods. Unadjusted p values are shown in black. Note how conservative Bonferroni is with even this small number of comparisons to correct for.
 </p>
@@ -893,58 +893,58 @@ Figure 21.1: Example of the adjustments made to p values by FDR and Bonferroni m
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">slope.model.lsm &lt;-<span class="st"> </span>lsmeans<span class="op">::</span><span class="kw">lsmeans</span>(slope.model, <span class="op">~</span>Days)</code></pre></div>
 <p>We can use this <code>lsm</code> object to calculate various contrasts we might want to see. First, consecutive contrasts where each level is compared with the next:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.lsm, <span class="st">&quot;consec&quot;</span>)
-##  contrast   estimate       SE     df t.ratio p.value
-##  1 - 0     7.8439500 10.47531 152.99   0.749  0.9887
-##  2 - 1     0.8661444 10.47531 152.99   0.083  1.0000
-##  3 - 2    17.6301111 10.47531 152.99   1.683  0.5278
-##  4 - 3     5.6574111 10.47531 152.99   0.540  0.9988
-##  5 - 4    19.8690333 10.47531 152.99   1.897  0.3777
-##  6 - 5     3.6598000 10.47531 152.99   0.349  1.0000
-##  7 - 6     6.5723278 10.47531 152.99   0.627  0.9965
-##  8 - 7    17.8789222 10.47531 152.99   1.707  0.5103
-##  9 - 8    14.2217167 10.47531 152.99   1.358  0.7627
-## 
-## P value adjustment: mvt method for 9 tests</code></pre></div>
+ contrast   estimate       SE     df t.ratio p.value
+ <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>     <span class="fl">7.8439500</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">0.749</span>  <span class="fl">0.9887</span>
+ <span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>     <span class="fl">0.8661444</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">0.083</span>  <span class="fl">1.0000</span>
+ <span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="dv">2</span>    <span class="fl">17.6301111</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">1.683</span>  <span class="fl">0.5276</span>
+ <span class="dv">4</span> <span class="op">-</span><span class="st"> </span><span class="dv">3</span>     <span class="fl">5.6574111</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">0.540</span>  <span class="fl">0.9988</span>
+ <span class="dv">5</span> <span class="op">-</span><span class="st"> </span><span class="dv">4</span>    <span class="fl">19.8690333</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">1.897</span>  <span class="fl">0.3777</span>
+ <span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="dv">5</span>     <span class="fl">3.6598000</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">0.349</span>  <span class="fl">1.0000</span>
+ <span class="dv">7</span> <span class="op">-</span><span class="st"> </span><span class="dv">6</span>     <span class="fl">6.5723278</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">0.627</span>  <span class="fl">0.9965</span>
+ <span class="dv">8</span> <span class="op">-</span><span class="st"> </span><span class="dv">7</span>    <span class="fl">17.8789222</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">1.707</span>  <span class="fl">0.5102</span>
+ <span class="dv">9</span> <span class="op">-</span><span class="st"> </span><span class="dv">8</span>    <span class="fl">14.2217167</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">1.358</span>  <span class="fl">0.7626</span>
+
+P value adjustment<span class="op">:</span><span class="st"> </span>mvt method <span class="cf">for</span> <span class="dv">9</span> tests </code></pre></div>
 <p>Polynomial contrasts allow us to test whether the increase in RT’s over the days is linear or curved:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.lsm, <span class="st">&quot;poly&quot;</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>, <span class="dt">max.degree=</span><span class="dv">3</span>)
-##  contrast    estimate       SE     df t.ratio p.value
-##  linear    1727.10218 134.5578 152.99  12.835  &lt;.0001
-##  quadratic   88.97389  85.1018 152.99   1.045  0.4462
-##  cubic      -65.30289 686.1126 152.99  -0.095  0.9243
-## 
-## P value adjustment: fdr method for 3 tests</code></pre></div>
+ contrast    estimate       SE     df t.ratio p.value
+ linear    <span class="fl">1727.10218</span> <span class="fl">134.5578</span> <span class="fl">152.99</span>  <span class="fl">12.835</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ quadratic   <span class="fl">88.97389</span>  <span class="fl">85.1018</span> <span class="fl">152.99</span>   <span class="fl">1.045</span>  <span class="fl">0.4462</span>
+ cubic      <span class="op">-</span><span class="fl">65.30289</span> <span class="fl">686.1126</span> <span class="fl">152.99</span>  <span class="op">-</span><span class="fl">0.095</span>  <span class="fl">0.9243</span>
+
+P value adjustment<span class="op">:</span><span class="st"> </span>fdr method <span class="cf">for</span> <span class="dv">3</span> tests </code></pre></div>
 <p>If we don’t specify a contrasts argument, or a type of correction, we will get Tukey contrasts for every pairwise comparison:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 45 tests - results not shown because similar to those shown above</span>
 lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.lsm, <span class="st">&quot;tukey&quot;</span>)</code></pre></div>
 <p>If we want to compare particular levels of <code>Days</code> with a specific reference level we can use the <code>trt.vs.ctrl</code> contrast type. In this example we are comparing each day with day 0, because day 0 is the first in the list of days and we specified <code>ref=1</code> (try running the comparisons against day 5).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.lsm, <span class="st">&quot;trt.vs.ctrl&quot;</span>, <span class="dt">ref=</span><span class="dv">1</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)
-##  contrast  estimate       SE     df t.ratio p.value
-##  1 - 0     7.843950 10.47531 152.99   0.749  0.4551
-##  2 - 0     8.710094 10.47531 152.99   0.831  0.4551
-##  3 - 0    26.340206 10.47531 152.99   2.515  0.0167
-##  4 - 0    31.997617 10.47531 152.99   3.055  0.0040
-##  5 - 0    51.866650 10.47531 152.99   4.951  &lt;.0001
-##  6 - 0    55.526450 10.47531 152.99   5.301  &lt;.0001
-##  7 - 0    62.098778 10.47531 152.99   5.928  &lt;.0001
-##  8 - 0    79.977700 10.47531 152.99   7.635  &lt;.0001
-##  9 - 0    94.199417 10.47531 152.99   8.993  &lt;.0001
-## 
-## P value adjustment: fdr method for 9 tests</code></pre></div>
+ contrast  estimate       SE     df t.ratio p.value
+ <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>     <span class="fl">7.843950</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">0.749</span>  <span class="fl">0.4551</span>
+ <span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>     <span class="fl">8.710094</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">0.831</span>  <span class="fl">0.4551</span>
+ <span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>    <span class="fl">26.340206</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">2.515</span>  <span class="fl">0.0167</span>
+ <span class="dv">4</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>    <span class="fl">31.997617</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">3.055</span>  <span class="fl">0.0040</span>
+ <span class="dv">5</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>    <span class="fl">51.866650</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">4.951</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ <span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>    <span class="fl">55.526450</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">5.301</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ <span class="dv">7</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>    <span class="fl">62.098778</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">5.928</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ <span class="dv">8</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>    <span class="fl">79.977700</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">7.635</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ <span class="dv">9</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>    <span class="fl">94.199417</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">8.993</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+
+P value adjustment<span class="op">:</span><span class="st"> </span>fdr method <span class="cf">for</span> <span class="dv">9</span> tests </code></pre></div>
 <p>And if we want to compare each level against the grand mean of the sample, the <code>eff</code> contrast type is short for <code>effect</code>. A way of thinking of this (in English) is that we are asking ‘what is the effect of being on a particular day, relative the other average of all days’.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.lsm, <span class="st">&quot;eff&quot;</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)
-##  contrast   estimate       SE     df t.ratio p.value
-##  0 effect -41.856086 7.027049 152.99  -5.956  &lt;.0001
-##  1 effect -34.012136 7.027049 152.99  -4.840  &lt;.0001
-##  2 effect -33.145992 7.027049 152.99  -4.717  &lt;.0001
-##  3 effect -15.515881 7.027049 152.99  -2.208  0.0410
-##  4 effect  -9.858469 7.027049 152.99  -1.403  0.1627
-##  5 effect  10.010564 7.027049 152.99   1.425  0.1627
-##  6 effect  13.670364 7.027049 152.99   1.945  0.0670
-##  7 effect  20.242692 7.027049 152.99   2.881  0.0076
-##  8 effect  38.121614 7.027049 152.99   5.425  &lt;.0001
-##  9 effect  52.343331 7.027049 152.99   7.449  &lt;.0001
-## 
-## P value adjustment: fdr method for 10 tests</code></pre></div>
+ contrast   estimate       SE     df t.ratio p.value
+ <span class="dv">0</span> effect <span class="op">-</span><span class="fl">41.856086</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>  <span class="op">-</span><span class="fl">5.956</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ <span class="dv">1</span> effect <span class="op">-</span><span class="fl">34.012136</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>  <span class="op">-</span><span class="fl">4.840</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ <span class="dv">2</span> effect <span class="op">-</span><span class="fl">33.145992</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>  <span class="op">-</span><span class="fl">4.717</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ <span class="dv">3</span> effect <span class="op">-</span><span class="fl">15.515881</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>  <span class="op">-</span><span class="fl">2.208</span>  <span class="fl">0.0410</span>
+ <span class="dv">4</span> effect  <span class="op">-</span><span class="fl">9.858469</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>  <span class="op">-</span><span class="fl">1.403</span>  <span class="fl">0.1627</span>
+ <span class="dv">5</span> effect  <span class="fl">10.010564</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>   <span class="fl">1.425</span>  <span class="fl">0.1627</span>
+ <span class="dv">6</span> effect  <span class="fl">13.670364</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>   <span class="fl">1.945</span>  <span class="fl">0.0670</span>
+ <span class="dv">7</span> effect  <span class="fl">20.242692</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>   <span class="fl">2.881</span>  <span class="fl">0.0076</span>
+ <span class="dv">8</span> effect  <span class="fl">38.121614</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>   <span class="fl">5.425</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ <span class="dv">9</span> effect  <span class="fl">52.343331</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>   <span class="fl">7.449</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+
+P value adjustment<span class="op">:</span><span class="st"> </span>fdr method <span class="cf">for</span> <span class="dv">10</span> tests </code></pre></div>
 <p>To list all the availble contrast types, or see the relevant help files, you can type:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># help file describing all the contrasts families</span>
 <span class="kw">help</span>(pairwise.lsmc)</code></pre></div>
@@ -1014,19 +1014,19 @@ lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.ls
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eysenck.lsm &lt;-<span class="st"> </span>lsmeans<span class="op">::</span><span class="kw">lsmeans</span>(eysenck.model, <span class="op">~</span>Age<span class="op">:</span>Condition)</code></pre></div>
 <p>And the various contrasts, here comparing each cell agains the grand mean:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(eysenck.lsm, <span class="st">&quot;eff&quot;</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)
-##  contrast               estimate        SE df t.ratio p.value
-##  Young,Counting effect     -4.61 0.8498823 90  -5.424  &lt;.0001
-##  Older,Counting effect     -5.11 0.8498823 90  -6.013  &lt;.0001
-##  Young,Rhyming effect      -4.71 0.8498823 90  -5.542  &lt;.0001
-##  Older,Rhyming effect      -4.01 0.8498823 90  -4.718  &lt;.0001
-##  Young,Adjective effect    -0.61 0.8498823 90  -0.718  0.5275
-##  Older,Adjective effect     3.19 0.8498823 90   3.753  0.0004
-##  Young,Imagery effect       1.79 0.8498823 90   2.106  0.0475
-##  Older,Imagery effect       5.99 0.8498823 90   7.048  &lt;.0001
-##  Young,Intention effect     0.39 0.8498823 90   0.459  0.6474
-##  Older,Intention effect     7.69 0.8498823 90   9.048  &lt;.0001
-## 
-## P value adjustment: fdr method for 10 tests</code></pre></div>
+ contrast               estimate        SE df t.ratio p.value
+ Young,Counting effect     <span class="op">-</span><span class="fl">4.61</span> <span class="fl">0.8498823</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">5.424</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Older,Counting effect     <span class="op">-</span><span class="fl">5.11</span> <span class="fl">0.8498823</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">6.013</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Young,Rhyming effect      <span class="op">-</span><span class="fl">4.71</span> <span class="fl">0.8498823</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">5.542</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Older,Rhyming effect      <span class="op">-</span><span class="fl">4.01</span> <span class="fl">0.8498823</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">4.718</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Young,Adjective effect    <span class="op">-</span><span class="fl">0.61</span> <span class="fl">0.8498823</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">0.718</span>  <span class="fl">0.5275</span>
+ Older,Adjective effect     <span class="fl">3.19</span> <span class="fl">0.8498823</span> <span class="dv">90</span>   <span class="fl">3.753</span>  <span class="fl">0.0004</span>
+ Young,Imagery effect       <span class="fl">1.79</span> <span class="fl">0.8498823</span> <span class="dv">90</span>   <span class="fl">2.106</span>  <span class="fl">0.0475</span>
+ Older,Imagery effect       <span class="fl">5.99</span> <span class="fl">0.8498823</span> <span class="dv">90</span>   <span class="fl">7.048</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Young,Intention effect     <span class="fl">0.39</span> <span class="fl">0.8498823</span> <span class="dv">90</span>   <span class="fl">0.459</span>  <span class="fl">0.6474</span>
+ Older,Intention effect     <span class="fl">7.69</span> <span class="fl">0.8498823</span> <span class="dv">90</span>   <span class="fl">9.048</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+
+P value adjustment<span class="op">:</span><span class="st"> </span>fdr method <span class="cf">for</span> <span class="dv">10</span> tests </code></pre></div>
 <p>Or all of the pairwise tests with Tukey adjustment:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(eysenck.lsm, <span class="st">&quot;tukey&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>broom<span class="op">::</span><span class="kw">tidy</span>() <span class="op">%&gt;%</span><span class="st"> </span>

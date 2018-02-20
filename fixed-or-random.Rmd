@@ -1,13 +1,12 @@
 ---
 title: 'Fixed and Random effects'
-
 ---
 
 
 
 # Fixed and random effects {#fixed-or-random}
 
-As noted by @gelman2005analysis (and [summarised here](http://andrewgelman.com/2005/01/25/why_i_dont_use/)), the terms 'fixed' and 'random' are used very loosely in both the methodological and applied literature. Gelman identifies 5 different senses in which the distinction between fixed and random effects can be drawn, and this inconsistency can lead to confusion.
+As noted by @gelman_analysis_2005 (and [summarised here](http://andrewgelman.com/2005/01/25/why_i_dont_use/)), the terms 'fixed' and 'random' are used very loosely in both the methodological and applied literature. Gelman identifies 5 different senses in which the distinction between fixed and random effects can be drawn, and this inconsistency can lead to confusion.
 
 
 #### {- #random-slopes-intercepts}

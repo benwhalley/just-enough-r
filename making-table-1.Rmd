@@ -5,8 +5,6 @@ title: 'Making "Table 1"'
 
 
 ```{r, include=FALSE, message=F}
-knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
-
 library(tidyverse)
 library(reshape2)
 library(broom)

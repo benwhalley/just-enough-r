@@ -1,3 +1,4 @@
+
 ---
 title: 'General linear models'
 
@@ -41,8 +42,8 @@ titanic %>%
 ```
 
 <div class="figure">
-<img src="general-linear-models_files/figure-html/unnamed-chunk-2-1.png" alt="Survival probabilities by Sex and ticket class." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-2)Survival probabilities by Sex and ticket class.</p>
+<img src="general-linear-models_files/figure-html/unnamed-chunk-3-1.png" alt="Survival probabilities by Sex and ticket class." width="672" />
+<p class="caption">(\#fig:unnamed-chunk-3)Survival probabilities by Sex and ticket class.</p>
 </div>
 
 
@@ -76,18 +77,18 @@ Which you can use like so:
 
 ```r
 logistic(Survived ~ Sex * factor(Pclass), data=titanic)
-## 
-## Call:  glm(formula = ..1, family = binomial(link = "logit"), data = ..2)
-## 
-## Coefficients:
-##             (Intercept)                  Sexmale          factor(Pclass)2  
-##                  3.4122                  -3.9494                  -0.9555  
-##         factor(Pclass)3  Sexmale:factor(Pclass)2  Sexmale:factor(Pclass)3  
-##                 -3.4122                  -0.1850                   2.0958  
-## 
-## Degrees of Freedom: 890 Total (i.e. Null);  885 Residual
-## Null Deviance:	    1187 
-## Residual Deviance: 798.1 	AIC: 810.1
+
+Call:  glm(formula = ..1, family = binomial(link = "logit"), data = ..2)
+
+Coefficients:
+            (Intercept)                  Sexmale          factor(Pclass)2  
+                 3.4122                  -3.9494                  -0.9555  
+        factor(Pclass)3  Sexmale:factor(Pclass)2  Sexmale:factor(Pclass)3  
+                -3.4122                  -0.1850                   2.0958  
+
+Degrees of Freedom: 890 Total (i.e. Null);  885 Residual
+Null Deviance:	    1187 
+Residual Deviance: 798.1 	AIC: 810.1
 ```
 
 #### Tests of parameters {-}
@@ -98,32 +99,32 @@ As with `lm()` models, we can use the `summary()` function to get p values for p
 ```r
 titanic.model <- logistic(Survived ~ Sex * factor(Pclass), data=titanic)
 summary(titanic.model)
-## 
-## Call:
-## glm(formula = ..1, family = binomial(link = "logit"), data = ..2)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -2.6248  -0.5853  -0.5395   0.4056   1.9996  
-## 
-## Coefficients:
-##                         Estimate Std. Error z value Pr(>|z|)    
-## (Intercept)               3.4122     0.5868   5.815 6.06e-09 ***
-## Sexmale                  -3.9494     0.6161  -6.411 1.45e-10 ***
-## factor(Pclass)2          -0.9555     0.7248  -1.318  0.18737    
-## factor(Pclass)3          -3.4122     0.6100  -5.594 2.22e-08 ***
-## Sexmale:factor(Pclass)2  -0.1850     0.7939  -0.233  0.81575    
-## Sexmale:factor(Pclass)3   2.0958     0.6572   3.189  0.00143 ** 
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## (Dispersion parameter for binomial family taken to be 1)
-## 
-##     Null deviance: 1186.7  on 890  degrees of freedom
-## Residual deviance:  798.1  on 885  degrees of freedom
-## AIC: 810.1
-## 
-## Number of Fisher Scoring iterations: 6
+
+Call:
+glm(formula = ..1, family = binomial(link = "logit"), data = ..2)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.6248  -0.5853  -0.5395   0.4056   1.9996  
+
+Coefficients:
+                        Estimate Std. Error z value Pr(>|z|)    
+(Intercept)               3.4122     0.5868   5.815 6.06e-09 ***
+Sexmale                  -3.9494     0.6161  -6.411 1.45e-10 ***
+factor(Pclass)2          -0.9555     0.7248  -1.318  0.18737    
+factor(Pclass)3          -3.4122     0.6100  -5.594 2.22e-08 ***
+Sexmale:factor(Pclass)2  -0.1850     0.7939  -0.233  0.81575    
+Sexmale:factor(Pclass)3   2.0958     0.6572   3.189  0.00143 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1186.7  on 890  degrees of freedom
+Residual deviance:  798.1  on 885  degrees of freedom
+AIC: 810.1
+
+Number of Fisher Scoring iterations: 6
 ```
 
 
@@ -137,15 +138,15 @@ Where there are categorical predictors we can also reuse the `car::Anova` functi
 
 ```r
 car::Anova(titanic.model, type=3)
-## Analysis of Deviance Table (Type III tests)
-## 
-## Response: Survived
-##                    LR Chisq Df Pr(>Chisq)    
-## Sex                  97.547  1  < 2.2e-16 ***
-## factor(Pclass)       90.355  2  < 2.2e-16 ***
-## Sex:factor(Pclass)   28.791  2  5.598e-07 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Analysis of Deviance Table (Type III tests)
+
+Response: Survived
+                   LR Chisq Df Pr(>Chisq)    
+Sex                  97.547  1  < 2.2e-16 ***
+factor(Pclass)       90.355  2  < 2.2e-16 ***
+Sex:factor(Pclass)   28.791  2  5.598e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 [Note that the Anova table for a `glm` model provides $\chi^2$ tests in place of F tests. Although they are calculated differently, you can interpret these $\chi^2$ tests and *p* values as you would for F tests in a regular Anova.]{.explainer}
@@ -164,8 +165,8 @@ One twist here though is that we have to choose whether to make predictions in u
 ```r
 new.passenger = expand.grid(Pclass=1, Sex=c("female"))
 predict.glm(titanic.model, newdata=new.passenger, type="response")
-##         1 
-## 0.9680851
+        1 
+0.9680851 
 ```
 
 And we could plot probabilities for each gender and class with a standard error for this prediction if desired:
@@ -194,7 +195,7 @@ new.passengers %>%
   ylab("Probability of survival")
 ```
 
-<img src="general-linear-models_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="general-linear-models_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 
 

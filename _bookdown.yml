@@ -4,6 +4,7 @@ link-citations: yes
 
 book_filename: "Just enough R"
 new_session: yes
+before_chapter_script: set_chunk_options.R
 output_dir: "docs"
 delete_merged_file: true
 rmd_files:
@@ -70,6 +71,7 @@ rmd_files:
 "multiple-comparisons.Rmd",
 "clustering.Rmd",
 "fixed-or-random.Rmd",
+"scaling-predictors.Rmd",
 "link-functions.Rmd",
 "over-fitting.Rmd",
 

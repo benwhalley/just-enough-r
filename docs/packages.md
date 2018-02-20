@@ -1,3 +1,4 @@
+
 ---
 title: 'Loading packages (Teaching an old dog new tricks)'
 ---
@@ -27,7 +28,7 @@ Will load the `ggplot2` package. You can then call the `qplot` function it provi
 qplot(mtcars$mpg, bins=7)
 ```
 
-<img src="packages_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+<img src="packages_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 
 #### {- #package-namespacing}
@@ -40,7 +41,7 @@ You don't strictly *need* to load packages to use the features within them thoug
 Hmisc::hist.data.frame(mtcars)
 ```
 
-<img src="packages_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="packages_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 
 The rule is to type `package::function(parameters)`, where `::` separates the package and function names. Parameters are just the inputs to the function.

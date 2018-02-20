@@ -399,19 +399,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h6>Selecting a single column</h6>
 <p>Because dataframes act like lists of vectors, we can access columns from them using the <code>$</code> symbol. For example, here we select the <code>Ozone</code> column, which returns a vector of the observations made:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airquality<span class="op">$</span>Ozone
-##   [1]  41  36  12  18  NA  28  23  19   8  NA   7  16  11  14  18  14  34
-##  [18]   6  30  11   1  11   4  32  NA  NA  NA  23  45 115  37  NA  NA  NA
-##  [35]  NA  NA  NA  29  NA  71  39  NA  NA  23  NA  NA  21  37  20  12  13
-##  [52]  NA  NA  NA  NA  NA  NA  NA  NA  NA  NA 135  49  32  NA  64  40  77
-##  [69]  97  97  85  NA  10  27  NA   7  48  35  61  79  63  16  NA  NA  80
-##  [86] 108  20  52  82  50  64  59  39   9  16  78  35  66 122  89 110  NA
-## [103]  NA  44  28  65  NA  22  59  23  31  44  21   9  NA  45 168  73  NA
-## [120]  76 118  84  85  96  78  73  91  47  32  20  23  21  24  44  21  28
-## [137]   9  13  46  18  13  24  16  13  23  36   7  14  30  NA  14  18  20</code></pre></div>
+  [<span class="dv">1</span>]  <span class="dv">41</span>  <span class="dv">36</span>  <span class="dv">12</span>  <span class="dv">18</span>  <span class="ot">NA</span>  <span class="dv">28</span>  <span class="dv">23</span>  <span class="dv">19</span>   <span class="dv">8</span>  <span class="ot">NA</span>   <span class="dv">7</span>  <span class="dv">16</span>  <span class="dv">11</span>  <span class="dv">14</span>  <span class="dv">18</span>  <span class="dv">14</span>  <span class="dv">34</span>
+ [<span class="dv">18</span>]   <span class="dv">6</span>  <span class="dv">30</span>  <span class="dv">11</span>   <span class="dv">1</span>  <span class="dv">11</span>   <span class="dv">4</span>  <span class="dv">32</span>  <span class="ot">NA</span>  <span class="ot">NA</span>  <span class="ot">NA</span>  <span class="dv">23</span>  <span class="dv">45</span> <span class="dv">115</span>  <span class="dv">37</span>  <span class="ot">NA</span>  <span class="ot">NA</span>  <span class="ot">NA</span>
+ [<span class="dv">35</span>]  <span class="ot">NA</span>  <span class="ot">NA</span>  <span class="ot">NA</span>  <span class="dv">29</span>  <span class="ot">NA</span>  <span class="dv">71</span>  <span class="dv">39</span>  <span class="ot">NA</span>  <span class="ot">NA</span>  <span class="dv">23</span>  <span class="ot">NA</span>  <span class="ot">NA</span>  <span class="dv">21</span>  <span class="dv">37</span>  <span class="dv">20</span>  <span class="dv">12</span>  <span class="dv">13</span>
+ [<span class="dv">52</span>]  <span class="ot">NA</span>  <span class="ot">NA</span>  <span class="ot">NA</span>  <span class="ot">NA</span>  <span class="ot">NA</span>  <span class="ot">NA</span>  <span class="ot">NA</span>  <span class="ot">NA</span>  <span class="ot">NA</span>  <span class="ot">NA</span> <span class="dv">135</span>  <span class="dv">49</span>  <span class="dv">32</span>  <span class="ot">NA</span>  <span class="dv">64</span>  <span class="dv">40</span>  <span class="dv">77</span>
+ [<span class="dv">69</span>]  <span class="dv">97</span>  <span class="dv">97</span>  <span class="dv">85</span>  <span class="ot">NA</span>  <span class="dv">10</span>  <span class="dv">27</span>  <span class="ot">NA</span>   <span class="dv">7</span>  <span class="dv">48</span>  <span class="dv">35</span>  <span class="dv">61</span>  <span class="dv">79</span>  <span class="dv">63</span>  <span class="dv">16</span>  <span class="ot">NA</span>  <span class="ot">NA</span>  <span class="dv">80</span>
+ [<span class="dv">86</span>] <span class="dv">108</span>  <span class="dv">20</span>  <span class="dv">52</span>  <span class="dv">82</span>  <span class="dv">50</span>  <span class="dv">64</span>  <span class="dv">59</span>  <span class="dv">39</span>   <span class="dv">9</span>  <span class="dv">16</span>  <span class="dv">78</span>  <span class="dv">35</span>  <span class="dv">66</span> <span class="dv">122</span>  <span class="dv">89</span> <span class="dv">110</span>  <span class="ot">NA</span>
+[<span class="dv">103</span>]  <span class="ot">NA</span>  <span class="dv">44</span>  <span class="dv">28</span>  <span class="dv">65</span>  <span class="ot">NA</span>  <span class="dv">22</span>  <span class="dv">59</span>  <span class="dv">23</span>  <span class="dv">31</span>  <span class="dv">44</span>  <span class="dv">21</span>   <span class="dv">9</span>  <span class="ot">NA</span>  <span class="dv">45</span> <span class="dv">168</span>  <span class="dv">73</span>  <span class="ot">NA</span>
+[<span class="dv">120</span>]  <span class="dv">76</span> <span class="dv">118</span>  <span class="dv">84</span>  <span class="dv">85</span>  <span class="dv">96</span>  <span class="dv">78</span>  <span class="dv">73</span>  <span class="dv">91</span>  <span class="dv">47</span>  <span class="dv">32</span>  <span class="dv">20</span>  <span class="dv">23</span>  <span class="dv">21</span>  <span class="dv">24</span>  <span class="dv">44</span>  <span class="dv">21</span>  <span class="dv">28</span>
+[<span class="dv">137</span>]   <span class="dv">9</span>  <span class="dv">13</span>  <span class="dv">46</span>  <span class="dv">18</span>  <span class="dv">13</span>  <span class="dv">24</span>  <span class="dv">16</span>  <span class="dv">13</span>  <span class="dv">23</span>  <span class="dv">36</span>   <span class="dv">7</span>  <span class="dv">14</span>  <span class="dv">30</span>  <span class="ot">NA</span>  <span class="dv">14</span>  <span class="dv">18</span>  <span class="dv">20</span></code></pre></div>
 <p>And we can pass this vector to functions, for example <code>summary()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(airquality<span class="op">$</span>Ozone)
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
-##    1.00   18.00   31.50   42.13   63.25  168.00      37</code></pre></div>
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA<span class="st">&#39;s </span>
+<span class="st">   1.00   18.00   31.50   42.13   63.25  168.00      37 </span></code></pre></div>
 </div>
 <div id="selecting-more-than-one-column" class="section level6 unnumbered">
 <h6>Selecting more than one column</h6>
@@ -419,50 +419,50 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(
   <span class="kw">select</span>(mtcars, cyl, hp)
 )
-##                   cyl  hp
-## Mazda RX4           6 110
-## Mazda RX4 Wag       6 110
-## Datsun 710          4  93
-## Hornet 4 Drive      6 110
-## Hornet Sportabout   8 175
-## Valiant             6 105</code></pre></div>
+                  cyl  hp
+Mazda RX4           <span class="dv">6</span> <span class="dv">110</span>
+Mazda RX4 Wag       <span class="dv">6</span> <span class="dv">110</span>
+Datsun <span class="dv">710</span>          <span class="dv">4</span>  <span class="dv">93</span>
+Hornet <span class="dv">4</span> Drive      <span class="dv">6</span> <span class="dv">110</span>
+Hornet Sportabout   <span class="dv">8</span> <span class="dv">175</span>
+Valiant             <span class="dv">6</span> <span class="dv">105</span></code></pre></div>
 <p>Because all the main <code>dplyr</code> functions tend to return a new dataframe, we can assign the results to a variable, and use that as normal:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cylandweight &lt;-<span class="st"> </span><span class="kw">select</span>(mtcars, cyl, wt)
 <span class="kw">summary</span>(cylandweight)
-##       cyl              wt       
-##  Min.   :4.000   Min.   :1.513  
-##  1st Qu.:4.000   1st Qu.:2.581  
-##  Median :6.000   Median :3.325  
-##  Mean   :6.188   Mean   :3.217  
-##  3rd Qu.:8.000   3rd Qu.:3.610  
-##  Max.   :8.000   Max.   :5.424</code></pre></div>
+      cyl              wt       
+ Min.   <span class="op">:</span><span class="fl">4.000</span>   Min.   <span class="op">:</span><span class="fl">1.513</span>  
+ 1st Qu.<span class="op">:</span><span class="fl">4.000</span>   1st Qu.<span class="op">:</span><span class="fl">2.581</span>  
+ Median <span class="op">:</span><span class="fl">6.000</span>   Median <span class="op">:</span><span class="fl">3.325</span>  
+ Mean   <span class="op">:</span><span class="fl">6.188</span>   Mean   <span class="op">:</span><span class="fl">3.217</span>  
+ 3rd Qu.<span class="op">:</span><span class="fl">8.000</span>   3rd Qu.<span class="op">:</span><span class="fl">3.610</span>  
+ Max.   <span class="op">:</span><span class="fl">8.000</span>   Max.   <span class="op">:</span><span class="fl">5.424</span>  </code></pre></div>
 <p>You can also put a minus (<code>-</code>) sign in front of the column name to indicate which columns you don’t want:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">select</span>(airquality, <span class="op">-</span>Ozone, <span class="op">-</span>Solar.R, <span class="op">-</span>Wind))
-##   Temp Month Day
-## 1   67     5   1
-## 2   72     5   2
-## 3   74     5   3
-## 4   62     5   4
-## 5   56     5   5
-## 6   66     5   6</code></pre></div>
+  Temp Month Day
+<span class="dv">1</span>   <span class="dv">67</span>     <span class="dv">5</span>   <span class="dv">1</span>
+<span class="dv">2</span>   <span class="dv">72</span>     <span class="dv">5</span>   <span class="dv">2</span>
+<span class="dv">3</span>   <span class="dv">74</span>     <span class="dv">5</span>   <span class="dv">3</span>
+<span class="dv">4</span>   <span class="dv">62</span>     <span class="dv">5</span>   <span class="dv">4</span>
+<span class="dv">5</span>   <span class="dv">56</span>     <span class="dv">5</span>   <span class="dv">5</span>
+<span class="dv">6</span>   <span class="dv">66</span>     <span class="dv">5</span>   <span class="dv">6</span></code></pre></div>
 <p>You can use a patterns to match a subset of the columns you want. For example, here we select all the columns where the name contains the letter <code>d</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">select</span>(mtcars, <span class="kw">contains</span>(<span class="st">&quot;d&quot;</span>)))
-##                   disp drat
-## Mazda RX4          160 3.90
-## Mazda RX4 Wag      160 3.90
-## Datsun 710         108 3.85
-## Hornet 4 Drive     258 3.08
-## Hornet Sportabout  360 3.15
-## Valiant            225 2.76</code></pre></div>
+                  disp drat
+Mazda RX4          <span class="dv">160</span> <span class="fl">3.90</span>
+Mazda RX4 Wag      <span class="dv">160</span> <span class="fl">3.90</span>
+Datsun <span class="dv">710</span>         <span class="dv">108</span> <span class="fl">3.85</span>
+Hornet <span class="dv">4</span> Drive     <span class="dv">258</span> <span class="fl">3.08</span>
+Hornet Sportabout  <span class="dv">360</span> <span class="fl">3.15</span>
+Valiant            <span class="dv">225</span> <span class="fl">2.76</span></code></pre></div>
 <p>And you can combine these techniques to make more complex selections:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">select</span>(mtcars, <span class="kw">contains</span>(<span class="st">&quot;d&quot;</span>), <span class="op">-</span>drat))
-##                   disp
-## Mazda RX4          160
-## Mazda RX4 Wag      160
-## Datsun 710         108
-## Hornet 4 Drive     258
-## Hornet Sportabout  360
-## Valiant            225</code></pre></div>
+                  disp
+Mazda RX4          <span class="dv">160</span>
+Mazda RX4 Wag      <span class="dv">160</span>
+Datsun <span class="dv">710</span>         <span class="dv">108</span>
+Hornet <span class="dv">4</span> Drive     <span class="dv">258</span>
+Hornet Sportabout  <span class="dv">360</span>
+Valiant            <span class="dv">225</span></code></pre></div>
 <p>As a quick reference, you can use the following ‘verbs’ to select columns in different ways:</p>
 <ul>
 <li><code>starts_with()</code></li>

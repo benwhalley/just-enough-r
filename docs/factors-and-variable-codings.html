@@ -410,23 +410,23 @@ categorical.model &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <
 </ul>
 <p>For example, here we specify <code>cyl</code> is a factor within the model formula:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(cyl), <span class="dt">data=</span>mtcars)
-## 
-## Call:
-## lm(formula = mpg ~ factor(cyl), data = mtcars)
-## 
-## Coefficients:
-##  (Intercept)  factor(cyl)6  factor(cyl)8  
-##       26.664        -6.921       -11.564</code></pre></div>
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(cyl), <span class="dt">data =</span> mtcars)
+
+Coefficients<span class="op">:</span>
+<span class="st"> </span>(Intercept)  <span class="kw">factor</span>(cyl)<span class="dv">6</span>  <span class="kw">factor</span>(cyl)<span class="dv">8</span>  
+      <span class="fl">26.664</span>        <span class="op">-</span><span class="fl">6.921</span>       <span class="op">-</span><span class="fl">11.564</span>  </code></pre></div>
 <p>Whereas here we convert to a factor in the original dataset:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars<span class="op">$</span>cyl.factor &lt;-<span class="st"> </span><span class="kw">factor</span>(mtcars<span class="op">$</span>cyl)
 <span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>cyl.factor, <span class="dt">data=</span>mtcars)
-## 
-## Call:
-## lm(formula = mpg ~ cyl.factor, data = mtcars)
-## 
-## Coefficients:
-## (Intercept)  cyl.factor6  cyl.factor8  
-##      26.664       -6.921      -11.564</code></pre></div>
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>cyl.factor, <span class="dt">data =</span> mtcars)
+
+Coefficients<span class="op">:</span>
+(Intercept)  cyl.factor6  cyl.factor8  
+     <span class="fl">26.664</span>       <span class="op">-</span><span class="fl">6.921</span>      <span class="op">-</span><span class="fl">11.564</span>  </code></pre></div>
 <p><span class="admonition">Neither option is universally better, but if you have variables which are <em>definitely</em> factors (i.e. should never be used as slopes) it’s probably better to convert them in the original dataframe, before you start modelling</span></p>
 </div>
 </div>

@@ -5,8 +5,6 @@ title: 'Cleaning up the mess'
 
 
 ```{r, include=FALSE, message=F}
-knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
-
 library(tidyverse)
 library(reshape2)
 library(broom)

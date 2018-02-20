@@ -411,8 +411,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Probabilities and odds ratios are two <em>equivalent</em> ways of expressing the same idea.</p>
 <p>So a probability of .5 equates to an odds ratio of 1 (i.e. 1 to 1); <em>p</em>=.6 equates to odds of 1.5 (that is, 1.5 to 1, or 3 to 2), and <em>p</em> = .95 equates to an odds ratio of 19 (19 to 1).</p>
 <p>Odds convert or <em>map</em> probabilities from 0 to 1 onto the <a href="http://en.wikipedia.org/wiki/Real_number">real numbers</a> from 0 to ∞.</p>
-<div class="figure"><span id="fig:unnamed-chunk-2"></span>
-<img src="link-functions_files/figure-html/unnamed-chunk-2-1.png" alt="Probabilities converted to the odds scale. As p approaches 1 Odds goes to infinity." width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="link-functions_files/figure-html/unnamed-chunk-3-1.png" alt="Probabilities converted to the odds scale. As p approaches 1 Odds goes to infinity." width="672" />
 <p class="caption">
 Figure 9.1: Probabilities converted to the odds scale. As p approaches 1 Odds goes to infinity.
 </p>
@@ -438,8 +438,8 @@ Figure 9.1: Probabilities converted to the odds scale. As p approaches 1 Odds go
 <li><p>It converts odds of less than one to negative numbers, because the <em>log</em> of a number between 0 and 1 is always negative[^1].</p></li>
 <li><p>It flattens the rather square curve for the odds in the figure above, and</p></li>
 </ol>
-<div class="figure"><span id="fig:unnamed-chunk-3"></span>
-<img src="link-functions_files/figure-html/unnamed-chunk-3-1.png" alt="Probabilities converted to the logit (log-odds) scale. Notice how the slope implies that as probabilities approach 0 or 1 then the logit will get very large." width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="link-functions_files/figure-html/unnamed-chunk-4-1.png" alt="Probabilities converted to the logit (log-odds) scale. Notice how the slope implies that as probabilities approach 0 or 1 then the logit will get very large." width="672" />
 <p class="caption">
 Figure 5.1: Probabilities converted to the logit (log-odds) scale. Notice how the slope implies that as probabilities approach 0 or 1 then the logit will get very large.
 </p>
@@ -489,7 +489,7 @@ B  &lt;-<span class="st"> </span><span class="kw">log</span>(<span class="dv">1<
 <span class="co"># we have to use rounding because of limitations in </span>
 <span class="co"># the precision of R&#39;s arithmetic, but A and B are equal</span>
 <span class="kw">round</span>(A, <span class="dv">10</span>) <span class="op">==</span><span class="st"> </span><span class="kw">round</span>(B, <span class="dv">10</span>)
-## [1] TRUE</code></pre></div>
+[<span class="dv">1</span>] <span class="ot">TRUE</span></code></pre></div>
 <p>This means that <em>change in the log-odds</em> is the same as the <em>ratio of the odds</em></p>
 <p>So, once we undo the log transformation by taking the exponent of the coefficient, we are left with the <em>odds ratio</em>.</p>
 <p>You can now jump back to <a href="general-linear-models.html#logistic-regression">running logistic regression</a>.</p>

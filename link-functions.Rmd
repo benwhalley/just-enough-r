@@ -4,34 +4,40 @@ title: 'Link functions and `glm`'
 ---
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 library(tidyverse)
 library(pander)
 library(lmerTest)
 ```
 
 
-# Link functions {#link-functions}
+
+# Non-scale outcomes 
 
 
-Standard regression models are linear combinations which allow predicted values to range between negative -∞ (infinity) and +∞.
+Standard regression models are linear combinations of parameters estimated from the data. Multiplying these parameters by different values of the predictor variables gives estimates of the outcome.
 
-If you think about it, this makes sense, because there is no bound on either the parameters we fit (the regression coefficients) or the predictor values. 
+However, because there's no hard limit on the range of predictor variables (at least, no limit coded into the model itself) the predictions of a linear model in theory range between negative -∞ (infinity) and +∞.  Although values approaching infinity might be very unlikely, there is no hard limit on either the parameters we fit (the regression coefficients) or the predictor values themselves. 
 
-Where outcome data are continuous and (in theory or if we make a reasonable assumption) this isn't a problem. 
+Where outcome data are continuous or somewhat like a continuous variable this isn't usually a problem. Although our models might predict some improbable values (for example, that someone is 8 feet tall), they will not often be strictly impossible.  
 
-However for binary or count data this isn't the case. 
+It might occur to you at this point that, if a model predicted a height of -8 feet or a temperature below absolute zero, then this would be impossible. And this is true, and a theoretical violation of the assumption of the linear model that the outcome can range betweem -∞ (infinity) and +∞. However researchers use linear regression to predict many outcomes which have this type of range restriction and, although models can make strange predictions in edge cases, they are useful and can make good predictions most of the time. 
+
+However for other types of outcome --- incuding binary or count data, or other quantities like the duration-to-failure --- this often won't be the case, and standard linear regression may fail to make sensible predictions even in cases that are not unusual.
+
+For binary data we want to predict the probability of a positive response, and this can range between zero and 1. For count data, predicted outcomes must always be non-negative (i.e. zero or greater). For these data, the lack of constraint on predictions from linear regression are a problem.
 
 
-For binary data we want to predict the probability of a positive response, and this can range between zero and 1.
 
-For count data, predicted outcomes must always be non-negative (i.e. zero or greater).
+## Link functions {#link-functions}
 
-Logistic and poisson regression extend regular linear regression to allow this to happen by using different 'link functions'. 
+Logistic and poisson regression extend regular linear regression to allow us to *constrain* linear regression to predict within the rannge of possible outcomes.  To achieve this, logistic regression, poisson regression and other members of the family of 'generalised linear models' use different 'link functions'. 
 
-These link functions transform the data, which are constrained to 0/1 or non-negative integers, to the range of the underlying linear model, which allows values between -∞ and +∞.
+Link functions are used to connect the outcome variable to the linear model (that is, the linear combination of the parameters estimated for each of the predictors in the model). This means we can use linear models which still predict between -∞ and +∞, but without making inappropriate predictions.
 
-So, in generalised linear regression our linear combination is predicting a transformed outcome.
+For linear regression the link is simply the [identity function](https://en.wikipedia.org/wiki/Identity_function) — that is, the linear model directly predicts the outcome. However for other types of model different functions are used.
+
+A good way to think about link functions is as a *transformation* of the model's predictions. For example, in logistic regression predictions from the linear model are transformed in such a way that they are constrained to fall between 0 and 1. Thus, although to the underlying linear model allows values between -∞ and +∞, the link function ensures predictions fall between 0 and 1.
+
 
 
 
@@ -40,7 +46,6 @@ So, in generalised linear regression our linear combination is predicting a tran
 When we have binary data, we want to be able run something like regression, but where we predict a *probability* of the outcome. 
 
 Because probabilities are limited to between 0 and 1, to link the data with the linear model we need to transform so they range from -∞ (infinity) to +∞.
-
 
 You can think of the solution as coming in two steps:
 

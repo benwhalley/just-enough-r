@@ -1,3 +1,4 @@
+
 ---
 title: 'Crosstabulation'
 ---
@@ -18,10 +19,10 @@ We saw in a previous section [how to create a frequency table of one or more var
 
 ```r
 lego.table
-##          prefers
-## age       duplo lego
-##   4 years    38   20
-##   6 years    12   30
+         prefers
+age       duplo lego
+  4 years    38   20
+  6 years    12   30
 ```
 
 We can easily run the inferential $\chi^2$ (sometimes spelled "chi", but pronounced "kai"-squared) test on this table:
@@ -31,11 +32,11 @@ We can easily run the inferential $\chi^2$ (sometimes spelled "chi", but pronoun
 ```r
 lego.test <- chisq.test(lego.table)
 lego.test
-## 
-## 	Pearson's Chi-squared test with Yates' continuity correction
-## 
-## data:  lego.table
-## X-squared = 11.864, df = 1, p-value = 0.0005724
+
+	Pearson's Chi-squared test with Yates' continuity correction
+
+data:  lego.table
+X-squared = 11.864, df = 1, p-value = 0.0005724
 ```
 
 
@@ -46,8 +47,8 @@ Note that we can access each number in this output individually because the `chi
 ```r
 # access the chi2 value alone
 lego.test$statistic
-## X-squared 
-##  11.86371
+X-squared 
+ 11.86371 
 ```
 
 Even nicer,  you can use an R package to write up your results for you in APA format!
@@ -57,7 +58,7 @@ Even nicer,  you can use an R package to write up your results for you in APA fo
 ```r
 library(apa)
 apa(lego.test, print_n=T)
-## [1] "$\\chi^2$(1, n = 100) = 11.86, *p* < .001"
+[1] "$\\chi^2$(1, n = 100) = 11.86, *p* < .001"
 ```
 
 [See more on automatically displaying statistics in APA format](#apa-output)
@@ -129,7 +130,7 @@ xtabs(~am+gear+cyl, mtcars) %>%
   as_data_frame() %>% 
   reshape2::dcast(am+gear~paste(cyl, "Cylinders")) %>% 
   pander()
-## Using n as value column: use value.var to override.
+Using n as value column: use value.var to override.
 ```
 
 
@@ -159,7 +160,7 @@ xtabs(~am+gear+cyl, mtcars) %>%
   as_data_frame() %>% 
   reshape2::dcast(gear+cyl~paste0("US=", am)) %>% 
   pander()
-## Using n as value column: use value.var to override.
+Using n as value column: use value.var to override.
 ```
 
 

@@ -8,7 +8,6 @@ title: 'Summarising data'
 
 
 ```{r, include=FALSE, message=F}
-knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 library(tidyverse)
 library(pander)
 angry.moods <- read_csv('data/angry_moods.csv')
@@ -37,7 +36,7 @@ If a function returns a dataframe (rather than just printing output to the scree
 ## "Quick and dirty" {-}
 
 
-##### (Using utility functions built into R) {-}
+##### Using utility functions built into R {-}
 
 
 ### Frequency tables {- #frequency-tables}
@@ -59,7 +58,7 @@ lego.table
 ```
 
 
-#### `xtab`
+#### `xtab` {-}
 
 `table` is a simple way of calculating frequencies, but you can also use the `xtabs` function to make more complex sumamries.
 

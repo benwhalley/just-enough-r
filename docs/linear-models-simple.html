@@ -415,43 +415,43 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">select</span>(mpg, disp, wt) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span>pairs</code></pre></div>
-<p><img src="linear-models_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="linear-models_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Before running any model, we should ask outselves: “what question we are trying to answer?”</p>
 <p>In this instance, we can see that both weight (<code>wt</code>) and engine size (<code>disp</code>) are related to <code>mpg</code>, but they are also correlated with one another. We might want to know, then, “are weight and engine size independent predictors of <code>mpg</code>?” That is, if we know a car’s weight, do we gain additional information about it’s <code>mpg</code> by measuring engine size?</p>
 <p>To answer this, we could use multiple regression, including both <code>wt</code> and <code>disp</code> as predictors of <code>mpg</code>. The formula for this model would be <code>mpg ~ wt + disp</code>. The command below runs the model:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data=</span>mtcars)
-## 
-## Call:
-## lm(formula = mpg ~ wt + disp, data = mtcars)
-## 
-## Coefficients:
-## (Intercept)           wt         disp  
-##    34.96055     -3.35083     -0.01772</code></pre></div>
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data =</span> mtcars)
+
+Coefficients<span class="op">:</span>
+(Intercept)           wt         disp  
+   <span class="fl">34.96055</span>     <span class="op">-</span><span class="fl">3.35083</span>     <span class="op">-</span><span class="fl">0.01772</span>  </code></pre></div>
 <p>For readers used to wading through reams of SPSS output R might seem concise to the point of rudeness. By default, the <code>lm</code> commands displays very little, only repeating the formula and listing the coefficients for each predictor in the model.</p>
 <p>So what next? Unlike SPSS, we must be explicit and tell R exactly what we want. The most convenient way to do this is to first store the results of the <code>lm()</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m.<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data=</span>mtcars)</code></pre></div>
 <p>This stores the results of the <code>lm()</code> function in a variable named <code>m.1</code>. As an aside, this is a pretty terrible variable name — try to give descriptive names to your variables because this will prevent errors and make your code easier to read.</p>
 <p>We can then use other functions to get more information about the model. For example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(m.<span class="dv">1</span>)
-## 
-## Call:
-## lm(formula = mpg ~ wt + disp, data = mtcars)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -3.4087 -2.3243 -0.7683  1.7721  6.3484 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 34.96055    2.16454  16.151 4.91e-16 ***
-## wt          -3.35082    1.16413  -2.878  0.00743 ** 
-## disp        -0.01773    0.00919  -1.929  0.06362 .  
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 2.917 on 29 degrees of freedom
-## Multiple R-squared:  0.7809, Adjusted R-squared:  0.7658 
-## F-statistic: 51.69 on 2 and 29 DF,  p-value: 2.744e-10</code></pre></div>
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data =</span> mtcars)
+
+Residuals<span class="op">:</span>
+<span class="st">    </span>Min      1Q  Median      3Q     Max 
+<span class="op">-</span><span class="fl">3.4087</span> <span class="op">-</span><span class="fl">2.3243</span> <span class="op">-</span><span class="fl">0.7683</span>  <span class="fl">1.7721</span>  <span class="fl">6.3484</span> 
+
+Coefficients<span class="op">:</span>
+<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept) <span class="fl">34.96055</span>    <span class="fl">2.16454</span>  <span class="fl">16.151</span> <span class="fl">4.91e-16</span> <span class="op">**</span><span class="er">*</span>
+wt          <span class="op">-</span><span class="fl">3.35082</span>    <span class="fl">1.16413</span>  <span class="op">-</span><span class="fl">2.878</span>  <span class="fl">0.00743</span> <span class="op">**</span><span class="st"> </span>
+disp        <span class="op">-</span><span class="fl">0.01773</span>    <span class="fl">0.00919</span>  <span class="op">-</span><span class="fl">1.929</span>  <span class="fl">0.06362</span> .  
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">2.917</span> on <span class="dv">29</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7809</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7658</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">51.69</span> on <span class="dv">2</span> and <span class="dv">29</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">2.744e-10</span></code></pre></div>
 <p>Although still compact, the <code>summary</code> function provides some familiar output, including the estimate, <em>SE</em>, and <em>p</em> value for each parameter.</p>
 <p>Take a moment to find the following statistics in the output above:</p>
 <ul>
@@ -470,38 +470,38 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Below, we define and run a linear model with both <code>vs</code> and <code>am</code> as predictors, along with the interaction of <code>vs:am</code>. We save this model as <code>m.2</code>, and use the <code>summary</code> command to print the coefficients.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m.<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>vs <span class="op">+</span><span class="st"> </span>am <span class="op">+</span><span class="st"> </span>vs<span class="op">:</span>am, <span class="dt">data=</span>mtcars)
 <span class="kw">summary</span>(m.<span class="dv">2</span>)
-## 
-## Call:
-## lm(formula = mpg ~ vs + am + vs:am, data = mtcars)
-## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -6.971 -1.973  0.300  2.036  6.250 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)   15.050      1.002  15.017 6.34e-15 ***
-## vs             5.693      1.651   3.448   0.0018 ** 
-## am             4.700      1.736   2.708   0.0114 *  
-## vs:am          2.929      2.541   1.153   0.2589    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 3.472 on 28 degrees of freedom
-## Multiple R-squared:  0.7003, Adjusted R-squared:  0.6682 
-## F-statistic: 21.81 on 3 and 28 DF,  p-value: 1.735e-07</code></pre></div>
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>vs <span class="op">+</span><span class="st"> </span>am <span class="op">+</span><span class="st"> </span>vs<span class="op">:</span>am, <span class="dt">data =</span> mtcars)
+
+Residuals<span class="op">:</span>
+<span class="st">   </span>Min     1Q Median     3Q    Max 
+<span class="op">-</span><span class="fl">6.971</span> <span class="op">-</span><span class="fl">1.973</span>  <span class="fl">0.300</span>  <span class="fl">2.036</span>  <span class="fl">6.250</span> 
+
+Coefficients<span class="op">:</span>
+<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept)   <span class="fl">15.050</span>      <span class="fl">1.002</span>  <span class="fl">15.017</span> <span class="fl">6.34e-15</span> <span class="op">**</span><span class="er">*</span>
+vs             <span class="fl">5.693</span>      <span class="fl">1.651</span>   <span class="fl">3.448</span>   <span class="fl">0.0018</span> <span class="op">**</span><span class="st"> </span>
+am             <span class="fl">4.700</span>      <span class="fl">1.736</span>   <span class="fl">2.708</span>   <span class="fl">0.0114</span> <span class="op">*</span><span class="st">  </span>
+vs<span class="op">:</span>am          <span class="fl">2.929</span>      <span class="fl">2.541</span>   <span class="fl">1.153</span>   <span class="fl">0.2589</span>    
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">3.472</span> on <span class="dv">28</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7003</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.6682</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">21.81</span> on <span class="dv">3</span> and <span class="dv">28</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">1.735e-07</span></code></pre></div>
 <p>We’d normally want to see the Anova table for this model, including the F-tests:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">car<span class="op">::</span><span class="kw">Anova</span>(m.<span class="dv">2</span>)
-## Anova Table (Type II tests)
-## 
-## Response: mpg
-##           Sum Sq Df F value    Pr(&gt;F)    
-## vs        367.41  1 30.4836 6.687e-06 ***
-## am        276.03  1 22.9021 4.984e-05 ***
-## vs:am      16.01  1  1.3283    0.2589    
-## Residuals 337.48 28                      
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre></div>
+Anova <span class="kw">Table</span> (Type II tests)
+
+Response<span class="op">:</span><span class="st"> </span>mpg
+          Sum Sq Df F value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    
+vs        <span class="fl">367.41</span>  <span class="dv">1</span> <span class="fl">30.4836</span> <span class="fl">6.687e-06</span> <span class="op">**</span><span class="er">*</span>
+am        <span class="fl">276.03</span>  <span class="dv">1</span> <span class="fl">22.9021</span> <span class="fl">4.984e-05</span> <span class="op">**</span><span class="er">*</span>
+vs<span class="op">:</span>am      <span class="fl">16.01</span>  <span class="dv">1</span>  <span class="fl">1.3283</span>    <span class="fl">0.2589</span>    
+Residuals <span class="fl">337.48</span> <span class="dv">28</span>                      
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
 <p>But before you do too much with Anova in R <a href="anova.html">read this section</a>.</p>
 <div id="other-formula-shortcuts" class="section level4 unnumbered">
 <h4>Other formula shortcuts</h4>

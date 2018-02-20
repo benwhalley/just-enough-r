@@ -399,20 +399,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Let’s say we have file called <code>angry_moods.csv</code> in the same directory as our <code>.Rmd</code> file. We can read this data using the <code>read_csv()</code> function from the <code>readr</code> package<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">angry.moods &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&#39;data/angry_moods.csv&#39;</span>)
 <span class="kw">head</span>(angry.moods)
-## # A tibble: 6 x 7
-##   Gender Sports Anger.Out Anger.In Control.Out Control.In Anger.Expression
-##    &lt;int&gt;  &lt;int&gt;     &lt;int&gt;    &lt;int&gt;       &lt;int&gt;      &lt;int&gt;            &lt;int&gt;
-## 1      2      1        18       13          23         20               36
-## 2      2      1        14       17          25         24               30
-## 3      2      1        13       14          28         28               19
-## 4      2      1        17       24          23         23               43
-## 5      1      1        16       17          26         28               27
-## 6      1      1        16       22          25         23               38</code></pre></div>
+<span class="co"># A tibble: 6 x 7</span>
+  Gender Sports Anger.Out Anger.In Control.Out Control.In Anger.Expression
+   <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">    </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">       </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">      </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">            </span><span class="er">&lt;</span>int<span class="op">&gt;</span>
+<span class="dv">1</span>      <span class="dv">2</span>      <span class="dv">1</span>        <span class="dv">18</span>       <span class="dv">13</span>          <span class="dv">23</span>         <span class="dv">20</span>               <span class="dv">36</span>
+<span class="dv">2</span>      <span class="dv">2</span>      <span class="dv">1</span>        <span class="dv">14</span>       <span class="dv">17</span>          <span class="dv">25</span>         <span class="dv">24</span>               <span class="dv">30</span>
+<span class="dv">3</span>      <span class="dv">2</span>      <span class="dv">1</span>        <span class="dv">13</span>       <span class="dv">14</span>          <span class="dv">28</span>         <span class="dv">28</span>               <span class="dv">19</span>
+<span class="dv">4</span>      <span class="dv">2</span>      <span class="dv">1</span>        <span class="dv">17</span>       <span class="dv">24</span>          <span class="dv">23</span>         <span class="dv">23</span>               <span class="dv">43</span>
+<span class="dv">5</span>      <span class="dv">1</span>      <span class="dv">1</span>        <span class="dv">16</span>       <span class="dv">17</span>          <span class="dv">26</span>         <span class="dv">28</span>               <span class="dv">27</span>
+<span class="dv">6</span>      <span class="dv">1</span>      <span class="dv">1</span>        <span class="dv">16</span>       <span class="dv">22</span>          <span class="dv">25</span>         <span class="dv">23</span>               <span class="dv">38</span></code></pre></div>
 <p>As you can see, when loading the <code>.csv</code> file the <code>read_csv()</code> makes some assumptions about the <em>type</em> of data the file contains. In this case, all the columns contain integer values. It’s worth checking this message to make sure that stray cells in the file you are importing don’t cause problems when importing. Excel won’t complain about this sort of thing, but R is more strict and won’t mix text and numbers in the same column.</p>
 <p>A common error is for stray notes or text values in a spreadsheet to cause a column which should be numeric to be converted to the <code>character</code> type.</p>
 <p>Once it’s loaded, you can use this new dataset like any other:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(angry.moods)</code></pre></div>
-<p><img src="import-export_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="import-export_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <div id="importing-data-from-the-web" class="section level3 unnumbered">
 <h3>Importing data over the web</h3>
 <p>One neat feature of the <code>readr</code> package is that you can import data from the web, using a URL rather than a filename on your local computer. This can be really helpful when sharing data and code with colleagues. For example, we can load the <code>angry_moods.csv</code> file from a URL:</p>

@@ -401,17 +401,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>For basic stats the <code>apa::</code> package is simple to use. Below we use the <code>apa::chisq_apa()</code> function to properly format the results of our chi<sup>2</sup> test ([see the full chi<sup>2</sup> example]#crosstabs)):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lego.test &lt;-<span class="st"> </span><span class="kw">chisq.test</span>(lego.table)
 lego.test
-## 
-##  Pearson&#39;s Chi-squared test with Yates&#39; continuity correction
-## 
-## data:  lego.table
-## X-squared = 11.864, df = 1, p-value = 0.0005724</code></pre></div>
+
+    Pearson<span class="st">&#39;s Chi-squared test with Yates&#39;</span> continuity correction
+
+data<span class="op">:</span><span class="st">  </span>lego.table
+X<span class="op">-</span>squared =<span class="st"> </span><span class="fl">11.864</span>, df =<span class="st"> </span><span class="dv">1</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.0005724</span></code></pre></div>
 <p>And we can format in APA like so:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">apa<span class="op">::</span><span class="kw">apa</span>(lego.test, <span class="dt">print_n=</span>T)
-## [1] &quot;$\\chi^2$(1, n = 100) = 11.86, *p* &lt; .001&quot;</code></pre></div>
+[<span class="dv">1</span>] <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">chi^2$(1, n = 100) = 11.86, *p* &lt; .001&quot;</span></code></pre></div>
 <p>or using <code>apastats::</code> we also get Cramer’s V, a measure of effect size:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">apastats<span class="op">::</span><span class="kw">describe.chi</span>(lego.table, <span class="dt">addN=</span>T)
-## [1] &quot;$\\chi^2$(1, _N_ = 100) = 11.86, _p_ &lt; .001, _V_ = .34&quot;</code></pre></div>
+[<span class="dv">1</span>] <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">chi^2$(1, _N_ = 100) = 11.86, _p_ &lt; .001, _V_ = .34&quot;</span></code></pre></div>
 <div id="inline-apa-format" class="section level4">
 <h4><span class="header-section-number">17.0.0.1</span> Inserting results into your text</h4>
 <p>If you are using RMarkdown, you can drop formatted results into your text without copying and pasting. Just type the following and the chi<sup>2</sup> test result is automatically inserted inline in your text:</p>
@@ -427,20 +427,20 @@ lego.test
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># run the t test</span>
 cars.test &lt;-<span class="st"> </span><span class="kw">t.test</span>(wt<span class="op">~</span>am,<span class="dt">data=</span>mtcars, <span class="dt">var.equal=</span>T)
 cars.test
-## 
-##  Two Sample t-test
-## 
-## data:  wt by am
-## t = 5.2576, df = 30, p-value = 1.125e-05
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  0.8304317 1.8853577
-## sample estimates:
-## mean in group 0 mean in group 1 
-##        3.768895        2.411000</code></pre></div>
+
+    Two Sample t<span class="op">-</span>test
+
+data<span class="op">:</span><span class="st">  </span>wt by am
+t =<span class="st"> </span><span class="fl">5.2576</span>, df =<span class="st"> </span><span class="dv">30</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">1.125e-05</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span>
+<span class="dv">95</span> percent confidence interval<span class="op">:</span>
+<span class="st"> </span><span class="fl">0.8304317</span> <span class="fl">1.8853577</span>
+sample estimates<span class="op">:</span>
+mean <span class="cf">in</span> group <span class="dv">0</span> mean <span class="cf">in</span> group <span class="dv">1</span> 
+       <span class="fl">3.768895</span>        <span class="fl">2.411000</span> </code></pre></div>
 <p>And then we can format as APA</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">apa<span class="op">::</span><span class="kw">apa</span>(cars.test)
-## [1] &quot;*t*(30) = 5.26, *p* &lt; .001, *d* = 1.86&quot;</code></pre></div>
+[<span class="dv">1</span>] <span class="st">&quot;*t*(30) = 5.26, *p* &lt; .001, *d* = 1.86&quot;</span></code></pre></div>
 <p><span class="apa-example">American cars were significantly heavier than foreign cars, mean difference=1358lbs; <em>t</em>(30) = 5.26, <em>p</em> &lt; .001, <em>d</em> = 1.86</span></p>
 </div>
 <div id="anova-1" class="section level3 unnumbered">
@@ -450,11 +450,11 @@ cars.test
 <span class="kw">library</span>(apastats)
 <span class="co"># extract and format main effect</span>
 <span class="kw">describe.Anova</span>(mpg.anova, <span class="dt">term=</span><span class="st">&quot;am&quot;</span>)
-## [1] &quot;_F_(1, 28) = 4.28, _p_ = .048&quot;
+[<span class="dv">1</span>] <span class="st">&quot;_F_(1, 28) = 4.28, _p_ = .048&quot;</span>
 
 <span class="co"># and the interaction</span>
 <span class="kw">describe.Anova</span>(mpg.anova, <span class="dt">term=</span><span class="st">&quot;am:cyl&quot;</span>)
-## [1] &quot;_F_(1, 28) = 3.41, _p_ = .076&quot;</code></pre></div>
+[<span class="dv">1</span>] <span class="st">&quot;_F_(1, 28) = 3.41, _p_ = .076&quot;</span></code></pre></div>
 <p><span class="apa-example">There was no interaction between location of manufacture and number of cylinders, <em>F</em>(1, 28) = 3.41, <em>p</em> = .076, but there was a main effect of location of manufacture, <em>F</em>(1, 28) = 3.41, <em>p</em> = .076, such that US-made cars had significantly higher fuel consumption than European or Japanese brands (see [Figure X or Table X])</span></p>
 <!-- 
 TODO add formatting of effect size estimates here
@@ -468,11 +468,11 @@ TODO add formatting of effect size estimates here
 
 <span class="co">#a single coefficient (this is a contrast from the reference category)</span>
 <span class="kw">describe.glm</span>(sleep.model, <span class="dt">term=</span><span class="st">&quot;factor(Days)1&quot;</span>)
-## [1] &quot;_t_ =  0.75, _p_ = .455&quot;
+[<span class="dv">1</span>] <span class="st">&quot;_t_ =  0.75, _p_ = .455&quot;</span>
 
 <span class="co"># or describe the F test for the overall effect of Days</span>
 <span class="kw">describe.lmtaov</span>(<span class="kw">anova</span>(sleep.model), <span class="dt">term=</span><span class="st">&#39;factor(Days)&#39;</span>)
-## [1] &quot;_F_(9, 153.0) = 18.70, _p_ &lt; .001&quot;</code></pre></div>
+[<span class="dv">1</span>] <span class="st">&quot;_F_(9, 153.0) = 18.70, _p_ &lt; .001&quot;</span></code></pre></div>
 <p><span class="apa-example">There were significant differences in reaction times across the 10 days of the study, <em>F</em>(9, 153.0) = 18.70, <em>p</em> &lt; .001 such that reaction latencies tended to increase in duration (see [Figure X]).</span></p>
 
 </div>

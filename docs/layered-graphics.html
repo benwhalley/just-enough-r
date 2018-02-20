@@ -404,8 +404,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Composition</li>
 </ul>
 <p>The <code>ggplot</code> library makes it easy to produce high quality graphics which serve these ends, and to layer them to produce information-dense plots which are really effective forms of communication.</p>
-<div class="figure"><span id="fig:unnamed-chunk-3"></span>
-<img src="graphics_files/figure-html/unnamed-chunk-3-1.png" alt="Examples of charts showing comaprisons, relationships, distribution and composition. The comparison, distribution and composition plots show 2 variables, but the relationship plot includes 3, increasing the density of the information displayed. " width="768" />
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="graphics_files/figure-html/unnamed-chunk-4-1.png" alt="Examples of charts showing comaprisons, relationships, distribution and composition. The comparison, distribution and composition plots show 2 variables, but the relationship plot includes 3, increasing the density of the information displayed. " width="768" />
 <p class="caption">
 Figure 5.1: Examples of charts showing comaprisons, relationships, distribution and composition. The comparison, distribution and composition plots show 2 variables, but the relationship plot includes 3, increasing the density of the information displayed.
 </p>
@@ -467,7 +467,7 @@ Figure 5.1: Examples of charts showing comaprisons, relationships, distribution 
 <p>At this point <code>ggplot</code> will create and label the axes and plot area, but doesn’t yet display any of our data. For this we need to add visual display layers (in the next step).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> disp, <span class="dt">y =</span> mpg, <span class="dt">colour=</span>hp))</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <div id="aesthetics" class="section level6 unnumbered explainer">
 <h6>Other aesthetics</h6>
 <p>There are many other aesthetics which can be specified. Some of the most useful are:</p>
@@ -490,7 +490,7 @@ Figure 5.1: Examples of charts showing comaprisons, relationships, distribution 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> disp, <span class="dt">y =</span> mpg, <span class="dt">colour=</span>hp)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>And we have a pretty slick graph: <code>ggplot</code> has now added points for each pair of <code>disp</code> and <code>mpg</code> values, and coloured them according to the value of <code>hp</code> (see <a href="colours.html#picking-colours">choosing colours below</a>).</p>
 <p><span class="exercise">Use the <code>airquality</code> dataset and create your own scatterplot and try to colour the points using the <code>Month</code> variable. Should <code>Month</code> be used as a factor or a numeric variable when colouring the points?</span></p>
 <p>What’s even neater about <code>ggplot</code> though is how easy it is to <em>layer</em> different visualisations of the same data. These visual layers are called <code>geom</code>’s and the functions which add them are all prefixed with <code>geom_</code>, so <code>geom_point()</code> for scatter plots, or <code>geom_line()</code> for line plots, or <code>geom_smooth()</code> for a smoothed line plot. We can add this to the scatter plot like so:</p>
@@ -498,7 +498,7 @@ Figure 5.1: Examples of charts showing comaprisons, relationships, distribution 
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> disp, <span class="dt">y =</span> mpg, <span class="dt">colour=</span>hp)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span>F, <span class="dt">colour=</span><span class="st">&quot;grey&quot;</span>) </code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>In the example above, I have also customised the smoothed line, making it grey to avoid over-intrusion into our perception of the points. Often less is more when plotting graphs: not everything can be emphasised at once, and <em>it’s important to make decisions about what should be given visual priority</em>.</p>
 </div>
 <div id="step-5-splitting-up-or-repeating-the-plot." class="section level5 unnumbered">
@@ -510,7 +510,7 @@ Figure 5.1: Examples of charts showing comaprisons, relationships, distribution 
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span>F, <span class="dt">colour=</span><span class="st">&quot;grey&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="st">&quot;am&quot;</span>)</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>One trick is to make sure factors are labelled nicely, because these labels appear on the final plot. Here the <code>mutate()</code> call <a href="real-data.html#factors-and-numerics">relabels the factor</a> which makes the plot easier to read:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">american =</span> <span class="kw">factor</span>(am, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;American&quot;</span>, <span class="st">&quot;Foreign&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -518,7 +518,7 @@ Figure 5.1: Examples of charts showing comaprisons, relationships, distribution 
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span>F, <span class="dt">colour=</span><span class="st">&quot;grey&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="st">&quot;american&quot;</span>)</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p><a href="http://ggplot2.tidyverse.org/reference/#section-facetting">See the ggplot documentation on facetting for more details</a>.</p>
 </div>
 </div>
@@ -526,20 +526,20 @@ Figure 5.1: Examples of charts showing comaprisons, relationships, distribution 
 <h3>‘Distributions’</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Reaction)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>()</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Imagine we wanted to compare distributions for individuals. Simply overlaying the lines is confusing:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Reaction, <span class="dt">group=</span>Subject)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>()</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>Facetting produces a nicer result:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Reaction)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="st">&quot;Subject&quot;</span>)</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>But we could present the same information more compactly, and with better facility to compare between subjects, if we use a bottleplot:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Subject, Reaction)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_violin</span>() </code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>We might want to plot our Subjects in order of their mean RT:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mean.ranked.sleep &lt;-<span class="st"> </span>lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(Subject) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -555,15 +555,15 @@ mean.ranked.sleep <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(SubjectRank, Reaction)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_violin</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">aspect.ratio =</span> .<span class="dv">33</span>)  <span class="co"># change the aspect ratio to make long and wide</span></code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>Or we might want to compare individuals against the combined distribution:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># duplicate all the data, assigning one-replication to a single subject, &quot;All&quot;</span>
 sleep.repeat &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(lme4<span class="op">::</span>sleepstudy,
                           lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Subject=</span><span class="st">&quot;All&quot;</span>))
-## Warning in bind_rows_(x, .id): binding factor and character vector,
-## coercing into character vector
-## Warning in bind_rows_(x, .id): binding character and factor vector,
-## coercing into character vector
+Warning <span class="cf">in</span> <span class="kw">bind_rows_</span>(x, .id)<span class="op">:</span><span class="st"> </span>binding factor and character vector,
+coercing into character vector
+Warning <span class="cf">in</span> <span class="kw">bind_rows_</span>(x, .id)<span class="op">:</span><span class="st"> </span>binding character and factor vector,
+coercing into character vector
 
 sleep.repeat <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">all =</span> Subject<span class="op">==</span><span class="st">&quot;All&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -571,17 +571,17 @@ sleep.repeat <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_violin</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">guides</span>(<span class="dt">colour=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="co"># turn off he legend because we don&#39;t really need it</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">aspect.ratio =</span> .<span class="dv">25</span>)  <span class="co"># change the aspect ratio to make long and wide</span></code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>Boxplots can also work well to show distributions, and have the advantage of showing the median explicitly:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mean.ranked.sleep <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(SubjectRank, Reaction)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>() </code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>If we plot the same data by-day, we can clearly see the effect of sleep deprivation, and the increase in variability between subjects as sime goes on: the lack of sleeps seems to be affecting some subjects more than others</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">factor</span>(Days), Reaction)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>() </code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 </div>
 <div id="comparisons" class="section level3 unnumbered">
 <h3>‘Comparisons’</h3>
@@ -591,14 +591,14 @@ sleep.repeat <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>pander</code></pre></div>
 <table style="width:100%;">
 <colgroup>
-<col width="21%" />
-<col width="9%" />
-<col width="5%" />
-<col width="13%" />
-<col width="9%" />
-<col width="9%" />
+<col width="19%" />
 <col width="8%" />
+<col width="7%" />
+<col width="14%" />
 <col width="10%" />
+<col width="10%" />
+<col width="9%" />
+<col width="9%" />
 <col width="10%" />
 </colgroup>
 <thead>
@@ -872,13 +872,13 @@ sleep.repeat <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(variable))
 
 weather.data.long <span class="op">%&gt;%</span><span class="st"> </span>head
-##   Year Region variable  value
-## 1 1900   east     Rain 429.98
-## 2 1901   east     Rain 500.12
-## 3 1902   east     Rain 315.33
-## 4 1903   east     Rain 694.09
-## 5 1904   east     Rain 564.86
-## 6 1905   east     Rain 443.11</code></pre></div>
+  Year Region variable  value
+<span class="dv">1</span> <span class="dv">1900</span>   east     Rain <span class="fl">429.98</span>
+<span class="dv">2</span> <span class="dv">1901</span>   east     Rain <span class="fl">500.12</span>
+<span class="dv">3</span> <span class="dv">1902</span>   east     Rain <span class="fl">315.33</span>
+<span class="dv">4</span> <span class="dv">1903</span>   east     Rain <span class="fl">694.09</span>
+<span class="dv">5</span> <span class="dv">1904</span>   east     Rain <span class="fl">564.86</span>
+<span class="dv">6</span> <span class="dv">1905</span>   east     Rain <span class="fl">443.11</span></code></pre></div>
 </div>
 <div id="section-12" class="section level5 exercise">
 <h5><span class="header-section-number">5.0.0.0.1</span> </h5>
@@ -892,20 +892,20 @@ rain <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Year, value)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;Rainfall (mm)&#39;</span>)</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>There are many ways to extract structure from these data, and make comparisons over time. One is to use colour:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rain <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Year, value, <span class="dt">color=</span>Region)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;Rainfall (mm)&#39;</span>)</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>It’s now easy to see the crude differences between the regions (west appears the driest, sw the wettest), but it’s still hard to compare between regions, or over time.</p>
 <p>For this we can use various forms of summaries, for example a smoothed line plot (the shaded area is the standard error), which clearly shows the relative changes in rainfall in each region over time:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rain <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Year, value, <span class="dt">color=</span>Region)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;Rainfall (mm)&#39;</span>)</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>It can sometimes be desireable to include points to preserve the relationship between the summary and the raw data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rain <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(Region <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;west&#39;</span>, <span class="st">&#39;se&#39;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -913,7 +913,7 @@ rain <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>, <span class="dt">size=</span>.<span class="dv">5</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span>F) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;Rainfall (mm)&#39;</span>)</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>If we weren’t interested in the time series and just wanted to focus on the most recent year, we might take a different approach. Here a bar plot is used to compare between regions, with the national average (au) highlighted in blue:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rain <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(Year <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(Year)) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -921,15 +921,15 @@ rain <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">geom=</span><span class="st">&quot;bar&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;Rainfall (mm)&#39;</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill=</span>F)</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>Finally, we shouldn’t forget that this dataset included both rainfall and temperature data, and we can display these in different ways, depending on what our research question was.</p>
 <p>In this case we can use facetting to display temperature and rainfall data side by side. Because AVt and Rain are on such different scales we need to allow the y axis to vary between variables:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weather.data.long <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Year, value, <span class="dt">color=</span>Region)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_smooth</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>variable, <span class="dt">scales=</span><span class="st">&quot;free&quot;</span>)
-## Warning: Removed 70 rows containing non-finite values (stat_smooth).</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+Warning<span class="op">:</span><span class="st"> </span>Removed <span class="dv">70</span> rows containing non<span class="op">-</span>finite <span class="kw">values</span> (stat_smooth).</code></pre></div>
+<p><img src="graphics_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <!-- ```{r} -->
 <!-- dataurl <- function(year, country){ -->
 <!--   sprintf("https://www.census.gov/population/international/data/idb/region.php?N=Results&T=10&A=separate&RT=0&Y=%.0f&R=-1&C=%s", 2017, "UK") -->
@@ -951,12 +951,12 @@ rain <span class="op">%&gt;%</span><span class="st"> </span>
               <span class="st">&quot;lost 5kg or more&quot;</span> =<span class="st"> </span><span class="dv">16</span>)
 
 waffle<span class="op">::</span><span class="kw">waffle</span>(outcomes)</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <p><span class="tip">Calculating these summary figures is left as an exercise to for the reader, but see the section on <a href="a-generalised-approach.html#split-apply-combine">summarising data with dplyr</a>.</span></p>
 <p>This is one of those occasions where the default ggplot colours could probably be improved, and we can do this by passing the <a href="colours.html#named-colours">names of the colours</a> we would like to use:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weight.loss.colours &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;firebrick2&#39;</span>, <span class="st">&#39;darkgoldenrod1&#39;</span>, <span class="st">&#39;palegreen3&#39;</span>, <span class="st">&#39;palegreen4&#39;</span>)
 waffle<span class="op">::</span><span class="kw">waffle</span>(outcomes, <span class="dt">colors =</span> weight.loss.colours)</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <p>Selecting colours by hand isn’t always the best way though: the <a href="colours.html#color-brewer"><code>colourbrewer</code> library provides some nice shortcuts</a> for using palletes from the excellent <a href="http://colorbrewer2.org">ColourBrewer website</a>.</p>
 </div>
 <div id="stacked-bars" class="section level4 unnumbered">
@@ -965,15 +965,15 @@ waffle<span class="op">::</span><span class="kw">waffle</span>(outcomes, <span c
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">reshape2<span class="op">::</span>tips <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>head <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>pander</code></pre></div>
-<table style="width:76%;">
+<table style="width:82%;">
 <colgroup>
 <col width="18%" />
-<col width="8%" />
 <col width="9%" />
 <col width="12%" />
+<col width="12%" />
 <col width="8%" />
-<col width="9%" />
-<col width="9%" />
+<col width="12%" />
+<col width="8%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -1047,19 +1047,19 @@ waffle<span class="op">::</span><span class="kw">waffle</span>(outcomes, <span c
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">reshape2<span class="op">::</span>tips <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(time, tip)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">geom=</span><span class="st">&quot;bar&quot;</span>)</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <p>And to facilitate the comparison between men and women we could colour portions of the bars using <code>position_stack()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">reshape2<span class="op">::</span>tips <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(time, tip, <span class="dt">fill=</span>sex)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">geom=</span><span class="st">&quot;bar&quot;</span>, <span class="dt">position=</span><span class="kw">position_stack</span>()) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Tip ($)&quot;</span>)</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 <p>Or to reverse the comparisons:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">reshape2<span class="op">::</span>tips <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(sex, tip, <span class="dt">fill=</span>time)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">geom=</span><span class="st">&quot;bar&quot;</span>, <span class="dt">position=</span><span class="kw">position_stack</span>()) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Tip ($)&quot;</span>)</code></pre></div>
-<p><img src="graphics_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p><img src="graphics_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 </div>
 </div>
 </div>

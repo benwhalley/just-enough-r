@@ -6,7 +6,6 @@ title: 'Working with character strings'
 ## Working with character strings {- #string-handling}
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
 library(tidyverse)
 library(tufte)
 library(pander)

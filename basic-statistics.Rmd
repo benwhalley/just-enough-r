@@ -2,9 +2,6 @@
 title: 'Basic statistics'
 ---
 
-```{r, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE)
-```
 
 
 # Common inferential statistics {#common-inferential-stats}

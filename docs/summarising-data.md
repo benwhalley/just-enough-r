@@ -1,3 +1,4 @@
+
 --
 title: 'Summarising data'
 ---
@@ -32,7 +33,7 @@ If a function returns a dataframe (rather than just printing output to the scree
 ## "Quick and dirty" {-}
 
 
-##### (Using utility functions built into R) {-}
+##### Using utility functions built into R {-}
 
 
 ### Frequency tables {- #frequency-tables}
@@ -48,14 +49,14 @@ We can use the `table()` command to get a cross tabulation of these `age` catego
 ```r
 lego.table <- with(lego.duplo.df, table(age, prefers))
 lego.table
-##          prefers
-## age       duplo lego
-##   4 years    38   20
-##   6 years    12   30
+         prefers
+age       duplo lego
+  4 years    38   20
+  6 years    12   30
 ```
 
 
-#### `xtab`
+#### `xtab` {-}
 
 `table` is a simple way of calculating frequencies, but you can also use the `xtabs` function to make more complex sumamries.
 
@@ -66,10 +67,10 @@ In the simplest case, we just write a tilde symbol (`~`) and the the names of th
 
 ```r
 xtabs(~age+prefers, lego.duplo.df)
-##          prefers
-## age       duplo lego
-##   4 years    38   20
-##   6 years    12   30
+         prefers
+age       duplo lego
+  4 years    38   20
+  6 years    12   30
 ```
 
 The order of the variables changes the orientation of the table:
@@ -77,10 +78,10 @@ The order of the variables changes the orientation of the table:
 
 ```r
 xtabs(~prefers+age, lego.duplo.df)
-##        age
-## prefers 4 years 6 years
-##   duplo      38      12
-##   lego       20      30
+       age
+prefers 4 years 6 years
+  duplo      38      12
+  lego       20      30
 ```
 
 
@@ -98,20 +99,20 @@ In this guide so far you might have noticed functions which provide summaries of
 
 ```r
 summary(angry.moods)
-##      Gender          Sports        Anger.Out        Anger.In    
-##  Min.   :1.000   Min.   :1.000   Min.   : 9.00   Min.   :10.00  
-##  1st Qu.:1.000   1st Qu.:1.000   1st Qu.:13.00   1st Qu.:15.00  
-##  Median :2.000   Median :2.000   Median :16.00   Median :18.50  
-##  Mean   :1.615   Mean   :1.679   Mean   :16.08   Mean   :18.58  
-##  3rd Qu.:2.000   3rd Qu.:2.000   3rd Qu.:18.00   3rd Qu.:22.00  
-##  Max.   :2.000   Max.   :2.000   Max.   :27.00   Max.   :31.00  
-##   Control.Out      Control.In    Anger.Expression
-##  Min.   :14.00   Min.   :11.00   Min.   : 7.00   
-##  1st Qu.:21.00   1st Qu.:18.25   1st Qu.:27.00   
-##  Median :24.00   Median :22.00   Median :36.00   
-##  Mean   :23.69   Mean   :21.96   Mean   :37.00   
-##  3rd Qu.:27.00   3rd Qu.:24.75   3rd Qu.:44.75   
-##  Max.   :32.00   Max.   :32.00   Max.   :68.00
+     Gender          Sports        Anger.Out        Anger.In    
+ Min.   :1.000   Min.   :1.000   Min.   : 9.00   Min.   :10.00  
+ 1st Qu.:1.000   1st Qu.:1.000   1st Qu.:13.00   1st Qu.:15.00  
+ Median :2.000   Median :2.000   Median :16.00   Median :18.50  
+ Mean   :1.615   Mean   :1.679   Mean   :16.08   Mean   :18.58  
+ 3rd Qu.:2.000   3rd Qu.:2.000   3rd Qu.:18.00   3rd Qu.:22.00  
+ Max.   :2.000   Max.   :2.000   Max.   :27.00   Max.   :31.00  
+  Control.Out      Control.In    Anger.Expression
+ Min.   :14.00   Min.   :11.00   Min.   : 7.00   
+ 1st Qu.:21.00   1st Qu.:18.25   1st Qu.:27.00   
+ Median :24.00   Median :22.00   Median :36.00   
+ Mean   :23.69   Mean   :21.96   Mean   :37.00   
+ 3rd Qu.:27.00   3rd Qu.:24.75   3rd Qu.:44.75   
+ Max.   :32.00   Max.   :32.00   Max.   :68.00   
 ```
 
 Or:
@@ -119,14 +120,14 @@ Or:
 
 ```r
 psych::describe(angry.moods, skew=FALSE)
-##                  vars  n  mean    sd min max range   se
-## Gender              1 78  1.62  0.49   1   2     1 0.06
-## Sports              2 78  1.68  0.47   1   2     1 0.05
-## Anger.Out           3 78 16.08  4.22   9  27    18 0.48
-## Anger.In            4 78 18.58  4.70  10  31    21 0.53
-## Control.Out         5 78 23.69  4.69  14  32    18 0.53
-## Control.In          6 78 21.96  4.95  11  32    21 0.56
-## Anger.Expression    7 78 37.00 12.94   7  68    61 1.47
+                 vars  n  mean    sd min max range   se
+Gender              1 78  1.62  0.49   1   2     1 0.06
+Sports              2 78  1.68  0.47   1   2     1 0.05
+Anger.Out           3 78 16.08  4.22   9  27    18 0.48
+Anger.In            4 78 18.58  4.70  10  31    21 0.53
+Control.Out         5 78 23.69  4.69  14  32    18 0.53
+Control.In          6 78 21.96  4.95  11  32    21 0.56
+Anger.Expression    7 78 37.00 12.94   7  68    61 1.47
 ```
 
 
@@ -244,85 +245,85 @@ If you find that rownames in your data have disappeared, [see this guide for tur
 
 ```r
 psych::describeBy(mtcars, 'cyl')
-## 
-##  Descriptive statistics by group 
-## group: 4
-##      vars  n   mean    sd median trimmed   mad   min    max range  skew
-## mpg     1 11  26.66  4.51  26.00   26.44  6.52 21.40  33.90 12.50  0.26
-## cyl     2 11   4.00  0.00   4.00    4.00  0.00  4.00   4.00  0.00   NaN
-## disp    3 11 105.14 26.87 108.00  104.30 43.00 71.10 146.70 75.60  0.12
-## hp      4 11  82.64 20.93  91.00   82.67 32.62 52.00 113.00 61.00  0.01
-## drat    5 11   4.07  0.37   4.08    4.02  0.34  3.69   4.93  1.24  1.00
-## wt      6 11   2.29  0.57   2.20    2.27  0.54  1.51   3.19  1.68  0.30
-## qsec    7 11  19.14  1.68  18.90   18.99  1.48 16.70  22.90  6.20  0.55
-## vs      8 11   0.91  0.30   1.00    1.00  0.00  0.00   1.00  1.00 -2.47
-## am      9 11   0.73  0.47   1.00    0.78  0.00  0.00   1.00  1.00 -0.88
-## gear   10 11   4.09  0.54   4.00    4.11  0.00  3.00   5.00  2.00  0.11
-## carb   11 11   1.55  0.52   2.00    1.56  0.00  1.00   2.00  1.00 -0.16
-##      kurtosis   se
-## mpg     -1.65 1.36
-## cyl       NaN 0.00
-## disp    -1.64 8.10
-## hp      -1.71 6.31
-## drat     0.12 0.11
-## wt      -1.36 0.17
-## qsec    -0.02 0.51
-## vs       4.52 0.09
-## am      -1.31 0.14
-## gear    -0.01 0.16
-## carb    -2.15 0.16
-## -------------------------------------------------------- 
-## group: 6
-##      vars n   mean    sd median trimmed   mad    min    max  range  skew
-## mpg     1 7  19.74  1.45  19.70   19.74  1.93  17.80  21.40   3.60 -0.16
-## cyl     2 7   6.00  0.00   6.00    6.00  0.00   6.00   6.00   0.00   NaN
-## disp    3 7 183.31 41.56 167.60  183.31 11.27 145.00 258.00 113.00  0.80
-## hp      4 7 122.29 24.26 110.00  122.29  7.41 105.00 175.00  70.00  1.36
-## drat    5 7   3.59  0.48   3.90    3.59  0.03   2.76   3.92   1.16 -0.74
-## wt      6 7   3.12  0.36   3.21    3.12  0.36   2.62   3.46   0.84 -0.22
-## qsec    7 7  17.98  1.71  18.30   17.98  1.90  15.50  20.22   4.72 -0.12
-## vs      8 7   0.57  0.53   1.00    0.57  0.00   0.00   1.00   1.00 -0.23
-## am      9 7   0.43  0.53   0.00    0.43  0.00   0.00   1.00   1.00  0.23
-## gear   10 7   3.86  0.69   4.00    3.86  0.00   3.00   5.00   2.00  0.11
-## carb   11 7   3.43  1.81   4.00    3.43  0.00   1.00   6.00   5.00 -0.26
-##      kurtosis    se
-## mpg     -1.91  0.55
-## cyl       NaN  0.00
-## disp    -1.23 15.71
-## hp       0.25  9.17
-## drat    -1.40  0.18
-## wt      -1.98  0.13
-## qsec    -1.75  0.65
-## vs      -2.20  0.20
-## am      -2.20  0.20
-## gear    -1.24  0.26
-## carb    -1.50  0.69
-## -------------------------------------------------------- 
-## group: 8
-##      vars  n   mean    sd median trimmed   mad    min    max  range  skew
-## mpg     1 14  15.10  2.56  15.20   15.15  1.56  10.40  19.20   8.80 -0.36
-## cyl     2 14   8.00  0.00   8.00    8.00  0.00   8.00   8.00   0.00   NaN
-## disp    3 14 353.10 67.77 350.50  349.63 73.39 275.80 472.00 196.20  0.45
-## hp      4 14 209.21 50.98 192.50  203.67 44.48 150.00 335.00 185.00  0.91
-## drat    5 14   3.23  0.37   3.12    3.19  0.16   2.76   4.22   1.46  1.34
-## wt      6 14   4.00  0.76   3.75    3.95  0.41   3.17   5.42   2.25  0.99
-## qsec    7 14  16.77  1.20  17.18   16.86  0.79  14.50  18.00   3.50 -0.80
-## vs      8 14   0.00  0.00   0.00    0.00  0.00   0.00   0.00   0.00   NaN
-## am      9 14   0.14  0.36   0.00    0.08  0.00   0.00   1.00   1.00  1.83
-## gear   10 14   3.29  0.73   3.00    3.17  0.00   3.00   5.00   2.00  1.83
-## carb   11 14   3.50  1.56   3.50    3.25  0.74   2.00   8.00   6.00  1.48
-##      kurtosis    se
-## mpg     -0.57  0.68
-## cyl       NaN  0.00
-## disp    -1.26 18.11
-## hp       0.09 13.62
-## drat     1.08  0.10
-## wt      -0.71  0.20
-## qsec    -0.92  0.32
-## vs        NaN  0.00
-## am       1.45  0.10
-## gear     1.45  0.19
-## carb     2.24  0.42
+
+ Descriptive statistics by group 
+group: 4
+     vars  n   mean    sd median trimmed   mad   min    max range  skew
+mpg     1 11  26.66  4.51  26.00   26.44  6.52 21.40  33.90 12.50  0.26
+cyl     2 11   4.00  0.00   4.00    4.00  0.00  4.00   4.00  0.00   NaN
+disp    3 11 105.14 26.87 108.00  104.30 43.00 71.10 146.70 75.60  0.12
+hp      4 11  82.64 20.93  91.00   82.67 32.62 52.00 113.00 61.00  0.01
+drat    5 11   4.07  0.37   4.08    4.02  0.34  3.69   4.93  1.24  1.00
+wt      6 11   2.29  0.57   2.20    2.27  0.54  1.51   3.19  1.68  0.30
+qsec    7 11  19.14  1.68  18.90   18.99  1.48 16.70  22.90  6.20  0.55
+vs      8 11   0.91  0.30   1.00    1.00  0.00  0.00   1.00  1.00 -2.47
+am      9 11   0.73  0.47   1.00    0.78  0.00  0.00   1.00  1.00 -0.88
+gear   10 11   4.09  0.54   4.00    4.11  0.00  3.00   5.00  2.00  0.11
+carb   11 11   1.55  0.52   2.00    1.56  0.00  1.00   2.00  1.00 -0.16
+     kurtosis   se
+mpg     -1.65 1.36
+cyl       NaN 0.00
+disp    -1.64 8.10
+hp      -1.71 6.31
+drat     0.12 0.11
+wt      -1.36 0.17
+qsec    -0.02 0.51
+vs       4.52 0.09
+am      -1.31 0.14
+gear    -0.01 0.16
+carb    -2.15 0.16
+-------------------------------------------------------- 
+group: 6
+     vars n   mean    sd median trimmed   mad    min    max  range  skew
+mpg     1 7  19.74  1.45  19.70   19.74  1.93  17.80  21.40   3.60 -0.16
+cyl     2 7   6.00  0.00   6.00    6.00  0.00   6.00   6.00   0.00   NaN
+disp    3 7 183.31 41.56 167.60  183.31 11.27 145.00 258.00 113.00  0.80
+hp      4 7 122.29 24.26 110.00  122.29  7.41 105.00 175.00  70.00  1.36
+drat    5 7   3.59  0.48   3.90    3.59  0.03   2.76   3.92   1.16 -0.74
+wt      6 7   3.12  0.36   3.21    3.12  0.36   2.62   3.46   0.84 -0.22
+qsec    7 7  17.98  1.71  18.30   17.98  1.90  15.50  20.22   4.72 -0.12
+vs      8 7   0.57  0.53   1.00    0.57  0.00   0.00   1.00   1.00 -0.23
+am      9 7   0.43  0.53   0.00    0.43  0.00   0.00   1.00   1.00  0.23
+gear   10 7   3.86  0.69   4.00    3.86  0.00   3.00   5.00   2.00  0.11
+carb   11 7   3.43  1.81   4.00    3.43  0.00   1.00   6.00   5.00 -0.26
+     kurtosis    se
+mpg     -1.91  0.55
+cyl       NaN  0.00
+disp    -1.23 15.71
+hp       0.25  9.17
+drat    -1.40  0.18
+wt      -1.98  0.13
+qsec    -1.75  0.65
+vs      -2.20  0.20
+am      -2.20  0.20
+gear    -1.24  0.26
+carb    -1.50  0.69
+-------------------------------------------------------- 
+group: 8
+     vars  n   mean    sd median trimmed   mad    min    max  range  skew
+mpg     1 14  15.10  2.56  15.20   15.15  1.56  10.40  19.20   8.80 -0.36
+cyl     2 14   8.00  0.00   8.00    8.00  0.00   8.00   8.00   0.00   NaN
+disp    3 14 353.10 67.77 350.50  349.63 73.39 275.80 472.00 196.20  0.45
+hp      4 14 209.21 50.98 192.50  203.67 44.48 150.00 335.00 185.00  0.91
+drat    5 14   3.23  0.37   3.12    3.19  0.16   2.76   4.22   1.46  1.34
+wt      6 14   4.00  0.76   3.75    3.95  0.41   3.17   5.42   2.25  0.99
+qsec    7 14  16.77  1.20  17.18   16.86  0.79  14.50  18.00   3.50 -0.80
+vs      8 14   0.00  0.00   0.00    0.00  0.00   0.00   0.00   0.00   NaN
+am      9 14   0.14  0.36   0.00    0.08  0.00   0.00   1.00   1.00  1.83
+gear   10 14   3.29  0.73   3.00    3.17  0.00   3.00   5.00   2.00  1.83
+carb   11 14   3.50  1.56   3.50    3.25  0.74   2.00   8.00   6.00  1.48
+     kurtosis    se
+mpg     -0.57  0.68
+cyl       NaN  0.00
+disp    -1.26 18.11
+hp       0.09 13.62
+drat     1.08  0.10
+wt      -0.71  0.20
+qsec    -0.92  0.32
+vs        NaN  0.00
+am       1.45  0.10
+gear     1.45  0.19
+carb     2.24  0.42
 ```
 
 This is helpful, but there's no simple way to convert the result to a dataframe, which we will want if we are creating tables for publication.
@@ -335,14 +336,14 @@ summary.tables <- psych::describeBy(mtcars, 'cyl')
 summary.tables[[1]] %>% 
   as_data_frame() %>% 
   head(3)
-## # A tibble: 3 x 13
-##    vars     n      mean        sd median   trimmed      mad   min   max
-##   <int> <dbl>     <dbl>     <dbl>  <dbl>     <dbl>    <dbl> <dbl> <dbl>
-## 1     1    11  26.66364  4.509828     26  26.44444  6.52344  21.4  33.9
-## 2     2    11   4.00000  0.000000      4   4.00000  0.00000   4.0   4.0
-## 3     3    11 105.13636 26.871594    108 104.30000 42.99540  71.1 146.7
-## # ... with 4 more variables: range <dbl>, skew <dbl>, kurtosis <dbl>,
-## #   se <dbl>
+# A tibble: 3 x 13
+   vars     n      mean        sd median   trimmed      mad   min   max
+  <int> <dbl>     <dbl>     <dbl>  <dbl>     <dbl>    <dbl> <dbl> <dbl>
+1     1    11  26.66364  4.509828     26  26.44444  6.52344  21.4  33.9
+2     2    11   4.00000  0.000000      4   4.00000  0.00000   4.0   4.0
+3     3    11 105.13636 26.871594    108 104.30000 42.99540  71.1 146.7
+# ... with 4 more variables: range <dbl>, skew <dbl>, kurtosis <dbl>,
+#   se <dbl>
 ```
 
 But this is pretty yucky. Not only are the column names all mangled up, but we also have to think about extracting each levell in turn, and need to check how many levels in `cyl` there are. What happens if an extra level gets added? Our code will likely break.
@@ -367,10 +368,10 @@ angry.moods %>%
     mean.anger.out=mean(Anger.Out), 
     sd.anger.out=sd(Anger.Out)
   )
-## # A tibble: 1 x 2
-##   mean.anger.out sd.anger.out
-##            <dbl>        <dbl>
-## 1       16.07692      4.21737
+# A tibble: 1 x 2
+  mean.anger.out sd.anger.out
+           <dbl>        <dbl>
+1       16.07692      4.21737
 ```
 
 The `summarise` function has returned a dataframe containing the statistics we need, although in this instance the dataframe only has one row. 
@@ -397,16 +398,16 @@ The first task is to organise our dataframe into the relevant groups. To do this
 angry.moods %>% 
   group_by(Gender) %>% 
   head
-## # A tibble: 6 x 7
-## # Groups:   Gender [2]
-##   Gender Sports Anger.Out Anger.In Control.Out Control.In Anger.Expression
-##    <int>  <int>     <int>    <int>       <int>      <int>            <int>
-## 1      2      1        18       13          23         20               36
-## 2      2      1        14       17          25         24               30
-## 3      2      1        13       14          28         28               19
-## 4      2      1        17       24          23         23               43
-## 5      1      1        16       17          26         28               27
-## 6      1      1        16       22          25         23               38
+# A tibble: 6 x 7
+# Groups:   Gender [2]
+  Gender Sports Anger.Out Anger.In Control.Out Control.In Anger.Expression
+   <int>  <int>     <int>    <int>       <int>      <int>            <int>
+1      2      1        18       13          23         20               36
+2      2      1        14       17          25         24               30
+3      2      1        13       14          28         28               19
+4      2      1        17       24          23         23               43
+5      1      1        16       17          26         28               27
+6      1      1        16       22          25         23               38
 ```
 
 Weirdly, this doesn't seem to have done anything. The data aren't sorted by `Gender`, and there is no visible sign of the grouping, but stick with it...
@@ -423,11 +424,11 @@ angry.moods %>%
   summarise(
     mean.anger.out=mean(Anger.Out)
   )
-## # A tibble: 2 x 2
-##   Gender mean.anger.out
-##    <int>          <dbl>
-## 1      1       16.56667
-## 2      2       15.77083
+# A tibble: 2 x 2
+  Gender mean.anger.out
+   <int>          <dbl>
+1      1       16.56667
+2      2       15.77083
 ```
 
 And R and `dplyr` have done as we asked:
@@ -446,36 +447,36 @@ In the previous section on datasets, we saw some found some raw data from a stud
 
 ```r
 phq9.df <- readr::read_csv("phq.csv")
-## Parsed with column specification:
-## cols(
-##   patient = col_integer(),
-##   phq9_01 = col_integer(),
-##   phq9_02 = col_integer(),
-##   phq9_03 = col_integer(),
-##   phq9_04 = col_integer(),
-##   phq9_05 = col_integer(),
-##   phq9_06 = col_integer(),
-##   phq9_07 = col_integer(),
-##   phq9_08 = col_integer(),
-##   phq9_09 = col_integer(),
-##   month = col_integer(),
-##   group = col_integer()
-## )
+Parsed with column specification:
+cols(
+  patient = col_integer(),
+  phq9_01 = col_integer(),
+  phq9_02 = col_integer(),
+  phq9_03 = col_integer(),
+  phq9_04 = col_integer(),
+  phq9_05 = col_integer(),
+  phq9_06 = col_integer(),
+  phq9_07 = col_integer(),
+  phq9_08 = col_integer(),
+  phq9_09 = col_integer(),
+  month = col_integer(),
+  group = col_integer()
+)
 glimpse(phq9.df)
-## Observations: 2,429
-## Variables: 12
-## $ patient <int> 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, ...
-## $ phq9_01 <int> 3, 1, 1, 2, 2, 2, 3, 2, 3, 3, 1, 3, 2, 1, 2, 3, 3, 3, ...
-## $ phq9_02 <int> 3, 2, 2, 2, 3, 3, 3, 2, 3, 3, 1, 3, 2, 1, 3, 3, 3, 3, ...
-## $ phq9_03 <int> 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 2, 3, 3, ...
-## $ phq9_04 <int> 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, ...
-## $ phq9_05 <int> 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 2, 1, 2, ...
-## $ phq9_06 <int> 3, 2, 2, 2, 3, 3, 2, 1, 2, 3, 3, 3, 2, 1, 3, 3, 3, 3, ...
-## $ phq9_07 <int> 3, 3, 1, 1, 2, 1, 2, 2, 1, 3, 2, 2, 2, 2, 3, 2, 1, 1, ...
-## $ phq9_08 <int> 0, 2, 2, 1, 1, 1, 1, 2, 1, 3, 1, 2, 1, 0, 2, 1, 0, 1, ...
-## $ phq9_09 <int> 2, 2, 1, 1, 2, 2, 2, 1, 1, 3, 1, 2, 1, 1, 3, 3, 3, 3, ...
-## $ month   <int> 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 18, 0, 1,...
-## $ group   <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, ...
+Observations: 2,429
+Variables: 12
+$ patient <int> 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, ...
+$ phq9_01 <int> 3, 1, 1, 2, 2, 2, 3, 2, 3, 3, 1, 3, 2, 1, 2, 3, 3, 3, ...
+$ phq9_02 <int> 3, 2, 2, 2, 3, 3, 3, 2, 3, 3, 1, 3, 2, 1, 3, 3, 3, 3, ...
+$ phq9_03 <int> 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 2, 3, 3, ...
+$ phq9_04 <int> 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, ...
+$ phq9_05 <int> 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 2, 1, 2, ...
+$ phq9_06 <int> 3, 2, 2, 2, 3, 3, 2, 1, 2, 3, 3, 3, 2, 1, 3, 3, 3, 3, ...
+$ phq9_07 <int> 3, 3, 1, 1, 2, 1, 2, 2, 1, 3, 2, 2, 2, 2, 3, 2, 1, 1, ...
+$ phq9_08 <int> 0, 2, 2, 1, 1, 1, 1, 2, 1, 3, 1, 2, 1, 0, 2, 1, 0, 1, ...
+$ phq9_09 <int> 2, 2, 1, 1, 2, 2, 2, 1, 1, 3, 1, 2, 1, 1, 3, 3, 3, 3, ...
+$ month   <int> 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 18, 0, 1,...
+$ group   <int> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, ...
 ```
 
 
@@ -509,22 +510,22 @@ phq9.summary.df <- phq9.df %>%
 phq9.summary.df %>% 
   filter(month %in% c(0, 7, 12)) %>% 
   pander::pandoc.table()
-## 
-## --------------------------
-##  month   group   phq.mean 
-## ------- ------- ----------
-##    0       0      19.76   
-## 
-##    0       1      18.97   
-## 
-##    7       0      16.62   
-## 
-##    7       1      13.42   
-## 
-##   12       0      16.15   
-## 
-##   12       1      12.54   
-## --------------------------
+
+--------------------------
+ month   group   phq.mean 
+------- ------- ----------
+   0       0      19.76   
+
+   0       1      18.97   
+
+   7       0      16.62   
+
+   7       1      13.42   
+
+  12       0      16.15   
+
+  12       1      12.54   
+--------------------------
 ```
 
 
@@ -544,21 +545,21 @@ phq9.df %>%
     select(phq9.df, starts_with("phq9_0"))
   )
 )
-## # A tibble: 2,429 x 13
-##    patient phq9_01 phq9_02 phq9_03 phq9_04 phq9_05 phq9_06 phq9_07 phq9_08
-##      <int>   <int>   <int>   <int>   <int>   <int>   <int>   <int>   <int>
-##  1       1       3       3       3       3       3       3       3       0
-##  2       2       1       2       3       3       3       2       3       2
-##  3       2       1       2       3       2       3       2       1       2
-##  4       2       2       2       3       3       3       2       1       1
-##  5       2       2       3       3       3       3       3       2       1
-##  6       2       2       3       3       3       3       3       1       1
-##  7       2       3       3       3       3       3       2       2       1
-##  8       2       2       2       3       3       3       1       2       2
-##  9       2       3       3       3       3       3       2       1       1
-## 10       2       3       3       3       3       3       3       3       3
-## # ... with 2,419 more rows, and 4 more variables: phq9_09 <int>,
-## #   month <int>, group <int>, phq9 <dbl>
+# A tibble: 2,429 x 13
+   patient phq9_01 phq9_02 phq9_03 phq9_04 phq9_05 phq9_06 phq9_07 phq9_08
+     <int>   <int>   <int>   <int>   <int>   <int>   <int>   <int>   <int>
+ 1       1       3       3       3       3       3       3       3       0
+ 2       2       1       2       3       3       3       2       3       2
+ 3       2       1       2       3       2       3       2       1       2
+ 4       2       2       2       3       3       3       2       1       1
+ 5       2       2       3       3       3       3       3       2       1
+ 6       2       2       3       3       3       3       3       1       1
+ 7       2       3       3       3       3       3       2       2       1
+ 8       2       2       2       3       3       3       1       2       2
+ 9       2       3       3       3       3       3       2       1       1
+10       2       3       3       3       3       3       3       3       3
+# ... with 2,419 more rows, and 4 more variables: phq9_09 <int>,
+#   month <int>, group <int>, phq9 <dbl>
 ```
 
 

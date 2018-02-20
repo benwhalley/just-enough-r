@@ -400,13 +400,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Taking the <code>mtcars</code> data, we might want to select the weights of only those cars with low <code>mpg</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gas.guzzlers &lt;-<span class="st"> </span><span class="kw">select</span>(<span class="kw">filter</span>(mtcars, mpg <span class="op">&lt;</span><span class="st"> </span><span class="dv">15</span>), wt)
 <span class="kw">summary</span>(gas.guzzlers)
-##        wt       
-##  Min.   :3.570  
-##  1st Qu.:3.840  
-##  Median :5.250  
-##  Mean   :4.686  
-##  3rd Qu.:5.345  
-##  Max.   :5.424</code></pre></div>
+       wt       
+ Min.   <span class="op">:</span><span class="fl">3.570</span>  
+ 1st Qu.<span class="op">:</span><span class="fl">3.840</span>  
+ Median <span class="op">:</span><span class="fl">5.250</span>  
+ Mean   <span class="op">:</span><span class="fl">4.686</span>  
+ 3rd Qu.<span class="op">:</span><span class="fl">5.345</span>  
+ Max.   <span class="op">:</span><span class="fl">5.424</span>  </code></pre></div>
 <p>This is OK, but can get quite confusing to read, and the more deeply functions are nested the easier it is to make a mistake.</p>
 <div id="dplyr-provides-an-alternative-to-nested-function-calls-called-the-pipe." class="section level4 unnumbered">
 <h4><code>dplyr</code> provides an alternative to nested function calls, called the pipe.</h4>
@@ -423,13 +423,13 @@ big.bucket.of.data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(mpg <span class="op">&lt;</span><span class="dv">15</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(wt) <span class="op">%&gt;%</span>
 <span class="st">  </span>summary
-##        wt       
-##  Min.   :3.570  
-##  1st Qu.:3.840  
-##  Median :5.250  
-##  Mean   :4.686  
-##  3rd Qu.:5.345  
-##  Max.   :5.424</code></pre></div>
+       wt       
+ Min.   <span class="op">:</span><span class="fl">3.570</span>  
+ 1st Qu.<span class="op">:</span><span class="fl">3.840</span>  
+ Median <span class="op">:</span><span class="fl">5.250</span>  
+ Mean   <span class="op">:</span><span class="fl">4.686</span>  
+ 3rd Qu.<span class="op">:</span><span class="fl">5.345</span>  
+ Max.   <span class="op">:</span><span class="fl">5.424</span>  </code></pre></div>
 <p>So we have achieved the same outcome, but the code reads as a series of operations which the data flows through, connected by our pipes (the <code>%&gt;%</code>). At the end of the last pipe, our data gets dumped into the <code>summary()</code> function<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a></p>
 <p>We could just as well have saved this smaller ‘bucket’ of data so we can use it later on:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">smaller.bucket &lt;-<span class="st"> </span>big.bucket.of.data <span class="op">%&gt;%</span>

@@ -400,25 +400,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>As we <a href="anova-cookbook.html#sleepstudy-rmanova">saw before</a>, the traditional RM Anova model is:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sleep.rmanova &lt;-<span class="st"> </span>afex<span class="op">::</span><span class="kw">aov_car</span>(Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span><span class="kw">Error</span>(Subject<span class="op">/</span>(Days)), <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
 sleep.rmanova
-## Anova Table (Type 3 tests)
-## 
-## Response: Reaction
-##   Effect          df     MSE         F ges p.value
-## 1   Days 3.32, 56.46 2676.18 18.70 *** .29  &lt;.0001
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;+&#39; 0.1 &#39; &#39; 1
-## 
-## Sphericity correction method: GG</code></pre></div>
+Anova <span class="kw">Table</span> (Type <span class="dv">3</span> tests)
+
+Response<span class="op">:</span><span class="st"> </span>Reaction
+  Effect          df     MSE         F ges p.value
+<span class="dv">1</span>   Days <span class="fl">3.32</span>, <span class="fl">56.46</span> <span class="fl">2676.18</span> <span class="fl">18.70</span> <span class="op">**</span><span class="er">*</span><span class="st"> </span>.<span class="dv">29</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;+&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Sphericity correction method<span class="op">:</span><span class="st"> </span>GG </code></pre></div>
 <p>The equivalent lmer model is:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lmerTest)
 sleep.lmer &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(Days) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>Subject), <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
 <span class="kw">anova</span>(sleep.lmer)
-## Analysis of Variance Table of type III  with  Satterthwaite 
-## approximation for degrees of freedom
-##              Sum Sq Mean Sq NumDF DenDF F.value    Pr(&gt;F)    
-## factor(Days) 166235   18471     9   153  18.703 &lt; 2.2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre></div>
+Analysis of Variance Table of type III  with  Satterthwaite 
+approximation <span class="cf">for</span> degrees of freedom
+             Sum Sq Mean Sq NumDF DenDF F.value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    
+<span class="kw">factor</span>(Days) <span class="dv">166235</span>   <span class="dv">18471</span>     <span class="dv">9</span>   <span class="dv">153</span>  <span class="fl">18.703</span> <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
 <!-- 
 This post by the author of afex confirms these models are equivalent to RM anova:
 http://singmann.org/mixed-models-for-anova-designs-with-one-observation-per-unit-of-observation-and-cell-of-the-design/ 
@@ -430,21 +430,21 @@ http://singmann.org/mixed-models-for-anova-designs-with-one-observation-per-unit
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Days, Reaction)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>() 
-## `geom_smooth()` using method = &#39;loess&#39;</code></pre></div>
-<p><img src="multilevel-models_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<span class="st">`</span><span class="dt">geom_smooth()</span><span class="st">`</span> using method =<span class="st"> &#39;loess&#39;</span></code></pre></div>
+<p><img src="multilevel-models_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">slope.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>Subject),  <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
 lmerTest<span class="op">::</span><span class="kw">anova</span>(slope.model)
-## Analysis of Variance Table of type III  with  Satterthwaite 
-## approximation for degrees of freedom
-##      Sum Sq Mean Sq NumDF DenDF F.value    Pr(&gt;F)    
-## Days 162703  162703     1   161   169.4 &lt; 2.2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+Analysis of Variance Table of type III  with  Satterthwaite 
+approximation <span class="cf">for</span> degrees of freedom
+     Sum Sq Mean Sq NumDF DenDF F.value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    
+Days <span class="dv">162703</span>  <span class="dv">162703</span>     <span class="dv">1</span>   <span class="dv">161</span>   <span class="fl">169.4</span> <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
 slope.model.summary &lt;-<span class="st"> </span><span class="kw">summary</span>(slope.model)
 slope.model.summary<span class="op">$</span>coefficients
-##              Estimate Std. Error       df  t value Pr(&gt;|t|)
-## (Intercept) 251.40510  9.7467163  22.8102 25.79383        0
-## Days         10.46729  0.8042214 161.0036 13.01543        0</code></pre></div>
+             Estimate Std. Error       df  t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)
+(Intercept) <span class="fl">251.40510</span>  <span class="fl">9.7467163</span>  <span class="fl">22.8102</span> <span class="fl">25.79383</span>        <span class="dv">0</span>
+Days         <span class="fl">10.46729</span>  <span class="fl">0.8042214</span> <span class="fl">161.0036</span> <span class="fl">13.01543</span>        <span class="dv">0</span></code></pre></div>
 </div>
 <div id="allow-the-effect-of-sleep-deprivation-to-vary-for-different-participants" class="section level3 unnumbered">
 <h3>Allow the effect of sleep deprivation to vary for different participants</h3>
@@ -456,31 +456,31 @@ lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span cla
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span>F) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">size=</span><span class="dv">1</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_minimal</span>()</code></pre></div>
-<p><img src="multilevel-models_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="multilevel-models_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>If we wanted to test whether there was significant variation in the effects of sleep deprivation between subjects, by adding a <a href="fixed-or-random.html#random-slopes-intercepts">random slope</a> to the model.</p>
 <p>The random slope allows the effect of <code>Days</code> to vary between subjects. So we can think of an overall slope (i.e. RT goes up over the days), from which individuals deviate by some amount (e.g. a resiliant person will have a negative deviation or residual from the overall slope).</p>
 <p>Adding the random slope doesn’t change the <em>F</em> test for <code>Days</code> that much:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">random.slope.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span>(Days<span class="op">|</span>Subject),  <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
 lmerTest<span class="op">::</span><span class="kw">anova</span>(random.slope.model)
-## Analysis of Variance Table of type III  with  Satterthwaite 
-## approximation for degrees of freedom
-##      Sum Sq Mean Sq NumDF DenDF F.value    Pr(&gt;F)    
-## Days  30031   30031     1    17  45.853 3.264e-06 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre></div>
+Analysis of Variance Table of type III  with  Satterthwaite 
+approximation <span class="cf">for</span> degrees of freedom
+     Sum Sq Mean Sq NumDF DenDF F.value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    
+Days  <span class="dv">30031</span>   <span class="dv">30031</span>     <span class="dv">1</span>    <span class="dv">17</span>  <span class="fl">45.853</span> <span class="fl">3.264e-06</span> <span class="op">**</span><span class="er">*</span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
 <p>Nor the overall slope coefficient:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">random.slope.model.summary &lt;-<span class="st"> </span><span class="kw">summary</span>(random.slope.model)
 slope.model.summary<span class="op">$</span>coefficients
-##              Estimate Std. Error       df  t value Pr(&gt;|t|)
-## (Intercept) 251.40510  9.7467163  22.8102 25.79383        0
-## Days         10.46729  0.8042214 161.0036 13.01543        0</code></pre></div>
+             Estimate Std. Error       df  t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)
+(Intercept) <span class="fl">251.40510</span>  <span class="fl">9.7467163</span>  <span class="fl">22.8102</span> <span class="fl">25.79383</span>        <span class="dv">0</span>
+Days         <span class="fl">10.46729</span>  <span class="fl">0.8042214</span> <span class="fl">161.0036</span> <span class="fl">13.01543</span>        <span class="dv">0</span></code></pre></div>
 <p>But we can use the <code>lmerTest::rand()</code> function to show that there is statistically significant variation in slopes between individuals, using the likelihood ratio test:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lmerTest<span class="op">::</span><span class="kw">rand</span>(random.slope.model)
-## Analysis of Random effects Table:
-##              Chi.sq Chi.DF p.value    
-## Days:Subject   42.8      2   5e-10 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre></div>
+Analysis of Random effects Table<span class="op">:</span>
+<span class="st">             </span>Chi.sq Chi.DF p.value    
+Days<span class="op">:</span>Subject   <span class="fl">42.8</span>      <span class="dv">2</span>   <span class="fl">5e-10</span> <span class="op">**</span><span class="er">*</span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
 <p>Because the random slope for <code>Days</code> is statistically significant, we know it improves the model. One way to see that improvement is to plot residuals (unexplained error for each datapoint) against predicted values. To extract residual and fitted values we use the <code>residuals()</code> and <code>predict()</code> functions. These are then combined in a data_frame, to enable us to use ggplot for the subsequent figures.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create data frames containing residuals and fitted</span>
 <span class="co"># values for each model we ran above</span>
@@ -502,8 +502,8 @@ residual.fitted.data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span>F) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model) 
-## `geom_smooth()` using method = &#39;loess&#39;</code></pre></div>
-<p><img src="multilevel-models_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<span class="st">`</span><span class="dt">geom_smooth()</span><span class="st">`</span> using method =<span class="st"> &#39;loess&#39;</span></code></pre></div>
+<p><img src="multilevel-models_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>We can plot both of the random effects from this model (intercept and slope) to see how much the model expects individuals to deviate from the overall (mean) slope.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># extract the random effects from the model (intercept and slope)</span>
 <span class="kw">ranef</span>(random.slope.model)<span class="op">$</span>Subject <span class="op">%&gt;%</span><span class="st"> </span>
@@ -517,35 +517,35 @@ residual.fitted.data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># set the scale of the plot to something sensible</span>
 <span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="dt">expand=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">100</span>, <span class="dv">100</span>)) </code></pre></div>
-<p><img src="multilevel-models_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="multilevel-models_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>Inspecting this plot, there doesn’t seem to be any strong correlation between the RT value at which an individual starts (their intercept residual) and the slope describing how they change over the days compared with the average slope (their slope residual).</p>
 <p>That is, we can’t say that knowing whether a person has fast or slow RTs at the start of the study gives us a clue about what will happen to them after they are sleep deprived: some people start slow and get faster; other start fast but suffer and get slower.</p>
 <p>However we can explicitly check this correlation (between individuals’ intercept and slope residuals) using the <code>VarCorr()</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">VarCorr</span>(random.slope.model)
-##  Groups   Name        Std.Dev. Corr 
-##  Subject  (Intercept) 24.7404       
-##           Days         5.9221  0.066
-##  Residual             25.5918</code></pre></div>
+ Groups   Name        Std.Dev. Corr 
+ <span class="kw">Subject</span>  (Intercept) <span class="fl">24.7404</span>       
+          Days         <span class="fl">5.9221</span>  <span class="fl">0.066</span>
+ Residual             <span class="fl">25.5918</span>       </code></pre></div>
 <p>The correlation between the random intercept and slopes is only 0.066, and so very low. We might, therefore, want to try fitting a model without this correlation. <code>lmer</code> includes the correlation by default, so we need to change the model formula to make it clear we don’t want it:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">uncorrelated.reffs.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(
   Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Subject) <span class="op">+</span><span class="st"> </span>(<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>Days<span class="op">|</span>Subject),  
   <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
 
 <span class="kw">VarCorr</span>(uncorrelated.reffs.model)
-##  Groups    Name        Std.Dev.
-##  Subject   (Intercept) 25.0513 
-##  Subject.1 Days         5.9882 
-##  Residual              25.5653</code></pre></div>
+ Groups    Name        Std.Dev.
+ <span class="kw">Subject</span>   (Intercept) <span class="fl">25.0513</span> 
+ Subject.<span class="dv">1</span> Days         <span class="fl">5.9882</span> 
+ Residual              <span class="fl">25.5653</span> </code></pre></div>
 <p>The variance components don’t change much when we constrain the <em>covariance</em> of intercepts and slopes to be zero, and we can explicitly compare these two models using the <code>anova()</code> function, which is somewhat confusingly named because in this instance it is performing a likelihood ratio test to compare the two models:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova</span>(random.slope.model, uncorrelated.reffs.model)
-## refitting model(s) with ML (instead of REML)
-## Data: lme4::sleepstudy
-## Models:
-## ..1: Reaction ~ Days + (1 | Subject) + (0 + Days | Subject)
-## object: Reaction ~ Days + (Days | Subject)
-##        Df    AIC    BIC  logLik deviance  Chisq Chi Df Pr(&gt;Chisq)
-## ..1     5 1762.0 1778.0 -876.00   1752.0                         
-## object  6 1763.9 1783.1 -875.97   1751.9 0.0639      1     0.8004</code></pre></div>
+refitting <span class="kw">model</span>(s) with <span class="kw">ML</span> (instead of REML)
+Data<span class="op">:</span><span class="st"> </span>lme4<span class="op">::</span>sleepstudy
+Models<span class="op">:</span>
+..<span class="dv">1</span><span class="op">:</span><span class="st"> </span>Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Subject) <span class="op">+</span><span class="st"> </span>(<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>Days <span class="op">|</span><span class="st"> </span>Subject)
+object<span class="op">:</span><span class="st"> </span>Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span>(Days <span class="op">|</span><span class="st"> </span>Subject)
+       Df    AIC    BIC  logLik deviance  Chisq Chi Df <span class="kw">Pr</span>(<span class="op">&gt;</span>Chisq)
+..<span class="dv">1</span>     <span class="dv">5</span> <span class="fl">1762.0</span> <span class="fl">1778.0</span> <span class="op">-</span><span class="fl">876.00</span>   <span class="fl">1752.0</span>                         
+object  <span class="dv">6</span> <span class="fl">1763.9</span> <span class="fl">1783.1</span> <span class="op">-</span><span class="fl">875.97</span>   <span class="fl">1751.9</span> <span class="fl">0.0639</span>      <span class="dv">1</span>     <span class="fl">0.8004</span></code></pre></div>
 <p>Model fit is not significantly worse with the constrained model, <a href="comparison-and-selection.html#over-fitting">so for parsimony’s sake we prefer it to the more complex model</a>.</p>
 </div>
 <div id="growth-curve-sleep-example" class="section level3 unnumbered">
@@ -555,16 +555,16 @@ residual.fitted.data <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Days, Reaction)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_smooth</span>() 
-## `geom_smooth()` using method = &#39;loess&#39;</code></pre></div>
-<p><img src="multilevel-models_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<span class="st">`</span><span class="dt">geom_smooth()</span><span class="st">`</span> using method =<span class="st"> &#39;loess&#39;</span></code></pre></div>
+<p><img src="multilevel-models_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>If we insisted on testing a curved (quadratic) function of <code>Days</code>, we could:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">quad.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(Days<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>Subject),  <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
 quad.model.summary &lt;-<span class="st"> </span><span class="kw">summary</span>(quad.model)
 quad.model.summary<span class="op">$</span>coefficients
-##                Estimate Std. Error        df   t value   Pr(&gt;|t|)
-## (Intercept) 255.4493728 10.4656310  30.04063 24.408406 0.00000000
-## Days          7.4340850  2.9707978 160.00374  2.502387 0.01334034
-## I(Days^2)     0.3370223  0.3177733 160.00374  1.060575 0.29048148</code></pre></div>
+               Estimate Std. Error        df   t value   <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)
+(Intercept) <span class="fl">255.4493728</span> <span class="fl">10.4656310</span>  <span class="fl">30.04063</span> <span class="fl">24.408406</span> <span class="fl">0.00000000</span>
+Days          <span class="fl">7.4340850</span>  <span class="fl">2.9707978</span> <span class="fl">160.00374</span>  <span class="fl">2.502387</span> <span class="fl">0.01334034</span>
+<span class="kw">I</span>(Days<span class="op">^</span><span class="dv">2</span>)     <span class="fl">0.3370223</span>  <span class="fl">0.3177733</span> <span class="fl">160.00374</span>  <span class="fl">1.060575</span> <span class="fl">0.29048148</span></code></pre></div>
 <p>Here, the <em>p</em> value for <code>I(Days^2)</code> is not significant, suggesting (as does the plot) that a simple slope model is sufficient.</p>
 </div>
 </div>

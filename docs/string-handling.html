@@ -400,26 +400,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>If you want to search inside a string there are lots of useful functions in the <code>stringr::</code> library. These replicate some functionality in base R, but like other packages in the ‘tidyverse’ they tend to be more consistent and easier to use. For example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cheese &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Stilton&quot;</span>, <span class="st">&quot;Brie&quot;</span>, <span class="st">&quot;Cheddar&quot;</span>)
 stringr<span class="op">::</span><span class="kw">str_detect</span>(cheese, <span class="st">&quot;Br&quot;</span>)
-## [1] FALSE  TRUE FALSE
+[<span class="dv">1</span>] <span class="ot">FALSE</span>  <span class="ot">TRUE</span> <span class="ot">FALSE</span>
 stringr<span class="op">::</span><span class="kw">str_locate</span>(cheese, <span class="st">&quot;i&quot;</span>)
-##      start end
-## [1,]     3   3
-## [2,]     3   3
-## [3,]    NA  NA
+     start end
+[<span class="dv">1</span>,]     <span class="dv">3</span>   <span class="dv">3</span>
+[<span class="dv">2</span>,]     <span class="dv">3</span>   <span class="dv">3</span>
+[<span class="dv">3</span>,]    <span class="ot">NA</span>  <span class="ot">NA</span>
 stringr<span class="op">::</span><span class="kw">str_replace</span>(cheese, <span class="st">&quot;Stil&quot;</span>, <span class="st">&quot;Mil&quot;</span>)
-## [1] &quot;Milton&quot;  &quot;Brie&quot;    &quot;Cheddar&quot;</code></pre></div>
+[<span class="dv">1</span>] <span class="st">&quot;Milton&quot;</span>  <span class="st">&quot;Brie&quot;</span>    <span class="st">&quot;Cheddar&quot;</span></code></pre></div>
 </div>
 <div id="paste" class="section level3 unnumbered">
 <h3>Using <code>paste</code> to make labels</h3>
 <p>Paste can combine character strings with other types of variable to produce a new vector:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(mtcars<span class="op">$</span>cyl, <span class="st">&quot;cylinders&quot;</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]
-##  [1] &quot;6 cylinders&quot; &quot;6 cylinders&quot; &quot;4 cylinders&quot; &quot;6 cylinders&quot; &quot;8 cylinders&quot;
-##  [6] &quot;6 cylinders&quot; &quot;8 cylinders&quot; &quot;4 cylinders&quot; &quot;4 cylinders&quot; &quot;6 cylinders&quot;</code></pre></div>
+ [<span class="dv">1</span>] <span class="st">&quot;6 cylinders&quot;</span> <span class="st">&quot;6 cylinders&quot;</span> <span class="st">&quot;4 cylinders&quot;</span> <span class="st">&quot;6 cylinders&quot;</span> <span class="st">&quot;8 cylinders&quot;</span>
+ [<span class="dv">6</span>] <span class="st">&quot;6 cylinders&quot;</span> <span class="st">&quot;8 cylinders&quot;</span> <span class="st">&quot;4 cylinders&quot;</span> <span class="st">&quot;4 cylinders&quot;</span> <span class="st">&quot;6 cylinders&quot;</span></code></pre></div>
 <p>Which can be a useful way to label graphs:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">paste</span>(mtcars<span class="op">$</span>cyl, <span class="st">&quot;cylinders&quot;</span>), mpg)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>)</code></pre></div>
-<p><img src="string-handling_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="string-handling_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 <div id="separate-and-extract" class="section level3 unnumbered">
 <h3>Fixing up <code>variable</code> after melting</h3>
@@ -428,13 +428,13 @@ stringr<span class="op">::</span><span class="kw">str_replace</span>(cheese, <sp
 <span class="st">  </span><span class="kw">melt</span>(<span class="dt">id.var=</span><span class="st">&quot;Subject&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">arrange</span>(Subject, variable)  <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>head
-##   Subject variable    value
-## 1       1    Day.0 249.5600
-## 2       1    Day.1 258.7047
-## 3       1    Day.2 250.8006
-## 4       1    Day.3 321.4398
-## 5       1    Day.4 356.8519
-## 6       1    Day.5 414.6901</code></pre></div>
+  Subject variable    value
+<span class="dv">1</span>       <span class="dv">1</span>    Day.<span class="dv">0</span> <span class="fl">249.5600</span>
+<span class="dv">2</span>       <span class="dv">1</span>    Day.<span class="dv">1</span> <span class="fl">258.7047</span>
+<span class="dv">3</span>       <span class="dv">1</span>    Day.<span class="dv">2</span> <span class="fl">250.8006</span>
+<span class="dv">4</span>       <span class="dv">1</span>    Day.<span class="dv">3</span> <span class="fl">321.4398</span>
+<span class="dv">5</span>       <span class="dv">1</span>    Day.<span class="dv">4</span> <span class="fl">356.8519</span>
+<span class="dv">6</span>       <span class="dv">1</span>    Day.<span class="dv">5</span> <span class="fl">414.6901</span></code></pre></div>
 <p>However the contents of <code>variable</code> are now a character string (i.e. a list of letters and numbers) rather than numeric values (see <a href="factors-and-numerics.html#factors-and-numerics">column types</a>) but in this instance we know that the values <code>Day.1</code>, <code>Day.2</code>… are not really separate categories but actually form a linear sequence, from 1 to 9.</p>
 <p>We can use the <code>extract</code> or <code>separate</code> functions to split up <code>variable</code> and create a numeric column for <code>Day</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sleep.long <span class="op">%&gt;%</span><span class="st"> </span>
