@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="fixed-or-random.html">
+<link rel="prev" href="non-scale-outcomes.html">
 <link rel="next" href="comparison-and-selection.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -361,10 +361,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="22" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>22</b> Non-independence</a></li>
 <li class="chapter" data-level="23" data-path="fixed-or-random.html"><a href="fixed-or-random.html"><i class="fa fa-check"></i><b>23</b> Fixed and random effects</a></li>
-<li class="chapter" data-level="24" data-path="link-functions.html"><a href="link-functions.html"><i class="fa fa-check"></i><b>24</b> Link functions</a><ul>
+<li class="chapter" data-level="24" data-path="scaling-predictors.html"><a href="scaling-predictors.html"><i class="fa fa-check"></i><b>24</b> Scaling predictor variables</a><ul>
+<li class="chapter" data-level="" data-path="standardizing.html"><a href="standardizing.html"><i class="fa fa-check"></i>Standardising</a></li>
+<li class="chapter" data-level="" data-path="dichotomising.html"><a href="dichotomising.html"><i class="fa fa-check"></i>Dichotomising continuous predictors (or outcomes)</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="non-scale-outcomes.html"><a href="non-scale-outcomes.html"><i class="fa fa-check"></i><b>25</b> Non-scale outcomes</a><ul>
+<li class="chapter" data-level="25.1" data-path="link-functions.html"><a href="link-functions.html"><i class="fa fa-check"></i><b>25.1</b> Link functions</a><ul>
 <li class="chapter" data-level="" data-path="link-functions.html"><a href="link-functions.html#logistic-link-function"><i class="fa fa-check"></i>Logistic regression</a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html"><i class="fa fa-check"></i><b>25</b> Building and choosing models</a><ul>
+</ul></li>
+<li class="chapter" data-level="26" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html"><i class="fa fa-check"></i><b>26</b> Building and choosing models</a><ul>
 <li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#like-maps-models-are-imperfect-but-useful"><i class="fa fa-check"></i>Like maps, models are imperfect but useful</a></li>
 <li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#over-fitting"><i class="fa fa-check"></i>Overfitting/underfitting</a></li>
 <li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#variable-selection"><i class="fa fa-check"></i>Choosing the ‘right variables’</a></li>
@@ -387,17 +393,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="link-functions" class="section level1">
-<h1><span class="header-section-number">24</span> Link functions</h1>
-<p>Standard regression models are linear combinations which allow predicted values to range between negative -∞ (infinity) and +∞.</p>
-<p>If you think about it, this makes sense, because there is no bound on either the parameters we fit (the regression coefficients) or the predictor values.</p>
-<p>Where outcome data are continuous and (in theory or if we make a reasonable assumption) this isn’t a problem.</p>
-<p>However for binary or count data this isn’t the case.</p>
-<p>For binary data we want to predict the probability of a positive response, and this can range between zero and 1.</p>
-<p>For count data, predicted outcomes must always be non-negative (i.e. zero or greater).</p>
-<p>Logistic and poisson regression extend regular linear regression to allow this to happen by using different ‘link functions’.</p>
-<p>These link functions transform the data, which are constrained to 0/1 or non-negative integers, to the range of the underlying linear model, which allows values between -∞ and +∞.</p>
-<p>So, in generalised linear regression our linear combination is predicting a transformed outcome.</p>
+<div id="link-functions" class="section level2">
+<h2><span class="header-section-number">25.1</span> Link functions</h2>
+<p>Logistic and poisson regression extend regular linear regression to allow us to <em>constrain</em> linear regression to predict within the rannge of possible outcomes. To achieve this, logistic regression, poisson regression and other members of the family of ‘generalised linear models’ use different ‘link functions’.</p>
+<p>Link functions are used to connect the outcome variable to the linear model (that is, the linear combination of the parameters estimated for each of the predictors in the model). This means we can use linear models which still predict between -∞ and +∞, but without making inappropriate predictions.</p>
+<p>For linear regression the link is simply the <a href="https://en.wikipedia.org/wiki/Identity_function">identity function</a> — that is, the linear model directly predicts the outcome. However for other types of model different functions are used.</p>
+<p>A good way to think about link functions is as a <em>transformation</em> of the model’s predictions. For example, in logistic regression predictions from the linear model are transformed in such a way that they are constrained to fall between 0 and 1. Thus, although to the underlying linear model allows values between -∞ and +∞, the link function ensures predictions fall between 0 and 1.</p>
 <div id="logistic-link-function" class="section level3 unnumbered">
 <h3>Logistic regression</h3>
 <p>When we have binary data, we want to be able run something like regression, but where we predict a <em>probability</em> of the outcome.</p>
@@ -478,7 +479,7 @@ Figure 5.1: Probabilities converted to the logit (log-odds) scale. Notice how th
 </ul>
 </div>
 <div id="regression-coefficients-are-odds-ratios" class="section level4">
-<h4><span class="header-section-number">24.0.0.1</span> Regression coefficients are odds ratios</h4>
+<h4><span class="header-section-number">25.1.0.1</span> Regression coefficients are odds ratios</h4>
 <p>One final twist: In the section above we said that in logistic regression the coefficients are the <em>change in the log odds of the outcome being 1, for a unit change in the predictor</em>.</p>
 <p>Without going into too much detail, one nice fact about logs is that if you take the log of two numbers and subtract them to take the difference, then this is equal to dividing the same numbers and then taking the log of the result:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A &lt;-<span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span>)<span class="op">-</span><span class="kw">log</span>(<span class="dv">5</span>) 
@@ -499,12 +500,13 @@ http://www.theanalysisfactor.com/why-use-odds-ratios/ -->
 </div>
 </div>
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="fixed-or-random.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="non-scale-outcomes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="comparison-and-selection.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

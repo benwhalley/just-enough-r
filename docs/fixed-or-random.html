@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="clustering.html">
-<link rel="next" href="link-functions.html">
+<link rel="next" href="scaling-predictors.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -361,10 +361,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="22" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>22</b> Non-independence</a></li>
 <li class="chapter" data-level="23" data-path="fixed-or-random.html"><a href="fixed-or-random.html"><i class="fa fa-check"></i><b>23</b> Fixed and random effects</a></li>
-<li class="chapter" data-level="24" data-path="link-functions.html"><a href="link-functions.html"><i class="fa fa-check"></i><b>24</b> Link functions</a><ul>
+<li class="chapter" data-level="24" data-path="scaling-predictors.html"><a href="scaling-predictors.html"><i class="fa fa-check"></i><b>24</b> Scaling predictor variables</a><ul>
+<li class="chapter" data-level="" data-path="standardizing.html"><a href="standardizing.html"><i class="fa fa-check"></i>Standardising</a></li>
+<li class="chapter" data-level="" data-path="dichotomising.html"><a href="dichotomising.html"><i class="fa fa-check"></i>Dichotomising continuous predictors (or outcomes)</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="non-scale-outcomes.html"><a href="non-scale-outcomes.html"><i class="fa fa-check"></i><b>25</b> Non-scale outcomes</a><ul>
+<li class="chapter" data-level="25.1" data-path="link-functions.html"><a href="link-functions.html"><i class="fa fa-check"></i><b>25.1</b> Link functions</a><ul>
 <li class="chapter" data-level="" data-path="link-functions.html"><a href="link-functions.html#logistic-link-function"><i class="fa fa-check"></i>Logistic regression</a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html"><i class="fa fa-check"></i><b>25</b> Building and choosing models</a><ul>
+</ul></li>
+<li class="chapter" data-level="26" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html"><i class="fa fa-check"></i><b>26</b> Building and choosing models</a><ul>
 <li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#like-maps-models-are-imperfect-but-useful"><i class="fa fa-check"></i>Like maps, models are imperfect but useful</a></li>
 <li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#over-fitting"><i class="fa fa-check"></i>Overfitting/underfitting</a></li>
 <li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#variable-selection"><i class="fa fa-check"></i>Choosing the ‘right variables’</a></li>
@@ -389,7 +395,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="fixed-or-random" class="section level1">
 <h1><span class="header-section-number">23</span> Fixed and random effects</h1>
-<p>As noted by <span class="citation">@gelman2005analysis</span> (and <a href="http://andrewgelman.com/2005/01/25/why_i_dont_use/">summarised here</a>), the terms ‘fixed’ and ‘random’ are used very loosely in both the methodological and applied literature. Gelman identifies 5 different senses in which the distinction between fixed and random effects can be drawn, and this inconsistency can lead to confusion.</p>
+<p>As noted by <span class="citation">@gelman_analysis_2005</span> (and <a href="http://andrewgelman.com/2005/01/25/why_i_dont_use/">summarised here</a>), the terms ‘fixed’ and ‘random’ are used very loosely in both the methodological and applied literature. Gelman identifies 5 different senses in which the distinction between fixed and random effects can be drawn, and this inconsistency can lead to confusion.</p>
 <div id="random-slopes-intercepts" class="section level4 unnumbered">
 <h4></h4>
 <p>For practical purposes, if you think that you have some form of grouping in your data and that it makes sense to think of variation in outcomes between these groups then you should probably include it as a random intercept in your model.</p>
@@ -436,7 +442,7 @@ https://dynamicecology.wordpress.com/2015/11/04/is-it-a-fixed-or-random-effect/
         </div>
       </div>
 <a href="clustering.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="link-functions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="scaling-predictors.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
