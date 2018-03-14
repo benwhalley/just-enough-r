@@ -58,17 +58,17 @@ df %>%
 -------------------------------------
  person   time   predictor   outcome 
 -------- ------ ----------- ---------
-   1       1         4         10    
+   1       1         7         12    
 
-   1       2         4          8    
+   1       2         7         10    
 
-   1       3         4          5    
+   1       3         7          8    
 
-   2       1         3         14    
+   2       1         3         20    
 
-   2       2         3         11    
+   2       2         3         12    
 
-   2       3         3         13    
+   2       3         3         10    
 -------------------------------------
 
 
@@ -87,17 +87,17 @@ df.wide %>%
 -----------------------------------------------
  person   predictor   Time 1   Time 2   Time 3 
 -------- ----------- -------- -------- --------
-   1          4         10       8        5    
+   1          7         12       10       8    
 
-   2          3         14       11       13   
+   2          3         20       12       10   
 
-   3          1         9        5        10   
+   3          8         1        5        9    
 
-   4          4         6        11       7    
+   4          3         8        7        18   
 
-   5          4         6        8        12   
+   5          4         9        12       17   
 
-   6          2         10       9        6    
+   6          5         6        6        14   
 -----------------------------------------------
 
 
@@ -454,6 +454,7 @@ Because our data are still in long form (we have two rows per person), we have t
 ```r
 expt.afex <- afex::aov_car(RT ~ Condition * time + Error(person/time),
                            data=expt.data.agg)
+Contrasts set to contr.sum for the following variables: Condition
 expt.afex$anova_table %>% 
   pander(caption="`afex::aov_car` output.")
 ```
@@ -550,6 +551,7 @@ ggplot(expt.data,
   aes(trial, RT)) + 
   geom_smooth() + 
   facet_wrap(~paste("Condition", Condition))
+`geom_smooth()` using method = 'loess'
 ```
 
 <img src="anova_files/figure-html/unnamed-chunk-22-1.png" width="672" />
@@ -606,6 +608,13 @@ The significant `Condition:trial` term indicates that there was a difference in 
 We found a significant interaction between condition and the linear term for trial number, *F*(3, 2340.18) = 10.83, *p* < .001. We explored this effect by plotting model-estimated reaction times for each group for trials 1 through 25 (see Figure X): participants in condition 2 and 4 exprienced a greater reduction in RTs across trial, suggesting a larger practice effect for these conditions.
 
 
+
+
+```
+`geom_smooth()` using method = 'loess'
+`geom_smooth()` using method = 'loess'
+`geom_smooth()` using method = 'loess'
+```
 
 <img src="anova_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
@@ -685,6 +694,7 @@ data_frame(
   ggplot(aes(fitted, residual)) + 
     geom_point() + 
     geom_smooth(se=F)
+`geom_smooth()` using method = 'loess'
 ```
 
 <div class="figure">

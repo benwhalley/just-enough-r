@@ -10,6 +10,8 @@ library(tidyverse)
 library(pander)
 library(huxtable)
 library(broom)
+source('diagram.R')
+
 ```
 
 
@@ -26,7 +28,7 @@ Nice reference guide: https://www.scribd.com/document/238478414/Beaujean-Latent-
 
 -->
 
->The CFA examples were adapted from a guide originally produced by Jon May
+>The CFA examples here were adapted from a guide originally produced by Jon May
 
 
 
@@ -39,15 +41,11 @@ Before you start this either section make sure you have the `lavaan` package ins
 install.packages(lavaan)
 ```
 
-And we load the package to [make all the functions available with minimal typing](#package-namespacing):
+And load the package to [make all the functions available with minimal typing](#package-namespacing):
 
 ```{r, message=F}
 library(lavaan)
 ```
-
-
-
-
 
 
 
@@ -148,26 +146,13 @@ In the example below we extract the parameter estimates, select only the regress
 
 ```{r}
 parameterEstimates(mediation.fit.means) %>% 
-  as_data_frame() %>% rownames_to_column() %>% 
-  mutate(term=paste(lhs, op, rhs)) %>% 
+  as_tibble() %>% 
+  filter(op=="~") %>% 
+  mutate(Term=paste(lhs, op, rhs)) %>% 
   rename(estimate=est, 
-         std.error = se,
-         p.value=pvalue,
-         statistic = z,
-         conf.low=ci.lower,
-         conf.hi=ci.upper) %>% 
-  select(term, op, everything(), -lhs, -rhs)
-
-```
-
-```{r}
-lm(mpg~wt, data=mtcars) %>% tidy(conf.int=T) %>% names
-
-parameterEstimates(mediation.fit.means) %>%
-  filter(op == "~") %>% 
-  mutate(term = paste(lhs, op, rhs)) %>%  
-  select(term, everything(), -se, -lhs, -rhs, -op) %>% 
-  pander(caption="Regression parameters from `mediation.fit`")
+         p=pvalue) %>% 
+  select(Term, estimate, z, p) %>% 
+  pander::pander(caption="Regression parameters from `mediation.fit`")
 
 ```
 
@@ -190,10 +175,113 @@ semPlot::semPaths(mediation.fit, "par",
 
 
 
+
+
 ## Confirmatory factor analysis (CFA) {- #cfa}
 
 
-Open some data and check that all looks well:
+In psychology we make observations, but we're often interested in *hypothetical constructs*, e.g. Anxiety, working memory. We can't measure these directly, but we assume that our observations are related to these constructs in some way.
+
+Regression and related techniques (e.g. Anova) require us to assume that our outcome variables are good indices of these underlying constructs, and that our predictor variables are measured without any error.
+
+When outcomes are straightforward observed variables like plant yield or weight reduction, and where predictors are experimentally manipulated, then these assumptions are reasonable. However in many applied fields these are not reasonable assumptions to make: For example, to assume that depression or working memory are indexed in a straightforward way by responses to a depression questionnaire or performance on a laboratory task is naive. Likewise, we should not assume that a construct like working memory is measured without error when we use it to predict some other outcome (e.g. exam success).
+
+Confirmatory factor analysis (CFA), structural equation models (SEM) and related techniques are designed to help researchers deal with these *imperfections in our observations*, and can help to explore the correspondence between our measures and the underlying constructs of interest.
+
+### Latent variables {- #latent-variables}
+
+CFA and SEM introduce the concept of a *latent variable* which is either the cause of, or formed by, the observations we make.
+Latent variables aren't quite the same thing as hypothetical constructs, but they are similar many in some ways. The original distinction between hypothetical constructs and intervening variables is quite interesting in this context, see Maccorquodale and Meehl (1948).
+
+To achieve this, CFA requires that researchers to make predictions about the patterns of correlations they will observe in their observations, based on the process they think is generating the data. CFA provides a mechanism to test and compare different hypotheses about these patterns, which correspond to different models of the underlying process which generates the data.
+
+It is conventional within CFA and SEM to extend the graphical models used to describe path models (see above). In these diagrams, square edged boxes represent observed variables, and rounded or oval boxes represent latent variables, sometimes called factors:
+
+
+```{r, fig.cap="Example of a CFA model, including one latent variable or factor, and 4 observed variables."}
+knit_gv('
+Factor -> a
+Factor -> b
+Factor -> c
+Factor -> d
+a[shape=rectangle]
+b[shape=rectangle]
+c[shape=rectangle]
+d[shape=rectangle]
+')
+```
+
+
+
+CFA models can also include multiple latent variables, and estimate the covariance between them:
+
+
+```{r}
+knit_gv('
+        Affective -> a
+Affective -> b
+Affective -> c
+Cognitive -> d
+Cognitive -> e
+Cognitive -> f
+Affective -> Cognitive:nw [dir=both]
+
+a [shape=box]
+b [shape=box]
+c [shape=box]
+d [shape=box]
+e [shape=box]
+f [shape=box]
+
+')
+```
+
+
+
+SEM models extend this by allowing regression paths between latent variables and observed or other latent variables:
+
+
+```{r}
+knit_gv('
+        Affective -> a
+Affective -> b
+Affective -> c
+Cognitive -> d
+Cognitive -> e
+Cognitive -> f
+Affective -> Cognitive:nw [dir=both]
+
+a [shape=box]
+b [shape=box]
+c [shape=box]
+d [shape=box]
+e [shape=box]
+f [shape=box]
+
+
+Stress -> g
+Stress -> h
+Stress -> i
+g [shape=box]
+h [shape=box]
+i [shape=box]
+
+Affective -> Stress
+
+
+        ')
+```
+
+
+
+
+For now though, we will focus on building a CFA model. Later we'll show how a *well fitting* measurement model can be used to test hypotheses related to the structural relations between latent variables.
+
+
+
+### Defining a CFA model {-}
+
+First, open some data and check that all looks well. This is a classic CFA example — see the help file for more info.
 
 ```{r}
 hz <- lavaan::HolzingerSwineford1939
@@ -201,9 +289,7 @@ hz %>% glimpse()
 ```
 
 
-### Defining the model {-}
-
-As noted above, to define models in `lavaan` you must specify the relationships between variables in a text format.  A full [guide to this lavaan model syntax](http://lavaan.ugent.be/tutorial/syntax1.html) is available on the project website.
+As noted above, to define models in `lavaan` you must specify the relationships between variables in a text format.  A full [guide to this lavaan model syntax is available on the project website](http://lavaan.ugent.be/tutorial/syntax1.html).
 
 For CFA models, like path models, the format is fairly simple, and resembles a series of linear models, written over several lines.
 
@@ -218,7 +304,6 @@ maths =~ x7 + x8 + x9'
 ```
 
 Note that we have saved our model specification/syntax in a variable named `hz.model`.
-
 
 The other special symbols in the `lavaan` syntax which can be used for CFA models are:
 
@@ -235,7 +320,8 @@ summary(hz.fit, standardized=TRUE)
 ```
 
 
-#### Model output {-}
+#### `lavaan` CFA Model output {-}
+
 The output has three parts:
 
 1. Parameter estimates. The values in the first column are the standardised weights from the observed variables to the latent factors.
@@ -265,7 +351,7 @@ semPlot::semPaths(hz.fit, "std")
 
 
 
-## Model fit {-}
+## CFA model fit {- #model-fit}
 
 To examine the model fit we use `fitmeasures()` and pass a list of the names of the fit indices we would like calculated:
 
@@ -281,6 +367,9 @@ This looks OK, but the fit indices indicate the model could be improved. In part
 
 ## Modification indices {-}
 
+Modification indices help us answer 'what if?' questions about whether freeing parameter constraints or adding paths to our models would help improve it. The  modification index is the $\chi^2$ value, with 1 degree of freedom, by which model fit would improve if a particular path was added or constraint freed. Values bigger than `r round(qchisq(.95, 1), 2)` indicate that the model would be 'improved', and the p value for the added parameter would be < .05, and values larger `r round(qchisq(.999, 1), 2)` than indicte the parameter would have a p vaue < .001. *This does not mean that all parameters which appear in the MI table should be added*, but it can be an aid to improving the model, in combination with domain or theoretical knowledge. The rule of thumb is to add parameters only when they 'make sense' substantively. See the notes on [model improvements](#model-improvement) for more guidance.
+
+
 To examine the modification indices we type:
 
 ```{r, echo=T, eval=F}
@@ -288,27 +377,29 @@ modificationindices(hz.fit)
 ```
 
 
-But because this function produces a very long table of output, it can be helpful to sort and filter the rows to show only those model modifications which might be of interes to us. 
+But because this function produces a very long table of output, it can be helpful to sort and filter the rows to show only those model modifications which might be of interest to us. 
 
 The command below converts the output of `modificationindices()` to a dataframe. It then:
 
 - Sorts the rows by the `mi` column, which represents the change in model $\chi^2$ we see if the path was included (see [sorting](#sorting))
-- Filters the results to show only those with $\chi^2$ change > 5
+- Filters the results to show only those with $\chi^2$ change > 10
 - Selects only the `lhs`, `op`, `rhs`, `mi`, and `epc` columns.
 
 ```{r}
 modificationindices(hz.fit) %>% 
   as_data_frame() %>% 
   arrange(-mi) %>% 
-  filter(mi > 5) %>% 
+  filter(mi > 11) %>% 
   select(lhs, op, rhs, mi, epc) %>% 
   pander(caption="Largest MI values for hz.fit")
 ```
 
 
-The `lhs` (left hand side), `rhs` (right hans side) and `op` (operation) columns specify what modification should be made. 
+The `lhs` (left hand side, or outcome), `rhs` (right hand side, or predictor) and `op` (operation) columns specify what modification should be made. 
 
-Latent factor to variable links have `=~` in the 'op' column. Error covariances for observed variables have `~~` as the op. These symbols match the symbols used to describe a path in the lavaan model syntax.
+Paths linking latent variables to the observed variables which index them have `=~` in the 'op' column. 
+
+Error covariances for observed variables have `~~` as the op. These symbols match the symbols used to describe a path in the lavaan model syntax.
 
 If we add the largest MI path to our model it will look like this:
 
@@ -346,7 +437,7 @@ parameters which, if included, would improve model fit (or constraints removed).
 [It's very important to avoid adding paths in a completely data-driven way because this is almost certain to lead to [over-fitting](#over-fitting).]{.tip}
 
 
-It's also important to work one step at a time, because the table of modification indices may change as you add additional paths. For example, the path second largest MI value may change once you add the path with the largest MI to the model.
+It's also important to work one step at a time, because the table of modification indices may change as you add additional paths. For example, the second largest MI value may change once you add the path with the largest MI to the model.
 
 
 The basic steps to follow are:
@@ -385,7 +476,7 @@ Nonetheless, with these caveats in mind, SEM can be a useful technique to quanti
 
 2. Ensure your measurement model [fits the data adequately](#gof) before continuing. Test alternative or simplified measurements models and report where these perform well (e.g. are close in fit to your desired model). SEM models that are based on a poorly fitting measurment model will produce parameter estimates that are imprecise, unstable or both, and you should not proceed unless an adequately fitting measrement model is founds ([see this nice discussion, which includes relevant references](https://stats.stackexchange.com/a/143465/)).
 
-3. Convert your measurement model by removing covariances between latent variables, and including new structural paths. Test model fit, and interpret the paths of interest. Avoid making changes to the measurement part of the model at this stage. Where the model is complex consider adjusting *p* values to allow for multuple comparisons (if using NHST).
+3. Convert your measurement model by removing covariances between latent variables where necessary and including new structural paths. Test model fit, and interpret the paths of interest. Avoid making changes to the measurement part of the model at this stage. Where the model is complex consider adjusting *p* values to allow for multuple comparisons (if using NHST).
 
 4. Test alternative models (e.g. with paths removed or reversed). Report where alternatives also fit the data.
 
@@ -396,7 +487,7 @@ Nonetheless, with these caveats in mind, SEM can be a useful technique to quanti
 
 #### A worked example: Building from a measurement model to SEM {-}
 
-```{r, include=F}
+```{r, include=F, echo=F}
 library(lavaan)
 model.tpb.gen <- ' 
   AT =~ a1 + .7*a2+ .5*a3+ .4*sn1 + .4*sn2
@@ -439,7 +530,7 @@ mice::md.pattern(tpb.df)
 
 We start by fitting a measurement model. The model sytax includes lines with 
 
-- `=~` separatatig left and right hand side (to define the latents)
+- `=~` separatatig left and right hand side (to define the latent variables)
 - `~~` to specify latent covariances
 
 We are not including `exercise` and `intention` yet because these are observed variables only (we don't have multiple measurements for them) and so they don't need to be in the measurement model:
@@ -459,12 +550,14 @@ mes.mod <- '
 '  
 ```
 
+
 We can fit this model to the data like so:
 
 ```{r}
 mes.mod.fit <- cfa(mes.mod, data=tpb.df)
 summary(mes.mod.fit)
 ```
+
 
 And we can assess model fit using `fitmeasures`. Here we select a subset of the possible fit indices to keep the output manageable.
 
@@ -489,7 +582,7 @@ However, in this case unless we had substantive reasons to add the paths, it wou
 
 
 
-##### Measurement model fits, so proceed to SEM {-}
+##### The measurement model fits, so proceed to SEM {-}
 
 Our SEM model adapts the CFA (measurement model), including additional observed variables (e.g. intention and exercise) and any relevant structural paths:
 
@@ -511,7 +604,7 @@ We can fit it as before, but now using the `sem()` function rather than the `cfa
 
 
 ```{r}
-sem.mod.fit <- cfa(sem.mod, data=tpb.df)
+sem.mod.fit <- sem(sem.mod, data=tpb.df)
 ```
 
 The first thing we do is check the model fit:
@@ -522,7 +615,6 @@ fitmeasures(sem.mod.fit, useful.fit.measures)
 
 
 RMSEA is slightly higher than we like, so we can check the modification indices:
-
 
 
 ```{r}
@@ -547,6 +639,7 @@ sem.mi %>%
 
 Of these suggested paths, the largest MI is for the one which says PBC is predicted by exercise. However, the model would also be improved by allowing PBC to predict exercise.
 Which should we add?
+
 
 ***The answer will depend on both previous theory and knowledge of the data.***
 
@@ -601,7 +694,9 @@ takeaway are:
 -   You need 'enough data'. Normally this will be at least 3 measured
     variables per latent. Sometimes 2 is enough, provided the errors of
     these variables are uncorrelated, but you may struggle to fit models
-    because of 'empirical under-identification'^[Note, indicators themselves should be correlated with one another in a bivariate correlation matrix. It's only the errors which should be uncorrelated.]
+    because of 'empirical under-identification'^[Note, indicators themselves 
+    should be correlated with one another in a bivariate correlation matrix. 
+    It's only the errors which should be uncorrelated.]
     
 -   If a model is non-identified, it may either i) fail to run or,
     worse, ii) produce spurious results.

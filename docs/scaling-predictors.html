@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Just Enough R</title>
   <meta name="description" content="Just Enough R">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Just Enough R" />
   <meta property="og:type" content="book" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="fixed-or-random.html">
-<link rel="next" href="standardizing.html">
+<link rel="next" href="non-scale-outcomes.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -102,15 +102,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">Just enough R</a></li>
 
 <li class="divider"></li>
-<li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
 <li class="part"><span><b>I Getting started</b></span></li>
-<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
 <li class="chapter" data-level="1" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>1</b> Working with R</a><ul>
-<li class="chapter" data-level="" data-path="installation-intro.html"><a href="installation-intro.html"><i class="fa fa-check"></i>Installation</a><ul>
-<li class="chapter" data-level="" data-path="installation-intro.html"><a href="installation-intro.html#start-here"><i class="fa fa-check"></i>Workflow</a></li>
+<li class="chapter" data-level="" data-path="installation-intro.html"><a href="installation-intro.html"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html"><i class="fa fa-check"></i>Workflow</a><ul>
+<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#rmarkdown"><i class="fa fa-check"></i>RMarkdown</a></li>
+<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#writing-and-knitting-rmarkdown"><i class="fa fa-check"></i>Writing and ‘knitting’ RMarkdown</a></li>
+<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#rstudio"><i class="fa fa-check"></i>RStudio</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="rmarkdown.html"><a href="rmarkdown.html"><i class="fa fa-check"></i>RMarkdown</a></li>
-<li class="chapter" data-level="" data-path="rstudio.html"><a href="rstudio.html"><i class="fa fa-check"></i>RStudio</a></li>
 <li class="chapter" data-level="" data-path="first-commands.html"><a href="first-commands.html"><i class="fa fa-check"></i>First commands</a></li>
 <li class="chapter" data-level="" data-path="variables.html"><a href="variables.html"><i class="fa fa-check"></i>Naming things</a></li>
 <li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html"><i class="fa fa-check"></i>Vectors and lists</a><ul>
@@ -203,7 +203,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="exporting-graphics.html"><a href="exporting-graphics.html"><i class="fa fa-check"></i>Exporting for print</a></li>
 </ul></li>
 <li class="part"><span><b>III Models</b></span></li>
-<li class="chapter" data-level="6" data-path="common-inferential-stats.html"><a href="common-inferential-stats.html"><i class="fa fa-check"></i><b>6</b> Common inferential statistics</a><ul>
+<li class="chapter" data-level="6" data-path="common-stats.html"><a href="common-stats.html"><i class="fa fa-check"></i><b>6</b> Commonly used statistics</a><ul>
 <li><a href="crosstabs.html#crosstabs">Crosstabulations and <span class="math inline">\(\chi^2\)</span></a><ul>
 <li class="chapter" data-level="" data-path="crosstabs.html"><a href="crosstabs.html"><i class="fa fa-check"></i>Three-way tables</a></li>
 </ul></li>
@@ -265,15 +265,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="multilevel-bayes-reasons.html"><a href="multilevel-bayes-reasons.html"><i class="fa fa-check"></i>Bayesian multilevel models</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="mediation-and-covariance-modelling.html"><a href="mediation-and-covariance-modelling.html"><i class="fa fa-check"></i><b>11</b> Mediation and covariance modelling</a><ul>
-<li class="chapter" data-level="" data-path="mediation.html"><a href="mediation.html"><i class="fa fa-check"></i>Mediation</a></li>
+<li class="chapter" data-level="" data-path="mediation.html"><a href="mediation.html"><i class="fa fa-check"></i>Mediation</a><ul>
+<li class="chapter" data-level="" data-path="mediation.html"><a href="mediation.html#mediation-with-multiple-regression"><i class="fa fa-check"></i>Mediation with multiple regression</a></li>
+<li class="chapter" data-level="" data-path="mediation.html"><a href="mediation.html#mediation-steps"><i class="fa fa-check"></i>Mediation Steps</a></li>
+<li class="chapter" data-level="" data-path="mediation.html"><a href="mediation.html#mediation-example-after-baron-and-kenny"><i class="fa fa-check"></i>Mediation example after Baron and Kenny</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="testing-the-indirect-effect.html"><a href="testing-the-indirect-effect.html"><i class="fa fa-check"></i>Testing the indirect effect</a></li>
+<li class="chapter" data-level="11.1" data-path="mediation-using-path-models.html"><a href="mediation-using-path-models.html"><i class="fa fa-check"></i><b>11.1</b> Mediation using Path models</a></li>
 <li class="chapter" data-level="" data-path="covariance-modelling.html"><a href="covariance-modelling.html"><i class="fa fa-check"></i>Covariance modelling</a></li>
 <li class="chapter" data-level="" data-path="path-models.html"><a href="path-models.html"><i class="fa fa-check"></i>Path models</a><ul>
 <li class="chapter" data-level="" data-path="path-models.html"><a href="path-models.html#defining-a-model"><i class="fa fa-check"></i>Defining a model</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="cfa.html"><a href="cfa.html"><i class="fa fa-check"></i>Confirmatory factor analysis (CFA)</a><ul>
-<li class="chapter" data-level="" data-path="cfa.html"><a href="cfa.html#defining-the-model"><i class="fa fa-check"></i>Defining the model</a></li>
+<li class="chapter" data-level="" data-path="cfa.html"><a href="cfa.html#latent-variables"><i class="fa fa-check"></i>Latent variables</a></li>
+<li class="chapter" data-level="" data-path="cfa.html"><a href="cfa.html#defining-a-cfa-model"><i class="fa fa-check"></i>Defining a CFA model</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="model-fit.html"><a href="model-fit.html"><i class="fa fa-check"></i>Model fit</a></li>
+<li class="chapter" data-level="" data-path="model-fit.html"><a href="model-fit.html"><i class="fa fa-check"></i>CFA model fit</a></li>
 <li class="chapter" data-level="" data-path="modification-indices.html"><a href="modification-indices.html"><i class="fa fa-check"></i>Modification indices</a></li>
 <li class="chapter" data-level="" data-path="model-improvement.html"><a href="model-improvement.html"><i class="fa fa-check"></i>Model modification and improvement</a></li>
 <li class="chapter" data-level="" data-path="sem.html"><a href="sem.html"><i class="fa fa-check"></i>Structural eqution modelling (SEM)</a></li>
@@ -362,8 +369,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="22" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>22</b> Non-independence</a></li>
 <li class="chapter" data-level="23" data-path="fixed-or-random.html"><a href="fixed-or-random.html"><i class="fa fa-check"></i><b>23</b> Fixed and random effects</a></li>
 <li class="chapter" data-level="24" data-path="scaling-predictors.html"><a href="scaling-predictors.html"><i class="fa fa-check"></i><b>24</b> Scaling predictor variables</a><ul>
-<li class="chapter" data-level="" data-path="standardizing.html"><a href="standardizing.html"><i class="fa fa-check"></i>Standardising</a></li>
-<li class="chapter" data-level="" data-path="dichotomising.html"><a href="dichotomising.html"><i class="fa fa-check"></i>Dichotomising continuous predictors (or outcomes)</a></li>
+<li class="chapter" data-level="" data-path="scaling-predictors.html"><a href="scaling-predictors.html#standardizing"><i class="fa fa-check"></i>Standardising</a></li>
+<li class="chapter" data-level="" data-path="scaling-predictors.html"><a href="scaling-predictors.html#dichotomising"><i class="fa fa-check"></i>Dichotomising continuous predictors (or outcomes)</a></li>
 </ul></li>
 <li class="chapter" data-level="25" data-path="non-scale-outcomes.html"><a href="non-scale-outcomes.html"><i class="fa fa-check"></i><b>25</b> Non-scale outcomes</a><ul>
 <li class="chapter" data-level="25.1" data-path="link-functions.html"><a href="link-functions.html"><i class="fa fa-check"></i><b>25.1</b> Link functions</a><ul>
@@ -395,7 +402,55 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="scaling-predictors" class="section level1">
 <h1><span class="header-section-number">24</span> Scaling predictor variables</h1>
-<p>When predictors have a natural scale, interpreting them can be relatively straightforward. However when predictors are on an arbitrary scale, or when multiple predictors are on different scales, then interpreting the model (or comparing between models) can be hard. In these cases scaling or standardising predictors in the model can make it easier to interpret the coefficients that are estimated.</p> 
+<div class="figure">
+<img src="media/Holding_the_eiffel_tower.jpg" alt="Image: Wikimedia" />
+<p class="caption">Image: <a href="https://commons.wikimedia.org/wiki/File:Holding_the_eiffel_tower_(4114302348).jpg">Wikimedia</a></p>
+</div>
+<p>When predictors have a natural scale, interpreting them can be relatively straightforward. However when predictors are on an arbitrary scale, or when multiple predictors are on different scales, then interpreting the model (or comparing between models) can be hard. In these cases scaling or standardising predictors in the model can make it easier to interpret the coefficients that are estimated.</p>
+<div id="standardizing" class="section level3 unnumbered">
+<h3>Standardising</h3>
+<p>‘Standardising’ predictors, by subtracting the mean and dividng by the standard deviation, is a common way to make interpreting regression models easier, and particularly to make comparisons between predictors — e.g. regarding their relative importance in predicting the outcome.</p>
+<p><span class="citation">@gelman_scaling_2008</span> covers in detail the advantages and disadvantages of standardising regression coefficients. Based on the observation that we often wish to compare continuous with binary predictors, they recommend standardisation by subtracting the mean and dividing by <em>two</em> standard deviations (rather thant the normal one SD). The <code>arm</code> package implements this procedure, and makes it easy to automatically scale the predictors in a linear model.</p>
+<p>First, we run the linear model:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m1 &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>am, <span class="dt">data=</span>mtcars)
+m1
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>am, <span class="dt">data =</span> mtcars)
+
+Coefficients<span class="op">:</span>
+(Intercept)           wt           am  
+   <span class="fl">37.32155</span>     <span class="op">-</span><span class="fl">5.35281</span>     <span class="op">-</span><span class="fl">0.02362</span>  </code></pre></div>
+<p>And then use <code>arm::standardize</code> to standardize the coefficients:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">arm<span class="op">::</span><span class="kw">standardize</span>(m1)
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>z.wt <span class="op">+</span><span class="st"> </span>c.am, <span class="dt">data =</span> mtcars)
+
+Coefficients<span class="op">:</span>
+(Intercept)         z.wt         c.am  
+   <span class="fl">20.09062</span>    <span class="op">-</span><span class="fl">10.47500</span>     <span class="op">-</span><span class="fl">0.02362</span>  </code></pre></div>
+<p>This automatically scales the data for <code>m1</code> and re-fits the model.</p>
+<p>An alternative is to use the <code>MuMIn::stdizeFit</code> although this applies scaling rules slightly differently to <code>arm</code>, in this case standardising by a single SD:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MuMIn<span class="op">::</span><span class="kw">stdizeFit</span>(m1, mtcars)
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>am, <span class="dt">data =</span> mtcars)
+
+Coefficients<span class="op">:</span>
+(Intercept)           wt           am  
+   <span class="fl">37.32155</span>     <span class="op">-</span><span class="fl">5.35281</span>     <span class="op">-</span><span class="fl">0.02362</span>  </code></pre></div>
+<p>Check the help file for <code>MuMIn::stdize</code> for a detailed discussion of the differences with <code>arm::standardize</code>.</p>
+</div>
+<div id="dichotomising" class="section level3 unnumbered">
+<h3>Dichotomising continuous predictors (or outcomes)</h3>
+<p>Dichotomising a continuous scale is almost always a bad idea. Although it is sometimes done to aid interpretation or presentation, there are better alternatives (for example estimating means from a model using Stata’s <code>margins</code> command and plotting them, something we will do in the next session). As the Cochrane collaboration puts it:</p>
+<blockquote>
+<p>The down side of converting other forms of data to a dichotomous form is that information about the size of the effect may be lost. For example a participant’s blood pressure may have lowered when measured on a continuous scale (mmHg), but if it has not lowered below the cut point they will still be in the ‘high blood pressure group’ and you will not see this improvement. In addition the process of dichotomising continuous data requires the setting of an appropriate clinical point about which to ‘split’ the data, and this may not be easy to determine.</p>
+</blockquote>
+<p>See <a href="http://www.cochrane-net.org/openlearning/html/mod11-2.htm" class="uri">http://www.cochrane-net.org/openlearning/html/mod11-2.htm</a> and also <span class="citation">@peacock_dichotomising_2012</span>. Also note that trichotomising (splitting into 3) is likely to be a better better/more efficient approach, see <span class="citation">@gelman2009splitting</span>.</p>
+
+</div>
 </div>
             </section>
 
@@ -403,7 +458,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="fixed-or-random.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="standardizing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="non-scale-outcomes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -421,10 +476,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -448,9 +504,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

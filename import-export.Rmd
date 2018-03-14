@@ -205,14 +205,16 @@ expt.data %>%
   do(filterandsave(.))
 ```
 
-Let's say all the files are in a single directory, and numbered sequentially. Using the `list.files()` function we can list the contents of a directory on the hard drive:
+Let's say that we have saved all the files are in a single directory, and these are numbered sequentially: `person01.csv`, `person02.csv` and so on.
+
+Using the `list.files()` function we can list the contents of a directory on the hard drive:
 
 ```{r}
 list.files('data/multiple-file-example/')
 ```
 
 
-`list.files()` creates a [vector](#vectors) of the names of all the files in the directory. 
+The `list.files()` function creates a [vector](#vectors) of the names of all the files in the directory. 
 
 At this point, there are many, many ways of importing the contents of these files, but below we use a technique which is concise, reliable, and less error-prone than many others. It also continues to use the `dplyr` library.
 

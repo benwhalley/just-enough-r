@@ -5,7 +5,6 @@ title: 'Getting help'
 
 
 
-
 # Getting help {#getting-help}
 
 If you don't know or can't remember what a function does, R provides help files which explain how they work.

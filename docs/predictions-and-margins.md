@@ -87,6 +87,7 @@ margins.plot <- inter.df %>%
     geom_line() + 
     ylab("Effect of being female")  + xlab("") +
     geom_hline(yintercept = 0)
+Using severity.of.injury as value column: use value.var to override.
 margins.plot
 ```
 
@@ -294,6 +295,7 @@ prediction.frame.plus.predictions <- bind_cols(
 mtcars.plus.predictions %>% 
   ggplot(aes(vs, fit, ymin=lwr, ymax=upr)) +
   stat_summary(geom="pointrange")
+No summary function supplied, defaulting to `mean_se()
 ```
 
 <img src="predictions-and-margins_files/figure-html/unnamed-chunk-14-1.png" width="672" />
@@ -315,6 +317,9 @@ prediction.frame.plus.predictions
 2     1     2 27.27297 25.57096 28.97499
 mtcars.plus.predictions %>% group_by(vs) %>%
   summarise_each(funs(mean), fit, lwr, upr)
+`summarise_each()` is deprecated.
+Use `summarise_all()`, `summarise_at()` or `summarise_if()` instead.
+To map `funs` over a selection of variables, use `summarise_at()`
 # A tibble: 2 x 4
      vs      fit      lwr      upr
   <dbl>    <dbl>    <dbl>    <dbl>
@@ -341,6 +346,10 @@ Two ways of computing, depending on which of these two you hate least:
 ```r
 library(margins)
 margins(m, at = list(wt = 1:2))
+Warning in check_values(data, at): A 'at' value for 'wt' is outside
+observed data range (1.513,5.424)!
+Average marginal effects at specified values
+lm(formula = mpg ~ vs + wt, data = mtcars)
  at(wt)    vs     wt
       1 3.154 -4.443
       2 3.154 -4.443
@@ -368,6 +377,8 @@ Residual standard error: 2.578 on 28 degrees of freedom
 Multiple R-squared:  0.8348,	Adjusted R-squared:  0.8171 
 F-statistic: 47.16 on 3 and 28 DF,  p-value: 4.497e-11
 m2.margins <- margins(m2, at = list(wt = 1.5:4.5))
+Warning in check_values(data, at): A 'at' value for 'wt' is outside
+observed data range (1.513,5.424)!
 
 summary(m2.margins)
  factor  wt     AME     SE       z      p   lower   upper

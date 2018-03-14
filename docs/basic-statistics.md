@@ -1,12 +1,11 @@
 
 ---
-title: 'Basic statistics'
+title: 'Common statistics'
 ---
 
 
 
-
-# Common inferential statistics {#common-inferential-stats}
+# Commonly used statistics {#common-stats}
 
 
 R has simple functions for common inferential statistics like Chi^2^, t-tests, correlations and many more. This section is by no means exhaustive, but covers [statistics for crosstabulations](#crosstabs), [differences in means](#t-tests), and [linear correlation](#correlations).

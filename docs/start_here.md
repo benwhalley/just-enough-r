@@ -5,9 +5,13 @@ title: 'Starting out'
   
 
 
+
+# (PART) Getting started {-} 
+
+
 # Working with R {#r-basics}
 
-
+There are many ways of working with R. This guide focusses on a fairly specific setup and workflow, and assumes you will use the RStudio editor, use R markdown documents to document and share your analyses, and install a number of recent packages, including the 'tidyverse', which give working with R a shallower learning curve, and let you get powerful things done quickly.
 
 
 
@@ -15,27 +19,19 @@ title: 'Starting out'
 ## Installation {- #installation-intro}
 
 
-#### RStudio Server {- #rstudio-server}
-
-The simplest way to get started with RStudio is to get an account on a server installation of the software (if you are a Plymouth University student please see the guidance on the DLE).
-
-
-
-
 #### Installing on your own machine. {- #local-install}
 
 
-1. [Download RStudio 1.01 or later](https://www.rstudio.com/products/rstudio/download/) (I'd suggest using whatever version is most recent and upgrading as new versions become available because the software is fairly actively developed).
+1. [Download RStudio 1.01 or later](https://www.rstudio.com/products/rstudio/download/) Use whatever version is most recent and expect to upgrade every 6 months or so, as new versions become available.
 
 2. Install the [packages listed below](#dependencies)
 
-3. If you want to 'knit' your work into a pdf format, you should also install LaTeX. On [windows use this installer](https://miktex.org/download). Make sure to do a 'full install', not just a basic install. On a Mac install [homebrew](https://brew.sh) and type `brew cask install mactex`.
+3. Optionally, if you want to 'knit' your work into a pdf format, you should also install LaTeX. For most people this isn't necessary, and is something you can skip for the moment, but it can be helpful when sharing finished analyses with colleagues. On [windows use this installer](https://miktex.org/download). Make sure to do a 'full install', not just a basic install. On a Mac install [homebrew](https://brew.sh) and type `brew cask install mactex`.
 
 
 
 
 #### Package dependencies {- #dependencies}
-
 
 [This script](requirements.R) installs all dependencies on a recent Linux or Mac system (excluding `rstan` and `rstanarm` which are additionally needed to work through the examples on Baysian estimation, but not the majority of the material).
 
@@ -48,7 +44,7 @@ The simplest way to get started with RStudio is to get an account on a server in
 
 
 
-### Workflow {- #start-here}
+## Workflow {- #start-here}
 
 <!-- <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/k56UXc4paIM?rel=0" frameborder="0" allowfullscreen></iframe>
  -->
@@ -69,7 +65,7 @@ One of the biggest adjustments people need to make when moving away from SPSS or
 
 
 
-## RMarkdown {- #rmarkdown}
+### RMarkdown {- #rmarkdown}
 
 A major weakness of traditional GUI stats packages is that there is no simple way to document and share your analyses, and so repeating or editing your work later is very hard.
 
@@ -88,7 +84,7 @@ Like computer code, RMarkdown can be 'run' or 'executed'. But in the language of
 
 
 
-#### Writing and 'knitting' RMarkdown {-}
+### Writing and 'knitting' RMarkdown {-}
 
 To include R code within RMarkdown we write 3 backticks (`` ``` ``), followed by `{r}`. We the include our R code, and close the block with 3 more backticks ([how to find the backtick on your keyboard](#backtick-location)).
 
@@ -99,7 +95,7 @@ When a document including this chunk is run or 'knitted', the final result will 
 
 
 
-## RStudio {- #rstudio}
+### RStudio {- #rstudio}
 
 RStudio is a text editor which has been customised to make working with R easy. It can be installed on your own computer, or you can login to a shared RStudio server (for example, one run by your university) from a web browser. Either way the interface is largely the same and contains 4 main panels:  
 
@@ -186,11 +182,13 @@ Once you have watched the video:
 
 
 
-###### More about RMarkdown {- .tip}
+##### More about RMarkdown {- .tip}
 
 A more detailed guide to using RMarkdown, which covers many of the 'chunk options' available to customise output, [is available here](http://cfss.uchicago.edu/block013_rmarkdown.html)
 
 If you'd like to use RMarkdown to include manage your citations, [see this guide](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html)
+
+
 
 
 
@@ -569,7 +567,7 @@ But other functions process a vector without returning any numbers. For example,
 hist(heights)
 ```
 
-<img src="start_here_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+<img src="start_here_files/figure-html/unnamed-chunk-28-1.png" width="672" />
 
 We'll cover lots more plotting and visualisation later on.
 
@@ -674,21 +672,21 @@ We can also use random number-generating functions built into R to create vector
 ```r
 # 10 uniformly distributed random numbers between 0 and 1
 runif(10)
- [1] 0.1790159 0.5043922 0.4721015 0.6482539 0.5121343 0.1253847 0.4577949
- [8] 0.9653722 0.9547195 0.5690736
+ [1] 0.6126703 0.4520277 0.3905088 0.9166254 0.3202581 0.5855937 0.9061971
+ [8] 0.9765845 0.5202774 0.5666197
 
 # 1,000 uniformly distributed random numbers between 1 and 100
 my.numbers <- runif(1000, 1, 10)
 
 # 10 random-normal numbers with mean 10 and SD=1
 rnorm(10, mean=10)
- [1] 10.154931 10.057710  9.551226  9.980110  7.845520 11.787558  8.746357
- [8]  7.478703 10.786122 10.409197
+ [1]  9.704247 11.552676 12.274657 12.030825 11.160548  9.682790  9.826141
+ [8] 10.193990  9.147506  9.520177
 
 # 10 random-normal numbers with mean 10 and SD=5
 rnorm(10, 10, 5)
- [1]  9.3794197 14.0484652 15.2923370  8.3775159 10.4907522 12.7248470
- [7] 10.9435927  0.4207705  6.1512915 17.8045256
+ [1] 14.567034  9.067716  9.278458  6.835906  8.390221 14.861313  9.136580
+ [8]  7.658026 14.550540  8.731716
 ```
 
 We can then use these numbers in our code, for example plotting them:
@@ -699,7 +697,7 @@ random.numbers <- rnorm(10000)
 hist(random.numbers)
 ```
 
-<img src="start_here_files/figure-html/unnamed-chunk-38-1.png" width="672" />
+<img src="start_here_files/figure-html/unnamed-chunk-37-1.png" width="672" />
 
 
 
@@ -765,9 +763,9 @@ ages <- round(rnorm(10, mean=40, sd=10))
 
 # get the rank order of elements (i.e. what their positions would be if the vector was sorted)
 ages
- [1] 44 38 36 34 54 37 49 52 29 47
+ [1] 41 33 26 45 38 38 37 32 50 48
 rank(ages, ties.method="first")
- [1]  6  5  3  2 10  4  8  9  1  7
+ [1]  7  3  1  8  5  6  4  2 10  9
 ```
 
 

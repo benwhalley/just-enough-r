@@ -327,7 +327,7 @@ fit.data %>%
 
 There's a clear trend here for lighter patients (at baseline) to have more missing data at followup. There's also a suggestion that younger patients are more likely to have been lost to followup.
 
-If needed, we could perform [inferential tests](#common-inferential-stats) for these differences:
+If needed, we could perform [inferential tests](#common-stats) for these differences:
 
 ```{r}
 t.test(kg1 ~ is.na(kg2), data=fit.data)

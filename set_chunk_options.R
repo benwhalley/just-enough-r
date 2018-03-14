@@ -1,0 +1,1 @@
+knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE, comment=NA)

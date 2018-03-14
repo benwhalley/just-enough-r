@@ -281,15 +281,14 @@ mean difference=`r round((cars.test$estimate[1]-cars.test$estimate[2])*1000)`lbs
 ```{r}
 mpg.anova <- car::Anova(lm(mpg~am*cyl, data=mtcars))
 
-library(apastats)
 # extract and format main effect
-describe.Anova(mpg.anova, term="am")
+apastats::describe.Anova(mpg.anova, term="am")
 
 # and the interaction
-describe.Anova(mpg.anova, term="am:cyl")
+apastats::describe.Anova(mpg.anova, term="am:cyl")
 ```
 
-[There was no interaction between location of manufacture and number of cylinders, `r describe.Anova(mpg.anova, term="am:cyl")`, but there was a main effect of location of manufacture, `r describe.Anova(mpg.anova, term="am:cyl")`, such that US-made cars had significantly higher fuel consumption than European or Japanese brands (see [Figure X or Table X])]{.apa-example}
+[There was no interaction between location of manufacture and number of cylinders, `r apastats::describe.Anova(mpg.anova, term="am:cyl")`, but there was a main effect of location of manufacture, `r apastats::describe.Anova(mpg.anova, term="am:cyl")`, such that US-made cars had significantly higher fuel consumption than European or Japanese brands (see [Figure X or Table X])]{.apa-example}
 
 
 <!-- 
@@ -308,13 +307,13 @@ If you have loaded the `lmerTest` package `apastats` can output either coefficie
 sleep.model <- lmer(Reaction~factor(Days)+(1|Subject), data=lme4::sleepstudy)
 
 #a single coefficient (this is a contrast from the reference category)
-describe.glm(sleep.model, term="factor(Days)1")
+apastats::describe.glm(sleep.model, term="factor(Days)1")
 
 # or describe the F test for the overall effect of Days
-describe.lmtaov(anova(sleep.model), term='factor(Days)')
+apastats::describe.lmtaov(anova(sleep.model), term='factor(Days)')
 ```
 
 
-[There were significant differences in reaction times across the 10 days of the study, `r describe.lmtaov(anova(sleep.model), term='factor(Days)')` such that reaction latencies tended to increase in duration (see [Figure X]).]{.apa-example}
+[There were significant differences in reaction times across the 10 days of the study, `r apastats::describe.lmtaov(anova(sleep.model), term='factor(Days)')` such that reaction latencies tended to increase in duration (see [Figure X]).]{.apa-example}
 
 

@@ -576,6 +576,21 @@ Let's imagine we have collected data from patients using the [PHQ-9](http://www.
 
 ```r
 phq9.df <- readr::read_csv("phq.csv")
+Parsed with column specification:
+cols(
+  patient = col_integer(),
+  phq9_01 = col_integer(),
+  phq9_02 = col_integer(),
+  phq9_03 = col_integer(),
+  phq9_04 = col_integer(),
+  phq9_05 = col_integer(),
+  phq9_06 = col_integer(),
+  phq9_07 = col_integer(),
+  phq9_08 = col_integer(),
+  phq9_09 = col_integer(),
+  month = col_integer(),
+  group = col_integer()
+)
 glimpse(phq9.df)
 Observations: 2,429
 Variables: 12

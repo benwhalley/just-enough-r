@@ -9,6 +9,11 @@ title: 'Graphics'
 # Graphics {#graphics}
 
 
+
+```
+`geom_smooth()` using method = 'loess'
+```
+
 <img src="graphics_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 
@@ -228,6 +233,7 @@ mtcars %>%
   ggplot(aes(x = disp, y = mpg, colour=hp)) +
   geom_point(size=2) + 
   geom_smooth(se=F, colour="grey") 
+`geom_smooth()` using method = 'loess'
 ```
 
 <img src="graphics_files/figure-html/unnamed-chunk-9-1.png" width="672" />
@@ -254,6 +260,7 @@ mtcars %>%
   geom_point(size=2) + 
   geom_smooth(se=F, colour="grey") +
   facet_wrap("am")
+`geom_smooth()` using method = 'loess'
 ```
 
 <img src="graphics_files/figure-html/unnamed-chunk-10-1.png" width="672" />
@@ -271,6 +278,7 @@ mtcars %>%
   geom_point(size=2) + 
   geom_smooth(se=F, colour="grey") +
   facet_wrap("american")
+`geom_smooth()` using method = 'loess'
 ```
 
 <img src="graphics_files/figure-html/unnamed-chunk-11-1.png" width="672" />
@@ -540,6 +548,7 @@ rain %>%
   ggplot(aes(Year, value, color=Region)) +
   geom_smooth() +
   ylab('Rainfall (mm)')
+`geom_smooth()` using method = 'loess'
 ```
 
 <img src="graphics_files/figure-html/unnamed-chunk-24-1.png" width="672" />
@@ -556,6 +565,7 @@ rain %>%
   geom_point(alpha=.5, size=.5) +
   geom_smooth(se=F) +
   ylab('Rainfall (mm)')
+`geom_smooth()` using method = 'loess'
 ```
 
 <img src="graphics_files/figure-html/unnamed-chunk-25-1.png" width="672" />
@@ -571,6 +581,7 @@ rain %>%
   stat_summary(geom="bar") +
   ylab('Rainfall (mm)') + 
   guides(fill=F)
+No summary function supplied, defaulting to `mean_se()
 ```
 
 <img src="graphics_files/figure-html/unnamed-chunk-26-1.png" width="672" />
@@ -588,6 +599,7 @@ weather.data.long %>%
   ggplot(aes(Year, value, color=Region)) + 
   geom_smooth() + 
   facet_wrap(~variable, scales="free")
+`geom_smooth()` using method = 'loess'
 Warning: Removed 70 rows containing non-finite values (stat_smooth).
 ```
 
@@ -689,6 +701,7 @@ To begin, we might like to plot tips by time of day:
 reshape2::tips %>% 
   ggplot(aes(time, tip)) + 
   stat_summary(geom="bar")
+No summary function supplied, defaulting to `mean_se()
 ```
 
 <img src="graphics_files/figure-html/unnamed-chunk-31-1.png" width="672" />
@@ -702,6 +715,7 @@ reshape2::tips %>%
   ggplot(aes(time, tip, fill=sex)) + 
   stat_summary(geom="bar", position=position_stack()) +
   xlab("") + ylab("Tip ($)")
+No summary function supplied, defaulting to `mean_se()
 ```
 
 <img src="graphics_files/figure-html/unnamed-chunk-32-1.png" width="672" />
@@ -715,6 +729,7 @@ reshape2::tips %>%
   ggplot(aes(sex, tip, fill=time)) + 
   stat_summary(geom="bar", position=position_stack()) +
   xlab("") + ylab("Tip ($)")
+No summary function supplied, defaulting to `mean_se()
 ```
 
 <img src="graphics_files/figure-html/unnamed-chunk-33-1.png" width="672" />
@@ -814,6 +829,7 @@ I don't think the base R plots are that convenient here. `ggplot2::` and the `st
 ```r
 ggplot(mtcars, aes(factor(cyl), mpg)) + 
   stat_summary(geom="bar")
+No summary function supplied, defaulting to `mean_se()
 ```
 
 <img src="graphics_files/figure-html/unnamed-chunk-38-1.png" width="672" />
@@ -825,6 +841,7 @@ And if you are plotting quantities, as disussed above, showing a range is sensib
 ```r
 ggplot(mtcars, aes(factor(cyl), mpg)) + 
   stat_summary(geom="pointrange")
+No summary function supplied, defaulting to `mean_se()
 ```
 
 <img src="graphics_files/figure-html/unnamed-chunk-39-1.png" width="672" />

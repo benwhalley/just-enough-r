@@ -3,34 +3,34 @@ title: 'Starting out'
 ---
   
 
+
+
+# (PART) Getting started {-} 
+
+
 # Working with R {#r-basics}
+
+There are many ways of working with R. This guide focusses on a fairly specific setup and workflow, and assumes you will use the RStudio editor, use R markdown documents to document and share your analyses, and install a number of recent packages, including the 'tidyverse', which give working with R a shallower learning curve, and let you get powerful things done quickly.
+
 
 
 
 ## Installation {- #installation-intro}
 
 
-#### RStudio Server {- #rstudio-server}
-
-The simplest way to get started with RStudio is to get an account on a server installation of the software (if you are a Plymouth University student please see the guidance on the DLE).
-
-
-
-
 #### Installing on your own machine. {- #local-install}
 
 
-1. [Download RStudio 1.01 or later](https://www.rstudio.com/products/rstudio/download/) (I'd suggest using whatever version is most recent and upgrading as new versions become available because the software is fairly actively developed).
+1. [Download RStudio 1.01 or later](https://www.rstudio.com/products/rstudio/download/) Use whatever version is most recent and expect to upgrade every 6 months or so, as new versions become available.
 
 2. Install the [packages listed below](#dependencies)
 
-3. If you want to 'knit' your work into a pdf format, you should also install LaTeX. On [windows use this installer](https://miktex.org/download). Make sure to do a 'full install', not just a basic install. On a Mac install [homebrew](https://brew.sh) and type `brew cask install mactex`.
+3. Optionally, if you want to 'knit' your work into a pdf format, you should also install LaTeX. For most people this isn't necessary, and is something you can skip for the moment, but it can be helpful when sharing finished analyses with colleagues. On [windows use this installer](https://miktex.org/download). Make sure to do a 'full install', not just a basic install. On a Mac install [homebrew](https://brew.sh) and type `brew cask install mactex`.
 
 
 
 
 #### Package dependencies {- #dependencies}
-
 
 [This script](requirements.R) installs all dependencies on a recent Linux or Mac system (excluding `rstan` and `rstanarm` which are additionally needed to work through the examples on Baysian estimation, but not the majority of the material).
 
@@ -43,7 +43,7 @@ The simplest way to get started with RStudio is to get an account on a server in
 
 
 
-### Workflow {- #start-here}
+## Workflow {- #start-here}
 
 <!-- <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/k56UXc4paIM?rel=0" frameborder="0" allowfullscreen></iframe>
  -->
@@ -64,7 +64,7 @@ One of the biggest adjustments people need to make when moving away from SPSS or
 
 
 
-## RMarkdown {- #rmarkdown}
+### RMarkdown {- #rmarkdown}
 
 A major weakness of traditional GUI stats packages is that there is no simple way to document and share your analyses, and so repeating or editing your work later is very hard.
 
@@ -83,7 +83,7 @@ Like computer code, RMarkdown can be 'run' or 'executed'. But in the language of
 
 
 
-#### Writing and 'knitting' RMarkdown {-}
+### Writing and 'knitting' RMarkdown {-}
 
 To include R code within RMarkdown we write 3 backticks (`` ``` ``), followed by `{r}`. We the include our R code, and close the block with 3 more backticks ([how to find the backtick on your keyboard](#backtick-location)).
 
@@ -94,7 +94,7 @@ When a document including this chunk is run or 'knitted', the final result will 
 
 
 
-## RStudio {- #rstudio}
+### RStudio {- #rstudio}
 
 RStudio is a text editor which has been customised to make working with R easy. It can be installed on your own computer, or you can login to a shared RStudio server (for example, one run by your university) from a web browser. Either way the interface is largely the same and contains 4 main panels:  
 
@@ -183,11 +183,13 @@ Once you have watched the video:
 
 
 
-###### More about RMarkdown {- .tip}
+##### More about RMarkdown {- .tip}
 
 A more detailed guide to using RMarkdown, which covers many of the 'chunk options' available to customise output, [is available here](http://cfss.uchicago.edu/block013_rmarkdown.html)
 
 If you'd like to use RMarkdown to include manage your citations, [see this guide](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html)
+
+
 
 
 

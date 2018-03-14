@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Just Enough R</title>
   <meta name="description" content="Just Enough R">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Just Enough R" />
   <meta property="og:type" content="book" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="mediation-and-covariance-modelling.html">
-<link rel="next" href="covariance-modelling.html">
+<link rel="next" href="testing-the-indirect-effect.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -102,15 +102,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">Just enough R</a></li>
 
 <li class="divider"></li>
-<li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
 <li class="part"><span><b>I Getting started</b></span></li>
-<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
 <li class="chapter" data-level="1" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>1</b> Working with R</a><ul>
-<li class="chapter" data-level="" data-path="installation-intro.html"><a href="installation-intro.html"><i class="fa fa-check"></i>Installation</a><ul>
-<li class="chapter" data-level="" data-path="installation-intro.html"><a href="installation-intro.html#start-here"><i class="fa fa-check"></i>Workflow</a></li>
+<li class="chapter" data-level="" data-path="installation-intro.html"><a href="installation-intro.html"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html"><i class="fa fa-check"></i>Workflow</a><ul>
+<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#rmarkdown"><i class="fa fa-check"></i>RMarkdown</a></li>
+<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#writing-and-knitting-rmarkdown"><i class="fa fa-check"></i>Writing and ‘knitting’ RMarkdown</a></li>
+<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#rstudio"><i class="fa fa-check"></i>RStudio</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="rmarkdown.html"><a href="rmarkdown.html"><i class="fa fa-check"></i>RMarkdown</a></li>
-<li class="chapter" data-level="" data-path="rstudio.html"><a href="rstudio.html"><i class="fa fa-check"></i>RStudio</a></li>
 <li class="chapter" data-level="" data-path="first-commands.html"><a href="first-commands.html"><i class="fa fa-check"></i>First commands</a></li>
 <li class="chapter" data-level="" data-path="variables.html"><a href="variables.html"><i class="fa fa-check"></i>Naming things</a></li>
 <li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html"><i class="fa fa-check"></i>Vectors and lists</a><ul>
@@ -203,7 +203,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="exporting-graphics.html"><a href="exporting-graphics.html"><i class="fa fa-check"></i>Exporting for print</a></li>
 </ul></li>
 <li class="part"><span><b>III Models</b></span></li>
-<li class="chapter" data-level="6" data-path="common-inferential-stats.html"><a href="common-inferential-stats.html"><i class="fa fa-check"></i><b>6</b> Common inferential statistics</a><ul>
+<li class="chapter" data-level="6" data-path="common-stats.html"><a href="common-stats.html"><i class="fa fa-check"></i><b>6</b> Commonly used statistics</a><ul>
 <li><a href="crosstabs.html#crosstabs">Crosstabulations and <span class="math inline">\(\chi^2\)</span></a><ul>
 <li class="chapter" data-level="" data-path="crosstabs.html"><a href="crosstabs.html"><i class="fa fa-check"></i>Three-way tables</a></li>
 </ul></li>
@@ -265,15 +265,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="multilevel-bayes-reasons.html"><a href="multilevel-bayes-reasons.html"><i class="fa fa-check"></i>Bayesian multilevel models</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="mediation-and-covariance-modelling.html"><a href="mediation-and-covariance-modelling.html"><i class="fa fa-check"></i><b>11</b> Mediation and covariance modelling</a><ul>
-<li class="chapter" data-level="" data-path="mediation.html"><a href="mediation.html"><i class="fa fa-check"></i>Mediation</a></li>
+<li class="chapter" data-level="" data-path="mediation.html"><a href="mediation.html"><i class="fa fa-check"></i>Mediation</a><ul>
+<li class="chapter" data-level="" data-path="mediation.html"><a href="mediation.html#mediation-with-multiple-regression"><i class="fa fa-check"></i>Mediation with multiple regression</a></li>
+<li class="chapter" data-level="" data-path="mediation.html"><a href="mediation.html#mediation-steps"><i class="fa fa-check"></i>Mediation Steps</a></li>
+<li class="chapter" data-level="" data-path="mediation.html"><a href="mediation.html#mediation-example-after-baron-and-kenny"><i class="fa fa-check"></i>Mediation example after Baron and Kenny</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="testing-the-indirect-effect.html"><a href="testing-the-indirect-effect.html"><i class="fa fa-check"></i>Testing the indirect effect</a></li>
+<li class="chapter" data-level="11.1" data-path="mediation-using-path-models.html"><a href="mediation-using-path-models.html"><i class="fa fa-check"></i><b>11.1</b> Mediation using Path models</a></li>
 <li class="chapter" data-level="" data-path="covariance-modelling.html"><a href="covariance-modelling.html"><i class="fa fa-check"></i>Covariance modelling</a></li>
 <li class="chapter" data-level="" data-path="path-models.html"><a href="path-models.html"><i class="fa fa-check"></i>Path models</a><ul>
 <li class="chapter" data-level="" data-path="path-models.html"><a href="path-models.html#defining-a-model"><i class="fa fa-check"></i>Defining a model</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="cfa.html"><a href="cfa.html"><i class="fa fa-check"></i>Confirmatory factor analysis (CFA)</a><ul>
-<li class="chapter" data-level="" data-path="cfa.html"><a href="cfa.html#defining-the-model"><i class="fa fa-check"></i>Defining the model</a></li>
+<li class="chapter" data-level="" data-path="cfa.html"><a href="cfa.html#latent-variables"><i class="fa fa-check"></i>Latent variables</a></li>
+<li class="chapter" data-level="" data-path="cfa.html"><a href="cfa.html#defining-a-cfa-model"><i class="fa fa-check"></i>Defining a CFA model</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="model-fit.html"><a href="model-fit.html"><i class="fa fa-check"></i>Model fit</a></li>
+<li class="chapter" data-level="" data-path="model-fit.html"><a href="model-fit.html"><i class="fa fa-check"></i>CFA model fit</a></li>
 <li class="chapter" data-level="" data-path="modification-indices.html"><a href="modification-indices.html"><i class="fa fa-check"></i>Modification indices</a></li>
 <li class="chapter" data-level="" data-path="model-improvement.html"><a href="model-improvement.html"><i class="fa fa-check"></i>Model modification and improvement</a></li>
 <li class="chapter" data-level="" data-path="sem.html"><a href="sem.html"><i class="fa fa-check"></i>Structural eqution modelling (SEM)</a></li>
@@ -362,8 +369,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="22" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>22</b> Non-independence</a></li>
 <li class="chapter" data-level="23" data-path="fixed-or-random.html"><a href="fixed-or-random.html"><i class="fa fa-check"></i><b>23</b> Fixed and random effects</a></li>
 <li class="chapter" data-level="24" data-path="scaling-predictors.html"><a href="scaling-predictors.html"><i class="fa fa-check"></i><b>24</b> Scaling predictor variables</a><ul>
-<li class="chapter" data-level="" data-path="standardizing.html"><a href="standardizing.html"><i class="fa fa-check"></i>Standardising</a></li>
-<li class="chapter" data-level="" data-path="dichotomising.html"><a href="dichotomising.html"><i class="fa fa-check"></i>Dichotomising continuous predictors (or outcomes)</a></li>
+<li class="chapter" data-level="" data-path="scaling-predictors.html"><a href="scaling-predictors.html#standardizing"><i class="fa fa-check"></i>Standardising</a></li>
+<li class="chapter" data-level="" data-path="scaling-predictors.html"><a href="scaling-predictors.html#dichotomising"><i class="fa fa-check"></i>Dichotomising continuous predictors (or outcomes)</a></li>
 </ul></li>
 <li class="chapter" data-level="25" data-path="non-scale-outcomes.html"><a href="non-scale-outcomes.html"><i class="fa fa-check"></i><b>25</b> Non-scale outcomes</a><ul>
 <li class="chapter" data-level="25.1" data-path="link-functions.html"><a href="link-functions.html"><i class="fa fa-check"></i><b>25.1</b> Link functions</a><ul>
@@ -395,25 +402,182 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="mediation" class="section level2 unnumbered">
 <h2>Mediation</h2>
-<p>XXX TODO EXPAND</p>
-<p>This chapter will assume:</p>
-<ul>
-<li>You know what mediation analyses are and why you want to run them</li>
-<li>You a basic understanding of the Baron and Kenny approach, but an inkling that there are more up to date ways of testing mediation hypotheses.</li>
-</ul>
-<!-- 
-
-http://lavaan.ugent.be/tutorial/mediation.html
-
-
-# indirect effect (a*b)
-             ab := a*b
-           # total effect
-             total := c + (a*b) 
-
-
--->
-
+<p>Mediation is a complex topic, and the key message to take on — before starting to analyse your data — is that mediation analayses make many strong assumptions abou the data. These assumptions can often be pretty unreasonable, when spelled out, so be cautious in the interpretation of you data.</p>
+<p>Put differently, mediation is a correlational technique aiming to provide a causal interpretation of data; caveat emptor.</p>
+<div id="mediation-with-multiple-regression" class="section level3 unnumbered">
+<h3>Mediation with multiple regression</h3>
+<p>One common (if outdated) way to analyse mediation is via the 3 steps described by Baron and Kenny <span class="citation">@baron1986moderator</span> (also see <span class="citation">@zhao_reconsidering_2010</span>).</p>
+<p>Let’s say we have a hypothesised situation such as this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">knit_gv</span>(<span class="st">&quot;</span>
+<span class="st">Lateness -&gt; Crashes</span>
+<span class="st">Lateness -&gt; Speeding</span>
+<span class="st">Speeding -&gt; Crashes</span>
+<span class="st">&quot;</span>)</code></pre></div>
+<p><img src="assets/6212312.png" width="294" /></p>
+<p>Baron and Kenny propose 3 steps to establishing mediation. These steps correspond to three separate regression models:</p>
+</div>
+<div id="mediation-steps" class="section level3 unnumbered">
+<h3>Mediation Steps</h3>
+<div id="step-1-check-distal-variable-predicts-mediator" class="section level4 unnumbered">
+<h4>Step 1 (check distal variable predicts mediator)</h4>
+<p>That is, show Lateness predicts Crashes</p>
+</div>
+<div id="step-2-check-distal-variable-predict-mediator" class="section level4 unnumbered">
+<h4>Step 2 (check distal variable predict mediator)</h4>
+<p>That is, show Lateness predicts Speeding</p>
+</div>
+<div id="step-3-check-for-mediation" class="section level4 unnumbered">
+<h4>Step 3 (check for mediation)</h4>
+<p>That is, show Speeding predicts Crashes, controlling for Lateness</p>
+<p>An additional step, which allows us to test whether the effect is <em>completely</em> mediated, also uses the final regression model:</p>
+</div>
+<div id="step-4-check-for-total-mediation" class="section level4 unnumbered">
+<h4>Step 4 (check for total mediation)</h4>
+<p>That is, check if Lateness still predicts crashes, controlling for Lateness</p>
+</div>
+</div>
+<div id="mediation-example-after-baron-and-kenny" class="section level3 unnumbered">
+<h3>Mediation example after Baron and Kenny</h3>
+<p>Using simulated data, we can work through the steps.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">smash <span class="op">%&gt;%</span><span class="st"> </span>glimpse
+Observations<span class="op">:</span><span class="st"> </span><span class="dv">200</span>
+Variables<span class="op">:</span><span class="st"> </span><span class="dv">4</span>
+<span class="op">$</span><span class="st"> </span>person   <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">15</span>, <span class="dv">16</span>...
+<span class="op">$</span><span class="st"> </span>lateness <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">9</span>, <span class="dv">8</span>, <span class="dv">11</span>, <span class="dv">4</span>, <span class="dv">11</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">11</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="dv">13</span>, ...
+<span class="op">$</span><span class="st"> </span>speed    <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">48.88524</span>, <span class="fl">43.07030</span>, <span class="fl">33.72812</span>, <span class="fl">44.17897</span>, <span class="fl">51.22378</span>, <span class="dv">40</span>....
+<span class="op">$</span><span class="st"> </span>crashes  <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">15</span>, <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">13</span>, <span class="dv">22</span>, <span class="dv">14</span>, <span class="dv">22</span>, <span class="dv">18</span>, <span class="dv">11</span>, <span class="dv">16</span>, <span class="dv">19</span>, <span class="dv">15</span>...</code></pre></div>
+<p>Step 1: does lateness predict crashes?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">step1 &lt;-<span class="st"> </span><span class="kw">lm</span>(crashes <span class="op">~</span><span class="st"> </span>lateness, <span class="dt">data=</span>smash)
+<span class="kw">tidy</span>(step1) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pander</span>()</code></pre></div>
+<table style="width:85%;">
+<colgroup>
+<col width="19%" />
+<col width="15%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">term</th>
+<th align="center">estimate</th>
+<th align="center">std.error</th>
+<th align="center">statistic</th>
+<th align="center">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">(Intercept)</td>
+<td align="center">12.15</td>
+<td align="center">1.204</td>
+<td align="center">10.09</td>
+<td align="center">1.365e-19</td>
+</tr>
+<tr class="even">
+<td align="center">lateness</td>
+<td align="center">0.4448</td>
+<td align="center">0.1125</td>
+<td align="center">3.953</td>
+<td align="center">0.0001074</td>
+</tr>
+</tbody>
+</table>
+<p>Step 2: Does lateness predict speed?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">step2 &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>lateness, <span class="dt">data=</span>smash)
+<span class="kw">tidy</span>(step2, <span class="dt">conf.int =</span> T) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pander</span>()</code></pre></div>
+<table>
+<colgroup>
+<col width="16%" />
+<col width="13%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">term</th>
+<th align="center">estimate</th>
+<th align="center">std.error</th>
+<th align="center">statistic</th>
+<th align="center">p.value</th>
+<th align="center">conf.low</th>
+<th align="center">conf.high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">(Intercept)</td>
+<td align="center">33.42</td>
+<td align="center">2.275</td>
+<td align="center">14.69</td>
+<td align="center">1.563e-33</td>
+<td align="center">28.93</td>
+<td align="center">37.9</td>
+</tr>
+<tr class="even">
+<td align="center">lateness</td>
+<td align="center">0.515</td>
+<td align="center">0.2126</td>
+<td align="center">2.422</td>
+<td align="center">0.01633</td>
+<td align="center">0.09573</td>
+<td align="center">0.9343</td>
+</tr>
+</tbody>
+</table>
+<p>The coefficient for <code>lateness</code> is statistically significant, so we would say yes.</p>
+<p>Step 3: Does speed predict crashes, controlling for lateness?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">step3 &lt;-<span class="st"> </span><span class="kw">lm</span>(crashes <span class="op">~</span><span class="st"> </span>lateness<span class="op">+</span>speed, <span class="dt">data=</span>smash)
+<span class="kw">tidy</span>(step3) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pander</span>()</code></pre></div>
+<table style="width:85%;">
+<colgroup>
+<col width="19%" />
+<col width="15%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">term</th>
+<th align="center">estimate</th>
+<th align="center">std.error</th>
+<th align="center">statistic</th>
+<th align="center">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">(Intercept)</td>
+<td align="center">2.542</td>
+<td align="center">1.465</td>
+<td align="center">1.735</td>
+<td align="center">0.08427</td>
+</tr>
+<tr class="even">
+<td align="center">lateness</td>
+<td align="center">0.2967</td>
+<td align="center">0.09611</td>
+<td align="center">3.088</td>
+<td align="center">0.002309</td>
+</tr>
+<tr class="odd">
+<td align="center">speed</td>
+<td align="center">0.2875</td>
+<td align="center">0.03166</td>
+<td align="center">9.083</td>
+<td align="center">1.122e-16</td>
+</tr>
+</tbody>
+</table>
+<p>The coefficient for speed is statistically significant, so we can say mediation does occur.</p>
+<p>Step 4: In the same model, does lateness predict crashes, controlling for speed? That is to say, is the mediation via speed <em>total</em>?</p>
+<p>Here, the coefficient is still statistically significant. According to the Baron and Kenny steps, this would indicate the mediation is <em>partial</em>, although the fact the p value falls one side or another of .05 is not necessarily the best way to express this (see below for ways to calculate the proportion of the effect which is mediated).</p>
+<p>We should alse be concerned here with the degree to which predictor and mediator are measured with error — if they are noisy measures, then the proportion of the effect which appears to be mediated will be reduced artificially (see the SEM chapter for more on this).</p>
+</div>
 </div>
             </section>
 
@@ -421,7 +585,7 @@ http://lavaan.ugent.be/tutorial/mediation.html
         </div>
       </div>
 <a href="mediation-and-covariance-modelling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="covariance-modelling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="testing-the-indirect-effect.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -439,10 +603,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -466,9 +631,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

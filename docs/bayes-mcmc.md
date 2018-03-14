@@ -76,6 +76,10 @@ library(rstanarm)
 options(contrasts = c("contr.sum", "contr.poly"))
 pain.model.mcmc <- stan_lm(with.music ~ no.music + familiar * liked,
                           data=painmusic, prior=NULL)
+trying deprecated constructor; please alert package maintainer
+Warning: There were 7 divergent transitions after warmup. Increasing adapt_delta above 0.95 may help. See
+http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
+Warning: Examine the pairs() plot to diagnose sampling problems
 ```
 
 
@@ -94,8 +98,8 @@ Model Info:
 
 Estimates:
                    mean   sd     2.5%   25%    50%    75%    97.5%
-(Intercept)         1.7    0.4    0.9    1.4    1.7    2.0    2.5 
-no.music            0.7    0.1    0.6    0.7    0.7    0.8    0.9 
+(Intercept)         1.7    0.4    1.0    1.4    1.7    2.0    2.5 
+no.music            0.7    0.1    0.6    0.7    0.7    0.8    0.8 
 familiar1           0.2    0.1   -0.1    0.1    0.2    0.3    0.5 
 liked1              0.3    0.1    0.0    0.2    0.3    0.4    0.6 
 familiar1:liked1   -0.2    0.1   -0.5   -0.3   -0.2   -0.1    0.1 
@@ -103,20 +107,20 @@ sigma               1.5    0.1    1.3    1.4    1.5    1.5    1.7
 log-fit_ratio       0.0    0.1   -0.1    0.0    0.0    0.0    0.1 
 R2                  0.5    0.1    0.4    0.4    0.5    0.5    0.6 
 mean_PPD            5.3    0.2    4.9    5.2    5.3    5.5    5.7 
-log-posterior    -206.0    2.3 -211.3 -207.3 -205.6 -204.3 -202.5 
+log-posterior    -206.0    2.3 -211.4 -207.4 -205.7 -204.3 -202.6 
 
 Diagnostics:
                  mcse Rhat n_eff
-(Intercept)      0.0  1.0  1667 
-no.music         0.0  1.0  1611 
-familiar1        0.0  1.0  3416 
+(Intercept)      0.0  1.0  1426 
+no.music         0.0  1.0  1356 
+familiar1        0.0  1.0  3305 
 liked1           0.0  1.0  4000 
-familiar1:liked1 0.0  1.0  3519 
-sigma            0.0  1.0  3863 
-log-fit_ratio    0.0  1.0  2073 
-R2               0.0  1.0  2150 
+familiar1:liked1 0.0  1.0  3662 
+sigma            0.0  1.0  3613 
+log-fit_ratio    0.0  1.0  2255 
+R2               0.0  1.0  1997 
 mean_PPD         0.0  1.0  4000 
-log-posterior    0.1  1.0  1058 
+log-posterior    0.1  1.0  1068 
 
 For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split chains (at convergence Rhat=1).
 ```
@@ -179,6 +183,7 @@ params.of.interest <-
   reshape2::melt() %>% 
   filter(stringr::str_detect(variable, "famil|liked")) %>% 
   group_by(variable)
+No id variables; using all as measure variables
 
 params.of.interest %>% 
   do(., mHPDI(.$value)) %>% 
@@ -187,11 +192,11 @@ params.of.interest %>%
 -----------------------------------------------
      variable       median     lower    upper  
 ------------------ --------- --------- --------
-    familiar1       0.1981    -0.0362   0.4968 
+    familiar1       0.1981    -0.1024   0.4554 
 
-      liked1        0.2966    0.03698   0.5768 
+      liked1        0.2948    0.04184   0.5783 
 
- familiar1:liked1   -0.1757   -0.4464   0.1041 
+ familiar1:liked1   -0.1756   -0.452    0.1004 
 -----------------------------------------------
 
 Table: Estimates and 95% credible intervals for the parameters of interest
@@ -214,9 +219,9 @@ params.of.interest %>%
 # A tibble: 3 x 4
           variable   estimate `p (x<0)` `p (x>0)`
             <fctr>      <dbl>     <dbl>     <dbl>
-1        familiar1  0.1983042   0.06875   0.93125
-2           liked1  0.2966558   0.01750   0.98250
-3 familiar1:liked1 -0.1766585   0.89675   0.10325
+1        familiar1  0.1963834   0.08275   0.91725
+2           liked1  0.2948018   0.01750   0.98250
+3 familiar1:liked1 -0.1758048   0.89725   0.10275
 ```
 
 
@@ -234,9 +239,9 @@ brms::hypothesis(pain.model.mcmc.df,
                    "familiar1:liked1 < 0"))
 Hypothesis Tests for class :
                        Estimate Est.Error l-95% CI u-95% CI Evid.Ratio
-(familiar1) > 0            0.20      0.13    -0.02      Inf      13.55
-(liked1) > 0               0.30      0.14     0.07      Inf      56.14
-(familiar1:liked1) < 0    -0.18      0.14     -Inf     0.05       8.69
+(familiar1) > 0            0.20      0.14    -0.04      Inf      11.08
+(liked1) > 0               0.29      0.14     0.07      Inf      56.14
+(familiar1:liked1) < 0    -0.18      0.14     -Inf     0.06       8.73
                        Star
 (familiar1) > 0            
 (liked1) > 0              *

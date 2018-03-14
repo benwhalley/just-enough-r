@@ -1,7 +1,8 @@
-bibliography: [bibliography.bib]
-biblio-style: apalike
-link-citations: yes
-
+bibliography: ["bibliography.bib"]
+citation_package: biblatex
+biblio-style: "apa6"
+link-citations: true
+# cover-image: "media/keepcalm.png"
 book_filename: "Just enough R"
 new_session: yes
 before_chapter_script: set_chunk_options.R
