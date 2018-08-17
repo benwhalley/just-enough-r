@@ -1,5 +1,5 @@
 ---
-title: 'General linear models'
+title: 'Generalized linear models'
 
 ---
   
@@ -8,7 +8,7 @@ library(tidyverse)
 ```
 
 
-# General linear models
+# Generalized linear models
 
 
 Linear regression is suitable for outcomes which are continuous numerical scores. In practice this requirement is often relaxed slightly, for example for data which are slightly skewed, or where scores are somewhat censored (e.g. questionnaire scores which have a minium or maximum).
