@@ -43,7 +43,7 @@ rmd_files:
 "t-tests.Rmd",
 "linear-models.Rmd",
 "anova.Rmd",
-"general-linear-models.Rmd",
+"generalized-linear-models.Rmd",
 "multilevel-models.Rmd",
 "mediation-and-covariance-models.Rmd",
 "cfa-sem.Rmd",
