@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Just Enough R</title>
   <meta name="description" content="Just Enough R">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Just Enough R" />
   <meta property="og:type" content="book" />
@@ -45,45 +45,84 @@
 
 
 
+<!-- Commenting and annotation script -->
 <script src="https://hypothes.is/embed.js" async></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118343766-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-118343766-1');
+</script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -243,8 +282,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="checking-assumptions.html"><a href="checking-assumptions.html"><i class="fa fa-check"></i>Checking assumptions</a></li>
 <li class="chapter" data-level="" data-path="followup-tests.html"><a href="followup-tests.html"><i class="fa fa-check"></i>Followup tests</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="general-linear-models.html"><a href="general-linear-models.html"><i class="fa fa-check"></i><b>9</b> General linear models</a><ul>
-<li class="chapter" data-level="" data-path="general-linear-models.html"><a href="general-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
+<li class="chapter" data-level="9" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html"><i class="fa fa-check"></i><b>9</b> Generalized linear models</a><ul>
+<li class="chapter" data-level="" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>10</b> Multilevel models</a><ul>
 <li class="chapter" data-level="" data-path="fitting-models.html"><a href="fitting-models.html"><i class="fa fa-check"></i>Fitting multilevel models in R</a><ul>
@@ -331,7 +370,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="apa-output.html#chi2">Chi<sup>2</sup></a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#t-test"><i class="fa fa-check"></i>T-test</a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#anova-1"><i class="fa fa-check"></i>Anova</a></li>
-<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#multilevel-models"><i class="fa fa-check"></i>Multilevel models</a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#multilevel-models-1"><i class="fa fa-check"></i>Multilevel models</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html"><i class="fa fa-check"></i>Simplifying and re-using</a><ul>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html#helper-functions"><i class="fa fa-check"></i>Writing helper functions</a></li>
@@ -405,34 +444,34 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Missing values aren’t a data type as such, but are an important concept in R; the way different functions handle missing values can be both helpful and frustrating in equal measure.</p>
 <p>Missing values in a vector are denoted by the letters <code>NA</code>, but notice that these letters are unquoted. That is to say <code>NA</code> is not the same as <code>&quot;NA&quot;</code>!</p>
 <p>To check for missing values in a vector (or dataframe column) we use the <code>is.na()</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nums.with.missing &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>)
+<pre class="sourceCode r"><code class="sourceCode r">nums.with.missing &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>)
 nums.with.missing
 [<span class="dv">1</span>]  <span class="dv">1</span>  <span class="dv">2</span> <span class="ot">NA</span>
 
 <span class="kw">is.na</span>(nums.with.missing)
-[<span class="dv">1</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span>  <span class="ot">TRUE</span></code></pre></div>
+[<span class="dv">1</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span>  <span class="ot">TRUE</span></code></pre>
 <p>Here the <code>is.na()</code> function has tested whether each item in our vector called <code>nums.with.missing</code> is missing. It returns a new vector with the results of each test: either <code>TRUE</code> or <code>FALSE</code>.</p>
 <p>We can also use the negation operator, the <code>!</code> symbol to reverse the meaning of <code>is.na</code>. So we can read <code>!is.na(nums)</code> as “test whether the values in <code>nums</code> are NOT missing”:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test if missing</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test if missing</span>
 <span class="kw">is.na</span>(nums.with.missing)
 [<span class="dv">1</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span>  <span class="ot">TRUE</span>
 
 <span class="co"># test if NOT missing (note the exclamation mark in front of the function)</span>
 <span class="op">!</span><span class="kw">is.na</span>(nums.with.missing)
-[<span class="dv">1</span>]  <span class="ot">TRUE</span>  <span class="ot">TRUE</span> <span class="ot">FALSE</span></code></pre></div>
+[<span class="dv">1</span>]  <span class="ot">TRUE</span>  <span class="ot">TRUE</span> <span class="ot">FALSE</span></code></pre>
 <p>We can use the <code>is.na()</code> function as part of dplyr filters:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(Solar.R)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>pander</code></pre></div>
-<table style="width:62%;">
+<span class="st">  </span>pander</code></pre>
+<table style="width:67%;">
 <colgroup>
 <col width="11%" />
 <col width="13%" />
 <col width="9%" />
 <col width="9%" />
 <col width="11%" />
-<col width="6%" />
+<col width="11%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -472,18 +511,18 @@ nums.with.missing
 </tbody>
 </table>
 <p>Or to select only cases without missing values for a particular variable:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Solar.R)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>pander</code></pre></div>
-<table style="width:62%;">
+<span class="st">  </span>pander</code></pre>
+<table style="width:67%;">
 <colgroup>
 <col width="11%" />
 <col width="13%" />
 <col width="9%" />
 <col width="9%" />
 <col width="11%" />
-<col width="6%" />
+<col width="11%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -526,11 +565,11 @@ nums.with.missing
 <h4>Complete cases</h4>
 <p>Sometimes we want to select only rows which have no missing values — i.e. <em>complete cases</em>.</p>
 <p>The <code>complete.cases</code> function accepts a dataframe (or matrix) and tests whether each <em>row</em> is complete. It returns a vector with a <code>TRUE/FALSE</code> result for each row:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">complete.cases</span>(airquality) <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">complete.cases</span>(airquality) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>head
-[<span class="dv">1</span>]  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></code></pre></div>
+[<span class="dv">1</span>]  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></code></pre>
 <p>This can also be useful in dplyr filters. Here we show all the rows which are <em>not</em> complete (note the exclamation mark):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">complete.cases</span>(airquality))
    Ozone Solar.R Wind Temp Month Day
 <span class="dv">1</span>     <span class="ot">NA</span>      <span class="ot">NA</span> <span class="fl">14.3</span>   <span class="dv">56</span>     <span class="dv">5</span>   <span class="dv">5</span>
@@ -574,12 +613,12 @@ nums.with.missing
 <span class="dv">39</span>    <span class="ot">NA</span>      <span class="dv">64</span> <span class="fl">11.5</span>   <span class="dv">79</span>     <span class="dv">8</span>  <span class="dv">15</span>
 <span class="dv">40</span>    <span class="ot">NA</span>     <span class="dv">255</span> <span class="fl">12.6</span>   <span class="dv">75</span>     <span class="dv">8</span>  <span class="dv">23</span>
 <span class="dv">41</span>    <span class="ot">NA</span>     <span class="dv">153</span>  <span class="fl">5.7</span>   <span class="dv">88</span>     <span class="dv">8</span>  <span class="dv">27</span>
-<span class="dv">42</span>    <span class="ot">NA</span>     <span class="dv">145</span> <span class="fl">13.2</span>   <span class="dv">77</span>     <span class="dv">9</span>  <span class="dv">27</span></code></pre></div>
+<span class="dv">42</span>    <span class="ot">NA</span>     <span class="dv">145</span> <span class="fl">13.2</span>   <span class="dv">77</span>     <span class="dv">9</span>  <span class="dv">27</span></code></pre>
 </div>
 <div id="section-8" class="section level4 unnumbered tip">
 <h4></h4>
 <p>Sometimes it’s convenient to use the <code>.</code> (period) to represent the output from the previous pipe command. For example, we could rewrite the previous example as:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">complete.cases</span>(.))  <span class="co"># note the . (period) here in place of `airmiles`</span>
    Ozone Solar.R Wind Temp Month Day
 <span class="dv">1</span>     <span class="ot">NA</span>      <span class="ot">NA</span> <span class="fl">14.3</span>   <span class="dv">56</span>     <span class="dv">5</span>   <span class="dv">5</span>
@@ -623,9 +662,9 @@ nums.with.missing
 <span class="dv">39</span>    <span class="ot">NA</span>      <span class="dv">64</span> <span class="fl">11.5</span>   <span class="dv">79</span>     <span class="dv">8</span>  <span class="dv">15</span>
 <span class="dv">40</span>    <span class="ot">NA</span>     <span class="dv">255</span> <span class="fl">12.6</span>   <span class="dv">75</span>     <span class="dv">8</span>  <span class="dv">23</span>
 <span class="dv">41</span>    <span class="ot">NA</span>     <span class="dv">153</span>  <span class="fl">5.7</span>   <span class="dv">88</span>     <span class="dv">8</span>  <span class="dv">27</span>
-<span class="dv">42</span>    <span class="ot">NA</span>     <span class="dv">145</span> <span class="fl">13.2</span>   <span class="dv">77</span>     <span class="dv">9</span>  <span class="dv">27</span></code></pre></div>
+<span class="dv">42</span>    <span class="ot">NA</span>     <span class="dv">145</span> <span class="fl">13.2</span>   <span class="dv">77</span>     <span class="dv">9</span>  <span class="dv">27</span></code></pre>
 <p>This is nice because we can apply the <code>complete.cases</code> function to the output of the previous pipe. For example, if we wanted to select complete cases for a subset of the variables we could write:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(Ozone, Solar.R) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">complete.cases</span>(.))
    Ozone Solar.R
@@ -670,21 +709,21 @@ nums.with.missing
 <span class="dv">39</span>    <span class="ot">NA</span>      <span class="dv">64</span>
 <span class="dv">40</span>    <span class="ot">NA</span>     <span class="dv">255</span>
 <span class="dv">41</span>    <span class="ot">NA</span>     <span class="dv">153</span>
-<span class="dv">42</span>    <span class="ot">NA</span>     <span class="dv">145</span></code></pre></div>
+<span class="dv">42</span>    <span class="ot">NA</span>     <span class="dv">145</span></code></pre>
 <p>Or alternatively:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rows.to.keep &lt;-<span class="st"> </span><span class="op">!</span><span class="kw">complete.cases</span>(<span class="kw">select</span>(airquality, Ozone, Solar.R))
+<pre class="sourceCode r"><code class="sourceCode r">rows.to.keep &lt;-<span class="st"> </span><span class="op">!</span><span class="kw">complete.cases</span>(<span class="kw">select</span>(airquality, Ozone, Solar.R))
 airquality <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(rows.to.keep) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>pander</code></pre></div>
-<table style="width:62%;">
+<span class="st">  </span>pander</code></pre>
+<table style="width:67%;">
 <colgroup>
 <col width="11%" />
 <col width="13%" />
 <col width="9%" />
 <col width="9%" />
 <col width="11%" />
-<col width="6%" />
+<col width="11%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -729,13 +768,13 @@ airquality <span class="op">%&gt;%</span><span class="st"> </span>
 <p>It’s normally good practice to pre-process your data and select the rows you want to analyse <em>before</em> passing dataframes to R functions.</p>
 <p>The reason for this is that different functions behave differently with missing data.</p>
 <p>For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(airquality<span class="op">$</span>Solar.R)
-[<span class="dv">1</span>] <span class="ot">NA</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(airquality<span class="op">$</span>Solar.R)
+[<span class="dv">1</span>] <span class="ot">NA</span></code></pre>
 <p>Here the default for <code>mean()</code> is to return NA if any of the values are missing. We can explicitly tell R to ignore missing values by setting <code>na.rm=TRUE</code></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(airquality<span class="op">$</span>Solar.R, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
-[<span class="dv">1</span>] <span class="fl">185.9315</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(airquality<span class="op">$</span>Solar.R, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
+[<span class="dv">1</span>] <span class="fl">185.9315</span></code></pre>
 <p>In contrast some other functions, for example the <code>lm()</code> which runs a linear regression will ignore missing values by default. If we run <code>summary</code> on the call to <code>lm</code> then we can see the line near the bottom of the output which reads: “(7 observations deleted due to missingness)”</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(Solar.R <span class="op">~</span><span class="st"> </span>Temp, <span class="dt">data=</span>airquality) <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(Solar.R <span class="op">~</span><span class="st"> </span>Temp, <span class="dt">data=</span>airquality) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>summary
 
 Call<span class="op">:</span>
@@ -743,11 +782,11 @@ Call<span class="op">:</span>
 
 Residuals<span class="op">:</span>
 <span class="st">     </span>Min       1Q   Median       3Q      Max 
-<span class="op">-</span><span class="fl">169.697</span>  <span class="op">-</span><span class="fl">59.315</span>    <span class="fl">6.224</span>   <span class="fl">67.685</span>  <span class="fl">186.083</span> 
+<span class="fl">-169.697</span>  <span class="fl">-59.315</span>    <span class="fl">6.224</span>   <span class="fl">67.685</span>  <span class="fl">186.083</span> 
 
 Coefficients<span class="op">:</span>
 <span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
-(Intercept)  <span class="op">-</span><span class="fl">24.431</span>     <span class="fl">61.508</span>  <span class="op">-</span><span class="fl">0.397</span> <span class="fl">0.691809</span>    
+(Intercept)  <span class="fl">-24.431</span>     <span class="fl">61.508</span>  <span class="fl">-0.397</span> <span class="fl">0.691809</span>    
 Temp           <span class="fl">2.693</span>      <span class="fl">0.782</span>   <span class="fl">3.444</span> <span class="fl">0.000752</span> <span class="op">**</span><span class="er">*</span>
 <span class="op">---</span>
 Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
@@ -755,26 +794,31 @@ Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv"
 Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">86.86</span> on <span class="dv">144</span> degrees of freedom
   (<span class="dv">7</span> observations deleted due to missingness)
 Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.07609</span>,   Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.06967</span> 
-F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">11.86</span> on <span class="dv">1</span> and <span class="dv">144</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">0.0007518</span></code></pre></div>
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">11.86</span> on <span class="dv">1</span> and <span class="dv">144</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">0.0007518</span></code></pre>
 <p><span class="tip">Normally R will do the ‘sensible thing’ when there are missing values, but it’s always worth checking whether you do have any missing data, and addressing this explicitly in your code</span></p>
 </div>
 <div id="patterns-of-missingness" class="section level4 unnumbered">
 <h4>Patterns of missingness</h4>
 <p>The <code>mice</code> package has some nice functions to describe patterns of missingness in the data. These can be useful both at the exploratory stage, when you are checking and validating your data, but can also be used to create tables of missingness for publication:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mice<span class="op">::</span><span class="kw">md.pattern</span>(airquality) 
+<pre class="sourceCode r"><code class="sourceCode r">mice<span class="op">::</span><span class="kw">md.pattern</span>(airquality) 
     Wind Temp Month Day Solar.R Ozone   
 <span class="dv">111</span>    <span class="dv">1</span>    <span class="dv">1</span>     <span class="dv">1</span>   <span class="dv">1</span>       <span class="dv">1</span>     <span class="dv">1</span>  <span class="dv">0</span>
  <span class="dv">35</span>    <span class="dv">1</span>    <span class="dv">1</span>     <span class="dv">1</span>   <span class="dv">1</span>       <span class="dv">1</span>     <span class="dv">0</span>  <span class="dv">1</span>
   <span class="dv">5</span>    <span class="dv">1</span>    <span class="dv">1</span>     <span class="dv">1</span>   <span class="dv">1</span>       <span class="dv">0</span>     <span class="dv">1</span>  <span class="dv">1</span>
   <span class="dv">2</span>    <span class="dv">1</span>    <span class="dv">1</span>     <span class="dv">1</span>   <span class="dv">1</span>       <span class="dv">0</span>     <span class="dv">0</span>  <span class="dv">2</span>
-       <span class="dv">0</span>    <span class="dv">0</span>     <span class="dv">0</span>   <span class="dv">0</span>       <span class="dv">7</span>    <span class="dv">37</span> <span class="dv">44</span></code></pre></div>
-<p>In this table, <code>md.pattern</code> list the number of cases with particular patterns of missing data. - Each row describes a misisng data ‘pattern’ - The first column indicates the number of cases - The central columns indicate whether a particular variable is missing for the pattern (0=missing) - The last column counts the number of values missing for the pattern - The final row counts the number of missing values for each variable.</p>
+       <span class="dv">0</span>    <span class="dv">0</span>     <span class="dv">0</span>   <span class="dv">0</span>       <span class="dv">7</span>    <span class="dv">37</span> <span class="dv">44</span></code></pre>
+<p>In this table, <code>md.pattern</code> list the number of cases with particular patterns of missing data.
+- Each row describes a misisng data ‘pattern’
+- The first column indicates the number of cases
+- The central columns indicate whether a particular variable is missing for the pattern (0=missing)
+- The last column counts the number of values missing for the pattern
+- The final row counts the number of missing values for each variable.</p>
 <div id="visualising-missingness" class="section level5 unnumbered">
 <h5>Visualising missingness</h5>
 <p>Graphics can also be useful to explore patterns in missingness.</p>
 <p><code>rct.data</code> contains data from an RCT of functional imagery training (FIT) for weight loss, which measured outcome (weight in kg) at baseline and two followups (<code>kg1</code>, <code>kg2</code>, <code>kg3</code>). The trial also measured global quality of life (<code>gqol</code>).</p>
 <p>As is common, there were some missing data at the follouwp:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit.data &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;data/fit-weight.RDS&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">fit.data &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;data/fit-weight.RDS&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(kg1, kg2, kg3, age, gqol1)
 
 mice<span class="op">::</span><span class="kw">md.pattern</span>(fit.data)
@@ -783,17 +827,17 @@ mice<span class="op">::</span><span class="kw">md.pattern</span>(fit.data)
   <span class="dv">2</span>   <span class="dv">1</span>   <span class="dv">1</span>     <span class="dv">1</span>   <span class="dv">1</span>   <span class="dv">0</span>  <span class="dv">1</span>
   <span class="dv">7</span>   <span class="dv">1</span>   <span class="dv">1</span>     <span class="dv">1</span>   <span class="dv">0</span>   <span class="dv">0</span>  <span class="dv">2</span>
   <span class="dv">8</span>   <span class="dv">0</span>   <span class="dv">0</span>     <span class="dv">0</span>   <span class="dv">0</span>   <span class="dv">0</span>  <span class="dv">5</span>
-      <span class="dv">8</span>   <span class="dv">8</span>     <span class="dv">8</span>  <span class="dv">15</span>  <span class="dv">17</span> <span class="dv">56</span></code></pre></div>
+      <span class="dv">8</span>   <span class="dv">8</span>     <span class="dv">8</span>  <span class="dv">15</span>  <span class="dv">17</span> <span class="dv">56</span></code></pre>
 <p>We might be interested to explore patterns in which observations were missing. Here we use colour to identify missing observations as a function of the data recorded at baseline:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit.data <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">fit.data <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">missing.followup =</span> <span class="kw">is.na</span>(kg2)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(kg1, age, <span class="dt">color=</span>missing.followup)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>()
-Warning<span class="op">:</span><span class="st"> </span>Removed <span class="dv">8</span> rows containing missing <span class="kw">values</span> (geom_point).</code></pre></div>
+Warning<span class="op">:</span><span class="st"> </span>Removed <span class="dv">8</span> rows containing missing <span class="kw">values</span> (geom_point).</code></pre>
 <p><img src="column-types-and-missing_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>There’s a clear trend here for lighter patients (at baseline) to have more missing data at followup. There’s also a suggestion that younger patients are more likely to have been lost to followup.</p>
 <p>If needed, we could perform <a href="common-stats.html#common-stats">inferential tests</a> for these differences:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(kg1 <span class="op">~</span><span class="st"> </span><span class="kw">is.na</span>(kg2), <span class="dt">data=</span>fit.data)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(kg1 <span class="op">~</span><span class="st"> </span><span class="kw">is.na</span>(kg2), <span class="dt">data=</span>fit.data)
 
     Welch Two Sample t<span class="op">-</span>test
 
@@ -813,10 +857,10 @@ data<span class="op">:</span><span class="st">  </span>age by <span class="kw">i
 t =<span class="st"> </span><span class="fl">1.2418</span>, df =<span class="st"> </span><span class="fl">6.5246</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.2571</span>
 alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span>
 <span class="dv">95</span> percent confidence interval<span class="op">:</span>
-<span class="st"> </span><span class="op">-</span><span class="fl">7.39455</span> <span class="fl">23.25169</span>
+<span class="st"> </span><span class="fl">-7.39455</span> <span class="fl">23.25169</span>
 sample estimates<span class="op">:</span>
 mean <span class="cf">in</span> group <span class="ot">FALSE</span>  mean <span class="cf">in</span> group <span class="ot">TRUE</span> 
-           <span class="fl">43.50000</span>            <span class="fl">35.57143</span> </code></pre></div>
+           <span class="fl">43.50000</span>            <span class="fl">35.57143</span> </code></pre>
 <p>However, given the small number of missing values and the post-hoc nature of these analyses these tests are rather underpowered and we might prefer to report and comment on the plot alone.</p>
 <p>For some nice missing data visualisation techniques, including those for repeated measures data, see <span class="citation">@zhang2015missing</span>.</p>
 
@@ -875,7 +919,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

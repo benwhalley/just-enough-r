@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Just Enough R</title>
   <meta name="description" content="Just Enough R">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Just Enough R" />
   <meta property="og:type" content="book" />
@@ -45,45 +45,84 @@
 
 
 
+<!-- Commenting and annotation script -->
 <script src="https://hypothes.is/embed.js" async></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118343766-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-118343766-1');
+</script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -243,8 +282,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="checking-assumptions.html"><a href="checking-assumptions.html"><i class="fa fa-check"></i>Checking assumptions</a></li>
 <li class="chapter" data-level="" data-path="followup-tests.html"><a href="followup-tests.html"><i class="fa fa-check"></i>Followup tests</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="general-linear-models.html"><a href="general-linear-models.html"><i class="fa fa-check"></i><b>9</b> General linear models</a><ul>
-<li class="chapter" data-level="" data-path="general-linear-models.html"><a href="general-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
+<li class="chapter" data-level="9" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html"><i class="fa fa-check"></i><b>9</b> Generalized linear models</a><ul>
+<li class="chapter" data-level="" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>10</b> Multilevel models</a><ul>
 <li class="chapter" data-level="" data-path="fitting-models.html"><a href="fitting-models.html"><i class="fa fa-check"></i>Fitting multilevel models in R</a><ul>
@@ -331,7 +370,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="apa-output.html#chi2">Chi<sup>2</sup></a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#t-test"><i class="fa fa-check"></i>T-test</a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#anova-1"><i class="fa fa-check"></i>Anova</a></li>
-<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#multilevel-models"><i class="fa fa-check"></i>Multilevel models</a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#multilevel-models-1"><i class="fa fa-check"></i>Multilevel models</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html"><i class="fa fa-check"></i>Simplifying and re-using</a><ul>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html#helper-functions"><i class="fa fa-check"></i>Writing helper functions</a></li>
@@ -566,10 +605,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="how-big-is-the-family" class="section level4 unnumbered">
 <h4>How big is the family?</h4>
-<div class="figure">
-<img src="media/large-family.jpg" />
-
-</div>
+<p><img src="media/large-family.jpg" /></p>
 <p>Whichever technique we employ we do need to determine how many tests we want to correct for having run; i.e. what size the ‘family’ of tests is. Unfortuntately, deciding which set of tests constitutes a ‘family’ is an unresolved problem, and reasonable people will come up with different solutions. As <span class="citation">@feise2002multiple</span> put it:</p>
 <blockquote>
 <p>It is unclear how wide the operative term “family” should be […] Does “family” include tests that were performed, but not published? Does it include a meta-analysis upon those tests? Should future papers on the same data set be accounted for in the first publication? Should each researcher have a career-wise adjusted p-value, or should there be a discipline-wise adjusted p-value? Should we publish an issue-wise adjusted p-value and a year-end-journal-wise adjusted p-value? Should our studies examine only one association at a time, thereby wasting valuable resources? No statistical theory provides answers for these practical issues, because it is impossible to formally account for an infinite number of potential inferences.</p>
@@ -617,19 +653,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>The design of the study suggests that we were interested in the effect of the experimental conditions on recall, and we might have predicted that these experimental manipulations would affect older and younder adults differently. Because we didn’t pre-specify our analyses, we should acknowledge that we would likly report any differences between any of the 5 experimental conditions (10 possible comparisons) and any differences between younger and older adults in any of those conditions (45 possible pairwise comparisons).</p>
 <p>Because replicating this experiment is relatively cheap (testing might only take 30 minutes per participant), and we are confident that other labs would want to replicate any significant findings we report, we are less concerned with the absolute rate of type 1 errors, but would like to limit our ‘false discovery rate’ (we have a repututation to maintain). We set our acceptable false discovery rate to 5%.</p>
 <p>We run an Anova model, including main effects for <code>Age</code> and <code>Condition</code> and their interaction:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eysenck.model &lt;-<span class="st"> </span><span class="kw">lm</span>(Recall <span class="op">~</span><span class="st"> </span>Age <span class="op">*</span><span class="st"> </span>Condition, 
+<pre class="sourceCode r"><code class="sourceCode r">eysenck.model &lt;-<span class="st"> </span><span class="kw">lm</span>(Recall <span class="op">~</span><span class="st"> </span>Age <span class="op">*</span><span class="st"> </span>Condition, 
                     <span class="dt">data=</span>eysenck)
 
 car<span class="op">::</span><span class="kw">Anova</span>(eysenck.model, <span class="dt">type=</span><span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">pander</span>()</code></pre></div>
-<table style="width:76%;">
+<span class="st">  </span><span class="kw">pander</span>()</code></pre>
+<table style="width:78%;">
 <caption>Anova Table (Type III tests)</caption>
 <colgroup>
 <col width="27%" />
 <col width="12%" />
 <col width="6%" />
 <col width="13%" />
-<col width="15%" />
+<col width="16%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -680,31 +716,31 @@ car<span class="op">::</span><span class="kw">Anova</span>(eysenck.model, <span 
 </table>
 <p>We report that there is are significant main effects for Age, Condition, and a significant interaction for <code>Age:Condition</code>. At this point, if we hadn’t already plotted the raw data, we would certainly want to do that, or to <a href="understanding-interactions.html#understanding-interactions">make predictions for each cell in the design and plot them</a>.</p>
 <p>Because the plot of the raw data (see above) suggested that the counting and rhyming conditions produced lower recall rates than the other conditions, we might want to report the relevant pairwise tests. We can use the the <code>lsmeans()</code> function from the <code>lsmeans::</code> package to compute these:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># use the lsmeans function which returns an lsm.list object.</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># use the lsmeans function which returns an lsm.list object.</span>
 eysenck.lsm &lt;-<span class="st"> </span>lsmeans<span class="op">::</span><span class="kw">lsmeans</span>(eysenck.model, pairwise<span class="op">~</span>Condition) 
 NOTE<span class="op">:</span><span class="st"> </span>Results may be misleading due to involvement <span class="cf">in</span> interactions
 
 <span class="co"># the `contrasts` element in this list is what we want for now</span>
 eysenck.lsm<span class="op">$</span>contrasts 
  contrast              estimate        SE df t.ratio p.value
- Counting <span class="op">-</span><span class="st"> </span>Rhyming       <span class="op">-</span><span class="fl">0.50</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">0.558</span>  <span class="fl">0.9807</span>
- Counting <span class="op">-</span><span class="st"> </span>Adjective     <span class="op">-</span><span class="fl">6.15</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">6.865</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
- Counting <span class="op">-</span><span class="st"> </span>Imagery       <span class="op">-</span><span class="fl">8.75</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">9.767</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
- Counting <span class="op">-</span><span class="st"> </span>Intention     <span class="op">-</span><span class="fl">8.90</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">9.935</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
- Rhyming <span class="op">-</span><span class="st"> </span>Adjective      <span class="op">-</span><span class="fl">5.65</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">6.307</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
- Rhyming <span class="op">-</span><span class="st"> </span>Imagery        <span class="op">-</span><span class="fl">8.25</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">9.209</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
- Rhyming <span class="op">-</span><span class="st"> </span>Intention      <span class="op">-</span><span class="fl">8.40</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">9.377</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
- Adjective <span class="op">-</span><span class="st"> </span>Imagery      <span class="op">-</span><span class="fl">2.60</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">2.902</span>  <span class="fl">0.0367</span>
- Adjective <span class="op">-</span><span class="st"> </span>Intention    <span class="op">-</span><span class="fl">2.75</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">3.070</span>  <span class="fl">0.0231</span>
- Imagery <span class="op">-</span><span class="st"> </span>Intention      <span class="op">-</span><span class="fl">0.15</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">0.167</span>  <span class="fl">0.9998</span>
+ Counting <span class="op">-</span><span class="st"> </span>Rhyming       <span class="fl">-0.50</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="fl">-0.558</span>  <span class="fl">0.9807</span>
+ Counting <span class="op">-</span><span class="st"> </span>Adjective     <span class="fl">-6.15</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="fl">-6.865</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Counting <span class="op">-</span><span class="st"> </span>Imagery       <span class="fl">-8.75</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="fl">-9.767</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Counting <span class="op">-</span><span class="st"> </span>Intention     <span class="fl">-8.90</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="fl">-9.935</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Rhyming <span class="op">-</span><span class="st"> </span>Adjective      <span class="fl">-5.65</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="fl">-6.307</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Rhyming <span class="op">-</span><span class="st"> </span>Imagery        <span class="fl">-8.25</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="fl">-9.209</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Rhyming <span class="op">-</span><span class="st"> </span>Intention      <span class="fl">-8.40</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="fl">-9.377</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Adjective <span class="op">-</span><span class="st"> </span>Imagery      <span class="fl">-2.60</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="fl">-2.902</span>  <span class="fl">0.0367</span>
+ Adjective <span class="op">-</span><span class="st"> </span>Intention    <span class="fl">-2.75</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="fl">-3.070</span>  <span class="fl">0.0231</span>
+ Imagery <span class="op">-</span><span class="st"> </span>Intention      <span class="fl">-0.15</span> <span class="fl">0.8958547</span> <span class="dv">90</span>  <span class="fl">-0.167</span>  <span class="fl">0.9998</span>
 
 Results are averaged over the levels of<span class="op">:</span><span class="st"> </span>Age 
-P value adjustment<span class="op">:</span><span class="st"> </span>tukey method <span class="cf">for</span> comparing a family of <span class="dv">5</span> estimates </code></pre></div>
+P value adjustment<span class="op">:</span><span class="st"> </span>tukey method <span class="cf">for</span> comparing a family of <span class="dv">5</span> estimates </code></pre>
 <p>By default Tukey correction is applied for multiple comparisons, which is a reasonable choice. If you wanted to adjust for the false discovery rate instead, you can use the <code>adjust</code> argument:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># not run, just shown as an example</span>
-lsmeans<span class="op">::</span><span class="kw">lsmeans</span>(eysenck.model, pairwise<span class="op">~</span>Condition, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>) </code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># not run, just shown as an example</span>
+lsmeans<span class="op">::</span><span class="kw">lsmeans</span>(eysenck.model, pairwise<span class="op">~</span>Condition, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>) </code></pre>
 <p>The plot also suggested that older and younger adults appeared to differ for the ‘adjective’, ‘imagery’, and ‘intention’ conditions. We can compute these detailed pairwise comparisons by including the interaction term, <code>Age:Condition</code> in the call to <code>lsmeans()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eysenck.age.condition.lsm &lt;-<span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">eysenck.age.condition.lsm &lt;-<span class="st"> </span>
 <span class="st">  </span>lsmeans<span class="op">::</span><span class="kw">lsmeans</span>(eysenck.model, 
                    pairwise<span class="op">~</span>Age<span class="op">:</span>Condition, 
                    <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)
@@ -712,7 +748,7 @@ lsmeans<span class="op">::</span><span class="kw">lsmeans</span>(eysenck.model, 
 eysenck.age.condition.lsm<span class="op">$</span>contrasts <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>broom<span class="op">::</span><span class="kw">tidy</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">snip.middle</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">pander</span>(<span class="dt">missing=</span><span class="st">&quot;...&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;8 of the 45 possible contrasts, FDR corrected&quot;</span>, <span class="dt">split.tables=</span><span class="ot">Inf</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">pander</span>(<span class="dt">missing=</span><span class="st">&quot;...&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;8 of the 45 possible contrasts, FDR corrected&quot;</span>, <span class="dt">split.tables=</span><span class="ot">Inf</span>)</code></pre>
 <table>
 <caption>8 of the 45 possible contrasts, FDR corrected</caption>
 <colgroup>
@@ -827,23 +863,23 @@ eysenck.age.condition.lsm<span class="op">$</span>contrasts <span class="op">%&g
 <div id="adjusting-for-the-fdr-by-hand" class="section level5 unnumbered">
 <h5>Adjusting for the FDR by hand</h5>
 <p>If you have a set of tests for which you want to adjust for the FDR it’s easy to use R’s <code>p.adjust()</code> to do this for you.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">5</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">5</span>)
 p.examples &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">data_frame</span>(<span class="dt">p =</span> <span class="kw">runif</span>(<span class="dv">4</span>, <span class="dt">min=</span>.<span class="dv">001</span>, <span class="dt">max=</span>.<span class="dv">07</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">p.fdr =</span> <span class="kw">p.adjust</span>(p, <span class="dt">method=</span><span class="st">&quot;fdr&quot;</span>),
-         <span class="dt">p.sig =</span> <span class="kw">ifelse</span>(p <span class="op">&lt;</span><span class="st"> </span>.<span class="dv">05</span>, <span class="st">&quot;*&quot;</span>, <span class="st">&quot;&quot;</span>),
-         <span class="dt">p.fdr.sig =</span> <span class="kw">ifelse</span>(p.fdr <span class="op">&lt;</span><span class="st"> </span>.<span class="dv">05</span>, <span class="st">&quot;*&quot;</span>, <span class="st">&quot;&quot;</span>)) 
+         <span class="dt">p.sig =</span> <span class="kw">ifelse</span>(p <span class="op">&lt;</span><span class="st"> </span><span class="fl">.05</span>, <span class="st">&quot;*&quot;</span>, <span class="st">&quot;&quot;</span>),
+         <span class="dt">p.fdr.sig =</span> <span class="kw">ifelse</span>(p.fdr <span class="op">&lt;</span><span class="st"> </span><span class="fl">.05</span>, <span class="st">&quot;*&quot;</span>, <span class="st">&quot;&quot;</span>)) 
 
 p.examples <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">arrange</span>(p) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">pander</span>(<span class="dt">caption=</span><span class="st">&quot;Randomly generated &#39;p values&#39;, with and without FDR correction applied.&quot;</span>)</code></pre></div>
-<table style="width:54%;">
+<span class="st">  </span><span class="kw">pander</span>(<span class="dt">caption=</span><span class="st">&quot;Randomly generated &#39;p values&#39;, with and without FDR correction applied.&quot;</span>)</code></pre>
+<table style="width:56%;">
 <caption>Randomly generated ‘p values’, with and without FDR correction applied.</caption>
 <colgroup>
 <col width="13%" />
 <col width="13%" />
 <col width="11%" />
-<col width="15%" />
+<col width="16%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -892,14 +928,14 @@ Figure 7.1: Example of the adjustments made to p values by FDR and Bonferroni me
 <div id="contrasts" class="section level4 unnumbered">
 <h4>Other contrasts</h4>
 <p>The <code>lsmeans::</code> package provides tools to compute contrasts for Anova and other linear models:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lsmeans)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lsmeans)</code></pre>
 <p>We can see a number of these different contrasts below. First, we run a model model including the factor Days:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">slope.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(Days) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>Subject),
-                    <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">slope.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(Days) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>Subject),
+                    <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)</code></pre>
 <p>And then we create the <code>lsmeans</code> object:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">slope.model.lsm &lt;-<span class="st"> </span>lsmeans<span class="op">::</span><span class="kw">lsmeans</span>(slope.model, <span class="op">~</span>Days)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">slope.model.lsm &lt;-<span class="st"> </span>lsmeans<span class="op">::</span><span class="kw">lsmeans</span>(slope.model, <span class="op">~</span>Days)</code></pre>
 <p>We can use this <code>lsm</code> object to calculate various contrasts we might want to see. First, consecutive contrasts where each level is compared with the next:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.lsm, <span class="st">&quot;consec&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.lsm, <span class="st">&quot;consec&quot;</span>)
  contrast   estimate       SE     df t.ratio p.value
  <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>     <span class="fl">7.8439500</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">0.749</span>  <span class="fl">0.9887</span>
  <span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>     <span class="fl">0.8661444</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">0.083</span>  <span class="fl">1.0000</span>
@@ -911,20 +947,20 @@ Figure 7.1: Example of the adjustments made to p values by FDR and Bonferroni me
  <span class="dv">8</span> <span class="op">-</span><span class="st"> </span><span class="dv">7</span>    <span class="fl">17.8789222</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">1.707</span>  <span class="fl">0.5102</span>
  <span class="dv">9</span> <span class="op">-</span><span class="st"> </span><span class="dv">8</span>    <span class="fl">14.2217167</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">1.358</span>  <span class="fl">0.7626</span>
 
-P value adjustment<span class="op">:</span><span class="st"> </span>mvt method <span class="cf">for</span> <span class="dv">9</span> tests </code></pre></div>
+P value adjustment<span class="op">:</span><span class="st"> </span>mvt method <span class="cf">for</span> <span class="dv">9</span> tests </code></pre>
 <p>Polynomial contrasts allow us to test whether the increase in RT’s over the days is linear or curved:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.lsm, <span class="st">&quot;poly&quot;</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>, <span class="dt">max.degree=</span><span class="dv">3</span>)
+<pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.lsm, <span class="st">&quot;poly&quot;</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>, <span class="dt">max.degree=</span><span class="dv">3</span>)
  contrast    estimate       SE     df t.ratio p.value
  linear    <span class="fl">1727.10218</span> <span class="fl">134.5578</span> <span class="fl">152.99</span>  <span class="fl">12.835</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
  quadratic   <span class="fl">88.97389</span>  <span class="fl">85.1018</span> <span class="fl">152.99</span>   <span class="fl">1.045</span>  <span class="fl">0.4462</span>
- cubic      <span class="op">-</span><span class="fl">65.30289</span> <span class="fl">686.1126</span> <span class="fl">152.99</span>  <span class="op">-</span><span class="fl">0.095</span>  <span class="fl">0.9243</span>
+ cubic      <span class="fl">-65.30289</span> <span class="fl">686.1126</span> <span class="fl">152.99</span>  <span class="fl">-0.095</span>  <span class="fl">0.9243</span>
 
-P value adjustment<span class="op">:</span><span class="st"> </span>fdr method <span class="cf">for</span> <span class="dv">3</span> tests </code></pre></div>
+P value adjustment<span class="op">:</span><span class="st"> </span>fdr method <span class="cf">for</span> <span class="dv">3</span> tests </code></pre>
 <p>If we don’t specify a contrasts argument, or a type of correction, we will get Tukey contrasts for every pairwise comparison:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 45 tests - results not shown because similar to those shown above</span>
-lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.lsm, <span class="st">&quot;tukey&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 45 tests - results not shown because similar to those shown above</span>
+lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.lsm, <span class="st">&quot;tukey&quot;</span>)</code></pre>
 <p>If we want to compare particular levels of <code>Days</code> with a specific reference level we can use the <code>trt.vs.ctrl</code> contrast type. In this example we are comparing each day with day 0, because day 0 is the first in the list of days and we specified <code>ref=1</code> (try running the comparisons against day 5).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.lsm, <span class="st">&quot;trt.vs.ctrl&quot;</span>, <span class="dt">ref=</span><span class="dv">1</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.lsm, <span class="st">&quot;trt.vs.ctrl&quot;</span>, <span class="dt">ref=</span><span class="dv">1</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)
  contrast  estimate       SE     df t.ratio p.value
  <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>     <span class="fl">7.843950</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">0.749</span>  <span class="fl">0.4551</span>
  <span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>     <span class="fl">8.710094</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">0.831</span>  <span class="fl">0.4551</span>
@@ -936,39 +972,39 @@ lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.ls
  <span class="dv">8</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>    <span class="fl">79.977700</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">7.635</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
  <span class="dv">9</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>    <span class="fl">94.199417</span> <span class="fl">10.47531</span> <span class="fl">152.99</span>   <span class="fl">8.993</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
 
-P value adjustment<span class="op">:</span><span class="st"> </span>fdr method <span class="cf">for</span> <span class="dv">9</span> tests </code></pre></div>
+P value adjustment<span class="op">:</span><span class="st"> </span>fdr method <span class="cf">for</span> <span class="dv">9</span> tests </code></pre>
 <p>And if we want to compare each level against the grand mean of the sample, the <code>eff</code> contrast type is short for <code>effect</code>. A way of thinking of this (in English) is that we are asking ‘what is the effect of being on a particular day, relative the other average of all days’.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.lsm, <span class="st">&quot;eff&quot;</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.lsm, <span class="st">&quot;eff&quot;</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)
  contrast   estimate       SE     df t.ratio p.value
- <span class="dv">0</span> effect <span class="op">-</span><span class="fl">41.856086</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>  <span class="op">-</span><span class="fl">5.956</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
- <span class="dv">1</span> effect <span class="op">-</span><span class="fl">34.012136</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>  <span class="op">-</span><span class="fl">4.840</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
- <span class="dv">2</span> effect <span class="op">-</span><span class="fl">33.145992</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>  <span class="op">-</span><span class="fl">4.717</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
- <span class="dv">3</span> effect <span class="op">-</span><span class="fl">15.515881</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>  <span class="op">-</span><span class="fl">2.208</span>  <span class="fl">0.0410</span>
- <span class="dv">4</span> effect  <span class="op">-</span><span class="fl">9.858469</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>  <span class="op">-</span><span class="fl">1.403</span>  <span class="fl">0.1627</span>
+ <span class="dv">0</span> effect <span class="fl">-41.856086</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>  <span class="fl">-5.956</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ <span class="dv">1</span> effect <span class="fl">-34.012136</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>  <span class="fl">-4.840</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ <span class="dv">2</span> effect <span class="fl">-33.145992</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>  <span class="fl">-4.717</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ <span class="dv">3</span> effect <span class="fl">-15.515881</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>  <span class="fl">-2.208</span>  <span class="fl">0.0410</span>
+ <span class="dv">4</span> effect  <span class="fl">-9.858469</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>  <span class="fl">-1.403</span>  <span class="fl">0.1627</span>
  <span class="dv">5</span> effect  <span class="fl">10.010564</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>   <span class="fl">1.425</span>  <span class="fl">0.1627</span>
  <span class="dv">6</span> effect  <span class="fl">13.670364</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>   <span class="fl">1.945</span>  <span class="fl">0.0670</span>
  <span class="dv">7</span> effect  <span class="fl">20.242692</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>   <span class="fl">2.881</span>  <span class="fl">0.0076</span>
  <span class="dv">8</span> effect  <span class="fl">38.121614</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>   <span class="fl">5.425</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
  <span class="dv">9</span> effect  <span class="fl">52.343331</span> <span class="fl">7.027049</span> <span class="fl">152.99</span>   <span class="fl">7.449</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
 
-P value adjustment<span class="op">:</span><span class="st"> </span>fdr method <span class="cf">for</span> <span class="dv">10</span> tests </code></pre></div>
+P value adjustment<span class="op">:</span><span class="st"> </span>fdr method <span class="cf">for</span> <span class="dv">10</span> tests </code></pre>
 <p>To list all the availble contrast types, or see the relevant help files, you can type:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># help file describing all the contrasts families</span>
-<span class="kw">help</span>(pairwise.lsmc)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># help file describing all the contrasts families</span>
+<span class="kw">help</span>(pairwise.lsmc)</code></pre>
 </div>
 <div id="interaction-pairwise-contrasts" class="section level4 unnumbered">
 <h4>Contrasts for interactions</h4>
 <p>Let’s recall <a href="anova-cookbook.html#howell-factorial-example">our example of factorial Anova</a>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">car<span class="op">::</span><span class="kw">Anova</span>(eysenck.model, <span class="dt">type=</span><span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>pander</code></pre></div>
-<table style="width:76%;">
+<pre class="sourceCode r"><code class="sourceCode r">car<span class="op">::</span><span class="kw">Anova</span>(eysenck.model, <span class="dt">type=</span><span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>pander</code></pre>
+<table style="width:78%;">
 <caption>Anova Table (Type III tests)</caption>
 <colgroup>
 <col width="27%" />
 <col width="12%" />
 <col width="6%" />
 <col width="13%" />
-<col width="15%" />
+<col width="16%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -1018,27 +1054,27 @@ P value adjustment<span class="op">:</span><span class="st"> </span>fdr method <
 </tbody>
 </table>
 <p>We can compute pairwise comparisons within the interaction as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eysenck.lsm &lt;-<span class="st"> </span>lsmeans<span class="op">::</span><span class="kw">lsmeans</span>(eysenck.model, <span class="op">~</span>Age<span class="op">:</span>Condition)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">eysenck.lsm &lt;-<span class="st"> </span>lsmeans<span class="op">::</span><span class="kw">lsmeans</span>(eysenck.model, <span class="op">~</span>Age<span class="op">:</span>Condition)</code></pre>
 <p>And the various contrasts, here comparing each cell agains the grand mean:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(eysenck.lsm, <span class="st">&quot;eff&quot;</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(eysenck.lsm, <span class="st">&quot;eff&quot;</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)
  contrast               estimate        SE df t.ratio p.value
- Young,Counting effect     <span class="op">-</span><span class="fl">4.61</span> <span class="fl">0.8498823</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">5.424</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
- Older,Counting effect     <span class="op">-</span><span class="fl">5.11</span> <span class="fl">0.8498823</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">6.013</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
- Young,Rhyming effect      <span class="op">-</span><span class="fl">4.71</span> <span class="fl">0.8498823</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">5.542</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
- Older,Rhyming effect      <span class="op">-</span><span class="fl">4.01</span> <span class="fl">0.8498823</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">4.718</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
- Young,Adjective effect    <span class="op">-</span><span class="fl">0.61</span> <span class="fl">0.8498823</span> <span class="dv">90</span>  <span class="op">-</span><span class="fl">0.718</span>  <span class="fl">0.5275</span>
+ Young,Counting effect     <span class="fl">-4.61</span> <span class="fl">0.8498823</span> <span class="dv">90</span>  <span class="fl">-5.424</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Older,Counting effect     <span class="fl">-5.11</span> <span class="fl">0.8498823</span> <span class="dv">90</span>  <span class="fl">-6.013</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Young,Rhyming effect      <span class="fl">-4.71</span> <span class="fl">0.8498823</span> <span class="dv">90</span>  <span class="fl">-5.542</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Older,Rhyming effect      <span class="fl">-4.01</span> <span class="fl">0.8498823</span> <span class="dv">90</span>  <span class="fl">-4.718</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+ Young,Adjective effect    <span class="fl">-0.61</span> <span class="fl">0.8498823</span> <span class="dv">90</span>  <span class="fl">-0.718</span>  <span class="fl">0.5275</span>
  Older,Adjective effect     <span class="fl">3.19</span> <span class="fl">0.8498823</span> <span class="dv">90</span>   <span class="fl">3.753</span>  <span class="fl">0.0004</span>
  Young,Imagery effect       <span class="fl">1.79</span> <span class="fl">0.8498823</span> <span class="dv">90</span>   <span class="fl">2.106</span>  <span class="fl">0.0475</span>
  Older,Imagery effect       <span class="fl">5.99</span> <span class="fl">0.8498823</span> <span class="dv">90</span>   <span class="fl">7.048</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
  Young,Intention effect     <span class="fl">0.39</span> <span class="fl">0.8498823</span> <span class="dv">90</span>   <span class="fl">0.459</span>  <span class="fl">0.6474</span>
  Older,Intention effect     <span class="fl">7.69</span> <span class="fl">0.8498823</span> <span class="dv">90</span>   <span class="fl">9.048</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
 
-P value adjustment<span class="op">:</span><span class="st"> </span>fdr method <span class="cf">for</span> <span class="dv">10</span> tests </code></pre></div>
+P value adjustment<span class="op">:</span><span class="st"> </span>fdr method <span class="cf">for</span> <span class="dv">10</span> tests </code></pre>
 <p>Or all of the pairwise tests with Tukey adjustment:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(eysenck.lsm, <span class="st">&quot;tukey&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(eysenck.lsm, <span class="st">&quot;tukey&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>broom<span class="op">::</span><span class="kw">tidy</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">snip.middle</span>(<span class="dv">4</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">pander</span>(<span class="dt">missing=</span><span class="st">&quot;...&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Some of the Tukey corrected pairwise contrasts (table abbreviated)&quot;</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">pander</span>(<span class="dt">missing=</span><span class="st">&quot;...&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Some of the Tukey corrected pairwise contrasts (table abbreviated)&quot;</span>)</code></pre>
 <table>
 <caption>Some of the Tukey corrected pairwise contrasts (table abbreviated)</caption>
 <colgroup>
@@ -1201,7 +1237,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

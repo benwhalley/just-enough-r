@@ -224,21 +224,22 @@ And we could [compute the contasts](#contrasts) for each fruit against the other
 
 
 ```r
-juice.lsm <- lsmeans::lsmeans(juice.lm, pairwise~juice, adjust="fdr")
-juice.contrasts <- summary(lsmeans::contrast(juice.lsm, "eff"))
-juice.contrasts
- contrast      estimate        SE df t.ratio p.value
- Mango effect      0.25 0.4014661 96   0.623  0.5349
- Apple effect      1.01 0.4014661 96   2.516  0.0271
- Orange effect     0.65 0.4014661 96   1.619  0.1450
- Durian effect    -1.91 0.4014661 96  -4.758  <.0001
+juice.lsm <- emmeans::emmeans(juice.lm, pairwise~juice, adjust="fdr")
+juice.contrasts <- emmeans::contrast(juice.lsm, "eff")
+juice.contrasts$contrasts
+ contrast               estimate        SE df t.ratio p.value
+ Mango - Apple effect      -1.90 0.6371203 96  -2.982  0.0060
+ Mango - Orange effect     -1.54 0.5124993 96  -3.005  0.0060
+ Mango - Durian effect      1.02 0.3455270 96   2.952  0.0060
+ Apple - Orange effect     -0.78 0.6371203 96  -1.224  0.2239
+ Apple - Durian effect      1.78 0.5124993 96   3.473  0.0046
+ Orange - Durian effect     1.42 0.6371203 96   2.229  0.0338
 
-P value adjustment: fdr method for 4 tests 
+P value adjustment: fdr method for 6 tests 
 ```
 
 
-[We found a significant main effect of juice, _F_(3, 96) = 7.99, _p_ < .001. Followup tests (adjusted for false discovery rate) indicated that only Durian differed from the other juices, and was rated a significantly less tasty Mango, Apple, and Orange juice, _B_ = -1.91 (0.40), _t_ = -4.76, _p_ < .001]{.apa-example}
-
+[We found a significant main effect of juice, _F_(3, 96) = 7.99, _p_ < .001. Followup tests (adjusted for false discovery rate) indicated that only Durian differed from the other juices, and was rated a significantly less tasty Mango, Apple, and Orange juice.]{.apa-example}
 
 
 
@@ -714,27 +715,12 @@ For more on assumptions checks after linear models or Anova see: <http://www.sta
 [The text below continues on from [this example of factorial Anova](#howell-factorial-example).]{.tip}
 
 
-If we want to look at post-hoc pairwise tests we can use the the `lsmeans()` function from the `lsmeans::` package. By default Tukey correction is applied for multiple comparisons, which is a reasonable default:
+If we want to look at post-hoc pairwise tests we can use the the `emmeans()` function from the `emmeans::` package. By default Tukey correction is applied for multiple comparisons, which is a reasonable default:
 
 
 ```r
-lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition)
-$lsmeans
- Age   Condition lsmean        SE df  lower.CL  upper.CL
- Young Counting     7.0 0.8958547 90  5.220228  8.779772
- Older Counting     6.5 0.8958547 90  4.720228  8.279772
- Young Rhyming      6.9 0.8958547 90  5.120228  8.679772
- Older Rhyming      7.6 0.8958547 90  5.820228  9.379772
- Young Adjective   11.0 0.8958547 90  9.220228 12.779772
- Older Adjective   14.8 0.8958547 90 13.020228 16.579772
- Young Imagery     13.4 0.8958547 90 11.620228 15.179772
- Older Imagery     17.6 0.8958547 90 15.820228 19.379772
- Young Intention   12.0 0.8958547 90 10.220228 13.779772
- Older Intention   19.3 0.8958547 90 17.520228 21.079772
-
-Confidence level used: 0.95 
-
-$contrasts
+em <- emmeans::emmeans(eysenck.model, pairwise~Age:Condition)
+em$contrasts
  contrast                          estimate      SE df t.ratio p.value
  Young,Counting - Older,Counting        0.5 1.26693 90   0.395  1.0000
  Young,Counting - Young,Rhyming         0.1 1.26693 90   0.079  1.0000

@@ -185,18 +185,17 @@ lme4::sleepstudy %>%
 
 ```r
 slope.model <- lmer(Reaction ~ Days + (1|Subject),  data=lme4::sleepstudy)
-lmerTest::anova(slope.model)
-Analysis of Variance Table of type III  with  Satterthwaite 
-approximation for degrees of freedom
-     Sum Sq Mean Sq NumDF DenDF F.value    Pr(>F)    
+anova(slope.model)
+Type III Analysis of Variance Table with Satterthwaite's method
+     Sum Sq Mean Sq NumDF DenDF F value    Pr(>F)    
 Days 162703  162703     1   161   169.4 < 2.2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 slope.model.summary <- summary(slope.model)
 slope.model.summary$coefficients
-             Estimate Std. Error       df  t value Pr(>|t|)
-(Intercept) 251.40510  9.7467163  22.8102 25.79383        0
-Days         10.46729  0.8042214 161.0036 13.01543        0
+             Estimate Std. Error       df  t value     Pr(>|t|)
+(Intercept) 251.40510  9.7467163  22.8102 25.79383 2.241353e-18
+Days         10.46729  0.8042214 161.0000 13.01543 6.412601e-27
 ```
 
 
@@ -227,10 +226,9 @@ Adding the random slope doesn't change the *F* test for `Days` that much:
 
 ```r
 random.slope.model <- lmer(Reaction ~ Days + (Days|Subject),  data=lme4::sleepstudy)
-lmerTest::anova(random.slope.model)
-Analysis of Variance Table of type III  with  Satterthwaite 
-approximation for degrees of freedom
-     Sum Sq Mean Sq NumDF DenDF F.value    Pr(>F)    
+anova(random.slope.model)
+Type III Analysis of Variance Table with Satterthwaite's method
+     Sum Sq Mean Sq NumDF DenDF F value    Pr(>F)    
 Days  30031   30031     1    17  45.853 3.264e-06 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -247,14 +245,18 @@ slope.model.summary$coefficients
 Days         10.46729  0.8042214 161.0036 13.01543        0
 ```
 
-But we can use the `lmerTest::rand()` function to show that there is statistically significant variation in slopes between individuals, using the likelihood ratio test:
+But we can use the `lmerTest::ranova()` function to show that there is statistically significant variation in slopes between individuals, using the likelihood ratio test:
 
 
 ```r
-lmerTest::rand(random.slope.model)
-Analysis of Random effects Table:
-             Chi.sq Chi.DF p.value    
-Days:Subject   42.8      2   5e-10 ***
+lmerTest::ranova(random.slope.model)
+ANOVA-like table for random-effects: Single term deletions
+
+Model:
+Reaction ~ Days + (Days | Subject)
+                         npar  logLik    AIC    LRT Df Pr(>Chisq)    
+<none>                      6 -871.81 1755.6                         
+Days in (Days | Subject)    4 -893.23 1794.5 42.837  2   4.99e-10 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -574,13 +576,26 @@ Here we can see the `service` variable does predict evaluations, and we can use 
 
 
 ```r
-service.means <- lmerTest::lsmeansLT(lectures.model.2, "service")
-service.means$lsmeans.table %>% 
-  select(service, Estimate, `Standard Error`)
-           service Estimate Standard Error
-service  0       0   3.2846         0.0290
-service  1       1   3.1694         0.0397
+service.means <- emmeans::emmeans(lectures.model.2, 'service')
+Loading required namespace: pbkrtest
+Note: D.f. calculations have been disabled because the number of observations exceeds 3000.
+To enable adjustments, set emm_options(pbkrtest.limit = 10000) or larger,
+but be warned that this may result in large computation time and memory use.
+NOTE: Results may be misleading due to involvement in interactions
+service.means %>% 
+  broom::tidy() %>% 
+  select(service, estimate, std.error) %>% 
+  pander
 ```
+
+
+--------------------------------
+ service   estimate   std.error 
+--------- ---------- -----------
+    0       3.285      0.02903  
+
+    1       3.169      0.03967  
+--------------------------------
 
 
 Or change the proportions of variance components at each level (they don't, much, in this instance):
@@ -602,30 +617,21 @@ VarCorr(lectures.model.2) %>% as_data_frame() %>%
 
 ## Contrasts and followup tests using `lmer` {- #contrasts-lmer }
 
-Many of the [contrasts possible after lm and Anova models](#contrasts-examples) are also possible using `lmer` for multilevel models. Instead of the `lsmeans` package we can use the `lsmeansLT` function in the `lmerTest` package.
+Many of the [contrasts possible after lm and Anova models](#contrasts-examples) are also possible using `lmer` for multilevel models.
 
 Let's say we repeat one of the models used in a previous section, looking at the effect of `Days` of sleep deprivation on reaction times:
 
 
 ```r
-sleep <- lme4::sleepstudy %>% mutate(Days=factor(Days))
-m <- lmer(Reaction~Days+(1|Subject), data=sleep)
+m <- lmer(Reaction~factor(Days)+(1|Subject), data=lme4::sleepstudy)
 anova(m)
 Analysis of Variance Table of type III  with  Satterthwaite 
 approximation for degrees of freedom
-     Sum Sq Mean Sq NumDF DenDF F.value    Pr(>F)    
-Days 166235   18471     9   153  18.703 < 2.2e-16 ***
+             Sum Sq Mean Sq NumDF DenDF F.value    Pr(>F)    
+factor(Days) 166235   18471     9   153  18.703 < 2.2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
-
-
-##### A quirk of `lsmeansLT` and factors {- .explainer}
-
-[One quirk of `lsmeansLT` is that you can't tell R that a variable is a factor *within* a formula. 
-
-So the model `lmer(Reaction~factor(Days)+(1|Subject), data=lme4::sleepstudy)` would run perfectly well, and we could even use it with `lsmeansLT` to get cell means, but would fail if we later tried to calculate contrasts. This is why in the example we transform `Days` to be a factor in in a copy of the dataframe, and then run the model.]{.tip}
 
 
 
@@ -633,25 +639,25 @@ So the model `lmer(Reaction~factor(Days)+(1|Subject), data=lme4::sleepstudy)` wo
 
 We can see a significant effect of `Days` in the Anova table, and want to compute followup tests. 
 
-To first estimate cell means and create an `lsmeans` object, you can use the `lsmeans()` function in the `lsmeans::` package:
+To first estimate cell means and create an `emmeans` object, you can use the `emmeans()` function in the `emmeans::` package:
 
 
 ```r
-m.lsm <- lsmeans::lsmeans(m, "Days")
-m.lsm
- Days   lsmean       SE    df lower.CL upper.CL
- 0    256.6518 11.45778 41.98 233.5288 279.7748
- 1    264.4958 11.45778 41.98 241.3727 287.6188
- 2    265.3619 11.45778 41.98 242.2389 288.4849
- 3    282.9920 11.45778 41.98 259.8690 306.1150
- 4    288.6494 11.45778 41.98 265.5264 311.7724
- 5    308.5185 11.45778 41.98 285.3954 331.6415
- 6    312.1783 11.45778 41.98 289.0552 335.3013
- 7    318.7506 11.45778 41.98 295.6276 341.8736
- 8    336.6295 11.45778 41.98 313.5065 359.7525
- 9    350.8512 11.45778 41.98 327.7282 373.9742
+m.emm <- emmeans(m, "Days")
+m.emm
+ Days   emmean       SE    df lower.CL upper.CL
+    0 256.6518 11.45778 41.98 233.5288 279.7748
+    1 264.4958 11.45778 41.98 241.3727 287.6188
+    2 265.3619 11.45778 41.98 242.2389 288.4849
+    3 282.9920 11.45778 41.98 259.8690 306.1150
+    4 288.6494 11.45778 41.98 265.5264 311.7724
+    5 308.5185 11.45778 41.98 285.3954 331.6415
+    6 312.1783 11.45778 41.98 289.0552 335.3013
+    7 318.7506 11.45778 41.98 295.6276 341.8736
+    8 336.6295 11.45778 41.98 313.5065 359.7525
+    9 350.8512 11.45778 41.98 327.7282 373.9742
 
-Degrees-of-freedom method: satterthwaite 
+Degrees-of-freedom method: kenward-roger 
 Confidence level used: 0.95 
 ```
 
@@ -660,11 +666,11 @@ It might be nice to extract these estimates and plot them:
 
 
 ```r
-m.lsm.df <- 
-  m.lsm %>%
+m.emm.df <- 
+  m.emm %>%
   broom::tidy()
 
-m.lsm.df %>% 
+m.emm.df %>% 
   ggplot(aes(Days, estimate, ymin=conf.low, ymax=conf.high)) + 
   geom_pointrange() + 
   ylab("RT")
@@ -678,15 +684,20 @@ If we wanted to compare each day against every other day (i.e. all the pairwise 
 
 ```r
 # results not shown to save space
-lsmeans::contrast(m.lsm, 'tukey') 
+contrast(m.emm, 'tukey') %>% 
+  broom::tidy() %>% 
+  head(6)
 ```
 
-Or we might want to see if there was a significant change between any consecutive days (it doesn't look like there was):
+Or we might want to see if there was a significant change between any specific day and baseline:
 
 
 ```r
 # results not shown to save space
-lsmeans::contrast(m.lsm, 'consec', method="fdr") 
+contrast(m.emm, 'trt.vs.ctrl') %>% 
+  broom::tidy() %>% 
+  head %>% 
+  pander
 ```
 
 
@@ -695,7 +706,7 @@ Perhaps more interesting in this example is to check the polynomial contrasts, t
 
 ```r
 # results not shown to save space
-lsmeans::contrast(m.lsm, 'poly') %>% 
+contrast(m.emm, 'poly') %>% 
   broom::tidy() %>% 
   head(3) %>% 
   pander(caption="The first three polynomial contrasts. Note you'd have to have quite a fancy theory to warrant looking at any of the higher level polynomial terms.") 

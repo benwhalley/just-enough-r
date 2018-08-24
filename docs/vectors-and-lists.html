@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Just Enough R</title>
   <meta name="description" content="Just Enough R">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Just Enough R" />
   <meta property="og:type" content="book" />
@@ -45,45 +45,84 @@
 
 
 
+<!-- Commenting and annotation script -->
 <script src="https://hypothes.is/embed.js" async></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118343766-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-118343766-1');
+</script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -243,8 +282,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="checking-assumptions.html"><a href="checking-assumptions.html"><i class="fa fa-check"></i>Checking assumptions</a></li>
 <li class="chapter" data-level="" data-path="followup-tests.html"><a href="followup-tests.html"><i class="fa fa-check"></i>Followup tests</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="general-linear-models.html"><a href="general-linear-models.html"><i class="fa fa-check"></i><b>9</b> General linear models</a><ul>
-<li class="chapter" data-level="" data-path="general-linear-models.html"><a href="general-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
+<li class="chapter" data-level="9" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html"><i class="fa fa-check"></i><b>9</b> Generalized linear models</a><ul>
+<li class="chapter" data-level="" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>10</b> Multilevel models</a><ul>
 <li class="chapter" data-level="" data-path="fitting-models.html"><a href="fitting-models.html"><i class="fa fa-check"></i>Fitting multilevel models in R</a><ul>
@@ -331,7 +370,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="apa-output.html#chi2">Chi<sup>2</sup></a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#t-test"><i class="fa fa-check"></i>T-test</a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#anova-1"><i class="fa fa-check"></i>Anova</a></li>
-<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#multilevel-models"><i class="fa fa-check"></i>Multilevel models</a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#multilevel-models-1"><i class="fa fa-check"></i>Multilevel models</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html"><i class="fa fa-check"></i>Simplifying and re-using</a><ul>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html#helper-functions"><i class="fa fa-check"></i>Writing helper functions</a></li>
@@ -404,35 +443,35 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Vectors and lists</h2>
 <p>When working with data, we often have lists or sequences of ‘things’. For example: a list of measurements we have made.</p>
 <ul>
-<li><p>When all the things are of the same type, R calls this a <em>vector</em><a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>.</p></li>
+<li><p>When all the things are of the same type, R calls this a <em>vector</em><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p></li>
 <li><p>When there is a mix of different things R calls this a <em>list</em>.</p></li>
 </ul>
 <div id="vector" class="section level3 unnumbered">
 <h3>Vectors</h3>
 <p>We can create a vector of numbers and display it like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># this creates a vector of heights, in cm</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># this creates a vector of heights, in cm</span>
 heights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">203</span>, <span class="dv">148</span>, <span class="dv">156</span>, <span class="dv">158</span>, <span class="dv">167</span>, 
              <span class="dv">162</span>, <span class="dv">172</span>, <span class="dv">164</span>, <span class="dv">172</span>, <span class="dv">187</span>, 
-             <span class="dv">134</span>, <span class="dv">182</span>, <span class="dv">175</span>)</code></pre></div>
+             <span class="dv">134</span>, <span class="dv">182</span>, <span class="dv">175</span>)</code></pre>
 <p>The <code>c()</code> command is shorthand for <em>combine</em>, so the example above combines the individual elements (numbers) into a new vector.</p>
 <p>We can create a vector of alphanumeric names just as easily:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">names &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Ben&quot;</span>, <span class="st">&quot;Joe&quot;</span>, <span class="st">&quot;Sue&quot;</span>, <span class="st">&quot;Rosa&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">names &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Ben&quot;</span>, <span class="st">&quot;Joe&quot;</span>, <span class="st">&quot;Sue&quot;</span>, <span class="st">&quot;Rosa&quot;</span>)</code></pre>
 <p>And we can check the values stored in these variables by printing them. You can either type <code>print(heights)</code>, or just write the name of the variable alone, which will print it by default. E.g.:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights 
- [<span class="dv">1</span>] <span class="dv">203</span> <span class="dv">148</span> <span class="dv">156</span> <span class="dv">158</span> <span class="dv">167</span> <span class="dv">162</span> <span class="dv">172</span> <span class="dv">164</span> <span class="dv">172</span> <span class="dv">187</span> <span class="dv">134</span> <span class="dv">182</span> <span class="dv">175</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">heights 
+ [<span class="dv">1</span>] <span class="dv">203</span> <span class="dv">148</span> <span class="dv">156</span> <span class="dv">158</span> <span class="dv">167</span> <span class="dv">162</span> <span class="dv">172</span> <span class="dv">164</span> <span class="dv">172</span> <span class="dv">187</span> <span class="dv">134</span> <span class="dv">182</span> <span class="dv">175</span></code></pre>
 <div id="section-2" class="section level4 unnumbered exercise">
 <h4></h4>
-<p>Try creating your own vector of numbers in a new code block below<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> using the <code>c(...)</code> command. Then change the name of the variable you assign it to.</p>
+<p>Try creating your own vector of numbers in a new code block below<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> using the <code>c(...)</code> command. Then change the name of the variable you assign it to.</p>
 </div>
 </div>
 <div id="access-vector-elements" class="section level3 unnumbered">
 <h3>Accessing elements</h3>
 <p>Once we have created a vector, we often want to access the individual elements again. We do this based on their <em>position</em>.</p>
 <p>Let’s say we have created a vector:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my.vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">my.vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>)</code></pre>
 <p>We can display the whole vector by just typing its name, as we saw above. But if we want to show only the <em>first</em> element of this vector, we type:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my.vector[<span class="dv">1</span>]
-[<span class="dv">1</span>] <span class="dv">10</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">my.vector[<span class="dv">1</span>]
+[<span class="dv">1</span>] <span class="dv">10</span></code></pre>
 <p>Here, the square brackets specify a <em>subset</em> of the vector we want - in this case, just the first element.</p>
 </div>
 <div id="selecting-more-than-one-element" class="section level3 unnumbered">
@@ -440,13 +479,13 @@ heights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv"
 <p>A neat feature of subsetting is that we can grab more than one element at a time.</p>
 <p>To do this, we need to tell R the <em>positions</em> of the elements we want, and so we provide a <em>vector of the positions of the elements we want</em>.</p>
 <p>It might seem obvious, but the first element has position 1, the second has position 2, and so on. So, if we wanted to extract the 4th and 5th elements from the vector of heights we saw above we would type:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">elements.to.grab &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>)
+<pre class="sourceCode r"><code class="sourceCode r">elements.to.grab &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>)
 heights[elements.to.grab]
-[<span class="dv">1</span>] <span class="dv">158</span> <span class="dv">167</span></code></pre></div>
+[<span class="dv">1</span>] <span class="dv">158</span> <span class="dv">167</span></code></pre>
 <p>We can also make a subset of the original vector and assign it to a <em>new</em> variable:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">first.two.elements &lt;-<span class="st"> </span>heights[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)]
+<pre class="sourceCode r"><code class="sourceCode r">first.two.elements &lt;-<span class="st"> </span>heights[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)]
 first.two.elements
-[<span class="dv">1</span>] <span class="dv">203</span> <span class="dv">148</span></code></pre></div>
+[<span class="dv">1</span>] <span class="dv">203</span> <span class="dv">148</span></code></pre>
 <!-- There are lots of other neat tricks you can use when subsetting, but we don't need them all right now.  -->
 <!-- If you want to know more see <http://www.statmethods.net/management/subset.html> -->
 </div>
@@ -454,46 +493,46 @@ first.two.elements
 <h3>Making and slicing with sequences</h3>
 <p>One common task in R is to create sequences of numbers, letters or dates.</p>
 <p>The simplest way of doing this is to define a range, with the colon:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">onetoten &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>
+<pre class="sourceCode r"><code class="sourceCode r">onetoten &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>
 onetoten
- [<span class="dv">1</span>]  <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">4</span>  <span class="dv">5</span>  <span class="dv">6</span>  <span class="dv">7</span>  <span class="dv">8</span>  <span class="dv">9</span> <span class="dv">10</span></code></pre></div>
+ [<span class="dv">1</span>]  <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">4</span>  <span class="dv">5</span>  <span class="dv">6</span>  <span class="dv">7</span>  <span class="dv">8</span>  <span class="dv">9</span> <span class="dv">10</span></code></pre>
 <p>This creates a vector which can be sliced like any other:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">onetoten[<span class="dv">8</span>]
-[<span class="dv">1</span>] <span class="dv">8</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">onetoten[<span class="dv">8</span>]
+[<span class="dv">1</span>] <span class="dv">8</span></code></pre>
 <p>One common use of sequences is to slice other vectors:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">onetoten[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]
-[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">onetoten[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]
+[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span></code></pre>
 <p>Or the first 10 values in the <code>heights</code> vector we defined above:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]
- [<span class="dv">1</span>] <span class="dv">203</span> <span class="dv">148</span> <span class="dv">156</span> <span class="dv">158</span> <span class="dv">167</span> <span class="dv">162</span> <span class="dv">172</span> <span class="dv">164</span> <span class="dv">172</span> <span class="dv">187</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">heights[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]
+ [<span class="dv">1</span>] <span class="dv">203</span> <span class="dv">148</span> <span class="dv">156</span> <span class="dv">158</span> <span class="dv">167</span> <span class="dv">162</span> <span class="dv">172</span> <span class="dv">164</span> <span class="dv">172</span> <span class="dv">187</span></code></pre>
 <p>This works backwards, and with negative numbers too:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span><span class="op">:-</span><span class="dv">5</span>
- [<span class="dv">1</span>]  <span class="dv">5</span>  <span class="dv">4</span>  <span class="dv">3</span>  <span class="dv">2</span>  <span class="dv">1</span>  <span class="dv">0</span> <span class="op">-</span><span class="dv">1</span> <span class="op">-</span><span class="dv">2</span> <span class="op">-</span><span class="dv">3</span> <span class="op">-</span><span class="dv">4</span> <span class="op">-</span><span class="dv">5</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span><span class="op">:-</span><span class="dv">5</span>
+ [<span class="dv">1</span>]  <span class="dv">5</span>  <span class="dv">4</span>  <span class="dv">3</span>  <span class="dv">2</span>  <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">-1</span> <span class="dv">-2</span> <span class="dv">-3</span> <span class="dv">-4</span> <span class="dv">-5</span></code></pre>
 <p>When your sequence doesn’t contain only whole numbers, or non-consecutive numbers, you can use the <code>seq</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">10</span>,<span class="dt">by=</span><span class="dv">2</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">10</span>,<span class="dt">by=</span><span class="dv">2</span>)
 [<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">3</span> <span class="dv">5</span> <span class="dv">7</span> <span class="dv">9</span>
 <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by=</span>.<span class="dv">2</span>)
-[<span class="dv">1</span>] <span class="fl">0.0</span> <span class="fl">0.2</span> <span class="fl">0.4</span> <span class="fl">0.6</span> <span class="fl">0.8</span> <span class="fl">1.0</span></code></pre></div>
+[<span class="dv">1</span>] <span class="fl">0.0</span> <span class="fl">0.2</span> <span class="fl">0.4</span> <span class="fl">0.6</span> <span class="fl">0.8</span> <span class="fl">1.0</span></code></pre>
 </div>
 <div id="conditional-slices" class="section level3 unnumbered">
 <h3>Conditional slicing</h3>
 <p>One neat feature of R is that you can create a sequence of <code>TRUE</code> or <code>FALSE</code> values, by asking whether each value in a sequence matches a particular condition. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>
- [<span class="dv">1</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>
+ [<span class="dv">1</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span></code></pre>
 <p>Re-using the heights vector from above, we can then use this to select values that are above the average:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(heights)
+<pre class="sourceCode r"><code class="sourceCode r">heights <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(heights)
  [<span class="dv">1</span>]  <span class="ot">TRUE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span>  <span class="ot">TRUE</span> <span class="ot">FALSE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span> <span class="ot">FALSE</span>
-[<span class="dv">12</span>]  <span class="ot">TRUE</span>  <span class="ot">TRUE</span></code></pre></div>
+[<span class="dv">12</span>]  <span class="ot">TRUE</span>  <span class="ot">TRUE</span></code></pre>
 <p>And we can use the vector of <code>TRUE</code> and <code>FALSE</code> values to select from the actual scores:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights[heights <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(heights)]
-[<span class="dv">1</span>] <span class="dv">203</span> <span class="dv">172</span> <span class="dv">172</span> <span class="dv">187</span> <span class="dv">182</span> <span class="dv">175</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">heights[heights <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(heights)]
+[<span class="dv">1</span>] <span class="dv">203</span> <span class="dv">172</span> <span class="dv">172</span> <span class="dv">187</span> <span class="dv">182</span> <span class="dv">175</span></code></pre>
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol start="2">
-<li id="fn2"><p>It’s actually a matrix if has 2 dimensions, like a table, or an array if it has more than 2 dimensions.<a href="vectors-and-lists.html#fnref2">↩</a></p></li>
-<li id="fn3"><p>i.e. edit the RMarkdown document<a href="vectors-and-lists.html#fnref3">↩</a></p></li>
+<li id="fn2"><p>It’s actually a matrix if has 2 dimensions, like a table, or an array if it has more than 2 dimensions.<a href="vectors-and-lists.html#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>i.e. edit the RMarkdown document<a href="vectors-and-lists.html#fnref3" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -548,7 +587,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

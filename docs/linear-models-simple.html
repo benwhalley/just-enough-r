@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Just Enough R</title>
   <meta name="description" content="Just Enough R">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Just Enough R" />
   <meta property="og:type" content="book" />
@@ -45,45 +45,84 @@
 
 
 
+<!-- Commenting and annotation script -->
 <script src="https://hypothes.is/embed.js" async></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118343766-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-118343766-1');
+</script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -243,8 +282,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="checking-assumptions.html"><a href="checking-assumptions.html"><i class="fa fa-check"></i>Checking assumptions</a></li>
 <li class="chapter" data-level="" data-path="followup-tests.html"><a href="followup-tests.html"><i class="fa fa-check"></i>Followup tests</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="general-linear-models.html"><a href="general-linear-models.html"><i class="fa fa-check"></i><b>9</b> General linear models</a><ul>
-<li class="chapter" data-level="" data-path="general-linear-models.html"><a href="general-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
+<li class="chapter" data-level="9" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html"><i class="fa fa-check"></i><b>9</b> Generalized linear models</a><ul>
+<li class="chapter" data-level="" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>10</b> Multilevel models</a><ul>
 <li class="chapter" data-level="" data-path="fitting-models.html"><a href="fitting-models.html"><i class="fa fa-check"></i>Fitting multilevel models in R</a><ul>
@@ -331,7 +370,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="apa-output.html#chi2">Chi<sup>2</sup></a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#t-test"><i class="fa fa-check"></i>T-test</a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#anova-1"><i class="fa fa-check"></i>Anova</a></li>
-<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#multilevel-models"><i class="fa fa-check"></i>Multilevel models</a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#multilevel-models-1"><i class="fa fa-check"></i>Multilevel models</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html"><i class="fa fa-check"></i>Simplifying and re-using</a><ul>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html#helper-functions"><i class="fa fa-check"></i>Writing helper functions</a></li>
@@ -411,7 +450,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3>Describing statistical models using formulae</h3>
 <p>R requires that you are explicit about the statistical model you want to run but provides a neat, concise way of describing models, called a <code>formula</code>. For multiple regression and simple Anova, the formulas we write map closely onto the underlying <em>linear model</em>. The formula syntax provides shortcuts to quickly describe all the models you are likely to need.</p>
 <p>Formulas have two parts: the left hand side and the right hand side, which are separated by the tilde symbol: <code>~</code>. Here, the tilde just means ‘is predicted by’.</p>
-<p>For example, this formula specifies a regression model where <code>height</code> is the <em>outcome</em>, and <code>age</code> and <code>gender</code> are the <em>predictor</em> variables.<a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a></p>
+<p>For example, this formula specifies a regression model where <code>height</code> is the <em>outcome</em>, and <code>age</code> and <code>gender</code> are the <em>predictor</em> variables.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p>
 <pre><code>height ~ age + gender</code></pre>
 <p>There are lots more useful tricks to learn when writing formulas, which are covered below. But in the interests of instant gratification let’s work through a simple example first:</p>
 </div>
@@ -419,46 +458,46 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3>Running a linear model</h3>
 <p>Linear models (including Anova and multiple regression) are run using the <code>lm(...)</code> function, short for ‘linear model’. We will use the <code>mtcars</code> dataset, which is built into R, for our first example.</p>
 <p>First, we have a quick look at the data. The pairs plot suggests that <code>mpg</code> might be related to a number of the other variables including <code>disp</code> (engine size) and <code>wt</code> (car weight):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">select</span>(mpg, disp, wt) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span>pairs</code></pre></div>
+<span class="st">    </span>pairs</code></pre>
 <p><img src="linear-models_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Before running any model, we should ask outselves: “what question we are trying to answer?”</p>
 <p>In this instance, we can see that both weight (<code>wt</code>) and engine size (<code>disp</code>) are related to <code>mpg</code>, but they are also correlated with one another. We might want to know, then, “are weight and engine size independent predictors of <code>mpg</code>?” That is, if we know a car’s weight, do we gain additional information about it’s <code>mpg</code> by measuring engine size?</p>
 <p>To answer this, we could use multiple regression, including both <code>wt</code> and <code>disp</code> as predictors of <code>mpg</code>. The formula for this model would be <code>mpg ~ wt + disp</code>. The command below runs the model:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data=</span>mtcars)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data=</span>mtcars)
 
 Call<span class="op">:</span>
 <span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data =</span> mtcars)
 
 Coefficients<span class="op">:</span>
 (Intercept)           wt         disp  
-   <span class="fl">34.96055</span>     <span class="op">-</span><span class="fl">3.35083</span>     <span class="op">-</span><span class="fl">0.01772</span>  </code></pre></div>
+   <span class="fl">34.96055</span>     <span class="fl">-3.35083</span>     <span class="fl">-0.01772</span>  </code></pre>
 <p>For readers used to wading through reams of SPSS output R might seem concise to the point of rudeness. By default, the <code>lm</code> commands displays very little, only repeating the formula and listing the coefficients for each predictor in the model.</p>
 <p>So what next? Unlike SPSS, we must be explicit and tell R exactly what we want. The most convenient way to do this is to first store the results of the <code>lm()</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m.<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data=</span>mtcars)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">m<span class="fl">.1</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data=</span>mtcars)</code></pre>
 <p>This stores the results of the <code>lm()</code> function in a variable named <code>m.1</code>. As an aside, this is a pretty terrible variable name — try to give descriptive names to your variables because this will prevent errors and make your code easier to read.</p>
 <p>We can then use other functions to get more information about the model. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(m.<span class="dv">1</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(m<span class="fl">.1</span>)
 
 Call<span class="op">:</span>
 <span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data =</span> mtcars)
 
 Residuals<span class="op">:</span>
 <span class="st">    </span>Min      1Q  Median      3Q     Max 
-<span class="op">-</span><span class="fl">3.4087</span> <span class="op">-</span><span class="fl">2.3243</span> <span class="op">-</span><span class="fl">0.7683</span>  <span class="fl">1.7721</span>  <span class="fl">6.3484</span> 
+<span class="fl">-3.4087</span> <span class="fl">-2.3243</span> <span class="fl">-0.7683</span>  <span class="fl">1.7721</span>  <span class="fl">6.3484</span> 
 
 Coefficients<span class="op">:</span>
 <span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
 (Intercept) <span class="fl">34.96055</span>    <span class="fl">2.16454</span>  <span class="fl">16.151</span> <span class="fl">4.91e-16</span> <span class="op">**</span><span class="er">*</span>
-wt          <span class="op">-</span><span class="fl">3.35082</span>    <span class="fl">1.16413</span>  <span class="op">-</span><span class="fl">2.878</span>  <span class="fl">0.00743</span> <span class="op">**</span><span class="st"> </span>
-disp        <span class="op">-</span><span class="fl">0.01773</span>    <span class="fl">0.00919</span>  <span class="op">-</span><span class="fl">1.929</span>  <span class="fl">0.06362</span> .  
+wt          <span class="fl">-3.35082</span>    <span class="fl">1.16413</span>  <span class="fl">-2.878</span>  <span class="fl">0.00743</span> <span class="op">**</span><span class="st"> </span>
+disp        <span class="fl">-0.01773</span>    <span class="fl">0.00919</span>  <span class="fl">-1.929</span>  <span class="fl">0.06362</span> .  
 <span class="op">---</span>
 Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
 
 Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">2.917</span> on <span class="dv">29</span> degrees of freedom
 Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7809</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7658</span> 
-F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">51.69</span> on <span class="dv">2</span> and <span class="dv">29</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">2.744e-10</span></code></pre></div>
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">51.69</span> on <span class="dv">2</span> and <span class="dv">29</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">2.744e-10</span></code></pre>
 <p>Although still compact, the <code>summary</code> function provides some familiar output, including the estimate, <em>SE</em>, and <em>p</em> value for each parameter.</p>
 <p>Take a moment to find the following statistics in the output above:</p>
 <ul>
@@ -475,15 +514,15 @@ F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </
 <p><em>The right hand side of the formula lists our predictors</em>. In the example above we used the <code>+</code> symbol to separate the predictors <code>wt</code> and <code>disp</code>. This told R to simply add each predictor to the model. However, many times we want to specify relationships <em>between</em> our predictors, as well as between predictors and outcomes.</p>
 <p>For example, we might have an experiment with 2 categorical predictors, each with 2 levels — that is, a 2x2 between-subjects design.</p>
 <p>Below, we define and run a linear model with both <code>vs</code> and <code>am</code> as predictors, along with the interaction of <code>vs:am</code>. We save this model as <code>m.2</code>, and use the <code>summary</code> command to print the coefficients.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m.<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>vs <span class="op">+</span><span class="st"> </span>am <span class="op">+</span><span class="st"> </span>vs<span class="op">:</span>am, <span class="dt">data=</span>mtcars)
-<span class="kw">summary</span>(m.<span class="dv">2</span>)
+<pre class="sourceCode r"><code class="sourceCode r">m<span class="fl">.2</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>vs <span class="op">+</span><span class="st"> </span>am <span class="op">+</span><span class="st"> </span>vs<span class="op">:</span>am, <span class="dt">data=</span>mtcars)
+<span class="kw">summary</span>(m<span class="fl">.2</span>)
 
 Call<span class="op">:</span>
 <span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>vs <span class="op">+</span><span class="st"> </span>am <span class="op">+</span><span class="st"> </span>vs<span class="op">:</span>am, <span class="dt">data =</span> mtcars)
 
 Residuals<span class="op">:</span>
 <span class="st">   </span>Min     1Q Median     3Q    Max 
-<span class="op">-</span><span class="fl">6.971</span> <span class="op">-</span><span class="fl">1.973</span>  <span class="fl">0.300</span>  <span class="fl">2.036</span>  <span class="fl">6.250</span> 
+<span class="fl">-6.971</span> <span class="fl">-1.973</span>  <span class="fl">0.300</span>  <span class="fl">2.036</span>  <span class="fl">6.250</span> 
 
 Coefficients<span class="op">:</span>
 <span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
@@ -496,9 +535,9 @@ Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv"
 
 Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">3.472</span> on <span class="dv">28</span> degrees of freedom
 Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7003</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.6682</span> 
-F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">21.81</span> on <span class="dv">3</span> and <span class="dv">28</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">1.735e-07</span></code></pre></div>
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">21.81</span> on <span class="dv">3</span> and <span class="dv">28</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">1.735e-07</span></code></pre>
 <p>We’d normally want to see the Anova table for this model, including the F-tests:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">car<span class="op">::</span><span class="kw">Anova</span>(m.<span class="dv">2</span>)
+<pre class="sourceCode r"><code class="sourceCode r">car<span class="op">::</span><span class="kw">Anova</span>(m<span class="fl">.2</span>)
 Anova <span class="kw">Table</span> (Type II tests)
 
 Response<span class="op">:</span><span class="st"> </span>mpg
@@ -508,7 +547,7 @@ am        <span class="fl">276.03</span>  <span class="dv">1</span> <span class=
 vs<span class="op">:</span>am      <span class="fl">16.01</span>  <span class="dv">1</span>  <span class="fl">1.3283</span>    <span class="fl">0.2589</span>    
 Residuals <span class="fl">337.48</span> <span class="dv">28</span>                      
 <span class="op">---</span>
-Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre>
 <p>But before you do too much with Anova in R <a href="anova.html">read this section</a>.</p>
 <div id="other-formula-shortcuts" class="section level4 unnumbered">
 <h4>Other formula shortcuts</h4>
@@ -532,7 +571,7 @@ Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv"
 <div class="footnotes">
 <hr />
 <ol start="10">
-<li id="fn10"><p>I avoid the terms dependent/independent variables because they are confusing to many students, and because they are misleading when discussing non-experimental data.<a href="linear-models-simple.html#fnref10">↩</a></p></li>
+<li id="fn10"><p>I avoid the terms dependent/independent variables because they are confusing to many students, and because they are misleading when discussing non-experimental data.<a href="linear-models-simple.html#fnref10" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -587,7 +626,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

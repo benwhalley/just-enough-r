@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Just Enough R</title>
   <meta name="description" content="Just Enough R">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Just Enough R" />
   <meta property="og:type" content="book" />
@@ -45,45 +45,84 @@
 
 
 
+<!-- Commenting and annotation script -->
 <script src="https://hypothes.is/embed.js" async></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118343766-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-118343766-1');
+</script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -243,8 +282,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="checking-assumptions.html"><a href="checking-assumptions.html"><i class="fa fa-check"></i>Checking assumptions</a></li>
 <li class="chapter" data-level="" data-path="followup-tests.html"><a href="followup-tests.html"><i class="fa fa-check"></i>Followup tests</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="general-linear-models.html"><a href="general-linear-models.html"><i class="fa fa-check"></i><b>9</b> General linear models</a><ul>
-<li class="chapter" data-level="" data-path="general-linear-models.html"><a href="general-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
+<li class="chapter" data-level="9" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html"><i class="fa fa-check"></i><b>9</b> Generalized linear models</a><ul>
+<li class="chapter" data-level="" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>10</b> Multilevel models</a><ul>
 <li class="chapter" data-level="" data-path="fitting-models.html"><a href="fitting-models.html"><i class="fa fa-check"></i>Fitting multilevel models in R</a><ul>
@@ -331,7 +370,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="apa-output.html#chi2">Chi<sup>2</sup></a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#t-test"><i class="fa fa-check"></i>T-test</a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#anova-1"><i class="fa fa-check"></i>Anova</a></li>
-<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#multilevel-models"><i class="fa fa-check"></i>Multilevel models</a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#multilevel-models-1"><i class="fa fa-check"></i>Multilevel models</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html"><i class="fa fa-check"></i>Simplifying and re-using</a><ul>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html#helper-functions"><i class="fa fa-check"></i>Writing helper functions</a></li>
@@ -408,10 +447,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Confirmatory factor analysis (CFA), structural equation models (SEM) and related techniques are designed to help researchers deal with these <em>imperfections in our observations</em>, and can help to explore the correspondence between our measures and the underlying constructs of interest.</p>
 <div id="latent-variables" class="section level3 unnumbered">
 <h3>Latent variables</h3>
-<p>CFA and SEM introduce the concept of a <em>latent variable</em> which is either the cause of, or formed by, the observations we make. Latent variables aren’t quite the same thing as hypothetical constructs, but they are similar many in some ways. The original distinction between hypothetical constructs and intervening variables is quite interesting in this context, see Maccorquodale and Meehl (1948).</p>
+<p>CFA and SEM introduce the concept of a <em>latent variable</em> which is either the cause of, or formed by, the observations we make.
+Latent variables aren’t quite the same thing as hypothetical constructs, but they are similar many in some ways. The original distinction between hypothetical constructs and intervening variables is quite interesting in this context, see Maccorquodale and Meehl (1948).</p>
 <p>To achieve this, CFA requires that researchers to make predictions about the patterns of correlations they will observe in their observations, based on the process they think is generating the data. CFA provides a mechanism to test and compare different hypotheses about these patterns, which correspond to different models of the underlying process which generates the data.</p>
 <p>It is conventional within CFA and SEM to extend the graphical models used to describe path models (see above). In these diagrams, square edged boxes represent observed variables, and rounded or oval boxes represent latent variables, sometimes called factors:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">knit_gv</span>(<span class="st">&#39;</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">knit_gv</span>(<span class="st">&#39;</span>
 <span class="st">Factor -&gt; a</span>
 <span class="st">Factor -&gt; b</span>
 <span class="st">Factor -&gt; c</span>
@@ -420,7 +460,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="st">b[shape=rectangle]</span>
 <span class="st">c[shape=rectangle]</span>
 <span class="st">d[shape=rectangle]</span>
-<span class="st">&#39;</span>)</code></pre></div>
+<span class="st">&#39;</span>)</code></pre>
 <div class="figure"><span id="fig:unnamed-chunk-12"></span>
 <img src="assets/6607374.png" alt="Example of a CFA model, including one latent variable or factor, and 4 observed variables." width="960" />
 <p class="caption">
@@ -428,7 +468,7 @@ Figure 10.1: Example of a CFA model, including one latent variable or factor, an
 </p>
 </div>
 <p>CFA models can also include multiple latent variables, and estimate the covariance between them:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">knit_gv</span>(<span class="st">&#39;</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">knit_gv</span>(<span class="st">&#39;</span>
 <span class="st">        Affective -&gt; a</span>
 <span class="st">Affective -&gt; b</span>
 <span class="st">Affective -&gt; c</span>
@@ -444,10 +484,10 @@ Figure 10.1: Example of a CFA model, including one latent variable or factor, an
 <span class="st">e [shape=box]</span>
 <span class="st">f [shape=box]</span>
 
-<span class="st">&#39;</span>)</code></pre></div>
+<span class="st">&#39;</span>)</code></pre>
 <p><img src="assets/4067921.png" width="792" /></p>
 <p>SEM models extend this by allowing regression paths between latent variables and observed or other latent variables:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">knit_gv</span>(<span class="st">&#39;</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">knit_gv</span>(<span class="st">&#39;</span>
 <span class="st">        Affective -&gt; a</span>
 <span class="st">Affective -&gt; b</span>
 <span class="st">Affective -&gt; c</span>
@@ -473,14 +513,14 @@ Figure 10.1: Example of a CFA model, including one latent variable or factor, an
 
 <span class="st">Affective -&gt; Stress</span>
 
-<span class="st">        &#39;</span>)</code></pre></div>
+<span class="st">        &#39;</span>)</code></pre>
 <p><img src="assets/7568989.png" width="1174" /></p>
 <p>For now though, we will focus on building a CFA model. Later we’ll show how a <em>well fitting</em> measurement model can be used to test hypotheses related to the structural relations between latent variables.</p>
 </div>
 <div id="defining-a-cfa-model" class="section level3 unnumbered">
 <h3>Defining a CFA model</h3>
 <p>First, open some data and check that all looks well. This is a classic CFA example — see the help file for more info.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hz &lt;-<span class="st"> </span>lavaan<span class="op">::</span>HolzingerSwineford1939
+<pre class="sourceCode r"><code class="sourceCode r">hz &lt;-<span class="st"> </span>lavaan<span class="op">::</span>HolzingerSwineford1939
 hz <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">glimpse</span>()
 Observations<span class="op">:</span><span class="st"> </span><span class="dv">301</span>
 Variables<span class="op">:</span><span class="st"> </span><span class="dv">15</span>
@@ -490,22 +530,22 @@ Variables<span class="op">:</span><span class="st"> </span><span class="dv">15</
 <span class="op">$</span><span class="st"> </span>agemo  <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">11</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">11</span>, <span class="dv">5</span>,...
 <span class="op">$</span><span class="st"> </span>school <span class="op">&lt;</span>fct<span class="op">&gt;</span><span class="st"> </span>Pasteur, Pasteur, Pasteur, Pasteur, Pasteur, Pasteur, P...
 <span class="op">$</span><span class="st"> </span>grade  <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>...
-<span class="op">$</span><span class="st"> </span>x1     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">3.333333</span>, <span class="fl">5.333333</span>, <span class="fl">4.500000</span>, <span class="fl">5.333333</span>, <span class="fl">4.833333</span>, <span class="fl">5.333</span>...
+<span class="op">$</span><span class="st"> </span>x1     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">3.333333</span>, <span class="fl">5.333333</span>, <span class="fl">4.500000</span>, <span class="fl">5.333333</span>, <span class="fl">4.833333</span>, <span class="dv">5</span>.<span class="dv">333</span>...
 <span class="op">$</span><span class="st"> </span>x2     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">7.75</span>, <span class="fl">5.25</span>, <span class="fl">5.25</span>, <span class="fl">7.75</span>, <span class="fl">4.75</span>, <span class="fl">5.00</span>, <span class="fl">6.00</span>, <span class="fl">6.25</span>, <span class="fl">5.75</span>, <span class="dv">5</span>...
 <span class="op">$</span><span class="st"> </span>x3     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">0.375</span>, <span class="fl">2.125</span>, <span class="fl">1.875</span>, <span class="fl">3.000</span>, <span class="fl">0.875</span>, <span class="fl">2.250</span>, <span class="fl">1.000</span>, <span class="fl">1.875</span>,...
-<span class="op">$</span><span class="st"> </span>x4     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">2.333333</span>, <span class="fl">1.666667</span>, <span class="fl">1.000000</span>, <span class="fl">2.666667</span>, <span class="fl">2.666667</span>, <span class="fl">1.000</span>...
+<span class="op">$</span><span class="st"> </span>x4     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">2.333333</span>, <span class="fl">1.666667</span>, <span class="fl">1.000000</span>, <span class="fl">2.666667</span>, <span class="fl">2.666667</span>, <span class="dv">1</span>.<span class="dv">000</span>...
 <span class="op">$</span><span class="st"> </span>x5     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">5.75</span>, <span class="fl">3.00</span>, <span class="fl">1.75</span>, <span class="fl">4.50</span>, <span class="fl">4.00</span>, <span class="fl">3.00</span>, <span class="fl">6.00</span>, <span class="fl">4.25</span>, <span class="fl">5.75</span>, <span class="dv">5</span>...
 <span class="op">$</span><span class="st"> </span>x6     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">1.2857143</span>, <span class="fl">1.2857143</span>, <span class="fl">0.4285714</span>, <span class="fl">2.4285714</span>, <span class="fl">2.5714286</span>, ...
-<span class="op">$</span><span class="st"> </span>x7     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">3.391304</span>, <span class="fl">3.782609</span>, <span class="fl">3.260870</span>, <span class="fl">3.000000</span>, <span class="fl">3.695652</span>, <span class="fl">4.347</span>...
+<span class="op">$</span><span class="st"> </span>x7     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">3.391304</span>, <span class="fl">3.782609</span>, <span class="fl">3.260870</span>, <span class="fl">3.000000</span>, <span class="fl">3.695652</span>, <span class="dv">4</span>.<span class="dv">347</span>...
 <span class="op">$</span><span class="st"> </span>x8     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">5.75</span>, <span class="fl">6.25</span>, <span class="fl">3.90</span>, <span class="fl">5.30</span>, <span class="fl">6.30</span>, <span class="fl">6.65</span>, <span class="fl">6.20</span>, <span class="fl">5.15</span>, <span class="fl">4.65</span>, <span class="dv">4</span>...
-<span class="op">$</span><span class="st"> </span>x9     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">6.361111</span>, <span class="fl">7.916667</span>, <span class="fl">4.416667</span>, <span class="fl">4.861111</span>, <span class="fl">5.916667</span>, <span class="fl">7.500</span>...</code></pre></div>
+<span class="op">$</span><span class="st"> </span>x9     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">6.361111</span>, <span class="fl">7.916667</span>, <span class="fl">4.416667</span>, <span class="fl">4.861111</span>, <span class="fl">5.916667</span>, <span class="dv">7</span>.<span class="dv">500</span>...</code></pre>
 <p>As noted above, to define models in <code>lavaan</code> you must specify the relationships between variables in a text format. A full <a href="http://lavaan.ugent.be/tutorial/syntax1.html">guide to this lavaan model syntax is available on the project website</a>.</p>
 <p>For CFA models, like path models, the format is fairly simple, and resembles a series of linear models, written over several lines.</p>
 <p>In the model below there are three latent variables, <code>visual</code>, <code>writing</code> and <code>maths</code>. The latent variable names are followed by =~ which means ‘is manifested by’, and then the observed variables, our measures for the latent variable, are listed, separated by the <code>+</code> symbol.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hz.model &lt;-<span class="st"> &#39;</span>
+<pre class="sourceCode r"><code class="sourceCode r">hz.model &lt;-<span class="st"> &#39;</span>
 <span class="st">visual =~ x1 + x2 + x3</span>
 <span class="st">writing =~ x4 + x5 + x6</span>
-<span class="st">maths =~ x7 + x8 + x9&#39;</span></code></pre></div>
+<span class="st">maths =~ x7 + x8 + x9&#39;</span></code></pre>
 <p>Note that we have saved our model specification/syntax in a variable named <code>hz.model</code>.</p>
 <p>The other special symbols in the <code>lavaan</code> syntax which can be used for CFA models are:</p>
 <ul>
@@ -513,9 +553,9 @@ Variables<span class="op">:</span><span class="st"> </span><span class="dv">15</
 <li><p><code>a ~~ a</code>, which is a <em>variance</em> (you can think of this as the covariance of a variable with itself)</p></li>
 </ul>
 <p>To run the analysis we again pass the model specification and the data to the <code>cfa()</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hz.fit &lt;-<span class="st"> </span><span class="kw">cfa</span>(hz.model, <span class="dt">data=</span>hz)
+<pre class="sourceCode r"><code class="sourceCode r">hz.fit &lt;-<span class="st"> </span><span class="kw">cfa</span>(hz.model, <span class="dt">data=</span>hz)
 <span class="kw">summary</span>(hz.fit, <span class="dt">standardized=</span><span class="ot">TRUE</span>)
-<span class="kw">lavaan</span> (<span class="fl">0.5</span><span class="op">-</span><span class="fl">23.1097</span>) converged normally after  <span class="dv">35</span> iterations
+<span class="kw">lavaan</span> (<span class="fl">0.5-23.1097</span>) converged normally after  <span class="dv">35</span> iterations
 
   Number of observations                           <span class="dv">301</span>
 
@@ -565,7 +605,7 @@ Variances<span class="op">:</span>
    .x9                <span class="fl">0.566</span>    <span class="fl">0.071</span>    <span class="fl">8.003</span>    <span class="fl">0.000</span>    <span class="fl">0.566</span>    <span class="fl">0.558</span>
     visual            <span class="fl">0.809</span>    <span class="fl">0.145</span>    <span class="fl">5.564</span>    <span class="fl">0.000</span>    <span class="fl">1.000</span>    <span class="fl">1.000</span>
     writing           <span class="fl">0.979</span>    <span class="fl">0.112</span>    <span class="fl">8.737</span>    <span class="fl">0.000</span>    <span class="fl">1.000</span>    <span class="fl">1.000</span>
-    maths             <span class="fl">0.384</span>    <span class="fl">0.086</span>    <span class="fl">4.451</span>    <span class="fl">0.000</span>    <span class="fl">1.000</span>    <span class="fl">1.000</span></code></pre></div>
+    maths             <span class="fl">0.384</span>    <span class="fl">0.086</span>    <span class="fl">4.451</span>    <span class="fl">0.000</span>    <span class="fl">1.000</span>    <span class="fl">1.000</span></code></pre>
 <div id="lavaan-cfa-model-output" class="section level4 unnumbered">
 <h4><code>lavaan</code> CFA Model output</h4>
 <p>The output has three parts:</p>
@@ -578,12 +618,12 @@ Variances<span class="op">:</span>
 <div id="plotting-models" class="section level4 unnumbered">
 <h4>Plotting models</h4>
 <p>As before, we can use the <code>semPaths()</code> function to visualise the model. This is an important step because it helps explain the model to others, and also gives you an opportunity to check you have specified your model correctly.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">semPlot<span class="op">::</span><span class="kw">semPaths</span>(hz.fit)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">semPlot<span class="op">::</span><span class="kw">semPaths</span>(hz.fit)</code></pre>
 <p><img src="cfa-sem_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>And for ‘final’ models we might want to overplot model parameter estimates (in this case, standardised):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># std refers to standardised estimates. &quot;par&quot; would plot</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># std refers to standardised estimates. &quot;par&quot; would plot</span>
 <span class="co"># the unstandardised estimates</span>
-semPlot<span class="op">::</span><span class="kw">semPaths</span>(hz.fit, <span class="st">&quot;std&quot;</span>)</code></pre></div>
+semPlot<span class="op">::</span><span class="kw">semPaths</span>(hz.fit, <span class="st">&quot;std&quot;</span>)</code></pre>
 <p><img src="cfa-sem_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 </div>
 </div>
@@ -640,7 +680,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

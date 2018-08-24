@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Just Enough R</title>
   <meta name="description" content="Just Enough R">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Just Enough R" />
   <meta property="og:type" content="book" />
@@ -45,45 +45,84 @@
 
 
 
+<!-- Commenting and annotation script -->
 <script src="https://hypothes.is/embed.js" async></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118343766-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-118343766-1');
+</script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -243,8 +282,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="checking-assumptions.html"><a href="checking-assumptions.html"><i class="fa fa-check"></i>Checking assumptions</a></li>
 <li class="chapter" data-level="" data-path="followup-tests.html"><a href="followup-tests.html"><i class="fa fa-check"></i>Followup tests</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="general-linear-models.html"><a href="general-linear-models.html"><i class="fa fa-check"></i><b>9</b> General linear models</a><ul>
-<li class="chapter" data-level="" data-path="general-linear-models.html"><a href="general-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
+<li class="chapter" data-level="9" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html"><i class="fa fa-check"></i><b>9</b> Generalized linear models</a><ul>
+<li class="chapter" data-level="" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>10</b> Multilevel models</a><ul>
 <li class="chapter" data-level="" data-path="fitting-models.html"><a href="fitting-models.html"><i class="fa fa-check"></i>Fitting multilevel models in R</a><ul>
@@ -331,7 +370,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="apa-output.html#chi2">Chi<sup>2</sup></a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#t-test"><i class="fa fa-check"></i>T-test</a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#anova-1"><i class="fa fa-check"></i>Anova</a></li>
-<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#multilevel-models"><i class="fa fa-check"></i>Multilevel models</a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#multilevel-models-1"><i class="fa fa-check"></i>Multilevel models</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html"><i class="fa fa-check"></i>Simplifying and re-using</a><ul>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html#helper-functions"><i class="fa fa-check"></i>Writing helper functions</a></li>
@@ -411,7 +450,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Let’s say we asked people to taste 1 of 4 fruit juices, and rate how tasty it was on a scale from 0 to 10:</p>
 <p><img src="anova_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>We can run a oneway Anova with <a href="anova.html#sums-squares">type 3 sums of squares</a> using the <code>Anova</code> function from the <code>car::</code> package:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">juice.lm &lt;-<span class="st"> </span><span class="kw">lm</span>(tastiness <span class="op">~</span><span class="st"> </span>juice, <span class="dt">data=</span>tasty.juice)
+<pre class="sourceCode r"><code class="sourceCode r">juice.lm &lt;-<span class="st"> </span><span class="kw">lm</span>(tastiness <span class="op">~</span><span class="st"> </span>juice, <span class="dt">data=</span>tasty.juice)
 juice.anova &lt;-<span class="st"> </span>car<span class="op">::</span><span class="kw">Anova</span>(juice.lm, <span class="dt">type=</span><span class="dv">3</span>)
 juice.anova
 Anova <span class="kw">Table</span> (Type III tests)
@@ -422,39 +461,41 @@ Response<span class="op">:</span><span class="st"> </span>tastiness
 juice       <span class="fl">128.83</span>  <span class="dv">3</span>   <span class="fl">7.9932</span> <span class="fl">8.231e-05</span> <span class="op">**</span><span class="er">*</span>
 Residuals   <span class="fl">515.76</span> <span class="dv">96</span>                       
 <span class="op">---</span>
-Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre>
 <p>And we could <a href="multiple-comparisons.html#contrasts">compute the contasts</a> for each fruit against the others (the grand mean):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">juice.lsm &lt;-<span class="st"> </span>lsmeans<span class="op">::</span><span class="kw">lsmeans</span>(juice.lm, pairwise<span class="op">~</span>juice, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)
-juice.contrasts &lt;-<span class="st"> </span><span class="kw">summary</span>(lsmeans<span class="op">::</span><span class="kw">contrast</span>(juice.lsm, <span class="st">&quot;eff&quot;</span>))
-juice.contrasts
- contrast      estimate        SE df t.ratio p.value
- Mango effect      <span class="fl">0.25</span> <span class="fl">0.4014661</span> <span class="dv">96</span>   <span class="fl">0.623</span>  <span class="fl">0.5349</span>
- Apple effect      <span class="fl">1.01</span> <span class="fl">0.4014661</span> <span class="dv">96</span>   <span class="fl">2.516</span>  <span class="fl">0.0271</span>
- Orange effect     <span class="fl">0.65</span> <span class="fl">0.4014661</span> <span class="dv">96</span>   <span class="fl">1.619</span>  <span class="fl">0.1450</span>
- Durian effect    <span class="op">-</span><span class="fl">1.91</span> <span class="fl">0.4014661</span> <span class="dv">96</span>  <span class="op">-</span><span class="fl">4.758</span>  <span class="op">&lt;</span>.<span class="dv">0001</span>
+<pre class="sourceCode r"><code class="sourceCode r">juice.lsm &lt;-<span class="st"> </span>emmeans<span class="op">::</span><span class="kw">emmeans</span>(juice.lm, pairwise<span class="op">~</span>juice, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)
+juice.contrasts &lt;-<span class="st"> </span>emmeans<span class="op">::</span><span class="kw">contrast</span>(juice.lsm, <span class="st">&quot;eff&quot;</span>)
+juice.contrasts<span class="op">$</span>contrasts
+ contrast               estimate        SE df t.ratio p.value
+ Mango <span class="op">-</span><span class="st"> </span>Apple effect      <span class="fl">-1.90</span> <span class="fl">0.6371203</span> <span class="dv">96</span>  <span class="fl">-2.982</span>  <span class="fl">0.0060</span>
+ Mango <span class="op">-</span><span class="st"> </span>Orange effect     <span class="fl">-1.54</span> <span class="fl">0.5124993</span> <span class="dv">96</span>  <span class="fl">-3.005</span>  <span class="fl">0.0060</span>
+ Mango <span class="op">-</span><span class="st"> </span>Durian effect      <span class="fl">1.02</span> <span class="fl">0.3455270</span> <span class="dv">96</span>   <span class="fl">2.952</span>  <span class="fl">0.0060</span>
+ Apple <span class="op">-</span><span class="st"> </span>Orange effect     <span class="fl">-0.78</span> <span class="fl">0.6371203</span> <span class="dv">96</span>  <span class="fl">-1.224</span>  <span class="fl">0.2239</span>
+ Apple <span class="op">-</span><span class="st"> </span>Durian effect      <span class="fl">1.78</span> <span class="fl">0.5124993</span> <span class="dv">96</span>   <span class="fl">3.473</span>  <span class="fl">0.0046</span>
+ Orange <span class="op">-</span><span class="st"> </span>Durian effect     <span class="fl">1.42</span> <span class="fl">0.6371203</span> <span class="dv">96</span>   <span class="fl">2.229</span>  <span class="fl">0.0338</span>
 
-P value adjustment<span class="op">:</span><span class="st"> </span>fdr method <span class="cf">for</span> <span class="dv">4</span> tests </code></pre></div>
-<p><span class="apa-example">We found a significant main effect of juice, <em>F</em>(3, 96) = 7.99, <em>p</em> &lt; .001. Followup tests (adjusted for false discovery rate) indicated that only Durian differed from the other juices, and was rated a significantly less tasty Mango, Apple, and Orange juice, <em>B</em> = -1.91 (0.40), <em>t</em> = -4.76, <em>p</em> &lt; .001</span></p>
+P value adjustment<span class="op">:</span><span class="st"> </span>fdr method <span class="cf">for</span> <span class="dv">6</span> tests </code></pre>
+<p><span class="apa-example">We found a significant main effect of juice, <em>F</em>(3, 96) = 7.99, <em>p</em> &lt; .001. Followup tests (adjusted for false discovery rate) indicated that only Durian differed from the other juices, and was rated a significantly less tasty Mango, Apple, and Orange juice.</span></p>
 </div>
 <div id="howell-factorial-example" class="section level4 unnumbered">
 <h4>Factorial Anova</h4>
 <p>We are using a <a href="http://www.uvm.edu/~dhowell/methods7/DataFiles/Tab13-2.dat">dataset from Howell</a> <span class="citation">[@howell2012statistical, chapter 13]</span>: an experiment which recorded <code>Recall</code> among young v.s. older adults (<code>Age</code>) for each of 5 conditions.</p>
 <p>These data would commonly be plotted something like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eysenck &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;data/eysenck.Rdata&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">eysenck &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;data/eysenck.Rdata&quot;</span>)
 eysenck <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Condition, Recall, <span class="dt">group=</span>Age, <span class="dt">color=</span>Age)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">geom=</span><span class="st">&quot;pointrange&quot;</span>, <span class="dt">fun.data =</span> mean_cl_boot) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Recall (95% CI)&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>)</code></pre>
 <p><img src="anova_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p><span class="apa-example">Visual inspection of the data (see Figure X) suggested that older adults recalled more words than younger adults, and that this difference was greatest for the intention, imagery, and adjective conditions. Recall peformance was worst in the counting and rhyming conditions.</span></p>
 <p>Or alternatively if we wanted to provde a better summary of the distribution of the raw data we could use a boxplot:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eysenck <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">eysenck <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Age, Recall)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">width=</span>.<span class="dv">33</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">facet_grid</span>(<span class="op">~</span>Condition) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Recall (95% CI)&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>)</code></pre>
 <div class="figure"><span id="fig:unnamed-chunk-11"></span>
 <img src="anova_files/figure-html/unnamed-chunk-11-1.png" alt="Boxplot for recall in older and young adults, by condition." width="672" />
 <p class="caption">
@@ -462,7 +503,7 @@ Figure 2.2: Boxplot for recall in older and young adults, by condition.
 </p>
 </div>
 <p>We can run a linear model including the effect of <code>Age</code> and <code>Condition</code> and the interaction of these variables, and calculate the Anova:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eysenck.model &lt;-<span class="st"> </span><span class="kw">lm</span>(Recall<span class="op">~</span>Age<span class="op">*</span>Condition, <span class="dt">data=</span>eysenck)
+<pre class="sourceCode r"><code class="sourceCode r">eysenck.model &lt;-<span class="st"> </span><span class="kw">lm</span>(Recall<span class="op">~</span>Age<span class="op">*</span>Condition, <span class="dt">data=</span>eysenck)
 car<span class="op">::</span><span class="kw">Anova</span>(eysenck.model, <span class="dt">type=</span><span class="dv">3</span>)
 Anova <span class="kw">Table</span> (Type III tests)
 
@@ -474,7 +515,7 @@ Condition     <span class="fl">351.52</span>  <span class="dv">4</span> <span cl
 Age<span class="op">:</span>Condition <span class="fl">190.30</span>  <span class="dv">4</span>  <span class="fl">5.9279</span> <span class="fl">0.0002793</span> <span class="op">**</span><span class="er">*</span>
 Residuals     <span class="fl">722.30</span> <span class="dv">90</span>                      
 <span class="op">---</span>
-Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre>
 </div>
 </div>
 <div id="repeated-measures" class="section level3 unnumbered">
@@ -490,14 +531,14 @@ Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv"
 <div id="sleepstudy-rmanova" class="section level4 unnumbered">
 <h4></h4>
 <p>The <code>sleepstudy</code> dataset in the <code>lme4</code> package provides reaction time data recorded from participants over a period of 10 days, during which time they were deprived of sleep.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">head</span>(<span class="dv">12</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>pander</code></pre></div>
-<table style="width:38%;">
+<span class="st">  </span>pander</code></pre>
+<table style="width:39%;">
 <colgroup>
 <col width="15%" />
 <col width="9%" />
-<col width="12%" />
+<col width="13%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -570,36 +611,36 @@ Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv"
 </tbody>
 </table>
 <p>We can plot these data to show the increase in RT as sleep deprivation continues:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">lme4<span class="op">::</span>sleepstudy <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">factor</span>(Days), Reaction)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Days&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;RT (ms)&quot;</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">y=</span><span class="dv">400</span>, <span class="dt">x=</span><span class="dv">2</span>, <span class="dt">label=</span><span class="st">&quot;you start to</span><span class="ch">\n</span><span class="st">feel bad here&quot;</span>), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">y=</span><span class="dv">450</span>, <span class="dt">x=</span><span class="dv">9</span>, <span class="dt">label=</span><span class="st">&quot;imagine how bad</span><span class="ch">\n</span><span class="st">you feel by this point&quot;</span>), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) </code></pre></div>
+<span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">y=</span><span class="dv">450</span>, <span class="dt">x=</span><span class="dv">9</span>, <span class="dt">label=</span><span class="st">&quot;imagine how bad</span><span class="ch">\n</span><span class="st">you feel by this point&quot;</span>), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) </code></pre>
 <p><img src="anova_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>If we want to test whether there are significant differences in RTs between <code>Days</code>, we could fit something very similar to a traditional repeat measures Anova using the <code>lme4::lmer()</code> function, and obtain an Anova table for the model using the special <code>lmerTest::anova()</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sleep.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(Days) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Subject), <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
+<pre class="sourceCode r"><code class="sourceCode r">sleep.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(Days) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Subject), <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
 lmerTest<span class="op">::</span><span class="kw">anova</span>(sleep.model)
 Analysis of Variance Table of type III  with  Satterthwaite 
 approximation <span class="cf">for</span> degrees of freedom
              Sum Sq Mean Sq NumDF DenDF F.value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    
 <span class="kw">factor</span>(Days) <span class="dv">166235</span>   <span class="dv">18471</span>     <span class="dv">9</span>   <span class="dv">153</span>  <span class="fl">18.703</span> <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span>
 <span class="op">---</span>
-Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre>
 </div>
 </div>
 <div id="trad-rm-anova" class="section level3 unnumbered">
 <h3>Traditional repeated measures Anova</h3>
 <p>If you really need to fit the traditional repeated measures Anova (e.g. your supervisor/reviewer has asked you to) then you should use either the <code>afex::</code> or <code>ez::</code> packages.</p>
 <p>Let’s say we have an experiment where we record reaction 25 times (<code>Trial</code>) before and after (<code>Time</code> = {1, 2}) one of 4 experimental manipulations (<code>Condition</code> = {1,2,3,4}). You have 12 participants in each condition and no missing data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">expt.data <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">expt.data <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Condition, RT)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="kw">paste</span>(<span class="st">&quot;Time&quot;</span>, time))</code></pre></div>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="kw">paste</span>(<span class="st">&quot;Time&quot;</span>, time))</code></pre>
 <p><img src="anova_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>We want to use our repeated measurements before and after the experimental interventions to increase the precision of our estimate of the between-condition differences.</p>
 <p>Our first step is to aggregate RTs for the multiple trials, taking the mean across all trials at a particular <code>time</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">expt.data.agg &lt;-<span class="st"> </span>expt.data <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">expt.data.agg &lt;-<span class="st"> </span>expt.data <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(Condition, person, time) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">RT=</span><span class="kw">mean</span>(RT))
 
@@ -613,23 +654,23 @@ Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv"
 <span class="dv">3</span>         <span class="dv">1</span>      <span class="dv">2</span>      <span class="dv">1</span> <span class="fl">279.1190</span>
 <span class="dv">4</span>         <span class="dv">1</span>      <span class="dv">2</span>      <span class="dv">2</span> <span class="fl">267.0095</span>
 <span class="dv">5</span>         <span class="dv">1</span>      <span class="dv">3</span>      <span class="dv">1</span> <span class="fl">254.3760</span>
-<span class="dv">6</span>         <span class="dv">1</span>      <span class="dv">3</span>      <span class="dv">2</span> <span class="fl">256.4459</span></code></pre></div>
+<span class="dv">6</span>         <span class="dv">1</span>      <span class="dv">3</span>      <span class="dv">2</span> <span class="fl">256.4459</span></code></pre>
 <p>Because our data are still in long form (we have two rows per person), we have to explicitly tell R that <code>time</code> is a within subject factor. Using the <code>afex::</code> package we would write:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">expt.afex &lt;-<span class="st"> </span>afex<span class="op">::</span><span class="kw">aov_car</span>(RT <span class="op">~</span><span class="st"> </span>Condition <span class="op">*</span><span class="st"> </span>time <span class="op">+</span><span class="st"> </span><span class="kw">Error</span>(person<span class="op">/</span>time),
+<pre class="sourceCode r"><code class="sourceCode r">expt.afex &lt;-<span class="st"> </span>afex<span class="op">::</span><span class="kw">aov_car</span>(RT <span class="op">~</span><span class="st"> </span>Condition <span class="op">*</span><span class="st"> </span>time <span class="op">+</span><span class="st"> </span><span class="kw">Error</span>(person<span class="op">/</span>time),
                            <span class="dt">data=</span>expt.data.agg)
 Contrasts set to contr.sum <span class="cf">for</span> the following variables<span class="op">:</span><span class="st"> </span>Condition
 expt.afex<span class="op">$</span>anova_table <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">pander</span>(<span class="dt">caption=</span><span class="st">&quot;`afex::aov_car` output.&quot;</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">pander</span>(<span class="dt">caption=</span><span class="st">&quot;`afex::aov_car` output.&quot;</span>)</code></pre>
 <table>
 <caption><code>afex::aov_car</code> output.</caption>
 <colgroup>
-<col width="28%" />
-<col width="12%" />
-<col width="12%" />
+<col width="27%" />
+<col width="11%" />
+<col width="11%" />
 <col width="10%" />
 <col width="10%" />
-<col width="12%" />
-<col width="14%" />
+<col width="11%" />
+<col width="15%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -673,14 +714,14 @@ expt.afex<span class="op">$</span>anova_table <span class="op">%&gt;%</span><spa
 </tbody>
 </table>
 <p>Using the <code>ez::</code> package we would write:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">expt.ez &lt;-<span class="st"> </span>ez<span class="op">::</span><span class="kw">ezANOVA</span>(<span class="dt">data=</span>expt.data.agg, 
+<pre class="sourceCode r"><code class="sourceCode r">expt.ez &lt;-<span class="st"> </span>ez<span class="op">::</span><span class="kw">ezANOVA</span>(<span class="dt">data=</span>expt.data.agg, 
             <span class="dt">dv =</span> RT, 
             <span class="dt">wid =</span> person,
             <span class="dt">within =</span> time,
             <span class="dt">between =</span> Condition)
 
 expt.ez<span class="op">$</span>ANOVA <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">pander</span>(<span class="dt">caption=</span><span class="st">&quot;`ez::ezANOVA` output.&quot;</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">pander</span>(<span class="dt">caption=</span><span class="st">&quot;`ez::ezANOVA` output.&quot;</span>)</code></pre>
 <table>
 <caption><code>ez::ezANOVA</code> output.</caption>
 <colgroup>
@@ -691,7 +732,7 @@ expt.ez<span class="op">$</span>ANOVA <span class="op">%&gt;%</span><span class=
 <col width="10%" />
 <col width="16%" />
 <col width="10%" />
-<col width="10%" />
+<col width="12%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -749,21 +790,21 @@ expt.ez<span class="op">$</span>ANOVA <span class="op">%&gt;%</span><span class=
 <div id="comparison-with-a-multilevel-model" class="section level3 unnumbered">
 <h3>Comparison with a multilevel model</h3>
 <p>For reference, a broadly equivalent (although not identical) multilevel model would be:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">expt.mlm  &lt;-<span class="st"> </span><span class="kw">lmer</span>(RT <span class="op">~</span><span class="st"> </span>Condition <span class="op">*</span><span class="st"> </span>time <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>person), 
+<pre class="sourceCode r"><code class="sourceCode r">expt.mlm  &lt;-<span class="st"> </span><span class="kw">lmer</span>(RT <span class="op">~</span><span class="st"> </span>Condition <span class="op">*</span><span class="st"> </span>time <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>person), 
     <span class="dt">data=</span>expt.data.agg) 
 
 <span class="kw">anova</span>(expt.mlm) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">pander</span>()</code></pre></div>
-<table>
+<span class="st">    </span><span class="kw">pander</span>()</code></pre>
+<table style="width:100%;">
 <caption>Analysis of Variance Table of type III with Satterthwaite</caption>
 <colgroup>
-<col width="27%" />
+<col width="26%" />
 <col width="11%" />
 <col width="12%" />
 <col width="10%" />
 <col width="10%" />
 <col width="12%" />
-<col width="14%" />
+<col width="15%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -807,14 +848,14 @@ expt.ez<span class="op">$</span>ANOVA <span class="op">%&gt;%</span><span class=
 </tbody>
 </table>
 <p>Although with a linear mixed model it would also be posible to analyse the trial-by-trial data. Let’s hypothesise, for example, that subjects in Conditions 2 and 4 experienced a ‘practice effect’, such that their RTs reduced over multiple trials. If we plot the data, we can see this suspicion may be supported (how conveninent!):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(expt.data, 
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(expt.data, 
   <span class="kw">aes</span>(trial, RT)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_smooth</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="kw">paste</span>(<span class="st">&quot;Condition&quot;</span>, Condition))
-<span class="st">`</span><span class="dt">geom_smooth()</span><span class="st">`</span> using method =<span class="st"> &#39;loess&#39;</span></code></pre></div>
+<span class="st">`</span><span class="dt">geom_smooth()</span><span class="st">`</span> using method =<span class="st"> &#39;loess&#39;</span></code></pre>
 <p><img src="anova_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>If we wanted to replicate the aggregated RM Anova models shown above we could write:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">contrasts =</span> <span class="kw">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">contrasts =</span> <span class="kw">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))
 expt.mlm2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(RT <span class="op">~</span><span class="st"> </span>Condition <span class="op">*</span><span class="st"> </span>time <span class="op">+</span><span class="st"> </span>(time<span class="op">|</span>person), <span class="dt">data=</span>expt.data)
 <span class="kw">anova</span>(expt.mlm2)
 Analysis of Variance Table of type III  with  Satterthwaite 
@@ -824,9 +865,9 @@ Condition      <span class="dv">1391631</span>  <span class="dv">463877</span>  
 time             <span class="dv">32791</span>   <span class="dv">32791</span>     <span class="dv">1</span> <span class="fl">71.596</span>   <span class="fl">9.176</span>   <span class="fl">0.00341</span> <span class="op">**</span><span class="st"> </span>
 Condition<span class="op">:</span>time  <span class="dv">313212</span>  <span class="dv">104404</span>     <span class="dv">3</span> <span class="fl">71.596</span>  <span class="fl">29.215</span> <span class="fl">1.911e-12</span> <span class="op">**</span><span class="er">*</span>
 <span class="op">---</span>
-Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre>
 <p>But we can now add a continuous predictor for <code>trial</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">expt.mlm.bytrial &lt;-<span class="st"> </span><span class="kw">lmer</span>(RT <span class="op">~</span><span class="st"> </span>Condition <span class="op">*</span><span class="st"> </span>time <span class="op">*</span><span class="st"> </span>trial <span class="op">+</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">expt.mlm.bytrial &lt;-<span class="st"> </span><span class="kw">lmer</span>(RT <span class="op">~</span><span class="st"> </span>Condition <span class="op">*</span><span class="st"> </span>time <span class="op">*</span><span class="st"> </span>trial <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span>(time<span class="op">|</span>person), 
     <span class="dt">data=</span>expt.data)
 
@@ -842,7 +883,7 @@ Condition<span class="op">:</span>trial      <span class="dv">126361</span>   <s
 time<span class="op">:</span>trial              <span class="dv">109</span>     <span class="dv">109</span>     <span class="dv">1</span> <span class="fl">2339.99</span>  <span class="fl">0.0314</span>   <span class="fl">0.85943</span>    
 Condition<span class="op">:</span>time<span class="op">:</span>trial  <span class="dv">27086</span>    <span class="dv">9029</span>     <span class="dv">3</span> <span class="fl">2339.99</span>  <span class="fl">2.5902</span>   <span class="fl">0.05125</span> .  
 <span class="op">---</span>
-Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre>
 <p>The significant <code>Condition:trial</code> term indicates that there was a difference in the practice effects between the experimental conditions.</p>
 <div id="section-15" class="section level4 unnumbered apa-example">
 <h4></h4>
@@ -918,7 +959,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

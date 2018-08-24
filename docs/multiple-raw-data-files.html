@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Just Enough R</title>
   <meta name="description" content="Just Enough R">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Just Enough R" />
   <meta property="og:type" content="book" />
@@ -45,45 +45,84 @@
 
 
 
+<!-- Commenting and annotation script -->
 <script src="https://hypothes.is/embed.js" async></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118343766-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-118343766-1');
+</script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -243,8 +282,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="checking-assumptions.html"><a href="checking-assumptions.html"><i class="fa fa-check"></i>Checking assumptions</a></li>
 <li class="chapter" data-level="" data-path="followup-tests.html"><a href="followup-tests.html"><i class="fa fa-check"></i>Followup tests</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="general-linear-models.html"><a href="general-linear-models.html"><i class="fa fa-check"></i><b>9</b> General linear models</a><ul>
-<li class="chapter" data-level="" data-path="general-linear-models.html"><a href="general-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
+<li class="chapter" data-level="9" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html"><i class="fa fa-check"></i><b>9</b> Generalized linear models</a><ul>
+<li class="chapter" data-level="" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>10</b> Multilevel models</a><ul>
 <li class="chapter" data-level="" data-path="fitting-models.html"><a href="fitting-models.html"><i class="fa fa-check"></i>Fitting multilevel models in R</a><ul>
@@ -331,7 +370,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="apa-output.html#chi2">Chi<sup>2</sup></a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#t-test"><i class="fa fa-check"></i>T-test</a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#anova-1"><i class="fa fa-check"></i>Anova</a></li>
-<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#multilevel-models"><i class="fa fa-check"></i>Multilevel models</a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#multilevel-models-1"><i class="fa fa-check"></i>Multilevel models</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html"><i class="fa fa-check"></i>Simplifying and re-using</a><ul>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html#helper-functions"><i class="fa fa-check"></i>Writing helper functions</a></li>
@@ -407,7 +446,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>In the <a href="anova-cookbook.html#trad-rm-anova">repeated measures Anova example later on in this guide</a> we encounter some data from an experiment where reaction times were recorded in 25 trials (<code>Trial</code>) before and after (<code>Time</code>) one of 4 experimental manipulations (<code>Condition = {1,2,3,4}</code>). There were 48 participants in total:</p>
 <p>Let’s say that we have saved all the files are in a single directory, and these are numbered sequentially: <code>person01.csv</code>, <code>person02.csv</code> and so on.</p>
 <p>Using the <code>list.files()</code> function we can list the contents of a directory on the hard drive:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>(<span class="st">&#39;data/multiple-file-example/&#39;</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>(<span class="st">&#39;data/multiple-file-example/&#39;</span>)
  [<span class="dv">1</span>] <span class="st">&quot;person1.csv&quot;</span>  <span class="st">&quot;person10.csv&quot;</span> <span class="st">&quot;person11.csv&quot;</span> <span class="st">&quot;person12.csv&quot;</span>
  [<span class="dv">5</span>] <span class="st">&quot;person13.csv&quot;</span> <span class="st">&quot;person14.csv&quot;</span> <span class="st">&quot;person15.csv&quot;</span> <span class="st">&quot;person16.csv&quot;</span>
  [<span class="dv">9</span>] <span class="st">&quot;person17.csv&quot;</span> <span class="st">&quot;person18.csv&quot;</span> <span class="st">&quot;person19.csv&quot;</span> <span class="st">&quot;person2.csv&quot;</span> 
@@ -419,7 +458,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 [<span class="dv">33</span>] <span class="st">&quot;person39.csv&quot;</span> <span class="st">&quot;person4.csv&quot;</span>  <span class="st">&quot;person40.csv&quot;</span> <span class="st">&quot;person41.csv&quot;</span>
 [<span class="dv">37</span>] <span class="st">&quot;person42.csv&quot;</span> <span class="st">&quot;person43.csv&quot;</span> <span class="st">&quot;person44.csv&quot;</span> <span class="st">&quot;person45.csv&quot;</span>
 [<span class="dv">41</span>] <span class="st">&quot;person46.csv&quot;</span> <span class="st">&quot;person47.csv&quot;</span> <span class="st">&quot;person48.csv&quot;</span> <span class="st">&quot;person5.csv&quot;</span> 
-[<span class="dv">45</span>] <span class="st">&quot;person6.csv&quot;</span>  <span class="st">&quot;person7.csv&quot;</span>  <span class="st">&quot;person8.csv&quot;</span>  <span class="st">&quot;person9.csv&quot;</span> </code></pre></div>
+[<span class="dv">45</span>] <span class="st">&quot;person6.csv&quot;</span>  <span class="st">&quot;person7.csv&quot;</span>  <span class="st">&quot;person8.csv&quot;</span>  <span class="st">&quot;person9.csv&quot;</span> </code></pre>
 <p>The <code>list.files()</code> function creates a <a href="#vectors">vector</a> of the names of all the files in the directory.</p>
 <p>At this point, there are many, many ways of importing the contents of these files, but below we use a technique which is concise, reliable, and less error-prone than many others. It also continues to use the <code>dplyr</code> library.</p>
 <p>This approach has 3 steps:</p>
@@ -431,9 +470,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="putting-the-filenames-into-a-dataframe" class="section level6 unnumbered">
 <h6>Putting the filenames into a dataframe</h6>
 <p>Because <code>list.files</code> produces a vector, we can make them a column in a new dataframe:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">raw.files &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">filename =</span> <span class="kw">list.files</span>(<span class="st">&#39;data/multiple-file-example/&#39;</span>))</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">raw.files &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">filename =</span> <span class="kw">list.files</span>(<span class="st">&#39;data/multiple-file-example/&#39;</span>))</code></pre>
 <p>And we can make a new column with the complete path (i.e. including the directory holding the files), using the <a href="processing-vectors.html#paste"><code>paste0</code></a> which combines strings of text. We wouldn’t have to do this if the raw files were in the same directory as our RMarkdown file, but that would get messy.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">raw.file.paths &lt;-<span class="st"> </span>raw.files  <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">raw.file.paths &lt;-<span class="st"> </span>raw.files  <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">filepath =</span> <span class="kw">paste0</span>(<span class="st">&quot;data/multiple-file-example/&quot;</span>, filename))
 
 raw.file.paths <span class="op">%&gt;%</span><span class="st"> </span>
@@ -443,7 +482,7 @@ raw.file.paths <span class="op">%&gt;%</span><span class="st"> </span>
          <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">                                   </span><span class="er">&lt;</span>chr<span class="op">&gt;</span>
 <span class="dv">1</span>  person1.csv  data<span class="op">/</span>multiple<span class="op">-</span>file<span class="op">-</span>example<span class="op">/</span>person1.csv
 <span class="dv">2</span> person10.csv data<span class="op">/</span>multiple<span class="op">-</span>file<span class="op">-</span>example<span class="op">/</span>person10.csv
-<span class="dv">3</span> person11.csv data<span class="op">/</span>multiple<span class="op">-</span>file<span class="op">-</span>example<span class="op">/</span>person11.csv</code></pre></div>
+<span class="dv">3</span> person11.csv data<span class="op">/</span>multiple<span class="op">-</span>file<span class="op">-</span>example<span class="op">/</span>person11.csv</code></pre>
 </div>
 <div id="dplyr-do" class="section level6 unnumbered">
 <h6>Using <code>do()</code></h6>
@@ -452,14 +491,14 @@ raw.file.paths <span class="op">%&gt;%</span><span class="st"> </span>
 <p>The means that our original dataframe is broken up into chunks (either groups of rows, if we use <code>group_by()</code>, or individual rows if we use <code>rowwise()</code>) and each chunk is fed to the function we specify. This function must do it’s work and return a new dataframe, and these are then combined into a single larger dataframe.</p>
 <p>So in this example, we break our dataframe of filenames up into individual rows using <code>rowwise</code> and then specify the <code>read_csv</code> function which takes the name of a csv file, and returns the content as a dataframe (<a href="importing-data.html#importing-data">see the importing data section</a>).</p>
 <p>For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">raw.data &lt;-<span class="st"> </span>raw.file.paths <span class="op">%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r">raw.data &lt;-<span class="st"> </span>raw.file.paths <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># &#39;do&#39; the function for each row in turn</span>
 <span class="st">  </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">do</span>(., <span class="kw">read_csv</span>(<span class="dt">file=</span>.<span class="op">$</span>filepath))</code></pre></div>
+<span class="st">  </span><span class="kw">do</span>(., <span class="kw">read_csv</span>(<span class="dt">file=</span>.<span class="op">$</span>filepath))</code></pre>
 <p>We can check these data look OK by sampling 10 rows at random:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">raw.data <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">raw.data <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">pander</span>()</code></pre></div>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre>
 <table style="width:62%;">
 <colgroup>
 <col width="16%" />
@@ -556,16 +595,16 @@ raw.file.paths <span class="op">%&gt;%</span><span class="st"> </span>
 <p>In this example, each of the raw data files included the participant number (the <code>person</code> variable). However, this isn’t always the case.</p>
 <p>This isn’t a problem though, if we create our own <a href="code-reuse.html#helper-functions">helper function</a> to import the data. Writing small functions in R is very easy, and the example below wraps the <code>read.csv()</code> function and adds a new colum, <code>filename</code> to the imported data frame which would enable us to keep track of where each row in the final combined dataset came from.</p>
 <p>This is the helper function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">read.csv.and.add.filename &lt;-<span class="st"> </span><span class="cf">function</span>(filepath){
+<pre class="sourceCode r"><code class="sourceCode r">read.csv.and.add.filename &lt;-<span class="st"> </span><span class="cf">function</span>(filepath){
   <span class="kw">read_csv</span>(filepath) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">mutate</span>(<span class="dt">filepath=</span>filepath)
-}</code></pre></div>
+}</code></pre>
 <p>In English, you should read this as:</p>
 <blockquote>
 <p>“Create a new R function called <code>read.csv.and.add.filename</code> which expects to be passed a path to a csv file as an input. This function reads the csv file at the path (converting it to a dataframe), and adds a new column containing the original file path it read from. It then returns this dataframe.”</p>
 </blockquote>
 <p>We can use our helper function with <code>do()</code> in place of the bare <code>read_csv</code> function we used before:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">raw.data.with.paths &lt;-<span class="st"> </span>raw.file.paths <span class="op">%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r">raw.data.with.paths &lt;-<span class="st"> </span>raw.file.paths <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">do</span>(., <span class="kw">read.csv.and.add.filename</span>(.<span class="op">$</span>filepath))
 Parsed with column specification<span class="op">:</span>
@@ -955,7 +994,7 @@ Parsed with column specification<span class="op">:</span>
 
 raw.data.with.paths <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">10</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">pander</span>()</code></pre></div>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre>
 <table style="width:62%;">
 <caption>Table continues below</caption>
 <colgroup>
@@ -1047,9 +1086,9 @@ raw.data.with.paths <span class="op">%&gt;%</span><span class="st"> </span>
 </tr>
 </tbody>
 </table>
-<table style="width:57%;">
+<table style="width:58%;">
 <colgroup>
-<col width="56%" />
+<col width="58%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -1150,7 +1189,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

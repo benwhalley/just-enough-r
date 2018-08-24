@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Just Enough R</title>
   <meta name="description" content="Just Enough R">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Just Enough R" />
   <meta property="og:type" content="book" />
@@ -45,45 +45,84 @@
 
 
 
+<!-- Commenting and annotation script -->
 <script src="https://hypothes.is/embed.js" async></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118343766-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-118343766-1');
+</script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -243,8 +282,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="checking-assumptions.html"><a href="checking-assumptions.html"><i class="fa fa-check"></i>Checking assumptions</a></li>
 <li class="chapter" data-level="" data-path="followup-tests.html"><a href="followup-tests.html"><i class="fa fa-check"></i>Followup tests</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="general-linear-models.html"><a href="general-linear-models.html"><i class="fa fa-check"></i><b>9</b> General linear models</a><ul>
-<li class="chapter" data-level="" data-path="general-linear-models.html"><a href="general-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
+<li class="chapter" data-level="9" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html"><i class="fa fa-check"></i><b>9</b> Generalized linear models</a><ul>
+<li class="chapter" data-level="" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>10</b> Multilevel models</a><ul>
 <li class="chapter" data-level="" data-path="fitting-models.html"><a href="fitting-models.html"><i class="fa fa-check"></i>Fitting multilevel models in R</a><ul>
@@ -331,7 +370,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="apa-output.html#chi2">Chi<sup>2</sup></a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#t-test"><i class="fa fa-check"></i>T-test</a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#anova-1"><i class="fa fa-check"></i>Anova</a></li>
-<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#multilevel-models"><i class="fa fa-check"></i>Multilevel models</a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#multilevel-models-1"><i class="fa fa-check"></i>Multilevel models</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html"><i class="fa fa-check"></i>Simplifying and re-using</a><ul>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html#helper-functions"><i class="fa fa-check"></i>Writing helper functions</a></li>
@@ -408,7 +447,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h4></h4>
 <p>It’s common, when variances and covariances are close to zero, that <code>lmer</code> has trouble fitting your model. The solution is to simplify complex models, removing of constraining some random effects.</p>
 <p>For example, in an experiment where you have multiple <code>stimuli</code> and different experimental <code>condition</code>s, with many repeated <code>trial</code>s, you might end up with data like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">head</span>()
 <span class="co"># A tibble: 6 x 5</span>
   trial condition block subject       RT
@@ -418,30 +457,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="dv">3</span>     <span class="dv">3</span>         <span class="dv">1</span>     <span class="dv">1</span>       <span class="dv">1</span> <span class="fl">300.6742</span>
 <span class="dv">4</span>     <span class="dv">4</span>         <span class="dv">1</span>     <span class="dv">1</span>       <span class="dv">1</span> <span class="fl">299.5173</span>
 <span class="dv">5</span>     <span class="dv">5</span>         <span class="dv">1</span>     <span class="dv">1</span>       <span class="dv">1</span> <span class="fl">299.7643</span>
-<span class="dv">6</span>     <span class="dv">6</span>         <span class="dv">1</span>     <span class="dv">1</span>       <span class="dv">1</span> <span class="fl">300.3312</span></code></pre></div>
+<span class="dv">6</span>     <span class="dv">6</span>         <span class="dv">1</span>     <span class="dv">1</span>       <span class="dv">1</span> <span class="fl">300.3312</span></code></pre>
 <p>Which you could model with <code>lmer</code> like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(RT <span class="op">~</span><span class="st"> </span>block <span class="op">*</span><span class="st"> </span>trial <span class="op">*</span><span class="st"> </span>condition <span class="op">+</span><span class="st"> </span>(block<span class="op">+</span>condition<span class="op">|</span>subject), <span class="dt">data=</span>df)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">m1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(RT <span class="op">~</span><span class="st"> </span>block <span class="op">*</span><span class="st"> </span>trial <span class="op">*</span><span class="st"> </span>condition <span class="op">+</span><span class="st"> </span>(block<span class="op">+</span>condition<span class="op">|</span>subject), <span class="dt">data=</span>df)</code></pre>
 <p>You can list the random effects from the model using the <code>VarCorr</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">VarCorr</span>(m1)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">VarCorr</span>(m1)
  Groups   Name        Std.Dev.  Corr         
  <span class="kw">subject</span>  (Intercept) <span class="fl">0.9923367</span>              
-          block       <span class="fl">0.0071373</span> <span class="op">-</span><span class="fl">0.312</span>       
-          condition   <span class="fl">0.0160946</span> <span class="op">-</span><span class="fl">0.403</span> <span class="op">-</span><span class="fl">0.744</span>
- Residual             <span class="fl">0.9973866</span>              </code></pre></div>
-<p>As <code>VarCorr</code> shows, this model estimates: - random intercepts for <code>subject</code>, - random slopes for <code>trial</code> and <code>condition</code>, and - three covariances between these random effects.</p>
+          block       <span class="fl">0.0071373</span> <span class="fl">-0.312</span>       
+          condition   <span class="fl">0.0160946</span> <span class="fl">-0.403</span> <span class="fl">-0.744</span>
+ Residual             <span class="fl">0.9973866</span>              </code></pre>
+<p>As <code>VarCorr</code> shows, this model estimates:
+- random intercepts for <code>subject</code>,
+- random slopes for <code>trial</code> and <code>condition</code>, and
+- three covariances between these random effects.</p>
 <p>If these covariances are very close to zero though, as is often the case, this can cause convergence issues, especially if insufficient data are available.</p>
 <p>If this occurs, you might want to simplify the model. For example, to remove all the covariances between random effects you might rewrite the model this way:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(RT <span class="op">~</span><span class="st"> </span>block <span class="op">*</span><span class="st"> </span>trial <span class="op">*</span><span class="st"> </span>condition <span class="op">+</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">m2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(RT <span class="op">~</span><span class="st"> </span>block <span class="op">*</span><span class="st"> </span>trial <span class="op">*</span><span class="st"> </span>condition <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span>(<span class="dv">1</span><span class="op">|</span>subject) <span class="op">+</span>
 <span class="st">  </span>(<span class="dv">0</span><span class="op">+</span>block<span class="op">|</span>subject) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span>(<span class="dv">0</span><span class="op">+</span>condition<span class="op">|</span>subject), <span class="dt">data=</span>df)
-<span class="kw">VarCorr</span>(m2)</code></pre></div>
+<span class="kw">VarCorr</span>(m2)</code></pre>
 <p>To remove only covariances with the intercept:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m3 &lt;-<span class="st"> </span><span class="kw">lmer</span>(RT <span class="op">~</span><span class="st"> </span>block <span class="op">*</span><span class="st"> </span>trial <span class="op">*</span><span class="st"> </span>condition <span class="op">+</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r">m3 &lt;-<span class="st"> </span><span class="kw">lmer</span>(RT <span class="op">~</span><span class="st"> </span>block <span class="op">*</span><span class="st"> </span>trial <span class="op">*</span><span class="st"> </span>condition <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span>(<span class="dv">1</span><span class="op">|</span>subject) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span>(<span class="dv">0</span><span class="op">+</span>block<span class="op">+</span>condition<span class="op">|</span>subject), <span class="dt">data=</span>df)
 
-<span class="kw">VarCorr</span>(m3)</code></pre></div>
+<span class="kw">VarCorr</span>(m3)</code></pre>
 <p>In general, the recommendation is to try and fit a full random effects structure, and simplify it by removing the least theoretically plausible parameters. See:</p>
 <ul>
 <li><p>This tutorial on mixed models in linguistics: <a href="http://www.bodowinter.com/tutorial/bw_LME_tutorial2.pdf" class="uri">http://www.bodowinter.com/tutorial/bw_LME_tutorial2.pdf</a></p></li>
@@ -503,7 +545,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

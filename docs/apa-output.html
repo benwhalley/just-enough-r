@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Just Enough R</title>
   <meta name="description" content="Just Enough R">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Just Enough R" />
   <meta property="og:type" content="book" />
@@ -45,45 +45,84 @@
 
 
 
+<!-- Commenting and annotation script -->
 <script src="https://hypothes.is/embed.js" async></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118343766-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-118343766-1');
+</script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -243,8 +282,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="checking-assumptions.html"><a href="checking-assumptions.html"><i class="fa fa-check"></i>Checking assumptions</a></li>
 <li class="chapter" data-level="" data-path="followup-tests.html"><a href="followup-tests.html"><i class="fa fa-check"></i>Followup tests</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="general-linear-models.html"><a href="general-linear-models.html"><i class="fa fa-check"></i><b>9</b> General linear models</a><ul>
-<li class="chapter" data-level="" data-path="general-linear-models.html"><a href="general-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
+<li class="chapter" data-level="9" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html"><i class="fa fa-check"></i><b>9</b> Generalized linear models</a><ul>
+<li class="chapter" data-level="" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>10</b> Multilevel models</a><ul>
 <li class="chapter" data-level="" data-path="fitting-models.html"><a href="fitting-models.html"><i class="fa fa-check"></i>Fitting multilevel models in R</a><ul>
@@ -331,7 +370,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="apa-output.html#chi2">Chi<sup>2</sup></a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#t-test"><i class="fa fa-check"></i>T-test</a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#anova-1"><i class="fa fa-check"></i>Anova</a></li>
-<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#multilevel-models"><i class="fa fa-check"></i>Multilevel models</a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#multilevel-models-1"><i class="fa fa-check"></i>Multilevel models</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html"><i class="fa fa-check"></i>Simplifying and re-using</a><ul>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html#helper-functions"><i class="fa fa-check"></i>Writing helper functions</a></li>
@@ -406,19 +445,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="chi2" class="section level3 unnumbered">
 <h3>Chi<sup>2</sup></h3>
 <p>For basic stats the <code>apa::</code> package is simple to use. Below we use the <code>apa::chisq_apa()</code> function to properly format the results of our chi<sup>2</sup> test ([see the full chi<sup>2</sup> example]#crosstabs)):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lego.test &lt;-<span class="st"> </span><span class="kw">chisq.test</span>(lego.table)
+<pre class="sourceCode r"><code class="sourceCode r">lego.test &lt;-<span class="st"> </span><span class="kw">chisq.test</span>(lego.table)
 lego.test
 
     Pearson<span class="st">&#39;s Chi-squared test with Yates&#39;</span> continuity correction
 
 data<span class="op">:</span><span class="st">  </span>lego.table
-X<span class="op">-</span>squared =<span class="st"> </span><span class="fl">11.864</span>, df =<span class="st"> </span><span class="dv">1</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.0005724</span></code></pre></div>
+X<span class="op">-</span>squared =<span class="st"> </span><span class="fl">11.864</span>, df =<span class="st"> </span><span class="dv">1</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.0005724</span></code></pre>
 <p>And we can format in APA like so:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">apa<span class="op">::</span><span class="kw">apa</span>(lego.test, <span class="dt">print_n=</span>T)
-[<span class="dv">1</span>] <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">chi^2$(1, n = 100) = 11.86, *p* &lt; .001&quot;</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">apa<span class="op">::</span><span class="kw">apa</span>(lego.test, <span class="dt">print_n=</span>T)
+[<span class="dv">1</span>] <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">chi^2$(1, n = 100) = 11.86, *p* &lt; .001&quot;</span></code></pre>
 <p>or using <code>apastats::</code> we also get Cramer’s V, a measure of effect size:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">apastats<span class="op">::</span><span class="kw">describe.chi</span>(lego.table, <span class="dt">addN=</span>T)
-[<span class="dv">1</span>] <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">chi^2$(1, _N_ = 100) = 11.86, _p_ &lt; .001, _V_ = .34&quot;</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">apastats<span class="op">::</span><span class="kw">describe.chi</span>(lego.table, <span class="dt">addN=</span>T)
+[<span class="dv">1</span>] <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">chi^2$(1, _N_ = 100) = 11.86, _p_ &lt; .001, _V_ = .34&quot;</span></code></pre>
 <div id="inline-apa-format" class="section level4">
 <h4><span class="header-section-number">17.0.0.1</span> Inserting results into your text</h4>
 <p>If you are using RMarkdown, you can drop formatted results into your text without copying and pasting. Just type the following and the chi<sup>2</sup> test result is automatically inserted inline in your text:</p>
@@ -431,7 +470,7 @@ X<span class="op">-</span>squared =<span class="st"> </span><span class="fl">11.
 </div>
 <div id="t-test" class="section level3 unnumbered">
 <h3>T-test</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># run the t test</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># run the t test</span>
 cars.test &lt;-<span class="st"> </span><span class="kw">t.test</span>(wt<span class="op">~</span>am,<span class="dt">data=</span>mtcars, <span class="dt">var.equal=</span>T)
 cars.test
 
@@ -444,15 +483,17 @@ alternative hypothesis<span class="op">:</span><span class="st"> </span>true dif
 <span class="st"> </span><span class="fl">0.8304317</span> <span class="fl">1.8853577</span>
 sample estimates<span class="op">:</span>
 mean <span class="cf">in</span> group <span class="dv">0</span> mean <span class="cf">in</span> group <span class="dv">1</span> 
-       <span class="fl">3.768895</span>        <span class="fl">2.411000</span> </code></pre></div>
+       <span class="fl">3.768895</span>        <span class="fl">2.411000</span> </code></pre>
 <p>And then we can format as APA</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">apa<span class="op">::</span><span class="kw">apa</span>(cars.test)
-[<span class="dv">1</span>] <span class="st">&quot;*t*(30) = 5.26, *p* &lt; .001, *d* = 1.86&quot;</span></code></pre></div>
-<p><span class="apa-example">American cars were significantly heavier than foreign cars, mean difference=1358lbs; <em>t</em>(30) = 5.26, <em>p</em> &lt; .001, <em>d</em> = 1.86</span></p>
+<pre class="sourceCode r"><code class="sourceCode r">apa<span class="op">::</span><span class="kw">apa</span>(cars.test)
+[<span class="dv">1</span>] <span class="st">&quot;*t*(30) = 5.26, *p* &lt; .001, *d* = 1.86&quot;</span></code></pre>
+<p><span class="apa-example">American cars were significantly heavier than foreign cars,
+mean difference=1358lbs;
+<em>t</em>(30) = 5.26, <em>p</em> &lt; .001, <em>d</em> = 1.86</span></p>
 </div>
 <div id="anova-1" class="section level3 unnumbered">
 <h3>Anova</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mpg.anova &lt;-<span class="st"> </span>car<span class="op">::</span><span class="kw">Anova</span>(<span class="kw">lm</span>(mpg<span class="op">~</span>am<span class="op">*</span>cyl, <span class="dt">data=</span>mtcars))
+<pre class="sourceCode r"><code class="sourceCode r">mpg.anova &lt;-<span class="st"> </span>car<span class="op">::</span><span class="kw">Anova</span>(<span class="kw">lm</span>(mpg<span class="op">~</span>am<span class="op">*</span>cyl, <span class="dt">data=</span>mtcars))
 
 <span class="co"># extract and format main effect</span>
 apastats<span class="op">::</span><span class="kw">describe.Anova</span>(mpg.anova, <span class="dt">term=</span><span class="st">&quot;am&quot;</span>)
@@ -460,17 +501,17 @@ apastats<span class="op">::</span><span class="kw">describe.Anova</span>(mpg.ano
 
 <span class="co"># and the interaction</span>
 apastats<span class="op">::</span><span class="kw">describe.Anova</span>(mpg.anova, <span class="dt">term=</span><span class="st">&quot;am:cyl&quot;</span>)
-[<span class="dv">1</span>] <span class="st">&quot;_F_(1, 28) = 3.41, _p_ = .076&quot;</span></code></pre></div>
+[<span class="dv">1</span>] <span class="st">&quot;_F_(1, 28) = 3.41, _p_ = .076&quot;</span></code></pre>
 <p><span class="apa-example">There was no interaction between location of manufacture and number of cylinders, <em>F</em>(1, 28) = 3.41, <em>p</em> = .076, but there was a main effect of location of manufacture, <em>F</em>(1, 28) = 3.41, <em>p</em> = .076, such that US-made cars had significantly higher fuel consumption than European or Japanese brands (see [Figure X or Table X])</span></p>
 <!-- 
 TODO add formatting of effect size estimates here
 
  -->
 </div>
-<div id="multilevel-models" class="section level3 unnumbered">
+<div id="multilevel-models-1" class="section level3 unnumbered">
 <h3>Multilevel models</h3>
 <p>If you have loaded the <code>lmerTest</code> package <code>apastats</code> can output either coefficients for single parameters, or F tests:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sleep.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction<span class="op">~</span><span class="kw">factor</span>(Days)<span class="op">+</span>(<span class="dv">1</span><span class="op">|</span>Subject), <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
+<pre class="sourceCode r"><code class="sourceCode r">sleep.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction<span class="op">~</span><span class="kw">factor</span>(Days)<span class="op">+</span>(<span class="dv">1</span><span class="op">|</span>Subject), <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
 
 <span class="co">#a single coefficient (this is a contrast from the reference category)</span>
 apastats<span class="op">::</span><span class="kw">describe.glm</span>(sleep.model, <span class="dt">term=</span><span class="st">&quot;factor(Days)1&quot;</span>)
@@ -478,7 +519,7 @@ apastats<span class="op">::</span><span class="kw">describe.glm</span>(sleep.mod
 
 <span class="co"># or describe the F test for the overall effect of Days</span>
 apastats<span class="op">::</span><span class="kw">describe.lmtaov</span>(<span class="kw">anova</span>(sleep.model), <span class="dt">term=</span><span class="st">&#39;factor(Days)&#39;</span>)
-[<span class="dv">1</span>] <span class="st">&quot;_F_(9, 153.0) = 18.70, _p_ &lt; .001&quot;</span></code></pre></div>
+[<span class="dv">1</span>] <span class="st">&quot;_F_(9, 153.0) = 18.70, _p_ &lt; .001&quot;</span></code></pre>
 <p><span class="apa-example">There were significant differences in reaction times across the 10 days of the study, such that reaction latencies tended to increase in duration (see [Figure X]).</span></p>
 
 </div>
@@ -535,7 +576,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

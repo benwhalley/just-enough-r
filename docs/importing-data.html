@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Just Enough R</title>
   <meta name="description" content="Just Enough R">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Just Enough R" />
   <meta property="og:type" content="book" />
@@ -45,45 +45,84 @@
 
 
 
+<!-- Commenting and annotation script -->
 <script src="https://hypothes.is/embed.js" async></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118343766-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-118343766-1');
+</script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -243,8 +282,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="checking-assumptions.html"><a href="checking-assumptions.html"><i class="fa fa-check"></i>Checking assumptions</a></li>
 <li class="chapter" data-level="" data-path="followup-tests.html"><a href="followup-tests.html"><i class="fa fa-check"></i>Followup tests</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="general-linear-models.html"><a href="general-linear-models.html"><i class="fa fa-check"></i><b>9</b> General linear models</a><ul>
-<li class="chapter" data-level="" data-path="general-linear-models.html"><a href="general-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
+<li class="chapter" data-level="9" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html"><i class="fa fa-check"></i><b>9</b> Generalized linear models</a><ul>
+<li class="chapter" data-level="" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>10</b> Multilevel models</a><ul>
 <li class="chapter" data-level="" data-path="fitting-models.html"><a href="fitting-models.html"><i class="fa fa-check"></i>Fitting multilevel models in R</a><ul>
@@ -331,7 +370,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="apa-output.html#chi2">Chi<sup>2</sup></a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#t-test"><i class="fa fa-check"></i>T-test</a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#anova-1"><i class="fa fa-check"></i>Anova</a></li>
-<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#multilevel-models"><i class="fa fa-check"></i>Multilevel models</a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#multilevel-models-1"><i class="fa fa-check"></i>Multilevel models</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html"><i class="fa fa-check"></i>Simplifying and re-using</a><ul>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html#helper-functions"><i class="fa fa-check"></i>Writing helper functions</a></li>
@@ -402,9 +441,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="importing-data" class="section level2 unnumbered">
 <h2>Importing data</h2>
-<p>If you have data outside of R, <em>the simplest way to import it is to first save it as a comma or tab-separated text file</em>, normally with the file extension <code>.csv</code> or <code>.txt</code><a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a>.</p>
-<p>Let’s say we have file called <code>angry_moods.csv</code> in the same directory as our <code>.Rmd</code> file. We can read this data using the <code>read_csv()</code> function from the <code>readr</code> package<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">angry.moods &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&#39;data/angry_moods.csv&#39;</span>)
+<p>If you have data outside of R, <em>the simplest way to import it is to first save it as a comma or tab-separated text file</em>, normally with the file extension <code>.csv</code> or <code>.txt</code><a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>.</p>
+<p>Let’s say we have file called <code>angry_moods.csv</code> in the same directory as our <code>.Rmd</code> file. We can read this data using the <code>read_csv()</code> function from the <code>readr</code> package<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">angry.moods &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&#39;data/angry_moods.csv&#39;</span>)
 Parsed with column specification<span class="op">:</span>
 <span class="kw">cols</span>(
   <span class="dt">Gender =</span> <span class="kw">col_integer</span>(),
@@ -424,19 +463,19 @@ Parsed with column specification<span class="op">:</span>
 <span class="dv">3</span>      <span class="dv">2</span>      <span class="dv">1</span>        <span class="dv">13</span>       <span class="dv">14</span>          <span class="dv">28</span>         <span class="dv">28</span>               <span class="dv">19</span>
 <span class="dv">4</span>      <span class="dv">2</span>      <span class="dv">1</span>        <span class="dv">17</span>       <span class="dv">24</span>          <span class="dv">23</span>         <span class="dv">23</span>               <span class="dv">43</span>
 <span class="dv">5</span>      <span class="dv">1</span>      <span class="dv">1</span>        <span class="dv">16</span>       <span class="dv">17</span>          <span class="dv">26</span>         <span class="dv">28</span>               <span class="dv">27</span>
-<span class="dv">6</span>      <span class="dv">1</span>      <span class="dv">1</span>        <span class="dv">16</span>       <span class="dv">22</span>          <span class="dv">25</span>         <span class="dv">23</span>               <span class="dv">38</span></code></pre></div>
+<span class="dv">6</span>      <span class="dv">1</span>      <span class="dv">1</span>        <span class="dv">16</span>       <span class="dv">22</span>          <span class="dv">25</span>         <span class="dv">23</span>               <span class="dv">38</span></code></pre>
 <p>As you can see, when loading the <code>.csv</code> file the <code>read_csv()</code> makes some assumptions about the <em>type</em> of data the file contains. In this case, all the columns contain integer values. It’s worth checking this message to make sure that stray cells in the file you are importing don’t cause problems when importing. Excel won’t complain about this sort of thing, but R is more strict and won’t mix text and numbers in the same column.</p>
 <p>A common error is for stray notes or text values in a spreadsheet to cause a column which should be numeric to be converted to the <code>character</code> type.</p>
 <p>Once it’s loaded, you can use this new dataset like any other:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(angry.moods)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(angry.moods)</code></pre>
 <p><img src="import-export_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <div id="importing-data-from-the-web" class="section level3 unnumbered">
 <h3>Importing data over the web</h3>
 <p>One neat feature of the <code>readr</code> package is that you can import data from the web, using a URL rather than a filename on your local computer. This can be really helpful when sharing data and code with colleagues. For example, we can load the <code>angry_moods.csv</code> file from a URL:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">angry.moods.from.url &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(
+<pre class="sourceCode r"><code class="sourceCode r">angry.moods.from.url &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(
   <span class="st">&quot;https://raw.githubusercontent.com/benwhalley/just-enough-r/master/angry_moods.csv&quot;</span>)
 
-<span class="kw">head</span>(angry.moods.from.url)</code></pre></div>
+<span class="kw">head</span>(angry.moods.from.url)</code></pre>
 </div>
 <div id="importing-proprietary-formats" class="section level3 unnumbered">
 <h3>Importing from SPSS and other packages</h3>
@@ -447,8 +486,8 @@ Parsed with column specification<span class="op">:</span>
 <div class="footnotes">
 <hr />
 <ol start="7">
-<li id="fn7"><p>This is easy to achieve in Excel and most other stats packages using the <code>Save As...</code> menu item<a href="importing-data.html#fnref7">↩</a></p></li>
-<li id="fn8"><p>There are also standard functions built into R, such as <code>read.csv()</code> or <code>read.table()</code> for importing data. These are fine if you can’t install the <code>readr</code> package for some reason, but they are quite old and the default behaviour is sometimes counterintuitive. I recommend using the <code>readr</code> equivalents: <code>read_csv()</code> or <code>read_tsv()</code>.<a href="importing-data.html#fnref8">↩</a></p></li>
+<li id="fn7"><p>This is easy to achieve in Excel and most other stats packages using the <code>Save As...</code> menu item<a href="importing-data.html#fnref7" class="footnote-back">↩</a></p></li>
+<li id="fn8"><p>There are also standard functions built into R, such as <code>read.csv()</code> or <code>read.table()</code> for importing data. These are fine if you can’t install the <code>readr</code> package for some reason, but they are quite old and the default behaviour is sometimes counterintuitive. I recommend using the <code>readr</code> equivalents: <code>read_csv()</code> or <code>read_tsv()</code>.<a href="importing-data.html#fnref8" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -503,7 +542,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

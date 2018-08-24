@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Just Enough R</title>
   <meta name="description" content="Just Enough R">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Just Enough R" />
   <meta property="og:type" content="book" />
@@ -45,45 +45,84 @@
 
 
 
+<!-- Commenting and annotation script -->
 <script src="https://hypothes.is/embed.js" async></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118343766-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-118343766-1');
+</script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -243,8 +282,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="checking-assumptions.html"><a href="checking-assumptions.html"><i class="fa fa-check"></i>Checking assumptions</a></li>
 <li class="chapter" data-level="" data-path="followup-tests.html"><a href="followup-tests.html"><i class="fa fa-check"></i>Followup tests</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="general-linear-models.html"><a href="general-linear-models.html"><i class="fa fa-check"></i><b>9</b> General linear models</a><ul>
-<li class="chapter" data-level="" data-path="general-linear-models.html"><a href="general-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
+<li class="chapter" data-level="9" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html"><i class="fa fa-check"></i><b>9</b> Generalized linear models</a><ul>
+<li class="chapter" data-level="" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>10</b> Multilevel models</a><ul>
 <li class="chapter" data-level="" data-path="fitting-models.html"><a href="fitting-models.html"><i class="fa fa-check"></i>Fitting multilevel models in R</a><ul>
@@ -331,7 +370,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="apa-output.html#chi2">Chi<sup>2</sup></a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#t-test"><i class="fa fa-check"></i>T-test</a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#anova-1"><i class="fa fa-check"></i>Anova</a></li>
-<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#multilevel-models"><i class="fa fa-check"></i>Multilevel models</a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#multilevel-models-1"><i class="fa fa-check"></i>Multilevel models</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html"><i class="fa fa-check"></i>Simplifying and re-using</a><ul>
 <li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html#helper-functions"><i class="fa fa-check"></i>Writing helper functions</a></li>
@@ -403,10 +442,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="processing-vectors" class="section level2 unnumbered">
 <h2>Processing vectors</h2>
 <p>Many of R’s most useful functions process <em>vectors of numbers</em> in some way. For example (as we’ve already seen) if we want to calculate the average of our vector of heights we just type:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(heights)
-[<span class="dv">1</span>] <span class="fl">167.6923</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(heights)
+[<span class="dv">1</span>] <span class="fl">167.6923</span></code></pre>
 <p>R contains <em>lots</em> of built in functions which we can use to summarise a vector of numbers. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">median</span>(heights)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">median</span>(heights)
 [<span class="dv">1</span>] <span class="dv">167</span>
 <span class="kw">sd</span>(heights)
 [<span class="dv">1</span>] <span class="fl">17.59443</span>
@@ -419,15 +458,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">IQR</span>(heights)
 [<span class="dv">1</span>] <span class="dv">17</span>
 <span class="kw">length</span>(heights)
-[<span class="dv">1</span>] <span class="dv">13</span></code></pre></div>
+[<span class="dv">1</span>] <span class="dv">13</span></code></pre>
 <p>All of these functions accept a vector as input, do some proccesing, and then return a <em>single number</em> which gets displayed by RStudio.</p>
 <p>But not all functions return a single number in the way that <code>mean</code> did above. Some return a new vector, or some other type of object instead. For example, the <code>quantile</code> function returns the values at the 0, 25th, 50th, 75th and 100th percentiles (by default).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">height.quantiles &lt;-<span class="st"> </span><span class="kw">quantile</span>(heights)
+<pre class="sourceCode r"><code class="sourceCode r">height.quantiles &lt;-<span class="st"> </span><span class="kw">quantile</span>(heights)
 height.quantiles
   <span class="dv">0</span><span class="op">%  25%</span><span class="st">  </span><span class="dv">50</span><span class="op">%  75%</span><span class="st"> </span><span class="dv">100</span>% 
- <span class="dv">134</span>  <span class="dv">158</span>  <span class="dv">167</span>  <span class="dv">175</span>  <span class="dv">203</span> </code></pre></div>
+ <span class="dv">134</span>  <span class="dv">158</span>  <span class="dv">167</span>  <span class="dv">175</span>  <span class="dv">203</span> </code></pre>
 <p>If a function returns a vector, we can use it just like any other vector:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">height.quantiles &lt;-<span class="st"> </span><span class="kw">quantile</span>(heights)
+<pre class="sourceCode r"><code class="sourceCode r">height.quantiles &lt;-<span class="st"> </span><span class="kw">quantile</span>(heights)
 
 <span class="co"># grab the third element, which is the median</span>
 height.quantiles[<span class="dv">3</span>]
@@ -438,62 +477,63 @@ height.quantiles[<span class="dv">3</span>]
 min.height &lt;-<span class="st"> </span>height.quantiles[<span class="dv">1</span>]
 min.height
  <span class="dv">0</span>% 
-<span class="dv">134</span> </code></pre></div>
+<span class="dv">134</span> </code></pre>
 <p>But other functions process a vector without returning any numbers. For example, the <code>hist</code> function returns a histogram:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(heights)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(heights)</code></pre>
 <p><img src="start_here_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <p>We’ll cover lots more plotting and visualisation later on.</p>
 <div id="making-new-vectors" class="section level3 unnumbered">
 <h3>Making new vectors</h3>
-<p>So far we’ve seen R functions which process a vector of numbers and produce a single number, a new vector of a different length (like <code>quantile</code> or <code>fivenum</code>), or some other object (like <code>hist</code> which makes a plot). However many other functions accept a single input, do something to it, and return a single processed value.</p>
+<p>So far we’ve seen R functions which process a vector of numbers and produce a single number, a new vector of a different length (like <code>quantile</code> or <code>fivenum</code>), or some other object (like <code>hist</code> which makes a plot).
+However many other functions accept a single input, do something to it, and return a single processed value.</p>
 <p>For example, the square root function, <code>sqrt</code>, accepts a single value and returns a single value: running <code>sqrt(10)</code> will return <code>3.1623</code>.</p>
-<p>In R, if a function accepts a single value as input and returns a single value as output (like <code>sqrt(10)</code>), then you can usually give a vector as input too. Some people find this surprising<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>, but R assumes that if you’re processing a vector of numbers, you want the function applied to each of them in the same way.</p>
+<p>In R, if a function accepts a single value as input and returns a single value as output (like <code>sqrt(10)</code>), then you can usually give a vector as input too. Some people find this surprising<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>, but R assumes that if you’re processing a vector of numbers, you want the function applied to each of them in the same way.</p>
 <p>This turns out to be very useful. For example, let’s say we want the square root of each of the elements of our height data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># these are the raw values</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># these are the raw values</span>
 heights
  [<span class="dv">1</span>] <span class="dv">203</span> <span class="dv">148</span> <span class="dv">156</span> <span class="dv">158</span> <span class="dv">167</span> <span class="dv">162</span> <span class="dv">172</span> <span class="dv">164</span> <span class="dv">172</span> <span class="dv">187</span> <span class="dv">134</span> <span class="dv">182</span> <span class="dv">175</span>
 
 <span class="co"># takes the sqrt of each value and returns a vector of all the square roots</span>
 <span class="kw">sqrt</span>(heights)
  [<span class="dv">1</span>] <span class="fl">14.24781</span> <span class="fl">12.16553</span> <span class="fl">12.49000</span> <span class="fl">12.56981</span> <span class="fl">12.92285</span> <span class="fl">12.72792</span> <span class="fl">13.11488</span>
- [<span class="dv">8</span>] <span class="fl">12.80625</span> <span class="fl">13.11488</span> <span class="fl">13.67479</span> <span class="fl">11.57584</span> <span class="fl">13.49074</span> <span class="fl">13.22876</span></code></pre></div>
+ [<span class="dv">8</span>] <span class="fl">12.80625</span> <span class="fl">13.11488</span> <span class="fl">13.67479</span> <span class="fl">11.57584</span> <span class="fl">13.49074</span> <span class="fl">13.22876</span></code></pre>
 <p>This also works with simple arithmetic So, if we wanted to convert all the heights from cm to meters we could just type:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights <span class="op">/</span><span class="st"> </span><span class="dv">100</span>
- [<span class="dv">1</span>] <span class="fl">2.03</span> <span class="fl">1.48</span> <span class="fl">1.56</span> <span class="fl">1.58</span> <span class="fl">1.67</span> <span class="fl">1.62</span> <span class="fl">1.72</span> <span class="fl">1.64</span> <span class="fl">1.72</span> <span class="fl">1.87</span> <span class="fl">1.34</span> <span class="fl">1.82</span> <span class="fl">1.75</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">heights <span class="op">/</span><span class="st"> </span><span class="dv">100</span>
+ [<span class="dv">1</span>] <span class="fl">2.03</span> <span class="fl">1.48</span> <span class="fl">1.56</span> <span class="fl">1.58</span> <span class="fl">1.67</span> <span class="fl">1.62</span> <span class="fl">1.72</span> <span class="fl">1.64</span> <span class="fl">1.72</span> <span class="fl">1.87</span> <span class="fl">1.34</span> <span class="fl">1.82</span> <span class="fl">1.75</span></code></pre>
 <div id="paste" class="section level4 unnumbered">
 <h4></h4>
 <p>This trick also works with other functions like <code>paste</code>, which combines the inputs you send it to produce an alphanumeric string:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;Once&quot;</span>, <span class="st">&quot;upon&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;time&quot;</span>)
-[<span class="dv">1</span>] <span class="st">&quot;Once upon a time&quot;</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;Once&quot;</span>, <span class="st">&quot;upon&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;time&quot;</span>)
+[<span class="dv">1</span>] <span class="st">&quot;Once upon a time&quot;</span></code></pre>
 <p>If we send a vector to <code>paste</code> it assumes we want a vector of results, with each element in the vector pasted next to each other:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bottles &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">99</span>, <span class="dv">98</span>, <span class="st">&quot;...&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">bottles &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">99</span>, <span class="dv">98</span>, <span class="st">&quot;...&quot;</span>)
 <span class="kw">paste</span>(bottles, <span class="st">&quot;green bottles hanging on the wall&quot;</span>)
 [<span class="dv">1</span>] <span class="st">&quot;100 green bottles hanging on the wall&quot;</span>
 [<span class="dv">2</span>] <span class="st">&quot;99 green bottles hanging on the wall&quot;</span> 
 [<span class="dv">3</span>] <span class="st">&quot;98 green bottles hanging on the wall&quot;</span> 
-[<span class="dv">4</span>] <span class="st">&quot;... green bottles hanging on the wall&quot;</span></code></pre></div>
+[<span class="dv">4</span>] <span class="st">&quot;... green bottles hanging on the wall&quot;</span></code></pre>
 <p>In other programming languages we might have had to write a ‘loop’ to create each line of the song, but R lets us write short statements to summarise <em>what</em> needs to be done; we don’t need to worry worrying about <em>how</em> it gets done.</p>
 </div>
 <div id="paste0" class="section level4 unnumbered tip">
 <h4></h4>
 <p>The <code>paste0</code> function does much the same, but leaves no spaces in the combined strings, which can be useful:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(<span class="st">&quot;N=&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)
- [<span class="dv">1</span>] <span class="st">&quot;N=1&quot;</span>  <span class="st">&quot;N=2&quot;</span>  <span class="st">&quot;N=3&quot;</span>  <span class="st">&quot;N=4&quot;</span>  <span class="st">&quot;N=5&quot;</span>  <span class="st">&quot;N=6&quot;</span>  <span class="st">&quot;N=7&quot;</span>  <span class="st">&quot;N=8&quot;</span>  <span class="st">&quot;N=9&quot;</span>  <span class="st">&quot;N=10&quot;</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(<span class="st">&quot;N=&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)
+ [<span class="dv">1</span>] <span class="st">&quot;N=1&quot;</span>  <span class="st">&quot;N=2&quot;</span>  <span class="st">&quot;N=3&quot;</span>  <span class="st">&quot;N=4&quot;</span>  <span class="st">&quot;N=5&quot;</span>  <span class="st">&quot;N=6&quot;</span>  <span class="st">&quot;N=7&quot;</span>  <span class="st">&quot;N=8&quot;</span>  <span class="st">&quot;N=9&quot;</span>  <span class="st">&quot;N=10&quot;</span></code></pre>
 </div>
 </div>
 <div id="making-up-data-new-vectors" class="section level3 unnumbered">
 <h3>Making up data (new vectors)</h3>
 <p>Sometimes you’ll need to create vectors containing regular sequences or randomly selected numbers.</p>
 <p>To create regular sequences a convenient shortcut is the ‘colon’ operator. For example, if we type <code>1:10</code> then we get a vector of numbers from 1 to 10:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>
- [<span class="dv">1</span>]  <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">4</span>  <span class="dv">5</span>  <span class="dv">6</span>  <span class="dv">7</span>  <span class="dv">8</span>  <span class="dv">9</span> <span class="dv">10</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>
+ [<span class="dv">1</span>]  <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">4</span>  <span class="dv">5</span>  <span class="dv">6</span>  <span class="dv">7</span>  <span class="dv">8</span>  <span class="dv">9</span> <span class="dv">10</span></code></pre>
 <p>The <code>seq</code> function allows you to create more specific sequences:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># make a sequence, specifying the interval between them</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># make a sequence, specifying the interval between them</span>
 <span class="kw">seq</span>(<span class="dt">from=</span><span class="fl">0.1</span>, <span class="dt">to=</span><span class="dv">2</span>, <span class="dt">by=</span>.<span class="dv">1</span>)
  [<span class="dv">1</span>] <span class="fl">0.1</span> <span class="fl">0.2</span> <span class="fl">0.3</span> <span class="fl">0.4</span> <span class="fl">0.5</span> <span class="fl">0.6</span> <span class="fl">0.7</span> <span class="fl">0.8</span> <span class="fl">0.9</span> <span class="fl">1.0</span> <span class="fl">1.1</span> <span class="fl">1.2</span> <span class="fl">1.3</span> <span class="fl">1.4</span> <span class="fl">1.5</span> <span class="fl">1.6</span> <span class="fl">1.7</span>
-[<span class="dv">18</span>] <span class="fl">1.8</span> <span class="fl">1.9</span> <span class="fl">2.0</span></code></pre></div>
+[<span class="dv">18</span>] <span class="fl">1.8</span> <span class="fl">1.9</span> <span class="fl">2.0</span></code></pre>
 <p>We can also use random number-generating functions built into R to create vectors:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 10 uniformly distributed random numbers between 0 and 1</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 10 uniformly distributed random numbers between 0 and 1</span>
 <span class="kw">runif</span>(<span class="dv">10</span>)
  [<span class="dv">1</span>] <span class="fl">0.6126703</span> <span class="fl">0.4520277</span> <span class="fl">0.3905088</span> <span class="fl">0.9166254</span> <span class="fl">0.3202581</span> <span class="fl">0.5855937</span> <span class="fl">0.9061971</span>
  [<span class="dv">8</span>] <span class="fl">0.9765845</span> <span class="fl">0.5202774</span> <span class="fl">0.5666197</span>
@@ -509,17 +549,17 @@ my.numbers &lt;-<span class="st"> </span><span class="kw">runif</span>(<span cla
 <span class="co"># 10 random-normal numbers with mean 10 and SD=5</span>
 <span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">5</span>)
  [<span class="dv">1</span>] <span class="fl">14.567034</span>  <span class="fl">9.067716</span>  <span class="fl">9.278458</span>  <span class="fl">6.835906</span>  <span class="fl">8.390221</span> <span class="fl">14.861313</span>  <span class="fl">9.136580</span>
- [<span class="dv">8</span>]  <span class="fl">7.658026</span> <span class="fl">14.550540</span>  <span class="fl">8.731716</span></code></pre></div>
+ [<span class="dv">8</span>]  <span class="fl">7.658026</span> <span class="fl">14.550540</span>  <span class="fl">8.731716</span></code></pre>
 <p>We can then use these numbers in our code, for example plotting them:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">random.numbers &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10000</span>)
-<span class="kw">hist</span>(random.numbers)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">random.numbers &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10000</span>)
+<span class="kw">hist</span>(random.numbers)</code></pre>
 <p><img src="start_here_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol start="4">
-<li id="fn4"><p>Mostly people who already know other programming languages like C. It’s not that surprising if you read the R code as you would English.<a href="processing-vectors.html#fnref4">↩</a></p></li>
+<li id="fn4"><p>Mostly people who already know other programming languages like C. It’s not that surprising if you read the R code as you would English.<a href="processing-vectors.html#fnref4" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -574,7 +614,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
