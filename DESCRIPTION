@@ -44,8 +44,3 @@ Imports:
   tidyverse,
   tufte,
   waffle
-
-Remotes:
-  rstudio/bookdown,
-  rstudio/rmarkdown,
-  slowkow/ggrepel
