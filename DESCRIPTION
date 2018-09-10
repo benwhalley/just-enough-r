@@ -1,0 +1,5 @@
+Package: placeholder
+Title: Just Enough R
+Version: 0.2
+Imports: bookdown
+Remotes: rstudio/bookdown
