@@ -2,11 +2,19 @@ language: r
 cache: packages
 sudo: required
 script:
-  - Rscript -e 'bookdown::render_book("index.rmd")'
+  - Rscript -e 'bookdown::render_book("index.Rmd")'
 
 apt_packages:
   - libxml2-dev
 
 repos:
   CRAN: https://mran.microsoft.com/snapshot/2018-07-01
-  
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep-history: true
+  on:
+    branch: master
+  local-dir: docs
