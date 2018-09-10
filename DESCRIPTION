@@ -1,5 +1,5 @@
 Package: placeholder
 Title: Just Enough R
 Version: 0.2
-Imports: bookdown
+Imports: bookdown, tidyverse
 Remotes: rstudio/bookdown
