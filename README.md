@@ -13,6 +13,8 @@ Any comments, suggestions or contributions are very welcome — please just fork
 Ben Whalley (<ben.whalley@plymouth.ac.uk>)
 
 
+### Added travis
+
 
 ### Contributors
 
