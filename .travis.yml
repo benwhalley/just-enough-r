@@ -1,0 +1,11 @@
+language: r
+cache: packages
+
+script:
+  - Rscript -e 'bookdown::render_book("index.rmd")'
+
+apt_packages:
+  - libxml2-dev
+
+repos:
+  CRAN: https://mran.microsoft.com/snapshot/2018-07-01
