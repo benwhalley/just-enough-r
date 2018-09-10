@@ -1,6 +1,6 @@
 language: r
 cache: packages
-
+sudo: false
 script:
   - Rscript -e 'bookdown::render_book("index.rmd")'
 
@@ -9,3 +9,4 @@ apt_packages:
 
 repos:
   CRAN: https://mran.microsoft.com/snapshot/2018-07-01
+  
