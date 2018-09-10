@@ -1,4 +1,51 @@
 Package: placeholder
 Title: Just Enough R
 Version: 0.2
-Imports: bookdown, AER, afex, apa, apaTables, arm  blme, bookdown  brms, broom, car, caret, coin, corrgram, cowplot, data.table, devtools, DAAG, DiagrammeR  DiagrammeRsvg, ez, gapminder, GGally, granova, ggthemes, ggrepel, gridExtra, haven, Hmisc, ggjoy, knitr, lavaan, lmerTest, lsr, lubridate, margins, mediation, merTools, mi, mice, multcomp, MuMIn, pander, png, psych, pwr, repmis, reshape2, rgl, rsvg, semPlot, servr, simr, statcheck, tidyverse  tufte, waffle, rmarkdown
+Imports: 
+  afex,
+  apa,
+  apaTables,
+  arm,
+  bookdown,
+  brms,
+  car,
+  coin,
+  corrgram,
+  cowplot,
+  DAAG,
+  data.table,
+  DiagrammeR,
+  DiagrammeRsvg,
+  ez,
+  gapminder,
+  GGally,
+  ggrepel,
+  ggthemes,
+  gridExtra,
+  Hmisc,
+  knitr,
+  lavaan,
+  lmerTest,
+  margins,
+  mediation,
+  merTools,
+  mi,
+  mice,
+  pander,
+  png,
+  psych,
+  pwr,
+  reshape2,
+  rmarkdown,
+  rstanarm,
+  rsvg,
+  semPlot,
+  simr,
+  tidyverse,
+  tufte,
+  waffle
+
+Remotes:
+  rstudio/bookdown,
+  rstudio/rmarkdown,
+  slowkow/ggrepel
