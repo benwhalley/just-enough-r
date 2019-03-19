@@ -81,7 +81,7 @@ model.fit.summary$coefficients
 
 ### 'Poking around' with `$` and `@` {-}
 
-It's actually a useful trick to learn how to 'poke around' inside R objects using the `$` and `@` operators (if you want the gory details of how these operators work, [start with this guide](http://adv-r.had.co.nz/OO-essentials.html) to object systems in R).
+It's a useful trick to learn how to 'poke around' inside R objects using the `$` and `@` operators (if you want the gory details [see this guide](http://adv-r.had.co.nz/OO-essentials.html)).
 
 In the video below, I use RStudio's autocomplete feature to find results buried within a `lm` object:
 
