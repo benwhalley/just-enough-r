@@ -87,7 +87,7 @@ inter.df %>%
 
 
 
-Howeber this bar plot might be better if it were re-drawn as a point and line plot:
+However this bar plot might be better if it were re-drawn as a point and line plot:
 
 ```{r, fig.cap="Point and line plot of injury severity by age and gender.", echo=F}
 inter.df %>% 
