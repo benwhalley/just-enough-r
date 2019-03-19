@@ -2,7 +2,7 @@
 \paperw15840 \paperh12240 \margl1440 \margr1440 \margt1440 \margb1440 \landscape 
 {\pard Table XX \par}
 {\pard  \par}
-{\pard\i Means, standard deviations, and correlations\par}
+{\pard\i Means, standard deviations, and correlations with confidence intervals\par}
 {\pard  \par}
 {
 \trowd \trgaph100
@@ -133,6 +133,26 @@
 \pard\sa0\sb0\intbl\ql{ }\cell
 \pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
 \pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{{\fs20[.17, .50]}}\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
+\row
+}
+{
+\trowd \trgaph100
+\clvertalc\cellx1835 
+\clvertalc\cellx3060 
+\clvertalc\cellx4284 
+\clvertalc\cellx5508 
+\clvertalc\cellx6732 
+\clvertalc\cellx7956 
+\clvertalc\cellx9180 
+\clvertalc\cellx10404 
+\pard\sa0\sb0\intbl\ql{ }\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
 \pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
 \pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
 \pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
@@ -155,6 +175,26 @@
 \pard\sa0\sb0\intbl\tqdec\tldot\tx428{3.52}\cell
 \pard\sa0\sb0\intbl\tqdec\tldot\tx428{-.60**}\cell
 \pard\sa0\sb0\intbl\tqdec\tldot\tx428{-.06}\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
+\row
+}
+{
+\trowd \trgaph100
+\clvertalc\cellx1835 
+\clvertalc\cellx3060 
+\clvertalc\cellx4284 
+\clvertalc\cellx5508 
+\clvertalc\cellx6732 
+\clvertalc\cellx7956 
+\clvertalc\cellx9180 
+\clvertalc\cellx10404 
+\pard\sa0\sb0\intbl\ql{ }\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{{\fs20[-.71, -.47]}}\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{{\fs20[-.22, .11]}}\cell
 \pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
 \pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
 \pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
@@ -213,6 +253,26 @@
 \pard\sa0\sb0\intbl\ql{ }\cell
 \pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
 \pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{{\fs20[.59, .78]}}\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{{\fs20[.12, .42]}}\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{{\fs20[-.57, -.32]}}\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
+\row
+}
+{
+\trowd \trgaph100
+\clvertalc\cellx1835 
+\clvertalc\cellx3060 
+\clvertalc\cellx4284 
+\clvertalc\cellx5508 
+\clvertalc\cellx6732 
+\clvertalc\cellx7956 
+\clvertalc\cellx9180 
+\clvertalc\cellx10404 
+\pard\sa0\sb0\intbl\ql{ }\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
 \pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
 \pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
 \pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
@@ -237,6 +297,26 @@
 \pard\sa0\sb0\intbl\tqdec\tldot\tx428{-.08}\cell
 \pard\sa0\sb0\intbl\tqdec\tldot\tx428{-.18*}\cell
 \pard\sa0\sb0\intbl\tqdec\tldot\tx428{.42**}\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
+\row
+}
+{
+\trowd \trgaph100
+\clvertalc\cellx1835 
+\clvertalc\cellx3060 
+\clvertalc\cellx4284 
+\clvertalc\cellx5508 
+\clvertalc\cellx6732 
+\clvertalc\cellx7956 
+\clvertalc\cellx9180 
+\clvertalc\cellx10404 
+\pard\sa0\sb0\intbl\ql{ }\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{{\fs20[-.02, .34]}}\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{{\fs20[-.23, .09]}}\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{{\fs20[-.33, -.02]}}\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{{\fs20[.28, .54]}}\cell
 \pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
 \row
 }
@@ -282,6 +362,26 @@
 }
 {
 \trowd \trgaph100
+\clvertalc\cellx1835 
+\clvertalc\cellx3060 
+\clvertalc\cellx4284 
+\clvertalc\cellx5508 
+\clvertalc\cellx6732 
+\clvertalc\cellx7956 
+\clvertalc\cellx9180 
+\clvertalc\cellx10404 
+\pard\sa0\sb0\intbl\ql{ }\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{{\fs20[-.20, .17]}}\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{{\fs20[-.31, .01]}}\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{{\fs20[-.13, .19]}}\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{{\fs20[-.28, .03]}}\cell
+\pard\sa0\sb0\intbl\tqdec\tldot\tx428{{\fs20[-.17, .15]}}\cell
+\row
+}
+{
+\trowd \trgaph100
 \clbrdrb\brdrw15\brdrs
 \clvertalc\cellx1835 
 \clbrdrb\brdrw15\brdrs
@@ -308,5 +408,5 @@
 \pard\sa0\sb0\intbl\tqdec\tldot\tx428{ }\cell
 \row
 }
-{\pard \par}{\pard{\i Note.} * indicates {\i p} < .05; ** indicates {\i p} < .01. {\i M} and {\i SD} are used to represent mean and standard deviation, respectively.\par}
+{\pard \par}{\pard{\i Note.} {\i M} and {\i SD} are used to represent mean and standard deviation, respectively. Values in square brackets indicate the 95% confidence interval for each correlation. The confidence interval is a plausible range of population correlations that could have caused the sample correlation (Cumming, 2014). * indicates {\i p} < .05. ** indicates {\i p} < .01.\par}
 }
