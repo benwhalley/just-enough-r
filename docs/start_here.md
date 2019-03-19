@@ -33,13 +33,14 @@ There are many ways of working with R. This guide focusses on a fairly specific 
 
 #### Package dependencies {- #dependencies}
 
-[This script](requirements.R) installs all dependencies on a recent Linux or Mac system (excluding `rstan` and `rstanarm` which are additionally needed to work through the examples on Baysian estimation, but not the majority of the material).
 
-[This script](install-bayes-tools.R) installs `rstan` and related tools. If you have problems with it however, refer to the latest installation guides for the relevant packages. `rstan` does require you to install a C++ compiler first.
-
+If you are just gettign started on a windows machine, [these instructions for students at Plymouth University](https://github.com/PlymouthPsychology/installR/blob/master/install-windows-stage1.md) make it easy to install R and most of the packages necessary to complete the examples in this book.
 
 
+[Further details of a recommended installation are given here](https://github.com/PlymouthPsychology/installR). These scripts will install all needed packages on a recent Linux or Mac system.
 
+
+For some of the sections on Bayesian estimation you will also need to install  `rstan` and `rstanarm`. [Details are also here](https://github.com/PlymouthPsychology/installR), but this can wait till later.
 
 
 
@@ -49,55 +50,42 @@ There are many ways of working with R. This guide focusses on a fairly specific 
 <!-- <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/k56UXc4paIM?rel=0" frameborder="0" allowfullscreen></iframe>
  -->
 
-One of the biggest adjustments people need to make when moving away from SPSS or other tools is to work out a 'way of working'. Good students often develop ways of working, saving and communicating their findings that become habitual. These habits are often attempts to work around limitations of these packages, so hopefully they will fade in time. But nevertheless habits are easier to replace than break, so here's an alternative model to adopt:
+One big adjustment to make when moving away tools like SPSS is to find a 'way of working' that suits you. 
+
+We have often developed ways of working, saving, and communicating our work, and become comfortable with them. In part, these habits and routines may be attempts to work around limitations of these tools. But nevertheless, habits are easier to replace than break, so here's an alternative model to adopt:
 
 
-1. Work in RStudio, and specifically use RMarkdown documents (see [next section](#rmarkdown))
+1. Work in [RStudio](#rstudio), and use [RMarkdown](#rmarkdown) documents (see next sections).
 
-2. Always keep your raw data in [.csv format](#use-csv). 
+2. Save your raw data in [.csv format](#use-csv). Never edit data by hand unless absolutely necessary.
 
-3. Avoid saving multiple 'processed' versions of your data, and never edit data by hand unless absolutely necessary.
-
-4. [Use R to process data and RMarkdown to document the steps taken](#save-intermediate-steps).
-
-5. 'Knit' (run) your RMarkdown documents for sharing with colleagues, or for publication.
+3. [Use R to process your data and RMarkdown to document the process](#save-intermediate-steps).
 
 
 
 
 ### RMarkdown {- #rmarkdown}
 
-A major weakness of traditional GUI stats packages is that there is no simple way to document and share your analyses, and so repeating or editing your work later is very hard.
+Conventional statistics software like SPSS lacks a simple way to document and share your analyses, and make repeating or editing your work later very hard.
 
-RMarkdown is a format for documenting and sharing statistical analyses, and is one of the first things we learn in this guide.
-This it might seem an odd place to start the guide: we haven't got anything to share yet!  But RMarkdown provides a really nice way to work with data interactively, and share results, and so it's worth starting as we mean to go on.
+RMarkdown is a format for documenting and sharing statistical analyses.
+
+This it might seem an odd place to start: we haven't got anything to share yet!  But using RMarkdown in RStudio provides a really nice way to work with data interactively and share our results, so we start as we mean to go on.
 
 
-You are currently reading the output of an 'RMarkdown' document. 
+You are currently reading the output of an 'RMarkdown' document. An RMarkdown document mixes R code with Markdown:
 
 - R is a computer language designed for working with data.
 - Markdown is a simple text-based format which can include prose, hypertext links, images, and code (see http://commonmark.org/help/).  
 
-An RMarkdown document mixes R code with Markdown. This means you can combine your analysis with text that explains and interprets it. RMarkdown includes all the details neeed to reproduce an analysis. 
-
+ 
 Like computer code, RMarkdown can be 'run' or 'executed'. But in the language of RStudio, you 'knit' your RMarkdown to produce a finished document. This combines analyses, graphs, and explanatory text in a single pdf, html, or Word document which can be shared. 
-
-
-
-### Writing and 'knitting' RMarkdown {-}
-
-To include R code within RMarkdown we write 3 backticks (`` ``` ``), followed by `{r}`. We the include our R code, and close the block with 3 more backticks ([how to find the backtick on your keyboard](#backtick-location)).
-
-![A code chunk in the RMarkdown editor](media/r-code-chunk.png)
-
-When a document including this chunk is run or 'knitted', the final result will include the the line `2+2` followed by the number `4` on the next line. We can use RMarkdown to 'show our workings': our analysis can be interleaved with narrative text to explain or interpret the calculations.
-
 
 
 
 ### RStudio {- #rstudio}
 
-RStudio is a text editor which has been customised to make working with R easy. It can be installed on your own computer, or you can login to a shared RStudio server (for example, one run by your university) from a web browser. Either way the interface is largely the same and contains 4 main panels:  
+[RStudio](https://www.rstudio.com/products/rstudio/) is a special text editor that has been customised to make working with R easy. It can be installed on your own computer, or you can login to a shared RStudio server (for example, one run by your university) from a web browser. Either way the interface is largely the same and contains 4 main panels:  
 
 
 <img src="media/rstudio-mainwindow.png" width="1495" />
@@ -179,6 +167,18 @@ Once you have watched the video:
 - Try creating a new RMarkdown document in RStudio.
 - Edit some of the text, and press the Knit button to see the results.
 - If you feel brave, edit one of the R blocks and see what happens!
+
+
+
+
+### Writing and 'knitting' RMarkdown {-}
+
+To include R code within RMarkdown we write 3 backticks (`` ``` ``), followed by `{r}`. We the include our R code, and close the block with 3 more backticks ([how to find the backtick on your keyboard](#backtick-location)).
+
+![A code chunk in the RMarkdown editor](media/r-code-chunk.png)
+
+When a document including this chunk is run or 'knitted', the final result will include the the line `2+2` followed by the number `4` on the next line. We can use RMarkdown to 'show our workings': our analysis can be interleaved with narrative text to explain or interpret the calculations.
+
 
 
 
