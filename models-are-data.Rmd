@@ -97,9 +97,7 @@ model.fit.summary$coefficients %>%
 
 
 
-
-
-### Save work: use a Broom {- #broom}
+### Save time: use a `broom` {- #broom}
 
 The [`broom::` library](http://varianceexplained.org/r/broom-intro/) is  worth learning because it makes it really easy to turn model results into dataframes, which is almost always what we want when working with data.
 
