@@ -23,11 +23,11 @@ This book uses R like any other statistics software: To work-with and visualise 
 #### Things to know Before you start {-}
 
 
-This guide is fairly opinionated. 
+This guide is fairly opinionated, but for good reason.
 
-There are lots of ways to use R, and this can be a barrier for beginners. In particular, base-R functions can be oddly-named, sometimes lack a regular or predictable interface. For this reason we:
+There are lots of ways to use R, and this has been a barrier for beginners. In particular base-R functions can be oddly-named, or lack a regular or predictable interface. For this reason we:
 
-- Recommend that you install and use 'packages' that extend some of R's basic functionality. These packages are powerful tools in their own right, but also hide some of the complexities of R in a [clear and consistent way](https://www.youtube.com/watch?v=K-ss_ag2k9E). It might seem restrictive but, to begin with, learning *only* these packages will help you form a more consistent mental model and make rapid progress. You can learn the crufty old bits (which still have their uses) later on.
+- Recommend (strongly) that you install and use 'packages' that extend some of R's basic functionality. These packages are powerful tools in their own right, but also hide some of the complexities of R in a [clear and consistent way](https://www.youtube.com/watch?v=K-ss_ag2k9E). It might seem restrictive but, to begin with, learning *only* these packages will help you form a more consistent mental model and make rapid progress. You can learn the crufty old bits (which still have their uses) later on.
 
 - Assume you are using the [RStudio editor](#rstudio) and working in an [RMarkdown document](#rmarkdown) (see the next section). If you don't have access to RStudio yet, see the [installation guide](installation.html).
 
