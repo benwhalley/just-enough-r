@@ -38,6 +38,7 @@ rmd_files:
 # PART MODELS
 "MODELS.Rmd",
 "basic-statistics.Rmd",
+"non-parametrics.Rmd",
 "crosstabulation.Rmd",
 "correlations.Rmd",
 "t-tests.Rmd",
