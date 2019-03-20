@@ -7,6 +7,7 @@ title: 'Multilevel models'
 ```{r, include=FALSE}
 library(tidyverse)
 library(pander)
+library(emmeans)
 library(lmerTest)
 ```
 
@@ -164,7 +165,7 @@ lme4::sleepstudy %>%
 
 ```{r}
 slope.model <- lmer(Reaction ~ Days + (1|Subject),  data=lme4::sleepstudy)
-lmerTest::anova(slope.model)
+anova(slope.model)
 slope.model.summary <- summary(slope.model)
 slope.model.summary$coefficients
 ```
@@ -194,7 +195,7 @@ Adding the random slope doesn't change the *F* test for `Days` that much:
 
 ```{r}
 random.slope.model <- lmer(Reaction ~ Days + (Days|Subject),  data=lme4::sleepstudy)
-lmerTest::anova(random.slope.model)
+anova(random.slope.model)
 ```
 
 Nor the overall slope coefficient:
@@ -204,10 +205,10 @@ random.slope.model.summary <- summary(random.slope.model)
 slope.model.summary$coefficients
 ```
 
-But we can use the `lmerTest::rand()` function to show that there is statistically significant variation in slopes between individuals, using the likelihood ratio test:
+But we can use the `lmerTest::ranova()` function to show that there is statistically significant variation in slopes between individuals, using the likelihood ratio test:
 
 ```{r}
-lmerTest::rand(random.slope.model)
+lmerTest::ranova(random.slope.model)
 ```
 
 
@@ -426,9 +427,11 @@ anova(lectures.model.2)
 Here we can see the `service` variable does predict evaluations, and we can use the model to estimate the mean and SE for service == 1 or service == 0 (see also the sections on [multiple comparisons](#multiple-comparisons), [followup contrasts](#contrasts), and doing [followup contrasts with lmer models](#contrasts-lmer) for more options here):
 
 ```{r}
-service.means <- lmerTest::lsmeansLT(lectures.model.2, "service")
-service.means$lsmeans.table %>% 
-  select(service, Estimate, `Standard Error`)
+service.means <- emmeans::emmeans(lectures.model.2, 'service')
+service.means %>% 
+  broom::tidy() %>% 
+  select(service, estimate, std.error) %>% 
+  pander
 ```
 
 
@@ -444,23 +447,14 @@ VarCorr(lectures.model.2) %>% as_data_frame() %>%
 
 ## Contrasts and followup tests using `lmer` {- #contrasts-lmer }
 
-Many of the [contrasts possible after lm and Anova models](#contrasts-examples) are also possible using `lmer` for multilevel models. Instead of the `lsmeans` package we can use the `lsmeansLT` function in the `lmerTest` package.
+Many of the [contrasts possible after lm and Anova models](#contrasts-examples) are also possible using `lmer` for multilevel models.
 
 Let's say we repeat one of the models used in a previous section, looking at the effect of `Days` of sleep deprivation on reaction times:
 
 ```{r}
-sleep <- lme4::sleepstudy %>% mutate(Days=factor(Days))
-m <- lmer(Reaction~Days+(1|Subject), data=sleep)
+m <- lmer(Reaction~factor(Days)+(1|Subject), data=lme4::sleepstudy)
 anova(m)
 ```
-
-
-
-##### A quirk of `lsmeansLT` and factors {- .explainer}
-
-[One quirk of `lsmeansLT` is that you can't tell R that a variable is a factor *within* a formula. 
-
-So the model `lmer(Reaction~factor(Days)+(1|Subject), data=lme4::sleepstudy)` would run perfectly well, and we could even use it with `lsmeansLT` to get cell means, but would fail if we later tried to calculate contrasts. This is why in the example we transform `Days` to be a factor in in a copy of the dataframe, and then run the model.]{.tip}
 
 
 
@@ -468,22 +462,22 @@ So the model `lmer(Reaction~factor(Days)+(1|Subject), data=lme4::sleepstudy)` wo
 
 We can see a significant effect of `Days` in the Anova table, and want to compute followup tests. 
 
-To first estimate cell means and create an `lsmeans` object, you can use the `lsmeans()` function in the `lsmeans::` package:
+To first estimate cell means and create an `emmeans` object, you can use the `emmeans()` function in the `emmeans::` package:
 
 ```{r}
-m.lsm <- lsmeans::lsmeans(m, "Days")
-m.lsm
+m.emm <- emmeans(m, "Days")
+m.emm
 ```
 
 
 It might be nice to extract these estimates and plot them:
 
 ```{r}
-m.lsm.df <- 
-  m.lsm %>%
+m.emm.df <- 
+  m.emm %>%
   broom::tidy()
 
-m.lsm.df %>% 
+m.emm.df %>% 
   ggplot(aes(Days, estimate, ymin=conf.low, ymax=conf.high)) + 
   geom_pointrange() + 
   ylab("RT")
@@ -494,14 +488,19 @@ If we wanted to compare each day against every other day (i.e. all the pairwise 
 
 ```{r, eval=F}
 # results not shown to save space
-lsmeans::contrast(m.lsm, 'tukey') 
+contrast(m.emm, 'tukey') %>% 
+  broom::tidy() %>% 
+  head(6)
 ```
 
-Or we might want to see if there was a significant change between any consecutive days (it doesn't look like there was):
+Or we might want to see if there was a significant change between any specific day and baseline:
 
 ```{r, eval=F}
 # results not shown to save space
-lsmeans::contrast(m.lsm, 'consec', method="fdr") 
+contrast(m.emm, 'trt.vs.ctrl') %>% 
+  broom::tidy() %>% 
+  head %>% 
+  pander
 ```
 
 
@@ -509,7 +508,7 @@ Perhaps more interesting in this example is to check the polynomial contrasts, t
 
 ```{r, eval=F}
 # results not shown to save space
-lsmeans::contrast(m.lsm, 'poly') %>% 
+contrast(m.emm, 'poly') %>% 
   broom::tidy() %>% 
   head(3) %>% 
   pander(caption="The first three polynomial contrasts. Note you'd have to have quite a fancy theory to warrant looking at any of the higher level polynomial terms.") 
