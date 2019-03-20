@@ -209,14 +209,13 @@ juice.anova
 And we could [compute the contasts](#contrasts) for each fruit against the others (the grand mean):
 
 ```{r}
-juice.lsm <- lsmeans::lsmeans(juice.lm, pairwise~juice, adjust="fdr")
-juice.contrasts <- summary(lsmeans::contrast(juice.lsm, "eff"))
-juice.contrasts
+juice.lsm <- emmeans::emmeans(juice.lm, pairwise~juice, adjust="fdr")
+juice.contrasts <- emmeans::contrast(juice.lsm, "eff")
+juice.contrasts$contrasts
 ```
 
 
-[We found a significant main effect of juice, `r apastats::describe.Anova(juice.anova, 2)`. Followup tests (adjusted for false discovery rate) indicated that only Durian differed from the other juices, and was rated a significantly less tasty Mango, Apple, and Orange juice, `r apastats::describe.lsmeans(juice.contrasts, 4, dtype="d")`]{.apa-example}
-
+[We found a significant main effect of juice, `r apastats::describe.Anova(juice.anova, 2)`. Followup tests (adjusted for false discovery rate) indicated that only Durian differed from the other juices, and was rated a significantly less tasty Mango, Apple, and Orange juice.]{.apa-example}
 
 
 
@@ -559,10 +558,11 @@ For more on assumptions checks after linear models or Anova see: <http://www.sta
 [The text below continues on from [this example of factorial Anova](#howell-factorial-example).]{.tip}
 
 
-If we want to look at post-hoc pairwise tests we can use the the `lsmeans()` function from the `lsmeans::` package. By default Tukey correction is applied for multiple comparisons, which is a reasonable default:
+If we want to look at post-hoc pairwise tests we can use the the `emmeans()` function from the `emmeans::` package. By default Tukey correction is applied for multiple comparisons, which is a reasonable default:
 
 ```{r}
-lsmeans::lsmeans(eysenck.model, pairwise~Age:Condition)
+em <- emmeans::emmeans(eysenck.model, pairwise~Age:Condition)
+em$contrasts
 ```
 
 Both cell means and pairwise contrasts are shown here. There is much more detail on computing pairwise comparisons and other types of contrasts in the section on [multiple comparisons](#multiple-comparisons), including ways to [extract](#extract-contrasts) and present your comparisons in APA format.
