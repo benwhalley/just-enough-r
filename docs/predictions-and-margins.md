@@ -336,10 +336,9 @@ What is the effect of being black or female on the chance of you getting diabete
 
 Two ways of computing, depending on which of these two you hate least:
 
-  - Calculate the effect of being black for someone who is 50% female (marginal effect at the means, MEM)
+- Calculate the effect of being black for someone who is 50% female (marginal effect at the means, MEM)
+
 - Calculate the effect first pretending someone is black, then pretending they are white, and taking the difference between these estimate (average marginal effect, AME)
-
-
 
 
 

@@ -16,9 +16,7 @@ title: 'Bayesian linear modelling via MCMC'
 
 This is a minimal guide to fitting and interpreting regression and multilevel models via MCMC. For _much_ more detail, and a much more comprehensive introduction to modern Bayesian analysis see [Jon Kruschke's *Doing Bayesian Data Analysis*](http://www.indiana.edu/~kruschke/DoingBayesianDataAnalysis/).
 
-
 Let's revisit our [previous example which investigated the effect of familiar and liked music on pain perception](#pain-music-data):
-
 
 
 ```r
@@ -65,8 +63,6 @@ Residual standard error: 1.47 on 107 degrees of freedom
 Multiple R-squared:  0.5043,	Adjusted R-squared:  0.4858 
 F-statistic: 27.22 on 4 and 107 DF,  p-value: 1.378e-15
 ```
-
-
 
 Do the same thing again, but with with MCMC using Stan:
 
@@ -126,9 +122,8 @@ For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure
 ```
 
 
-
-
 ### Posterior probabilities for parameters {-}
+
 
 
 ```r

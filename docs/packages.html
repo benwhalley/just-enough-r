@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="lists.html">
+<link rel="prev" href="functions-to-learn-now.html">
 <link rel="next" href="datasets-dataframes.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -147,8 +147,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="installation-intro.html"><a href="installation-intro.html"><i class="fa fa-check"></i>Installation</a></li>
 <li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html"><i class="fa fa-check"></i>Workflow</a><ul>
 <li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#rmarkdown"><i class="fa fa-check"></i>RMarkdown</a></li>
-<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#writing-and-knitting-rmarkdown"><i class="fa fa-check"></i>Writing and ‘knitting’ RMarkdown</a></li>
 <li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#rstudio"><i class="fa fa-check"></i>RStudio</a></li>
+<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#creating-code-chunks"><i class="fa fa-check"></i>Creating code chunks</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="first-commands.html"><a href="first-commands.html"><i class="fa fa-check"></i>First commands</a></li>
 <li class="chapter" data-level="" data-path="variables.html"><a href="variables.html"><i class="fa fa-check"></i>Naming things</a></li>
@@ -159,12 +159,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html#making-sequences"><i class="fa fa-check"></i>Making and slicing with sequences</a></li>
 <li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html#conditional-slices"><i class="fa fa-check"></i>Conditional slicing</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="processing-vectors.html"><a href="processing-vectors.html"><i class="fa fa-check"></i>Processing vectors</a><ul>
-<li class="chapter" data-level="" data-path="processing-vectors.html"><a href="processing-vectors.html#making-new-vectors"><i class="fa fa-check"></i>Making new vectors</a></li>
-<li class="chapter" data-level="" data-path="processing-vectors.html"><a href="processing-vectors.html#making-up-data-new-vectors"><i class="fa fa-check"></i>Making up data (new vectors)</a></li>
+<li class="chapter" data-level="" data-path="working-with-vectors.html"><a href="working-with-vectors.html"><i class="fa fa-check"></i>Working with vectors</a><ul>
+<li class="chapter" data-level="" data-path="working-with-vectors.html"><a href="working-with-vectors.html#making-new-vectors"><i class="fa fa-check"></i>Making new vectors</a></li>
+<li class="chapter" data-level="" data-path="working-with-vectors.html"><a href="working-with-vectors.html#making-up-data-new-vectors"><i class="fa fa-check"></i>Making up data (new vectors)</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="functions-to-learn-now.html"><a href="functions-to-learn-now.html"><i class="fa fa-check"></i>Functions to learn now</a></li>
-<li class="chapter" data-level="" data-path="lists.html"><a href="lists.html"><i class="fa fa-check"></i>Lists</a></li>
 <li class="chapter" data-level="" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i>Packages</a></li>
 </ul></li>
 <li class="part"><span><b>II Data</b></span></li>
@@ -363,7 +362,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#storing-models-in-variables"><i class="fa fa-check"></i>Storing models in variables</a></li>
 <li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#extract-results-from-models"><i class="fa fa-check"></i>Extracting results from models</a></li>
 <li><a href="models-are-data-too.html#poking-around-with-and">‘Poking around’ with <code>$</code> and <code>@</code></a></li>
-<li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#broom"><i class="fa fa-check"></i>Save work: use a Broom</a></li>
+<li><a href="models-are-data-too.html#broom">Save time: use a <code>broom</code></a></li>
 <li class="chapter" data-level="" data-path="process-model-results.html"><a href="process-model-results.html"><i class="fa fa-check"></i>‘Processing’ results</a></li>
 <li class="chapter" data-level="" data-path="output-tables.html"><a href="output-tables.html"><i class="fa fa-check"></i>Printing tables</a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html"><i class="fa fa-check"></i>APA formatting for free</a><ul>
@@ -382,7 +381,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="rownames.html"><a href="rownames.html"><i class="fa fa-check"></i>Rownames are evil</a></li>
 <li class="chapter" data-level="" data-path="string-handling.html"><a href="string-handling.html"><i class="fa fa-check"></i>Working with character strings</a><ul>
 <li class="chapter" data-level="18.0.1" data-path="string-handling.html"><a href="string-handling.html#searching-and-replacing"><i class="fa fa-check"></i><b>18.0.1</b> Searching and replacing</a></li>
-<li><a href="processing-vectors.html#paste">Using <code>paste</code> to make labels</a></li>
+<li><a href="working-with-vectors.html#paste">Using <code>paste</code> to make labels</a></li>
 <li><a href="string-handling.html#separate-and-extract">Fixing up <code>variable</code> after melting</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="colours.html"><a href="colours.html"><i class="fa fa-check"></i>Colours</a><ul>
@@ -441,24 +440,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="packages" class="section level2 unnumbered">
 <h2>Packages</h2>
-<p>R has been around for a very long time, but has remained popular because it is easy for people to add new functions to it.</p>
-<p>You can run almost any statistical model and produce a wide variety of graphics in R because people have contributed new functions and these extend the base language. These new features are distributed in bundles known as ‘packages’. For now we’ll assume someone has helped you install all the packages you need<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.</p>
-<p>To <em>access</em> the features in packages, you normally load the package with the <code>library()</code> function. Running <code>library(&lt;packagename&gt;)</code> loads all the new functions within it, and it is then possible to call them from your code. For example, typing:</p>
+<p>R has been around for ages. It remains popular because it’s <em>easy for people to add to it</em>.</p>
+<p>You can run almost any statistical model and produce many different plots in R because users write ‘packages’ which extend the base language. For now we assume someone has helped you install all the packages you need<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.</p>
+<p>To <em>access</em> features in packages, you normally load the package with the <code>library()</code> function. Running <code>library(&lt;packagename&gt;)</code> loads all the new functions within it, and it is then possible to call them from your code. For example, typing:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)</code></pre>
 <p>Will load the <code>ggplot2</code> package. You can then call the <code>qplot</code> function it provides:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(mtcars<span class="op">$</span>mpg, <span class="dt">bins=</span><span class="dv">7</span>)</code></pre>
 <p><img src="packages_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div class="tip">
+<p>It’s good style to load packages at the top of an R script, or in the first chunk of an RMarkdown document. This makes it easy for others to see what packages they need to install, and helps avoid certain sorts of errors in your code.</p>
+</div>
 <div id="package-namespacing" class="section level4 unnumbered">
 <h4></h4>
-<p>You don’t strictly <em>need</em> to load packages to use the features within them though. If a package is installed on your system you can also call a function it provides directly. In the example below we call the <code>hist.data.frame</code> from the <code>Hmisc</code> package, and obtain histograms of all the variables in the <code>mtcars</code> dataset:</p>
+<p>You don’t strictly <em>need</em> to load packages to use their features. If a package is installed on your system you can also call a function it provides directly. In the example below we call the <code>hist.data.frame</code> from the <code>Hmisc</code> package, and obtain histograms of all the variables in the <code>mtcars</code> dataset:</p>
 <pre class="sourceCode r"><code class="sourceCode r">Hmisc<span class="op">::</span><span class="kw">hist.data.frame</span>(mtcars)</code></pre>
 <p><img src="packages_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>The rule is to type <code>package::function(parameters)</code>, where <code>::</code> separates the package and function names. Parameters are just the inputs to the function.</p>
 <p>There are two reasons not to load a package before using it:</p>
 <ol style="list-style-type: decimal">
 <li><p>Laziness: it can save typing if you just want to use one function from a package, and only once.</p></li>
-<li><p>Explicitness: It’s an unfortunate fact that some function names are repeated across a number of packages. This can be confusing if they work differently, and if you don’t know which package the version you are using comes from. Using <code>package_name:function_name</code> can help make things explicit.</p></li>
+<li><p>Explicitness: It’s an unfortunate truth that some function names are repeated in different packages. This can be confusing if they work differently or do comepletely different things. If you don’t know which package the version you are using comes from. Using <code>package_name:function_name</code> can help make things explicit.</p></li>
 </ol>
+<div class="exercise">
+<p>Try using the <code>hist.data.frame</code> function in the <code>Hmisc</code> package on the <code>mtcars</code> data.</p>
+<ul>
+<li>First using the <code>::</code> syntax</li>
+<li>Then load the <code>Hmisc</code> package, and repeat without using the <code>::</code>.</li>
+</ul>
+</div>
 
 </div>
 </div>
@@ -477,7 +486,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="lists.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="functions-to-learn-now.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="datasets-dataframes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

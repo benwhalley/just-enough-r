@@ -105,6 +105,7 @@ The figure above shows the main RStudio interface, comprising:
 
 You can see a short video demonstrating the RStudio interface here: 
 
+
 <iframe src="https://player.vimeo.com/video/221888958" width="640" height="480" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 <!-- 
@@ -162,16 +163,23 @@ The video:
 - Run a plotting function, and see the result.
 - Create RMarkdown file, and 'Knit' it to produce a document containing the results of your code and explanatory text.
 
+
+
+:::{.exercise}
+
 Once you have watched the video:
 
-- Try creating a new RMarkdown document in RStudio.
-- Edit some of the text, and press the Knit button to see the results.
-- If you feel brave, edit one of the R blocks and see what happens!
+
+- Open RStudio and create a new RMarkdown document.
+- Edit some of the text, and press the `Knit` button to see the results.
+- Edit some of the R blocks and see what happens.
+
+:::
 
 
 
 
-### Writing and 'knitting' RMarkdown {-}
+### Creating code chunks {-}
 
 To include R code within RMarkdown we write 3 backticks (`` ``` ``), followed by `{r}`. We the include our R code, and close the block with 3 more backticks ([how to find the backtick on your keyboard](#backtick-location)).
 
@@ -180,31 +188,23 @@ To include R code within RMarkdown we write 3 backticks (`` ``` ``), followed by
 When a document including this chunk is run or 'knitted', the final result will include the the line `2+2` followed by the number `4` on the next line. We can use RMarkdown to 'show our workings': our analysis can be interleaved with narrative text to explain or interpret the calculations.
 
 
-
-
 ##### More about RMarkdown {- .tip}
 
-A more detailed guide to using RMarkdown, which covers many of the 'chunk options' available to customise output, [is available here](http://cfss.uchicago.edu/block013_rmarkdown.html)
-
-If you'd like to use RMarkdown to include manage your citations, [see this guide](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html)
-
-
-
+A more in depth explanation of RMarkdown is here: [https://rmarkdown.rstudio.com](https://rmarkdown.rstudio.com), and a detailed user guide here: [https://rmarkdown.rstudio.com/lesson-1.html](https://rmarkdown.rstudio.com/lesson-1.html)
 
 
 
 ## First commands {-}
 
-You can type R commands directly into the console and see the result there, but you should make a habit of working in an RMarkdown file. This keeps a record of everything you try, and makes it easy to edit/amend commands which don't work as you expect.
-
-Now would be a good time to open an RMarkdown document to see how it works. A good place to start would be to open the source to this document. The best way to do this is to download the source code for the 'Just Enough R' project, and then open the file `start_here.Rmd`.
+You can type R commands directly into the 'console' (see [here](#rstudio)) and see the result there, but you should make a habit of working in an RMarkdown file. This keeps a record of everything you try, and makes it easy to edit/amend things which didn't quite work.
 
 
-#### {- .exercise}
 
-The source for this RMarkdown file is available here: <https://raw.githubusercontent.com/benwhalley/just-enough-r/master/start_here.Rmd>.
+:::{.exercise}
 
-Or you can download the whole project here: <https://github.com/benwhalley/just-enough-r/archive/master.zip>. This link downloads a 'zip' file, which is a compressed folder containing all the files in the project. To 'unzip' it on Mac or Windows just double-click the file in the Finder or Windows Explorer.
+Create a new Rmarkdown document from the 'file' menu in RStudio.
+
+:::
 
 
 
@@ -212,7 +212,7 @@ Or you can download the whole project here: <https://github.com/benwhalley/just-
 
 To run code in the RStudio interface put your cursor on a line within an R Block (or select the code you want to run), and press `Ctrl-Enter`. The result will appear below the code block.
 
-The command in the R block below prints (shows on screen) the first few rows of the build-in `mtcars` example dataset. 
+The command in the R block below prints (i.e. shows on screen) the first few rows of a dataset that is built-in to R as an example, called `mtcars`. 
 
 Place your cursor somewhere in the line the command is on and run it by typing `Ctrl-Enter`, shown in this brief video:
 
@@ -234,13 +234,15 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
 ```
 
 
-If you are reading this from within RStudio, running `head(mtcars)` will have included an interactive table in the document, which you can use this to view the `mtcars` dataset. If you are still reading the compiled html or pdf document you will see a table containing the same data, included within the body of the document.
+If you are reading this from within RStudio, running `head(mtcars)` makes an interactive table in your document, which you can use this to browse the `mtcars` dataset. 
+
+If you are still reading the compiled html or pdf document you will see a static table containing the same data.
 
 Hopefully at this point it's obvious that RStudio and RMarkdown give you:
 
-- A nice place to work with R and explore your data
-- A nice format to share your workings (e.g. with other researchers or your tutor)
-- A mechanism to save reports of your analysis, to share with other people who don't use RStudio
+- A nice place to work your data interactively
+- A way to 'show your workings' and save this for later
+- A way to share your analysis
 
 
 
@@ -255,7 +257,11 @@ To assign labels we use the `<-` symbol. The `<-` symbol points from the value w
 the_magic_number <- 3
 ```
 
-This assigns the value `3` to the variable `the_magic_number`. This block wouldn't display anything because assigning a variable doesn't create any output. To both assign a variable *and* display it we would type:
+This assigns the value `3` to the variable `the_magic_number`. 
+
+This block wouldn't display anything because assigning a variable doesn't create any output. 
+
+To both assign a variable *and* display it we would type:
   
 
 ```r
@@ -263,7 +269,6 @@ the_magic_number <- 3
 the_magic_number
 [1] 3
 ```
-
 
 
 Or we can use a shortcut: if we wrap the line in parentheses this both makes the assignment and prints the result to the console:
@@ -277,8 +282,7 @@ Or we can use a shortcut: if we wrap the line in parentheses this both makes the
 
 
 
-
-Helpfully, we can do  calculations as we assign variables:
+We can also do calculations as we assign variables:
 
 
 ```r
@@ -288,10 +292,15 @@ one_score <- 20
 ```
 
 
+:::{.tip}
 
+We can give *anything* a label by assigning it to a variable. 
 
-[We can give *anything* a label by assigning it to a variable. It doesn't have to be a number: we can also assign words, graphics and plots, the results of a statistical model, or *lists* of any of these things.]{.tip}
+It doesn't have to be a number; we can also assign letters, words, graphics, the results of a statistical model, or *lists* of any of these things.
 
+This will come in handy later.
+
+:::
 
 
 
@@ -497,7 +506,7 @@ heights[heights > mean(heights)]
 
 
 
-## Processing vectors {-}
+## Working with vectors {-}
 
 Many of R's most useful functions process *vectors of numbers* in some way. For example (as we've already seen) if we want to calculate the average of our vector of heights we just type:
 
@@ -800,31 +809,47 @@ Try and experiment with each of these functions. Check the output against what y
 
 
 
-
+<!-- 
 
 
 ## Lists {- #lists}
 
-Try running the code below:
+Try running the code below by typing it into the console:
 
 
 ```r
-(confusing.vector <- c(1, 2, 3, "Wibble"))
+confusing.vector <- c(1, 2, 3, "Wibble")
+confusing.vector
 [1] "1"      "2"      "3"      "Wibble"
-(first.element <- confusing.vector[1])
-[1] "1"
+```
+
+And then try this:
+
+
+```r
+first.element <- confusing.vector[1]
 sqrt(first.element)
 Error in sqrt(first.element): non-numeric argument to mathematical function
 ```
 
 
+:::{.exercise}
+
 Take a minute to try and make a guess at what went wrong. Why does R complain that the `1` is non-numeric?
 
-When we built the vector we used `c` to combine the elements `1`, `2`, `3` and `"Wibble"`. Although our first three elements are numbers, `"Wibble"` is not - it's made up of letters (this is called a character string).
+:::
+
+
+The answer: When we built the vector we used `c` to combine the elements `1`, `2`, `3` and `"Wibble"`. Although our first three elements are numbers, `"Wibble"` is not - it's made up of letters (this is called a character string).
 
 Vectors can only contain one *type* of thing so R automatically converts all the elements to the same type, if it can. 
 
 Because R can't reliably convert `"Wibble"` to a number, everything in the vector was converted to the `character` type instead. We get an error because R can't mutiply words together.
+
+
+
+#### Checking what type of thing you have... {-}
+
 
 If you're not sure what type of thing your vector contains, you can use the `typeof` function:
 
@@ -924,4 +949,4 @@ Extended questions:
 - Use the `paste` and `c(...)` functions to create a vector which contains the sequence "1 elephant", "2 elephants", ...,  "1000 elephants". 
 
 
-
+ -->

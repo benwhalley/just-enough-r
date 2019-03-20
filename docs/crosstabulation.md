@@ -40,7 +40,7 @@ X-squared = 11.864, df = 1, p-value = 0.0005724
 ```
 
 
-Note that we can access each number in this output individually because the `chisq.test` function returns [a list](#lists). We do this by using the `$` syntax:
+Note that we can access each number in this output individually because the `chisq.test` function returns a list. We do this by using the `$` syntax:
 
 
 

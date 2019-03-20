@@ -9,29 +9,73 @@ title: 'Datasets and dataframes'
 
 # (PART) Data {- #data}
 
+# The `dataframe` {#datasets-dataframes}
 
-# Datasets and dataframes {#datasets-dataframes}
+A `dataframe` is a container for our data.
 
-A dataframe is an object which can store data as you might encounter it in SPSS, Stata, or other statistics packages. 
-
-It's much like a spreadsheet, but with some constraints applied. 
-'Constraints' sound bad, but are helpful here: they make dataframes more structured and predictable to work with:
+It's much like a spreadsheet, but with some constraints applied.  'Constraints' might sound bad, but they're actually helpful: they make dataframes more structured and predictable to work with. The main constraints are that:
 
 - Each column is a [vector](#vectors-and-lists), and so can [only store one type of data](#vectors-and-lists).
 
 - Every column has to be the same length (although missing values are allowed).
 
-- Each column should have a name.
+- Each column must have a name.
 
 
-Put another way, a dataframe behaves like a *list* of *vectors*, which means we can use a lot of the same rules to [access elements within them](#access-vector-elements) (more on this below).
+A `tibble` is an updated version of a dataframe with a whimsical name, which is part of the `tidyverse`. It's almost exactly the same a dataframe, but with some rough edges smoothed off — it's safe and preferred to use `tibble` in place of `data.frame`.
+
+
+You can make a simple tibble or dataframe like this:
+
+
+```r
+data.frame(myvariable = 1:10)
+   myvariable
+1           1
+2           2
+3           3
+4           4
+5           5
+6           6
+7           7
+8           8
+9           9
+10         10
+```
+
+Using a tible is much the same, but allows some extra tricks like creating one variable from another:
+
+
+
+```r
+tibble(
+	height_m = rnorm(10, 1.5, .2),
+	weight_kg = rnorm(10, 65, 10),
+	bmi = weight_kg / height_m ^ 2,
+	overweight = bmi > 25
+)
+# A tibble: 10 x 4
+   height_m weight_kg   bmi overweight
+      <dbl>     <dbl> <dbl> <lgl>     
+ 1     1.54      56.9  23.8 FALSE     
+ 2     1.62      73.2  27.8 TRUE      
+ 3     1.44      75.7  36.4 TRUE      
+ 4     1.42      78.8  38.9 TRUE      
+ 5     1.31      62.9  36.4 TRUE      
+ 6     1.31      73.1  42.4 TRUE      
+ 7     1.45      77.6  37.0 TRUE      
+ 8     1.70      64.7  22.4 FALSE     
+ 9     1.31      67.6  39.6 TRUE      
+10     1.07      66.0  57.8 TRUE      
+```
+
 
 
 
 #### Using 'built in' data {- #built-in-data}
 
 
-The quickest way to see a dataframe in action is to use one that is [built in to R](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html). For example:
+The quickest way to see a dataframe in action is to use one that is built in to R ([this page](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html) lists all the built-in datasets). For example:
 
 
 ```r
@@ -59,15 +103,23 @@ Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
 Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
 ```
 
-In both these examples the datasets (`airquality` and `mtcars`) are already loaded and available to be used in the `head()` function.
-
-[To find a list of all the built in datasets you can type `help(datasets)` or see <https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html>. Familiarise yourself with some of the other included datasets, e.g. `datasets::attitude`. Watch out that not all the included datasets are *dataframes*: Some are just vectors of observations (e.g. the `airmiles` data) and some are 'time-series', (e.g. the `co2` data)]{.exercise}
+In both these examples the datasets are already loaded and available to be used with the `head()` function.
 
 
 
+:::{.exercise}
+
+To find a list of all the built in datasets you can type `help(datasets)` into the console, or see <https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html>. 
+
+Familiarise yourself with some of the other included datasets, e.g. `datasets::attitude`. Watch out that not all the included datasets are *dataframes*: Some are just vectors of observations (e.g. the `airmiles` data) and some are 'time-series', (e.g. the `co2` data)
+
+:::
 
 
-## Looking at data {- #looking-at-data}
+
+
+
+#### Looking at dataframes {- #looking-at-data}
 
 As we've already seen, using `print(df)` within an RMarkdown document creates a nice interactive table you can use to look at your data.
 
@@ -135,63 +187,25 @@ pander(head(airquality), caption="Tables always need a caption.")
 Table: Tables always need a caption.
 
 
-See the section on [sharing and publishing for more ways to format and present tables](#sharing-and-publication).
+See the section on [sharing and publishing](#sharing-and-publication) for more ways to format and present tables.
 
 
 Other useful functions for looking at and exploring datasets include:
 
-
-```r
-summary(airquality)
-     Ozone           Solar.R           Wind             Temp      
- Min.   :  1.00   Min.   :  7.0   Min.   : 1.700   Min.   :56.00  
- 1st Qu.: 18.00   1st Qu.:115.8   1st Qu.: 7.400   1st Qu.:72.00  
- Median : 31.50   Median :205.0   Median : 9.700   Median :79.00  
- Mean   : 42.13   Mean   :185.9   Mean   : 9.958   Mean   :77.88  
- 3rd Qu.: 63.25   3rd Qu.:258.8   3rd Qu.:11.500   3rd Qu.:85.00  
- Max.   :168.00   Max.   :334.0   Max.   :20.700   Max.   :97.00  
- NA's   :37       NA's   :7                                       
-     Month            Day      
- Min.   :5.000   Min.   : 1.0  
- 1st Qu.:6.000   1st Qu.: 8.0  
- Median :7.000   Median :16.0  
- Mean   :6.993   Mean   :15.8  
- 3rd Qu.:8.000   3rd Qu.:23.0  
- Max.   :9.000   Max.   :31.0  
-                               
-```
+- `summary(df)`
+- `psych::describe(df)`
+- `skimr::skim(df)`
 
 
-Or the more compact and useful output from `describe()` which is in the `pysch` package:
+:::{.exercise}
+
+Experiment with a few of the functions for viewing/summarising dataframes.
+
+:::
 
 
-```r
-# fast = T just skips some of the available stats (e.g. kurtosis)
-psych::describe(airquality, fast = T) %>% 
-  pander(caption="Summary statistics generated by the `psych::describe()` function.")
-```
 
-
-------------------------------------------------------------------------
-   &nbsp;      vars    n    mean     sd     min   max    range     se   
-------------- ------ ----- ------- ------- ----- ------ ------- --------
-  **Ozone**     1     116   42.13   32.99    1    168     167    3.063  
-
- **Solar.R**    2     146   185.9   90.06    7    334     327    7.453  
-
-  **Wind**      3     153   9.958   3.523   1.7   20.7    19     0.2848 
-
-  **Temp**      4     153   77.88   9.465   56     97     41     0.7652 
-
-  **Month**     5     153   6.993   1.417    5     9       4     0.1145 
-
-   **Day**      6     153   15.8    8.865    1     31     30     0.7167 
-------------------------------------------------------------------------
-
-Table: Summary statistics generated by the `psych::describe()` function.
-
-
-There are also some helpful plotting functions which accept a whole dataframe:
+There are also some helpful plotting functions which accept a whole dataframe as their input:
 
 
 ```r
@@ -218,9 +232,14 @@ These plots might not be worth including in a final write-up, but are very usefu
 
 
 
-### Using individual columns {-}
+#### Selecting individual columns from a dataframe {-}
 
-Because dataframes are like a list of vectors, we can access individual columns using the `$` symbol. This extracts the column as a vector, so we can pass it to functions:
+Like spreadsheets, dataframes have a series of columns in order, but each column also has a name.
+
+This means we can access individual columns by their position, OR by their name.
+
+
+To access columns by name we use the `$` symbol. The dollar symbol selects the column as a vector, and we can use this within functions like `mean`:
 
 
 ```r
@@ -228,13 +247,18 @@ mean(mtcars$mpg)
 [1] 20.09062
 ```
 
-Or slice it:
-
+We can also slice the column, taking individual items or a series of items from it. Here we slice it to take the first item:
 
 
 ```r
 (first.mpg <- mtcars$mpg[1])
 [1] 21
+```
+
+We can combine this with other functions like `sort` or `rev` (short for reverse) to get the largest or smallest vaules:
+
+
+```r
 (worst.mpg <- sort(mtcars$mpg)[1])
 [1] 10.4
 (best.mpg <- rev(sort(mtcars$mpg))[1])
@@ -243,7 +267,13 @@ Or slice it:
 
 
 
-[The problem with extracting individual columns in this way is that it's easy for data to be taken out of context: for example, if you sort individual columns then your data might get mixed up.  In general if you are accessing individual columns of data in this way it's a sign your code may be brittle and vulnerable to errors. In later sections we introduce methods for working on the whole dataset, which tends to be safer.]{.admonition}
+:::{.admonition}
+
+The problem with extracting individual columns in this way is that it's easy for data to be taken out of context.
+
+For example, if you sort individual columns then your data might get mixed up.  In general if you are accessing individual columns of data in this way it's a sign your code may be brittle and vulnerable to errors. In later sections we introduce methods for working on the whole dataset, which tends to be safer.
+
+:::
 
 
 

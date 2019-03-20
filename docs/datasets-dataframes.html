@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="packages.html">
-<link rel="next" href="looking-at-data.html">
+<link rel="next" href="working-with-dataframes.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -142,13 +142,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="part"><span><b>I Getting started</b></span></li>
-<li class="chapter" data-level="1" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>1</b> Working with R</a><ul>
+<li class="part"><span><b>I Getting started</b></span><ul>
 <li class="chapter" data-level="" data-path="installation-intro.html"><a href="installation-intro.html"><i class="fa fa-check"></i>Installation</a></li>
 <li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html"><i class="fa fa-check"></i>Workflow</a><ul>
 <li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#rmarkdown"><i class="fa fa-check"></i>RMarkdown</a></li>
-<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#writing-and-knitting-rmarkdown"><i class="fa fa-check"></i>Writing and ‘knitting’ RMarkdown</a></li>
 <li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#rstudio"><i class="fa fa-check"></i>RStudio</a></li>
+<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#creating-code-chunks"><i class="fa fa-check"></i>Creating code chunks</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="first-commands.html"><a href="first-commands.html"><i class="fa fa-check"></i>First commands</a></li>
 <li class="chapter" data-level="" data-path="variables.html"><a href="variables.html"><i class="fa fa-check"></i>Naming things</a></li>
@@ -159,19 +158,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html#making-sequences"><i class="fa fa-check"></i>Making and slicing with sequences</a></li>
 <li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html#conditional-slices"><i class="fa fa-check"></i>Conditional slicing</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="processing-vectors.html"><a href="processing-vectors.html"><i class="fa fa-check"></i>Processing vectors</a><ul>
-<li class="chapter" data-level="" data-path="processing-vectors.html"><a href="processing-vectors.html#making-new-vectors"><i class="fa fa-check"></i>Making new vectors</a></li>
-<li class="chapter" data-level="" data-path="processing-vectors.html"><a href="processing-vectors.html#making-up-data-new-vectors"><i class="fa fa-check"></i>Making up data (new vectors)</a></li>
+<li class="chapter" data-level="" data-path="working-with-vectors.html"><a href="working-with-vectors.html"><i class="fa fa-check"></i>Working with vectors</a><ul>
+<li class="chapter" data-level="" data-path="working-with-vectors.html"><a href="working-with-vectors.html#making-new-vectors"><i class="fa fa-check"></i>Making new vectors</a></li>
+<li class="chapter" data-level="" data-path="working-with-vectors.html"><a href="working-with-vectors.html#making-up-data-new-vectors"><i class="fa fa-check"></i>Making up data (new vectors)</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="functions-to-learn-now.html"><a href="functions-to-learn-now.html"><i class="fa fa-check"></i>Functions to learn now</a></li>
 <li class="chapter" data-level="" data-path="lists.html"><a href="lists.html"><i class="fa fa-check"></i>Lists</a></li>
 <li class="chapter" data-level="" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i>Packages</a></li>
 </ul></li>
 <li class="part"><span><b>II Data</b></span></li>
-<li class="chapter" data-level="2" data-path="datasets-dataframes.html"><a href="datasets-dataframes.html"><i class="fa fa-check"></i><b>2</b> Datasets and dataframes</a><ul>
-<li class="chapter" data-level="" data-path="looking-at-data.html"><a href="looking-at-data.html"><i class="fa fa-check"></i>Looking at data</a><ul>
-<li class="chapter" data-level="" data-path="looking-at-data.html"><a href="looking-at-data.html#using-individual-columns"><i class="fa fa-check"></i>Using individual columns</a></li>
-</ul></li>
+<li class="chapter" data-level="1" data-path="datasets-dataframes.html"><a href="datasets-dataframes.html"><i class="fa fa-check"></i><b>1</b> The <code>dataframe</code></a><ul>
 <li class="chapter" data-level="" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html"><i class="fa fa-check"></i>Working with dataframes</a><ul>
 <li><a href="working-with-dataframes.html#tidyverse">Introducing the <code>tidyverse</code></a></li>
 </ul></li>
@@ -182,7 +178,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="pipes.html"><a href="pipes.html"><i class="fa fa-check"></i>Pipes</a></li>
 <li class="chapter" data-level="" data-path="mutate.html"><a href="mutate.html"><i class="fa fa-check"></i>Modifying and creating new columns</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="real-data.html"><a href="real-data.html"><i class="fa fa-check"></i><b>3</b> ‘Real’ data</a><ul>
+<li class="chapter" data-level="2" data-path="real-data.html"><a href="real-data.html"><i class="fa fa-check"></i><b>2</b> ‘Real’ data</a><ul>
 <li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html"><i class="fa fa-check"></i>Importing data</a><ul>
 <li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html#importing-data-from-the-web"><i class="fa fa-check"></i>Importing data over the web</a></li>
 <li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html#importing-proprietary-formats"><i class="fa fa-check"></i>Importing from SPSS and other packages</a></li>
@@ -206,7 +202,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="reshaping.html"><a href="reshaping.html#aggregating-and-reshaping-at-the-same-time"><i class="fa fa-check"></i>Aggregating and reshaping at the same time</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="summarising-data.html"><a href="summarising-data.html"><i class="fa fa-check"></i><b>4</b> Summaries</a><ul>
+<li class="chapter" data-level="3" data-path="summarising-data.html"><a href="summarising-data.html"><i class="fa fa-check"></i><b>3</b> Summaries</a><ul>
 <li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html"><i class="fa fa-check"></i>“Quick and dirty”</a><ul>
 <li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#frequency-tables"><i class="fa fa-check"></i>Frequency tables</a></li>
 <li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#summary-statistics"><i class="fa fa-check"></i>Summary statistics</a></li>
@@ -217,7 +213,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="a-generalised-approach.html"><a href="a-generalised-approach.html#fancy-reshaping"><i class="fa fa-check"></i>Fancy reshaping</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>5</b> Graphics</a><ul>
+<li class="chapter" data-level="4" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>4</b> Graphics</a><ul>
 <li class="chapter" data-level="" data-path="graphics-benefits.html"><a href="graphics-benefits.html"><i class="fa fa-check"></i>Benefits of visualising data</a></li>
 <li class="chapter" data-level="" data-path="graphics-approaches.html"><a href="graphics-approaches.html"><i class="fa fa-check"></i>Which tool to use?</a></li>
 <li><a href="layered-graphics.html#layered-graphics">Layered graphics with <code>ggplot</code></a><ul>
@@ -229,9 +225,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="layered-graphics.html"><a href="layered-graphics.html#composition"><i class="fa fa-check"></i>‘Composition’</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html"><i class="fa fa-check"></i>‘Quick and dirty’ (utility) plots</a><ul>
-<li class="chapter" data-level="5.0.1" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html#distributions-1"><i class="fa fa-check"></i><b>5.0.1</b> Distributions</a></li>
-<li class="chapter" data-level="5.0.2" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html#relationships-1"><i class="fa fa-check"></i><b>5.0.2</b> Relationships</a></li>
-<li class="chapter" data-level="5.0.3" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html#quantities"><i class="fa fa-check"></i><b>5.0.3</b> Quantities</a></li>
+<li class="chapter" data-level="4.0.1" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html#distributions-1"><i class="fa fa-check"></i><b>4.0.1</b> Distributions</a></li>
+<li class="chapter" data-level="4.0.2" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html#relationships-1"><i class="fa fa-check"></i><b>4.0.2</b> Relationships</a></li>
+<li class="chapter" data-level="4.0.3" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html#quantities"><i class="fa fa-check"></i><b>4.0.3</b> Quantities</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="ggplot-details.html"><a href="ggplot-details.html"><i class="fa fa-check"></i>Tricks with ggplot</a><ul>
 <li class="chapter" data-level="" data-path="ggplot-details.html"><a href="ggplot-details.html#facetting-plots"><i class="fa fa-check"></i>More ways to facet a plot</a></li>
@@ -242,7 +238,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="exporting-graphics.html"><a href="exporting-graphics.html"><i class="fa fa-check"></i>Exporting for print</a></li>
 </ul></li>
 <li class="part"><span><b>III Models</b></span></li>
-<li class="chapter" data-level="6" data-path="common-stats.html"><a href="common-stats.html"><i class="fa fa-check"></i><b>6</b> Commonly used statistics</a><ul>
+<li class="chapter" data-level="5" data-path="common-stats.html"><a href="common-stats.html"><i class="fa fa-check"></i><b>5</b> Commonly used statistics</a><ul>
 <li><a href="crosstabs.html#crosstabs">Crosstabulations and <span class="math inline">\(\chi^2\)</span></a><ul>
 <li class="chapter" data-level="" data-path="crosstabs.html"><a href="crosstabs.html"><i class="fa fa-check"></i>Three-way tables</a></li>
 </ul></li>
@@ -257,7 +253,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="t-tests.html"><a href="t-tests.html#running-a-t-test"><i class="fa fa-check"></i>Running a t-test</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="linear-models-simple.html"><a href="linear-models-simple.html"><i class="fa fa-check"></i><b>7</b> Regression</a><ul>
+<li class="chapter" data-level="6" data-path="linear-models-simple.html"><a href="linear-models-simple.html"><i class="fa fa-check"></i><b>6</b> Regression</a><ul>
 <li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#formulae"><i class="fa fa-check"></i>Describing statistical models using formulae</a></li>
 <li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#running-a-linear-model"><i class="fa fa-check"></i>Running a linear model</a></li>
 <li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#more-on-formulas"><i class="fa fa-check"></i>More on formulas</a></li>
@@ -270,7 +266,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#what-next"><i class="fa fa-check"></i>What next</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>8</b> Anova</a><ul>
+<li class="chapter" data-level="7" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>7</b> Anova</a><ul>
 <li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#rules-for-using-anova-in-r"><i class="fa fa-check"></i>Rules for using Anova in R</a></li>
 <li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#anova-recommendations"><i class="fa fa-check"></i>Recommendations for doing Anova</a></li>
 <li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html"><i class="fa fa-check"></i>Anova ‘Cookbook’</a><ul>
@@ -282,10 +278,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="checking-assumptions.html"><a href="checking-assumptions.html"><i class="fa fa-check"></i>Checking assumptions</a></li>
 <li class="chapter" data-level="" data-path="followup-tests.html"><a href="followup-tests.html"><i class="fa fa-check"></i>Followup tests</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html"><i class="fa fa-check"></i><b>9</b> Generalized linear models</a><ul>
+<li class="chapter" data-level="8" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html"><i class="fa fa-check"></i><b>8</b> Generalized linear models</a><ul>
 <li class="chapter" data-level="" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
+<li class="chapter" data-level="" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html#poisson-regression"><i class="fa fa-check"></i>Poisson regression</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>10</b> Multilevel models</a><ul>
+<li class="chapter" data-level="9" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>9</b> Multilevel models</a><ul>
 <li class="chapter" data-level="" data-path="fitting-models.html"><a href="fitting-models.html"><i class="fa fa-check"></i>Fitting multilevel models in R</a><ul>
 <li><a href="fitting-models.html#use-lmer-and-glmer">Use <code>lmer</code> and <code>glmer</code></a></li>
 <li><a href="fitting-models.html#p-values-in-multilevel-models"><em>p</em> values in multilevel models</a></li>
@@ -303,14 +300,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="multilevel-bayes-reasons.html"><a href="multilevel-bayes-reasons.html"><i class="fa fa-check"></i>Bayesian multilevel models</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="mediation-and-covariance-modelling.html"><a href="mediation-and-covariance-modelling.html"><i class="fa fa-check"></i><b>11</b> Mediation and covariance modelling</a><ul>
+<li class="chapter" data-level="10" data-path="mediation-and-covariance-modelling.html"><a href="mediation-and-covariance-modelling.html"><i class="fa fa-check"></i><b>10</b> Mediation and covariance modelling</a><ul>
 <li class="chapter" data-level="" data-path="mediation.html"><a href="mediation.html"><i class="fa fa-check"></i>Mediation</a><ul>
 <li class="chapter" data-level="" data-path="mediation.html"><a href="mediation.html#mediation-with-multiple-regression"><i class="fa fa-check"></i>Mediation with multiple regression</a></li>
 <li class="chapter" data-level="" data-path="mediation.html"><a href="mediation.html#mediation-steps"><i class="fa fa-check"></i>Mediation Steps</a></li>
 <li class="chapter" data-level="" data-path="mediation.html"><a href="mediation.html#mediation-example-after-baron-and-kenny"><i class="fa fa-check"></i>Mediation example after Baron and Kenny</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="testing-the-indirect-effect.html"><a href="testing-the-indirect-effect.html"><i class="fa fa-check"></i>Testing the indirect effect</a></li>
-<li class="chapter" data-level="11.1" data-path="mediation-using-path-models.html"><a href="mediation-using-path-models.html"><i class="fa fa-check"></i><b>11.1</b> Mediation using Path models</a></li>
+<li class="chapter" data-level="10.1" data-path="mediation-using-path-models.html"><a href="mediation-using-path-models.html"><i class="fa fa-check"></i><b>10.1</b> Mediation using Path models</a></li>
 <li class="chapter" data-level="" data-path="covariance-modelling.html"><a href="covariance-modelling.html"><i class="fa fa-check"></i>Covariance modelling</a></li>
 <li class="chapter" data-level="" data-path="path-models.html"><a href="path-models.html"><i class="fa fa-check"></i>Path models</a><ul>
 <li class="chapter" data-level="" data-path="path-models.html"><a href="path-models.html#defining-a-model"><i class="fa fa-check"></i>Defining a model</a></li>
@@ -327,25 +324,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="cfa-sem-missing-data.html"><a href="cfa-sem-missing-data.html"><i class="fa fa-check"></i>Missing data</a></li>
 <li class="chapter" data-level="" data-path="gof.html"><a href="gof.html"><i class="fa fa-check"></i>Goodness of fit statistics in CFA</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html"><i class="fa fa-check"></i><b>12</b> Baysian model fitting</a><ul>
+<li class="chapter" data-level="11" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html"><i class="fa fa-check"></i><b>11</b> Baysian model fitting</a><ul>
 <li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#baysian-fitting-of-linear-models-via-mcmc-methods"><i class="fa fa-check"></i>Baysian fitting of linear models via MCMC methods</a></li>
 <li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#posterior-probabilities-for-parameters"><i class="fa fa-check"></i>Posterior probabilities for parameters</a></li>
 <li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#credible-intervals"><i class="fa fa-check"></i>Credible intervals</a></li>
 <li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#bayesian-p-values-for-parameters"><i class="fa fa-check"></i>Bayesian ‘p values’ for parameters</a></li>
+<li class="chapter" data-level="" data-path="region-of-practical-importance.html"><a href="region-of-practical-importance.html"><i class="fa fa-check"></i>Bayesian analysis of RCT data</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="power-analysis.html"><a href="power-analysis.html"><i class="fa fa-check"></i><b>13</b> Power analysis</a><ul>
+<li class="chapter" data-level="12" data-path="power-analysis.html"><a href="power-analysis.html"><i class="fa fa-check"></i><b>12</b> Power analysis</a><ul>
 <li class="chapter" data-level="" data-path="power-analysis.html"><a href="power-analysis.html#for-most-inferential-statistics"><i class="fa fa-check"></i>For most inferential statistics</a></li>
 <li class="chapter" data-level="" data-path="power-analysis.html"><a href="power-analysis.html#for-multilevel-or-generalised-linear-models"><i class="fa fa-check"></i>For multilevel or generalised linear models</a></li>
 </ul></li>
 <li class="part"><span><b>IV Patterns</b></span></li>
-<li class="chapter" data-level="14" data-path="learning-key-patterns.html"><a href="learning-key-patterns.html"><i class="fa fa-check"></i><b>14</b> Learning key patterns</a></li>
-<li class="chapter" data-level="15" data-path="understanding-interactions.html"><a href="understanding-interactions.html"><i class="fa fa-check"></i><b>15</b> Unpicking interactions</a><ul>
+<li class="chapter" data-level="13" data-path="learning-key-patterns.html"><a href="learning-key-patterns.html"><i class="fa fa-check"></i><b>13</b> Learning key patterns</a></li>
+<li class="chapter" data-level="14" data-path="understanding-interactions.html"><a href="understanding-interactions.html"><i class="fa fa-check"></i><b>14</b> Unpicking interactions</a><ul>
 <li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#what-is-an-interaction"><i class="fa fa-check"></i>What is an interaction?</a></li>
 <li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#visualising-interactions-from-raw-data"><i class="fa fa-check"></i>Visualising interactions from raw data</a></li>
 <li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#pain-music-data"><i class="fa fa-check"></i>A painful example</a></li>
 <li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#continuous-predictors"><i class="fa fa-check"></i>Continuous predictors</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html"><i class="fa fa-check"></i><b>16</b> Making predictions</a><ul>
+<li class="chapter" data-level="15" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html"><i class="fa fa-check"></i><b>15</b> Making predictions</a><ul>
 <li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predictions-vs-margins"><i class="fa fa-check"></i>Predictions vs margins</a></li>
 <li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predicted-means"><i class="fa fa-check"></i>Predicted means</a></li>
 <li><a href="predictions-and-margins.html#effects-margins"><em>Effects</em> (margins)</a></li>
@@ -359,11 +357,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="predictions-with-continuous-covariates.html"><a href="predictions-with-continuous-covariates.html"><i class="fa fa-check"></i>Predictions with continuous covariates</a></li>
 <li class="chapter" data-level="" data-path="visualising-interactions.html"><a href="visualising-interactions.html"><i class="fa fa-check"></i>Visualising interactions</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="models-are-data-too.html"><a href="models-are-data-too.html"><i class="fa fa-check"></i><b>17</b> Models are data</a><ul>
+<li class="chapter" data-level="16" data-path="models-are-data-too.html"><a href="models-are-data-too.html"><i class="fa fa-check"></i><b>16</b> Models are data</a><ul>
 <li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#storing-models-in-variables"><i class="fa fa-check"></i>Storing models in variables</a></li>
 <li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#extract-results-from-models"><i class="fa fa-check"></i>Extracting results from models</a></li>
 <li><a href="models-are-data-too.html#poking-around-with-and">‘Poking around’ with <code>$</code> and <code>@</code></a></li>
-<li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#broom"><i class="fa fa-check"></i>Save work: use a Broom</a></li>
+<li><a href="models-are-data-too.html#broom">Save time: use a <code>broom</code></a></li>
 <li class="chapter" data-level="" data-path="process-model-results.html"><a href="process-model-results.html"><i class="fa fa-check"></i>‘Processing’ results</a></li>
 <li class="chapter" data-level="" data-path="output-tables.html"><a href="output-tables.html"><i class="fa fa-check"></i>Printing tables</a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html"><i class="fa fa-check"></i>APA formatting for free</a><ul>
@@ -378,11 +376,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="table1.html"><a href="table1.html"><i class="fa fa-check"></i>“Table 1”</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="quirks.html"><a href="quirks.html"><i class="fa fa-check"></i><b>18</b> Dealing with quirks of R</a><ul>
+<li class="chapter" data-level="17" data-path="quirks.html"><a href="quirks.html"><i class="fa fa-check"></i><b>17</b> Dealing with quirks of R</a><ul>
 <li class="chapter" data-level="" data-path="rownames.html"><a href="rownames.html"><i class="fa fa-check"></i>Rownames are evil</a></li>
 <li class="chapter" data-level="" data-path="string-handling.html"><a href="string-handling.html"><i class="fa fa-check"></i>Working with character strings</a><ul>
-<li class="chapter" data-level="18.0.1" data-path="string-handling.html"><a href="string-handling.html#searching-and-replacing"><i class="fa fa-check"></i><b>18.0.1</b> Searching and replacing</a></li>
-<li><a href="processing-vectors.html#paste">Using <code>paste</code> to make labels</a></li>
+<li class="chapter" data-level="17.0.1" data-path="string-handling.html"><a href="string-handling.html#searching-and-replacing"><i class="fa fa-check"></i><b>17.0.1</b> Searching and replacing</a></li>
+<li><a href="working-with-vectors.html#paste">Using <code>paste</code> to make labels</a></li>
 <li><a href="string-handling.html#separate-and-extract">Fixing up <code>variable</code> after melting</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="colours.html"><a href="colours.html"><i class="fa fa-check"></i>Colours</a><ul>
@@ -391,32 +389,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#color-brewer"><i class="fa fa-check"></i>ColourBrewer with ggplot</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="getting-help.html"><a href="getting-help.html"><i class="fa fa-check"></i><b>19</b> Getting help</a><ul>
+<li class="chapter" data-level="18" data-path="getting-help.html"><a href="getting-help.html"><i class="fa fa-check"></i><b>18</b> Getting help</a><ul>
 <li class="chapter" data-level="" data-path="getting-help.html"><a href="getting-help.html#backtick-location"><i class="fa fa-check"></i>Finding the backtick on your keyboard</a></li>
 </ul></li>
 <li class="part"><span><b>V Explanations</b></span></li>
-<li class="chapter" data-level="20" data-path="intervals.html"><a href="intervals.html"><i class="fa fa-check"></i><b>20</b> Confidence and Intervals</a><ul>
+<li class="chapter" data-level="19" data-path="intervals.html"><a href="intervals.html"><i class="fa fa-check"></i><b>19</b> Confidence and Intervals</a><ul>
 <li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html#the-problem-with-confidence-intervals"><i class="fa fa-check"></i>The problem with confidence intervals</a></li>
 <li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html#forgetting-that-the-ci-depends-on-sample-size."><i class="fa fa-check"></i>Forgetting that the CI depends on sample size.</a></li>
+<li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html#but-should-i-report-the-ci-or-not"><i class="fa fa-check"></i>But should I report the CI or not?</a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html"><i class="fa fa-check"></i><b>21</b> Multiple comparisons</a><ul>
+<li class="chapter" data-level="20" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html"><i class="fa fa-check"></i><b>20</b> Multiple comparisons</a><ul>
 <li><a href="multiple-comparisons.html#p-values-and-false-discoveries"><em>p</em> values and ‘false discoveries’</a></li>
 <li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#multiple-tests-on-the-same-data"><i class="fa fa-check"></i>Multiple tests on the same data</a></li>
 <li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#what-to-do-about-it"><i class="fa fa-check"></i>What to do about it?</a></li>
 <li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#contrasts-examples"><i class="fa fa-check"></i>Practical examples</a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>22</b> Non-independence</a></li>
-<li class="chapter" data-level="23" data-path="fixed-or-random.html"><a href="fixed-or-random.html"><i class="fa fa-check"></i><b>23</b> Fixed and random effects</a></li>
-<li class="chapter" data-level="24" data-path="scaling-predictors.html"><a href="scaling-predictors.html"><i class="fa fa-check"></i><b>24</b> Scaling predictor variables</a><ul>
+<li class="chapter" data-level="21" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>21</b> Non-independence</a></li>
+<li class="chapter" data-level="22" data-path="fixed-or-random.html"><a href="fixed-or-random.html"><i class="fa fa-check"></i><b>22</b> Fixed and random effects</a></li>
+<li class="chapter" data-level="23" data-path="scaling-predictors.html"><a href="scaling-predictors.html"><i class="fa fa-check"></i><b>23</b> Scaling predictor variables</a><ul>
 <li class="chapter" data-level="" data-path="scaling-predictors.html"><a href="scaling-predictors.html#standardizing"><i class="fa fa-check"></i>Standardising</a></li>
 <li class="chapter" data-level="" data-path="scaling-predictors.html"><a href="scaling-predictors.html#dichotomising"><i class="fa fa-check"></i>Dichotomising continuous predictors (or outcomes)</a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="non-scale-outcomes.html"><a href="non-scale-outcomes.html"><i class="fa fa-check"></i><b>25</b> Non-scale outcomes</a><ul>
-<li class="chapter" data-level="25.1" data-path="link-functions.html"><a href="link-functions.html"><i class="fa fa-check"></i><b>25.1</b> Link functions</a><ul>
+<li class="chapter" data-level="24" data-path="non-scale-outcomes.html"><a href="non-scale-outcomes.html"><i class="fa fa-check"></i><b>24</b> Non-scale outcomes</a><ul>
+<li class="chapter" data-level="24.1" data-path="link-functions.html"><a href="link-functions.html"><i class="fa fa-check"></i><b>24.1</b> Link functions</a><ul>
 <li class="chapter" data-level="" data-path="link-functions.html"><a href="link-functions.html#logistic-link-function"><i class="fa fa-check"></i>Logistic regression</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html"><i class="fa fa-check"></i><b>26</b> Building and choosing models</a><ul>
+<li class="chapter" data-level="25" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html"><i class="fa fa-check"></i><b>25</b> Building and choosing models</a><ul>
 <li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#like-maps-models-are-imperfect-but-useful"><i class="fa fa-check"></i>Like maps, models are imperfect but useful</a></li>
 <li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#over-fitting"><i class="fa fa-check"></i>Overfitting/underfitting</a></li>
 <li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#variable-selection"><i class="fa fa-check"></i>Choosing the ‘right variables’</a></li>
@@ -440,19 +439,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="datasets-dataframes" class="section level1">
-<h1><span class="header-section-number">2</span> Datasets and dataframes</h1>
-<p>A dataframe is an object which can store data as you might encounter it in SPSS, Stata, or other statistics packages.</p>
-<p>It’s much like a spreadsheet, but with some constraints applied.
-‘Constraints’ sound bad, but are helpful here: they make dataframes more structured and predictable to work with:</p>
+<h1><span class="header-section-number">1</span> The <code>dataframe</code></h1>
+<p>A <code>dataframe</code> is a container for our data.</p>
+<p>It’s much like a spreadsheet, but with some constraints applied. ‘Constraints’ might sound bad, but they’re actually helpful: they make dataframes more structured and predictable to work with. The main constraints are that:</p>
 <ul>
 <li><p>Each column is a <a href="vectors-and-lists.html#vectors-and-lists">vector</a>, and so can <a href="vectors-and-lists.html#vectors-and-lists">only store one type of data</a>.</p></li>
 <li><p>Every column has to be the same length (although missing values are allowed).</p></li>
-<li><p>Each column should have a name.</p></li>
+<li><p>Each column must have a name.</p></li>
 </ul>
-<p>Put another way, a dataframe behaves like a <em>list</em> of <em>vectors</em>, which means we can use a lot of the same rules to <a href="vectors-and-lists.html#access-vector-elements">access elements within them</a> (more on this below).</p>
+<p>A <code>tibble</code> is an updated version of a dataframe with a whimsical name, which is part of the <code>tidyverse</code>. It’s almost exactly the same a dataframe, but with some rough edges smoothed off — it’s safe and preferred to use <code>tibble</code> in place of <code>data.frame</code>.</p>
+<p>You can make a simple tibble or dataframe like this:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(<span class="dt">myvariable =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)
+   myvariable
+<span class="dv">1</span>           <span class="dv">1</span>
+<span class="dv">2</span>           <span class="dv">2</span>
+<span class="dv">3</span>           <span class="dv">3</span>
+<span class="dv">4</span>           <span class="dv">4</span>
+<span class="dv">5</span>           <span class="dv">5</span>
+<span class="dv">6</span>           <span class="dv">6</span>
+<span class="dv">7</span>           <span class="dv">7</span>
+<span class="dv">8</span>           <span class="dv">8</span>
+<span class="dv">9</span>           <span class="dv">9</span>
+<span class="dv">10</span>         <span class="dv">10</span></code></pre>
+<p>Using a tible is much the same, but allows some extra tricks like creating one variable from another:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tibble</span>(
+    <span class="dt">height_m =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="fl">1.5</span>, <span class="fl">.2</span>),
+    <span class="dt">weight_kg =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dv">65</span>, <span class="dv">10</span>),
+    <span class="dt">bmi =</span> weight_kg <span class="op">/</span><span class="st"> </span>height_m <span class="op">^</span><span class="st"> </span><span class="dv">2</span>,
+    <span class="dt">overweight =</span> bmi <span class="op">&gt;</span><span class="st"> </span><span class="dv">25</span>
+)
+<span class="co"># A tibble: 10 x 4</span>
+   height_m weight_kg   bmi overweight
+      <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>lgl<span class="op">&gt;</span><span class="st">     </span>
+<span class="st"> </span><span class="dv">1</span>     <span class="fl">1.54</span>      <span class="fl">56.9</span>  <span class="fl">23.8</span> <span class="ot">FALSE</span>     
+ <span class="dv">2</span>     <span class="fl">1.62</span>      <span class="fl">73.2</span>  <span class="fl">27.8</span> <span class="ot">TRUE</span>      
+ <span class="dv">3</span>     <span class="fl">1.44</span>      <span class="fl">75.7</span>  <span class="fl">36.4</span> <span class="ot">TRUE</span>      
+ <span class="dv">4</span>     <span class="fl">1.42</span>      <span class="fl">78.8</span>  <span class="fl">38.9</span> <span class="ot">TRUE</span>      
+ <span class="dv">5</span>     <span class="fl">1.31</span>      <span class="fl">62.9</span>  <span class="fl">36.4</span> <span class="ot">TRUE</span>      
+ <span class="dv">6</span>     <span class="fl">1.31</span>      <span class="fl">73.1</span>  <span class="fl">42.4</span> <span class="ot">TRUE</span>      
+ <span class="dv">7</span>     <span class="fl">1.45</span>      <span class="fl">77.6</span>  <span class="fl">37.0</span> <span class="ot">TRUE</span>      
+ <span class="dv">8</span>     <span class="fl">1.70</span>      <span class="fl">64.7</span>  <span class="fl">22.4</span> <span class="ot">FALSE</span>     
+ <span class="dv">9</span>     <span class="fl">1.31</span>      <span class="fl">67.6</span>  <span class="fl">39.6</span> <span class="ot">TRUE</span>      
+<span class="dv">10</span>     <span class="fl">1.07</span>      <span class="fl">66.0</span>  <span class="fl">57.8</span> <span class="ot">TRUE</span>      </code></pre>
 <div id="built-in-data" class="section level4 unnumbered">
 <h4>Using ‘built in’ data</h4>
-<p>The quickest way to see a dataframe in action is to use one that is <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html">built in to R</a>. For example:</p>
+<p>The quickest way to see a dataframe in action is to use one that is built in to R (<a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html">this page</a> lists all the built-in datasets). For example:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(airquality)
   Ozone Solar.R Wind Temp Month Day
 <span class="dv">1</span>    <span class="dv">41</span>     <span class="dv">190</span>  <span class="fl">7.4</span>   <span class="dv">67</span>     <span class="dv">5</span>   <span class="dv">1</span>
@@ -470,8 +501,160 @@ Datsun <span class="dv">710</span>        <span class="fl">22.8</span>   <span c
 Hornet <span class="dv">4</span> Drive    <span class="fl">21.4</span>   <span class="dv">6</span>  <span class="dv">258</span> <span class="dv">110</span> <span class="fl">3.08</span> <span class="fl">3.215</span> <span class="fl">19.44</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span>
 Hornet Sportabout <span class="fl">18.7</span>   <span class="dv">8</span>  <span class="dv">360</span> <span class="dv">175</span> <span class="fl">3.15</span> <span class="fl">3.440</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">2</span>
 Valiant           <span class="fl">18.1</span>   <span class="dv">6</span>  <span class="dv">225</span> <span class="dv">105</span> <span class="fl">2.76</span> <span class="fl">3.460</span> <span class="fl">20.22</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span></code></pre>
-<p>In both these examples the datasets (<code>airquality</code> and <code>mtcars</code>) are already loaded and available to be used in the <code>head()</code> function.</p>
-<p><span class="exercise">To find a list of all the built in datasets you can type <code>help(datasets)</code> or see <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html</a>. Familiarise yourself with some of the other included datasets, e.g. <code>datasets::attitude</code>. Watch out that not all the included datasets are <em>dataframes</em>: Some are just vectors of observations (e.g. the <code>airmiles</code> data) and some are ‘time-series’, (e.g. the <code>co2</code> data)</span></p>
+<p>In both these examples the datasets are already loaded and available to be used with the <code>head()</code> function.</p>
+<div class="exercise">
+<p>To find a list of all the built in datasets you can type <code>help(datasets)</code> into the console, or see <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html" class="uri">https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html</a>.</p>
+<p>Familiarise yourself with some of the other included datasets, e.g. <code>datasets::attitude</code>. Watch out that not all the included datasets are <em>dataframes</em>: Some are just vectors of observations (e.g. the <code>airmiles</code> data) and some are ‘time-series’, (e.g. the <code>co2</code> data)</p>
+</div>
+</div>
+<div id="looking-at-data" class="section level4 unnumbered">
+<h4>Looking at dataframes</h4>
+<p>As we’ve already seen, using <code>print(df)</code> within an RMarkdown document creates a nice interactive table you can use to look at your data.</p>
+<p>However you won’t want to print your whole data file when you Knit your RMarkdown document. The <code>head</code> function can be useful if you just want to show a few rows:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(mtcars)
+                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         <span class="fl">21.0</span>   <span class="dv">6</span>  <span class="dv">160</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.620</span> <span class="fl">16.46</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span>
+Mazda RX4 Wag     <span class="fl">21.0</span>   <span class="dv">6</span>  <span class="dv">160</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.875</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span>
+Datsun <span class="dv">710</span>        <span class="fl">22.8</span>   <span class="dv">4</span>  <span class="dv">108</span>  <span class="dv">93</span> <span class="fl">3.85</span> <span class="fl">2.320</span> <span class="fl">18.61</span>  <span class="dv">1</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">1</span>
+Hornet <span class="dv">4</span> Drive    <span class="fl">21.4</span>   <span class="dv">6</span>  <span class="dv">258</span> <span class="dv">110</span> <span class="fl">3.08</span> <span class="fl">3.215</span> <span class="fl">19.44</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span>
+Hornet Sportabout <span class="fl">18.7</span>   <span class="dv">8</span>  <span class="dv">360</span> <span class="dv">175</span> <span class="fl">3.15</span> <span class="fl">3.440</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">2</span>
+Valiant           <span class="fl">18.1</span>   <span class="dv">6</span>  <span class="dv">225</span> <span class="dv">105</span> <span class="fl">2.76</span> <span class="fl">3.460</span> <span class="fl">20.22</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span></code></pre>
+<p>Or we can use <code>glimpse()</code> function from the <code>dplyr::</code> package (see the <a href="packages.html#packages">section on loading and using packages</a>) for a different view of the first few rows of the <code>mtcars</code> data. This flips the dataframe so the variables are listed in the first column of the output:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glimpse</span>(mtcars)
+Observations<span class="op">:</span><span class="st"> </span><span class="dv">32</span>
+Variables<span class="op">:</span><span class="st"> </span><span class="dv">11</span>
+<span class="op">$</span><span class="st"> </span>mpg  <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">21.0</span>, <span class="fl">21.0</span>, <span class="fl">22.8</span>, <span class="fl">21.4</span>, <span class="fl">18.7</span>, <span class="fl">18.1</span>, <span class="fl">14.3</span>, <span class="fl">24.4</span>, <span class="fl">22.8</span>, <span class="dv">19</span>....
+<span class="op">$</span><span class="st"> </span>cyl  <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">4</span>, <span class="dv">4</span>, ...
+<span class="op">$</span><span class="st"> </span>disp <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">160.0</span>, <span class="fl">160.0</span>, <span class="fl">108.0</span>, <span class="fl">258.0</span>, <span class="fl">360.0</span>, <span class="fl">225.0</span>, <span class="fl">360.0</span>, <span class="fl">146.7</span>, <span class="dv">1</span>...
+<span class="op">$</span><span class="st"> </span>hp   <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">110</span>, <span class="dv">110</span>, <span class="dv">93</span>, <span class="dv">110</span>, <span class="dv">175</span>, <span class="dv">105</span>, <span class="dv">245</span>, <span class="dv">62</span>, <span class="dv">95</span>, <span class="dv">123</span>, <span class="dv">123</span>, <span class="dv">180</span>, ...
+<span class="op">$</span><span class="st"> </span>drat <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">3.90</span>, <span class="fl">3.90</span>, <span class="fl">3.85</span>, <span class="fl">3.08</span>, <span class="fl">3.15</span>, <span class="fl">2.76</span>, <span class="fl">3.21</span>, <span class="fl">3.69</span>, <span class="fl">3.92</span>, <span class="dv">3</span>.<span class="dv">9</span>...
+<span class="op">$</span><span class="st"> </span>wt   <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">2.620</span>, <span class="fl">2.875</span>, <span class="fl">2.320</span>, <span class="fl">3.215</span>, <span class="fl">3.440</span>, <span class="fl">3.460</span>, <span class="fl">3.570</span>, <span class="fl">3.190</span>, <span class="dv">3</span>...
+<span class="op">$</span><span class="st"> </span>qsec <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">16.46</span>, <span class="fl">17.02</span>, <span class="fl">18.61</span>, <span class="fl">19.44</span>, <span class="fl">17.02</span>, <span class="fl">20.22</span>, <span class="fl">15.84</span>, <span class="fl">20.00</span>, <span class="dv">2</span>...
+<span class="op">$</span><span class="st"> </span>vs   <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, ...
+<span class="op">$</span><span class="st"> </span>am   <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, ...
+<span class="op">$</span><span class="st"> </span>gear <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>, ...
+<span class="op">$</span><span class="st"> </span>carb <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">2</span>, ...</code></pre>
+<p>You can use the <code>pander()</code> function (from the <code>pander::</code> package) to format tables nicely, for when you Knit a document to HTML, Word or PDF. For example:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pander)
+<span class="kw">pander</span>(<span class="kw">head</span>(airquality), <span class="dt">caption=</span><span class="st">&quot;Tables always need a caption.&quot;</span>)</code></pre>
+<table style="width:67%;">
+<caption>Tables always need a caption.</caption>
+<colgroup>
+<col width="11%" />
+<col width="13%" />
+<col width="9%" />
+<col width="9%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Ozone</th>
+<th align="center">Solar.R</th>
+<th align="center">Wind</th>
+<th align="center">Temp</th>
+<th align="center">Month</th>
+<th align="center">Day</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">41</td>
+<td align="center">190</td>
+<td align="center">7.4</td>
+<td align="center">67</td>
+<td align="center">5</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">36</td>
+<td align="center">118</td>
+<td align="center">8</td>
+<td align="center">72</td>
+<td align="center">5</td>
+<td align="center">2</td>
+</tr>
+<tr class="odd">
+<td align="center">12</td>
+<td align="center">149</td>
+<td align="center">12.6</td>
+<td align="center">74</td>
+<td align="center">5</td>
+<td align="center">3</td>
+</tr>
+<tr class="even">
+<td align="center">18</td>
+<td align="center">313</td>
+<td align="center">11.5</td>
+<td align="center">62</td>
+<td align="center">5</td>
+<td align="center">4</td>
+</tr>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">14.3</td>
+<td align="center">56</td>
+<td align="center">5</td>
+<td align="center">5</td>
+</tr>
+<tr class="even">
+<td align="center">28</td>
+<td align="center">NA</td>
+<td align="center">14.9</td>
+<td align="center">66</td>
+<td align="center">5</td>
+<td align="center">6</td>
+</tr>
+</tbody>
+</table>
+<p>See the section on <a href="#sharing-and-publication">sharing and publishing</a> for more ways to format and present tables.</p>
+<p>Other useful functions for looking at and exploring datasets include:</p>
+<ul>
+<li><code>summary(df)</code></li>
+<li><code>psych::describe(df)</code></li>
+<li><code>skimr::skim(df)</code></li>
+</ul>
+<div class="exercise">
+<p>Experiment with a few of the functions for viewing/summarising dataframes.</p>
+</div>
+<p>There are also some helpful plotting functions which accept a whole dataframe as their input:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(airquality)</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-10"></span>
+<img src="datasets_files/figure-html/unnamed-chunk-10-1.png" alt="Box plot of all variables in a dataset." width="672" />
+<p class="caption">
+Figure 1.1: Box plot of all variables in a dataset.
+</p>
+</div>
+<pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">cor.plot</span>(airquality)</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-11"></span>
+<img src="datasets_files/figure-html/unnamed-chunk-11-1.png" alt="Correlation heatmap of all variables in a dataset. Colours indicate size of the correlation between pairs of variables." width="672" />
+<p class="caption">
+Figure 1.2: Correlation heatmap of all variables in a dataset. Colours indicate size of the correlation between pairs of variables.
+</p>
+</div>
+<p>These plots might not be worth including in a final write-up, but are very useful when exploring your data.</p>
+</div>
+<div id="selecting-individual-columns-from-a-dataframe" class="section level4 unnumbered">
+<h4>Selecting individual columns from a dataframe</h4>
+<p>Like spreadsheets, dataframes have a series of columns in order, but each column also has a name.</p>
+<p>This means we can access individual columns by their position, OR by their name.</p>
+<p>To access columns by name we use the <code>$</code> symbol. The dollar symbol selects the column as a vector, and we can use this within functions like <code>mean</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(mtcars<span class="op">$</span>mpg)
+[<span class="dv">1</span>] <span class="fl">20.09062</span></code></pre>
+<p>We can also slice the column, taking individual items or a series of items from it. Here we slice it to take the first item:</p>
+<pre class="sourceCode r"><code class="sourceCode r">(first.mpg &lt;-<span class="st"> </span>mtcars<span class="op">$</span>mpg[<span class="dv">1</span>])
+[<span class="dv">1</span>] <span class="dv">21</span></code></pre>
+<p>We can combine this with other functions like <code>sort</code> or <code>rev</code> (short for reverse) to get the largest or smallest vaules:</p>
+<pre class="sourceCode r"><code class="sourceCode r">(worst.mpg &lt;-<span class="st"> </span><span class="kw">sort</span>(mtcars<span class="op">$</span>mpg)[<span class="dv">1</span>])
+[<span class="dv">1</span>] <span class="fl">10.4</span>
+(best.mpg &lt;-<span class="st"> </span><span class="kw">rev</span>(<span class="kw">sort</span>(mtcars<span class="op">$</span>mpg))[<span class="dv">1</span>])
+[<span class="dv">1</span>] <span class="fl">33.9</span></code></pre>
+<div class="admonition">
+<p>The problem with extracting individual columns in this way is that it’s easy for data to be taken out of context.</p>
+<p>For example, if you sort individual columns then your data might get mixed up. In general if you are accessing individual columns of data in this way it’s a sign your code may be brittle and vulnerable to errors. In later sections we introduce methods for working on the whole dataset, which tends to be safer.</p>
+</div>
+
 </div> 
 </div>
             </section>
@@ -480,7 +663,7 @@ Valiant           <span class="fl">18.1</span>   <span class="dv">6</span>  <spa
         </div>
       </div>
 <a href="packages.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="looking-at-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="working-with-dataframes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

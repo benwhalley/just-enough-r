@@ -147,8 +147,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="installation-intro.html"><a href="installation-intro.html"><i class="fa fa-check"></i>Installation</a></li>
 <li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html"><i class="fa fa-check"></i>Workflow</a><ul>
 <li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#rmarkdown"><i class="fa fa-check"></i>RMarkdown</a></li>
-<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#writing-and-knitting-rmarkdown"><i class="fa fa-check"></i>Writing and ‘knitting’ RMarkdown</a></li>
 <li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#rstudio"><i class="fa fa-check"></i>RStudio</a></li>
+<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#creating-code-chunks"><i class="fa fa-check"></i>Creating code chunks</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="first-commands.html"><a href="first-commands.html"><i class="fa fa-check"></i>First commands</a></li>
 <li class="chapter" data-level="" data-path="variables.html"><a href="variables.html"><i class="fa fa-check"></i>Naming things</a></li>
@@ -159,12 +159,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html#making-sequences"><i class="fa fa-check"></i>Making and slicing with sequences</a></li>
 <li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html#conditional-slices"><i class="fa fa-check"></i>Conditional slicing</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="processing-vectors.html"><a href="processing-vectors.html"><i class="fa fa-check"></i>Processing vectors</a><ul>
-<li class="chapter" data-level="" data-path="processing-vectors.html"><a href="processing-vectors.html#making-new-vectors"><i class="fa fa-check"></i>Making new vectors</a></li>
-<li class="chapter" data-level="" data-path="processing-vectors.html"><a href="processing-vectors.html#making-up-data-new-vectors"><i class="fa fa-check"></i>Making up data (new vectors)</a></li>
+<li class="chapter" data-level="" data-path="working-with-vectors.html"><a href="working-with-vectors.html"><i class="fa fa-check"></i>Working with vectors</a><ul>
+<li class="chapter" data-level="" data-path="working-with-vectors.html"><a href="working-with-vectors.html#making-new-vectors"><i class="fa fa-check"></i>Making new vectors</a></li>
+<li class="chapter" data-level="" data-path="working-with-vectors.html"><a href="working-with-vectors.html#making-up-data-new-vectors"><i class="fa fa-check"></i>Making up data (new vectors)</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="functions-to-learn-now.html"><a href="functions-to-learn-now.html"><i class="fa fa-check"></i>Functions to learn now</a></li>
-<li class="chapter" data-level="" data-path="lists.html"><a href="lists.html"><i class="fa fa-check"></i>Lists</a></li>
 <li class="chapter" data-level="" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i>Packages</a></li>
 </ul></li>
 <li class="part"><span><b>II Data</b></span></li>
@@ -363,7 +362,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#storing-models-in-variables"><i class="fa fa-check"></i>Storing models in variables</a></li>
 <li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#extract-results-from-models"><i class="fa fa-check"></i>Extracting results from models</a></li>
 <li><a href="models-are-data-too.html#poking-around-with-and">‘Poking around’ with <code>$</code> and <code>@</code></a></li>
-<li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#broom"><i class="fa fa-check"></i>Save work: use a Broom</a></li>
+<li><a href="models-are-data-too.html#broom">Save time: use a <code>broom</code></a></li>
 <li class="chapter" data-level="" data-path="process-model-results.html"><a href="process-model-results.html"><i class="fa fa-check"></i>‘Processing’ results</a></li>
 <li class="chapter" data-level="" data-path="output-tables.html"><a href="output-tables.html"><i class="fa fa-check"></i>Printing tables</a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html"><i class="fa fa-check"></i>APA formatting for free</a><ul>
@@ -382,7 +381,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="rownames.html"><a href="rownames.html"><i class="fa fa-check"></i>Rownames are evil</a></li>
 <li class="chapter" data-level="" data-path="string-handling.html"><a href="string-handling.html"><i class="fa fa-check"></i>Working with character strings</a><ul>
 <li class="chapter" data-level="18.0.1" data-path="string-handling.html"><a href="string-handling.html#searching-and-replacing"><i class="fa fa-check"></i><b>18.0.1</b> Searching and replacing</a></li>
-<li><a href="processing-vectors.html#paste">Using <code>paste</code> to make labels</a></li>
+<li><a href="working-with-vectors.html#paste">Using <code>paste</code> to make labels</a></li>
 <li><a href="string-handling.html#separate-and-extract">Fixing up <code>variable</code> after melting</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="colours.html"><a href="colours.html"><i class="fa fa-check"></i>Colours</a><ul>
@@ -615,7 +614,7 @@ nums.with.missing
 <span class="dv">41</span>    <span class="ot">NA</span>     <span class="dv">153</span>  <span class="fl">5.7</span>   <span class="dv">88</span>     <span class="dv">8</span>  <span class="dv">27</span>
 <span class="dv">42</span>    <span class="ot">NA</span>     <span class="dv">145</span> <span class="fl">13.2</span>   <span class="dv">77</span>     <span class="dv">9</span>  <span class="dv">27</span></code></pre>
 </div>
-<div id="section-8" class="section level4 unnumbered tip">
+<div id="section-5" class="section level4 unnumbered tip">
 <h4></h4>
 <p>Sometimes it’s convenient to use the <code>.</code> (period) to represent the output from the previous pipe command. For example, we could rewrite the previous example as:</p>
 <pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span><span class="st"> </span>

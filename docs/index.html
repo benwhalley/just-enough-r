@@ -147,8 +147,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="installation-intro.html"><a href="installation-intro.html"><i class="fa fa-check"></i>Installation</a></li>
 <li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html"><i class="fa fa-check"></i>Workflow</a><ul>
 <li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#rmarkdown"><i class="fa fa-check"></i>RMarkdown</a></li>
-<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#writing-and-knitting-rmarkdown"><i class="fa fa-check"></i>Writing and ‘knitting’ RMarkdown</a></li>
 <li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#rstudio"><i class="fa fa-check"></i>RStudio</a></li>
+<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#creating-code-chunks"><i class="fa fa-check"></i>Creating code chunks</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="first-commands.html"><a href="first-commands.html"><i class="fa fa-check"></i>First commands</a></li>
 <li class="chapter" data-level="" data-path="variables.html"><a href="variables.html"><i class="fa fa-check"></i>Naming things</a></li>
@@ -159,12 +159,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html#making-sequences"><i class="fa fa-check"></i>Making and slicing with sequences</a></li>
 <li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html#conditional-slices"><i class="fa fa-check"></i>Conditional slicing</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="processing-vectors.html"><a href="processing-vectors.html"><i class="fa fa-check"></i>Processing vectors</a><ul>
-<li class="chapter" data-level="" data-path="processing-vectors.html"><a href="processing-vectors.html#making-new-vectors"><i class="fa fa-check"></i>Making new vectors</a></li>
-<li class="chapter" data-level="" data-path="processing-vectors.html"><a href="processing-vectors.html#making-up-data-new-vectors"><i class="fa fa-check"></i>Making up data (new vectors)</a></li>
+<li class="chapter" data-level="" data-path="working-with-vectors.html"><a href="working-with-vectors.html"><i class="fa fa-check"></i>Working with vectors</a><ul>
+<li class="chapter" data-level="" data-path="working-with-vectors.html"><a href="working-with-vectors.html#making-new-vectors"><i class="fa fa-check"></i>Making new vectors</a></li>
+<li class="chapter" data-level="" data-path="working-with-vectors.html"><a href="working-with-vectors.html#making-up-data-new-vectors"><i class="fa fa-check"></i>Making up data (new vectors)</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="functions-to-learn-now.html"><a href="functions-to-learn-now.html"><i class="fa fa-check"></i>Functions to learn now</a></li>
-<li class="chapter" data-level="" data-path="lists.html"><a href="lists.html"><i class="fa fa-check"></i>Lists</a></li>
 <li class="chapter" data-level="" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i>Packages</a></li>
 </ul></li>
 <li class="part"><span><b>II Data</b></span></li>
@@ -363,7 +362,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#storing-models-in-variables"><i class="fa fa-check"></i>Storing models in variables</a></li>
 <li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#extract-results-from-models"><i class="fa fa-check"></i>Extracting results from models</a></li>
 <li><a href="models-are-data-too.html#poking-around-with-and">‘Poking around’ with <code>$</code> and <code>@</code></a></li>
-<li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#broom"><i class="fa fa-check"></i>Save work: use a Broom</a></li>
+<li><a href="models-are-data-too.html#broom">Save time: use a <code>broom</code></a></li>
 <li class="chapter" data-level="" data-path="process-model-results.html"><a href="process-model-results.html"><i class="fa fa-check"></i>‘Processing’ results</a></li>
 <li class="chapter" data-level="" data-path="output-tables.html"><a href="output-tables.html"><i class="fa fa-check"></i>Printing tables</a></li>
 <li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html"><i class="fa fa-check"></i>APA formatting for free</a><ul>
@@ -382,7 +381,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="rownames.html"><a href="rownames.html"><i class="fa fa-check"></i>Rownames are evil</a></li>
 <li class="chapter" data-level="" data-path="string-handling.html"><a href="string-handling.html"><i class="fa fa-check"></i>Working with character strings</a><ul>
 <li class="chapter" data-level="18.0.1" data-path="string-handling.html"><a href="string-handling.html#searching-and-replacing"><i class="fa fa-check"></i><b>18.0.1</b> Searching and replacing</a></li>
-<li><a href="processing-vectors.html#paste">Using <code>paste</code> to make labels</a></li>
+<li><a href="working-with-vectors.html#paste">Using <code>paste</code> to make labels</a></li>
 <li><a href="string-handling.html#separate-and-extract">Fixing up <code>variable</code> after melting</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="colours.html"><a href="colours.html"><i class="fa fa-check"></i>Colours</a><ul>
@@ -447,14 +446,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="media/keepcalm.png" class="cup" /></p>
 <!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
 <p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a complete programmming language, but if you’re reading this guide then that might not be of interest to you. That’s OK — the goal here is <em>not</em> to teach you how to program in R<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your data.</p>
-<p>In this guide, we use R in the same way we use any other statistics software: To check and visualise data, run statistical analyses, and share our results with others. To do that it’s worth learning the <em>absolute basics</em> of the R language and key recent extensions to it. The next few chapters walk you through those basics: what you need to know to be productive in R and RStudio.</p>
-<div id="a-warning" class="section level4 unnumbered">
-<h4>A warning</h4>
-<p>This guide is fairly opinionated in places.</p>
-<p>There are many ways to get things done with R, but trying to learn them all at once causes unhappiness. In particular, lots of the base R functions are old, quirky, inconstently named, and hard to remember. This guide recommends that you use several new ‘packages’ that replicate and extend some of R’s basic functionality.</p>
-<p>Using this new set of packages, which are <a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">thoughtfully designed and work together nicely</a>, will help you form a more consistent mental model and workflow in R. You can learn the crufty old bits (which do still have their uses) later on.</p>
-<p>The guide also assumes you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an <a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). This is important because this guide itself is written in RMarkdown, and editing it will be an important part of the learning process. If you don’t have access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p>
+<p>It also happens to be a programmming language, but if you’re reading this, that might not be of interest. That’s OK — the goal here is not to teach programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your data.</p>
+<p>This book uses R like any other statistics software: To work-with and visualise data, run statistical analyses, and share our results with others. To do that you don’t need more than the <em>absolute basics</em> of the R language itself. The first chapters walk you through what you need to know to be productive.</p>
+<div id="things-to-know-before-you-start" class="section level4 unnumbered">
+<h4>Things to know Before you start</h4>
+<p>This guide is fairly opinionated, but for good reason.</p>
+<p>There are lots of ways to use R, and this has been a barrier for beginners. In particular base-R functions can be oddly-named, or lack a regular or predictable interface. For this reason we:</p>
+<ul>
+<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of R’s basic functionality. These packages are powerful tools in their own right, but also hide some of the complexities of R in a <a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It might seem restrictive but, to begin with, learning <em>only</em> these packages will help you form a more consistent mental model and make rapid progress. You can learn the crufty old bits (which still have their uses) later on.</p></li>
+<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an <a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
+</ul>
 </div>
 <div id="license" class="section level4 unnumbered">
 <h4>License</h4>
@@ -468,7 +469,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="footnotes">
 <hr />
 <ol start="1">
-<li id="fn1"><p>This is actually a lie, but you might not notice until it’s too late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
