@@ -167,10 +167,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i>Packages</a></li>
 </ul></li>
 <li class="part"><span><b>II Data</b></span></li>
-<li class="chapter" data-level="2" data-path="datasets-dataframes.html"><a href="datasets-dataframes.html"><i class="fa fa-check"></i><b>2</b> Datasets and dataframes</a><ul>
-<li class="chapter" data-level="" data-path="looking-at-data.html"><a href="looking-at-data.html"><i class="fa fa-check"></i>Looking at data</a><ul>
-<li class="chapter" data-level="" data-path="looking-at-data.html"><a href="looking-at-data.html#using-individual-columns"><i class="fa fa-check"></i>Using individual columns</a></li>
-</ul></li>
+<li class="chapter" data-level="2" data-path="datasets-dataframes.html"><a href="datasets-dataframes.html"><i class="fa fa-check"></i><b>2</b> The <code>dataframe</code></a><ul>
 <li class="chapter" data-level="" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html"><i class="fa fa-check"></i>Working with dataframes</a><ul>
 <li><a href="working-with-dataframes.html#tidyverse">Introducing the <code>tidyverse</code></a></li>
 </ul></li>
@@ -541,7 +538,7 @@ Variables<span class="op">:</span><span class="st"> </span><span class="dv">12</
 <li>Calculate the average PHQ-9 score at each month, and in each group</li>
 <li>Show these means by group for months 0, 7 and 12</li>
 </ul>
-<p>Using only the commands above<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> we can write:</p>
+<p>Using only the commands above<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> we can write:</p>
 <pre class="sourceCode r"><code class="sourceCode r">phq9.summary.df &lt;-<span class="st"> </span>phq9.df <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">phq9 =</span> phq9_<span class="dv">01</span> <span class="op">+</span><span class="st"> </span>phq9_<span class="dv">02</span> <span class="op">+</span><span class="st"> </span>phq9_<span class="dv">03</span> <span class="op">+</span><span class="st"> </span>
 <span class="st">                    </span>phq9_<span class="dv">04</span> <span class="op">+</span><span class="st"> </span>phq9_<span class="dv">05</span> <span class="op">+</span><span class="st"> </span>phq9_<span class="dv">06</span> <span class="op">+</span><span class="st"> </span>
@@ -796,8 +793,8 @@ Using RT as value column<span class="op">:</span><span class="st"> </span>use va
 <!-- </div> -->
 <div class="footnotes">
 <hr />
-<ol start="9">
-<li id="fn9"><p>You might have noticed I sneaked something new in here: the call to <code>pander()</code>. This is from the <code>pander::</code> package, which contains is a useful set of functions function for when writing RMarkdown documents. They convert many R objects into more readable output: here it makes a nice table for us in the compiled document. We cover more tips and tricks for formatting RMarkdown documents in the chapter on <a href="#sharing-and-publication">sharing and publishing your data</a>. You might also want to check <a href="#missing">this page on missing values</a> to explain the filter which uses <code>!is.na()</code>, but you could equally leave this for later.<a href="a-generalised-approach.html#fnref9" class="footnote-back">↩</a></p></li>
+<ol start="8">
+<li id="fn8"><p>You might have noticed I sneaked something new in here: the call to <code>pander()</code>. This is from the <code>pander::</code> package, which contains is a useful set of functions function for when writing RMarkdown documents. They convert many R objects into more readable output: here it makes a nice table for us in the compiled document. We cover more tips and tricks for formatting RMarkdown documents in the chapter on <a href="#sharing-and-publication">sharing and publishing your data</a>. You might also want to check <a href="#missing">this page on missing values</a> to explain the filter which uses <code>!is.na()</code>, but you could equally leave this for later.<a href="a-generalised-approach.html#fnref8" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>

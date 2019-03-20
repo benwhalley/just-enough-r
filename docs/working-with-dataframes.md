@@ -65,6 +65,7 @@ Valiant             6 105
 
 
 #### Saving a subset of the data {-}
+
 Because `dplyr` functions return a *new* dataframe, we can assign the results to a variable:
 
 
@@ -84,8 +85,7 @@ summary(justcylandweight)
 
 #### Excluding columns {-}
 
-If you want most of the columns --- perhaps you just want to get rid of one of them --- you can also put a minus (`-`) sign in front of the name. This then selects everything *except* the column you named:
-
+If you want to keep most of the columns --- perhaps you just want to get rid of one and keep the rest --- put a minus (`-`) sign in front of the name of the column to drop. This then selects everything *except* the column you named:
 
 
 ```r
@@ -101,8 +101,8 @@ head(select(airquality, -Ozone))
 ```
 
 
-
 #### Matching specific columns {-}
+
 You can use a patterns to match a subset of the columns you want. For example, here we select all the columns where the name contains the letter `d`:
 
 

@@ -167,10 +167,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i>Packages</a></li>
 </ul></li>
 <li class="part"><span><b>II Data</b></span></li>
-<li class="chapter" data-level="2" data-path="datasets-dataframes.html"><a href="datasets-dataframes.html"><i class="fa fa-check"></i><b>2</b> Datasets and dataframes</a><ul>
-<li class="chapter" data-level="" data-path="looking-at-data.html"><a href="looking-at-data.html"><i class="fa fa-check"></i>Looking at data</a><ul>
-<li class="chapter" data-level="" data-path="looking-at-data.html"><a href="looking-at-data.html#using-individual-columns"><i class="fa fa-check"></i>Using individual columns</a></li>
-</ul></li>
+<li class="chapter" data-level="2" data-path="datasets-dataframes.html"><a href="datasets-dataframes.html"><i class="fa fa-check"></i><b>2</b> The <code>dataframe</code></a><ul>
 <li class="chapter" data-level="" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html"><i class="fa fa-check"></i>Working with dataframes</a><ul>
 <li><a href="working-with-dataframes.html#tidyverse">Introducing the <code>tidyverse</code></a></li>
 </ul></li>
@@ -455,7 +452,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>An <em>outcome</em>: severity of injury in a car crash, for example.</li>
 <li>At least 2 <em>predictors</em> of that outcome: e.g. age and gender.</li>
 </ul>
-<p>Let’s think of a scenario where we’ve measured severity of injury after road accidents, along with the age and gender of the drivers involved. Let’s assume<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>:</p>
+<p>Let’s think of a scenario where we’ve measured severity of injury after road accidents, along with the age and gender of the drivers involved. Let’s assume<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>:</p>
 <ul>
 <li>Women are likely to be more seriously injured than men in a crash (a +10 point increase in severity)</li>
 <li>Drivers over 60 are more likely to injured than younger drivers (+10 point severity vs &lt;60 years)</li>
@@ -541,7 +538,7 @@ Variables<span class="op">:</span><span class="st"> </span><span class="dv">4</s
 <span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name=</span><span class="st">&quot;&quot;</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>) </code></pre>
 <p><img src="interactions_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<p>This plot doesn’t include all of the information about the distribution of effects that the density or boxplots do (for example, we can’t see any asymmetry in the distributions any more), but we still get some information about the variability of the effect of the experimental conditions on pain by plotting the SE of the mean over the top of each point<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></p>
+<p>This plot doesn’t include all of the information about the distribution of effects that the density or boxplots do (for example, we can’t see any asymmetry in the distributions any more), but we still get some information about the variability of the effect of the experimental conditions on pain by plotting the SE of the mean over the top of each point<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></p>
 <p>At this point, especially if your current data include only categorical predictors, you might want to move on to the section on <a href="predictions-and-margins.html">making predictions from models</a> and visualising these.</p>
 </div>
 <div id="continuous-predictors" class="section level3 unnumbered">
@@ -604,9 +601,9 @@ grid <span class="op">%&gt;%</span><span class="st"> </span>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="12">
-<li id="fn12"><p>This example is loosely based on figures reported by <span class="citation">@kockelman2002driver</span><a href="understanding-interactions.html#fnref12" class="footnote-back">↩</a></p></li>
-<li id="fn13"><p>We could equally well plot the 95% confidence interval for the mean, or the interquartile range)<a href="understanding-interactions.html#fnref13" class="footnote-back">↩</a></p></li>
+<ol start="11">
+<li id="fn11"><p>This example is loosely based on figures reported by <span class="citation">@kockelman2002driver</span><a href="understanding-interactions.html#fnref11" class="footnote-back">↩</a></p></li>
+<li id="fn12"><p>We could equally well plot the 95% confidence interval for the mean, or the interquartile range)<a href="understanding-interactions.html#fnref12" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>

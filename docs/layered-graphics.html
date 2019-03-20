@@ -167,10 +167,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i>Packages</a></li>
 </ul></li>
 <li class="part"><span><b>II Data</b></span></li>
-<li class="chapter" data-level="2" data-path="datasets-dataframes.html"><a href="datasets-dataframes.html"><i class="fa fa-check"></i><b>2</b> Datasets and dataframes</a><ul>
-<li class="chapter" data-level="" data-path="looking-at-data.html"><a href="looking-at-data.html"><i class="fa fa-check"></i>Looking at data</a><ul>
-<li class="chapter" data-level="" data-path="looking-at-data.html"><a href="looking-at-data.html#using-individual-columns"><i class="fa fa-check"></i>Using individual columns</a></li>
-</ul></li>
+<li class="chapter" data-level="2" data-path="datasets-dataframes.html"><a href="datasets-dataframes.html"><i class="fa fa-check"></i><b>2</b> The <code>dataframe</code></a><ul>
 <li class="chapter" data-level="" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html"><i class="fa fa-check"></i>Working with dataframes</a><ul>
 <li><a href="working-with-dataframes.html#tidyverse">Introducing the <code>tidyverse</code></a></li>
 </ul></li>
@@ -459,7 +456,7 @@ Figure 5.1: Examples of charts showing comaprisons, relationships, distribution 
 <h3>A thought on ‘chart chooser’ guides</h3>
 <p>There are various simple chart selection guides available online, of which these are quite nice examples:</p>
 <ul>
-<li><a href="http://extremepresentation.typepad.com/blog/2006/09/choosing_a_good.html">Chart selection guide (pdf)</a>]</li>
+<li><a href="http://extremepresentation.typepad.com/blog/2006/09/choosing_a_good.html">Chart selection guide (pdf)</a></li>
 <li><a href="https://www.perceptualedge.com/articles/misc/Graph_Selection_Matrix.pdf">‘Show me the numbers’ chart guide (pdf)</a></li>
 </ul>
 <p><img src="media/choosing_a_good_chart.jpg" /></p>
@@ -472,7 +469,7 @@ Figure 5.1: Examples of charts showing comaprisons, relationships, distribution 
 <li><p>perhaps most importantly, even when they include error bars, readers consistently misinterpret the quantitative information in bar graphs (specifically, when bar graphs are used to display estimates which contain error, readers assume points above the bar are less likely than points within the bar, even though this is typically not the case).</p></li>
 </ul>
 <p>You should be guided in choosing plots not by mechanical rules based on the number or type of variables you want to display. Instead, you should be guided by the evidence from basic studies of human perception, and applied data on how different types of infromation displays are really used by readers.</p>
-<p>This guide is restricted to examples likely to be useful and effective for experiemental and applied psychologists.</p>
+<p><strong>This guide is restricted to examples likely to be useful and effective for experimental and applied psychologists.</strong></p>
 </div>
 <div id="thinking-like-ggplot" class="section level3 unnumbered">
 <h3>Thinking like <code>ggplot</code></h3>
@@ -925,7 +922,7 @@ weather.data.long <span class="op">%&gt;%</span><span class="st"> </span>head
 <span class="dv">5</span> <span class="dv">1904</span>   east     Rain <span class="fl">564.86</span>
 <span class="dv">6</span> <span class="dv">1905</span>   east     Rain <span class="fl">443.11</span></code></pre>
 </div>
-<div id="section-8" class="section level5 exercise">
+<div id="section-7" class="section level5 exercise">
 <h5><span class="header-section-number">5.0.0.0.1</span> </h5>
 <p>Try stepping through the code above line by line and see what is produced at each step.</p>
 <p>With our data in long form we can use <code>ggplot</code> to plot our data over time. In the plot below, we use <code>filter()</code> to select only the rainfall measurements:</p>

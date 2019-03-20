@@ -167,10 +167,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i>Packages</a></li>
 </ul></li>
 <li class="part"><span><b>II Data</b></span></li>
-<li class="chapter" data-level="2" data-path="datasets-dataframes.html"><a href="datasets-dataframes.html"><i class="fa fa-check"></i><b>2</b> Datasets and dataframes</a><ul>
-<li class="chapter" data-level="" data-path="looking-at-data.html"><a href="looking-at-data.html"><i class="fa fa-check"></i>Looking at data</a><ul>
-<li class="chapter" data-level="" data-path="looking-at-data.html"><a href="looking-at-data.html#using-individual-columns"><i class="fa fa-check"></i>Using individual columns</a></li>
-</ul></li>
+<li class="chapter" data-level="2" data-path="datasets-dataframes.html"><a href="datasets-dataframes.html"><i class="fa fa-check"></i><b>2</b> The <code>dataframe</code></a><ul>
 <li class="chapter" data-level="" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html"><i class="fa fa-check"></i>Working with dataframes</a><ul>
 <li><a href="working-with-dataframes.html#tidyverse">Introducing the <code>tidyverse</code></a></li>
 </ul></li>
@@ -440,8 +437,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="importing-data" class="section level2 unnumbered">
 <h2>Importing data</h2>
-<p>If you have data outside of R, <em>the simplest way to import it is to first save it as a comma or tab-separated text file</em>, normally with the file extension <code>.csv</code> or <code>.txt</code><a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>.</p>
-<p>Let’s say we have file called <code>angry_moods.csv</code> in the same directory as our <code>.Rmd</code> file. We can read this data using the <code>read_csv()</code> function from the <code>readr</code> package<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>:</p>
+<p>If you have data outside of R, <em>the simplest way to import it is to first save it as a comma or tab-separated text file</em>, normally with the file extension <code>.csv</code> or <code>.txt</code><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>.</p>
+<p>Let’s say we have file called <code>angry_moods.csv</code> in the same directory as our <code>.Rmd</code> file. We can read this data using the <code>read_csv()</code> function from the <code>readr</code> package<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">angry.moods &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&#39;data/angry_moods.csv&#39;</span>)
 Parsed with column specification<span class="op">:</span>
 <span class="kw">cols</span>(
@@ -484,9 +481,9 @@ Parsed with column specification<span class="op">:</span>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="7">
-<li id="fn7"><p>This is easy to achieve in Excel and most other stats packages using the <code>Save As...</code> menu item<a href="importing-data.html#fnref7" class="footnote-back">↩</a></p></li>
-<li id="fn8"><p>There are also standard functions built into R, such as <code>read.csv()</code> or <code>read.table()</code> for importing data. These are fine if you can’t install the <code>readr</code> package for some reason, but they are quite old and the default behaviour is sometimes counterintuitive. I recommend using the <code>readr</code> equivalents: <code>read_csv()</code> or <code>read_tsv()</code>.<a href="importing-data.html#fnref8" class="footnote-back">↩</a></p></li>
+<ol start="6">
+<li id="fn6"><p>This is easy to achieve in Excel and most other stats packages using the <code>Save As...</code> menu item<a href="importing-data.html#fnref6" class="footnote-back">↩</a></p></li>
+<li id="fn7"><p>There are also standard functions built into R, such as <code>read.csv()</code> or <code>read.table()</code> for importing data. These are fine if you can’t install the <code>readr</code> package for some reason, but they are quite old and the default behaviour is sometimes counterintuitive. I recommend using the <code>readr</code> equivalents: <code>read_csv()</code> or <code>read_tsv()</code>.<a href="importing-data.html#fnref7" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>

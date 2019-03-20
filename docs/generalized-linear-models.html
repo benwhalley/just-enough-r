@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="working-with-vectors.html">
-<link rel="next" href="packages.html">
+<link rel="prev" href="followup-tests.html">
+<link rel="next" href="multilevel-models.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -435,206 +435,168 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="functions-to-learn-now" class="section level2 unnumbered">
-<h2>Functions to learn now</h2>
-<p>There are <em>thousands</em> of functions built into R. Below are just a few examples which are likely to be useful as you work with your data:</p>
-<div id="repetition" class="section level6 unnumbered">
-<h6>Repetition</h6>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># repeat something N times</span>
-<span class="kw">rep</span>(<span class="st">&quot;Apple pie&quot;</span>, <span class="dv">10</span>)
- [<span class="dv">1</span>] <span class="st">&quot;Apple pie&quot;</span> <span class="st">&quot;Apple pie&quot;</span> <span class="st">&quot;Apple pie&quot;</span> <span class="st">&quot;Apple pie&quot;</span> <span class="st">&quot;Apple pie&quot;</span>
- [<span class="dv">6</span>] <span class="st">&quot;Apple pie&quot;</span> <span class="st">&quot;Apple pie&quot;</span> <span class="st">&quot;Apple pie&quot;</span> <span class="st">&quot;Apple pie&quot;</span> <span class="st">&quot;Apple pie&quot;</span></code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># repeat a short vector, combining into a single longer vector</span>
-<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Custard&quot;</span>, <span class="st">&quot;Gravy&quot;</span>), <span class="dv">5</span>)
- [<span class="dv">1</span>] <span class="st">&quot;Custard&quot;</span> <span class="st">&quot;Gravy&quot;</span>   <span class="st">&quot;Custard&quot;</span> <span class="st">&quot;Gravy&quot;</span>   <span class="st">&quot;Custard&quot;</span> <span class="st">&quot;Gravy&quot;</span>   <span class="st">&quot;Custard&quot;</span>
- [<span class="dv">8</span>] <span class="st">&quot;Gravy&quot;</span>   <span class="st">&quot;Custard&quot;</span> <span class="st">&quot;Gravy&quot;</span>  </code></pre>
+<div id="generalized-linear-models" class="section level1">
+<h1><span class="header-section-number">9</span> Generalized linear models</h1>
+<p>Linear regression is suitable for outcomes which are continuous numerical scores. In practice this requirement is often relaxed slightly, for example for data which are slightly skewed, or where scores are somewhat censored (e.g. questionnaire scores which have a minium or maximum).</p>
+<p>However, for some types of outcomes standard linear models are unsuitable. Examples here include binary (zero or one) or count data (i.e. positive integers representing frequencies), or proportions (e.g. proportion of product failures per batch). This section is primarily concerned with binary outcomes, but many of the same principles apply to these other types of outcome.</p>
+<div id="logistic-regression" class="section level3 unnumbered">
+<h3>Logistic regression</h3>
+<p>In R we fit logistic regression with the <code>glm()</code> function which is built into R, or if we have a <a href="multilevel-models.html#multilevel-models">multilevel model</a> with a binary outcome we use <code>glmer()</code> from the <code>lme4::</code> package.</p>
+<p>Fitting the model is very similar to linear regression, except we need to specify the <code>family=&quot;binomial&quot;</code> parameter to let R know what type of data we are using.</p>
+<p>Here we use the <code>titanic</code> dataset (you can download this from <a href="https://www.kaggle.com/c/titanic/data">Kaggle</a>, although you need to sign up for an account).</p>
+<p>Before we start fitting models, it’s best to plot the data to give us a feel for what is happening.</p>
+<p><span class="apa-example">Figure 1 reveals that, across all fare categories, women were more likely to survive the disaster than men. Ticket class also appears to be related to outcome: those with third class tickets were less likely to survive than those with first or second class tickets. However, differences in survival rates for men and women differed across ticket classes: women with third class tickets appear to have been less advantaged (compared to men) than women with first or second class tickets.</span></p>
+<pre class="sourceCode r"><code class="sourceCode r">titanic &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/titanic.csv&#39;</span>)
+titanic <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">factor</span>(Pclass), Survived, 
+             <span class="dt">group=</span>Sex, <span class="dt">color=</span>Sex)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">stat_summary</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">geom=</span><span class="st">&quot;line&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Ticket class&quot;</span>)</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="generalized-linear-models_files/figure-html/unnamed-chunk-3-1.png" alt="Survival probabilities by Sex and ticket class." width="672" />
+<p class="caption">
+Figure 9.1: Survival probabilities by Sex and ticket class.
+</p>
 </div>
-<div id="sequences" class="section level6 unnumbered">
-<h6>Sequences</h6>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># make a sequence </span>
-(countdown &lt;-<span class="st"> </span><span class="dv">100</span><span class="op">:</span><span class="dv">1</span>)
-  [<span class="dv">1</span>] <span class="dv">100</span>  <span class="dv">99</span>  <span class="dv">98</span>  <span class="dv">97</span>  <span class="dv">96</span>  <span class="dv">95</span>  <span class="dv">94</span>  <span class="dv">93</span>  <span class="dv">92</span>  <span class="dv">91</span>  <span class="dv">90</span>  <span class="dv">89</span>  <span class="dv">88</span>  <span class="dv">87</span>  <span class="dv">86</span>  <span class="dv">85</span>  <span class="dv">84</span>
- [<span class="dv">18</span>]  <span class="dv">83</span>  <span class="dv">82</span>  <span class="dv">81</span>  <span class="dv">80</span>  <span class="dv">79</span>  <span class="dv">78</span>  <span class="dv">77</span>  <span class="dv">76</span>  <span class="dv">75</span>  <span class="dv">74</span>  <span class="dv">73</span>  <span class="dv">72</span>  <span class="dv">71</span>  <span class="dv">70</span>  <span class="dv">69</span>  <span class="dv">68</span>  <span class="dv">67</span>
- [<span class="dv">35</span>]  <span class="dv">66</span>  <span class="dv">65</span>  <span class="dv">64</span>  <span class="dv">63</span>  <span class="dv">62</span>  <span class="dv">61</span>  <span class="dv">60</span>  <span class="dv">59</span>  <span class="dv">58</span>  <span class="dv">57</span>  <span class="dv">56</span>  <span class="dv">55</span>  <span class="dv">54</span>  <span class="dv">53</span>  <span class="dv">52</span>  <span class="dv">51</span>  <span class="dv">50</span>
- [<span class="dv">52</span>]  <span class="dv">49</span>  <span class="dv">48</span>  <span class="dv">47</span>  <span class="dv">46</span>  <span class="dv">45</span>  <span class="dv">44</span>  <span class="dv">43</span>  <span class="dv">42</span>  <span class="dv">41</span>  <span class="dv">40</span>  <span class="dv">39</span>  <span class="dv">38</span>  <span class="dv">37</span>  <span class="dv">36</span>  <span class="dv">35</span>  <span class="dv">34</span>  <span class="dv">33</span>
- [<span class="dv">69</span>]  <span class="dv">32</span>  <span class="dv">31</span>  <span class="dv">30</span>  <span class="dv">29</span>  <span class="dv">28</span>  <span class="dv">27</span>  <span class="dv">26</span>  <span class="dv">25</span>  <span class="dv">24</span>  <span class="dv">23</span>  <span class="dv">22</span>  <span class="dv">21</span>  <span class="dv">20</span>  <span class="dv">19</span>  <span class="dv">18</span>  <span class="dv">17</span>  <span class="dv">16</span>
- [<span class="dv">86</span>]  <span class="dv">15</span>  <span class="dv">14</span>  <span class="dv">13</span>  <span class="dv">12</span>  <span class="dv">11</span>  <span class="dv">10</span>   <span class="dv">9</span>   <span class="dv">8</span>   <span class="dv">7</span>   <span class="dv">6</span>   <span class="dv">5</span>   <span class="dv">4</span>   <span class="dv">3</span>   <span class="dv">2</span>   <span class="dv">1</span></code></pre>
-<p>Make sequences with steps of a particular size:</p>
-<pre class="sourceCode r"><code class="sourceCode r">(tenths  &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">0</span>, <span class="dt">to=</span><span class="dv">1</span>, <span class="dt">by=</span>.<span class="dv">1</span>))
- [<span class="dv">1</span>] <span class="fl">0.0</span> <span class="fl">0.1</span> <span class="fl">0.2</span> <span class="fl">0.3</span> <span class="fl">0.4</span> <span class="fl">0.5</span> <span class="fl">0.6</span> <span class="fl">0.7</span> <span class="fl">0.8</span> <span class="fl">0.9</span> <span class="fl">1.0</span>
+<p>Given the plot above, it seems reasonable to predict survival from <code>Sex</code> and <code>Pclass</code>, and also to include the interaction between these variables.</p>
+<p>To run a logistic regression we specify the model as we would with <code>lm()</code>, but instead use <code>glm()</code> and specify the <code>family</code> parameter:</p>
+<pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">glm</span>(Survived <span class="op">~</span><span class="st"> </span>Sex <span class="op">*</span><span class="st"> </span><span class="kw">factor</span>(Pclass), 
+         <span class="dt">data=</span>titanic, <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&quot;logit&quot;</span>))</code></pre>
+<div id="helper-function-logistic" class="section level4 unnumbered">
+<h4></h4>
+<p>Because it can become repetitive to write out the <code>family</code> parameter in full each time, I usually write a <a href="code-reuse.html#helper-functions">‘helper function’</a> called <code>logistic()</code> which simply calls <code>glm</code> with the right settings. For example:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define a helper function for logistic regression the &#39;...&#39; </span>
+<span class="co"># means &#39;all arguments&#39;, so this function passes all it&#39;s </span>
+<span class="co"># arguments on to the glm function, but sets the family correctly</span>
+logistic &lt;-<span class="st"> </span><span class="cf">function</span>(...) {
+  <span class="kw">glm</span>(..., <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&quot;logit&quot;</span>))
+}</code></pre>
+<p>Which you can use like so:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">logistic</span>(Survived <span class="op">~</span><span class="st"> </span>Sex <span class="op">*</span><span class="st"> </span><span class="kw">factor</span>(Pclass), <span class="dt">data=</span>titanic)
 
-(twelfths &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">0</span>, <span class="dt">to=</span><span class="dv">10</span>, <span class="dt">length.out=</span><span class="dv">12</span>))
- [<span class="dv">1</span>]  <span class="fl">0.0000000</span>  <span class="fl">0.9090909</span>  <span class="fl">1.8181818</span>  <span class="fl">2.7272727</span>  <span class="fl">3.6363636</span>  <span class="fl">4.5454545</span>
- [<span class="dv">7</span>]  <span class="fl">5.4545455</span>  <span class="fl">6.3636364</span>  <span class="fl">7.2727273</span>  <span class="fl">8.1818182</span>  <span class="fl">9.0909091</span> <span class="fl">10.0000000</span></code></pre>
+Call<span class="op">:</span><span class="st">  </span><span class="kw">glm</span>(<span class="dt">formula =</span> ..<span class="dv">1</span>, <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>), <span class="dt">data =</span> ..<span class="dv">2</span>)
+
+Coefficients<span class="op">:</span>
+<span class="st">            </span>(Intercept)                  Sexmale          <span class="kw">factor</span>(Pclass)<span class="dv">2</span>  
+                 <span class="fl">3.4122</span>                  <span class="fl">-3.9494</span>                  <span class="fl">-0.9555</span>  
+        <span class="kw">factor</span>(Pclass)<span class="dv">3</span>  Sexmale<span class="op">:</span><span class="kw">factor</span>(Pclass)<span class="dv">2</span>  Sexmale<span class="op">:</span><span class="kw">factor</span>(Pclass)<span class="dv">3</span>  
+                <span class="fl">-3.4122</span>                  <span class="fl">-0.1850</span>                   <span class="fl">2.0958</span>  
+
+Degrees of Freedom<span class="op">:</span><span class="st"> </span><span class="dv">890</span> <span class="kw">Total</span> (i.e. Null);  <span class="dv">885</span> Residual
+Null Deviance<span class="op">:</span><span class="st">      </span><span class="dv">1187</span> 
+Residual Deviance<span class="op">:</span><span class="st"> </span><span class="fl">798.1</span>    AIC<span class="op">:</span><span class="st"> </span><span class="fl">810.1</span></code></pre>
 </div>
-<div id="ranking" class="section level6 unnumbered">
-<h6>Ranking</h6>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># generate some random data (here, ages in years)</span>
-ages &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dt">mean=</span><span class="dv">40</span>, <span class="dt">sd=</span><span class="dv">10</span>))
+<div id="tests-of-parameters" class="section level4 unnumbered">
+<h4>Tests of parameters</h4>
+<p>As with <code>lm()</code> models, we can use the <code>summary()</code> function to get p values for parameters in <code>glm</code> objects:</p>
+<pre class="sourceCode r"><code class="sourceCode r">titanic.model &lt;-<span class="st"> </span><span class="kw">logistic</span>(Survived <span class="op">~</span><span class="st"> </span>Sex <span class="op">*</span><span class="st"> </span><span class="kw">factor</span>(Pclass), <span class="dt">data=</span>titanic)
+<span class="kw">summary</span>(titanic.model)
 
-<span class="co"># get the rank order of elements (i.e. what their positions would be if the vector was sorted)</span>
-ages
- [<span class="dv">1</span>] <span class="dv">41</span> <span class="dv">33</span> <span class="dv">26</span> <span class="dv">45</span> <span class="dv">38</span> <span class="dv">38</span> <span class="dv">37</span> <span class="dv">32</span> <span class="dv">50</span> <span class="dv">48</span>
-<span class="kw">rank</span>(ages, <span class="dt">ties.method=</span><span class="st">&quot;first&quot;</span>)
- [<span class="dv">1</span>]  <span class="dv">7</span>  <span class="dv">3</span>  <span class="dv">1</span>  <span class="dv">8</span>  <span class="dv">5</span>  <span class="dv">6</span>  <span class="dv">4</span>  <span class="dv">2</span> <span class="dv">10</span>  <span class="dv">9</span></code></pre>
+Call<span class="op">:</span>
+<span class="kw">glm</span>(<span class="dt">formula =</span> ..<span class="dv">1</span>, <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&quot;logit&quot;</span>), <span class="dt">data =</span> ..<span class="dv">2</span>)
+
+Deviance Residuals<span class="op">:</span><span class="st"> </span>
+<span class="st">    </span>Min       1Q   Median       3Q      Max  
+<span class="fl">-2.6248</span>  <span class="fl">-0.5853</span>  <span class="fl">-0.5395</span>   <span class="fl">0.4056</span>   <span class="fl">1.9996</span>  
+
+Coefficients<span class="op">:</span>
+<span class="st">                        </span>Estimate Std. Error z value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)    
+(Intercept)               <span class="fl">3.4122</span>     <span class="fl">0.5868</span>   <span class="fl">5.815</span> <span class="fl">6.06e-09</span> <span class="op">**</span><span class="er">*</span>
+Sexmale                  <span class="fl">-3.9494</span>     <span class="fl">0.6161</span>  <span class="fl">-6.411</span> <span class="fl">1.45e-10</span> <span class="op">**</span><span class="er">*</span>
+<span class="kw">factor</span>(Pclass)<span class="dv">2</span>          <span class="fl">-0.9555</span>     <span class="fl">0.7248</span>  <span class="fl">-1.318</span>  <span class="fl">0.18737</span>    
+<span class="kw">factor</span>(Pclass)<span class="dv">3</span>          <span class="fl">-3.4122</span>     <span class="fl">0.6100</span>  <span class="fl">-5.594</span> <span class="fl">2.22e-08</span> <span class="op">**</span><span class="er">*</span>
+Sexmale<span class="op">:</span><span class="kw">factor</span>(Pclass)<span class="dv">2</span>  <span class="fl">-0.1850</span>     <span class="fl">0.7939</span>  <span class="fl">-0.233</span>  <span class="fl">0.81575</span>    
+Sexmale<span class="op">:</span><span class="kw">factor</span>(Pclass)<span class="dv">3</span>   <span class="fl">2.0958</span>     <span class="fl">0.6572</span>   <span class="fl">3.189</span>  <span class="fl">0.00143</span> <span class="op">**</span><span class="st"> </span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+(Dispersion parameter <span class="cf">for</span> binomial family taken to be <span class="dv">1</span>)
+
+    Null deviance<span class="op">:</span><span class="st"> </span><span class="fl">1186.7</span>  on <span class="dv">890</span>  degrees of freedom
+Residual deviance<span class="op">:</span><span class="st">  </span><span class="fl">798.1</span>  on <span class="dv">885</span>  degrees of freedom
+AIC<span class="op">:</span><span class="st"> </span><span class="fl">810.1</span>
+
+Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </span><span class="dv">6</span></code></pre>
+<p><span class="explainer">You might have spotted in this table that <code>summary</code> reports <em>z</em> tests rather than <em>t</em> tests for parameters in the <code>glm</code> model. These can be interepreted as you would the t-test in a linear model, however.</span></p>
+<div id="tests-of-categorical-predictorss" class="section level5 unnumbered">
+<h5>Tests of categorical predictorss</h5>
+<p>Where there are categorical predictors we can also reuse the <code>car::Anova</code> function to get the equivalent of the F test from a linear model (<a href="anova.html#sums-squares">with type 3 sums of squares</a>; remember not to use the built in <code>anova</code> function unless you want type 1 sums of squares):</p>
+<pre class="sourceCode r"><code class="sourceCode r">car<span class="op">::</span><span class="kw">Anova</span>(titanic.model, <span class="dt">type=</span><span class="dv">3</span>)
+Analysis of Deviance <span class="kw">Table</span> (Type III tests)
+
+Response<span class="op">:</span><span class="st"> </span>Survived
+                   LR Chisq Df <span class="kw">Pr</span>(<span class="op">&gt;</span>Chisq)    
+Sex                  <span class="fl">97.547</span>  <span class="dv">1</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span>
+<span class="kw">factor</span>(Pclass)       <span class="fl">90.355</span>  <span class="dv">2</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span>
+Sex<span class="op">:</span><span class="kw">factor</span>(Pclass)   <span class="fl">28.791</span>  <span class="dv">2</span>  <span class="fl">5.598e-07</span> <span class="op">**</span><span class="er">*</span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre>
+<p><span class="explainer">Note that the Anova table for a <code>glm</code> model provides <span class="math inline">\(\chi^2\)</span> tests in place of F tests. Although they are calculated differently, you can interpret these <span class="math inline">\(\chi^2\)</span> tests and <em>p</em> values as you would for F tests in a regular Anova.</span></p>
 </div>
-<div id="unique-values" class="section level6 unnumbered">
-<h6>Unique values</h6>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return the unique values in a vector</span>
-<span class="kw">unique</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">100</span>))
- [<span class="dv">1</span>]  <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">4</span>  <span class="dv">5</span>  <span class="dv">6</span>  <span class="dv">7</span>  <span class="dv">8</span>  <span class="dv">9</span> <span class="dv">10</span></code></pre>
 </div>
-<div id="lengths" class="section level6 unnumbered">
-<h6>Lengths</h6>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return the unique values in a vector</span>
-<span class="kw">length</span>(<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">100</span>, <span class="dv">2</span>))
-[<span class="dv">1</span>] <span class="dv">50</span></code></pre>
+<div id="glm-predictions" class="section level4 unnumbered">
+<h4>Predictions after <code>glm</code></h4>
+<p>As with linear models, we can make predictions from <code>glm</code> models for our current or new data.</p>
+<p>One twist here though is that we have to choose whether to make predictions in units of the response (i.e. probability of survival), or of the transformed response (logit) that is actually the ‘outcome’ in a <code>glm</code> (see the <a href="link-functions.html#link-functions">explainer on transformations and links functions</a>).</p>
+<p><em>You will almost always want predictions in the units of your response</em>, which means you need to add <code>type=&quot;response&quot;</code> to the <code>predict()</code> function call. Here we predict the chance of survival for a new female passenger with a first class ticket:</p>
+<pre class="sourceCode r"><code class="sourceCode r">new.passenger =<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">Pclass=</span><span class="dv">1</span>, <span class="dt">Sex=</span><span class="kw">c</span>(<span class="st">&quot;female&quot;</span>))
+<span class="kw">predict.glm</span>(titanic.model, <span class="dt">newdata=</span>new.passenger, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)
+        <span class="dv">1</span> 
+<span class="fl">0.9680851</span> </code></pre>
+<p>And we could plot probabilities for each gender and class with a standard error for this prediction if desired:</p>
+<pre class="sourceCode r"><code class="sourceCode r">new.passengers =<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">Pclass=</span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">Sex=</span><span class="kw">c</span>(<span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>))
+
+<span class="co"># this creates two vectors: $fit, which contains </span>
+<span class="co"># predicted probabilities and $se.fit</span>
+preds &lt;-<span class="st"> </span><span class="kw">predict.glm</span>(titanic.model, 
+                     <span class="dt">newdata=</span>new.passengers, 
+                     <span class="dt">type=</span><span class="st">&quot;response&quot;</span>, 
+                     <span class="dt">se.fit=</span>T)
+
+new.passengers <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">fit =</span> preds<span class="op">$</span>fit, 
+         <span class="dt">lower=</span>fit <span class="op">-</span><span class="st"> </span>preds<span class="op">$</span>se.fit, 
+         <span class="dt">upper=</span>fit <span class="op">+</span><span class="st"> </span>preds<span class="op">$</span>se.fit) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">factor</span>(Pclass), fit, 
+             <span class="dt">ymin=</span>lower, <span class="dt">ymax=</span>upper, 
+             <span class="dt">group=</span>Sex, <span class="dt">color=</span>Sex)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_pointrange</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Ticket class&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Probability of survival&quot;</span>)</code></pre>
+<p><img src="generalized-linear-models_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
-<div id="section-2" class="section level6 unnumbered exercise">
-<h6></h6>
-<p>Try and experiment with each of these functions. Check the output against what you expected to happen, and make sure you understand what they do.</p>
-<!-- 
+<div id="glm-cross-validation" class="section level4 unnumbered">
+<h4>Evaluating logistic regression models</h4>
+<p><code>glm</code> models don’t provide an <em>R</em><sup>2</sup> statistic, but it is possible to evaluate how well the model fits the data in other ways.</p>
+<p><span class="explainer">Although there are various pseudo-<em>R</em><sup>2</sup> statistics available for <code>glm</code>; see <a href="https://www.r-bloggers.com/evaluating-logistic-regression-models/" class="uri">https://www.r-bloggers.com/evaluating-logistic-regression-models/</a></span></p>
+<p>One common technique, however, is to build a model using a ‘training’ dataset (sometimes a subset of your data) and evaluate how well this model predicts new observations in a ‘test’ dataset. See <a href="http://r4ds.had.co.nz/model-assess.html" class="uri">http://r4ds.had.co.nz/model-assess.html</a> for an introduction.</p>
+<!-- TODO 
+
+- interactions and weirness between probbaility and logit space
+
+-->
+<!-- TODO 
 
 
-## Lists {- #lists}
+### Poisson regression {-}
 
-Try running the code below by typing it into the console:
-
-
-```r
-confusing.vector <- c(1, 2, 3, "Wibble")
-confusing.vector
-[1] "1"      "2"      "3"      "Wibble"
-```
-
-And then try this:
+- fitting
+- predicted counts
 
 
-```r
-first.element <- confusing.vector[1]
-sqrt(first.element)
-Error in sqrt(first.element): non-numeric argument to mathematical function
-```
+-->
 
+<!-- ADD?
+Doug bates guide:
+http://lme4.r-forge.r-project.org/lMMwR/lrgprt.pdf 
 
-:::{.exercise}
+Predictive Margins and Marginal Effects in Stata
+http://www.stata.com/meeting/germany13/abstracts/materials/de13_jann.pdf
 
-Take a minute to try and make a guess at what went wrong. Why does R complain that the `1` is non-numeric?
-
-:::
-
-
-The answer: When we built the vector we used `c` to combine the elements `1`, `2`, `3` and `"Wibble"`. Although our first three elements are numbers, `"Wibble"` is not - it's made up of letters (this is called a character string).
-
-Vectors can only contain one *type* of thing so R automatically converts all the elements to the same type, if it can. 
-
-Because R can't reliably convert `"Wibble"` to a number, everything in the vector was converted to the `character` type instead. We get an error because R can't mutiply words together.
-
-
-
-#### Checking what type of thing you have... {-}
-
-
-If you're not sure what type of thing your vector contains, you can use the `typeof` function:
-
-
-```r
-typeof(1:10)
-[1] "integer"
-typeof(runif(10))
-[1] "double"
-typeof(c(1, 2, "Wibble"))
-[1] "character"
-```
-
-Here the meaning of *integer* should be self explanatory. The vector `runif(10)` has type *double*, because it contains 'double-precision' floating point numbers. For our purposes you can just think of `double` as meaning any number with decimal places.
-
-The last vector has the type `character` because it includes the character string `Wibble`, and all the other numbers in it were coerced to become character strings too.
-
-If we want to (safely) mix up different types of object without them being converted we need a proper `list`, rather than a vector. In R we would write:
-
-
-```r
-my.list <- list(2, 2, "Wibble")
-```
-
-
-We can still access elements from lists as we do for vectors, although now we need to use double square brackets, for example:
-
-
-
-```r
-my.list[[1]]
-[1] 2
-```
-
-But now our numbers haven't been converted to character strings, and we can still multiply them.
-
-
-```r
-my.list[[1]] * my.list[[2]]
-[1] 4
-```
-
-Square brackets are ugly and can be confusing though, so we often give names to the elements of our list when we create it:
-
-
-```r
-my.party <- list(number.guests=8, 
-                 when="Friday", 
-                 drinks = c("Juice", "Beer", "Whisky"))
-```
-
-Which means we can then access the elements *by name* later on. To do this, you write the name of the vector, then a `$` sign, and then the name of the element you want to access:
-
-
-```r
-my.party$when
-[1] "Friday"
-```
-
-You might have spotted that we included a vector inside the party list. This is not a problem, and we can still access individual elements of this vector too:
-
-
-```r
-my.party$drinks[1]
-[1] "Juice"
-```
-
-
-####  {- .exercise}
-
-1. Create a vector containing 3 numbers then:
-
-  - Access just the last number
-  - Create a new vector containing just the first and last number
-
-2. Create a list containing your address and your age in years. Then:
-
-  - Multiply your age in years by your flat or house number (by accessing the relevant elements in the list)
-
-3. Run the following R code and explain what has happened:
-
-
-```r
-sqrt(1:10) * 10
- [1] 10.00000 14.14214 17.32051 20.00000 22.36068 24.49490 26.45751
- [8] 28.28427 30.00000 31.62278
-```
-
-
-
-#### {- .exercise}
-
-Extended questions:
-
-- What is the average of the 9 times table, up to and including 9 x 1000? 
-
-- Use the `paste` and `c(...)` functions to create a vector which contains the sequence "1 elephant", "2 elephants", ...,  "1000 elephants". 
-
-
- -->
-
+-->
+</div>
 </div>
 </div>
             </section>
@@ -642,8 +604,8 @@ Extended questions:
           </div>
         </div>
       </div>
-<a href="working-with-vectors.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="packages.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="followup-tests.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multilevel-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
