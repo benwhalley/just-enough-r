@@ -25,10 +25,12 @@ data_frame(pictures = abs(rnorm(100, 30, 10)), words = pictures*1000+rnorm(100, 
 <!-- TODO ADD @matejka2017sameand dino plots -->
 
 
-Graphics are the best thing about R. The base system alone provides lots of useful plotting functions, but the `ggplot2` package is exceptional in the consistent and powerful approach it takes to visualising data. This chapter focusses mostly on `ggplot`, but does include some pointers to other useful plotting functions.
+Plotting and data visualisation is probably the best thing about R. 
+
+The base system alone provides lots of useful plotting functions, but the `ggplot2` package is exceptional in the consistent and powerful approach it takes to visualising data. This chapter focusses mostly on `ggplot`, but does include some pointers to other useful plotting functions.
 
 
-It's also worth pointing out here that the O'Reilly [R Graphics cookbook is available as a pdf download](https://ase.tufts.edu/bugs/guide/assets/R%20Graphics%20Cookbook.pdf) and is a much more comprehensive source than this page. 
+It's also worth pointing out here that the O'Reilly [R Graphics cookbook is available as a pdf download](https://ase.tufts.edu/bugs/guide/assets/R%20Graphics%20Cookbook.pdf) and is a much more comprehensive source than this book. 
 
 The examples below are more selective and show plots likely to be of particular use in reporting your studies.
 
@@ -40,32 +42,36 @@ The emphaisis on showing you how to make _good_ plots that help you explore data
 ## Benefits of visualising data {- #graphics-benefits}
 
 
-Scientists attempt to understanding natural processes, predict events in the observable world, and communicate this understanding to others. In each case, graphics are a powerful tool in their armoury.
+Scientists attempt to understand natural processes, predict events in the observable world, and communicate this understanding to others. In each case, graphics are a powerful tool in their armoury.
 
-The doctrine of null hypothesis testing which has infected psychology and many other fields has made some researchers nervous about the power of graphics to explore and find patterns in data: perhaps concerned with the accusation of undertaking a 'fishing trip' or capitalising on chance in ther analyses, too many scientists have eschewed graphical statistics and focussed instead on point estimates and *p* values from complex statistical models.
 
-But as the complexity of theories group, the role of graphics becomes ever more important because the _right_ graphical presentations of our data are in many cases the only reliable way of checking the appropriateness of our models, and of communicating our findings efficiently.
+<!-- The doctrine of null hypothesis testing which has infected psychology and many other fields has made some researchers nervous about the power of graphics to explore and find patterns in data: perhaps concerned with the accusation of undertaking a 'fishing trip' or capitalising on chance in ther analyses, too many scientists have eschewed graphical statistics and focussed instead on point estimates and *p* values from complex statistical models.
+
+But as the complexity of theories group, the role of graphics becomes ever more important because the _right_ graphical presentations of our data are in many cases the only reliable way of checking the appropriateness of our models, and of communicating our findings efficiently. -->
 
 David McCandless recently spoke at a TedX event about his work on data journalism, and makes a persuasive case for paying more attention to visualisations:
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/5Zg-C8AAIGg?rel=0" frameborder="0" allowfullscreen></iframe>
 
-
-For a fascinating history and exploration of the good, the bad and the ugly in data visualisations you should also (at least) skim Edward Tufte's book [@edward2001visual].
+<!-- 
+For a fascinating history and exploration of the good, the bad and the ugly in data visualisations Edward Tufte's book [@edward2001visual]. -->
 
 
 
 ## Which tool to use? {- #graphics-approaches}
 
-Typically when setting out to plot data in R it pays to ask yourself whether you need:
+When plotting data it pays to decide if you need:
 
-1. A quick way to visualise something specific -- for example to check some feature of your data before you continue your analysis -- without worrying _too_ much about the detail of the graphic.
+1. A quick way to visualise something specific -- for example to check some feature of your data before you continue your analysis.
 
-2. A plot that is specifically designed to communicate your data effectively, and where you do care about the details of the final output.
+2. A plot that is specifically designed to communicate your data effectively, and where you care about the details of the final output.
   
-For the first case, where you already know what you want --- for example to visualise a distribution of a single variable or to check diagnostics from a linear model --- there are many useful built-in functions in base-R.
 
-For the second case --- for example where you want to visualise the main outcomes of your study, or draw attention to specific aspects of your data --- there is `ggplot2`. We'll deal with the second case first, because using ggplot highlights many important aspects of plotting in general.
+For the first case --- for example to visualise a distribution of a single variable, or to check diagnostics from a linear model --- there are lots of useful built-in functions in base-R and other packages.
+
+For the second case --- for example where you want to visualise the main outcomes of your study, or draw attention to specific aspects of your data --- there is `ggplot2`. 
+
+We case 2 first, because using ggplot highlights many important aspects of plotting in general.
 
 
 
@@ -100,7 +106,7 @@ gridExtra::grid.arrange(relationships+mm, distributions+mm, comparison+mm, compo
 
 There are various simple chart selection guides available online, of which these are quite nice examples:
 
-- [Chart selection guide (pdf)](http://extremepresentation.typepad.com/blog/2006/09/choosing_a_good.html)]
+- [Chart selection guide (pdf)](http://extremepresentation.typepad.com/blog/2006/09/choosing_a_good.html)
 - ['Show me the numbers' chart guide (pdf)](https://www.perceptualedge.com/articles/misc/Graph_Selection_Matrix.pdf)
 
 ![](media/choosing_a_good_chart.jpg)
@@ -120,7 +126,7 @@ Specifically, they:
 
 You should be guided in choosing plots not by mechanical rules based on the number or type of variables you want to display. Instead, you should be guided by the evidence from basic studies of human perception, and applied data on how different types of infromation displays are really used by readers.
 
-This guide is restricted to examples likely to be useful and effective for experiemental and applied psychologists.
+**This guide is restricted to examples likely to be useful and effective for experimental and applied psychologists.**
 
 
 
