@@ -312,6 +312,11 @@ apastats::describe.lmtaov(anova(sleep.model), term='factor(Days)')
 ```
 
 
-[There were significant differences in reaction times across the 10 days of the study, `r apastats::describe.lmtaov(anova(sleep.model), term='factor(Days)')` such that reaction latencies tended to increase in duration (see [Figure X]).]{.apa-example}
+```{r, echo=F, include=F}
+rtchanges <- apastats::describe.lmtaov(anova(sleep.model), term='factor(Days)')
+```
+
+
+[There were significant differences in reaction times across the 10 days of the study, `r rtchanges` such that reaction latencies tended to increase in duration (see [Figure X]).]{.apa-example}
 
 
