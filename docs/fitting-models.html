@@ -239,6 +239,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>III Models</b></span></li>
 <li class="chapter" data-level="6" data-path="common-stats.html"><a href="common-stats.html"><i class="fa fa-check"></i><b>6</b> Commonly used statistics</a><ul>
+<li class="chapter" data-level="6.1" data-path="nonparametrics.html"><a href="nonparametrics.html"><i class="fa fa-check"></i><b>6.1</b> Non-parametric statistics</a></li>
 <li><a href="crosstabs.html#crosstabs">Crosstabulations and <span class="math inline">\(\chi^2\)</span></a><ul>
 <li class="chapter" data-level="" data-path="crosstabs.html"><a href="crosstabs.html"><i class="fa fa-check"></i>Three-way tables</a></li>
 </ul></li>
@@ -378,7 +379,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="rownames.html"><a href="rownames.html"><i class="fa fa-check"></i>Rownames are evil</a></li>
 <li class="chapter" data-level="" data-path="string-handling.html"><a href="string-handling.html"><i class="fa fa-check"></i>Working with character strings</a><ul>
 <li class="chapter" data-level="18.0.1" data-path="string-handling.html"><a href="string-handling.html#searching-and-replacing"><i class="fa fa-check"></i><b>18.0.1</b> Searching and replacing</a></li>
-<li><a href="working-with-vectors.html#paste">Using <code>paste</code> to make labels</a></li>
+<li><a href="string-handling.html#paste">Using <code>paste</code> to make labels</a></li>
 <li><a href="string-handling.html#separate-and-extract">Fixing up <code>variable</code> after melting</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="colours.html"><a href="colours.html"><i class="fa fa-check"></i>Colours</a><ul>
@@ -452,15 +453,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="lmer-syntax" class="section level4 unnumbered">
 <h4>The <code>lmer</code> formula syntax</h4>
-<p>Specifying <code>lmer</code> models is very similar to the <a href="linear-models-simple.html#formulae">syntax for <code>lm</code></a>. The ‘fixed’ part of the model is exactly the same, with additional parts used to specify <a href="fitting-models.html#random-intercepts">random intercepts</a>, <a href="fitting-models.html#random-slopes">random slopes</a>, and control the covariances of these random effects (<a href="troubleshooting-multilevel-models.html#controlling-lmer-covariances">there’s more on this in the troubleshooting section</a>).</p>
-<div id="random-intercepts" class="section level6 unnumbered">
+<p>Specifying <code>lmer</code> models is very similar to the <a href="linear-models-simple.html#formulae">syntax for <code>lm</code></a>. The ‘fixed’ part of the model is exactly the same, with additional parts used to specify <a href="fixed-or-random.html#random-intercepts">random intercepts</a>, <a href="fixed-or-random.html#random-slopes">random slopes</a>, and control the covariances of these random effects (<a href="troubleshooting-multilevel-models.html#controlling-lmer-covariances">there’s more on this in the troubleshooting section</a>).</p>
+<div id="ml-random-intercepts" class="section level6 unnumbered">
 <h6>Random intercepts</h6>
-<p>The simplest model which allows a <a href="fitting-models.html#random-intercepts">‘random intercept’</a> for each level in the grouping looks like this:</p>
+<p>The simplest model which allows a <a href="fixed-or-random.html#random-intercepts">‘random intercept’</a> for each level in the grouping looks like this:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lmer</span>(outcome <span class="op">~</span><span class="st"> </span>predictors <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>grouping), <span class="dt">data=</span>df)</code></pre>
 <p>Here the outcome and predictors are specified in a formula, just as we did when using <code>lm()</code>. The only difference is that we now add a ‘random part’ to the model, in this case: <code>(1|grouping)</code>.</p>
 <p>The <code>1</code> refers to an intercept, and so in English this part of the formula means ‘add a random intercept for each level of grouping’.</p>
 </div>
-<div id="random-slopes" class="section level6 unnumbered">
+<div id="ml-random-slopes" class="section level6 unnumbered">
 <h6>Random slopes</h6>
 <p>If we want to add a <a href="fixed-or-random.html#random-slopes-intercepts">random slope</a> to the model, we could adjust the random part like so:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lmer</span>(outcome <span class="op">~</span><span class="st"> </span>predictor <span class="op">+</span><span class="st"> </span>(predictor <span class="op">|</span><span class="st"> </span>grouping), <span class="dt">data=</span>df)</code></pre>

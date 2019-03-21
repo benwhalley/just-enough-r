@@ -614,7 +614,6 @@ heights / 100
 ```
 
 
-#### {- #paste}
 
 This trick also works with other functions like `paste`, which combines the inputs you send it to produce an alphanumeric string:
 

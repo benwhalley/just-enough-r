@@ -239,6 +239,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>III Models</b></span></li>
 <li class="chapter" data-level="6" data-path="common-stats.html"><a href="common-stats.html"><i class="fa fa-check"></i><b>6</b> Commonly used statistics</a><ul>
+<li class="chapter" data-level="6.1" data-path="nonparametrics.html"><a href="nonparametrics.html"><i class="fa fa-check"></i><b>6.1</b> Non-parametric statistics</a></li>
 <li><a href="crosstabs.html#crosstabs">Crosstabulations and <span class="math inline">\(\chi^2\)</span></a><ul>
 <li class="chapter" data-level="" data-path="crosstabs.html"><a href="crosstabs.html"><i class="fa fa-check"></i>Three-way tables</a></li>
 </ul></li>
@@ -378,7 +379,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="rownames.html"><a href="rownames.html"><i class="fa fa-check"></i>Rownames are evil</a></li>
 <li class="chapter" data-level="" data-path="string-handling.html"><a href="string-handling.html"><i class="fa fa-check"></i>Working with character strings</a><ul>
 <li class="chapter" data-level="18.0.1" data-path="string-handling.html"><a href="string-handling.html#searching-and-replacing"><i class="fa fa-check"></i><b>18.0.1</b> Searching and replacing</a></li>
-<li><a href="working-with-vectors.html#paste">Using <code>paste</code> to make labels</a></li>
+<li><a href="string-handling.html#paste">Using <code>paste</code> to make labels</a></li>
 <li><a href="string-handling.html#separate-and-extract">Fixing up <code>variable</code> after melting</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="colours.html"><a href="colours.html"><i class="fa fa-check"></i>Colours</a><ul>
@@ -448,29 +449,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  Residual             <span class="fl">30.991</span>  </code></pre>
 <p>And we can test the variance parameter using the <code>rand()</code> function:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rand</span>(random.intercepts.model)
-Analysis of Random effects Table<span class="op">:</span>
-<span class="st">        </span>Chi.sq Chi.DF p.value    
-Subject    <span class="dv">107</span>      <span class="dv">1</span>  <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+ANOVA<span class="op">-</span>like table <span class="cf">for</span> random<span class="op">-</span>effects<span class="op">:</span><span class="st"> </span>Single term deletions
+
+Model<span class="op">:</span>
+Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Subject)
+              npar  logLik    AIC   LRT Df <span class="kw">Pr</span>(<span class="op">&gt;</span>Chisq)    
+<span class="op">&lt;</span>none<span class="op">&gt;</span><span class="st">           </span><span class="dv">4</span> <span class="fl">-893.23</span> <span class="fl">1794.5</span>                        
+(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Subject)    <span class="dv">3</span> <span class="fl">-946.83</span> <span class="fl">1899.7</span> <span class="fl">107.2</span>  <span class="dv">1</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span>
 <span class="op">---</span>
 Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre>
 <p>Helpfully, if we convert the result of <code>VarCorr</code> to a dataframe, we are provided with the columns <code>vcov</code> which stands for <code>variance or covariance</code>, as well as the <code>sdcor</code> (standard deviation or correlation) which is provided in the printed summary:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">VarCorr</span>(random.intercepts.model) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">as_data_frame</span>()
 <span class="co"># A tibble: 2 x 5</span>
-       grp        var1  var2      vcov    sdcor
-     <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">       </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">    </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
-<span class="dv">1</span>  <span class="kw">Subject</span> (Intercept)  <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st"> </span><span class="fl">1378.1785</span> <span class="fl">37.12383</span>
-<span class="dv">2</span> Residual        <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">  </span><span class="fl">960.4566</span> <span class="fl">30.99123</span></code></pre>
+  grp      var1        var2   vcov sdcor
+  <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">    </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">       </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span> <span class="kw">Subject</span>  (Intercept) <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">  </span><span class="fl">1378.</span>  <span class="fl">37.1</span>
+<span class="dv">2</span> Residual <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">        </span><span class="er">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">   </span><span class="fl">960.</span>  <span class="fl">31.0</span></code></pre>
 <p>The variance partition coefficient is simply the variance at a given level of the model, divided by the total variance (the sum of the variance parameters). So we can write:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">VarCorr</span>(random.intercepts.model) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">as_data_frame</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">icc=</span>vcov<span class="op">/</span><span class="kw">sum</span>(vcov)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(grp, icc)
 <span class="co"># A tibble: 2 x 2</span>
-       grp       icc
-     <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
-<span class="dv">1</span>  Subject <span class="fl">0.5893089</span>
-<span class="dv">2</span> Residual <span class="fl">0.4106911</span></code></pre>
+  grp        icc
+  <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">    </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span> Subject  <span class="fl">0.589</span>
+<span class="dv">2</span> Residual <span class="fl">0.411</span></code></pre>
 <p><span class="apa-example">Intraclass correlations were computed from the mixed effects mode. 59% of the variation in outcome was attributable to differences between subjects, <span class="math inline">\(\chi^2(1) = 107\)</span>, <em>p</em> &lt; .001.</span></p>
 <p>[It’s not straightforward to put an confidence interval around the VPC estimate from an lmer model. If this is important to you, you should explore <a href="bayes-mcmc.html#bayes-mcmc">re-fitting the same model in a Bayesian framework</a>]</p>
 </div>

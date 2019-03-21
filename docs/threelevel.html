@@ -239,6 +239,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>III Models</b></span></li>
 <li class="chapter" data-level="6" data-path="common-stats.html"><a href="common-stats.html"><i class="fa fa-check"></i><b>6</b> Commonly used statistics</a><ul>
+<li class="chapter" data-level="6.1" data-path="nonparametrics.html"><a href="nonparametrics.html"><i class="fa fa-check"></i><b>6.1</b> Non-parametric statistics</a></li>
 <li><a href="crosstabs.html#crosstabs">Crosstabulations and <span class="math inline">\(\chi^2\)</span></a><ul>
 <li class="chapter" data-level="" data-path="crosstabs.html"><a href="crosstabs.html"><i class="fa fa-check"></i>Three-way tables</a></li>
 </ul></li>
@@ -378,7 +379,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="rownames.html"><a href="rownames.html"><i class="fa fa-check"></i>Rownames are evil</a></li>
 <li class="chapter" data-level="" data-path="string-handling.html"><a href="string-handling.html"><i class="fa fa-check"></i>Working with character strings</a><ul>
 <li class="chapter" data-level="18.0.1" data-path="string-handling.html"><a href="string-handling.html#searching-and-replacing"><i class="fa fa-check"></i><b>18.0.1</b> Searching and replacing</a></li>
-<li><a href="working-with-vectors.html#paste">Using <code>paste</code> to make labels</a></li>
+<li><a href="string-handling.html#paste">Using <code>paste</code> to make labels</a></li>
 <li><a href="string-handling.html#separate-and-extract">Fixing up <code>variable</code> after melting</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="colours.html"><a href="colours.html"><i class="fa fa-check"></i>Colours</a><ul>
@@ -453,54 +454,56 @@ lectures &lt;-<span class="st"> </span><span class="kw">sample_n</span>(lme4<spa
 <p>We run a model without any predictors, but respecting the clustering in the data, in the example below. This model is a three-level random intercepts model, which splits the variance between lecturers, students, and the residual variance. Because, in some cases, some of the same students provide data on a particular lecturer these data are ‘partially crossed’ (the alternative would be to sample different students for each lecturer).</p>
 <pre class="sourceCode r"><code class="sourceCode r">lectures.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(y<span class="op">~</span>(<span class="dv">1</span><span class="op">|</span>d)<span class="op">+</span>(<span class="dv">1</span><span class="op">|</span>s), <span class="dt">data=</span>lectures)
 <span class="kw">summary</span>(lectures.model)
-summary from lme4 is returned
-some computational error has occurred <span class="cf">in</span> lmerTest
-Linear mixed model fit by REML [<span class="st">&#39;lmerMod&#39;</span>]
-Formula<span class="op">:</span><span class="st"> </span>y <span class="op">~</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>d) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>s)
-   Data<span class="op">:</span><span class="st"> </span>lectures
+Linear mixed model fit by REML. t<span class="op">-</span>tests use Satterthwaite<span class="st">&#39;s method [</span>
+<span class="st">lmerModLmerTest]</span>
+<span class="st">Formula: y ~ (1 | d) + (1 | s)</span>
+<span class="st">   Data: lectures</span>
 
-REML criterion at convergence<span class="op">:</span><span class="st"> </span><span class="fl">33053.3</span>
+<span class="st">REML criterion at convergence: 33053.3</span>
 
-Scaled residuals<span class="op">:</span><span class="st"> </span>
-<span class="st">     </span>Min       1Q   Median       3Q      Max 
-<span class="fl">-2.55587</span> <span class="fl">-0.73732</span>  <span class="fl">0.05425</span>  <span class="fl">0.76974</span>  <span class="fl">2.46972</span> 
+<span class="st">Scaled residuals: </span>
+<span class="st">     Min       1Q   Median       3Q      Max </span>
+<span class="st">-2.55587 -0.73732  0.05425  0.76974  2.46972 </span>
 
-Random effects<span class="op">:</span>
-<span class="st"> </span>Groups   Name        Variance Std.Dev.
- <span class="kw">s</span>        (Intercept) <span class="fl">0.08245</span>  <span class="fl">0.2871</span>  
- <span class="kw">d</span>        (Intercept) <span class="fl">0.28066</span>  <span class="fl">0.5298</span>  
- Residual             <span class="fl">1.38497</span>  <span class="fl">1.1768</span>  
-Number of obs<span class="op">:</span><span class="st"> </span><span class="dv">10000</span>, groups<span class="op">:</span><span class="st">  </span>s, <span class="dv">2692</span>; d, <span class="dv">1076</span>
+<span class="st">Random effects:</span>
+<span class="st"> Groups   Name        Variance Std.Dev.</span>
+<span class="st"> s        (Intercept) 0.08245  0.2871  </span>
+<span class="st"> d        (Intercept) 0.28066  0.5298  </span>
+<span class="st"> Residual             1.38497  1.1768  </span>
+<span class="st">Number of obs: 10000, groups:  s, 2692; d, 1076</span>
 
-Fixed effects<span class="op">:</span>
-<span class="st">            </span>Estimate Std. Error t value
-(Intercept)  <span class="fl">3.23319</span>    <span class="fl">0.02373</span>   <span class="fl">136.3</span></code></pre>
+<span class="st">Fixed effects:</span>
+<span class="st">             Estimate Std. Error        df t value Pr(&gt;|t|)    </span>
+<span class="st">(Intercept)   3.23319    0.02373 999.70738   136.3   &lt;2e-16 ***</span>
+<span class="st">---</span>
+<span class="st">Signif. codes:  0 &#39;</span><span class="op">**</span><span class="er">*</span><span class="st">&#39; 0.001 &#39;</span><span class="op">**</span><span class="st">&#39; 0.01 &#39;</span><span class="op">*</span><span class="st">&#39; 0.05 &#39;</span>.<span class="st">&#39; 0.1 &#39;</span> <span class="st">&#39; 1</span></code></pre>
 <p>As before, we can extract only the variance components from the model, and look at the ICC:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">VarCorr</span>(lectures.model) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_data_frame</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">icc=</span>vcov<span class="op">/</span><span class="kw">sum</span>(vcov)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(grp, vcov, icc)
 <span class="co"># A tibble: 3 x 3</span>
-       grp       vcov        icc
-     <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">      </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">      </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
-<span class="dv">1</span>        s <span class="fl">0.08245434</span> <span class="fl">0.04716829</span>
-<span class="dv">2</span>        d <span class="fl">0.28066185</span> <span class="fl">0.16055360</span>
-<span class="dv">3</span> Residual <span class="fl">1.38497202</span> <span class="fl">0.79227811</span></code></pre>
+  grp        vcov    icc
+  <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span> s        <span class="fl">0.0825</span> <span class="fl">0.0472</span>
+<span class="dv">2</span> d        <span class="fl">0.281</span>  <span class="fl">0.161</span> 
+<span class="dv">3</span> Residual <span class="fl">1.38</span>   <span class="fl">0.792</span> </code></pre>
 <p>And we can add predictors to the model to see if they help explain student ratings:</p>
 <pre class="sourceCode r"><code class="sourceCode r">lectures.model<span class="fl">.2</span> &lt;-<span class="st"> </span><span class="kw">lmer</span>(y<span class="op">~</span>service<span class="op">*</span>dept<span class="op">+</span>(<span class="dv">1</span><span class="op">|</span>d)<span class="op">+</span>(<span class="dv">1</span><span class="op">|</span>s), <span class="dt">data=</span>lectures)
 <span class="kw">anova</span>(lectures.model<span class="fl">.2</span>)
-Analysis of Variance Table of type III  with  Satterthwaite 
-approximation <span class="cf">for</span> degrees of freedom
-             Sum Sq Mean Sq NumDF  DenDF F.value   <span class="kw">Pr</span>(<span class="op">&gt;</span>F)   
-service      <span class="fl">10.521</span> <span class="fl">10.5212</span>     <span class="dv">1</span> <span class="fl">7351.4</span>  <span class="fl">7.6046</span> <span class="fl">0.005836</span> <span class="op">**</span>
-dept         <span class="fl">15.671</span>  <span class="fl">1.2054</span>    <span class="dv">13</span> <span class="fl">1153.4</span>  <span class="fl">0.8713</span> <span class="fl">0.583611</span>   
-service<span class="op">:</span>dept <span class="fl">25.361</span>  <span class="fl">1.9509</span>    <span class="dv">13</span> <span class="fl">6399.7</span>  <span class="fl">1.4101</span> <span class="fl">0.145724</span>   
-<span class="op">---</span>
-Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre>
+Type III Analysis of Variance Table with Satterthwaite<span class="st">&#39;s method</span>
+<span class="st">             Sum Sq Mean Sq NumDF  DenDF F value   Pr(&gt;F)   </span>
+<span class="st">service      10.521 10.5212     1 7351.4  7.6046 0.005836 **</span>
+<span class="st">dept         15.671  1.2054    13 1157.4  0.8713 0.583610   </span>
+<span class="st">service:dept 25.361  1.9509    13 6350.4  1.4101 0.145727   </span>
+<span class="st">---</span>
+<span class="st">Signif. codes:  0 &#39;</span><span class="op">**</span><span class="er">*</span><span class="st">&#39; 0.001 &#39;</span><span class="op">**</span><span class="st">&#39; 0.01 &#39;</span><span class="op">*</span><span class="st">&#39; 0.05 &#39;</span>.<span class="st">&#39; 0.1 &#39;</span> <span class="st">&#39; 1</span></code></pre>
 <p>Here we can see the <code>service</code> variable does predict evaluations, and we can use the model to estimate the mean and SE for service == 1 or service == 0 (see also the sections on <a href="multiple-comparisons.html#multiple-comparisons">multiple comparisons</a>, <a href="multiple-comparisons.html#contrasts">followup contrasts</a>, and doing <a href="contrasts-lmer.html#contrasts-lmer">followup contrasts with lmer models</a> for more options here):</p>
 <pre class="sourceCode r"><code class="sourceCode r">service.means &lt;-<span class="st"> </span>emmeans<span class="op">::</span><span class="kw">emmeans</span>(lectures.model<span class="fl">.2</span>, <span class="st">&#39;service&#39;</span>)
-Loading required namespace<span class="op">:</span><span class="st"> </span>pbkrtest
 Note<span class="op">:</span><span class="st"> </span>D.f. calculations have been disabled because the number of observations exceeds <span class="fl">3000.</span>
 To enable adjustments, set <span class="kw">emm_options</span>(<span class="dt">pbkrtest.limit =</span> <span class="dv">10000</span>) or larger,
+but be warned that this may result <span class="cf">in</span> large computation time and memory use.
+Note<span class="op">:</span><span class="st"> </span>D.f. calculations have been disabled because the number of observations exceeds <span class="fl">3000.</span>
+To enable adjustments, set <span class="kw">emm_options</span>(<span class="dt">lmerTest.limit =</span> <span class="dv">10000</span>) or larger,
 but be warned that this may result <span class="cf">in</span> large computation time and memory use.
 NOTE<span class="op">:</span><span class="st"> </span>Results may be misleading due to involvement <span class="cf">in</span> interactions
 service.means <span class="op">%&gt;%</span><span class="st"> </span>
@@ -538,11 +541,11 @@ service.means <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">icc=</span>vcov<span class="op">/</span><span class="kw">sum</span>(vcov)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(grp, vcov, icc)
 <span class="co"># A tibble: 3 x 3</span>
-       grp      vcov        icc
-     <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">      </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
-<span class="dv">1</span>        s <span class="fl">0.0813370</span> <span class="fl">0.04677069</span>
-<span class="dv">2</span>        d <span class="fl">0.2741918</span> <span class="fl">0.15766675</span>
-<span class="dv">3</span> Residual <span class="fl">1.3835306</span> <span class="fl">0.79556257</span></code></pre>
+  grp        vcov    icc
+  <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span> s        <span class="fl">0.0813</span> <span class="fl">0.0468</span>
+<span class="dv">2</span> d        <span class="fl">0.274</span>  <span class="fl">0.158</span> 
+<span class="dv">3</span> Residual <span class="fl">1.38</span>   <span class="fl">0.796</span> </code></pre>
 </div>
             </section>
 

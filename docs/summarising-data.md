@@ -38,6 +38,9 @@ If a function returns a dataframe (rather than just printing output to the scree
 
 ### Frequency tables {- #frequency-tables}
 
+<!-- https://pixabay.com/photos/lego-blocks-duplo-lego-colorful-2458575/  -->
+![](media/lego-blocks-2458575_1280-1.jpg){.small-image}
+
 
 Let's say we ask 4 year olds and 6 year olds whether they prefer lego or duplo. 
 

@@ -1,10 +1,7 @@
 
 ---
 title: 'Multilevel models'
-
 ---
-
-
 
 
 
@@ -19,7 +16,6 @@ http://www.stata.com/meeting/germany13/abstracts/materials/de13_jann.pdf
 
 
 # Multilevel models {#multilevel-models}
-
 
 Psychological data often contains natural *groupings*. In intervention research, multiple patients may be treated by individual therapists, or children taught within classes, which are further nested within schools; in experimental research participants may respond on multiple occasions to a variety of stimuli.
 
@@ -80,7 +76,7 @@ That notwithstanding, many people have wanted to use the various methods to calc
 Specifying `lmer` models is very similar to the [syntax for `lm`](#formulae). The 'fixed' part of the model is exactly the same, with additional parts used to specify [random intercepts](#random-intercepts), [random slopes](#random-slopes), and control the covariances of these random effects ([there's more on this in the troubleshooting section](#controlling-lmer-covariances)).
 
 
-###### Random intercepts {- }
+###### Random intercepts {- #ml-random-intercepts}
 
 The simplest model which allows a ['random intercept'](#random-intercepts) for each level in the grouping looks like this:
 
@@ -94,7 +90,7 @@ Here the outcome and predictors are specified in a formula, just as we did when 
 The `1` refers to an intercept, and so in English this part of the formula means 'add a random intercept for each level of grouping'.
 
 
-###### Random slopes {- }
+###### Random slopes {- #ml-random-slopes}
 
 If we want to add a [random slope](#random-slopes-intercepts) to the model, we could adjust the random part like so:
 
@@ -150,9 +146,8 @@ The equivalent lmer model is:
 library(lmerTest)
 sleep.lmer <- lmer(Reaction ~ factor(Days) + (1|Subject), data=lme4::sleepstudy)
 anova(sleep.lmer)
-Analysis of Variance Table of type III  with  Satterthwaite 
-approximation for degrees of freedom
-             Sum Sq Mean Sq NumDF DenDF F.value    Pr(>F)    
+Type III Analysis of Variance Table with Satterthwaite's method
+             Sum Sq Mean Sq NumDF DenDF F value    Pr(>F)    
 factor(Days) 166235   18471     9   153  18.703 < 2.2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -177,7 +172,7 @@ lme4::sleepstudy %>%
   ggplot(aes(Days, Reaction)) + 
   geom_point() + geom_jitter() +
   geom_smooth() 
-`geom_smooth()` using method = 'loess'
+`geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
 <img src="multilevel-models_files/figure-html/unnamed-chunk-7-1.png" width="672" />
@@ -240,9 +235,9 @@ Nor the overall slope coefficient:
 ```r
 random.slope.model.summary <- summary(random.slope.model)
 slope.model.summary$coefficients
-             Estimate Std. Error       df  t value Pr(>|t|)
-(Intercept) 251.40510  9.7467163  22.8102 25.79383        0
-Days         10.46729  0.8042214 161.0036 13.01543        0
+             Estimate Std. Error       df  t value     Pr(>|t|)
+(Intercept) 251.40510  9.7467163  22.8102 25.79383 2.241353e-18
+Days         10.46729  0.8042214 161.0000 13.01543 6.412601e-27
 ```
 
 But we can use the `lmerTest::ranova()` function to show that there is statistically significant variation in slopes between individuals, using the likelihood ratio test:
@@ -293,7 +288,7 @@ residual.fitted.data %>%
   geom_point() + 
   geom_smooth(se=F) +
   facet_wrap(~model) 
-`geom_smooth()` using method = 'loess'
+`geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
 <img src="multilevel-models_files/figure-html/unnamed-chunk-14-1.png" width="672" />
@@ -364,11 +359,14 @@ anova(random.slope.model, uncorrelated.reffs.model)
 refitting model(s) with ML (instead of REML)
 Data: lme4::sleepstudy
 Models:
-..1: Reaction ~ Days + (1 | Subject) + (0 + Days | Subject)
-object: Reaction ~ Days + (Days | Subject)
-       Df    AIC    BIC  logLik deviance  Chisq Chi Df Pr(>Chisq)
-..1     5 1762.0 1778.0 -876.00   1752.0                         
-object  6 1763.9 1783.1 -875.97   1751.9 0.0639      1     0.8004
+uncorrelated.reffs.model: Reaction ~ Days + (1 | Subject) + (0 + Days | Subject)
+random.slope.model: Reaction ~ Days + (Days | Subject)
+                         Df    AIC    BIC  logLik deviance  Chisq Chi Df
+uncorrelated.reffs.model  5 1762.0 1778.0 -876.00   1752.0              
+random.slope.model        6 1763.9 1783.1 -875.97   1751.9 0.0639      1
+                         Pr(>Chisq)
+uncorrelated.reffs.model           
+random.slope.model           0.8004
 ```
 
 Model fit is not significantly worse with the constrained model, [so for parsimony's sake we prefer it to the more complex model](#over-fitting).
@@ -386,7 +384,7 @@ lme4::sleepstudy %>%
   ggplot(aes(Days, Reaction)) + 
   geom_point() + geom_jitter() + 
   geom_smooth() 
-`geom_smooth()` using method = 'loess'
+`geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
 <img src="multilevel-models_files/figure-html/unnamed-chunk-19-1.png" width="672" />
@@ -398,10 +396,10 @@ If we insisted on testing a curved (quadratic) function of `Days`, we could:
 quad.model <- lmer(Reaction ~ Days + I(Days^2) + (1|Subject),  data=lme4::sleepstudy)
 quad.model.summary <- summary(quad.model)
 quad.model.summary$coefficients
-               Estimate Std. Error        df   t value   Pr(>|t|)
-(Intercept) 255.4493728 10.4656310  30.04063 24.408406 0.00000000
-Days          7.4340850  2.9707978 160.00374  2.502387 0.01334034
-I(Days^2)     0.3370223  0.3177733 160.00374  1.060575 0.29048148
+               Estimate Std. Error        df   t value     Pr(>|t|)
+(Intercept) 255.4493728 10.4656310  30.04064 24.408406 2.299687e-21
+Days          7.4340850  2.9707978 160.00000  2.502387 1.334036e-02
+I(Days^2)     0.3370223  0.3177733 160.00000  1.060575 2.904815e-01
 ```
 
 Here, the *p* value for `I(Days^2)` is not significant, suggesting (as does the plot) that a simple slope model is sufficient.
@@ -437,9 +435,13 @@ And we can test the variance parameter using the `rand()` function:
 
 ```r
 rand(random.intercepts.model)
-Analysis of Random effects Table:
-        Chi.sq Chi.DF p.value    
-Subject    107      1  <2e-16 ***
+ANOVA-like table for random-effects: Single term deletions
+
+Model:
+Reaction ~ Days + (1 | Subject)
+              npar  logLik    AIC   LRT Df Pr(>Chisq)    
+<none>           4 -893.23 1794.5                        
+(1 | Subject)    3 -946.83 1899.7 107.2  1  < 2.2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -452,10 +454,10 @@ Helpfully, if we convert the result of `VarCorr` to a dataframe, we are provided
 VarCorr(random.intercepts.model) %>% 
   as_data_frame()
 # A tibble: 2 x 5
-       grp        var1  var2      vcov    sdcor
-     <chr>       <chr> <chr>     <dbl>    <dbl>
-1  Subject (Intercept)  <NA> 1378.1785 37.12383
-2 Residual        <NA>  <NA>  960.4566 30.99123
+  grp      var1        var2   vcov sdcor
+  <chr>    <chr>       <chr> <dbl> <dbl>
+1 Subject  (Intercept) <NA>  1378.  37.1
+2 Residual <NA>        <NA>   960.  31.0
 ```
 
 The variance partition coefficient is simply the variance at a given level of the model, divided by the total variance (the sum of the variance parameters). So we can write:
@@ -467,10 +469,10 @@ VarCorr(random.intercepts.model) %>%
   mutate(icc=vcov/sum(vcov)) %>% 
   select(grp, icc)
 # A tibble: 2 x 2
-       grp       icc
-     <chr>     <dbl>
-1  Subject 0.5893089
-2 Residual 0.4106911
+  grp        icc
+  <chr>    <dbl>
+1 Subject  0.589
+2 Residual 0.411
 ```
 
 [Intraclass correlations were computed from the mixed effects mode. 59% of the variation in outcome was attributable to differences between subjects, $\chi^2(1) = 107$, *p* < .001.]{.apa-example}
@@ -515,9 +517,8 @@ We run a model without any predictors, but respecting the clustering in the data
 ```r
 lectures.model <- lmer(y~(1|d)+(1|s), data=lectures)
 summary(lectures.model)
-summary from lme4 is returned
-some computational error has occurred in lmerTest
-Linear mixed model fit by REML ['lmerMod']
+Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
 Formula: y ~ (1 | d) + (1 | s)
    Data: lectures
 
@@ -535,8 +536,10 @@ Random effects:
 Number of obs: 10000, groups:  s, 2692; d, 1076
 
 Fixed effects:
-            Estimate Std. Error t value
-(Intercept)  3.23319    0.02373   136.3
+             Estimate Std. Error        df t value Pr(>|t|)    
+(Intercept)   3.23319    0.02373 999.70738   136.3   <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 
@@ -548,11 +551,11 @@ VarCorr(lectures.model) %>% as_data_frame() %>%
   mutate(icc=vcov/sum(vcov)) %>% 
   select(grp, vcov, icc)
 # A tibble: 3 x 3
-       grp       vcov        icc
-     <chr>      <dbl>      <dbl>
-1        s 0.08245434 0.04716829
-2        d 0.28066185 0.16055360
-3 Residual 1.38497202 0.79227811
+  grp        vcov    icc
+  <chr>     <dbl>  <dbl>
+1 s        0.0825 0.0472
+2 d        0.281  0.161 
+3 Residual 1.38   0.792 
 ```
 
 
@@ -562,12 +565,11 @@ And we can add predictors to the model to see if they help explain student ratin
 ```r
 lectures.model.2 <- lmer(y~service*dept+(1|d)+(1|s), data=lectures)
 anova(lectures.model.2)
-Analysis of Variance Table of type III  with  Satterthwaite 
-approximation for degrees of freedom
-             Sum Sq Mean Sq NumDF  DenDF F.value   Pr(>F)   
+Type III Analysis of Variance Table with Satterthwaite's method
+             Sum Sq Mean Sq NumDF  DenDF F value   Pr(>F)   
 service      10.521 10.5212     1 7351.4  7.6046 0.005836 **
-dept         15.671  1.2054    13 1153.4  0.8713 0.583611   
-service:dept 25.361  1.9509    13 6399.7  1.4101 0.145724   
+dept         15.671  1.2054    13 1157.4  0.8713 0.583610   
+service:dept 25.361  1.9509    13 6350.4  1.4101 0.145727   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -577,9 +579,11 @@ Here we can see the `service` variable does predict evaluations, and we can use 
 
 ```r
 service.means <- emmeans::emmeans(lectures.model.2, 'service')
-Loading required namespace: pbkrtest
 Note: D.f. calculations have been disabled because the number of observations exceeds 3000.
 To enable adjustments, set emm_options(pbkrtest.limit = 10000) or larger,
+but be warned that this may result in large computation time and memory use.
+Note: D.f. calculations have been disabled because the number of observations exceeds 3000.
+To enable adjustments, set emm_options(lmerTest.limit = 10000) or larger,
 but be warned that this may result in large computation time and memory use.
 NOTE: Results may be misleading due to involvement in interactions
 service.means %>% 
@@ -605,11 +609,11 @@ VarCorr(lectures.model.2) %>% as_data_frame() %>%
   mutate(icc=vcov/sum(vcov)) %>% 
   select(grp, vcov, icc)
 # A tibble: 3 x 3
-       grp      vcov        icc
-     <chr>     <dbl>      <dbl>
-1        s 0.0813370 0.04677069
-2        d 0.2741918 0.15766675
-3 Residual 1.3835306 0.79556257
+  grp        vcov    icc
+  <chr>     <dbl>  <dbl>
+1 s        0.0813 0.0468
+2 d        0.274  0.158 
+3 Residual 1.38   0.796 
 ```
 
 
@@ -625,9 +629,8 @@ Let's say we repeat one of the models used in a previous section, looking at the
 ```r
 m <- lmer(Reaction~factor(Days)+(1|Subject), data=lme4::sleepstudy)
 anova(m)
-Analysis of Variance Table of type III  with  Satterthwaite 
-approximation for degrees of freedom
-             Sum Sq Mean Sq NumDF DenDF F.value    Pr(>F)    
+Type III Analysis of Variance Table with Satterthwaite's method
+             Sum Sq Mean Sq NumDF DenDF F value    Pr(>F)    
 factor(Days) 166235   18471     9   153  18.703 < 2.2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -734,14 +737,14 @@ For example, in an experiment where you have multiple `stimuli` and different ex
 df %>%
   head()
 # A tibble: 6 x 5
-  trial condition block subject       RT
-  <int>     <int> <int>   <int>    <dbl>
-1     1         1     1       1 300.8379
-2     2         1     1       1 299.2759
-3     3         1     1       1 300.6742
-4     4         1     1       1 299.5173
-5     5         1     1       1 299.7643
-6     6         1     1       1 300.3312
+  trial condition block subject    RT
+  <int>     <int> <int>   <int> <dbl>
+1     1         1     1       1  301.
+2     2         1     1       1  299.
+3     3         1     1       1  301.
+4     4         1     1       1  300.
+5     5         1     1       1  300.
+6     6         1     1       1  300.
 ```
 
 

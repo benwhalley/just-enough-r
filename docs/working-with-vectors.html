@@ -239,6 +239,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>III Models</b></span></li>
 <li class="chapter" data-level="6" data-path="common-stats.html"><a href="common-stats.html"><i class="fa fa-check"></i><b>6</b> Commonly used statistics</a><ul>
+<li class="chapter" data-level="6.1" data-path="nonparametrics.html"><a href="nonparametrics.html"><i class="fa fa-check"></i><b>6.1</b> Non-parametric statistics</a></li>
 <li><a href="crosstabs.html#crosstabs">Crosstabulations and <span class="math inline">\(\chi^2\)</span></a><ul>
 <li class="chapter" data-level="" data-path="crosstabs.html"><a href="crosstabs.html"><i class="fa fa-check"></i>Three-way tables</a></li>
 </ul></li>
@@ -378,7 +379,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="rownames.html"><a href="rownames.html"><i class="fa fa-check"></i>Rownames are evil</a></li>
 <li class="chapter" data-level="" data-path="string-handling.html"><a href="string-handling.html"><i class="fa fa-check"></i>Working with character strings</a><ul>
 <li class="chapter" data-level="18.0.1" data-path="string-handling.html"><a href="string-handling.html#searching-and-replacing"><i class="fa fa-check"></i><b>18.0.1</b> Searching and replacing</a></li>
-<li><a href="working-with-vectors.html#paste">Using <code>paste</code> to make labels</a></li>
+<li><a href="string-handling.html#paste">Using <code>paste</code> to make labels</a></li>
 <li><a href="string-handling.html#separate-and-extract">Fixing up <code>variable</code> after melting</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="colours.html"><a href="colours.html"><i class="fa fa-check"></i>Colours</a><ul>
@@ -496,8 +497,6 @@ heights
 <p>This also works with simple arithmetic So, if we wanted to convert all the heights from cm to meters we could just type:</p>
 <pre class="sourceCode r"><code class="sourceCode r">heights <span class="op">/</span><span class="st"> </span><span class="dv">100</span>
  [<span class="dv">1</span>] <span class="fl">2.03</span> <span class="fl">1.48</span> <span class="fl">1.56</span> <span class="fl">1.58</span> <span class="fl">1.67</span> <span class="fl">1.62</span> <span class="fl">1.72</span> <span class="fl">1.64</span> <span class="fl">1.72</span> <span class="fl">1.87</span> <span class="fl">1.34</span> <span class="fl">1.82</span> <span class="fl">1.75</span></code></pre>
-<div id="paste" class="section level4 unnumbered">
-<h4></h4>
 <p>This trick also works with other functions like <code>paste</code>, which combines the inputs you send it to produce an alphanumeric string:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;Once&quot;</span>, <span class="st">&quot;upon&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;time&quot;</span>)
 [<span class="dv">1</span>] <span class="st">&quot;Once upon a time&quot;</span></code></pre>
@@ -509,7 +508,6 @@ heights
 [<span class="dv">3</span>] <span class="st">&quot;98 green bottles hanging on the wall&quot;</span> 
 [<span class="dv">4</span>] <span class="st">&quot;... green bottles hanging on the wall&quot;</span></code></pre>
 <p>In other programming languages we might have had to write a ‘loop’ to create each line of the song, but R lets us write short statements to summarise <em>what</em> needs to be done; we don’t need to worry worrying about <em>how</em> it gets done.</p>
-</div>
 <div id="paste0" class="section level4 unnumbered tip">
 <h4></h4>
 <p>The <code>paste0</code> function does much the same, but leaves no spaces in the combined strings, which can be useful:</p>

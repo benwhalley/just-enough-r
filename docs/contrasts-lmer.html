@@ -239,6 +239,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>III Models</b></span></li>
 <li class="chapter" data-level="6" data-path="common-stats.html"><a href="common-stats.html"><i class="fa fa-check"></i><b>6</b> Commonly used statistics</a><ul>
+<li class="chapter" data-level="6.1" data-path="nonparametrics.html"><a href="nonparametrics.html"><i class="fa fa-check"></i><b>6.1</b> Non-parametric statistics</a></li>
 <li><a href="crosstabs.html#crosstabs">Crosstabulations and <span class="math inline">\(\chi^2\)</span></a><ul>
 <li class="chapter" data-level="" data-path="crosstabs.html"><a href="crosstabs.html"><i class="fa fa-check"></i>Three-way tables</a></li>
 </ul></li>
@@ -378,7 +379,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="rownames.html"><a href="rownames.html"><i class="fa fa-check"></i>Rownames are evil</a></li>
 <li class="chapter" data-level="" data-path="string-handling.html"><a href="string-handling.html"><i class="fa fa-check"></i>Working with character strings</a><ul>
 <li class="chapter" data-level="18.0.1" data-path="string-handling.html"><a href="string-handling.html#searching-and-replacing"><i class="fa fa-check"></i><b>18.0.1</b> Searching and replacing</a></li>
-<li><a href="working-with-vectors.html#paste">Using <code>paste</code> to make labels</a></li>
+<li><a href="string-handling.html#paste">Using <code>paste</code> to make labels</a></li>
 <li><a href="string-handling.html#separate-and-extract">Fixing up <code>variable</code> after melting</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="colours.html"><a href="colours.html"><i class="fa fa-check"></i>Colours</a><ul>
@@ -441,12 +442,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Let’s say we repeat one of the models used in a previous section, looking at the effect of <code>Days</code> of sleep deprivation on reaction times:</p>
 <pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction<span class="op">~</span><span class="kw">factor</span>(Days)<span class="op">+</span>(<span class="dv">1</span><span class="op">|</span>Subject), <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
 <span class="kw">anova</span>(m)
-Analysis of Variance Table of type III  with  Satterthwaite 
-approximation <span class="cf">for</span> degrees of freedom
-             Sum Sq Mean Sq NumDF DenDF F.value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    
-<span class="kw">factor</span>(Days) <span class="dv">166235</span>   <span class="dv">18471</span>     <span class="dv">9</span>   <span class="dv">153</span>  <span class="fl">18.703</span> <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span>
-<span class="op">---</span>
-Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre>
+Type III Analysis of Variance Table with Satterthwaite<span class="st">&#39;s method</span>
+<span class="st">             Sum Sq Mean Sq NumDF DenDF F value    Pr(&gt;F)    </span>
+<span class="st">factor(Days) 166235   18471     9   153  18.703 &lt; 2.2e-16 ***</span>
+<span class="st">---</span>
+<span class="st">Signif. codes:  0 &#39;</span><span class="op">**</span><span class="er">*</span><span class="st">&#39; 0.001 &#39;</span><span class="op">**</span><span class="st">&#39; 0.01 &#39;</span><span class="op">*</span><span class="st">&#39; 0.05 &#39;</span>.<span class="st">&#39; 0.1 &#39;</span> <span class="st">&#39; 1</span></code></pre>
 <div id="section-14" class="section level5 unnumbered">
 <h5></h5>
 <p>We can see a significant effect of <code>Days</code> in the Anova table, and want to compute followup tests.</p>
