@@ -16,179 +16,23 @@ angry.moods <- read_csv('data/angry_moods.csv')
 
 Before you begin this section, make sure you have fully understood the section on [datasets and dataframes](datasets.html), and in particular that you are happy using the `%>%` symbol to [describe a flow of data](#pipes).
 
-The chapter outlines several different approaches to obtaining summary statistics, and covers:
+Although R contains many functions like `table`, or `xtabs`, `describe` or `summarise` which you might see used elsewhere to tabulate or summarise data, for beginners these base-R functions can be confusing; their names and input names are not always consistent, and they don't always work together nicely.
 
-- Useful 'utility' functions
-- Creating tables
-- Using `dplyr` as a generalisable tool to make any kind of summary
+Instead we recommend using `dplyr` and other parts of the tidyverse because they provide a general set of tools to make any kind of table or summary. 
 
+They also encourage more coherent thinking about *what summary is really needed*, rather than accepting or fighting with default options.
 
-In particular, we emphasise functions that *return dataframes*. 
 
-If a function returns a dataframe (rather than just printing output to the screen) then we can continue to process and present these results in useful ways.
 
-
-<!-- VIDEO COVERING THIS MATERIAL -->
-
-
-
-
-## "Quick and dirty" {-}
-
-
-##### Using utility functions built into R {-}
-
-
-### Frequency tables {- #frequency-tables}
-
-
-Let's say we ask 4 year olds and 6 year olds whether they prefer lego or duplo. 
-
-We can use the `table()` command to get a cross tabulation of these `age` categories and what the child `prefers`. We wrap `table(...)` in the `with()` function to tell it which dataframe to use:
-
-```{r, include=F, echo=F}
-set.seed(1234)
-lego.duplo.df <- data_frame(prefers=c(rep("duplo", 50), rep("lego", 50)), age=c(rep("4 years", 38), rep("6 years", 42), rep("4 years", 20)) ) %>% sample_frac(., 1)
-saveRDS(lego.duplo.df, file="data/lego.RDS")
-```
-
-```{r}
-lego.table <- with(lego.duplo.df, table(age, prefers))
-lego.table
-```
-
-
-#### `xtab` {-}
-
-`table` is a simple way of calculating frequencies, but you can also use the `xtabs` function to make more complex sumamries.
-
-`xtabs` uses a formula type syntax to describe the table ([formulas for linear models are explained here](#formulae)).
-
-In the simplest case, we just write a tilde symbol (`~`) and the the names of the variables we want to tablulate, separated with `+` symbols:
-
-```{r}
-xtabs(~age+prefers, lego.duplo.df)
-```
-
-The order of the variables changes the orientation of the table:
-
-```{r}
-xtabs(~prefers+age, lego.duplo.df)
-```
-
-
-Tables like this are useful in their own right, but can also be passed to inferential tests, like [Chi squred](#crosstabs)
-
-
-
-
-
-### Summary statistics {-}
-
-
-In this guide so far you might have noticed functions which provide summaries of an entire dataframe. For example:
-
-```{r}
-summary(angry.moods)
-```
-
-Or:
-
-```{r}
-psych::describe(angry.moods, skew=FALSE)
-```
-
-
-
-Although useful, these functions miss two important elements:
-
-1. We have to operate on the whole dataframe at once
-2. The output is just printed to screen. We might prefer to get back a dataframe so that we can process the results further.
-
-
-
-### Creating a data frame of summary statistics {-}
-
-Thanksfully, many summary functions allow us to pass their results to the `as_data_frame()` function, which converts the output into a table which we can use like any other dataset.
-
-In this example, we create summary statistics with the `psych::describe()` function, then convert to a dataframe and format as a table in RMarkdown:
-
-
-```{r}
-psych::describe(angry.moods, skew=FALSE) %>% 
-  as_data_frame %>% 
-  pander()
-```
-
-
-This summary table can be processed like any other dataframe. For instance, we can select columns and rows from it using `dplyr`:
-
-```{r}
-psych::describe(angry.moods, skew=FALSE) %>% 
-  # rownames_to_column converts to a df but saves the 
-  # row names in a new column for us, which can be useful
-  rownames_to_column(var="variable") %>% 
-  select(variable, mean, sd) %>% 
-  filter(mean > 20) %>% 
-  pander
-```
-
-
-We can do the same with the output of [`table` or `xtabs`](#frequency-tables) too:
-
-
-```{r}
-xtabs(~prefers+age, lego.duplo.df) %>%
-  as_data_frame %>%
-  pander(caption="Using `xtabs` to make a frequency table; converting to a dataframe for presentation using `pander`.")
-```
-
-
-
-
-
-##### Rownames are evil {- .explainer}
-
-Historically 'row names' were used on R to label individual rows in a dataframe. It turned out that this is generally a bad idea, because sorting and some summary functions would get very confused and mix up row names and the data itself.
-
-It's generally considered best practice to avoid row names, and store everything as columns of data.
-
-If you find that rownames in your data have disappeared, [see this guide for turning them into an extra column of data using `tibble::rownames_to_column()`](#rownames).
-
-
-
-
-
-### Computing statistics by-groups {-}
-
-
-```{r, error=T}
-psych::describeBy(mtcars, 'cyl')
-```
-
-This is helpful, but there's no simple way to convert the result to a dataframe, which we will want if we are creating tables for publication.
-
-`describeBy` actually returns a list of tables, one for each level of the `cyl` variable, so it is is possible to convert each table in turn:
-
-```{r}
-summary.tables <- psych::describeBy(mtcars, 'cyl')
-summary.tables[[1]] %>% 
-  as_data_frame() %>% 
-  head(3)
-```
-
-But this is pretty yucky. Not only are the column names all mangled up, but we also have to think about extracting each levell in turn, and need to check how many levels in `cyl` there are. What happens if an extra level gets added? Our code will likely break.
-
-Thankfully there is much nicer and more consistent way to compute exactly the summaries we want, sometimes termed the 'split, apply, combine' method.
-
-
-
-## A generalised approach {-}
+## A generalised approach {- #dplyr-general}
 
 
 #### The 'split, apply, combine' model {- #split-apply-combine}
 
 The `dplyr::` package, and especially the `summarise()` function provides a generalised way to create dataframes of frequencies and other summary statistics, grouped and sorted however we like.
+
+**Each of the `dplyr` 'verbs' acts on a dataframe in some way, and returns a dataframe as it's result. This is convenient because we can chain together the different verbs to describe exactly the table we want.**
+
 
 For example, let's say we want the mean of some of our variables across the whole dataframe:
 
@@ -200,15 +44,21 @@ angry.moods %>%
   )
 ```
 
-The `summarise` function has returned a dataframe containing the statistics we need, although in this instance the dataframe only has one row. 
+
+:::{.explainer}
+
+Here the `summarise` function accepts the `angry.moods` dataframe as an input, and has returned a dataframe containing the statistics we need. In this instance the result dataframe only has one row. 
+
+:::
+
 
 What if we want the numbers for men and women separately?
 
-Utility functions like `describeBy` have options to do this (you would specify grouping variables in that). But there's a more general pattern at work --- we want to:
+The key is to think about what we want to achieve, and work out how to describe it.  However, in general, we will often want to follow this pattern:
 
 - *Split* our data (into men and women, or some other categorisation)
-- *Apply* some function to them (e.g. calculate the mean) and then
-- *Combine* it into a single table again (for more processing or analysis)
+- *Apply* some operation (function) to each group individually (e.g. calculate the mean)
+- *Combine* it into a single table again 
 
 
 It's helpful to think of this *split $\rightarrow$ apply $\rightarrow$ combine* pattern whenever we are processing data because it *makes explicit what we want to do*.
@@ -222,15 +72,15 @@ The first task is to organise our dataframe into the relevant groups. To do this
 ```{r}
 angry.moods %>% 
   group_by(Gender) %>% 
-  head
+  glimpse
 ```
 
-Weirdly, this doesn't seem to have done anything. The data aren't sorted by `Gender`, and there is no visible sign of the grouping, but stick with it...
+Weirdly, this doesn't seem to have done anything. The data aren't sorted by `Gender`, and there is no visible sign of the grouping, but stick with it... the grouping is there and the effect will be clearer in a moment.
 
 
 #### Apply and combine {-}
  
-Continuing the example above, once we have grouped our data we can then *apply* a function to it — for exmaple, summarise:
+Continuing the example above, once we have grouped our data we can then *apply* a function to it — for example, we can summarise each group by taking the mean of the `Anger.Out` variable:
 
 ```{r}
 angry.moods %>% 
@@ -240,88 +90,72 @@ angry.moods %>%
   )
 ```
 
-And R and `dplyr` have done as we asked:
+The **combine** step happens automatically for us: `dplyr` has combined the summaries of each gender into a single dataframe for us.
+
+In summary, we:
 
 - *split* the data by `Gender`, using `group_by()`
 - *apply* the `summarise()` function
-- *combine* the results into a new data frame
+- *combine* the results into a new data frame (happens automatically)
+
 
 
 
 #### A 'real' example {-}
 
-In the previous section on datasets, we saw some found some raw data from a study which had measured depression with the PHQ-9. Patients were measured on numerous occasions (`month` is recorded) and were split into treatment and control groups:
+Imagine we have raw data from a study which had measured depression with the PHQ-9 scale. 
+
+Each `patient` was measured on numerous occasions (the `month` of observation is recorded), and were split into treatment `group` (0=control, 1=treatment). The `phq9` variable is calculated as the sum of all their questionnaire responses.
 
 
-```{r, mesage=F}
-phq9.df <- readr::read_csv("phq.csv")
-glimpse(phq9.df)
+```{r, mesage=F, echo=F, include=F}
+phq9.df <- readr::read_csv("data/phq.csv") %>%
+  mutate(phq9 = rowMeans(
+    select(., starts_with("phq9_0")), na.rm=T
+  )) %>% 
+  select(patient, group, month, phq9) %>% 
+  mutate(phq9=round(phq9, 2))
+phq9.df
+write_csv(phq9.df, "data/phq-summary.csv")
+```
+
+```{r}
+phq9.df %>% glimpse
 ```
 
 
 If this were our data we might want to:
 
-- Calculate the sum of the PHQ-9 variables (the PHQ-9 *score*)
 - Calculate the average PHQ-9 score at each month, and in each group
 - Show these means by group for months 0, 7 and 12
 
-Using only the commands above[^sneaked]  we can write:
 
-[^sneaked]: You might have noticed I sneaked something new in here: the call to `pander()`. This is from the `pander::` package, which contains is a useful set of functions function for when writing RMarkdown documents. They convert many R objects into more readable output: here it makes a nice table for us in the compiled document.  We cover more tips and tricks for formatting RMarkdown documents in the chapter on [sharing and publishing your data](#sharing-and-publication). You might also want to check [this page on missing values](#missing) to explain the filter which uses `!is.na()`, but you could equally leave this for later.
-
-
-```{r}
-phq9.summary.df <- phq9.df %>% 
-  mutate(phq9 = phq9_01 + phq9_02 + phq9_03 + 
-                    phq9_04 + phq9_05 + phq9_06 + 
-                    phq9_07 + phq9_08 + phq9_09) %>% 
-
-  select(patient, group, month, phq9) %>% 
-  # remove rows with missing values
-  filter(!is.na(phq9)) %>% 
-  # split
-  group_by(month, group) %>% 
-  # apply and combine
-  summarise(phq.mean = mean(phq9))
-
-
-phq9.summary.df %>% 
-  filter(month %in% c(0, 7, 12)) %>% 
-  pander::pandoc.table()
-```
-
-
-
-###### A 'neater way' {- #mutate-with-rowmeans}
-
-You might have thought that typing out each variable in the above example (`phq9_01 + phq9_02...`) seemed a bit repetitive.
-
-In general, if you find yourself typing something repetitive in R then there *will* a better way of doing it, and this is true here.
-
-Stepping back, what we want is *the row mean of all the variables starting with `phq9_0`*. We can write this more concisely like so:
+We can do this using `group_by` and `summarise`:
 
 ```{r}
 phq9.df %>% 
-  mutate(phq9 = rowMeans(
-    select(phq9.df, starts_with("phq9_0"))
-  )
-)
+  group_by(group) %>% 
+  summarise(average_phq9 = mean(phq9))
 ```
 
 
-I've broken the code into multiple lines to make it clearer to read. In English, this code means:
+:::{.exercise}
 
-1. Take the the dataframe `phq9.df`
-2. Add (using `mutate()`) a new variable called `phq` by
-3. Calculating the rowmeans of selected columns in `phq9.df` which
-4. Start with the letters: `phq9_0
+You can load the PHQ9 data above by typing:
 
-
-[Ignore this if you are found the last section confusing, but if you find pipes useful then note that I explicitly passed the `phq9.df` directly to the `select()` function. There are other tricks with pipes where you can pass the intermediate result of a series of pipes to a function by putting a `.` (a full stop or period) as the argument to the function. This can be very useful, so see the [package documentation for details](https://github.com/tidyverse/magrittr).]{.explainer}
-
+```{r}
+# remeber to load the tidyverse package first
+phq9 <- read_csv('data/phq-summary.csv')
+```
 
 
+Try to edit the code above to:
 
+- Create summary table with the mean at each month
+- The mean at each month, in each group
+- The mean and SD by month and group
+
+:::
 
 
 
