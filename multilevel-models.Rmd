@@ -21,7 +21,6 @@ http://www.stata.com/meeting/germany13/abstracts/materials/de13_jann.pdf
 
 # Multilevel models {#multilevel-models}
 
-
 Psychological data often contains natural *groupings*. In intervention research, multiple patients may be treated by individual therapists, or children taught within classes, which are further nested within schools; in experimental research participants may respond on multiple occasions to a variety of stimuli.
 
 Although disparate in nature, these groupings share a common characteristic: they induce *dependency* between the observations we make. That is, our data points are *not independently sampled* from one another.
@@ -81,7 +80,7 @@ That notwithstanding, many people have wanted to use the various methods to calc
 Specifying `lmer` models is very similar to the [syntax for `lm`](#formulae). The 'fixed' part of the model is exactly the same, with additional parts used to specify [random intercepts](#random-intercepts), [random slopes](#random-slopes), and control the covariances of these random effects ([there's more on this in the troubleshooting section](#controlling-lmer-covariances)).
 
 
-###### Random intercepts {- }
+###### Random intercepts {- #ml-random-intercepts}
 
 The simplest model which allows a ['random intercept'](#random-intercepts) for each level in the grouping looks like this:
 
@@ -94,7 +93,7 @@ Here the outcome and predictors are specified in a formula, just as we did when 
 The `1` refers to an intercept, and so in English this part of the formula means 'add a random intercept for each level of grouping'.
 
 
-###### Random slopes {- }
+###### Random slopes {- #ml-random-slopes}
 
 If we want to add a [random slope](#random-slopes-intercepts) to the model, we could adjust the random part like so:
 
