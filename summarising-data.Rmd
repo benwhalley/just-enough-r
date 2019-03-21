@@ -109,7 +109,7 @@ Each `patient` was measured on numerous occasions (the `month` of observation is
 
 
 ```{r, mesage=F, echo=F, include=F}
-phq9.df <- readr::read_csv("data/phq.csv") %>%
+phq9.df <- readr::read_csv("data/phq9.csv") %>%
   mutate(phq9 = rowMeans(
     select(., starts_with("phq9_0")), na.rm=T
   )) %>% 
