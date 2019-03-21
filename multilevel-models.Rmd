@@ -1,8 +1,6 @@
 ---
 title: 'Multilevel models'
-
 ---
-
 
 ```{r, include=FALSE}
 library(tidyverse)
@@ -10,7 +8,6 @@ library(pander)
 library(emmeans)
 library(lmerTest)
 ```
-
 
 <!-- ADD?
 Doug bates guide:
