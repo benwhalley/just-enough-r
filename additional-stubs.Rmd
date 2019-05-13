@@ -1,8 +1,6 @@
 ---
 title: 'Bayes factors'
-
 ---
-
 
 ```{r, include=FALSE}
 library(tidyverse)
@@ -10,40 +8,32 @@ library(pander)
 library(lmerTest)
 ```
 
-
-
 # Additional stub articles
 
 These hopefully to be fleshed out soon. Contributions welcome!
 
-
-
 ## Meta analysis {- #meta-analysis}
 
-
-For the moment, [see this introduction to meta analysis in R](https://www.r-bloggers.com/r-and-meta-analysis/)
-
+For the moment,
+[see this introduction to meta analysis in R](https://www.r-bloggers.com/r-and-meta-analysis/)
 
 ## Bayes factors {- #bayes-factors}
 
-
 TODO
 
-Tongue in cheek Chapter that Andy proposed as a Stage 4 option: "doing BF for rubbish data..."
+Tongue in cheek Chapter that Andy proposed as a Stage 4 option: "doing BF for
+rubbish data..."
 
 Cover:
 
-- What is a BF: http://bayesfactor.blogspot.co.uk/2014/02/the-bayesfactor-package-this-blog-is.html
-https://en.wikipedia.org/wiki/Bayes_factor#Interpretation
+-   What is a BF:
+    http://bayesfactor.blogspot.co.uk/2014/02/the-bayesfactor-package-this-blog-is.html
+    https://en.wikipedia.org/wiki/Bayes_factor#Interpretation
 
-- BF package manual http://bayesfactorpcl.r-forge.r-project.org/#twosample
+-   BF package manual http://bayesfactorpcl.r-forge.r-project.org/#twosample
 
-- BayesFactors not (too) sensitive to choice of priors:  http://www.nicebread.de/interactive-exploration-of-a-priors-impact/
+-   BayesFactors not (too) sensitive to choice of priors:
+    http://www.nicebread.de/interactive-exploration-of-a-priors-impact/
 
-
-
-Also explore parameter estimation and inference from posterior of parameters as an alternative approach (see Krusche chapter, and Gelman papers).
-
-
-
-
+Also explore parameter estimation and inference from posterior of parameters as
+an alternative approach (see Krusche chapter, and Gelman papers).

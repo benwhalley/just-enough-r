@@ -1,5 +1,5 @@
 ---
-title: "Bayesian linear modelling via MCMC"
+title: 'Bayesian linear modelling via MCMC'
 ---
 
 ```{r, include=F}
@@ -15,9 +15,13 @@ library(lmerTest)
 
 ### Baysian fitting of linear models via MCMC methods {-}
 
-This is a minimal guide to fitting and interpreting regression and multilevel models via MCMC. For _much_ more detail, and a much more comprehensive introduction to modern Bayesian analysis see [Jon Kruschke's _Doing Bayesian Data Analysis_](http://www.indiana.edu/~kruschke/DoingBayesianDataAnalysis/).
+This is a minimal guide to fitting and interpreting regression and multilevel
+models via MCMC. For _much_ more detail, and a much more comprehensive
+introduction to modern Bayesian analysis see
+[Jon Kruschke's _Doing Bayesian Data Analysis_](http://www.indiana.edu/~kruschke/DoingBayesianDataAnalysis/).
 
-Let's revisit our [previous example which investigated the effect of familiar and liked music on pain perception](#pain-music-data):
+Let's revisit our
+[previous example which investigated the effect of familiar and liked music on pain perception](#pain-music-data):
 
 ```{r}
 painmusic <- readRDS('data/painmusic.RDS')
@@ -96,7 +100,8 @@ params.of.interest %>%
 
 ### Bayesian 'p values' for parameters {-}
 
-We can do simple arithmetic with the posterior draws to calculate the probability a parameter is greater than (or less than) zero:
+We can do simple arithmetic with the posterior draws to calculate the
+probability a parameter is greater than (or less than) zero:
 
 ```{r}
 params.of.interest %>%
@@ -105,7 +110,9 @@ params.of.interest %>%
             `p (x>0)` = mean(value > 0))
 ```
 
-Or if you'd like the Bayes Factor (evidence ratio) for one hypotheses vs another, for example comparing the hypotheses that a parameter is > vs. <= 0, then you can use the `hypothesis` function in the `brms` package:
+Or if you'd like the Bayes Factor (evidence ratio) for one hypotheses vs
+another, for example comparing the hypotheses that a parameter is > vs. <= 0,
+then you can use the `hypothesis` function in the `brms` package:
 
 ```{r}
 pain.model.mcmc.df <-
@@ -118,9 +125,17 @@ brms::hypothesis(pain.model.mcmc.df,
                    "familiar1:liked1 < 0"))
 ```
 
-Here although we only have a 'significant' p value for one of the parameters, we can also see there is "very strong" evidence that familiarity also influences pain, and "strong" evidence for the interaction of familiarity and liking, according to [conventional rules of thumb when interpreting Bayes Factors](https://en.wikipedia.org/wiki/Bayes_factor#Interpretation).
+Here although we only have a 'significant' p value for one of the parameters, we
+can also see there is "very strong" evidence that familiarity also influences
+pain, and "strong" evidence for the interaction of familiarity and liking,
+according to
+[conventional rules of thumb when interpreting Bayes Factors](https://en.wikipedia.org/wiki/Bayes_factor#Interpretation).
 
-TODO - add a fuller explanation of why [multiple comparisons](#mutiple-comparisons) are not an issue for Bayesian analysis [@gelman2012we], because _p_ values do not have the same interpretation in terms of long run frequencies of replication; they are a representation of the weight of the evidence in favour of a hypothesis.
+TODO - add a fuller explanation of why
+[multiple comparisons](#mutiple-comparisons) are not an issue for Bayesian
+analysis [@gelman2012we], because _p_ values do not have the same interpretation
+in terms of long run frequencies of replication; they are a representation of
+the weight of the evidence in favour of a hypothesis.
 
 TODO: Also reference Zoltan Dienes Bayes paper.
 

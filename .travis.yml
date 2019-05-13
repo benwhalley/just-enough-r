@@ -2,29 +2,29 @@ language: r
 cache: packages
 sudo: required
 script:
-  - Rscript -e 'bookdown::render_book("index.Rmd")'
+    - Rscript -e 'bookdown::render_book("index.Rmd")'
 
 before_install:
-  - sudo add-apt-repository -y "ppa:marutter/rrutter"
-  - sudo add-apt-repository -y "ppa:marutter/c2d4u"
-  - sudo apt-get update -q
-  - sudo apt-get install r-cran-rstan -y
+    - sudo add-apt-repository -y "ppa:marutter/rrutter"
+    - sudo add-apt-repository -y "ppa:marutter/c2d4u"
+    - sudo apt-get update -q
+    - sudo apt-get install r-cran-rstan -y
 
 r_github_packages:
-  - achetverikov/APAstats
+    - achetverikov/APAstats/apastats
 
 apt_packages:
-  - libxml2-dev
-  - libv8-dev
+    - libxml2-dev
+    - libv8-dev
 
 # repos:
 # CRAN: https://mran.microsoft.com/snapshot/2018-07-01
 
 deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
-  keep-history: true
-  on:
-    branch: master
-  local-dir: docs
+    provider: pages
+    skip-cleanup: true
+    github-token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
+    keep-history: true
+    on:
+        branch: master
+    local-dir: docs
