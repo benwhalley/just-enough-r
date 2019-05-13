@@ -6,14 +6,15 @@ script:
 
 apt_packages:
   - libxml2-dev
+  - libv8-dev
 
 # repos:
-  # CRAN: https://mran.microsoft.com/snapshot/2018-07-01
+# CRAN: https://mran.microsoft.com/snapshot/2018-07-01
 
 deploy:
   provider: pages
   skip-cleanup: true
-  github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  github-token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
   keep-history: true
   on:
     branch: master
