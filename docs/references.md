@@ -1,6 +1,0 @@
-
----
-title: 'References'
----
-
-# References {-}
