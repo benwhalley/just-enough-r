@@ -11,117 +11,149 @@ library(lmerTest)
 
 <!-- ADD?
 Doug bates guide:
-http://lme4.r-forge.r-project.org/lMMwR/lrgprt.pdf 
+http://lme4.r-forge.r-project.org/lMMwR/lrgprt.pdf
 
 Predictive Margins and Marginal Effects in Stata
 http://www.stata.com/meeting/germany13/abstracts/materials/de13_jann.pdf
 
 -->
 
-
 # Multilevel models {#multilevel-models}
 
-Psychological data often contains natural *groupings*. In intervention research, multiple patients may be treated by individual therapists, or children taught within classes, which are further nested within schools; in experimental research participants may respond on multiple occasions to a variety of stimuli.
+Psychological data often contains natural _groupings_. In intervention research,
+multiple patients may be treated by individual therapists, or children taught
+within classes, which are further nested within schools; in experimental
+research participants may respond on multiple occasions to a variety of stimuli.
 
-Although disparate in nature, these groupings share a common characteristic: they induce *dependency* between the observations we make. That is, our data points are *not independently sampled* from one another.
+Although disparate in nature, these groupings share a common characteristic:
+they induce _dependency_ between the observations we make. That is, our data
+points are _not independently sampled_ from one another.
 
-When data are clustered int his way then multilevel, sometimes called linear mixed models, serve two purposes:
+When data are clustered int his way then multilevel, sometimes called linear
+mixed models, serve two purposes:
 
-1. They overcome limitations of conventional models which assume that data *are* independently sampled ([read a more detailed explanation of why handling non-independence properly matters](#clustering))
+1. They overcome limitations of conventional models which assume that data _are_
+   independently sampled
+   ([read a more detailed explanation of why handling non-independence properly matters](#clustering))
 
-2. They allow us to answer substantive questions about *sources of variation* in our data.
-
-
+2. They allow us to answer substantive questions about _sources of variation_ in
+   our data.
 
 ###### Repeated measures Anova and beyond {-}
 
-RM Anova is another technique which relaxes the assumption of independent sampling, and is widely used in psychology: it is common that participants make repeated responses which can be categorised by various experimental variables (e.g. time, condition).  
+RM Anova is another technique which relaxes the assumption of independent
+sampling, and is widely used in psychology: it is common that participants make
+repeated responses which can be categorised by various experimental variables
+(e.g. time, condition).
 
-However RM Anova is just a special case of a much wider family of models: linear mixed models, but one which makes a number of restrictions which can be invonvenient, inefficient, or unreasonable. 
-
-
+However RM Anova is just a special case of a much wider family of models: linear
+mixed models, but one which makes a number of restrictions which can be
+invonvenient, inefficient, or unreasonable.
 
 ###### Substantive questions about variation {-}
 
-Additionally, rather than simply 'managing' the non-independence of observations --- treating it is a kind of nuisance to be eliminated --- mixed models can allow researchers to focus on the sources of variation in their data directly. 
+Additionally, rather than simply 'managing' the non-independence of observations
+--- treating it is a kind of nuisance to be eliminated --- mixed models can
+allow researchers to focus on the sources of variation in their data directly.
 
-It can be of substantive interest to estimate [how much variation in the outcome is due to different levels of the nested structure](#icc-and-vpc). For example, in a clinical trial researchers might want to know how much influence therapists have on their clients' outcome: if patients are 'nested' within therapists then multilevel models can estimate the variation between therapists  (the 'therapist effect') and variation 'within' therapists (i.e. variation between clients).
-
-
+It can be of substantive interest to estimate
+[how much variation in the outcome is due to different levels of the nested structure](#icc-and-vpc).
+For example, in a clinical trial researchers might want to know how much
+influence therapists have on their clients' outcome: if patients are 'nested'
+within therapists then multilevel models can estimate the variation between
+therapists (the 'therapist effect') and variation 'within' therapists (i.e.
+variation between clients).
 
 ## Fitting multilevel models in R {- #fitting-models}
 
 ### Use `lmer` and `glmer` {-}
 
-Although there are mutiple R packages which can fit mixed-effects regression models, the `lmer` and `glmer` functions within the `lme4` package are the most frequently used, for good reason, and the examples below all use these two functions.
+Although there are mutiple R packages which can fit mixed-effects regression
+models, the `lmer` and `glmer` functions within the `lme4` package are the most
+frequently used, for good reason, and the examples below all use these two
+functions.
 
+### _p_ values in multilevel models {-}
 
-
-### *p* values in multilevel models {-}
-
-For various philosophical and statistical reasons the author of lme4, Doug Bates, has always refused to display *p* values in the output from lmer (his reasoning [is explained here](https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html)).
+For various philosophical and statistical reasons the author of lme4, Doug
+Bates, has always refused to display _p_ values in the output from lmer (his
+reasoning
+[is explained here](https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html)).
 
 <!-- See also http://glmm.wikidot.com/faq#df ? But outdated in places-->
 
-That notwithstanding, many people have wanted to use the various methods to calculate p values for parameters in mixed models, and calculate F tests for effects and interactions. Various methods have been developed over the years which address at least some of  Bates' concerns, and these techniques have been implemented in R in the `lmerTest::` package. In particular, `lmerTest` implements an `anova` function for `lmer` models, which is very helpful.
+That notwithstanding, many people have wanted to use the various methods to
+calculate p values for parameters in mixed models, and calculate F tests for
+effects and interactions. Various methods have been developed over the years
+which address at least some of Bates' concerns, and these techniques have been
+implemented in R in the `lmerTest::` package. In particular, `lmerTest`
+implements an `anova` function for `lmer` models, which is very helpful.
 
+##### {- .tip}
 
-#####  {- .tip}
-
-**Don't worry!** All you need to do is to load the `lmerTest` package rather than `lme4`. This loads updated versions of `lmer`, `glmer`, and extra functions for things like calculating *F* tests and the Anova table.
-
-
-
-
+**Don't worry!** All you need to do is to load the `lmerTest` package rather
+than `lme4`. This loads updated versions of `lmer`, `glmer`, and extra functions
+for things like calculating _F_ tests and the Anova table.
 
 #### The `lmer` formula syntax {- #lmer-syntax}
 
-
-Specifying `lmer` models is very similar to the [syntax for `lm`](#formulae). The 'fixed' part of the model is exactly the same, with additional parts used to specify [random intercepts](#random-intercepts), [random slopes](#random-slopes), and control the covariances of these random effects ([there's more on this in the troubleshooting section](#controlling-lmer-covariances)).
-
+Specifying `lmer` models is very similar to the [syntax for `lm`](#formulae).
+The 'fixed' part of the model is exactly the same, with additional parts used to
+specify [random intercepts](#random-intercepts),
+[random slopes](#random-slopes), and control the covariances of these random
+effects
+([there's more on this in the troubleshooting section](#controlling-lmer-covariances)).
 
 ###### Random intercepts {- #ml-random-intercepts}
 
-The simplest model which allows a ['random intercept'](#random-intercepts) for each level in the grouping looks like this:
+The simplest model which allows a ['random intercept'](#random-intercepts) for
+each level in the grouping looks like this:
 
 ```{r, eval=F}
 lmer(outcome ~ predictors + (1 | grouping), data=df)
 ```
 
-Here the outcome and predictors are specified in a formula, just as we did when using `lm()`. The only difference is that we now add a 'random part' to the model, in this case: `(1|grouping)`. 
+Here the outcome and predictors are specified in a formula, just as we did when
+using `lm()`. The only difference is that we now add a 'random part' to the
+model, in this case: `(1|grouping)`.
 
-The `1` refers to an intercept, and so in English this part of the formula means 'add a random intercept for each level of grouping'.
-
+The `1` refers to an intercept, and so in English this part of the formula means
+'add a random intercept for each level of grouping'.
 
 ###### Random slopes {- #ml-random-slopes}
 
-If we want to add a [random slope](#random-slopes-intercepts) to the model, we could adjust the random part like so:
+If we want to add a [random slope](#random-slopes-intercepts) to the model, we
+could adjust the random part like so:
 
 ```{r, eval=F}
 lmer(outcome ~ predictor + (predictor | grouping), data=df)
 ```
 
-This implicitly adds a random intercept too, so in English this formula says something like: let `outcome` be predicted by `predictor`; let variation in outcome to vary between levels of `grouping`, and also allow the effect of `predictor` to vary between levels of `grouping`.
+This implicitly adds a random intercept too, so in English this formula says
+something like: let `outcome` be predicted by `predictor`; let variation in
+outcome to vary between levels of `grouping`, and also allow the effect of
+`predictor` to vary between levels of `grouping`.
 
-
-
-The `lmer` syntax for the random part is very powerful, and allows complex combinations of random intercepts and slopes and control over how these random effects are allowed to correlate with one another. For a detailed guide to fitting two and three level models, with various covariance structures, see: <http://rpsychologist.com/r-guide-longitudinal-lme-lmer>
-
-
+The `lmer` syntax for the random part is very powerful, and allows complex
+combinations of random intercepts and slopes and control over how these random
+effects are allowed to correlate with one another. For a detailed guide to
+fitting two and three level models, with various covariance structures, see:
+<http://rpsychologist.com/r-guide-longitudinal-lme-lmer>
 
 #### Are my effects fixed or random? {- .tip}
 
-If you're not sure which part of your model should be 'fixed' and which parts should be 'random' [theres a more detailed explanation in this section](#fixed-or-random).
-
-
-
+If you're not sure which part of your model should be 'fixed' and which parts
+should be 'random'
+[theres a more detailed explanation in this section](#fixed-or-random).
 
 ## Extending traditional RM Anova {-}
 
-As noted in the [Anova cookbook section](anova-cookbook.html), repeated measures anova can be approximated using linear mixed models.
+As noted in the [Anova cookbook section](anova-cookbook.html), repeated measures
+anova can be approximated using linear mixed models.
 
-For example, reprising the [`sleepstudy` example](#sleepstudy-rmanova), we can approximate a repeated measures Anova in which multiple measurements of `Reaction` time are taken on multiple `Days` for each `Subject`.
-
+For example, reprising the [`sleepstudy` example](#sleepstudy-rmanova), we can
+approximate a repeated measures Anova in which multiple measurements of
+`Reaction` time are taken on multiple `Days` for each `Subject`.
 
 As we [saw before](#sleepstudy-rmanova), the traditional RM Anova model is:
 
@@ -129,7 +161,6 @@ As we [saw before](#sleepstudy-rmanova), the traditional RM Anova model is:
 sleep.rmanova <- afex::aov_car(Reaction ~ Days + Error(Subject/(Days)), data=lme4::sleepstudy)
 sleep.rmanova
 ```
-
 
 The equivalent lmer model is:
 
@@ -139,24 +170,21 @@ sleep.lmer <- lmer(Reaction ~ factor(Days) + (1|Subject), data=lme4::sleepstudy)
 anova(sleep.lmer)
 ```
 
-<!-- 
+<!--
 This post by the author of afex confirms these models are equivalent to RM anova:
-http://singmann.org/mixed-models-for-anova-designs-with-one-observation-per-unit-of-observation-and-cell-of-the-design/ 
+http://singmann.org/mixed-models-for-anova-designs-with-one-observation-per-unit-of-observation-and-cell-of-the-design/
 -->
 
-
-The following sections demonstrate just some of the extensions to RM Anova which are possible with mutlilevel models,
-
-
-
+The following sections demonstrate just some of the extensions to RM Anova which
+are possible with mutlilevel models,
 
 ### Fit a simple slope for `Days` {-}
 
 ```{r}
-lme4::sleepstudy %>% 
-  ggplot(aes(Days, Reaction)) + 
+lme4::sleepstudy %>%
+  ggplot(aes(Days, Reaction)) +
   geom_point() + geom_jitter() +
-  geom_smooth() 
+  geom_smooth()
 ```
 
 ```{r}
@@ -166,28 +194,32 @@ slope.model.summary <- summary(slope.model)
 slope.model.summary$coefficients
 ```
 
-
 ### Allow the effect of sleep deprivation to vary for different participants {-}
 
-If we plot the data, it looks like sleep deprivation hits some participants worse than others:
+If we plot the data, it looks like sleep deprivation hits some participants
+worse than others:
 
 ```{r}
 set.seed(1234)
-lme4::sleepstudy %>% 
-  filter(Subject %in% sample(levels(Subject), 10)) %>% 
+lme4::sleepstudy %>%
+  filter(Subject %in% sample(levels(Subject), 10)) %>%
   ggplot(aes(Days, Reaction, group=Subject, color=Subject)) +
-  geom_smooth(method="lm", se=F) + 
+  geom_smooth(method="lm", se=F) +
   geom_jitter(size=1) +
   theme_minimal()
-  
+
 ```
 
+If we wanted to test whether there was significant variation in the effects of
+sleep deprivation between subjects, by adding a
+[random slope](#random-slopes-intercepts) to the model.
 
-If we wanted to test whether there was significant variation in the effects of sleep deprivation between subjects, by adding a [random slope](#random-slopes-intercepts) to the model. 
+The random slope allows the effect of `Days` to vary between subjects. So we can
+think of an overall slope (i.e. RT goes up over the days), from which
+individuals deviate by some amount (e.g. a resiliant person will have a negative
+deviation or residual from the overall slope).
 
-The random slope allows the effect of `Days` to vary between subjects. So we can think of an overall slope (i.e. RT goes up over the days), from which individuals deviate by some amount (e.g. a resiliant person will have a negative deviation or residual from the overall slope).
-
-Adding the random slope doesn't change the *F* test for `Days` that much:
+Adding the random slope doesn't change the _F_ test for `Days` that much:
 
 ```{r}
 random.slope.model <- lmer(Reaction ~ Days + (Days|Subject),  data=lme4::sleepstudy)
@@ -201,109 +233,123 @@ random.slope.model.summary <- summary(random.slope.model)
 slope.model.summary$coefficients
 ```
 
-But we can use the `lmerTest::ranova()` function to show that there is statistically significant variation in slopes between individuals, using the likelihood ratio test:
+But we can use the `lmerTest::ranova()` function to show that there is
+statistically significant variation in slopes between individuals, using the
+likelihood ratio test:
 
 ```{r}
 lmerTest::ranova(random.slope.model)
 ```
 
-
-Because the random slope for `Days` is statistically significant, we know it improves the model.
-One way to see that improvement is to plot residuals (unexplained error for each datapoint) against predicted values. To extract residual and fitted values we use the `residuals()` and `predict()` functions. These are then combined in a data_frame, to enable us to use ggplot for the subsequent figures.
-
+Because the random slope for `Days` is statistically significant, we know it
+improves the model. One way to see that improvement is to plot residuals
+(unexplained error for each datapoint) against predicted values. To extract
+residual and fitted values we use the `residuals()` and `predict()` functions.
+These are then combined in a data_frame, to enable us to use ggplot for the
+subsequent figures.
 
 ```{r}
 # create data frames containing residuals and fitted
 # values for each model we ran above
 a <-  data_frame(
     model = "random.slope",
-    fitted = predict(random.slope.model), 
+    fitted = predict(random.slope.model),
     residual = residuals(random.slope.model))
 b <- data_frame(
     model = "random.intercept",
-    fitted = predict(slope.model), 
-    residual = residuals(slope.model)) 
+    fitted = predict(slope.model),
+    residual = residuals(slope.model))
 
 # join the two data frames together
 residual.fitted.data <- bind_rows(a,b)
 ```
 
-We can see that the residuals from the random slope model are much more evenly distributed across the range of fitted values, which suggests that the assumption of homogeneity of variance is met in the random slope model:
+We can see that the residuals from the random slope model are much more evenly
+distributed across the range of fitted values, which suggests that the
+assumption of homogeneity of variance is met in the random slope model:
 
 ```{r}
 # plots residuals against fitted values for each model
 residual.fitted.data %>%
   ggplot(aes(fitted, residual)) +
-  geom_point() + 
+  geom_point() +
   geom_smooth(se=F) +
-  facet_wrap(~model) 
+  facet_wrap(~model)
 ```
 
-
-
-We can plot both of the random effects from this model (intercept and slope) to see how much the model expects individuals to deviate from the overall (mean) slope.
+We can plot both of the random effects from this model (intercept and slope) to
+see how much the model expects individuals to deviate from the overall (mean)
+slope.
 
 ```{r}
 # extract the random effects from the model (intercept and slope)
-ranef(random.slope.model)$Subject %>% 
+ranef(random.slope.model)$Subject %>%
   # implicitly convert them to a dataframe and add a column with the subject number
-  rownames_to_column(var="Subject") %>% 
+  rownames_to_column(var="Subject") %>%
   # plot the intercept and slobe values with geom_abline()
-  ggplot(aes()) + 
+  ggplot(aes()) +
   geom_abline(aes(intercept=`(Intercept)`, slope=Days, color=Subject)) +
   # add axis label
   xlab("Day") + ylab("Residual RT") +
   # set the scale of the plot to something sensible
-  scale_x_continuous(limits=c(0,10), expand=c(0,0)) + 
-  scale_y_continuous(limits=c(-100, 100)) 
+  scale_x_continuous(limits=c(0,10), expand=c(0,0)) +
+  scale_y_continuous(limits=c(-100, 100))
 ```
 
+Inspecting this plot, there doesn't seem to be any strong correlation between
+the RT value at which an individual starts (their intercept residual) and the
+slope describing how they change over the days compared with the average slope
+(their slope residual).
 
+That is, we can't say that knowing whether a person has fast or slow RTs at the
+start of the study gives us a clue about what will happen to them after they are
+sleep deprived: some people start slow and get faster; other start fast but
+suffer and get slower.
 
-Inspecting this plot, there doesn't seem to be any strong correlation between the RT value at which an individual starts (their intercept residual) and the slope describing how they change over the days compared with the average slope (their slope residual). 
-
-That is, we can't say that knowing whether a person has fast or slow RTs at the start of the study gives us a clue about what will happen to them after they are sleep deprived: some people start slow and get faster; other start fast but suffer and get slower. 
-
-However we can explicitly check this correlation (between individuals' intercept and slope residuals) using the `VarCorr()` function:
-
-
+However we can explicitly check this correlation (between individuals' intercept
+and slope residuals) using the `VarCorr()` function:
 
 ```{r}
 VarCorr(random.slope.model)
 ```
 
-
-The correlation between the random intercept and slopes is only 0.066, and so very low. We might, therefore, want to try fitting a model without this correlation.  `lmer` includes the correlation by default, so we need to change the model formula to make it clear we don't want it:
-
+The correlation between the random intercept and slopes is only 0.066, and so
+very low. We might, therefore, want to try fitting a model without this
+correlation. `lmer` includes the correlation by default, so we need to change
+the model formula to make it clear we don't want it:
 
 ```{r}
 uncorrelated.reffs.model <- lmer(
-  Reaction ~ Days + (1 | Subject) + (0 + Days|Subject),  
+  Reaction ~ Days + (1 | Subject) + (0 + Days|Subject),
   data=lme4::sleepstudy)
 
 VarCorr(uncorrelated.reffs.model)
 ```
 
-The variance components don't change much when we constrain the *covariance* of intercepts and slopes to be zero, and we can explicitly compare these two models using the `anova()` function, which is somewhat confusingly named because in this instance it is performing a likelihood ratio test to compare the two models:
+The variance components don't change much when we constrain the _covariance_ of
+intercepts and slopes to be zero, and we can explicitly compare these two models
+using the `anova()` function, which is somewhat confusingly named because in
+this instance it is performing a likelihood ratio test to compare the two
+models:
 
 ```{r}
 anova(random.slope.model, uncorrelated.reffs.model)
 ```
 
-Model fit is not significantly worse with the constrained model, [so for parsimony's sake we prefer it to the more complex model](#over-fitting).
-
-
+Model fit is not significantly worse with the constrained model,
+[so for parsimony's sake we prefer it to the more complex model](#over-fitting).
 
 ### Fitting a curve for the effect of `Days` {- #growth-curve-sleep-example}
 
-In theory, we could also fit additional parameters for the effect of `Days`, although a combined smoothed line plot/scatterplot indicates that a linear function fits the data reasonably well.
-
+In theory, we could also fit additional parameters for the effect of `Days`,
+although a combined smoothed line plot/scatterplot indicates that a linear
+function fits the data reasonably well.
 
 ```{r}
-lme4::sleepstudy %>% 
-  ggplot(aes(Days, Reaction)) + 
-  geom_point() + geom_jitter() + 
-  geom_smooth() 
+lme4::sleepstudy %>%
+  ggplot(aes(Days, Reaction)) +
+  geom_point() + geom_jitter() +
+  geom_smooth()
 ```
 
 If we insisted on testing a curved (quadratic) function of `Days`, we could:
@@ -314,29 +360,29 @@ quad.model.summary <- summary(quad.model)
 quad.model.summary$coefficients
 ```
 
-Here, the *p* value for `I(Days^2)` is not significant, suggesting (as does the plot) that a simple slope model is sufficient.
-
-
-
-
-
-
+Here, the _p_ value for `I(Days^2)` is not significant, suggesting (as does the
+plot) that a simple slope model is sufficient.
 
 ## Variance partition coefficients and intraclass correlations {- #icc-and-vpc}
 
-The purpose of multilevel models is to partition variance in the outcome between the different groupings in the data. 
+The purpose of multilevel models is to partition variance in the outcome between
+the different groupings in the data.
 
-For example, if we make multiple observations on individual participants we partition outcome variance between individuals, and the residual variance. 
+For example, if we make multiple observations on individual participants we
+partition outcome variance between individuals, and the residual variance.
 
-We might then want to know what *proportion* of the total variance is attributable to variation within-groups, or how much is found between-groups. This statistic is termed the variance partition coefficient VPC, or intraclass correlation.
+We might then want to know what _proportion_ of the total variance is
+attributable to variation within-groups, or how much is found between-groups.
+This statistic is termed the variance partition coefficient VPC, or intraclass
+correlation.
 
-We calculate the VPC woth some simple arithmetic on the variance estimates from the lmer model. We can extract the variance estimates from the VarCorr function:
+We calculate the VPC woth some simple arithmetic on the variance estimates from
+the lmer model. We can extract the variance estimates from the VarCorr function:
 
 ```{r}
 random.intercepts.model <- lmer(Reaction ~ Days + (1|Subject),  data=lme4::sleepstudy)
 VarCorr(random.intercepts.model)
 ```
-
 
 And we can test the variance parameter using the `rand()` function:
 
@@ -344,186 +390,204 @@ And we can test the variance parameter using the `rand()` function:
 rand(random.intercepts.model)
 ```
 
-
-Helpfully, if we convert the result of `VarCorr` to a dataframe, we are provided with the columns `vcov` which stands for `variance or covariance`, as well as the `sdcor` (standard deviation or correlation) which is provided in the printed summary:
+Helpfully, if we convert the result of `VarCorr` to a dataframe, we are provided
+with the columns `vcov` which stands for `variance or covariance`, as well as
+the `sdcor` (standard deviation or correlation) which is provided in the printed
+summary:
 
 ```{r}
-VarCorr(random.intercepts.model) %>% 
+VarCorr(random.intercepts.model) %>%
   as_data_frame()
 ```
 
-The variance partition coefficient is simply the variance at a given level of the model, divided by the total variance (the sum of the variance parameters). So we can write:
+The variance partition coefficient is simply the variance at a given level of
+the model, divided by the total variance (the sum of the variance parameters).
+So we can write:
 
 ```{r}
-VarCorr(random.intercepts.model) %>% 
-  as_data_frame() %>% 
-  mutate(icc=vcov/sum(vcov)) %>% 
+VarCorr(random.intercepts.model) %>%
+  as_data_frame() %>%
+  mutate(icc=vcov/sum(vcov)) %>%
   select(grp, icc)
 ```
 
-[Intraclass correlations were computed from the mixed effects mode. 59% of the variation in outcome was attributable to differences between subjects, $\chi^2(1) = 107$, *p* < .001.]{.apa-example}
+[Intraclass correlations were computed from the mixed effects mode. 59% of the
+variation in outcome was attributable to differences between subjects,
+$\chi^2(1) = 107$, *p* < .001.]{.apa-example}
 
-
-[It's not straightforward to put an confidence interval around the VPC estimate from an lmer model. If this is important to you, you should explore [re-fitting the same model in a Bayesian framework](#bayes-mcmc)]
-
-
+[It's not straightforward to put an confidence interval around the VPC estimate
+from an lmer model. If this is important to you, you should explore
+[re-fitting the same model in a Bayesian framework](#bayes-mcmc)]
 
 ## 3 level models with 'partially crossed' random effects {- #threelevel}
 
-The `lme4::InstEval` dataset records University lecture evaluations by students at ETH Zurich. The variables include:
+The `lme4::InstEval` dataset records University lecture evaluations by students
+at ETH Zurich. The variables include:
 
-- `s` a factor with levels 1:2972 denoting individual students.
+-   `s` a factor with levels 1:2972 denoting individual students.
 
-- `d` a factor with 1128 levels from 1:2160, denoting individual professors or lecturers.
+-   `d` a factor with 1128 levels from 1:2160, denoting individual professors or
+    lecturers.
 
-- `studage` an ordered factor with levels 2 < 4 < 6 < 8, denoting student's “age” measured in the semester number the student has been enrolled.
+-   `studage` an ordered factor with levels 2 < 4 < 6 < 8, denoting student's
+    “age” measured in the semester number the student has been enrolled.
 
-- `lectage` an ordered factor with 6 levels, 1 < 2 < ... < 6, measuring how many semesters back the lecture rated had taken place.
+-   `lectage` an ordered factor with 6 levels, 1 < 2 < ... < 6, measuring how
+    many semesters back the lecture rated had taken place.
 
-- `service` a binary factor with levels 0 and 1; a lecture is a “service”, if held for a different department than the lecturer's main one.
+-   `service` a binary factor with levels 0 and 1; a lecture is a “service”, if
+    held for a different department than the lecturer's main one.
 
-- `dept` a factor with 14 levels from 1:15, using a random code for the department of the lecture.
+-   `dept` a factor with 14 levels from 1:15, using a random code for the
+    department of the lecture.
 
-- `y` a numeric vector of ratings of lectures by the students, using the discrete scale 1:5, with meanings of ‘poor’ to ‘very good’.
+-   `y` a numeric vector of ratings of lectures by the students, using the
+    discrete scale 1:5, with meanings of ‘poor’ to ‘very good’.
 
-
-
-For convenience, in this example we take a subsample of the (fairly large) dataset:
+For convenience, in this example we take a subsample of the (fairly large)
+dataset:
 
 ```{r}
 set.seed(1234)
 lectures <- sample_n(lme4::InstEval, 10000)
 ```
 
-
-We run a model without any predictors, but respecting the clustering in the data, in the example below. This model is a three-level random intercepts model, which splits the variance between lecturers, students, and the residual variance. Because, in some cases, some of the same students provide data on a particular lecturer these data are 'partially crossed' (the alternative would be to sample different students for each lecturer).
+We run a model without any predictors, but respecting the clustering in the
+data, in the example below. This model is a three-level random intercepts model,
+which splits the variance between lecturers, students, and the residual
+variance. Because, in some cases, some of the same students provide data on a
+particular lecturer these data are 'partially crossed' (the alternative would be
+to sample different students for each lecturer).
 
 ```{r}
 lectures.model <- lmer(y~(1|d)+(1|s), data=lectures)
 summary(lectures.model)
 ```
 
-
-As before, we can extract only the variance components from the model, and look at the ICC:
+As before, we can extract only the variance components from the model, and look
+at the ICC:
 
 ```{r}
-VarCorr(lectures.model) %>% as_data_frame() %>% 
-  mutate(icc=vcov/sum(vcov)) %>% 
+VarCorr(lectures.model) %>% as_data_frame() %>%
+  mutate(icc=vcov/sum(vcov)) %>%
   select(grp, vcov, icc)
 ```
 
-
-And we can add predictors to the model to see if they help explain student ratings:
+And we can add predictors to the model to see if they help explain student
+ratings:
 
 ```{r}
 lectures.model.2 <- lmer(y~service*dept+(1|d)+(1|s), data=lectures)
 anova(lectures.model.2)
 ```
 
-Here we can see the `service` variable does predict evaluations, and we can use the model to estimate the mean and SE for service == 1 or service == 0 (see also the sections on [multiple comparisons](#multiple-comparisons), [followup contrasts](#contrasts), and doing [followup contrasts with lmer models](#contrasts-lmer) for more options here):
+Here we can see the `service` variable does predict evaluations, and we can use
+the model to estimate the mean and SE for service == 1 or service == 0 (see also
+the sections on [multiple comparisons](#multiple-comparisons),
+[followup contrasts](#contrasts), and doing
+[followup contrasts with lmer models](#contrasts-lmer) for more options here):
 
 ```{r}
 service.means <- emmeans::emmeans(lectures.model.2, 'service')
-service.means %>% 
-  broom::tidy() %>% 
-  select(service, estimate, std.error) %>% 
+service.means %>%
+  broom::tidy() %>%
+  select(service, estimate, std.error) %>%
   pander
 ```
 
+Or change the proportions of variance components at each level (they don't,
+much, in this instance):
 
-Or change the proportions of variance components at each level (they don't, much, in this instance):
 ```{r}
-VarCorr(lectures.model.2) %>% as_data_frame() %>% 
-  mutate(icc=vcov/sum(vcov)) %>% 
+VarCorr(lectures.model.2) %>% as_data_frame() %>%
+  mutate(icc=vcov/sum(vcov)) %>%
   select(grp, vcov, icc)
 ```
 
-
-
-
 ## Contrasts and followup tests using `lmer` {- #contrasts-lmer }
 
-Many of the [contrasts possible after lm and Anova models](#contrasts-examples) are also possible using `lmer` for multilevel models.
+Many of the [contrasts possible after lm and Anova models](#contrasts-examples)
+are also possible using `lmer` for multilevel models.
 
-Let's say we repeat one of the models used in a previous section, looking at the effect of `Days` of sleep deprivation on reaction times:
+Let's say we repeat one of the models used in a previous section, looking at the
+effect of `Days` of sleep deprivation on reaction times:
 
 ```{r}
 m <- lmer(Reaction~factor(Days)+(1|Subject), data=lme4::sleepstudy)
 anova(m)
 ```
 
-
-
 ##### {-}
 
-We can see a significant effect of `Days` in the Anova table, and want to compute followup tests. 
+We can see a significant effect of `Days` in the Anova table, and want to
+compute followup tests.
 
-To first estimate cell means and create an `emmeans` object, you can use the `emmeans()` function in the `emmeans::` package:
+To first estimate cell means and create an `emmeans` object, you can use the
+`emmeans()` function in the `emmeans::` package:
 
 ```{r}
 m.emm <- emmeans(m, "Days")
 m.emm
 ```
 
-
 It might be nice to extract these estimates and plot them:
 
 ```{r}
-m.emm.df <- 
+m.emm.df <-
   m.emm %>%
   broom::tidy()
 
-m.emm.df %>% 
-  ggplot(aes(Days, estimate, ymin=conf.low, ymax=conf.high)) + 
-  geom_pointrange() + 
+m.emm.df %>%
+  ggplot(aes(Days, estimate, ymin=conf.low, ymax=conf.high)) +
+  geom_pointrange() +
   ylab("RT")
 ```
 
-
-If we wanted to compare each day against every other day (i.e. all the pairwise comparisons) we can use `contrast()`:
+If we wanted to compare each day against every other day (i.e. all the pairwise
+comparisons) we can use `contrast()`:
 
 ```{r, eval=F}
 # results not shown to save space
-contrast(m.emm, 'tukey') %>% 
-  broom::tidy() %>% 
+contrast(m.emm, 'tukey') %>%
+  broom::tidy() %>%
   head(6)
 ```
 
-Or we might want to see if there was a significant change between any specific day and baseline:
+Or we might want to see if there was a significant change between any specific
+day and baseline:
 
 ```{r, eval=F}
 # results not shown to save space
-contrast(m.emm, 'trt.vs.ctrl') %>% 
-  broom::tidy() %>% 
-  head %>% 
+contrast(m.emm, 'trt.vs.ctrl') %>%
+  broom::tidy() %>%
+  head %>%
   pander
 ```
 
-
-Perhaps more interesting in this example is to check the polynomial contrasts, to see if there was a linear or quadratic change in RT over days:
+Perhaps more interesting in this example is to check the polynomial contrasts,
+to see if there was a linear or quadratic change in RT over days:
 
 ```{r, eval=F}
 # results not shown to save space
-contrast(m.emm, 'poly') %>% 
-  broom::tidy() %>% 
-  head(3) %>% 
-  pander(caption="The first three polynomial contrasts. Note you'd have to have quite a fancy theory to warrant looking at any of the higher level polynomial terms.") 
+contrast(m.emm, 'poly') %>%
+  broom::tidy() %>%
+  head(3) %>%
+  pander(caption="The first three polynomial contrasts. Note you'd have to have quite a fancy theory to warrant looking at any of the higher level polynomial terms.")
 ```
-
-
 
 ## Troubleshooting {- #troubleshooting-multilevel-models}
 
-
 ### Convergence problems and simplifying the random effects structure {- #simplifying-mixed-models}
-
 
 #### {- #controlling-lmer-covariances}
 
-It's common, when variances and covariances are close to zero, that `lmer` has trouble fitting your model. The solution is to simplify complex models, removing of constraining some random effects.
+It's common, when variances and covariances are close to zero, that `lmer` has
+trouble fitting your model. The solution is to simplify complex models, removing
+of constraining some random effects.
 
-For example, in an experiment where you have multiple `stimuli` and different experimental `condition`s, with many repeated `trial`s, you might end up with data like this:
-
+For example, in an experiment where you have multiple `stimuli` and different
+experimental `condition`s, with many repeated `trial`s, you might end up with
+data like this:
 
 ```{r, include=F}
 df <- expand.grid(trial=1:20, condition=1:4, block=1:4, subject=1:50) %>%
@@ -542,7 +606,6 @@ df %>%
 
 ```
 
-
 Which you could model with `lmer` like this:
 
 ```{r}
@@ -555,20 +618,22 @@ You can list the random effects from the model using the `VarCorr` function:
 VarCorr(m1)
 ```
 
-As `VarCorr` shows, this model estimates: 
-- random intercepts for `subject`, 
-- random slopes for `trial` and `condition`, and
-- three covariances between these random effects. 
+As `VarCorr` shows, this model estimates:
 
-If these covariances are very close to zero though, as is often the case, this can cause convergence issues, especially if insufficient data are available. 
+-   random intercepts for `subject`,
+-   random slopes for `trial` and `condition`, and
+-   three covariances between these random effects.
 
-If this occurs, you might want to simplify the model. For example, to remove all the covariances between random effects you might rewrite the model this way:
+If these covariances are very close to zero though, as is often the case, this
+can cause convergence issues, especially if insufficient data are available.
 
+If this occurs, you might want to simplify the model. For example, to remove all
+the covariances between random effects you might rewrite the model this way:
 
 ```{r, eval=F}
-m2 <- lmer(RT ~ block * trial * condition + 
+m2 <- lmer(RT ~ block * trial * condition +
   (1|subject) +
-  (0+block|subject) + 
+  (0+block|subject) +
   (0+condition|subject), data=df)
 VarCorr(m2)
 
@@ -576,38 +641,33 @@ VarCorr(m2)
 
 To remove only covariances with the intercept:
 
-
 ```{r, eval=F}
-m3 <- lmer(RT ~ block * trial * condition + 
-  (1|subject) + 
+m3 <- lmer(RT ~ block * trial * condition +
+  (1|subject) +
   (0+block+condition|subject), data=df)
 
 VarCorr(m3)
 ```
 
+In general, the recommendation is to try and fit a full random effects
+structure, and simplify it by removing the least theoretically plausible
+parameters. See:
 
-In general, the recommendation is to try and fit a full random effects structure, and simplify it by removing the least theoretically plausible parameters. See:
+-   This tutorial on mixed models in linguistics:
+    http://www.bodowinter.com/tutorial/bw_LME_tutorial2.pdf
 
-- This tutorial on mixed models in linguistics: http://www.bodowinter.com/tutorial/bw_LME_tutorial2.pdf
-
-- @barr2013random, which recommends you 'keep it maximal', meaning that you should keep all random effects terms, including covariances, where this is possible.
-
+-   @barr2013random, which recommends you 'keep it maximal', meaning that you
+    should keep all random effects terms, including covariances, where this is
+    possible.
 
 [See this page for lots more examples of more complex mixed models](http://rpsychologist.com/r-guide-longitudinal-lme-lmer)
 
-
-
-
-
-
-
-
-
-
 ## Bayesian multilevel models {- #multilevel-bayes-reasons}
 
-Complex models with many random effects it can be challenging to fit using standard software [see eager2017mixed and @gelman2014bayesian]. Many authors have noted that a Bayesian approach to model fitting can be advantageous for multilevel models.
+Complex models with many random effects it can be challenging to fit using
+standard software [see eager2017mixed and @gelman2014bayesian]. Many authors
+have noted that a Bayesian approach to model fitting can be advantageous for
+multilevel models.
 
-
-A brief example of fitting multilevel models via MCMC is given in this section: [Bayes via MCMC](#bayes-mcmc)
-
+A brief example of fitting multilevel models via MCMC is given in this section:
+[Bayes via MCMC](#bayes-mcmc)

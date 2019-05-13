@@ -1,117 +1,129 @@
 ---
 title: 'Starting out'
 ---
-  
 
-
-
-# (PART) Getting started {-} 
-
+# (PART) Getting started {-}
 
 # Working with R {#r-basics}
 
-There are many ways of working with R. This guide focusses on a fairly specific setup and workflow, and assumes you will use the RStudio editor, use R markdown documents to document and share your analyses, and install a number of recent packages, including the 'tidyverse', which give working with R a shallower learning curve, and let you get powerful things done quickly.
-
-
-
+There are many ways of working with R. This guide focusses on a fairly specific
+setup and workflow, and assumes you will use the RStudio editor, use R markdown
+documents to document and share your analyses, and install a number of recent
+packages, including the 'tidyverse', which give working with R a shallower
+learning curve, and let you get powerful things done quickly.
 
 ## Installation {- #installation-intro}
 
-
 #### Installing on your own machine. {- #local-install}
 
-
-1. [Download RStudio 1.01 or later](https://www.rstudio.com/products/rstudio/download/) Use whatever version is most recent and expect to upgrade every 6 months or so, as new versions become available.
+1. [Download RStudio 1.01 or later](https://www.rstudio.com/products/rstudio/download/)
+   Use whatever version is most recent and expect to upgrade every 6 months or
+   so, as new versions become available.
 
 2. Install the [packages listed below](#dependencies)
 
-3. Optionally, if you want to 'knit' your work into a pdf format, you should also install LaTeX. For most people this isn't necessary, and is something you can skip for the moment, but it can be helpful when sharing finished analyses with colleagues. On [windows use this installer](https://miktex.org/download). Make sure to do a 'full install', not just a basic install. On a Mac install [homebrew](https://brew.sh) and type `brew cask install mactex`.
-
-
-
+3. Optionally, if you want to 'knit' your work into a pdf format, you should
+   also install LaTeX. For most people this isn't necessary, and is something
+   you can skip for the moment, but it can be helpful when sharing finished
+   analyses with colleagues. On
+   [windows use this installer](https://miktex.org/download). Make sure to do a
+   'full install', not just a basic install. On a Mac install
+   [homebrew](https://brew.sh) and type `brew cask install mactex`.
 
 #### Package dependencies {- #dependencies}
 
+If you are just gettign started on a windows machine,
+[these instructions for students at Plymouth University](https://github.com/PlymouthPsychology/installR/blob/master/install-windows-stage1.md)
+make it easy to install R and most of the packages necessary to complete the
+examples in this book.
 
-If you are just gettign started on a windows machine, [these instructions for students at Plymouth University](https://github.com/PlymouthPsychology/installR/blob/master/install-windows-stage1.md) make it easy to install R and most of the packages necessary to complete the examples in this book.
+[Further details of a recommended installation are given here](https://github.com/PlymouthPsychology/installR).
+These scripts will install all needed packages on a recent Linux or Mac system.
 
-
-[Further details of a recommended installation are given here](https://github.com/PlymouthPsychology/installR). These scripts will install all needed packages on a recent Linux or Mac system.
-
-
-For some of the sections on Bayesian estimation you will also need to install  `rstan` and `rstanarm`. [Details are also here](https://github.com/PlymouthPsychology/installR), but this can wait till later.
-
-
-
+For some of the sections on Bayesian estimation you will also need to install
+`rstan` and `rstanarm`.
+[Details are also here](https://github.com/PlymouthPsychology/installR), but
+this can wait till later.
 
 ## Workflow {- #start-here}
 
 <!-- <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/k56UXc4paIM?rel=0" frameborder="0" allowfullscreen></iframe>
  -->
 
-One big adjustment to make when moving away tools like SPSS is to find a 'way of working' that suits you. 
+One big adjustment to make when moving away tools like SPSS is to find a 'way of
+working' that suits you.
 
-We have often developed ways of working, saving, and communicating our work, and become comfortable with them. In part, these habits and routines may be attempts to work around limitations of these tools. But nevertheless, habits are easier to replace than break, so here's an alternative model to adopt:
+We have often developed ways of working, saving, and communicating our work, and
+become comfortable with them. In part, these habits and routines may be attempts
+to work around limitations of these tools. But nevertheless, habits are easier
+to replace than break, so here's an alternative model to adopt:
 
+1. Work in [RStudio](#rstudio), and use [RMarkdown](#rmarkdown) documents (see
+   next sections).
 
-1. Work in [RStudio](#rstudio), and use [RMarkdown](#rmarkdown) documents (see next sections).
-
-2. Save your raw data in [.csv format](#use-csv). Never edit data by hand unless absolutely necessary.
+2. Save your raw data in [.csv format](#use-csv). Never edit data by hand unless
+   absolutely necessary.
 
 3. [Use R to process your data and RMarkdown to document the process](#save-intermediate-steps).
 
-
-
-
 ### RMarkdown {- #rmarkdown}
 
-Conventional statistics software like SPSS lacks a simple way to document and share your analyses, and make repeating or editing your work later very hard.
+Conventional statistics software like SPSS lacks a simple way to document and
+share your analyses, and make repeating or editing your work later very hard.
 
 RMarkdown is a format for documenting and sharing statistical analyses.
 
-This it might seem an odd place to start: we haven't got anything to share yet!  But using RMarkdown in RStudio provides a really nice way to work with data interactively and share our results, so we start as we mean to go on.
+This it might seem an odd place to start: we haven't got anything to share yet!
+But using RMarkdown in RStudio provides a really nice way to work with data
+interactively and share our results, so we start as we mean to go on.
 
+You are currently reading the output of an 'RMarkdown' document. An RMarkdown
+document mixes R code with Markdown:
 
-You are currently reading the output of an 'RMarkdown' document. An RMarkdown document mixes R code with Markdown:
+-   R is a computer language designed for working with data.
+-   Markdown is a simple text-based format which can include prose, hypertext
+    links, images, and code (see http://commonmark.org/help/).
 
-- R is a computer language designed for working with data.
-- Markdown is a simple text-based format which can include prose, hypertext links, images, and code (see http://commonmark.org/help/).  
-
- 
-Like computer code, RMarkdown can be 'run' or 'executed'. But in the language of RStudio, you 'knit' your RMarkdown to produce a finished document. This combines analyses, graphs, and explanatory text in a single pdf, html, or Word document which can be shared. 
-
-
+Like computer code, RMarkdown can be 'run' or 'executed'. But in the language of
+RStudio, you 'knit' your RMarkdown to produce a finished document. This combines
+analyses, graphs, and explanatory text in a single pdf, html, or Word document
+which can be shared.
 
 ### RStudio {- #rstudio}
 
-[RStudio](https://www.rstudio.com/products/rstudio/) is a special text editor that has been customised to make working with R easy. It can be installed on your own computer, or you can login to a shared RStudio server (for example, one run by your university) from a web browser. Either way the interface is largely the same and contains 4 main panels:  
-
+[RStudio](https://www.rstudio.com/products/rstudio/) is a special text editor
+that has been customised to make working with R easy. It can be installed on
+your own computer, or you can login to a shared RStudio server (for example, one
+run by your university) from a web browser. Either way the interface is largely
+the same and contains 4 main panels:
 
 ```{r echo=FALSE, fig.fullwidth=T}
 knitr::include_graphics('media/rstudio-mainwindow.png')
 ```
 
-
 The figure above shows the main RStudio interface, comprising:
 
-1. The main R-script or RMarkdown editor window. This is where you write commands, which can then be executed (to run the current line type ctrl-Enter or cmd-Enter on a Mac).
+1. The main R-script or RMarkdown editor window. This is where you write
+   commands, which can then be executed (to run the current line type ctrl-Enter
+   or cmd-Enter on a Mac).
 
-1. The R console, into which you can type R commands directly, and see the output of commands run in the script editor.
+1. The R console, into which you can type R commands directly, and see the
+   output of commands run in the script editor.
 
-1. The 'environment' panel, which lists all the variables you have defined and currently available to use.
+1. The 'environment' panel, which lists all the variables you have defined and
+   currently available to use.
 
-1. The files and help panel. Within this panel the 'files' tab enables you to open files stored on the server, in the current project, or elsewhere on your hard drive.
+1. The files and help panel. Within this panel the 'files' tab enables you to
+   open files stored on the server, in the current project, or elsewhere on your
+   hard drive.
 
-
-
-You can see a short video demonstrating the RStudio interface here: 
-
+You can see a short video demonstrating the RStudio interface here:
 
 <iframe src="https://player.vimeo.com/video/221888958" width="640" height="480" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
-<!-- 
+<!--
 
-When you first open RStudio (in this case, it's the server version, so loaded in a web page) it should look something like this. 
+When you first open RStudio (in this case, it's the server version, so loaded in a web page) it should look something like this.
 
 There is a single window, intially split into three panels, which are:
 
@@ -139,7 +151,7 @@ This is all saved as a single html file which you can email to collaborators, pu
 If I close this window, you can also see that if I click the arrow next to the 'knit' button we could also have created a pdf or word document, although I'd recommend sticking to HTML to begin with.
 
 
-At the top of the RMarkdown file itself, we have a title for the document, and a line which tells RStudio that we want to build and html file by default. 
+At the top of the RMarkdown file itself, we have a title for the document, and a line which tells RStudio that we want to build and html file by default.
 
 Moving down, we have a 'code chunk', which is denoted by these three backticks, the curly brackets and the letter "R". This tells Rstduio that we're about to include some R code which it will need to run. Ignore the code in this chunk for the moment, and I'll come back to that later.
 
@@ -157,49 +169,49 @@ OK - so that's it for this video. Just quickly before I go though, it's worth kn
 
 -->
 
-
 The video:
 
-- Shows you how to type commands into the Console and view the results.
-- Run a plotting function, and see the result.
-- Create RMarkdown file, and 'Knit' it to produce a document containing the results of your code and explanatory text.
-
-
+-   Shows you how to type commands into the Console and view the results.
+-   Run a plotting function, and see the result.
+-   Create RMarkdown file, and 'Knit' it to produce a document containing the
+    results of your code and explanatory text.
 
 :::{.exercise}
 
 Once you have watched the video:
 
-
-- Open RStudio and create a new RMarkdown document.
-- Edit some of the text, and press the `Knit` button to see the results.
-- Edit some of the R blocks and see what happens.
+-   Open RStudio and create a new RMarkdown document.
+-   Edit some of the text, and press the `Knit` button to see the results.
+-   Edit some of the R blocks and see what happens.
 
 :::
 
-
-
-
 ### Creating code chunks {-}
 
-To include R code within RMarkdown we write 3 backticks (`` ``` ``), followed by `{r}`. We the include our R code, and close the block with 3 more backticks ([how to find the backtick on your keyboard](#backtick-location)).
+To include R code within RMarkdown we write 3 backticks (` ``` `), followed by
+`{r}`. We the include our R code, and close the block with 3 more backticks
+([how to find the backtick on your keyboard](#backtick-location)).
 
 ![A code chunk in the RMarkdown editor](media/r-code-chunk.png)
 
-When a document including this chunk is run or 'knitted', the final result will include the the line `2+2` followed by the number `4` on the next line. We can use RMarkdown to 'show our workings': our analysis can be interleaved with narrative text to explain or interpret the calculations.
-
+When a document including this chunk is run or 'knitted', the final result will
+include the the line `2+2` followed by the number `4` on the next line. We can
+use RMarkdown to 'show our workings': our analysis can be interleaved with
+narrative text to explain or interpret the calculations.
 
 ##### More about RMarkdown {- .tip}
 
-A more in depth explanation of RMarkdown is here: [https://rmarkdown.rstudio.com](https://rmarkdown.rstudio.com), and a detailed user guide here: [https://rmarkdown.rstudio.com/lesson-1.html](https://rmarkdown.rstudio.com/lesson-1.html)
-
-
+A more in depth explanation of RMarkdown is here:
+[https://rmarkdown.rstudio.com](https://rmarkdown.rstudio.com), and a detailed
+user guide here:
+[https://rmarkdown.rstudio.com/lesson-1.html](https://rmarkdown.rstudio.com/lesson-1.html)
 
 ## First commands {-}
 
-You can type R commands directly into the 'console' (see [here](#rstudio)) and see the result there, but you should make a habit of working in an RMarkdown file. This keeps a record of everything you try, and makes it easy to edit/amend things which didn't quite work.
-
-
+You can type R commands directly into the 'console' (see [here](#rstudio)) and
+see the result there, but you should make a habit of working in an RMarkdown
+file. This keeps a record of everything you try, and makes it easy to edit/amend
+things which didn't quite work.
 
 :::{.exercise}
 
@@ -207,68 +219,68 @@ Create a new Rmarkdown document from the 'file' menu in RStudio.
 
 :::
 
-
-
 #### {-}
 
-To run code in the RStudio interface put your cursor on a line within an R Block (or select the code you want to run), and press `Ctrl-Enter`. The result will appear below the code block.
+To run code in the RStudio interface put your cursor on a line within an R Block
+(or select the code you want to run), and press `Ctrl-Enter`. The result will
+appear below the code block.
 
-The command in the R block below prints (i.e. shows on screen) the first few rows of a dataset that is built-in to R as an example, called `mtcars`. 
+The command in the R block below prints (i.e. shows on screen) the first few
+rows of a dataset that is built-in to R as an example, called `mtcars`.
 
-Place your cursor somewhere in the line the command is on and run it by typing `Ctrl-Enter`, shown in this brief video:
-
+Place your cursor somewhere in the line the command is on and run it by typing
+`Ctrl-Enter`, shown in this brief video:
 
 <iframe src="https://player.vimeo.com/video/225968925" width="640" height="480" frameborder="0"></iframe>
 <p><a href="https://vimeo.com/225968925">Create an R block in RMarkdown, then run some simple commands.</a></p>
-
 
 ```{r}
 head(mtcars)
 ```
 
+If you are reading this from within RStudio, running `head(mtcars)` makes an
+interactive table in your document, which you can use this to browse the
+`mtcars` dataset.
 
-If you are reading this from within RStudio, running `head(mtcars)` makes an interactive table in your document, which you can use this to browse the `mtcars` dataset. 
-
-If you are still reading the compiled html or pdf document you will see a static table containing the same data.
+If you are still reading the compiled html or pdf document you will see a static
+table containing the same data.
 
 Hopefully at this point it's obvious that RStudio and RMarkdown give you:
 
-- A nice place to work your data interactively
-- A way to 'show your workings' and save this for later
-- A way to share your analysis
-
-
+-   A nice place to work your data interactively
+-   A way to 'show your workings' and save this for later
+-   A way to share your analysis
 
 ## Naming things {- #variables}
 
-We can assign labels to the results of calculations and other parts of our analyses to keep track of them. 
+We can assign labels to the results of calculations and other parts of our
+analyses to keep track of them.
 
-To assign labels we use the `<-` symbol. The `<-` symbol points from the value we want to store, to the name we want to use. For example:
+To assign labels we use the `<-` symbol. The `<-` symbol points from the value
+we want to store, to the name we want to use. For example:
 
 ```{r}
 the_magic_number <- 3
 ```
 
-This assigns the value `3` to the variable `the_magic_number`. 
+This assigns the value `3` to the variable `the_magic_number`.
 
-This block wouldn't display anything because assigning a variable doesn't create any output. 
+This block wouldn't display anything because assigning a variable doesn't create
+any output.
 
-To both assign a variable *and* display it we would type:
-  
+To both assign a variable _and_ display it we would type:
+
 ```{r}
 the_magic_number <- 3
 the_magic_number
 ```
 
-
-Or we can use a shortcut: if we wrap the line in parentheses this both makes the assignment and prints the result to the console:
-
+Or we can use a shortcut: if we wrap the line in parentheses this both makes the
+assignment and prints the result to the console:
 
 ```{r}
 (i_am_a_new_variable <- 22)
 ```
-
-
 
 We can also do calculations as we assign variables:
 
@@ -277,32 +289,27 @@ one_score <- 20
 (four_score_years_and_ten <- one_score * 4 + 10)
 ```
 
-
 :::{.tip}
 
-We can give *anything* a label by assigning it to a variable. 
+We can give _anything_ a label by assigning it to a variable.
 
-It doesn't have to be a number; we can also assign letters, words, graphics, the results of a statistical model, or *lists* of any of these things.
+It doesn't have to be a number; we can also assign letters, words, graphics, the
+results of a statistical model, or _lists_ of any of these things.
 
 This will come in handy later.
 
 :::
 
-
-
-
-
 ## Vectors and lists {- #vectors-and-lists}
 
-When working with data, we often have lists or sequences of 'things'. For example: a list of measurements we have made.
+When working with data, we often have lists or sequences of 'things'. For
+example: a list of measurements we have made.
 
-- When all the things are of the same type, R calls this a *vector*^[It's actually a matrix if has 2 dimensions, like a table, or an array if it has more than 2 dimensions.].
+-   When all the things are of the same type, R calls this a _vector_^[It's
+    actually a matrix if has 2 dimensions, like a table, or an array if it has
+    more than 2 dimensions.].
 
-- When there is a mix of different things R calls this a *list*.
-
-
-
-
+-   When there is a mix of different things R calls this a _list_.
 
 ### Vectors {- #vector}
 
@@ -310,12 +317,13 @@ We can create a vector of numbers and display it like this:
 
 ```{r}
 # this creates a vector of heights, in cm
-heights <- c(203, 148, 156, 158, 167, 
-             162, 172, 164, 172, 187, 
+heights <- c(203, 148, 156, 158, 167,
+             162, 172, 164, 172, 187,
              134, 182, 175)
 ```
 
-The `c()` command is shorthand for *combine*, so the example above combines the individual elements (numbers) into a new vector.
+The `c()` command is shorthand for _combine_, so the example above combines the
+individual elements (numbers) into a new vector.
 
 We can create a vector of alphanumeric names just as easily:
 
@@ -323,68 +331,69 @@ We can create a vector of alphanumeric names just as easily:
 names <- c("Ben", "Joe", "Sue", "Rosa")
 ```
 
-And we can check the values stored in these variables by printing them. You can either type `print(heights)`, or just write the name of the variable alone, which will print it by default. E.g.:
+And we can check the values stored in these variables by printing them. You can
+either type `print(heights)`, or just write the name of the variable alone,
+which will print it by default. E.g.:
 
 ```{r}
-heights 
+heights
 ```
-
-
 
 #### {- .exercise}
 
-Try creating your own vector of numbers in a new code block below^[i.e. edit the RMarkdown document] using the `c(...)` command. Then change the name of the variable you assign it to.
-
-
-
+Try creating your own vector of numbers in a new code block below^[i.e. edit the
+RMarkdown document] using the `c(...)` command. Then change the name of the
+variable you assign it to.
 
 ### Accessing elements {- #access-vector-elements}
 
-Once we have created a vector, we often want to access the individual elements again. We do this based on their *position*. 
+Once we have created a vector, we often want to access the individual elements
+again. We do this based on their _position_.
 
 Let's say we have created a vector:
-  
+
 ```{r}
 my.vector <- c(10, 20, 30, 40)
 ```
 
-We can display the whole vector by just typing its name, as we saw above. But if we want to show only the *first* element of this vector, we type:
-  
+We can display the whole vector by just typing its name, as we saw above. But if
+we want to show only the _first_ element of this vector, we type:
+
 ```{r}
 my.vector[1]
 ```
 
-
-Here, the square brackets specify a *subset* of the vector we want - in this case, just the first element.
-
+Here, the square brackets specify a _subset_ of the vector we want - in this
+case, just the first element.
 
 ### Selecting more than one element {-}
 
-A neat feature of subsetting is that we can grab more than one element at a time. 
+A neat feature of subsetting is that we can grab more than one element at a
+time.
 
-To do this, we need to tell R the *positions* of the elements we want, and so we provide a *vector of the positions of the elements we want*. 
+To do this, we need to tell R the _positions_ of the elements we want, and so we
+provide a _vector of the positions of the elements we want_.
 
-It might seem obvious, but the first element has position 1, the second has position 2, and so on.  So, if we wanted to extract the 4th and 5th elements from the vector of heights we saw above we would type:
+It might seem obvious, but the first element has position 1, the second has
+position 2, and so on. So, if we wanted to extract the 4th and 5th elements from
+the vector of heights we saw above we would type:
 
 ```{r}
 elements.to.grab <- c(4, 5)
 heights[elements.to.grab]
 ```
 
-We can also make a subset of the original vector and assign it to a *new* variable:
+We can also make a subset of the original vector and assign it to a _new_
+variable:
 
 ```{r}
 first.two.elements <- heights[c(1, 2)]
 first.two.elements
 ```
 
-
-
 <!-- There are lots of other neat tricks you can use when subsetting, but we don't need them all right now.  -->
 
 <!-- If you want to know more see <http://www.statmethods.net/management/subset.html> -->
-
-
 
 ### Making and slicing with sequences {- #making-sequences}
 
@@ -403,13 +412,11 @@ This creates a vector which can be sliced like any other:
 onetoten[8]
 ```
 
-
 One common use of sequences is to slice other vectors:
 
 ```{r}
 onetoten[1:3]
 ```
-
 
 Or the first 10 values in the `heights` vector we defined above:
 
@@ -417,59 +424,56 @@ Or the first 10 values in the `heights` vector we defined above:
 heights[1:10]
 ```
 
-
 This works backwards, and with negative numbers too:
 
 ```{r}
 5:-5
 ```
 
-
-
-
-When your sequence doesn't contain only whole numbers, or non-consecutive numbers, you can use the `seq` function:
+When your sequence doesn't contain only whole numbers, or non-consecutive
+numbers, you can use the `seq` function:
 
 ```{r}
 seq(1,10,by=2)
 seq(0, 1, by=.2)
 ```
 
-
-
-
 ### Conditional slicing {- #conditional-slices}
 
-One neat feature of R is that you can create a sequence of `TRUE` or `FALSE` values, by asking whether each value in a sequence matches a particular condition. For example:
+One neat feature of R is that you can create a sequence of `TRUE` or `FALSE`
+values, by asking whether each value in a sequence matches a particular
+condition. For example:
 
 ```{r}
 1:10 > 5
 ```
 
-
-Re-using the heights vector from above, we can then use this to select values that are above the average:
+Re-using the heights vector from above, we can then use this to select values
+that are above the average:
 
 ```{r}
 heights > mean(heights)
 ```
 
-And we can use the vector of `TRUE` and `FALSE` values to select from the actual scores:
+And we can use the vector of `TRUE` and `FALSE` values to select from the actual
+scores:
 
 ```{r}
 heights[heights > mean(heights)]
 ```
 
-
-
-
 ## Working with vectors {-}
 
-Many of R's most useful functions process *vectors of numbers* in some way. For example (as we've already seen) if we want to calculate the average of our vector of heights we just type:
+Many of R's most useful functions process _vectors of numbers_ in some way. For
+example (as we've already seen) if we want to calculate the average of our
+vector of heights we just type:
 
 ```{r}
 mean(heights)
 ```
 
-R contains *lots* of built in functions which we can use to summarise a vector of numbers. For example:
+R contains _lots_ of built in functions which we can use to summarise a vector
+of numbers. For example:
 
 ```{r, echo=T}
 median(heights)
@@ -481,17 +485,18 @@ IQR(heights)
 length(heights)
 ```
 
+All of these functions accept a vector as input, do some proccesing, and then
+return a _single number_ which gets displayed by RStudio.
 
-All of these functions accept a vector as input, do some proccesing, and then return a *single number* which gets displayed by RStudio. 
-
-But not all functions return a single number in the way that `mean` did above. Some return a new vector, or some other type of object instead.  For example, the `quantile` function returns the values at the 0, 25th, 50th, 75th and 100th percentiles (by default).
-
+But not all functions return a single number in the way that `mean` did above.
+Some return a new vector, or some other type of object instead. For example, the
+`quantile` function returns the values at the 0, 25th, 50th, 75th and 100th
+percentiles (by default).
 
 ```{r}
 height.quantiles <- quantile(heights)
 height.quantiles
 ```
-
 
 If a function returns a vector, we can use it just like any other vector:
 
@@ -506,7 +511,8 @@ min.height <- height.quantiles[1]
 min.height
 ```
 
-But other functions process a vector without returning any numbers. For example, the `hist` function returns a histogram:
+But other functions process a vector without returning any numbers. For example,
+the `hist` function returns a histogram:
 
 ```{r}
 hist(heights)
@@ -514,18 +520,26 @@ hist(heights)
 
 We'll cover lots more plotting and visualisation later on.
 
-
-
 ### Making new vectors {-}
 
-So far we've seen R functions which process a vector of numbers and produce a single number, a new vector of a different length (like `quantile` or `fivenum`), or some other object (like `hist` which makes a plot).
-However many other functions accept a single input, do something to it, and return a single processed value. 
+So far we've seen R functions which process a vector of numbers and produce a
+single number, a new vector of a different length (like `quantile` or
+`fivenum`), or some other object (like `hist` which makes a plot). However many
+other functions accept a single input, do something to it, and return a single
+processed value.
 
-For example, the square root function, `sqrt`, accepts a single value and returns a single value: running `sqrt(10)` will return `3.1623`. 
+For example, the square root function, `sqrt`, accepts a single value and
+returns a single value: running `sqrt(10)` will return `3.1623`.
 
-In R, if a function accepts a single value as input and returns a single value as output (like `sqrt(10)`), then you can usually give a vector as input too. Some people find this surprising^[Mostly people who already know other programming languages like C. It's not that surprising if you read the R code as you would English.], but R assumes that if you're processing a vector of numbers, you want the function applied to each of them in the same way. 
+In R, if a function accepts a single value as input and returns a single value
+as output (like `sqrt(10)`), then you can usually give a vector as input too.
+Some people find this surprising^[Mostly people who already know other
+programming languages like C. It's not that surprising if you read the R code as
+you would English.], but R assumes that if you're processing a vector of
+numbers, you want the function applied to each of them in the same way.
 
-This turns out to be very useful. For example, let's say we want the square root of each of the elements of our height data:
+This turns out to be very useful. For example, let's say we want the square root
+of each of the elements of our height data:
 
 ```{r}
 # these are the raw values
@@ -535,46 +549,48 @@ heights
 sqrt(heights)
 ```
 
-This also works with simple arithmetic So, if we wanted to convert all the heights from cm to meters we could just type:
+This also works with simple arithmetic So, if we wanted to convert all the
+heights from cm to meters we could just type:
 
 ```{r}
 heights / 100
 ```
 
-
-
-This trick also works with other functions like `paste`, which combines the inputs you send it to produce an alphanumeric string:
+This trick also works with other functions like `paste`, which combines the
+inputs you send it to produce an alphanumeric string:
 
 ```{r}
 paste("Once", "upon", "a", "time")
 ```
 
-If we send a vector to `paste` it assumes we want a vector of results, with each element in the vector pasted next to each other:
+If we send a vector to `paste` it assumes we want a vector of results, with each
+element in the vector pasted next to each other:
 
 ```{r}
 bottles <- c(100, 99, 98, "...")
 paste(bottles, "green bottles hanging on the wall")
 ```
 
-In other programming languages we might have had to write a 'loop' to create each line of the song, but R lets us write short statements to summarise *what* needs to be done; we don't need to worry worrying about *how* it gets done.
-
+In other programming languages we might have had to write a 'loop' to create
+each line of the song, but R lets us write short statements to summarise _what_
+needs to be done; we don't need to worry worrying about _how_ it gets done.
 
 #### {- #paste0 .tip}
 
-The `paste0` function does much the same, but leaves no spaces in the combined strings, which can be useful:
+The `paste0` function does much the same, but leaves no spaces in the combined
+strings, which can be useful:
 
 ```{r}
 paste0("N=", 1:10)
 ```
 
-
-
-
 ### Making up data (new vectors) {-}
 
-Sometimes you'll need to create vectors containing regular sequences or randomly selected numbers.
+Sometimes you'll need to create vectors containing regular sequences or randomly
+selected numbers.
 
-To create regular sequences a convenient shortcut is the 'colon' operator. For example, if we type `1:10` then we get a vector of numbers from 1 to 10:
+To create regular sequences a convenient shortcut is the 'colon' operator. For
+example, if we type `1:10` then we get a vector of numbers from 1 to 10:
 
 ```{r}
 1:10
@@ -587,8 +603,8 @@ The `seq` function allows you to create more specific sequences:
 seq(from=0.1, to=2, by=.1)
 ```
 
-
-We can also use random number-generating functions built into R to create vectors:
+We can also use random number-generating functions built into R to create
+vectors:
 
 ```{r}
 # 10 uniformly distributed random numbers between 0 and 1
@@ -611,12 +627,10 @@ random.numbers <- rnorm(10000)
 hist(random.numbers)
 ```
 
-
-
 ## Functions to learn now {- }
 
-There are *thousands* of functions built into R. Below are just a few examples which are likely to be useful as you work with your data:
-
+There are _thousands_ of functions built into R. Below are just a few examples
+which are likely to be useful as you work with your data:
 
 ###### Repetition {-}
 
@@ -630,14 +644,12 @@ rep("Apple pie", 10)
 rep(c("Custard", "Gravy"), 5)
 ```
 
-
 ###### Sequences {-}
 
 ```{r}
-# make a sequence 
+# make a sequence
 (countdown <- 100:1)
 ```
-
 
 Make sequences with steps of a particular size:
 
@@ -646,8 +658,6 @@ Make sequences with steps of a particular size:
 
 (twelfths <- seq(from=0, to=10, length.out=12))
 ```
-
-
 
 ###### Ranking {-}
 
@@ -660,16 +670,12 @@ ages
 rank(ages, ties.method="first")
 ```
 
-
-
 ###### Unique values {-}
 
 ```{r}
 # return the unique values in a vector
 unique(rep(1:10, 100))
 ```
-
-
 
 ###### Lengths {-}
 
@@ -678,17 +684,12 @@ unique(rep(1:10, 100))
 length(seq(1,100, 2))
 ```
 
-
 ###### {- .exercise}
 
-Try and experiment with each of these functions. Check the output against what you expected to happen, and make sure you understand what they do.
+Try and experiment with each of these functions. Check the output against what
+you expected to happen, and make sure you understand what they do.
 
-
-
-
-
-
-<!-- 
+<!--
 
 
 ## Lists {- #lists}
@@ -717,7 +718,7 @@ Take a minute to try and make a guess at what went wrong. Why does R complain th
 
 The answer: When we built the vector we used `c` to combine the elements `1`, `2`, `3` and `"Wibble"`. Although our first three elements are numbers, `"Wibble"` is not - it's made up of letters (this is called a character string).
 
-Vectors can only contain one *type* of thing so R automatically converts all the elements to the same type, if it can. 
+Vectors can only contain one *type* of thing so R automatically converts all the elements to the same type, if it can.
 
 Because R can't reliably convert `"Wibble"` to a number, everything in the vector was converted to the `character` type instead. We get an error because R can't mutiply words together.
 
@@ -761,8 +762,8 @@ my.list[[1]] * my.list[[2]]
 Square brackets are ugly and can be confusing though, so we often give names to the elements of our list when we create it:
 
 ```{r}
-my.party <- list(number.guests=8, 
-                 when="Friday", 
+my.party <- list(number.guests=8,
+                 when="Friday",
                  drinks = c("Juice", "Beer", "Whisky"))
 ```
 
@@ -802,9 +803,9 @@ sqrt(1:10) * 10
 
 Extended questions:
 
-- What is the average of the 9 times table, up to and including 9 x 1000? 
+- What is the average of the 9 times table, up to and including 9 x 1000?
 
-- Use the `paste` and `c(...)` functions to create a vector which contains the sequence "1 elephant", "2 elephants", ...,  "1000 elephants". 
+- Use the `paste` and `c(...)` functions to create a vector which contains the sequence "1 elephant", "2 elephants", ...,  "1000 elephants".
 
 
  -->

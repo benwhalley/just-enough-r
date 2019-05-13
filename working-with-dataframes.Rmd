@@ -2,7 +2,6 @@
 title: 'Working with dataframes'
 ---
 
-
 ## Working with dataframes {- #working-with-dataframes}
 
 ```{r, include=FALSE}
@@ -12,21 +11,21 @@ library(tufte)
 library(pander)
 ```
 
-
 ### Introducing the `tidyverse` {- #tidyverse}
 
+This guide deliberately ignores many common patterns for working with
+dataframes.
 
-This guide deliberately ignores many common patterns for working with dataframes. 
-
-There are plenty of other guides for working in these older ways, but for beginners, these techniques can be confusing. The approach shown here is based only on functions in [the `tidyverse`](#tidyverse). Although simple --- and easy to read ---  the approach is extremely flexible and covers almost all of the cases you will encounter when working with psychological data. 
-
-
+There are plenty of other guides for working in these older ways, but for
+beginners, these techniques can be confusing. The approach shown here is based
+only on functions in [the `tidyverse`](#tidyverse). Although simple --- and easy
+to read --- the approach is extremely flexible and covers almost all of the
+cases you will encounter when working with psychological data.
 
 Specifically, we make extensive use of two tidyverse packages:
 
-- `dplyr`: to select, filter and summarise data
-- `ggplot2`: to make plots
-
+-   `dplyr`: to select, filter and summarise data
+-   `ggplot2`: to make plots
 
 To load the tidyverse first write:
 
@@ -34,23 +33,23 @@ To load the tidyverse first write:
 library(tidyverse)
 ```
 
-This can either be typed into the console or (better) included at the top of an markdown file.
-
+This can either be typed into the console or (better) included at the top of an
+markdown file.
 
 <!---
 XXX Add note for teachers here???
 --->
 
-
 ## Selecting columns {- #selecting-columns}
 
+To pick out single or multiple columns use the `select()` function.
 
-To pick out single or multiple columns use the `select()` function. 
+The `select()` function expects a dataframe as it's first input ('argument', in
+R language), followed by the names of the columns you want to extract with a
+comma between each name.
 
-The `select()` function expects a dataframe as it's first input ('argument', in R language), followed by the names of the columns you want to extract with a comma between each name. 
-
-It returns a *new* dataframe with just those columns, in the order you specified:
-
+It returns a _new_ dataframe with just those columns, in the order you
+specified:
 
 ```{r}
 head(
@@ -58,36 +57,35 @@ head(
 )
 ```
 
-
 #### Saving a subset of the data {-}
 
-Because `dplyr` functions return a *new* dataframe, we can assign the results to a variable:
+Because `dplyr` functions return a _new_ dataframe, we can assign the results to
+a variable:
 
 ```{r}
 justcylandweight <- select(mtcars, cyl, wt)
 summary(justcylandweight)
 ```
 
-
-
 #### Excluding columns {-}
 
-If you want to keep most of the columns --- perhaps you just want to get rid of one and keep the rest --- put a minus (`-`) sign in front of the name of the column to drop. This then selects everything *except* the column you named:
+If you want to keep most of the columns --- perhaps you just want to get rid of
+one and keep the rest --- put a minus (`-`) sign in front of the name of the
+column to drop. This then selects everything _except_ the column you named:
 
 ```{r}
 # Note we are just dropping the Ozone column
 head(select(airquality, -Ozone))
 ```
 
-
 #### Matching specific columns {-}
 
-You can use a patterns to match a subset of the columns you want. For example, here we select all the columns where the name contains the letter `d`:
+You can use a patterns to match a subset of the columns you want. For example,
+here we select all the columns where the name contains the letter `d`:
 
 ```{r}
 head(select(mtcars, contains("d")))
 ```
-
 
 And you can combine these techniques to make more complex selections:
 
@@ -95,25 +93,23 @@ And you can combine these techniques to make more complex selections:
 head(select(mtcars, contains("d"), -drat))
 ```
 
-
-
 #### Other methods of selection {-}
 
-As a quick reference, you can use the following 'verbs' to select columns in different ways:
+As a quick reference, you can use the following 'verbs' to select columns in
+different ways:
 
-- `starts_with()`
-- `ends_with()`
-- `contains()`
-- `everything()`
+-   `starts_with()`
+-   `ends_with()`
+-   `contains()`
+-   `everything()`
 
-See the help files for more information (type `??dplyr::select` into the console).
-
-
+See the help files for more information (type `??dplyr::select` into the
+console).
 
 ## Selecting rows {- #selecting-rows}
 
-To select rows from a dataframe use the `filter()` function (again from `dplyr`). 
-
+To select rows from a dataframe use the `filter()` function (again from
+`dplyr`).
 
 If we only wanted to rows for 6-cylindered cars, we could write:
 
@@ -121,18 +117,17 @@ If we only wanted to rows for 6-cylindered cars, we could write:
 filter(mtcars, cyl==6)
 ```
 
-
 ## 'Operators' {- #operators}
 
 <!-- <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/4TYv2PhG89A?rel=0" frameborder="0" allowfullscreen></iframe>
  -->
 
-When selecting rows in the [example above](#selecting-rows) we used two equals signs `==` to select rows where `cyl` was exactly `6`. 
+When selecting rows in the [example above](#selecting-rows) we used two equals
+signs `==` to select rows where `cyl` was exactly `6`.
 
-As you might guess, there are other 'operators' we can use to create filters. 
+As you might guess, there are other 'operators' we can use to create filters.
 
 Rather than describe them, the examples below demonstrate what each of them do.
-
 
 ###### Equality and matching {-}
 
@@ -148,17 +143,15 @@ And in a filter:
 filter(mtcars, cyl==6)
 ```
 
-
 :::{.explainer}
 
-You might have noted above that we write `==` rather than just `=` to define the criteria. This is because most programming languages, including R, use two `=` symbols to distinguish: *comparison* from *assignment*.
+You might have noted above that we write `==` rather than just `=` to define the
+criteria. This is because most programming languages, including R, use two `=`
+symbols to distinguish: _comparison_ from _assignment_.
 
 :::
 
-
-
 ###### Presence/absence {-}
-
 
 To test if a value is in a vector of suitable matches we can use: `%in%`:
 
@@ -172,7 +165,8 @@ Or for an example which is not true:
 100 %in% 1:10
 ```
 
-Perhaps less obviously, we can test whether each value in a vector is *in* a second vector. 
+Perhaps less obviously, we can test whether each value in a vector is _in_ a
+second vector.
 
 This returns a vector of `TRUE/FALSE` values as long as the first list:
 
@@ -188,10 +182,10 @@ head(filter(mtcars, cyl %in% c(4, 6)))
 
 :::{.explainer}
 
-Here we selected all rows where `cyl` matched either `4` or `6`. That is, where the value of `cyl` was 'in' the vector `c(4,6)`.
+Here we selected all rows where `cyl` matched either `4` or `6`. That is, where
+the value of `cyl` was 'in' the vector `c(4,6)`.
 
 :::
-
 
 ###### Greater/less than {-}
 
@@ -202,7 +196,6 @@ head(filter(mtcars, cyl > 4))
 head(filter(mtcars, cyl < 5))
 ```
 
-
 You can also use `>=` and `<=`:
 
 ```{r, eval=F}
@@ -210,12 +203,10 @@ filter(mtcars, cyl >= 6)
 filter(mtcars, cyl <= 4)
 ```
 
-
-
 ###### Negation (opposite of) {-}
 
-The `!` is very useful to tell R to reverse an expression; that is, take the opposite of the value. In the simplest example:
-
+The `!` is very useful to tell R to reverse an expression; that is, take the
+opposite of the value. In the simplest example:
 
 ```{r}
 !TRUE
@@ -228,7 +219,7 @@ is.na(NA)
 !is.na(NA)
 ```
 
-And we can use in dplyr filters. 
+And we can use in dplyr filters.
 
 Here we select rows where `Ozone` is missing (`NA`):
 
@@ -236,24 +227,21 @@ Here we select rows where `Ozone` is missing (`NA`):
 filter(airquality, is.na(Ozone))
 ```
 
-And here we use `!` to reverse the expression and select rows which are not missing:
+And here we use `!` to reverse the expression and select rows which are not
+missing:
 
 ```{r, eval=F}
 filter(airquality, !is.na(Ozone))
 ```
 
-
-
 :::{.exercise}
 
-Try running these commands for yourself and experiment with changing the operators to make select different combinations of rows
+Try running these commands for yourself and experiment with changing the
+operators to make select different combinations of rows
 
 :::
 
-
-
 ###### Other logical operators {-}
-
 
 There are operators for 'and'/'or' which can combine other filters.
 
@@ -269,7 +257,8 @@ In contrast, the pipe symbol, `|`, means 'or', so we match more rows:
 filter(mtcars, hp > 200 | wt > 4)
 ```
 
-Finally, you can set the order in which operators are applied by using parentheses. This means these expressions are subtly different:
+Finally, you can set the order in which operators are applied by using
+parentheses. This means these expressions are subtly different:
 
 ```{r}
 # first
@@ -279,60 +268,55 @@ filter(mtcars, (hp > 200 & wt > 4) | cyl==8)
 filter(mtcars, hp > 200 & (wt > 4 | cyl==8))
 ```
 
-
 :::{.exercise}
 
 Try writing in plain English the meaning of the two filter expressions above
 
 :::
 
-
-
 ## Sorting {- #sorting}
 
 Sort dataframes using `arrange()` from `dplyr`:
 
 ```{r}
-airquality %>% 
-  arrange(Ozone) %>% 
+airquality %>%
+  arrange(Ozone) %>%
   head
 ```
 
 By default sorting is ascending, but you can use a minus sign to reverse this:
 
 ```{r}
-airquality %>% 
-  arrange(-Ozone) %>% 
+airquality %>%
+  arrange(-Ozone) %>%
   head
 ```
 
-
-You can sort on multiple columns too, but the order of the variables makes a difference. This:
+You can sort on multiple columns too, but the order of the variables makes a
+difference. This:
 
 ```{r}
-airquality %>% 
-  select(Month, Ozone) %>% 
-  arrange(Month, -Ozone) %>% 
+airquality %>%
+  select(Month, Ozone) %>%
+  arrange(Month, -Ozone) %>%
   head
 ```
 
 Is different to this:
 
 ```{r}
-airquality %>% 
-  select(Month, Ozone) %>% 
-  arrange(-Ozone, Month) %>% 
+airquality %>%
+  select(Month, Ozone) %>%
+  arrange(-Ozone, Month) %>%
   head
 ```
 
-
-
-
 ## Pipes {- #pipes}
 
-We often want to combine `select` and `filter` (and other functions) to return a subset of our original data.
+We often want to combine `select` and `filter` (and other functions) to return a
+subset of our original data.
 
-One way to achieve this is to 'nest' function calls. 
+One way to achieve this is to 'nest' function calls.
 
 Taking the `mtcars` data, we can select the weights of cars with a poor `mpg`:
 
@@ -341,23 +325,20 @@ gas.guzzlers <- select(filter(mtcars, mpg < 15), wt)
 summary(gas.guzzlers)
 ```
 
-
-This is OK, but can be confusing to read.  The more deeply nested we go, the easier it is to make a mistake.
-
-
+This is OK, but can be confusing to read. The more deeply nested we go, the
+easier it is to make a mistake.
 
 #### `tidyverse` provides an alternative to nested function calls, called the 'pipe'. {-}
 
+Imagine your dataframe as a big bucket, containing data.
 
-Imagine your dataframe as a big bucket, containing data. 
+From this bucket, you can 'pour' your data down the screen, and it passes
+through a series of tubes and filters.
 
-From this bucket, you can 'pour' your data down the screen, and it passes through a series of tubes and filters. 
-
-At the bottom of your screen you have a smaller bucket, containing only the data you want.
-
+At the bottom of your screen you have a smaller bucket, containing only the data
+you want.
 
 ![Think of your data 'flowing' down the screen.](media/tubes.jpg)
-
 
 The 'pipe' operator, `%>%` makes our data 'flow' in this way:
 
@@ -372,14 +353,16 @@ big.bucket.of.data %>%
 
 :::{.explainer}
 
-The `%>%` symbol makes the data flow onto the next step. Each function which follows the pipe takes the incoming data as it's first input.
+The `%>%` symbol makes the data flow onto the next step. Each function which
+follows the pipe takes the incoming data as it's first input.
 
 :::
 
-
 Pipes do the same thing as nesting functions, but the code stays more readable.
 
-It's especially nice because the order in which the functions happen is the same as the order in which we read the code (the opposite is true for nested functions).
+It's especially nice because the order in which the functions happen is the same
+as the order in which we read the code (the opposite is true for nested
+functions).
 
 We can save intermediate 'buckets' for use later on:
 
@@ -389,28 +372,24 @@ smaller.bucket <- big.bucket.of.data %>%
   select(wt)
 ```
 
+This is an incredibly useful pattern for processing and working with data.
 
-This is an incredibly useful pattern for processing and working with data. 
-
-We can 'pour' data through a series of filters and other operations, saving intermediate states where necessary.
+We can 'pour' data through a series of filters and other operations, saving
+intermediate states where necessary.
 
 :::{.tip}
 
-You can insert the `%>%` symbol in RStdudio by typing `cmd-shift-M`, which saves a lot of typing.
+You can insert the `%>%` symbol in RStdudio by typing `cmd-shift-M`, which saves
+a lot of typing.
 
 :::
 
-
-
-
-
-
 ## Modifying and creating new columns {- #mutate}
 
+We often want to compute new columns from data we already have.
 
-We often want to compute new columns from data we already have. 
-
-Imagine we had heights stored in cm, and weights stored in kg for 100 participants in a study on weight loss:
+Imagine we had heights stored in cm, and weights stored in kg for 100
+participants in a study on weight loss:
 
 ```{r}
 set.seed(1234)
@@ -426,29 +405,28 @@ weightloss <- tibble(
 weightloss %>% head
 ```
 
-
-If we want to compute each participants' Body Mass Index, we first need to convert their height into meters. We do this with mutate:
+If we want to compute each participants' Body Mass Index, we first need to
+convert their height into meters. We do this with mutate:
 
 ```{r}
-weightloss %>% 
-  mutate(height_meters = height_cm / 100) %>% 
+weightloss %>%
+  mutate(height_meters = height_cm / 100) %>%
   head
 ```
 
 We then want to calculate BMI:
 
 ```{r}
-weightloss %>% 
+weightloss %>%
   mutate(height_meters = height_cm / 100,
-         bmi = weight_kg / height_meters ^ 2) %>% 
+         bmi = weight_kg / height_meters ^ 2) %>%
   head
 ```
 
-
 :::{.tip}
 
-You could skip the intermediate step of converting to meters and write: `bmi = weight_kg / (height_cm/100) ^ 2`. But it's often best to be explicit and simplify each operation.
+You could skip the intermediate step of converting to meters and write:
+`bmi = weight_kg / (height_cm/100) ^ 2`. But it's often best to be explicit and
+simplify each operation.
 
 :::
-
-

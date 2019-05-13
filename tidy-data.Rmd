@@ -1,27 +1,26 @@
 ---
 title: '"Tidy" data'
 ---
-  
 
 ```{r, include=FALSE}
 library(tidyverse)
 library(tufte)
 ```
 
-
 ## Tidying data {- #tidyingdata}
 
+'Tidying' data means converting it into the format that is most useful for data
+analyses, and so we have already covered many of the key techniques: selecting
+and filtering data, reshaping and summarising.
 
-'Tidying' data means converting it into the format that is most useful for data analyses, and so we have already covered many of the key techniques: selecting and filtering data, reshaping and summarising.
-
-However the ideas behind 'tidying' draw together other related concepts which link together the way we enter, store and process data: for example the idea of '[relational data]()' and techniques to join together related datasets.
-
+However the ideas behind 'tidying' draw together other related concepts which
+link together the way we enter, store and process data: for example the idea of
+'[relational data]()' and techniques to join together related datasets.
 
 #### A philosophy of tidy data {-}
 
-The chapter on tidying in 'R for data science' is well worth reading for it's thoughtful explanation of why we want tidy data, and the core techniques to clean up untidy data:  <http://r4ds.had.co.nz/tidy-data.html>
-
-
-
+The chapter on tidying in 'R for data science' is well worth reading for it's
+thoughtful explanation of why we want tidy data, and the core techniques to
+clean up untidy data: <http://r4ds.had.co.nz/tidy-data.html>
 
 <!-- XXX TODO ADD DETAIL -->

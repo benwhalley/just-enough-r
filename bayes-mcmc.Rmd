@@ -5,9 +5,9 @@ title: 'Bayesian linear modelling via MCMC'
 ```{r, include=F}
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE, message=F, warning=F)
 
-library(tidyverse)
-library(pander)
-library(lmerTest)
+  library(tidyverse)
+  library(pander)
+  library(lmerTest)
 
 ```
 
@@ -84,7 +84,7 @@ http://doingbayesiandataanalysis.blogspot.co.uk/2012/04/why-to-use-highest-densi
 
 -->
 
-```{r, eval=F}
+```{r}
 
 params.of.interest <-
   pain.model.mcmc %>%
@@ -94,7 +94,7 @@ params.of.interest <-
   group_by(variable)
 
 params.of.interest %>%
-  do(., mHPDI(.$value)) %>%
+  tidybayes::mean_hdi() %>%
   pander::pandoc.table(caption="Estimates and 95% credible intervals for the parameters of interest")
 ```
 

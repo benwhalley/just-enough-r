@@ -1,6 +1,5 @@
 ---
 title: 'Link functions and `glm`'
-
 ---
 
 ```{r, include=FALSE}
@@ -9,117 +8,132 @@ library(pander)
 library(lmerTest)
 ```
 
+# Non-scale outcomes
 
+Standard regression models are linear combinations of parameters estimated from
+the data. Multiplying these parameters by different values of the predictor
+variables gives estimates of the outcome.
 
-# Non-scale outcomes 
+However, because there's no hard limit on the range of predictor variables (at
+least, no limit coded into the model itself) the predictions of a linear model
+in theory range between negative -∞ (infinity) and +∞. Although values
+approaching infinity might be very unlikely, there is no hard limit on either
+the parameters we fit (the regression coefficients) or the predictor values
+themselves.
 
+Where outcome data are continuous or somewhat like a continuous variable this
+isn't usually a problem. Although our models might predict some improbable
+values (for example, that someone is 8 feet tall), they will not often be
+strictly impossible.
 
-Standard regression models are linear combinations of parameters estimated from the data. Multiplying these parameters by different values of the predictor variables gives estimates of the outcome.
+It might occur to you at this point that, if a model predicted a height of -8
+feet or a temperature below absolute zero, then this would be impossible. And
+this is true, and a theoretical violation of the assumption of the linear model
+that the outcome can range betweem -∞ (infinity) and +∞. However researchers use
+linear regression to predict many outcomes which have this type of range
+restriction and, although models can make strange predictions in edge cases,
+they are useful and can make good predictions most of the time.
 
-However, because there's no hard limit on the range of predictor variables (at least, no limit coded into the model itself) the predictions of a linear model in theory range between negative -∞ (infinity) and +∞.  Although values approaching infinity might be very unlikely, there is no hard limit on either the parameters we fit (the regression coefficients) or the predictor values themselves. 
+However for other types of outcome --- incuding binary or count data, or other
+quantities like the duration-to-failure --- this often won't be the case, and
+standard linear regression may fail to make sensible predictions even in cases
+that are not unusual.
 
-Where outcome data are continuous or somewhat like a continuous variable this isn't usually a problem. Although our models might predict some improbable values (for example, that someone is 8 feet tall), they will not often be strictly impossible.  
-
-It might occur to you at this point that, if a model predicted a height of -8 feet or a temperature below absolute zero, then this would be impossible. And this is true, and a theoretical violation of the assumption of the linear model that the outcome can range betweem -∞ (infinity) and +∞. However researchers use linear regression to predict many outcomes which have this type of range restriction and, although models can make strange predictions in edge cases, they are useful and can make good predictions most of the time. 
-
-However for other types of outcome --- incuding binary or count data, or other quantities like the duration-to-failure --- this often won't be the case, and standard linear regression may fail to make sensible predictions even in cases that are not unusual.
-
-For binary data we want to predict the probability of a positive response, and this can range between zero and 1. For count data, predicted outcomes must always be non-negative (i.e. zero or greater). For these data, the lack of constraint on predictions from linear regression are a problem.
-
-
+For binary data we want to predict the probability of a positive response, and
+this can range between zero and 1. For count data, predicted outcomes must
+always be non-negative (i.e. zero or greater). For these data, the lack of
+constraint on predictions from linear regression are a problem.
 
 ## Link functions {#link-functions}
 
-Logistic and poisson regression extend regular linear regression to allow us to *constrain* linear regression to predict within the rannge of possible outcomes.  To achieve this, logistic regression, poisson regression and other members of the family of 'generalised linear models' use different 'link functions'. 
+Logistic and poisson regression extend regular linear regression to allow us to
+_constrain_ linear regression to predict within the rannge of possible outcomes.
+To achieve this, logistic regression, poisson regression and other members of
+the family of 'generalised linear models' use different 'link functions'.
 
-Link functions are used to connect the outcome variable to the linear model (that is, the linear combination of the parameters estimated for each of the predictors in the model). This means we can use linear models which still predict between -∞ and +∞, but without making inappropriate predictions.
+Link functions are used to connect the outcome variable to the linear model
+(that is, the linear combination of the parameters estimated for each of the
+predictors in the model). This means we can use linear models which still
+predict between -∞ and +∞, but without making inappropriate predictions.
 
-For linear regression the link is simply the [identity function](https://en.wikipedia.org/wiki/Identity_function) — that is, the linear model directly predicts the outcome. However for other types of model different functions are used.
+For linear regression the link is simply the
+[identity function](https://en.wikipedia.org/wiki/Identity_function) — that is,
+the linear model directly predicts the outcome. However for other types of model
+different functions are used.
 
-A good way to think about link functions is as a *transformation* of the model's predictions. For example, in logistic regression predictions from the linear model are transformed in such a way that they are constrained to fall between 0 and 1. Thus, although to the underlying linear model allows values between -∞ and +∞, the link function ensures predictions fall between 0 and 1.
-
-
-
+A good way to think about link functions is as a _transformation_ of the model's
+predictions. For example, in logistic regression predictions from the linear
+model are transformed in such a way that they are constrained to fall between 0
+and 1. Thus, although to the underlying linear model allows values between -∞
+and +∞, the link function ensures predictions fall between 0 and 1.
 
 ### Logistic regression {- #logistic-link-function}
 
-When we have binary data, we want to be able run something like regression, but where we predict a *probability* of the outcome. 
+When we have binary data, we want to be able run something like regression, but
+where we predict a _probability_ of the outcome.
 
-Because probabilities are limited to between 0 and 1, to link the data with the linear model we need to transform so they range from -∞ (infinity) to +∞.
+Because probabilities are limited to between 0 and 1, to link the data with the
+linear model we need to transform so they range from -∞ (infinity) to +∞.
 
 You can think of the solution as coming in two steps:
 
-
 #### Step 1 {-}
 
-We can transform a probability on the 0---1 scale to a 0
-\rightarrow ∞ scale by converting it to *odds*, which are expressed as
-a ratio:
+We can transform a probability on the 0---1 scale to a 0 \rightarrow ∞ scale by
+converting it to _odds_, which are expressed as a ratio:
 
 $$\textrm{odds} = \dfrac{\textrm{probability}}{1-\textrm{probability}}$$
 
-Probabilities and odds ratios are two *equivalent* ways of expressing
-the same idea.
+Probabilities and odds ratios are two _equivalent_ ways of expressing the same
+idea.
 
-So a probability of .5 equates to an odds ratio of 1 (i.e. 1 to 1); *p*=.6
-equates to odds of 1.5 (that is, 1.5 to 1, or 3 to 2), and *p* = .95
-equates to an odds ratio of 19 (19 to 1).
+So a probability of .5 equates to an odds ratio of 1 (i.e. 1 to 1); _p_=.6
+equates to odds of 1.5 (that is, 1.5 to 1, or 3 to 2), and _p_ = .95 equates to
+an odds ratio of 19 (19 to 1).
 
-Odds convert or *map* probabilities from 0 to 1 onto the [real
-numbers](http://en.wikipedia.org/wiki/Real_number) from 0 to ∞.
-
+Odds convert or _map_ probabilities from 0 to 1 onto the
+[real numbers](http://en.wikipedia.org/wiki/Real_number) from 0 to ∞.
 
 ```{r, echo=F, fig.cap="Probabilities converted to the odds scale. As p approaches 1 Odds goes to infinity."}
 df <- data.frame(x = c(.01, .99))
 odds <- function(p) p/(1-p)
 ggplot(df, aes(x)) +
   stat_function(fun = odds, colour = "red") +
-  ylab("Odds") + 
+  ylab("Odds") +
   xlab("Probability") + coord_flip()
 ```
-
-
 
 We can reverse the transformation too (which is important later) because:
 
 $$\textrm{probability} = \dfrac{\textrm{odds}}{1+\textrm{odds}}$$
 
-
-
-
-
-
 ##### {- .exercise}
 
+-   If a bookie gives odds of 66:1 on a horse, what probability does he think it
+    has of winning?
 
-- If a bookie gives odds of 66:1 on a horse, what probability
-does he think it has of winning?
+-   Why do bookies use odds and not probabilities?
 
-- Why do bookies use odds and not probabilities?
-
-- Should researchers use odds or probabilities when discussing with members of the public?
-
-
-
+-   Should researchers use odds or probabilities when discussing with members of
+    the public?
 
 #### Step 2 {-}
 
-When we convert a probability to odds, the odds will always be > zero. 
+When we convert a probability to odds, the odds will always be > zero.
 
-This is still a problem for our linear model. We'd like our 'regression' coefficients to be able to vary between -∞ and ∞.
+This is still a problem for our linear model. We'd like our 'regression'
+coefficients to be able to vary between -∞ and ∞.
 
-To avoid this restriction, we can take the *logarithm* of the odds --- sometimes called the *logit*.
+To avoid this restriction, we can take the _logarithm_ of the odds --- sometimes
+called the _logit_.
 
-The figure below shows the transformation of probabilities between 0 and 1 to the log-odds scale. The logit has two nice properties:
+The figure below shows the transformation of probabilities between 0 and 1 to
+the log-odds scale. The logit has two nice properties:
 
+1.  It converts odds of less than one to negative numbers, because the _log_ of
+    a number between 0 and 1 is always negative[^1].
 
-1.  It converts odds of less than one to negative numbers,
-    because the *log* of a number between 0 and 1 is always
-    negative[^1].
-
-2.  It flattens the rather square curve for the odds in the
-    figure above, and
-
+2.  It flattens the rather square curve for the odds in the figure above, and
 
 ```{r, echo=F, fig.cap="Probabilities converted to the logit (log-odds) scale. Notice how the slope implies that as probabilities approach 0 or 1 then the logit will get very large."}
 df <- data.frame(
@@ -130,84 +144,85 @@ logit <- function(x) log(x/(1-x))
 
 ggplot(df, aes(x)) +
   stat_function(fun = logit, colour = "red") +
-  ylab("Log odds (logit)") + 
-  xlab("Probability") + 
+  ylab("Log odds (logit)") +
+  xlab("Probability") +
   coord_flip()
 ```
 
-
-
-
 #### Reversing the process to interpret the model {-}
 
-As we've seen here, the logit or logistic link function transforms  probabilities between 0/1 to the range from negative to positive infinity. 
+As we've seen here, the logit or logistic link function transforms probabilities
+between 0/1 to the range from negative to positive infinity.
 
-This means logistic regression coefficients are in log-odds units, so we must interpret logistic regression coefficients differently from regular regression with continuous outcomes.
+This means logistic regression coefficients are in log-odds units, so we must
+interpret logistic regression coefficients differently from regular regression
+with continuous outcomes.
 
-- In linear regression, the coefficient is the change the outcome for a unit change in the predictor.
+-   In linear regression, the coefficient is the change the outcome for a unit
+    change in the predictor.
 
-- For logistic regression, the coefficient is the *change in the log odds of the outcome being 1, for a unit change in the predictor*.
+-   For logistic regression, the coefficient is the _change in the log odds of
+    the outcome being 1, for a unit change in the predictor_.
 
-If we want to interpret logistic regression in terms of probabilities, we need to undo the transformation described in steps 1 and 2. To do this:
+If we want to interpret logistic regression in terms of probabilities, we need
+to undo the transformation described in steps 1 and 2. To do this:
 
-1. We take the exponent of the logit to 'undo' the log transformation. This gives us the *predicted odds*.
+1. We take the exponent of the logit to 'undo' the log transformation. This
+   gives us the _predicted odds_.
 
 2. We convert the odds back to probability.
 
-
 #### A hypothetical example {-}
 
-Imagine if we have a model to predict whether a person has any children. The outcome is binary, so equals 1 if the person has any children, and 0 otherwise.
+Imagine if we have a model to predict whether a person has any children. The
+outcome is binary, so equals 1 if the person has any children, and 0 otherwise.
 
-The model has an intercept and one predictor, $age$ in years.  We estimate two parameters: $\beta_0 = 0.5$ and $\beta_{1} = 0.02$.
+The model has an intercept and one predictor, $age$ in years. We estimate two
+parameters: $\beta_0 = 0.5$ and $\beta_{1} = 0.02$.
 
-The outcome ($y$) of the linear model is the log-odds. 
+The outcome ($y$) of the linear model is the log-odds.
 
 The model prediction is: $\hat{y} = \beta_0 + \beta_1\textrm{age}$
 
-So, for someone aged 30: 
+So, for someone aged 30:
 
-- the predicted log-odds = $0.5 + 0.02 * 30 = 1.1$
-- the predicted odds = $exp(1.1) = 3.004$
-- the predicted probability = $3.004 / (1 + 3.004) = .75$
+-   the predicted log-odds = $0.5 + 0.02 * 30 = 1.1$
+-   the predicted odds = $exp(1.1) = 3.004$
+-   the predicted probability = $3.004 / (1 + 3.004) = .75$
 
-For someone aged 40: 
+For someone aged 40:
 
-- the predicted log-odds = $0.5 + 0.02 * 40 = 1.3$
-- the predicted odds = $exp(1.3) = 3.669$
-- the predicted probability = $3.669 / (1 + 3.669) = .78$
-
-
+-   the predicted log-odds = $0.5 + 0.02 * 40 = 1.3$
+-   the predicted odds = $exp(1.3) = 3.669$
+-   the predicted probability = $3.669 / (1 + 3.669) = .78$
 
 #### Regression coefficients are odds ratios
 
-One final twist: In the section above we said that in logistic regression the coefficients are the *change in the log odds of the outcome being 1, for a unit change in the predictor*.
+One final twist: In the section above we said that in logistic regression the
+coefficients are the _change in the log odds of the outcome being 1, for a unit
+change in the predictor_.
 
-Without going into too much detail, one nice fact about logs is that if you take the log of two numbers and subtract them to take the difference, then this is equal to dividing the same numbers and then taking the log of the result:
-
+Without going into too much detail, one nice fact about logs is that if you take
+the log of two numbers and subtract them to take the difference, then this is
+equal to dividing the same numbers and then taking the log of the result:
 
 ```{r}
-A <- log(1)-log(5) 
+A <- log(1)-log(5)
 B  <- log(1/5)
 
 
-# we have to use rounding because of limitations in 
+# we have to use rounding because of limitations in
 # the precision of R's arithmetic, but A and B are equal
 round(A, 10) == round(B, 10)
 ```
 
-This means that *change in the log-odds* is the same as the *ratio of the odds*
+This means that _change in the log-odds_ is the same as the _ratio of the odds_
 
-So, once we undo the log transformation by taking the exponent of the coefficient, we are left with the *odds ratio*.
-
-
+So, once we undo the log transformation by taking the exponent of the
+coefficient, we are left with the _odds ratio_.
 
 You can now jump back to [running logistic regression](#logistic-regression).
 
-
-<!-- 
+<!--
 
 http://www.theanalysisfactor.com/why-use-odds-ratios/ -->
-
-
-

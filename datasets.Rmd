@@ -1,13 +1,11 @@
 ---
 title: 'Datasets and dataframes'
 ---
-  
 
 ```{r, include=FALSE}
 library(tidyverse)
 library(tufte)
 ```
-
 
 # (PART) Data {- #data}
 
@@ -15,17 +13,22 @@ library(tufte)
 
 A `dataframe` is a container for our data.
 
-It's much like a spreadsheet, but with some constraints applied.  'Constraints' might sound bad, but they're actually helpful: they make dataframes more structured and predictable to work with. The main constraints are that:
+It's much like a spreadsheet, but with some constraints applied. 'Constraints'
+might sound bad, but they're actually helpful: they make dataframes more
+structured and predictable to work with. The main constraints are that:
 
-- Each column is a [vector](#vectors-and-lists), and so can [only store one type of data](#vectors-and-lists).
+-   Each column is a [vector](#vectors-and-lists), and so can
+    [only store one type of data](#vectors-and-lists).
 
-- Every column has to be the same length (although missing values are allowed).
+-   Every column has to be the same length (although missing values are
+    allowed).
 
-- Each column must have a name.
+-   Each column must have a name.
 
-
-A `tibble` is an updated version of a dataframe with a whimsical name, which is part of the `tidyverse`. It's almost exactly the same a dataframe, but with some rough edges smoothed off — it's safe and preferred to use `tibble` in place of `data.frame`.
-
+A `tibble` is an updated version of a dataframe with a whimsical name, which is
+part of the `tidyverse`. It's almost exactly the same a dataframe, but with some
+rough edges smoothed off — it's safe and preferred to use `tibble` in place of
+`data.frame`.
 
 You can make a simple tibble or dataframe like this:
 
@@ -33,8 +36,8 @@ You can make a simple tibble or dataframe like this:
 data.frame(myvariable = 1:10)
 ```
 
-Using a tible is much the same, but allows some extra tricks like creating one variable from another:
-
+Using a tible is much the same, but allows some extra tricks like creating one
+variable from another:
 
 ```{r}
 tibble(
@@ -45,13 +48,12 @@ tibble(
 )
 ```
 
-
-
-
 #### Using 'built in' data {- #built-in-data}
 
-
-The quickest way to see a dataframe in action is to use one that is built in to R ([this page](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html) lists all the built-in datasets). For example:
+The quickest way to see a dataframe in action is to use one that is built in to
+R
+([this page](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html)
+lists all the built-in datasets). For example:
 
 ```{r}
 head(airquality)
@@ -63,57 +65,60 @@ Or
 head(mtcars)
 ```
 
-In both these examples the datasets are already loaded and available to be used with the `head()` function.
-
-
+In both these examples the datasets are already loaded and available to be used
+with the `head()` function.
 
 :::{.exercise}
 
-To find a list of all the built in datasets you can type `help(datasets)` into the console, or see <https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html>. 
+To find a list of all the built in datasets you can type `help(datasets)` into
+the console, or see
+<https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html>.
 
-Familiarise yourself with some of the other included datasets, e.g. `datasets::attitude`. Watch out that not all the included datasets are *dataframes*: Some are just vectors of observations (e.g. the `airmiles` data) and some are 'time-series', (e.g. the `co2` data)
+Familiarise yourself with some of the other included datasets, e.g.
+`datasets::attitude`. Watch out that not all the included datasets are
+_dataframes_: Some are just vectors of observations (e.g. the `airmiles` data)
+and some are 'time-series', (e.g. the `co2` data)
 
 :::
 
-
-
-
-
 #### Looking at dataframes {- #looking-at-data}
 
-As we've already seen, using `print(df)` within an RMarkdown document creates a nice interactive table you can use to look at your data.
+As we've already seen, using `print(df)` within an RMarkdown document creates a
+nice interactive table you can use to look at your data.
 
-However you won't want to print your whole data file when you Knit your RMarkdown document. The `head` function can be useful if you just want to show a few rows:
+However you won't want to print your whole data file when you Knit your
+RMarkdown document. The `head` function can be useful if you just want to show a
+few rows:
 
 ```{r}
 head(mtcars)
 ```
 
-
-Or we can use `glimpse()` function from the `dplyr::` package (see the [section on loading and using packages](#packages)) for a different view of the first few rows of the `mtcars` data. This flips the dataframe so the variables are listed in the first column of the output:
+Or we can use `glimpse()` function from the `dplyr::` package (see the
+[section on loading and using packages](#packages)) for a different view of the
+first few rows of the `mtcars` data. This flips the dataframe so the variables
+are listed in the first column of the output:
 
 ```{r}
 glimpse(mtcars)
 ```
 
-
-You can use the `pander()` function (from the `pander::` package) to format tables nicely, for when you Knit a document to HTML, Word or PDF. For example:
+You can use the `pander()` function (from the `pander::` package) to format
+tables nicely, for when you Knit a document to HTML, Word or PDF. For example:
 
 ```{r}
 library(pander)
 pander(head(airquality), caption="Tables always need a caption.")
 ```
 
-
-See the section on [sharing and publishing](#sharing-and-publication) for more ways to format and present tables.
-
+See the section on [sharing and publishing](#sharing-and-publication) for more
+ways to format and present tables.
 
 Other useful functions for looking at and exploring datasets include:
 
-- `summary(df)`
-- `psych::describe(df)`
-- `skimr::skim(df)`
-
+-   `summary(df)`
+-   `psych::describe(df)`
+-   `skimr::skim(df)`
 
 :::{.exercise}
 
@@ -121,9 +126,8 @@ Experiment with a few of the functions for viewing/summarising dataframes.
 
 :::
 
-
-
-There are also some helpful plotting functions which accept a whole dataframe as their input:
+There are also some helpful plotting functions which accept a whole dataframe as
+their input:
 
 ```{r, fig.cap="Box plot of all variables in a dataset."}
 boxplot(airquality)
@@ -133,7 +137,5 @@ boxplot(airquality)
 psych::cor.plot(airquality)
 ```
 
-These plots might not be worth including in a final write-up, but are very useful when exploring your data.
-
-
-
+These plots might not be worth including in a final write-up, but are very
+useful when exploring your data.

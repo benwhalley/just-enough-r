@@ -2,7 +2,6 @@
 title: 'Covariance modelling'
 ---
 
-
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE, message=F, warning = F)
 library(tufte)
@@ -14,12 +13,11 @@ source('diagram.R')
 
 ```
 
-
 ## Covariance modelling {- #covariance-modelling}
 
-<!-- 
+<!--
 Differences CFA EFA
-https://jonathantemplin.com/files/multivariate/mv11icpsr/mv11icpsr_lecture12.pdf 
+https://jonathantemplin.com/files/multivariate/mv11icpsr/mv11icpsr_lecture12.pdf
 
 Writing up CFA: http://www.understandingdata.net/2017/03/22/cfa-in-lavaan/#writeup
 
@@ -28,46 +26,42 @@ Nice reference guide: https://www.scribd.com/document/238478414/Beaujean-Latent-
 
 -->
 
->The CFA examples here were adapted from a guide originally produced by Jon May
+> The CFA examples here were adapted from a guide originally produced by Jon May
 
+This section covers path analysis (path models), confirmatory factor analysis
+(CFA) and structural equation modelling (SEM). You are encouraged to work
+through the path models and CFA sections, and especially the material on
+assessing model fit, before tacking SEM.
 
-
-This section covers path analysis (path models), confirmatory factor analysis (CFA) and structural equation modelling (SEM). You are encouraged to work through the path models and CFA sections, and especially the material on assessing model fit, before tacking SEM.
-
-
-Before you start this either section make sure you have the `lavaan` package installed (see [installing packages](#packages)).
+Before you start this either section make sure you have the `lavaan` package
+installed (see [installing packages](#packages)).
 
 ```{r, eval=F}
 install.packages(lavaan)
 ```
 
-And load the package to [make all the functions available with minimal typing](#package-namespacing):
+And load the package to
+[make all the functions available with minimal typing](#package-namespacing):
 
 ```{r, message=F}
 library(lavaan)
 ```
 
-
-
-
-
 ## Path models {- #path-models}
 
+Path models are an extension of linear regression, but where multiple observed
+variables can be considered as 'outcomes'.
 
-Path models are an extension of linear regression, but where 
-multiple observed variables can be considered as 'outcomes'.
+Because the terminology of outcomes v.s. predictors breaks down when variables
+can be both outcomes and predictors at the same time, it's normal to distinguish
+instead between:
 
-Because the terminology of outcomes v.s. predictors breaks down when variables can be both outcomes and predictors at the same time, it's normal to distinguish instead between:
+-   _Exogenous_ variables: those which are not predicted by any other
 
-- *Exogenous* variables: those which are not predicted by any other
-
-- *Endogenous* variables: variables which do have predictors, and may or may not predict other variales
-
-
-
+-   _Endogenous_ variables: variables which do have predictors, and may or may
+    not predict other variales
 
 ### Defining a model {-}
-
 
 ```{r, include=F, echo=F}
 # setup some data for the example below
@@ -80,11 +74,14 @@ mediation.df <- lavaan::simulateData(mm, sample.nobs=200,
                                      seed="1234")
 ```
 
+To define a path model, `lavaan` requires that you specify the relationships
+between variables in a text format. A full
+[guide to this lavaan model syntax](http://lavaan.ugent.be/tutorial/syntax1.html)
+is available on the project website.
 
-To define a path model, `lavaan` requires that you specify the relationships between variables in a text format.  A full [guide to this lavaan model syntax](http://lavaan.ugent.be/tutorial/syntax1.html) is available on the project website. 
-
-For path models the format is very simple, and resembles a series of linear models, written over several lines, but in text rather than as a [model formula](#formulae):
-
+For path models the format is very simple, and resembles a series of linear
+models, written over several lines, but in text rather than as a
+[model formula](#formulae):
 
 ```{r}
 # define the model over multiple lines for clarity
@@ -94,109 +91,151 @@ mediation.model <- "
 "
 ```
 
+In this case the `~` symbols just means 'regressed on' or 'is predicted by'. The
+model in the example above defines that our outcome `y` is predicted by both `x`
+and `m`, and that `x` also predicts `m`. You might recognise this as a
+[mediation model](#mediation).
 
-In this case the `~` symbols just means 'regressed on' or 'is predicted by'. The model in the example above defines that our outcome `y` is predicted by both `x` and `m`, and that `x` also predicts `m`. You might recognise this as a [mediation model](#mediation).
+[Make sure you include the closing quote symbol, and also be careful when
+running the code which defines the model. RStdudio can sometimes get confused
+and only run some of the lines, leading to errors. The simplest solution is to
+select the entire block explicitly and run that.]{.tip}
 
-[Make sure you include the closing quote symbol, and also be careful when running the code which defines the model. RStdudio can sometimes get confused and only run some of the lines, leading to errors. The simplest solution is to select the entire block explicitly and run that.]{.tip}
-
-
-To fit the model we pass the model specification and the data to the `sem()` function:
+To fit the model we pass the model specification and the data to the `sem()`
+function:
 
 ```{r}
 mediation.fit <- sem(mediation.model, data=mediation.df)
 ```
 
-As we did for [linear regression models](#linear-models-simple), we have saved the model fit object into a variable, here named `mediation.fit`. 
+As we did for [linear regression models](#linear-models-simple), we have saved
+the model fit object into a variable, here named `mediation.fit`.
 
-To display the model results we can use `summary()`. The key section of the output to check is the table listed 'Regressions', which lists the regression parameters for the predictors for each of the endogenous variables.
+To display the model results we can use `summary()`. The key section of the
+output to check is the table listed 'Regressions', which lists the regression
+parameters for the predictors for each of the endogenous variables.
 
 ```{r}
 summary(mediation.fit)
 ```
 
-
-
-From this table we can see that both `x` and `m` are significant predictors of `y`, and that `x` also predicts `m`. This implie that mediation is taking place, but [see the mediation chapter](#mediation) for details of testing indirect effects in `lavaan`.
-
-
+From this table we can see that both `x` and `m` are significant predictors of
+`y`, and that `x` also predicts `m`. This implie that mediation is taking place,
+but [see the mediation chapter](#mediation) for details of testing indirect
+effects in `lavaan`.
 
 #### Where's the intercept? {-}
 
-Path analysis is part of the set of techniques often termed 'covariance modelling'. As the name implies the primary focus here is the relationships between variables, and less so the mean-structure of the variables. In fact, by default the software first creates the covariance matrix of all the variables in the model, and the fit is based only on these values, plus the sample sizes (in early SEM software you typically had to provide the covariance matrix directly, rather than working with the raw data).
+Path analysis is part of the set of techniques often termed 'covariance
+modelling'. As the name implies the primary focus here is the relationships
+between variables, and less so the mean-structure of the variables. In fact, by
+default the software first creates the covariance matrix of all the variables in
+the model, and the fit is based only on these values, plus the sample sizes (in
+early SEM software you typically had to provide the covariance matrix directly,
+rather than working with the raw data).
 
-Nonetheless, because path analysis is an extension of regression techniques it is possible to request that intercepts are included in the model, and means estimated, by adding `meanstructure=TRUE` to the `sem()` function ([see the `lavaan` manual for details](http://lavaan.ugent.be/tutorial/means.html)). 
+Nonetheless, because path analysis is an extension of regression techniques it
+is possible to request that intercepts are included in the model, and means
+estimated, by adding `meanstructure=TRUE` to the `sem()` function
+([see the `lavaan` manual for details](http://lavaan.ugent.be/tutorial/means.html)).
 
-In the output below we now also see a table labelled 'Intercepts' which gives the mean values of each variable *when it's predictors are zero* (just like in linear regression):
+In the output below we now also see a table labelled 'Intercepts' which gives
+the mean values of each variable _when it's predictors are zero_ (just like in
+linear regression):
 
 ```{r}
-mediation.fit.means <- sem(mediation.model, 
+mediation.fit.means <- sem(mediation.model,
                            meanstructure=T,
                            data=mediation.df)
 
 summary(mediation.fit.means)
 ```
 
-
-
 #### Tables of model coefficients {-}
 
-If you want to present results from these models in table format, the `parameterEstimates()` function is useful to extract the relevant numbers as a dataframe. We can then manipulate and present this table as we would any other dataframe. 
+If you want to present results from these models in table format, the
+`parameterEstimates()` function is useful to extract the relevant numbers as a
+dataframe. We can then manipulate and present this table as we would any other
+dataframe.
 
-In the example below we extract the parameter estimates, select only the regression parameters (`~`) and remove some of the columns to make the final output easier to read:
+In the example below we extract the parameter estimates, select only the
+regression parameters (`~`) and remove some of the columns to make the final
+output easier to read:
 
 ```{r}
-parameterEstimates(mediation.fit.means) %>% 
-  as_tibble() %>% 
-  filter(op=="~") %>% 
-  mutate(Term=paste(lhs, op, rhs)) %>% 
-  rename(estimate=est, 
-         p=pvalue) %>% 
-  select(Term, estimate, z, p) %>% 
+parameterEstimates(mediation.fit.means) %>%
+  as_tibble() %>%
+  filter(op=="~") %>%
+  mutate(Term=paste(lhs, op, rhs)) %>%
+  rename(estimate=est,
+         p=pvalue) %>%
+  select(Term, estimate, z, p) %>%
   pander::pander(caption="Regression parameters from `mediation.fit`")
 
 ```
 
-
-
 #### Diagrams {-}
 
-Because describing path, CFA and SEM models in words can be tedious and difficult for readers to follow it is conventional to include a diagram of (at least) your final model, and perhaps also initial or alternative models.
+Because describing path, CFA and SEM models in words can be tedious and
+difficult for readers to follow it is conventional to include a diagram of (at
+least) your final model, and perhaps also initial or alternative models.
 
-The `semPlot::` package makes this relatively easy: passing a fitted `lavaan` model to the `semPaths()` function produces a line drawing, and gives the option to overlap raw or standardised coefficients over this drawing:
+The `semPlot::` package makes this relatively easy: passing a fitted `lavaan`
+model to the `semPaths()` function produces a line drawing, and gives the option
+to overlap raw or standardised coefficients over this drawing:
 
 ```{r}
 # unfortunately semPaths plots very small by default, so we set
 # some extra parameters to increase the size to make it readable
 semPlot::semPaths(mediation.fit, "par",
              sizeMan = 15, sizeInt = 15, sizeLat = 15,
-             edge.label.cex=1.5, 
+             edge.label.cex=1.5,
              fade=FALSE)
 ```
 
-
-
-
-
 ## Confirmatory factor analysis (CFA) {- #cfa}
 
+In psychology we make observations, but we're often interested in _hypothetical
+constructs_, e.g. Anxiety, working memory. We can't measure these directly, but
+we assume that our observations are related to these constructs in some way.
 
-In psychology we make observations, but we're often interested in *hypothetical constructs*, e.g. Anxiety, working memory. We can't measure these directly, but we assume that our observations are related to these constructs in some way.
+Regression and related techniques (e.g. Anova) require us to assume that our
+outcome variables are good indices of these underlying constructs, and that our
+predictor variables are measured without any error.
 
-Regression and related techniques (e.g. Anova) require us to assume that our outcome variables are good indices of these underlying constructs, and that our predictor variables are measured without any error.
+When outcomes are straightforward observed variables like plant yield or weight
+reduction, and where predictors are experimentally manipulated, then these
+assumptions are reasonable. However in many applied fields these are not
+reasonable assumptions to make: For example, to assume that depression or
+working memory are indexed in a straightforward way by responses to a depression
+questionnaire or performance on a laboratory task is naive. Likewise, we should
+not assume that a construct like working memory is measured without error when
+we use it to predict some other outcome (e.g. exam success).
 
-When outcomes are straightforward observed variables like plant yield or weight reduction, and where predictors are experimentally manipulated, then these assumptions are reasonable. However in many applied fields these are not reasonable assumptions to make: For example, to assume that depression or working memory are indexed in a straightforward way by responses to a depression questionnaire or performance on a laboratory task is naive. Likewise, we should not assume that a construct like working memory is measured without error when we use it to predict some other outcome (e.g. exam success).
-
-Confirmatory factor analysis (CFA), structural equation models (SEM) and related techniques are designed to help researchers deal with these *imperfections in our observations*, and can help to explore the correspondence between our measures and the underlying constructs of interest.
+Confirmatory factor analysis (CFA), structural equation models (SEM) and related
+techniques are designed to help researchers deal with these _imperfections in
+our observations_, and can help to explore the correspondence between our
+measures and the underlying constructs of interest.
 
 ### Latent variables {- #latent-variables}
 
-CFA and SEM introduce the concept of a *latent variable* which is either the cause of, or formed by, the observations we make.
-Latent variables aren't quite the same thing as hypothetical constructs, but they are similar many in some ways. The original distinction between hypothetical constructs and intervening variables is quite interesting in this context, see Maccorquodale and Meehl (1948).
+CFA and SEM introduce the concept of a _latent variable_ which is either the
+cause of, or formed by, the observations we make. Latent variables aren't quite
+the same thing as hypothetical constructs, but they are similar many in some
+ways. The original distinction between hypothetical constructs and intervening
+variables is quite interesting in this context, see Maccorquodale and Meehl
+(1948).
 
-To achieve this, CFA requires that researchers to make predictions about the patterns of correlations they will observe in their observations, based on the process they think is generating the data. CFA provides a mechanism to test and compare different hypotheses about these patterns, which correspond to different models of the underlying process which generates the data.
+To achieve this, CFA requires that researchers to make predictions about the
+patterns of correlations they will observe in their observations, based on the
+process they think is generating the data. CFA provides a mechanism to test and
+compare different hypotheses about these patterns, which correspond to different
+models of the underlying process which generates the data.
 
-It is conventional within CFA and SEM to extend the graphical models used to describe path models (see above). In these diagrams, square edged boxes represent observed variables, and rounded or oval boxes represent latent variables, sometimes called factors:
-
+It is conventional within CFA and SEM to extend the graphical models used to
+describe path models (see above). In these diagrams, square edged boxes
+represent observed variables, and rounded or oval boxes represent latent
+variables, sometimes called factors:
 
 ```{r, fig.cap="Example of a CFA model, including one latent variable or factor, and 4 observed variables."}
 knit_gv('
@@ -211,10 +250,8 @@ d[shape=rectangle]
 ')
 ```
 
-
-
-CFA models can also include multiple latent variables, and estimate the covariance between them:
-
+CFA models can also include multiple latent variables, and estimate the
+covariance between them:
 
 ```{r}
 knit_gv('
@@ -236,10 +273,8 @@ f [shape=box]
 ')
 ```
 
-
-
-SEM models extend this by allowing regression paths between latent variables and observed or other latent variables:
-
+SEM models extend this by allowing regression paths between latent variables and
+observed or other latent variables:
 
 ```{r}
 knit_gv('
@@ -272,29 +307,31 @@ Affective -> Stress
         ')
 ```
 
-
-
-
-For now though, we will focus on building a CFA model. Later we'll show how a *well fitting* measurement model can be used to test hypotheses related to the structural relations between latent variables.
-
-
+For now though, we will focus on building a CFA model. Later we'll show how a
+_well fitting_ measurement model can be used to test hypotheses related to the
+structural relations between latent variables.
 
 ### Defining a CFA model {-}
 
-First, open some data and check that all looks well. This is a classic CFA example — see the help file for more info.
+First, open some data and check that all looks well. This is a classic CFA
+example — see the help file for more info.
 
 ```{r}
 hz <- lavaan::HolzingerSwineford1939
 hz %>% glimpse()
 ```
 
+As noted above, to define models in `lavaan` you must specify the relationships
+between variables in a text format. A full
+[guide to this lavaan model syntax is available on the project website](http://lavaan.ugent.be/tutorial/syntax1.html).
 
-As noted above, to define models in `lavaan` you must specify the relationships between variables in a text format.  A full [guide to this lavaan model syntax is available on the project website](http://lavaan.ugent.be/tutorial/syntax1.html).
+For CFA models, like path models, the format is fairly simple, and resembles a
+series of linear models, written over several lines.
 
-For CFA models, like path models, the format is fairly simple, and resembles a series of linear models, written over several lines.
-
-In the model below there are three latent variables, `visual`, `writing` and `maths`. The latent variable names are followed by =~ which means 'is manifested by', and then the observed variables, our measures for the latent variable, are listed, separated by the `+` symbol.
-
+In the model below there are three latent variables, `visual`, `writing` and
+`maths`. The latent variable names are followed by =~ which means 'is manifested
+by', and then the observed variables, our measures for the latent variable, are
+listed, separated by the `+` symbol.
 
 ```{r}
 hz.model <- '
@@ -303,44 +340,50 @@ writing =~ x4 + x5 + x6
 maths =~ x7 + x8 + x9'
 ```
 
-Note that we have saved our model specification/syntax in a variable named `hz.model`.
+Note that we have saved our model specification/syntax in a variable named
+`hz.model`.
 
-The other special symbols in the `lavaan` syntax which can be used for CFA models are:
+The other special symbols in the `lavaan` syntax which can be used for CFA
+models are:
 
-- `a ~~ b`, which represents a *covariance*.
+-   `a ~~ b`, which represents a _covariance_.
 
-- `a ~~ a`, which is a *variance* (you can think of this as the covariance of a variable with itself)
+-   `a ~~ a`, which is a _variance_ (you can think of this as the covariance of
+    a variable with itself)
 
-
-To run the analysis we again pass the model specification and the data to the `cfa()` function:
+To run the analysis we again pass the model specification and the data to the
+`cfa()` function:
 
 ```{r}
 hz.fit <- cfa(hz.model, data=hz)
 summary(hz.fit, standardized=TRUE)
 ```
 
-
 #### `lavaan` CFA Model output {-}
 
 The output has three parts:
 
-1. Parameter estimates. The values in the first column are the standardised weights from the observed variables to the latent factors.
+1. Parameter estimates. The values in the first column are the standardised
+   weights from the observed variables to the latent factors.
 
-2. Factor covariances. The values in the first column are the covariances between the latent factors.
+2. Factor covariances. The values in the first column are the covariances
+   between the latent factors.
 
-3. Error variances. The values in the first column are the estimates of each observed variable’s error variance.
-
-
+3. Error variances. The values in the first column are the estimates of each
+   observed variable’s error variance.
 
 #### Plotting models {-}
 
-As before, we can use the `semPaths()` function to visualise the model. This is an important step because it helps explain the model to others, and also gives you an opportunity to check you have specified your model correctly.
+As before, we can use the `semPaths()` function to visualise the model. This is
+an important step because it helps explain the model to others, and also gives
+you an opportunity to check you have specified your model correctly.
 
 ```{r}
 semPlot::semPaths(hz.fit)
 ```
 
-And for 'final' models we might want to overplot model parameter estimates (in this case, standardised):
+And for 'final' models we might want to overplot model parameter estimates (in
+this case, standardised):
 
 ```{r}
 # std refers to standardised estimates. "par" would plot
@@ -348,27 +391,34 @@ And for 'final' models we might want to overplot model parameter estimates (in t
 semPlot::semPaths(hz.fit, "std")
 ```
 
-
-
-
 ## CFA model fit {- #model-fit}
 
-To examine the model fit we use `fitmeasures()` and pass a list of the names of the fit indices we would like calculated:
+To examine the model fit we use `fitmeasures()` and pass a list of the names of
+the fit indices we would like calculated:
 
 ```{r}
 library(lavaan)
-fitmeasures(hz.fit, c('cfi', 'rmsea', 'rmsea.ci.upper', 'bic')) 
+fitmeasures(hz.fit, c('cfi', 'rmsea', 'rmsea.ci.upper', 'bic'))
 ```
 
-This looks OK, but the fit indices indicate the model could be improved. In particular the RMSEA figure is above 0.05. See the [notes on goodness of fit statistics](#gof) for more detail.
-
-
-
+This looks OK, but the fit indices indicate the model could be improved. In
+particular the RMSEA figure is above 0.05. See the
+[notes on goodness of fit statistics](#gof) for more detail.
 
 ## Modification indices {-}
 
-Modification indices help us answer 'what if?' questions about whether freeing parameter constraints or adding paths to our models would help improve it. The  modification index is the $\chi^2$ value, with 1 degree of freedom, by which model fit would improve if a particular path was added or constraint freed. Values bigger than `r round(qchisq(.95, 1), 2)` indicate that the model would be 'improved', and the p value for the added parameter would be < .05, and values larger `r round(qchisq(.999, 1), 2)` than indicte the parameter would have a p vaue < .001. *This does not mean that all parameters which appear in the MI table should be added*, but it can be an aid to improving the model, in combination with domain or theoretical knowledge. The rule of thumb is to add parameters only when they 'make sense' substantively. See the notes on [model improvements](#model-improvement) for more guidance.
-
+Modification indices help us answer 'what if?' questions about whether freeing
+parameter constraints or adding paths to our models would help improve it. The
+modification index is the $\chi^2$ value, with 1 degree of freedom, by which
+model fit would improve if a particular path was added or constraint freed.
+Values bigger than `r round(qchisq(.95, 1), 2)` indicate that the model would be
+'improved', and the p value for the added parameter would be < .05, and values
+larger `r round(qchisq(.999, 1), 2)` than indicte the parameter would have a p
+vaue < .001. _This does not mean that all parameters which appear in the MI
+table should be added_, but it can be an aid to improving the model, in
+combination with domain or theoretical knowledge. The rule of thumb is to add
+parameters only when they 'make sense' substantively. See the notes on
+[model improvements](#model-improvement) for more guidance.
 
 To examine the modification indices we type:
 
@@ -376,30 +426,35 @@ To examine the modification indices we type:
 modificationindices(hz.fit)
 ```
 
+But because this function produces a very long table of output, it can be
+helpful to sort and filter the rows to show only those model modifications which
+might be of interest to us.
 
-But because this function produces a very long table of output, it can be helpful to sort and filter the rows to show only those model modifications which might be of interest to us. 
+The command below converts the output of `modificationindices()` to a dataframe.
+It then:
 
-The command below converts the output of `modificationindices()` to a dataframe. It then:
-
-- Sorts the rows by the `mi` column, which represents the change in model $\chi^2$ we see if the path was included (see [sorting](#sorting))
-- Filters the results to show only those with $\chi^2$ change > 10
-- Selects only the `lhs`, `op`, `rhs`, `mi`, and `epc` columns.
+-   Sorts the rows by the `mi` column, which represents the change in model
+    $\chi^2$ we see if the path was included (see [sorting](#sorting))
+-   Filters the results to show only those with $\chi^2$ change > 10
+-   Selects only the `lhs`, `op`, `rhs`, `mi`, and `epc` columns.
 
 ```{r}
-modificationindices(hz.fit) %>% 
-  as_data_frame() %>% 
-  arrange(-mi) %>% 
-  filter(mi > 11) %>% 
-  select(lhs, op, rhs, mi, epc) %>% 
+modificationindices(hz.fit) %>%
+  as_data_frame() %>%
+  arrange(-mi) %>%
+  filter(mi > 11) %>%
+  select(lhs, op, rhs, mi, epc) %>%
   pander(caption="Largest MI values for hz.fit")
 ```
 
+The `lhs` (left hand side, or outcome), `rhs` (right hand side, or predictor)
+and `op` (operation) columns specify what modification should be made.
 
-The `lhs` (left hand side, or outcome), `rhs` (right hand side, or predictor) and `op` (operation) columns specify what modification should be made. 
+Paths linking latent variables to the observed variables which index them have
+`=~` in the 'op' column.
 
-Paths linking latent variables to the observed variables which index them have `=~` in the 'op' column. 
-
-Error covariances for observed variables have `~~` as the op. These symbols match the symbols used to describe a path in the lavaan model syntax.
+Error covariances for observed variables have `~~` as the op. These symbols
+match the symbols used to describe a path in the lavaan model syntax.
 
 If we add the largest MI path to our model it will look like this:
 
@@ -414,31 +469,26 @@ hz.fit.2 <- cfa(hz.model.2, data=hz)
 fitmeasures(hz.fit.2, c('cfi', 'rmsea', 'rmsea.ci.upper', 'bic'))
 ```
 
-RMSEA has improved somewhat, but we'd probably want to investigate this model further, and make additional improvements to it (although see the notes on [model improvements](#model-improvement))
-
-
-
-
-
-
-
-
-
-
+RMSEA has improved somewhat, but we'd probably want to investigate this model
+further, and make additional improvements to it (although see the notes on
+[model improvements](#model-improvement))
 
 ## Model modification and improvement {- #model-improvement}
 
-Modification indices are a way of improving your model by identifying
-parameters which, if included, would improve model fit (or constraints removed). However, remember that:
+Modification indices are a way of improving your model by identifying parameters
+which, if included, would improve model fit (or constraints removed). However,
+remember that:
 
 -   Use of modification indices should be informed by theory
 -   MI may suggest paths which don't make substantive sense
 
-[It's very important to avoid adding paths in a completely data-driven way because this is almost certain to lead to [over-fitting](#over-fitting).]{.tip}
+[It's very important to avoid adding paths in a completely data-driven way
+because this is almost certain to lead to [over-fitting](#over-fitting).]{.tip}
 
-
-It's also important to work one step at a time, because the table of modification indices may change as you add additional paths. For example, the second largest MI value may change once you add the path with the largest MI to the model.
-
+It's also important to work one step at a time, because the table of
+modification indices may change as you add additional paths. For example, the
+second largest MI value may change once you add the path with the largest MI to
+the model.
 
 The basic steps to follow are:
 
@@ -450,106 +500,133 @@ The basic steps to follow are:
 6.  If this parameter makes theoretical sense, relax the constraint
 7.  Re-run the model and return to step 4
 
-
-
-
-
 ## Structural eqution modelling (SEM) {- #sem}
 
-Combining Path models and CFA to create structural equation models (SEM) allows researchers to combine allow for measurment imperfection whilst also (attempting to) infer information about causation. 
+Combining Path models and CFA to create structural equation models (SEM) allows
+researchers to combine allow for measurment imperfection whilst also (attempting
+to) infer information about causation.
 
-SEM involves adding paths to CFA models which are, like predictors in standard regression models, are assumed to be causal in nature; i.e. rather than variables $x$ and $y$ simply covarying with one another, we are prepared to make the assumption that $x$ causes $y$.
+SEM involves adding paths to CFA models which are, like predictors in standard
+regression models, are assumed to be causal in nature; i.e. rather than
+variables $x$ and $y$ simply covarying with one another, we are prepared to make
+the assumption that $x$ causes $y$.
 
-It's worth pointing out though, right from the offset,  that *causal relationships drawn from SEM models always dependent on assumptions we are prepared to make when setting up our model*. There is nothing magical in the technique that makes allows us to infer causality from non-experimental data (although note SEM can be used for some experimental analyses). 
+It's worth pointing out though, right from the offset, that _causal
+relationships drawn from SEM models always dependent on assumptions we are
+prepared to make when setting up our model_. There is nothing magical in the
+technique that makes allows us to infer causality from non-experimental data
+(although note SEM can be used for some experimental analyses).
 
-It is only be our substantive knowledge of the domain that makes any kind of causal inference reasonable, and when using SEM the onus is always *on us* to check our assumptions, provide sensitivity analyses which test alternative causal models, and interpret observational data cautiously.
+It is only be our substantive knowledge of the domain that makes any kind of
+causal inference reasonable, and when using SEM the onus is always _on us_ to
+check our assumptions, provide sensitivity analyses which test alternative
+causal models, and interpret observational data cautiously.
 
-[Note, there are techniques which use SEM as a means to make stronger kinds of causal statements, for example [instrumental variable analysis](https://en.wikipedia.org/wiki/Instrumental_variable), but even here, inferring causality still requires that we make strong assumptions about the process which generated our data.
+[Note, there are techniques which use SEM as a means to make stronger kinds of
+causal statements, for example
+[instrumental variable analysis](https://en.wikipedia.org/wiki/Instrumental_variable),
+but even here, inferring causality still requires that we make strong
+assumptions about the process which generated our data.
 
-Nonetheless, with these caveats in mind, SEM can be a useful technique to quantify relationships been observed variables where we have measurement error, and especially where we have a theoretical model linking these observations.
-
-
+Nonetheless, with these caveats in mind, SEM can be a useful technique to
+quantify relationships been observed variables where we have measurement error,
+and especially where we have a theoretical model linking these observations.
 
 #### Steps to running an SEM {-}
 
-1. Identify and test the fit of a *measurement model*. This is a CFA model which includes all of your observed variables, arranged in relation to the latent variables you think generated the data, and where covariances between all these latent variables are included. This step many include [many rounds of model fitting and modification](#model-improvement).
+1. Identify and test the fit of a _measurement model_. This is a CFA model which
+   includes all of your observed variables, arranged in relation to the latent
+   variables you think generated the data, and where covariances between all
+   these latent variables are included. This step many include
+   [many rounds of model fitting and modification](#model-improvement).
 
-2. Ensure your measurement model [fits the data adequately](#gof) before continuing. Test alternative or simplified measurements models and report where these perform well (e.g. are close in fit to your desired model). SEM models that are based on a poorly fitting measurment model will produce parameter estimates that are imprecise, unstable or both, and you should not proceed unless an adequately fitting measrement model is founds ([see this nice discussion, which includes relevant references](https://stats.stackexchange.com/a/143465/)).
+2. Ensure your measurement model [fits the data adequately](#gof) before
+   continuing. Test alternative or simplified measurements models and report
+   where these perform well (e.g. are close in fit to your desired model). SEM
+   models that are based on a poorly fitting measurment model will produce
+   parameter estimates that are imprecise, unstable or both, and you should not
+   proceed unless an adequately fitting measrement model is founds
+   ([see this nice discussion, which includes relevant references](https://stats.stackexchange.com/a/143465/)).
 
-3. Convert your measurement model by removing covariances between latent variables where necessary and including new structural paths. Test model fit, and interpret the paths of interest. Avoid making changes to the measurement part of the model at this stage. Where the model is complex consider adjusting *p* values to allow for multuple comparisons (if using NHST).
+3. Convert your measurement model by removing covariances between latent
+   variables where necessary and including new structural paths. Test model fit,
+   and interpret the paths of interest. Avoid making changes to the measurement
+   part of the model at this stage. Where the model is complex consider
+   adjusting _p_ values to allow for multuple comparisons (if using NHST).
 
-4. Test alternative models (e.g. with paths removed or reversed). Report where alternatives also fit the data.
+4. Test alternative models (e.g. with paths removed or reversed). Report where
+   alternatives also fit the data.
 
-5. In writing up, provide sufficient detail for other researchers to replicate your analyses, and to follow the logic of the ammendments you make. Ideally share your raw data, but at a minimum share the covariance matrix. Report GOF statistics, and follow published reporting guidelines for SEM [@schreiber_reporting_2006]. Always include a diagram of your final model (at the very least).
-
-
-
+5. In writing up, provide sufficient detail for other researchers to replicate
+   your analyses, and to follow the logic of the ammendments you make. Ideally
+   share your raw data, but at a minimum share the covariance matrix. Report GOF
+   statistics, and follow published reporting guidelines for SEM
+   [@schreiber_reporting_2006]. Always include a diagram of your final model (at
+   the very least).
 
 #### A worked example: Building from a measurement model to SEM {-}
 
 ```{r, include=F, echo=F}
 library(lavaan)
-model.tpb.gen <- ' 
+model.tpb.gen <- '
   AT =~ a1 + .7*a2+ .5*a3+ .4*sn1 + .4*sn2
   SN =~ sn1 + .45*sn2 + .5*sn3 + .6*sn4 + .5*a1
   PBC =~ pc1 + .8*pc2 + .7*pc3 + .4*pc4 + .6*pc5
   intention ~ .3*AT + .3*SN + .5*PBC
-  exercise ~ 1*intention + .6*PBC 
+  exercise ~ 1*intention + .6*PBC
   AT ~~ .3 * SN
-'  
+'
 set.seed(1234)
 drop5pc <- function(l) ifelse(rbinom(length(l), 1, .05)==1, NA,  l)
 
-tpb.df <- simulateData(model.tpb.gen, sample.nobs=487,  debug=F) %>% 
-  rowwise() %>% 
+tpb.df <- simulateData(model.tpb.gen, sample.nobs=487,  debug=F) %>%
+  rowwise() %>%
   mutate(
     exercise = max(0, round(exercise * 10 + 80)),
     intention = max(0, intention * 2 + 10)
-  ) %>% 
+  ) %>%
   mutate_each(funs(drop5pc), a1, a2, sn4, intention)
 
 ```
 
-
-
-Imagine we have some data from a study that aimed to test the theory of planned behaviour. Researcher measured exercise and intentions, along with multiple measures of attitudes, social norms and percieved behavioural control. 
+Imagine we have some data from a study that aimed to test the theory of planned
+behaviour. Researcher measured exercise and intentions, along with multiple
+measures of attitudes, social norms and percieved behavioural control.
 
 ```{r}
 tpb.df %>% psych::describe(fast=T)
 ```
 
-
-There were some missing data, but nothing to suggest a systematic pattern. For the moment we continue with standard methods:
-
+There were some missing data, but nothing to suggest a systematic pattern. For
+the moment we continue with standard methods:
 
 ```{r}
-mice::md.pattern(tpb.df) 
+mice::md.pattern(tpb.df)
 ```
 
+We start by fitting a measurement model. The model sytax includes lines with
 
+-   `=~` separatatig left and right hand side (to define the latent variables)
+-   `~~` to specify latent covariances
 
-We start by fitting a measurement model. The model sytax includes lines with 
-
-- `=~` separatatig left and right hand side (to define the latent variables)
-- `~~` to specify latent covariances
-
-We are not including `exercise` and `intention` yet because these are observed variables only (we don't have multiple measurements for them) and so they don't need to be in the measurement model:
+We are not including `exercise` and `intention` yet because these are observed
+variables only (we don't have multiple measurements for them) and so they don't
+need to be in the measurement model:
 
 ```{r}
-mes.mod <- ' 
+mes.mod <- '
   # the "measurement" part, defining the latent variables
   AT =~ a1 + a2 + a3 + sn1
   SN =~ sn1 + sn2 + sn3 + sn4
   PBC =~ pc1 + pc2 + pc3 + pc4 + pc5
-  
+
   # note that lavaan automatically includes latent covariances
   # but we can add here anyway to be explicit
   AT ~~ SN
   SN ~~ PBC
   AT ~~ PBC
-'  
+'
 ```
-
 
 We can fit this model to the data like so:
 
@@ -558,36 +635,37 @@ mes.mod.fit <- cfa(mes.mod, data=tpb.df)
 summary(mes.mod.fit)
 ```
 
-
-And we can assess model fit using `fitmeasures`. Here we select a subset of the possible fit indices to keep the output manageable.
+And we can assess model fit using `fitmeasures`. Here we select a subset of the
+possible fit indices to keep the output manageable.
 
 ```{r}
 useful.fit.measures <- c('chisq', 'rmsea', 'cfi', 'aic')
 fitmeasures(mes.mod.fit, useful.fit.measures)
 ```
 
-
-This model looks pretty good (see the [guide to fit indices](#common-fit-indices)), but still check [modification indices to identify improvements](#model-improvement). If they made theoretical sense we might choose to add paths:
+This model looks pretty good (see the
+[guide to fit indices](#common-fit-indices)), but still check
+[modification indices to identify improvements](#model-improvement). If they
+made theoretical sense we might choose to add paths:
 
 ```{r}
-modificationindices(mes.mod.fit) %>% 
-  as_data_frame() %>% 
-  filter(mi>4) %>% 
-  arrange(-mi) %>% 
+modificationindices(mes.mod.fit) %>%
+  as_data_frame() %>%
+  filter(mi>4) %>%
+  arrange(-mi) %>%
   pander(caption="Modification indices for the measurement model")
 ```
 
-
-However, in this case unless we had substantive reasons to add the paths, it would probably be reasonable to continue with the original model.
-
-
+However, in this case unless we had substantive reasons to add the paths, it
+would probably be reasonable to continue with the original model.
 
 ##### The measurement model fits, so proceed to SEM {-}
 
-Our SEM model adapts the CFA (measurement model), including additional observed variables (e.g. intention and exercise) and any relevant structural paths:
+Our SEM model adapts the CFA (measurement model), including additional observed
+variables (e.g. intention and exercise) and any relevant structural paths:
 
 ```{r}
-sem.mod <- ' 
+sem.mod <- '
   # this section identical to measurement model
   AT =~ a1 + a2 + a3 + sn1
   SN =~ sn1 + sn2 + sn3 + sn4
@@ -599,9 +677,8 @@ sem.mod <- '
 '
 ```
 
-
-We can fit it as before, but now using the `sem()` function rather than the `cfa()` function:
-
+We can fit it as before, but now using the `sem()` function rather than the
+`cfa()` function:
 
 ```{r}
 sem.mod.fit <- sem(sem.mod, data=tpb.df)
@@ -613,119 +690,126 @@ The first thing we do is check the model fit:
 fitmeasures(sem.mod.fit, useful.fit.measures)
 ```
 
-
 RMSEA is slightly higher than we like, so we can check the modification indices:
 
-
 ```{r}
-sem.mi <- modificationindices(sem.mod.fit) %>% 
-  as_data_frame() %>% 
+sem.mi <- modificationindices(sem.mod.fit) %>%
+  as_data_frame() %>%
   arrange(-mi)
 
-sem.mi %>% 
-  head(6) %>% 
+sem.mi %>%
+  head(6) %>%
   pander(caption="Top 6 modification indices for the SEM model")
 ```
 
-
-Interestingly, this model suggests two additional paths involving `exercise` and the `PBC` latent:
+Interestingly, this model suggests two additional paths involving `exercise` and
+the `PBC` latent:
 
 ```{r}
-sem.mi %>% 
-  filter(lhs %in% c('exercise', 'PBC') & rhs %in% c('exercise', 'PBC')) %>% 
+sem.mi %>%
+  filter(lhs %in% c('exercise', 'PBC') & rhs %in% c('exercise', 'PBC')) %>%
   pander()
 ```
 
+Of these suggested paths, the largest MI is for the one which says PBC is
+predicted by exercise. However, the model would also be improved by allowing PBC
+to predict exercise. Which should we add?
 
-Of these suggested paths, the largest MI is for the one which says PBC is predicted by exercise. However, the model would also be improved by allowing PBC to predict exercise.
-Which should we add?
+**_The answer will depend on both previous theory and knowledge of the data._**
 
+If it were the case that exercise was measured at a later time point than PBC.
+In this case the decision is reasonably clear, because the temporal sequencing
+of observations would determine the most likely path. These data were collected
+contemporaneously, however, and so we can't use our _design_ to differentiate
+the causal possibilities.
 
-***The answer will depend on both previous theory and knowledge of the data.***
+Another consideration would be that, by adding a path from exercise to PBC we
+would make the [model non-recursive](#identification-recursion), and likely
+[non-identified](#identification).
 
-If it were the case that exercise was measured at a later time point than PBC. In this case the decision is reasonably clear, because the temporal sequencing of observations would determine the most likely path. These data were collected contemporaneously, however, and so we can't use our *design* to differentiate the causal possibilities.
+A theorist might also argue that because previous studies, and the theory of
+planned behaviour itself, predict that PBC may exert a direct influence on
+behaviour, we should add the path with the smaller MI (so allow PBC to predict
+exercise).
 
-Another consideration would be that, by adding a path from exercise to PBC we would make the [model non-recursive](#identification-recursion), and likely [non-identified](#identification).
-
-A theorist might also argue that because previous studies, and the theory of planned behaviour itself, predict that PBC may exert a direct influence on behaviour, we should add the path with the smaller MI (so allow PBC to predict exercise).
-
-In this case, the best course of action would probably be to report the theoretically implied model, but also test alternative models in which causal relations between the variables are reversed or otherwise altered (along with measures of fit and key parameter estimates). The discussion of your paper would then make the case for your preferred account, but make clear that the data were (most likely) unable to provide a persuasive case either way, and that alternative explanations cannot be ruled out.
-
-
-
+In this case, the best course of action would probably be to report the
+theoretically implied model, but also test alternative models in which causal
+relations between the variables are reversed or otherwise altered (along with
+measures of fit and key parameter estimates). The discussion of your paper would
+then make the case for your preferred account, but make clear that the data were
+(most likely) unable to provide a persuasive case either way, and that
+alternative explanations cannot be ruled out.
 
 ##### Interpreting and presenting key parameters {-}
 
-One of the best ways to present estimates from your final model is in a diagram, because this is intutive and provides a simple way for readers to comprehend the paths implied by your model.
+One of the best ways to present estimates from your final model is in a diagram,
+because this is intutive and provides a simple way for readers to comprehend the
+paths implied by your model.
 
-We can automatically generate a plot from a fitted model using `semPaths()`. Here, the `what='std'` is requesting standardised parameter estimates be shown. Adding `residuals=F` hides variances of observed and latent variables, which are not of interest here. The line thicknesses are scaled to represent the size parameter itself:
+We can automatically generate a plot from a fitted model using `semPaths()`.
+Here, the `what='std'` is requesting standardised parameter estimates be shown.
+Adding `residuals=F` hides variances of observed and latent variables, which are
+not of interest here. The line thicknesses are scaled to represent the size
+parameter itself:
 
 ```{r}
 semPlot::semPaths(sem.mod.fit, what='std', residuals=F)
 ```
 
-
 For more information on reporting SEM however, see @schreiber2006reporting.
-
-
-
-
-
-
-
 
 ## 'Identification' in CFA and SEM {- #identification}
 
-Identification refers to the idea that a model is 'estimable', or more specifically whether there is a single best solution for the parameters specified in the model. An analogy would be the 'line of best fit' in regression - if we could draw two lines that fit the data equally well then our method doesn't enable us to choose between these possibilities, and is essentially meaningless (or uninterpretable, anyway).
+Identification refers to the idea that a model is 'estimable', or more
+specifically whether there is a single best solution for the parameters
+specified in the model. An analogy would be the 'line of best fit' in
+regression - if we could draw two lines that fit the data equally well then our
+method doesn't enable us to choose between these possibilities, and is
+essentially meaningless (or uninterpretable, anyway).
 
-This is a complex topic, but David Kenny has
-an excellent page here which covers identification in lots of detail:
-<http://davidakenny.net/cm/identify.htm>. Some of the key ideas to
-takeaway are:
+This is a complex topic, but David Kenny has an excellent page here which covers
+identification in lots of detail: <http://davidakenny.net/cm/identify.htm>. Some
+of the key ideas to takeaway are:
 
-####  {- #identification-recursion}
+#### {- #identification-recursion}
 
--   Feedback loops and other non-recursive models are likely to cause
-    problems without special attention.
-    
--   Latent variables need a scale. To do this either fix their variance,
-    or fix a factor loading to 1.
-    
--   You need 'enough data'. Normally this will be at least 3 measured
-    variables per latent. Sometimes 2 is enough, provided the errors of
-    these variables are uncorrelated, but you may struggle to fit models
-    because of 'empirical under-identification'^[Note, indicators themselves 
-    should be correlated with one another in a bivariate correlation matrix. 
-    It's only the errors which should be uncorrelated.]
-    
--   If a model is non-identified, it may either i) fail to run or,
-    worse, ii) produce spurious results.
+-   Feedback loops and other non-recursive models are likely to cause problems
+    without special attention.
 
+-   Latent variables need a scale. To do this either fix their variance, or fix
+    a factor loading to 1.
+
+-   You need 'enough data'. Normally this will be at least 3 measured variables
+    per latent. Sometimes 2 is enough, provided the errors of these variables
+    are uncorrelated, but you may struggle to fit models because of 'empirical
+    under-identification'^[Note, indicators themselves should be correlated with
+    one another in a bivariate correlation matrix. It's only the errors which
+    should be uncorrelated.]
+
+-   If a model is non-identified, it may either i) fail to run or, worse, ii)
+    produce spurious results.
 
 ##### Rule B {-}
 
-For structural models, 'Rule B' also applies when deciding when a model is identified: No more than one of the following statements should be true about variables or latents in your
-model:
+For structural models, 'Rule B' also applies when deciding when a model is
+identified: No more than one of the following statements should be true about
+variables or latents in your model:
 
 -   X directly causes Y
 -   Y directly causes X
 -   X and Y have a correlated disturbance
 -   X and Y are correlated exogenous variables
 
-But see <http://davidakenny.net/cm/identify_formal.htm#RuleB> for a proper explanation.
-
-
-
-
-
-
+But see <http://davidakenny.net/cm/identify_formal.htm#RuleB> for a proper
+explanation.
 
 <!-- TODO improve with notes from 557 -->
 
-
 ## Missing data {- #cfa-sem-missing-data}
 
-If you have missing data  you can use the `missing = "ML"` argument to ask lavaan to estimate the 'full information maximum likelihood' (see <http://lavaan.ugent.be/tutorial/est.html>).
+If you have missing data you can use the `missing = "ML"` argument to ask lavaan
+to estimate the 'full information maximum likelihood' (see
+<http://lavaan.ugent.be/tutorial/est.html>).
 
 ```{r}
 # fit ML model including mean structure to make comparable with FIML fit below
@@ -736,129 +820,117 @@ sem.mod.fit <- sem(sem.mod, data=tpb.df, meanstructure=TRUE)
 sem.mod.fit.fiml <- sem(sem.mod, data=tpb.df, missing="ML")
 ```
 
-
-It doesn't look like the parameter estimates change much. To compare them explicitly we can extract the relevant coefficients from each (they don't look all that different):
+It doesn't look like the parameter estimates change much. To compare them
+explicitly we can extract the relevant coefficients from each (they don't look
+all that different):
 
 ```{r}
-bind_cols(parameterestimates(sem.mod.fit) %>% 
-    select(lhs, op, rhs, est, pvalue) %>% 
-    rename(ml=est, ml.p = pvalue), 
-  parameterestimates(sem.mod.fit.fiml) %>% 
-    transmute(fiml=est, fiml.p = pvalue)) %>% 
+bind_cols(parameterestimates(sem.mod.fit) %>%
+    select(lhs, op, rhs, est, pvalue) %>%
+    rename(ml=est, ml.p = pvalue),
+  parameterestimates(sem.mod.fit.fiml) %>%
+    transmute(fiml=est, fiml.p = pvalue)) %>%
   # select only the regression paths
-  filter(op=="~") %>% 
-  as_huxtable() %>% 
-  set_caption("Comparison of ML and MLM parameter estimates.") %>% 
+  filter(op=="~") %>%
+  as_huxtable() %>%
+  set_caption("Comparison of ML and MLM parameter estimates.") %>%
   print_md()
 ```
 
-
-
-
-
-
-
-
-
-
 ## Goodness of fit statistics in CFA {- #gof}
 
+It's worth noting that many 'goodness of fit' statistics are misnamed and are in
+fact indexing 'badness of fit'. This applies to RMSEA, $\chi^2$, BIC, AIC and
+others.
 
-It's worth noting that many 'goodness of fit' statistics are misnamed and are in fact indexing 'badness of fit'. This applies to RMSEA, $\chi^2$, BIC, AIC and others.
+However all of these indices are trying to solve similar problems in subtly
+different ways. The problem is that we would like a model which:
 
-However all of these indices are trying to solve similar problems in subtly different ways. The problem is that we would like a model which:
+-   Fits the data we have _and also_
+-   Predicts new data
 
-- Fits the data we have *and also*
-- Predicts new data 
-
-You might think that these goals would be aligned and that a model which fits the data we have would also be good ad predicting new data, but this isn't the case. In fact, if we [overfit](#over-fitting) our current data we won't be able to predict new observations very accurately.
-
+You might think that these goals would be aligned and that a model which fits
+the data we have would also be good ad predicting new data, but this isn't the
+case. In fact, if we [overfit](#over-fitting) our current data we won't be able
+to predict new observations very accurately.
 
 #### How fit indices work {-}
 
-There is a tradeoff involved to avoid over-fitting the data, and most fit indices attempt to:
+There is a tradeoff involved to avoid over-fitting the data, and most fit
+indices attempt to:
 
-- Quantify how well the model fits the current data but
-- Penalise models which use many parameters (i.e. those in danger of overfitting)
+-   Quantify how well the model fits the current data but
+-   Penalise models which use many parameters (i.e. those in danger of
+    overfitting)
 
-Each formula for a goodness of fit statistic represents a different tradeoff between these goals.
-
-
+Each formula for a goodness of fit statistic represents a different tradeoff
+between these goals.
 
 #### {- .tip }
 
-Model fit statistics are useful but can be misleading and misused. See David Kenny's page on model fit for more details:
-<http://davidakenny.net/cm/fit.htm>
-
-
+Model fit statistics are useful but can be misleading and misused. See David
+Kenny's page on model fit for more details: <http://davidakenny.net/cm/fit.htm>
 
 #### {- #common-fit-indices}
-Below are some of the most useful and commonly reported GOF statistics for CFA and SEM models:
 
-
+Below are some of the most useful and commonly reported GOF statistics for CFA
+and SEM models:
 
 #### Root Mean Square Error of Approximation (RMSEA) {-}
 
-MacCallum, Browne and Sugawara (1996) have used 0.01, 0.05, and 0.08 to indicate excellent, good, and mediocre fit, respectively.
+MacCallum, Browne and Sugawara (1996) have used 0.01, 0.05, and 0.08 to indicate
+excellent, good, and mediocre fit, respectively.
 
-RMSEA &lt; .05 often used as a cutoff for a reasonably fitting model, athough others suggest .1.
+RMSEA &lt; .05 often used as a cutoff for a reasonably fitting model, athough
+others suggest .1.
 
-RMSEA is also used to calculate the 'probability of a close fit' or pclose statistic — this is the probability that the RMSEA is under 0.05.
-
-
-
+RMSEA is also used to calculate the 'probability of a close fit' or pclose
+statistic — this is the probability that the RMSEA is under 0.05.
 
 #### Comparative fit index (CFI) {-}
 
-CFI (and the related TLI) assesses the relative improvement in fit of your model compared with the baseline model.
+CFI (and the related TLI) assesses the relative improvement in fit of your model
+compared with the baseline model.
 
 CFI ranges between 0 and 1.
 
-The conventional (rule of thumb) threshold for a good fitting model is for CFI to be > .9
-
-
-
-
+The conventional (rule of thumb) threshold for a good fitting model is for CFI
+to be > .9
 
 #### Akaike Information Criterion (AIC) and Bayesian Information Criterion (BIC) {-}
 
-The AIC and BIC are measures of comparative fit, so can be used when models are non-nested (and therefore otherwise not easily comparable).
+The AIC and BIC are measures of comparative fit, so can be used when models are
+non-nested (and therefore otherwise not easily comparable).
 
-AIC is particularly attractive because it corresponds to a measure of *predictive* accuracy. That is, selecting the model with the smallest AIC is one way of asking: "which model is most likely to accurately predict new data?"
-
-
-
+AIC is particularly attractive because it corresponds to a measure of
+_predictive_ accuracy. That is, selecting the model with the smallest AIC is one
+way of asking: "which model is most likely to accurately predict new data?"
 
 #### Factors which can influence fit statistics {-}
 
 All of the following can influence or bias fit statistics:
 
--   Number of variables (although note RMSEA trends to reduce with more parameters included, but other fit statistics will increase).
--   Model complexity (different statistics reward parsimony to
-    different degrees).
--   Sample size (varies by statistic: some increase and others decrease
-    with sample size).
+-   Number of variables (although note RMSEA trends to reduce with more
+    parameters included, but other fit statistics will increase).
+-   Model complexity (different statistics reward parsimony to different
+    degrees).
+-   Sample size (varies by statistic: some increase and others decrease with
+    sample size).
 -   Non-normality of outcome data will (tend to) worsen fit.
-
-
-
 
 #### Which statistics should you report? {-}
 
-When reporting absolute model fit, RMSEA and CFI are the most widely
-reported, and are probably sufficient.
+When reporting absolute model fit, RMSEA and CFI are the most widely reported,
+and are probably sufficient.
 
 However, you should almost never just report a single model, and so:
 
-- When comparing nested models you should report the $\chi^2$ `lrtest`.
-- When comparing non-nested models you should also report differences in BIC and AIC.
-
-
+-   When comparing nested models you should report the $\chi^2$ `lrtest`.
+-   When comparing non-nested models you should also report differences in BIC
+    and AIC.
 
 #### Further reading {-}
 
-This set of slides on model fit provides all fo the formulae and an
-explanation for many different fit indices:
+This set of slides on model fit provides all fo the formulae and an explanation
+for many different fit indices:
 <http://www.psych.umass.edu/uploads/people/79/Fit_Indices.pdf>
-
-

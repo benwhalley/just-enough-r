@@ -2,56 +2,62 @@
 title: 'Fixed and Random effects'
 ---
 
-
-
 # Fixed and random effects {#fixed-or-random}
 
-As noted by @gelman_analysis_2005 (and [summarised here](http://andrewgelman.com/2005/01/25/why_i_dont_use/)), the terms 'fixed' and 'random' are used very loosely in both the methodological and applied literature. Gelman identifies 5 different senses in which the distinction between fixed and random effects can be drawn, and this inconsistency can lead to confusion.
-
+As noted by @gelman_analysis_2005 (and
+[summarised here](http://andrewgelman.com/2005/01/25/why_i_dont_use/)), the
+terms 'fixed' and 'random' are used very loosely in both the methodological and
+applied literature. Gelman identifies 5 different senses in which the
+distinction between fixed and random effects can be drawn, and this
+inconsistency can lead to confusion.
 
 #### {- #random-slopes-intercepts}
 
-For practical purposes, if you think that you have some form of grouping in your data and that it makes sense to think of variation in outcomes between these groups then you should probably include it as a random intercept in your model. 
+For practical purposes, if you think that you have some form of grouping in your
+data and that it makes sense to think of variation in outcomes between these
+groups then you should probably include it as a random intercept in your model.
 
-Likewise, if you include a predictor in your model and it is reasonable to think that the effect of this predictor would vary between groups in the data (e.g., between individuals) then you should include a random slope effect for this variable.
-
-
+Likewise, if you include a predictor in your model and it is reasonable to think
+that the effect of this predictor would vary between groups in the data (e.g.,
+between individuals) then you should include a random slope effect for this
+variable.
 
 ##### Random intercepts {- #random-intercepts}
 
 Some example of groupings which should be included as random intercepts:
 
-- Participants
-- Classes and Schools
-- Therapists or treatment providers (e.g. in cluster randomised trial)
-- Stimuli or 'items'
-
+-   Participants
+-   Classes and Schools
+-   Therapists or treatment providers (e.g. in cluster randomised trial)
+-   Stimuli or 'items'
 
 Groupings which are not clear cut in either direction:
 
-- A smallish number of experimental conditions which could be thought of as 'sampled' from a larger population of possible groupings [@gelman2005analysis]. An example here would be groups which recieve different doses of a drug.
-
+-   A smallish number of experimental conditions which could be thought of as
+    'sampled' from a larger population of possible groupings
+    [@gelman2005analysis]. An example here would be groups which recieve
+    different doses of a drug.
 
 Examples of groupings which are probably not best handled as random intercepts:
 
-- Experimental conditions especially where the conditions are qualitatively different (although the interventions might warrant inclusion as a random slope, see below).
-
-
-
+-   Experimental conditions especially where the conditions are qualitatively
+    different (although the interventions might warrant inclusion as a random
+    slope, see below).
 
 ##### Random slopes {- #random-slopes}
 
-Where the effect of a variable might vary between individuals (or other grouping) should be considered for inclusion as a random slopes. Some examples might include:
+Where the effect of a variable might vary between individuals (or other
+grouping) should be considered for inclusion as a random slopes. Some examples
+might include:
 
-- Time (or some function of time)
-- An experimental intervention (e.g. in a factorial design)
+-   Time (or some function of time)
+-   An experimental intervention (e.g. in a factorial design)
 
+For a more in depth discussion of when to include a random slope
+[this presentation and transcript from the Bristol CMM is excellent](http://www.bristol.ac.uk/cmm/learning/videos/random-slopes.html).
 
-For a more in depth discussion of when to include a random slope [this presentation and transcript from the Bristol CMM is excellent](http://www.bristol.ac.uk/cmm/learning/videos/random-slopes.html).
-
-
-<!-- 
- ADD THIS? 
+<!--
+ ADD THIS?
 
 https://dynamicecology.wordpress.com/2015/11/04/is-it-a-fixed-or-random-effect/
 

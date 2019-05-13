@@ -10,50 +10,48 @@ panderOptions('round', 3)
 panderOptions('keep.trailing.zeros', TRUE)
 ```
 
-
-
 ## t-tests {- #t-tests}
-
 
 ### Visualising your data first {-}
 
-Before you run any tests it's worth plotting your data. 
+Before you run any tests it's worth plotting your data.
 
-Assuming you have a continuous outcome and categorical (binary) predictor (here we use a subset of the built in `chickwts` data), a boxplot can work well:
+Assuming you have a continuous outcome and categorical (binary) predictor (here
+we use a subset of the built in `chickwts` data), a boxplot can work well:
 
 ```{r boxplot, fig.cap="The box in a boxplot indictes the IQR; the whisker indicates the min/max values or 1.5 \times the IQR, whichever is the smaller. If there are outliers beyond 1.5 \times the IQR then they are shown as points."}
-chicks.eating.beans <- chickwts %>% 
+chicks.eating.beans <- chickwts %>%
   filter(feed %in% c("horsebean", "soybean"))
 
-chicks.eating.beans %>% 
+chicks.eating.beans %>%
   ggplot(aes(feed, weight)) +
   geom_boxplot()
 ```
 
-Or a violin or bottle plot, which shows the distributions within each group and makes it relatively easy to check some of the main assumptions of the test:
+Or a violin or bottle plot, which shows the distributions within each group and
+makes it relatively easy to check some of the main assumptions of the test:
 
 ```{r}
-chicks.eating.beans %>% 
+chicks.eating.beans %>%
   ggplot(aes(feed, weight)) +
   geom_violin()
 ```
 
-
-Layering boxes and bottles can work well too because it combines information about the distribution with key statistics like the median and IQR, and also because it scales reasonably well to multiple categories:
-
+Layering boxes and bottles can work well too because it combines information
+about the distribution with key statistics like the median and IQR, and also
+because it scales reasonably well to multiple categories:
 
 ```{r}
-chickwts %>% 
+chickwts %>%
   ggplot(aes(feed, weight)) +
   geom_violin() +
   geom_boxplot(width=.1)
 ```
 
-
 <!-- Bottleplots are just density plots, turned 90 degrees. Density plots might be more familiar to some, but it's hard to show more than 2 or 3 categories:
 
 ```{r}
-chicks.eating.beans %>% 
+chicks.eating.beans %>%
   ggplot(aes(weight, fill=feed)) +
   geom_density(alpha=.5)
 ```
@@ -63,35 +61,33 @@ chicks.eating.beans %>%
 And density plots are just smoothed histograms (which you might prefer if you're a fan of 80's computer games):
 
 ```{r}
-chicks.eating.beans %>% 
+chicks.eating.beans %>%
   ggplot(aes(weight)) +
-  geom_histogram(bins=7) + 
+  geom_histogram(bins=7) +
   facet_grid(feed ~ .)
 ```
  -->
 
-
 ### Running a t-test {-}
 
-Assuming you really do still want to run a null hypothesis test on one or two means, the `t.test()` function performs most common variants, illustrated below.
-
-
-
+Assuming you really do still want to run a null hypothesis test on one or two
+means, the `t.test()` function performs most common variants, illustrated below.
 
 ##### 2 independent groups {-}
 
-Assuming  your data are in long format:
+Assuming your data are in long format:
 
 ```{r}
 t.test(weight ~ feed, data=chicks.eating.beans)
 ```
 
-
-Or equivalently, if your [data are untidy](#tidying-data) and each group has it's own column (e.g. chicks eating soybeans in one column and those eating horsebeans in another):
+Or equivalently, if your [data are untidy](#tidying-data) and each group has
+it's own column (e.g. chicks eating soybeans in one column and those eating
+horsebeans in another):
 
 ```{r, include=F}
-untidy.chicks <- chicks.eating.beans %>% 
-  mutate(chick = row_number()) %>% 
+untidy.chicks <- chicks.eating.beans %>%
+  mutate(chick = row_number()) %>%
   reshape2::dcast(chick~feed, value.var = 'weight')
 ```
 
@@ -99,19 +95,19 @@ untidy.chicks <- chicks.eating.beans %>%
 with(untidy.chicks, t.test(horsebean, soybean))
 ```
 
-
 ##### Equal or unequal variances? {- #equal-variances .admonition}
 
-By default R assumes your groups have unequal variances and applies an appropriate correction (you will notice the output labelled 'Welch Two Sample t-test'). 
+By default R assumes your groups have unequal variances and applies an
+appropriate correction (you will notice the output labelled 'Welch Two Sample
+t-test').
 
-You can turn this correction off (for example, if you're trying to replcate an analysis done using the default settings in SPSS) but you probably do want to assume unequal variances [see @ruxton2006unequal].
-
-
-
+You can turn this correction off (for example, if you're trying to replcate an
+analysis done using the default settings in SPSS) but you probably do want to
+assume unequal variances [see @ruxton2006unequal].
 
 ##### Paired samples {-}
 
-If you have repeated measures on a sample you need a paired samples test. 
+If you have repeated measures on a sample you need a paired samples test.
 
 ```{r}
 # simulate paired samples in pre-post design
@@ -123,17 +119,15 @@ followup = baseline + rnorm(50, .5, 1)
 t.test(baseline, followup, paired=TRUE)
 ```
 
-
-Note that we could also ['melt' the data into long format](#wide-to-long) and use the `paired=TRUE` argument with a formula:
+Note that we could also ['melt' the data into long format](#wide-to-long) and
+use the `paired=TRUE` argument with a formula:
 
 ```{r}
-long.form.data <- data_frame(baseline=baseline, follow=followup) %>% 
+long.form.data <- data_frame(baseline=baseline, follow=followup) %>%
   reshape2::melt()
 
 with(long.form.data, t.test(value~variable, paired=TRUE))
 ```
-
-
 
 ##### One-sample test {-}
 
@@ -145,4 +139,3 @@ set.seed(1234)
 test.scores <- rnorm(50, 2.5, 1)
 t.test(test.scores, mu=2)
 ```
-

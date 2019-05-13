@@ -2,16 +2,12 @@
 title: 'Code hygiene'
 ---
 
-
 Sometimes code has a 'smell' about it...
-
-
 
 # Naming variables
 
-
 # Using commments
 
-You can include comments within your R code, to help others understand what your code does. Comments start with a `#` symbol and are not processed by R when the code runs.
-
-
+You can include comments within your R code, to help others understand what your
+code does. Comments start with a `#` symbol and are not processed by R when the
+code runs.

@@ -12,69 +12,74 @@ panderOptions('keep.trailing.zeros', TRUE)
 
 ```
 
-
 ## Correlations {- #correlations}
 
-The base R `cor()` function provides a simple way to get Pearson correlations, but to get a correlation matrix as you might expect from SPSS or Stata it's best to use the ``corr.test()`` function in the `psych` package.
+The base R `cor()` function provides a simple way to get Pearson correlations,
+but to get a correlation matrix as you might expect from SPSS or Stata it's best
+to use the `corr.test()` function in the `psych` package.
 
-Before you start though, plotting the correlations might be the best way of getting to grips with the patterns of relationship in your data.  A pairs plot is a nice way of doing this:
-
+Before you start though, plotting the correlations might be the best way of
+getting to grips with the patterns of relationship in your data. A pairs plot is
+a nice way of doing this:
 
 ```{r}
-airquality %>% 
-  select(-Month, -Day) %>% 
+airquality %>%
+  select(-Month, -Day) %>%
   pairs
 ```
 
-
-If we were satisfied the relationships were (reasonably) linear, we could also visualise correlations themselves with a 'corrgram', using the `corrgram` library:
-
+If we were satisfied the relationships were (reasonably) linear, we could also
+visualise correlations themselves with a 'corrgram', using the `corrgram`
+library:
 
 ```{r, fig.cap="A corrgram, showing pearson correlations (above the diagonal), variable distributions (on the diagonal) and ellipses and smoothed lines of best fit (below the diagnonal). Long, narrow ellipses denote large correlations; circular ellipses indicate small correlations."}
 library("corrgram")
-airquality %>% 
-  select(-Month, -Day) %>% 
+airquality %>%
+  select(-Month, -Day) %>%
   corrgram(lower.panel=corrgram::panel.ellipse,
          upper.panel=panel.cor,
          diag.panel=panel.density)
 
 ```
 
-
-The ggpairs function from the `GGally` package is also a nice way of plotting relationships between a combination of categorical and continuous data - it packs a lot of information into a limited space:
-
+The ggpairs function from the `GGally` package is also a nice way of plotting
+relationships between a combination of categorical and continuous data - it
+packs a lot of information into a limited space:
 
 ```{r, message=F}
-mtcars %>% 
-  mutate(cyl = factor(cyl)) %>% 
-  select(mpg, wt, drat, cyl) %>% 
+mtcars %>%
+  mutate(cyl = factor(cyl)) %>%
+  select(mpg, wt, drat, cyl) %>%
   GGally::ggpairs()
 
 ```
 
-
-
 ### Creating a correlation matrix {- #correlation-matrix}
 
-
-The `psych::corr.test()` function is a quick way to obtain a pairwise correlation matrix for an entire dataset, along with p values and confidence intervals which the base R `cor()` function will not provide:
-
+The `psych::corr.test()` function is a quick way to obtain a pairwise
+correlation matrix for an entire dataset, along with p values and confidence
+intervals which the base R `cor()` function will not provide:
 
 ```{r}
 mycorrelations <- psych::corr.test(airquality)
 mycorrelations
 ```
 
-
-One thing to be aware of is that by default `corr.test()` produces p values that are adjusted for multiple comparisons in the top right hand triangle (i.e. above the diagonal). If you want the uncorrected values use the values below the diagonal (or pass `adjust=FALSE` when calling the function). 
-
-
+One thing to be aware of is that by default `corr.test()` produces p values that
+are adjusted for multiple comparisons in the top right hand triangle (i.e. above
+the diagonal). If you want the uncorrected values use the values below the
+diagonal (or pass `adjust=FALSE` when calling the function).
 
 ### Working with correlation matrices {-}
 
-It's important to realise that, as with all R objects, we can work with correlation matrices to continue our data ananalyses.
+It's important to realise that, as with all R objects, we can work with
+correlation matrices to continue our data ananalyses.
 
-For example, as part of exploring your data, you might want to know whether correlations you observe in one sample are similar to those from another sample, when using the same questions. For example, let's say we ran a survey measuring variables from the theory of planned behaviour first in students, and later in older adults:
+For example, as part of exploring your data, you might want to know whether
+correlations you observe in one sample are similar to those from another sample,
+when using the same questions. For example, let's say we ran a survey measuring
+variables from the theory of planned behaviour first in students, and later in
+older adults:
 
 ```{r, include=F, echo=F, message=F}
 tbp <- 'behaviour ~ .5*intention + 0.8*control
@@ -95,84 +100,91 @@ corr.students <- cor(students)
 corr.public <- cor(public)
 ```
 
-
-And we could 'eyeball' both of these correlation matrices and try and spot patterns or differences between them, but this is quite hard:
+And we could 'eyeball' both of these correlation matrices and try and spot
+patterns or differences between them, but this is quite hard:
 
 ```{r}
-corr.students %>% 
+corr.students %>%
   pander()
 ```
 
 ```{r}
-corr.public %>% 
+corr.public %>%
   pander
 ```
 
-
-But we could also simply *subtract* one matrix from the other to show the difference directly:
+But we could also simply _subtract_ one matrix from the other to show the
+difference directly:
 
 ```{r}
-(corr.students - corr.public) %>% 
+(corr.students - corr.public) %>%
   pander()
 ```
 
-Now it's much more obvious that the behaviour/control correlation differs between the samples (it's higher in the students).
+Now it's much more obvious that the behaviour/control correlation differs
+between the samples (it's higher in the students).
 
-The point here is not that this is an analysis you are likely to actually report --- although you might find it useful when exploring the data and interpreting your findings. 
+The point here is not that this is an analysis you are likely to actually report
+--- although you might find it useful when exploring the data and interpreting
+your findings.
 
-But rather this show that a correlation matrix, in common with the results of all the statistical tests we run, are themselves *just data points*. We can do whatever we like with our results — storing them in data frames to display later, or process as we need.
+But rather this show that a correlation matrix, in common with the results of
+all the statistical tests we run, are themselves _just data points_. We can do
+whatever we like with our results — storing them in data frames to display
+later, or process as we need.
 
-In reality, if you wanted to test the difference in correlations (slopes) in two groups for one outcome variable you probably want to use [multiple regression](#regression), and if you wanted to test a complex model like the theory of planned behaviour, you might consider [CFA](#cfa) and/or [SEM](#sem)).
-
-
-
-
+In reality, if you wanted to test the difference in correlations (slopes) in two
+groups for one outcome variable you probably want to use
+[multiple regression](#regression), and if you wanted to test a complex model
+like the theory of planned behaviour, you might consider [CFA](#cfa) and/or
+[SEM](#sem)).
 
 ### Tables for publication {- #correlation-tables-for-publication}
 
-
 #### Using `apaTables` {-}
 
-If you want to produce nice correlation tables for publication the `apaTables` package might be useful. This block saves an APA formatted correlation table to an [external Word document like this](Table1_APA.doc).
+If you want to produce nice correlation tables for publication the `apaTables`
+package might be useful. This block saves an APA formatted correlation table to
+an [external Word document like this](Table1_APA.doc).
 
-Note though, that the APA table format does encourage 'star gazing' to some degree. Try to avoid interpreting correlation tables solely based on the significance (or not) of the *r* values. The `pairs` or `corrgram` plots shown above are a much better summary of the data, and are can be just as compact.
-
+Note though, that the APA table format does encourage 'star gazing' to some
+degree. Try to avoid interpreting correlation tables solely based on the
+significance (or not) of the _r_ values. The `pairs` or `corrgram` plots shown
+above are a much better summary of the data, and are can be just as compact.
 
 ```{r}
 library(apaTables)
 apa.cor.table(airquality, filename="Table1_APA.doc", show.conf.interval=F)
 ```
 
-
 #### By hand {-}
 
-If you're not bothered about strict APA format, you might still want to extract *r* and *p* values as dataframes which can then be saved to a csv and opened in Excel, or converted to a table  some other way. 
+If you're not bothered about strict APA format, you might still want to extract
+_r_ and _p_ values as dataframes which can then be saved to a csv and opened in
+Excel, or converted to a table some other way.
 
-You can do this by storing the `corr.test` output in a variable, and the accessing the `$r` and `$p` values within it. 
+You can do this by storing the `corr.test` output in a variable, and the
+accessing the `$r` and `$p` values within it.
 
 First, we create the `corr.test` object:
-
 
 ```{r}
 mycorrelations <- psych::corr.test(airquality)
 ```
 
-Then extract the *r* values as a table:
+Then extract the _r_ values as a table:
 
 ```{r}
-mycorrelations$r %>% 
+mycorrelations$r %>%
   pander()
 ```
-
-
 
 And we can also extract p values:
 
 ```{r}
-mycorrelations$p %>% 
+mycorrelations$p %>%
   pander()
 ```
-
 
 Saving as a .csv is the same as for other dataframes:
 
@@ -180,27 +192,20 @@ Saving as a .csv is the same as for other dataframes:
 write.csv(mycorrelations$r, file="airquality-r-values.csv")
 ```
 
-
-
 And can also access the CI for each pariwise correlation as a table:
 
 ```{r}
-mycorrelations$ci %>% 
-  head() %>% 
+mycorrelations$ci %>%
+  head() %>%
   pander(caption="First 6 rows of the table of CI's for the correlation matrix.")
 ```
 
-
-
 ### Other methods for correlation {- #correlation-methods}
 
-By default `corr.test` produces Pearson correlations, but You can pass the `method` argument `psych::corr.test()`:
+By default `corr.test` produces Pearson correlations, but You can pass the
+`method` argument `psych::corr.test()`:
 
 ```{r, echo=T, eval=F}
 psych::corr.test(airquality, method="spearman")
 psych::corr.test(airquality, method="kendall")
 ```
-
-
-
-

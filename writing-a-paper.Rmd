@@ -7,16 +7,12 @@ title: 'Writing a paper'
 
 ```
 
-
-
 # Writing a complete paper in RMarkdown {- #writing-paper}
-
 
 XXX This section to be a complete example and cover:
 
-- tidying up the mess and preprocessing raw-data
-- table 1 and reporting missing data
-- main analysis and figure 1
-- reporting models in the text
-- tabulating multiple models
-
+-   tidying up the mess and preprocessing raw-data
+-   table 1 and reporting missing data
+-   main analysis and figure 1
+-   reporting models in the text
+-   tabulating multiple models

@@ -10,224 +10,237 @@ library(broom)
 library(pander)
 ```
 
-
-
 # Models are data {#models-are-data-too}
-
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/WPc-VEqBPHI?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
 
+You might remember the episode of the Simpsons where Homer designs a car for
+'the average man'. It doesn't end well. Traditional statistics packages are a
+bit like Homer's car. They try to work for everyone, but in the process become
+bloated and difficult to use.
 
-You might remember the episode of the Simpsons where Homer designs a car for 'the average man'. It doesn't end well.  Traditional statistics packages are a bit like Homer's car. They try to work for everyone, but in the process become bloated and difficult to use.
+This is particularly true of the _output_ of software like SPSS, which by
+default produces multiple pages of 'results' for even relatively simple
+statistical models. However, the problem is not just that SPSS is incredibly
+verbose.
 
-This is particularly true of the *output* of software like SPSS, which by default produces multiple pages of 'results' for even relatively simple statistical models. However, the problem is not just that SPSS is incredibly verbose.
-
-The real issue is that SPSS views the results of a model as the *end* of a process, rather than the beginning. The model SPSS has is something like:
+The real issue is that SPSS views the results of a model as the _end_ of a
+process, rather than the beginning. The model SPSS has is something like:
 
 1. Collect data
 2. Choose analysis from GUI
 3. Select relevant figures from pages of output and publish.
 
+This is a problem because in real life it just doesn't work that way. In reality
+you will want to do things like:
 
-This is a problem because in real life it just doesn't work that way. In reality you will want to do things like:
+-   Run the same model for different outcomes
+-   Re-run similar models as part of a sensitivity analysis
+-   Compare different models and produce summaries of results from multiple
+    models
 
-- Run the same model for different outcomes
-- Re-run similar models as part of a sensitivity analysis
-- Compare different models and produce summaries of results from multiple models
+All of this requires an _iterative process_, in which you may want to compare
+and visualise the results of multiple models. In a traditional GUI, this quickly
+becomes overwhelming.
 
+However, if we treat modelling as a process which _both consumes and produces
+data_, R provides many helpful tools.
 
-All of this requires an *iterative process*, in which you may want to compare and visualise the results of multiple models. In a traditional GUI, this quickly becomes overwhelming.
-
-However, if we treat modelling as a process which *both consumes and produces data*, R provides many helpful tools. 
-
-This is an important insight: in R, the results of analyses are not the end point — instead *model results are themselves data*, to be processed, visualised, and compared.
-
-
+This is an important insight: in R, the results of analyses are not the end
+point — instead _model results are themselves data_, to be processed,
+visualised, and compared.
 
 ### Storing models in variables {-}
 
-This may seem obvious (and we have seen many examples in the sections above), but because R variables can contain anything, we can use them to store the results of our models. 
+This may seem obvious (and we have seen many examples in the sections above),
+but because R variables can contain anything, we can use them to store the
+results of our models.
 
-This is important, because it means we can keep track of different versions of the models we run, and compare them.
-
-
-
+This is important, because it means we can keep track of different versions of
+the models we run, and compare them.
 
 ### Extracting results from models {- #extract-results-from-models}
 
+One of the nice things about R is that the `summary()` function will almost
+always provide a concise output of whatever model you send it, showing the key
+features of an model you have run.
 
-One of the nice things about R is that the `summary()` function will almost always provide a concise output of whatever model you send it, showing the key features of an model you have run.
+However, this text output isn't suitable for publication, and can even be too
+verbose for communicating with colleagues. Often, when communicating with
+others, you want to focus in on the important details from analyses and to do
+this you need to extract results from your models.
 
-However, this text output isn't suitable for publication, and can even be too verbose for communicating with colleagues. Often, when communicating with others, you want to focus in on the important details from analyses and to do this you need to extract results from your models.
-
-Thankfully, there is almost always a method to extract results to a [`dataframe`]( #datasets-dataframes). For example, if we run a linear model:
-
+Thankfully, there is almost always a method to extract results to a
+[`dataframe`](#datasets-dataframes). For example, if we run a linear model:
 
 ```{r}
 model.fit <- lm(mpg ~ wt + disp, data=mtcars)
 summary(model.fit)
 ```
 
-
-We can extract the parameter table from this model by saving the `summary()` of it, and then using the `$` operator to access the `coefficients` table (actually a matrix), which is stored within the summary object. 
-
+We can extract the parameter table from this model by saving the `summary()` of
+it, and then using the `$` operator to access the `coefficients` table (actually
+a matrix), which is stored within the summary object.
 
 ```{r}
 model.fit.summary <- summary(model.fit)
 model.fit.summary$coefficients
 ```
 
-
-
 ### 'Poking around' with `$` and `@` {-}
 
-It's a useful trick to learn how to 'poke around' inside R objects using the `$` and `@` operators (if you want the gory details [see this guide](http://adv-r.had.co.nz/OO-essentials.html)).
+It's a useful trick to learn how to 'poke around' inside R objects using the `$`
+and `@` operators (if you want the gory details
+[see this guide](http://adv-r.had.co.nz/OO-essentials.html)).
 
-In the video below, I use RStudio's autocomplete feature to find results buried within a `lm` object:
+In the video below, I use RStudio's autocomplete feature to find results buried
+within a `lm` object:
 
 <iframe src="https://player.vimeo.com/video/225529842" width="862" height="892" frameborder="0"></iframe>
 
-For example, we could write the follwing to extract a table of coefficients, test statistics and *p* values from an `lm()` object (this is shown in the video:
+For example, we could write the follwing to extract a table of coefficients,
+test statistics and _p_ values from an `lm()` object (this is shown in the
+video:
 
 ```{r}
 model.fit.summary <- summary(model.fit)
-model.fit.summary$coefficients %>% 
+model.fit.summary$coefficients %>%
   as_data_frame()
 ```
 
-
-
 ### Save time: use a `broom` {- #broom}
 
-The [`broom::` library](http://varianceexplained.org/r/broom-intro/) is  worth learning because it makes it really easy to turn model results into dataframes, which is almost always what we want when working with data.
+The [`broom::` library](http://varianceexplained.org/r/broom-intro/) is worth
+learning because it makes it really easy to turn model results into dataframes,
+which is almost always what we want when working with data.
 
-It takes a slightly different approach than simply poking around with $ and @, because it providing general methods to 'clean up' the output of many older R functions.
+It takes a slightly different approach than simply poking around with \$ and @,
+because it providing general methods to 'clean up' the output of many older R
+functions.
 
-For example, the `lm()` or `car::Anova` functions display results in the console, but don't make it easy to extract results as a dataframe. `broom::` provides a consistent way of extracting the key numbers from most R objects. 
+For example, the `lm()` or `car::Anova` functions display results in the
+console, but don't make it easy to extract results as a dataframe. `broom::`
+provides a consistent way of extracting the key numbers from most R objects.
 
 Let's say we have a regression model:
-
 
 ```{r}
 (model.1 <- lm(mpg ~ factor(cyl) + wt + disp, data=mtcars))
 ```
 
-We can extract model fit statistics --- that is, attributes of the model as a whole --- with `glance()`. This produces a dataframe:
+We can extract model fit statistics --- that is, attributes of the model as a
+whole --- with `glance()`. This produces a dataframe:
 
 ```{r}
 glance(model.1)
 ```
 
+If we want to extract information about the model coefficients we can use
+`tidy`:
 
-If we want to extract information about the model coefficients we can use `tidy`:
 ```{r}
-tidy(model.1, conf.int = T) %>% 
+tidy(model.1, conf.int = T) %>%
   pander
 ```
 
-Which can then be plotted easily (adding the `conf.int=T` includes 95% confidence intervals for each parameter, which we can pass to `ggplot`):
+Which can then be plotted easily (adding the `conf.int=T` includes 95%
+confidence intervals for each parameter, which we can pass to `ggplot`):
 
 ```{r}
-tidy(model.1, conf.int = T) %>% 
-  ggplot(aes(term, estimate, ymin=conf.low, ymax=conf.high)) + 
+tidy(model.1, conf.int = T) %>%
+  ggplot(aes(term, estimate, ymin=conf.low, ymax=conf.high)) +
   geom_pointrange() +
   geom_hline(yintercept = 0)
 ```
 
-
-
-Finally, we can use the `augment` function to get information on individual rows in the modelled data: namely the fitted and residual values, plus common diagnostic metrics like Cooks distances:
+Finally, we can use the `augment` function to get information on individual rows
+in the modelled data: namely the fitted and residual values, plus common
+diagnostic metrics like Cooks distances:
 
 ```{r}
-augment(model.1) %>% 
-  head() %>% 
+augment(model.1) %>%
+  head() %>%
   pander(split.tables=Inf)
 ```
-
 
 Again these can be plotted:
 
 ```{r}
-augment(model.1) %>% 
-  ggplot(aes(x=.fitted, y=.resid)) + 
-  geom_point() + 
+augment(model.1) %>%
+  ggplot(aes(x=.fitted, y=.resid)) +
+  geom_point() +
   geom_smooth()
 ```
 
-
-Because `broom` always returns a dataframe with a consistent set of column names we can also combine model results into tables for comparison. In this plot we see what happens to the regression coefficients in model 1 when we add `disp`, `carb` and `drat` in model 2. We plot the coefficients side by side for ease of comparison, and can see that the estimates for cyl1 and wt both shrink slightly with the addition of these variables:
-
+Because `broom` always returns a dataframe with a consistent set of column names
+we can also combine model results into tables for comparison. In this plot we
+see what happens to the regression coefficients in model 1 when we add `disp`,
+`carb` and `drat` in model 2. We plot the coefficients side by side for ease of
+comparison, and can see that the estimates for cyl1 and wt both shrink slightly
+with the addition of these variables:
 
 ```{r}
 # run a new model with more predictors
 (model.2 <- lm(mpg ~ factor(cyl) + wt + disp + carb + drat, data=mtcars))
 
 # make a single dataframe from both models
-# addin a new `model` column with mutate to 
+# addin a new `model` column with mutate to
 # identify which coefficient came from which model
 combined.results <- bind_rows(
-  tidy(model.1, conf.int = T) %>% mutate(model="1"), 
-  tidy(model.2, conf.int = T) %>%  mutate(model="2")) 
+  tidy(model.1, conf.int = T) %>% mutate(model="1"),
+  tidy(model.2, conf.int = T) %>%  mutate(model="2"))
 ```
 
 ```{r}
-combined.results %>% 
+combined.results %>%
   # remove the intercept to make plot scale more sane
-  filter(term != "(Intercept)") %>% 
+  filter(term != "(Intercept)") %>%
   ggplot(aes(term, estimate, ymin=conf.low, ymax=conf.high, color=model)) +
-    geom_pointrange(position=position_dodge(width=.1)) + 
+    geom_pointrange(position=position_dodge(width=.1)) +
   geom_hline(yintercept = 0)
 
 ```
-
-
-
-
-
-
-
 
 ## 'Processing' results {- #process-model-results}
 
 XXX TODO e.g.:
 
-- Calculate VPC/ICC from an lmer models using `model %>% summary %>% as_data_frame()$varcor`
-
-
+-   Calculate VPC/ICC from an lmer models using
+    `model %>% summary %>% as_data_frame()$varcor`
 
 ## Printing tables {- #output-tables}
 
-XXX TODO 
+XXX TODO
 
-- Pander and pandoc
-- Dealing with rounding and string formatting issues
-- Missing values/unequal length columns
-- Point out that arbitrarily complex tables often not worth the candle, longer easier than wider etc.
-
-
+-   Pander and pandoc
+-   Dealing with rounding and string formatting issues
+-   Missing values/unequal length columns
+-   Point out that arbitrarily complex tables often not worth the candle, longer
+    easier than wider etc.
 
 ## APA formatting for free {- #apa-output}
 
-
-A neat trick to avoid [fat finger errors](https://en.wikipedia.org/wiki/Fat-finger_error) is to use functions to automatically display results in APA format. Unfortunately, there isn't a single package which works with all types of model, but it's not too hard switch  between them.
-
-
+A neat trick to avoid
+[fat finger errors](https://en.wikipedia.org/wiki/Fat-finger_error) is to use
+functions to automatically display results in APA format. Unfortunately, there
+isn't a single package which works with all types of model, but it's not too
+hard switch between them.
 
 ### Chi^2^ {-}
 
-For basic stats the `apa::` package is simple to use. Below we use the `apa::chisq_apa()` function to properly format the results of our chi^2^ test ([see the full chi^2^ example]#crosstabs)):
+For basic stats the `apa::` package is simple to use. Below we use the
+`apa::chisq_apa()` function to properly format the results of our chi^2^ test
+([see the full chi^2^ example]#crosstabs)):
 
 ```{r, include=F}
 lego.duplo.df <- readRDS("data/lego.RDS")
 lego.table <- with(lego.duplo.df, table(age, prefers))
 ```
 
-
 ```{r}
 lego.test <- chisq.test(lego.table)
 lego.test
 ```
-
 
 And we can format in APA like so:
 
@@ -235,25 +248,22 @@ And we can format in APA like so:
 apa::apa(lego.test, print_n=T)
 ```
 
-
 or using `apastats::` we also get Cramer's V, a measure of effect size:
 
 ```{r}
 apastats::describe.chi(lego.table, addN=T)
 ```
 
-
 #### Inserting results into your text {#inline-apa-format}
 
-If you are using RMarkdown, you can drop formatted results into your text without copying and pasting. Just type the following and the chi^2^ test result is automatically inserted inline in your text:
+If you are using RMarkdown, you can drop formatted results into your text
+without copying and pasting. Just type the following and the chi^2^ test result
+is automatically inserted inline in your text:
 
 ![Example of inline call to R functions within the text. This is shown as an image, because it would otherwise be hidden in this output (because the function is evaluated when we knit the document)](media/inline-r-example.png)
 
-[Age (4 vs 6 years) was significantly associated with preference for duplo v.s. lego, `r apastats::describe.chi(lego.table, addN=T)`]{.apa-example}
-
-
-
-
+[Age (4 vs 6 years) was significantly associated with preference for duplo v.s.
+lego, `r apastats::describe.chi(lego.table, addN=T)`]{.apa-example}
 
 ### T-test {-}
 
@@ -264,15 +274,14 @@ cars.test
 ```
 
 And then we can format as APA
+
 ```{r}
 apa::apa(cars.test)
 ```
 
-[American cars were significantly heavier than foreign cars, 
-mean difference=`r round((cars.test$estimate[1]-cars.test$estimate[2])*1000)`lbs; 
+[American cars were significantly heavier than foreign cars, mean
+difference=`r round((cars.test$estimate[1]-cars.test$estimate[2])*1000)`lbs;
 `r apa::apa(cars.test)`]{.apa-example}
-
-
 
 ### Anova {-}
 
@@ -286,20 +295,22 @@ apastats::describe.Anova(mpg.anova, term="am")
 apastats::describe.Anova(mpg.anova, term="am:cyl")
 ```
 
-[There was no interaction between location of manufacture and number of cylinders, `r apastats::describe.Anova(mpg.anova, term="am:cyl")`, but there was a main effect of location of manufacture, `r apastats::describe.Anova(mpg.anova, term="am:cyl")`, such that US-made cars had significantly higher fuel consumption than European or Japanese brands (see [Figure X or Table X])]{.apa-example}
+[There was no interaction between location of manufacture and number of
+cylinders, `r apastats::describe.Anova(mpg.anova, term="am:cyl")`, but there was
+a main effect of location of manufacture,
+`r apastats::describe.Anova(mpg.anova, term="am:cyl")`, such that US-made cars
+had significantly higher fuel consumption than European or Japanese brands (see
+[Figure X or Table X])]{.apa-example}
 
-
-<!-- 
+<!--
 TODO add formatting of effect size estimates here
 
  -->
 
-
-
 ### Multilevel models {-}
 
-
-If you have loaded the `lmerTest` package `apastats` can output either coefficients for single parameters, or F tests:
+If you have loaded the `lmerTest` package `apastats` can output either
+coefficients for single parameters, or F tests:
 
 ```{r}
 sleep.model <- lmer(Reaction~factor(Days)+(1|Subject), data=lme4::sleepstudy)
@@ -311,12 +322,10 @@ apastats::describe.glm(sleep.model, term="factor(Days)1")
 apastats::describe.lmtaov(anova(sleep.model), term='factor(Days)')
 ```
 
-
 ```{r, echo=F, include=F}
 rtchanges <- apastats::describe.lmtaov(anova(sleep.model), term='factor(Days)')
 ```
 
-
-[There were significant differences in reaction times across the 10 days of the study, `r rtchanges` such that reaction latencies tended to increase in duration (see [Figure X]).]{.apa-example}
-
-
+[There were significant differences in reaction times across the 10 days of the
+study, `r rtchanges` such that reaction latencies tended to increase in duration
+(see [Figure X]).]{.apa-example}

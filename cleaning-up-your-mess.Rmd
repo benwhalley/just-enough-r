@@ -2,8 +2,6 @@
 title: 'Cleaning up the mess'
 ---
 
-
-
 ```{r, include=FALSE, message=F}
 library(tidyverse)
 library(reshape2)
@@ -11,9 +9,8 @@ library(broom)
 library(pander)
 ```
 
-
-
 ## Cleaning up the mess: dealing with raw data {- #raw-data-mess}
 
-
-XXX TODO expand on [multiple files example](#multiple-raw-data-files) and show it worked all the way through, merging multiple files with left_join and bind_rows/cols
+XXX TODO expand on [multiple files example](#multiple-raw-data-files) and show
+it worked all the way through, merging multiple files with left_join and
+bind_rows/cols

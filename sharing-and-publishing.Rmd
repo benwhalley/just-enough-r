@@ -8,34 +8,26 @@ library(lmerTest)
 library(apastats)
 ```
 
-
-
 # Sharing, publishing and archiving {#sharing-and-publication}
 
+RMarkdown is an excellent format to collaborate on with other people. Because
+it's plain text it works well with version control systems like git (e.g. using
+<github.com>).
 
-RMarkdown is an excellent format to collaborate on with other people. Because it's plain text it works well with version control systems like git (e.g. using <github.com>).
-
-You can also knit documents into formats that journals and 
-
-
-
+You can also knit documents into formats that journals and
 
 ### Tips for dead tree journals {- #publication}
 
+-   Save graphics to .pdf format.
 
-- Save graphics to .pdf format. 
+-   Use RMarkdown documents to create supplementary online files or appendices
+    for published papers.
 
-- Use RMarkdown documents to create supplementary online files or appendices for published papers. 
-
-- Wait until you're an expert to [try writing the whole paper in RMarkdown (e.g. with citeproc)](https://kieranhealy.org/blog/archives/2014/01/23/plain-text/).
-
-
+-   Wait until you're an expert to
+    [try writing the whole paper in RMarkdown (e.g. with citeproc)](https://kieranhealy.org/blog/archives/2014/01/23/plain-text/).
 
 ### Registering your predictions {- #register-predictions}
 
-An RMarkdown file which produced simulated data to illustrate your predictions, and then run the analysis you propose, would be an excellent document to upload to a service like <aspredicted.org>
-
-
-
-
-
+An RMarkdown file which produced simulated data to illustrate your predictions,
+and then run the analysis you propose, would be an excellent document to upload
+to a service like <aspredicted.org>

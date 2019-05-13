@@ -2,7 +2,6 @@
 title: 'Working with character strings'
 ---
 
-
 ## Working with character strings {- #string-handling}
 
 ```{r, include=FALSE}
@@ -12,11 +11,12 @@ library(pander)
 library(reshape2)
 ```
 
-
-
 ### Searching and replacing
 
-If you want to search inside a string there are lots of useful functions in the `stringr::` library. These replicate some functionality in base R, but like other packages in the 'tidyverse' they tend to be more consistent and easier to use. For example:
+If you want to search inside a string there are lots of useful functions in the
+`stringr::` library. These replicate some functionality in base R, but like
+other packages in the 'tidyverse' they tend to be more consistent and easier to
+use. For example:
 
 ```{r}
 cheese <- c("Stilton", "Brie", "Cheddar")
@@ -25,30 +25,24 @@ stringr::str_locate(cheese, "i")
 stringr::str_replace(cheese, "Stil", "Mil")
 ```
 
-
-
-
 ### Using `paste` to make labels {- #paste}
 
-Paste can combine character strings with other types of variable to produce a new vector:
+Paste can combine character strings with other types of variable to produce a
+new vector:
 
 ```{r}
 paste(mtcars$cyl, "cylinders")[1:10]
 ```
 
-
 Which can be a useful way to label graphs:
 
 ```{r}
-mtcars %>% 
-  ggplot(aes(paste(mtcars$cyl, "cylinders"), mpg)) + 
+mtcars %>%
+  ggplot(aes(paste(mtcars$cyl, "cylinders"), mpg)) +
   geom_boxplot() + xlab("")
 ```
 
-
-
-
-### Fixing up `variable` after melting  {- #separate-and-extract}
+### Fixing up `variable` after melting {- #separate-and-extract}
 
 In this example `melt()` creates a new column called `variable`.
 
@@ -57,31 +51,37 @@ sleep.wide <- readRDS('data/sleep.wide.RDS')
 ```
 
 ```{r}
-sleep.wide %>% 
+sleep.wide %>%
   melt(id.var="Subject") %>%
-  arrange(Subject, variable)  %>% 
+  arrange(Subject, variable)  %>%
   head
 ```
 
-However the contents of `variable` are now a character string (i.e. a list of letters and numbers) rather than numeric values (see [column types](#factors-and-numerics)) but in this instance we know that the values `Day.1`, `Day.2`... are not really separate categories but actually form a linear sequence, from 1 to 9.
+However the contents of `variable` are now a character string (i.e. a list of
+letters and numbers) rather than numeric values (see
+[column types](#factors-and-numerics)) but in this instance we know that the
+values `Day.1`, `Day.2`... are not really separate categories but actually form
+a linear sequence, from 1 to 9.
 
-
-We can use the `extract` or `separate` functions to split up `variable` and create a numeric column for `Day`:
+We can use the `extract` or `separate` functions to split up `variable` and
+create a numeric column for `Day`:
 
 ```{r include=F}
 sleep.long <- readRDS('data/sleep.long.RDS')
 ```
 
-
 ```{r}
-sleep.long %>% 
-  separate(variable, c("variable", "Day")) %>% 
-  mutate(Day=as.numeric(Day)) %>% 
-  arrange(Subject) %>% 
+sleep.long %>%
+  separate(variable, c("variable", "Day")) %>%
+  mutate(Day=as.numeric(Day)) %>%
+  arrange(Subject) %>%
   head %>% pander
 ```
 
 See the user guide for `separate` and `extract` for more details.
 
-
-[If you are familiar with [regular expressions](https://code.tutsplus.com/tutorials/you-dont-know-anything-about-regular-expressions-a-complete-guide--net-7869) you will be happy to know that you can use regex to separate variables using `extract` and `separate`. [See this guide for more details on how `separate` and `extract` work](https://rpubs.com/bradleyboehmke/data_wrangling)]{.explainer}
+[If you are familiar with
+[regular expressions](https://code.tutsplus.com/tutorials/you-dont-know-anything-about-regular-expressions-a-complete-guide--net-7869)
+you will be happy to know that you can use regex to separate variables using
+`extract` and `separate`.
+[See this guide for more details on how `separate` and `extract` work](https://rpubs.com/bradleyboehmke/data_wrangling)]{.explainer}

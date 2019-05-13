@@ -2,39 +2,43 @@
 title: 'Making "Table 1"'
 ---
 
-
-
 ```{r, include=FALSE, message=F}
 library(tidyverse)
 library(reshape2)
 library(broom)
 library(pander)
 ```
- 
-
 
 ## "Table 1" {- #table1}
 
-Table 1 in reports of clinical trials and many psychological studies reports characteristics of the sample. Typically, you will want to present information collected at baseline, split by experimental groups, including:
+Table 1 in reports of clinical trials and many psychological studies reports
+characteristics of the sample. Typically, you will want to present information
+collected at baseline, split by experimental groups, including:
 
-- Means, standard deviations or other descriptive statistics for continuous variables
-- Frequencies of particular responses for categorical variables
-- Some kind of inferential test for a zero-difference between the groups; this could be a t-test, an F-statistic where there are more than 2 groups, or a chi-squared test for categorical variables.
-
+-   Means, standard deviations or other descriptive statistics for continuous
+    variables
+-   Frequencies of particular responses for categorical variables
+-   Some kind of inferential test for a zero-difference between the groups; this
+    could be a t-test, an F-statistic where there are more than 2 groups, or a
+    chi-squared test for categorical variables.
 
 <!-- Make reference to this? https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3379950/ -->
 
-Producing this table is a pain because it requires collating multiple statistics, calculated from different functions. Many researchers resort to performing all the analyses required for each part of the table, and then copying-and-pasting results into Word. 
+Producing this table is a pain because it requires collating multiple
+statistics, calculated from different functions. Many researchers resort to
+performing all the analyses required for each part of the table, and then
+copying-and-pasting results into Word.
 
-It can be automated though! This example combines and extends many of the techniques we have learned using the split-apply-combine method.
+It can be automated though! This example combines and extends many of the
+techniques we have learned using the split-apply-combine method.
 
-To begin, let's simulate some data from a fairly standard 2-arm clinical trial or psychological experiment:
-
+To begin, let's simulate some data from a fairly standard 2-arm clinical trial
+or psychological experiment:
 
 ```{r, include=F}
 # make up some example data
-boring.study <- expand.grid(person=1:70, time=1:2, condition=c("Control", "Intervention")) %>% 
-  as_tibble %>% 
+boring.study <- expand.grid(person=1:70, time=1:2, condition=c("Control", "Intervention")) %>%
+  as_tibble %>%
   mutate(person=row_number(),
          yob=round(1979+rnorm(n(), 0,5)),
          WM=round(100+rnorm(n(), 0, 10)),
@@ -43,73 +47,66 @@ boring.study <- expand.grid(person=1:70, time=1:2, condition=c("Control", "Inter
          Attitude = round(5+2 * (condition=="Control") + rnorm(n(), 0, 3)))
 ```
 
-
 Check our data:
 
 ```{r}
 boring.study %>% glimpse
 ```
 
-
-
 Start by making a long-form table for the categorical variables:
 
 ```{r}
-boring.study.categorical.melted <- 
-  table1.categorical.Ns <- boring.study %>% 
-  select(condition, education, ethnicity) %>% 
-  melt(id.var='condition') 
+boring.study.categorical.melted <-
+  table1.categorical.Ns <- boring.study %>%
+  select(condition, education, ethnicity) %>%
+  melt(id.var='condition')
 ```
-
 
 Then calculate the N's for each response/variable in each group:
 
 ```{r}
-(table1.categorical.Ns <- 
-  boring.study.categorical.melted %>% 
-  group_by(condition, variable, value) %>% 
-  summarise(N=n()) %>% 
+(table1.categorical.Ns <-
+  boring.study.categorical.melted %>%
+  group_by(condition, variable, value) %>%
+  summarise(N=n()) %>%
   dcast(variable+value~condition, value.var="N"))
 ```
-
 
 Then make a second table containing Chi2 test statistics for each variable:
 
 ```{r}
-(table1.categorical.tests <- 
-  boring.study.categorical.melted %>% 
+(table1.categorical.tests <-
+  boring.study.categorical.melted %>%
   group_by(variable) %>%
-  do(., chisq.test(.$value, .$condition) %>% tidy) %>% 
+  do(., chisq.test(.$value, .$condition) %>% tidy) %>%
   # this purely to facilitate matching rows up below
   mutate(firstrowforvar=T))
 ```
 
-
 Combine these together:
 
 ```{r}
-(table1.categorical.both <- table1.categorical.Ns %>% 
-  group_by(variable) %>% 
+(table1.categorical.both <- table1.categorical.Ns %>%
+  group_by(variable) %>%
   # we join on firstrowforvar to make sure we don't duplicate the tests
-  mutate(firstrowforvar=row_number()==1) %>% 
-  left_join(., table1.categorical.tests, by=c("variable", "firstrowforvar")) %>% 
+  mutate(firstrowforvar=row_number()==1) %>%
+  left_join(., table1.categorical.tests, by=c("variable", "firstrowforvar")) %>%
   # this is gross, but we don't want to repeat the variable names in our table
-  ungroup() %>% 
-  mutate(variable = ifelse(firstrowforvar==T, as.character(variable), NA)) %>% 
+  ungroup() %>%
+  mutate(variable = ifelse(firstrowforvar==T, as.character(variable), NA)) %>%
   select(variable, value, Control, Intervention, statistic, parameter, p.value))
 ```
 
-
-
-Now we deal with the continuous variables. First we make a 'long' version of the continuous data
+Now we deal with the continuous variables. First we make a 'long' version of the
+continuous data
 
 ```{r}
 continuous_variables <- c("yob", "WM")
-boring.continuous.melted <- 
-  boring.study %>% 
-  select(condition, continuous_variables) %>% 
-  melt() %>% 
-  group_by(variable) 
+boring.continuous.melted <-
+  boring.study %>%
+  select(condition, continuous_variables) %>%
+  melt() %>%
+  group_by(variable)
 
 boring.continuous.melted %>% head
 ```
@@ -117,65 +114,62 @@ boring.continuous.melted %>% head
 Then calculate separate tables of t-tests and means/SD's:
 
 ```{r}
-(table.continuous_variables.tests <- 
-    boring.continuous.melted %>% 
+(table.continuous_variables.tests <-
+    boring.continuous.melted %>%
     # note that we pass the result of t-test to tidy, which returns a dataframe
-    do(., t.test(.$value~.$condition) %>% tidy) %>% 
+    do(., t.test(.$value~.$condition) %>% tidy) %>%
     select(variable, statistic, parameter, p.value))
 
-(table.continuous_variables.descriptives <- 
-    boring.continuous.melted %>% 
-    group_by(variable, condition) %>% 
-    # this is not needed here because we have no missing values, but if there 
+(table.continuous_variables.descriptives <-
+    boring.continuous.melted %>%
+    group_by(variable, condition) %>%
+    # this is not needed here because we have no missing values, but if there
     # were missing value in this dataset then mean/sd functions would fail below,
     #  so best to remove rows without a response:
-    filter(!is.na(value)) %>% 
+    filter(!is.na(value)) %>%
     # note, we might also want the median/IQR
-    summarise(Mean=mean(value), SD=sd(value)) %>% 
-    group_by(variable, condition) %>% 
-    # we format the mean and SD into a single column using sprintf. 
+    summarise(Mean=mean(value), SD=sd(value)) %>%
+    group_by(variable, condition) %>%
+    # we format the mean and SD into a single column using sprintf.
     # we don't have to do this, but it makes reshaping simpler and we probably want
     # to round the numbers at some point, and so may as well do this now.
-    transmute(MSD = sprintf("%.2f (%.2f)", Mean, SD)) %>% 
+    transmute(MSD = sprintf("%.2f (%.2f)", Mean, SD)) %>%
     dcast(variable~condition))
 ```
-
 
 And combine them:
 
 ```{r}
-(table.continuous_variables.both <- 
-  left_join(table.continuous_variables.descriptives, 
+(table.continuous_variables.both <-
+  left_join(table.continuous_variables.descriptives,
             table.continuous_variables.tests))
-  
+
 ```
-
-
 
 Finally put the whole thing together:
 
 ```{r}
-(table1 <- table1.categorical.both %>% 
-  # make these variables into character format to be consistent with 
+(table1 <- table1.categorical.both %>%
+  # make these variables into character format to be consistent with
   # the Mean (SD) column for continuus variables
-  mutate_each(funs(format), Control, Intervention) %>% 
+  mutate_each(funs(format), Control, Intervention) %>%
   # note the '.' as the first argument, which is the input from the pipe
-  bind_rows(., 
+  bind_rows(.,
           table.continuous_variables.both) %>%
   # prettify a few things
-  rename(df = parameter, 
+  rename(df = parameter,
          p=p.value,
          `Control N/Mean (SD)`= Control,
-         Variable=variable, 
-         Response=value, 
-         `t/χ2` = statistic)) 
+         Variable=variable,
+         Response=value,
+         `t/χ2` = statistic))
 ```
 
-
-And we can print to markdown format for outputting. This is best done in a separate chunk to avoid warnings/messages appearing in the final document.
+And we can print to markdown format for outputting. This is best done in a
+separate chunk to avoid warnings/messages appearing in the final document.
 
 ```{r}
-table1 %>% 
+table1 %>%
   # split.tables argument needed to avoid the table wrapping
   pander(split.tables=Inf,
          missing="-",
@@ -183,17 +177,11 @@ table1 %>%
          caption='Table presenting baseline differences between conditions. Categorical variables tested with Pearson χ2, continuous variables with two-sample t-test.')
 ```
 
-
-
-
 Some exercises to work on/extensions to this code you might need:
 
-- Add a new continuous variable to the simulated dataset and include it in the final table
-- Create a third experimental group and amend the code to i) include 3 columns for the N/Mean and ii) report the F-test from a one-way Anova as the test statistic.
-- Add the within-group percentage for each response to a categorical variable.
-
-
-
-
-
-
+-   Add a new continuous variable to the simulated dataset and include it in the
+    final table
+-   Create a third experimental group and amend the code to i) include 3 columns
+    for the N/Mean and ii) report the F-test from a one-way Anova as the test
+    statistic.
+-   Add the within-group percentage for each response to a categorical variable.

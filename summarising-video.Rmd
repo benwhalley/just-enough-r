@@ -2,11 +2,11 @@
 title: 'Summarising data'
 ---
 
-
-In this video I'm going to show a couple of techniques for getting summary statistics on a dataset, but with a focus on using the split-apply-combine method to get any kind of summary that we want in a flexible way.
+In this video I'm going to show a couple of techniques for getting summary
+statistics on a dataset, but with a focus on using the split-apply-combine
+method to get any kind of summary that we want in a flexible way.
 
 Before we start I'll just load a few packages that we'll use later.
-
 
 ```{r, message=F}
 library(tidyverse)
@@ -14,48 +14,54 @@ library(pander)
 library(gapminder)
 ```
 
-
-The dataset we'll be using is called gapminder, and is in the gapminder package. We can take a look at it:
+The dataset we'll be using is called gapminder, and is in the gapminder package.
+We can take a look at it:
 
 ```{r}
 gapminder
 ```
 
-
-Just navigating the table view in RStudio can be a real help. We can see the first few rows of data here, but we can also see the types of the different variables up here, so these are factors, these are numeric types. 
+Just navigating the table view in RStudio can be a real help. We can see the
+first few rows of data here, but we can also see the types of the different
+variables up here, so these are factors, these are numeric types.
 
 We can also page through the data using these controls here.
 
-But I often find the `glimpse` function is useful, especially when there are lots of columns:
+But I often find the `glimpse` function is useful, especially when there are
+lots of columns:
 
 ```{r}
 gapminder %>% glimpse
 ```
 
-
-
-One nice feature of glimpse is that it returns the dataframe you give to it, withouth modifying anything. Which means you can include glimpse in pipelines. So here for example, we can use glimpse, then just add another pipe to show just the top 6 rows with head. This means you can keep referring back to the glimpse output later on if you like: RStduio creates two tabs here for the two parts to the output.
+One nice feature of glimpse is that it returns the dataframe you give to it,
+withouth modifying anything. Which means you can include glimpse in pipelines.
+So here for example, we can use glimpse, then just add another pipe to show just
+the top 6 rows with head. This means you can keep referring back to the glimpse
+output later on if you like: RStduio creates two tabs here for the two parts to
+the output.
 
 ```{r}
 gapminder %>% glimpse %>% head
 ```
 
-You might want to delete the `glimpse` call in the end though to make the knitted document neater.
+You might want to delete the `glimpse` call in the end though to make the
+knitted document neater.
 
-
-
-
-Anyway - so we'd like to get some summary statistics on these data. There are many options for this, but I quite like the describe function in the psych package:
+Anyway - so we'd like to get some summary statistics on these data. There are
+many options for this, but I quite like the describe function in the psych
+package:
 
 ```{r}
 psych::describe(gapminder)
 ```
 
+So this gives u the lst of variables, the mean, SD and a bunch of other stuff.
 
-
-So this gives u the lst of variables, the mean, SD and a bunch of other stuff. 
-
-One thing to be very cautious of here is that we have a mean for the 'country' variable, which should seem odd. After all, the country was a factor variable. What's happened here is that describe has converted that variable to a numeric value, and then averaged that. 
+One thing to be very cautious of here is that we have a mean for the 'country'
+variable, which should seem odd. After all, the country was a factor variable.
+What's happened here is that describe has converted that variable to a numeric
+value, and then averaged that.
 
 So we can see all the country names.
 
@@ -69,132 +75,132 @@ as.numeric(gapminder$country)
 mean(as.numeric(gapminder$country))
 ```
 
-
-
-
 Anyway - I suppose that's a warning to be careful when interpreting the output.
 
+One thing that does bug me about the psych::describe output is that it's a bit
+verbose.
 
-
-One thing that does bug me about the psych::describe output is that it's a bit verbose.
-
-I normally select only the columns I want, and convert the result to a data_frame so that I can select only the columns I want. You can see here that the conversion actually happens implicitly
+I normally select only the columns I want, and convert the result to a
+data_frame so that I can select only the columns I want. You can see here that
+the conversion actually happens implicitly
 
 ```{r}
-gapminder %>% 
-  select(-country, -continent) %>% 
-  psych::describe() %>% 
+gapminder %>%
+  select(-country, -continent) %>%
+  psych::describe() %>%
   select(mean, sd)
 ```
 
+So that's great, but at the moment these stats are just averaging across both
+country and year. What we might want is to calculate averages for each country
+-- or for each person, or each person within each block if we have a
+psychological experiment.
 
-
-So that's great, but at the moment these stats are just averaging across both country and year. What we might want is to calculate averages for each country  -- or for each person, or each person within each block if we 
-have a psychological experiment.
-
-There are ways to get that with the psych package, but I think it's better to learn a more general technique which will let you get any summary you want, with any kind of grouping.
+There are ways to get that with the psych package, but I think it's better to
+learn a more general technique which will let you get any summary you want, with
+any kind of grouping.
 
 So, to replicate the table above using this method we can use summarise:
 
-
 ```{r}
-gapminder %>% 
-  summarise(av_lifeexp=mean(lifeExp)) 
+gapminder %>%
+  summarise(av_lifeexp=mean(lifeExp))
 ```
 
-So this is neat because it takes our dataframe and applies a function to it, but returns a new dataframe. It's easy to add more columns too:
+So this is neat because it takes our dataframe and applies a function to it, but
+returns a new dataframe. It's easy to add more columns too:
 
 ```{r}
-gapminder %>% 
-  summarise(av_lifeexp=mean(lifeExp), av_gdppercap=mean(gdpPercap)) 
+gapminder %>%
+  summarise(av_lifeexp=mean(lifeExp), av_gdppercap=mean(gdpPercap))
 ```
 
-
-But that's slightly annoying, so instead we can just specify a list of summary functions we want to use, and the list of variables to apply them to:
-
+But that's slightly annoying, so instead we can just specify a list of summary
+functions we want to use, and the list of variables to apply them to:
 
 ```{r}
-gapminder %>% 
-  summarise_at(vars(lifeExp, gdpPercap), funs(mean, sd)) 
+gapminder %>%
+  summarise_at(vars(lifeExp, gdpPercap), funs(mean, sd))
 ```
 
+The idea here though is to use the split apply combine method. So in what we've
+seen so far we've just been doing the 'apply' bit... applying a function like
+'mean' to our data.
 
+The next step is to include a 'split' step before we apply, and then combine the
+results together.
 
-The idea here though is to use the split apply combine method. So in what we've seen so far we've just been doing the 'apply' bit... applying a function like 'mean' to our data.
+So, to tell sumarise what groupings we want to use... that is, which groups in
+the data should we compute sumamries for, means adding a `group_by` statement.
 
-The next step is to include a 'split' step before we apply, and then combine the results together.
+`group_by` is telling R to "break up our dataframe into these groups before you
+do anything to it".
 
-So, to tell sumarise what groupings we want to use... that is, which groups in the data should we compute sumamries for, means adding a `group_by` statement.
-
-`group_by` is telling R to "break up our dataframe into these groups before you do anything to it".
-
-So first we might add continent as a grouping.... and then run the same `summarise_at` command.
-If we run this we can see we get a dataframe back, but with one row per continent.
+So first we might add continent as a grouping.... and then run the same
+`summarise_at` command. If we run this we can see we get a dataframe back, but
+with one row per continent.
 
 ```{r}
-gapminder %>% 
-  group_by(continent) %>% 
-  summarise_at(vars(lifeExp, gdpPercap), funs(mean, sd)) 
+gapminder %>%
+  group_by(continent) %>%
+  summarise_at(vars(lifeExp, gdpPercap), funs(mean, sd))
   # combining happens automatically!
 ```
 
+So `dplyr` has been nice and combined the results of each of the `apply` steps,
+on each of the group`, and fed back a single dataframe with a 'continent' column
+so we can keep track of the values:
 
-So `dplyr` has been nice and combined the results of each of the `apply` steps, on each of the group`, and fed back a single dataframe with a 'continent' column so we can keep track of the values:
-
-
-What's cool is that we can add as many groups as we like, so we could group by both continent and year
+What's cool is that we can add as many groups as we like, so we could group by
+both continent and year
 
 ```{r}
-gapminder %>% 
-  group_by(continent, year) %>% 
-  summarise_at(vars(lifeExp, gdpPercap), funs(mean, sd)) 
+gapminder %>%
+  group_by(continent, year) %>%
+  summarise_at(vars(lifeExp, gdpPercap), funs(mean, sd))
 ```
 
+What's even neater is that we can repeat this process as many times as we like,
+and we can use the results just as we would any dataframe.
 
-
-
-What's even neater is that we can repeat this process as many times as we like, and we can use the results just as we would any dataframe.
-
-
-Just to note, in the  `summarise` step - the apply part - you can use any function that returns a single number.  So we can use the `min` and `max` functions to find the worst and best figures from each continent:
+Just to note, in the `summarise` step - the apply part - you can use any
+function that returns a single number. So we can use the `min` and `max`
+functions to find the worst and best figures from each continent:
 
 ```{r}
-gapminder %>% 
-  group_by(continent) %>% 
+gapminder %>%
+  group_by(continent) %>%
   summarise(worst.case = min(lifeExp), best.case = max(lifeExp))
 ```
 
-
-
-Or we could use some sorting along with  the `first` function, which just picks the first item in a vector. This lets us pick the name and average life expectancy statistic of the worst country in each continent:
-
+Or we could use some sorting along with the `first` function, which just picks
+the first item in a vector. This lets us pick the name and average life
+expectancy statistic of the worst country in each continent:
 
 ```{r}
-gapminder %>% 
-  group_by(continent) %>% 
-  arrange(lifeExp) %>% 
+gapminder %>%
+  group_by(continent) %>%
+  arrange(lifeExp) %>%
   summarise(country = first(country), worst.lifeExp = first(lifeExp), year = first(year))
 ```
 
-Or let's say we want to find countries where life expectancy has hit a more recent low point, We could group by country again, and do some more sorting after our summarising. We can see there are only 6 countries where lifeExp hasn't risen continuously since 1952 - even war-torn Afghanistan:
+Or let's say we want to find countries where life expectancy has hit a more
+recent low point, We could group by country again, and do some more sorting
+after our summarising. We can see there are only 6 countries where lifeExp
+hasn't risen continuously since 1952 - even war-torn Afghanistan:
 
 ```{r}
-gapminder %>% 
-  group_by(country) %>% 
-  arrange(lifeExp) %>% 
-  summarise(worst.lifeExp = first(lifeExp), year = first(year)) %>% 
-  filter(year > 1952) 
+gapminder %>%
+  group_by(country) %>%
+  arrange(lifeExp) %>%
+  summarise(worst.lifeExp = first(lifeExp), year = first(year)) %>%
+  filter(year > 1952)
 ```
 
-
-
-
-What's great about this approach is that it's infinitely flexible. You can compute any summaries you like on any groupings in your data, and use this as you would any other dataframe. So these summaries might be the input to a table, a graph or a statistical model like standard anova, where you want 1 row per subject.
+What's great about this approach is that it's infinitely flexible. You can
+compute any summaries you like on any groupings in your data, and use this as
+you would any other dataframe. So these summaries might be the input to a table,
+a graph or a statistical model like standard anova, where you want 1 row per
+subject.
 
 Ok - that's all for now.
-
-
-
-
-
-

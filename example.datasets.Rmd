@@ -10,32 +10,24 @@ library(pander)
 library(lubridate)
 ```
 
-
-
 # Example datasets {#example-datasets}
 
-
-The 
-
-
+The
 
 ```{r}
   # data from: https://en.wikipedia.org/wiki/Mile_run_world_record_progression#Men
 miles <-
   read_csv('data/miletimes.csv') %>%
-  mutate(date=lubridate::dmy(date)) %>% 
-  select(-auto) %>% 
-  separate(time, into=c('m','s'), sep=":") %>% 
-  mutate_each(funs(as.numeric), m,s) %>% 
-  mutate(time=lubridate::seconds(m*60+s)) 
+  mutate(date=lubridate::dmy(date)) %>%
+  select(-auto) %>%
+  separate(time, into=c('m','s'), sep=":") %>%
+  mutate_each(funs(as.numeric), m,s) %>%
+  mutate(time=lubridate::seconds(m*60+s))
 
 saveRDS(miles, file="data/miles.RDS")
-miles %>% filter(date < lubridate::dmy("01 January 1970")) %>% 
+miles %>% filter(date < lubridate::dmy("01 January 1970")) %>%
 saveRDS(., file="data/miles-pre-1970.RDS")
 
 miles %>% glimpse
 
 ```
-
-
-

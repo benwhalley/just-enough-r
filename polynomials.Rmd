@@ -1,4 +1,17 @@
-
 From field:
 
-A quadratic trend is where there is one change in the direction of the line (e.g., the line is curved in one place). An example of this might be a situation in which a drug enhances performance on a task at first, but then as the dose increases the performance drops again. To find a quadratic trend you need at least three groups (because in the two-group situation there are not enough categories of the independent variable for the means of the dependent variable to change one way and then another). A cubic trend is where there are two changes in the direction of the trend. So, for example, the mean of the dependent variable at first goes up across the first couple of categories of the independent variable, then across the succeeding categories the means go down, but then across the last few categories the means rise again. To have two changes in the direction of the mean you must have at least four categories of the independent variable. The final trend that you are likely to come across is the quartic trend, and this trend has three changes of direction (so you need at least five categories of the independent variable).
+A quadratic trend is where there is one change in the direction of the line
+(e.g., the line is curved in one place). An example of this might be a situation
+in which a drug enhances performance on a task at first, but then as the dose
+increases the performance drops again. To find a quadratic trend you need at
+least three groups (because in the two-group situation there are not enough
+categories of the independent variable for the means of the dependent variable
+to change one way and then another). A cubic trend is where there are two
+changes in the direction of the trend. So, for example, the mean of the
+dependent variable at first goes up across the first couple of categories of the
+independent variable, then across the succeeding categories the means go down,
+but then across the last few categories the means rise again. To have two
+changes in the direction of the mean you must have at least four categories of
+the independent variable. The final trend that you are likely to come across is
+the quartic trend, and this trend has three changes of direction (so you need at
+least five categories of the independent variable).
