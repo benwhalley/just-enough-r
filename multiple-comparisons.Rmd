@@ -1,6 +1,3 @@
-```{r include=FALSE, cache=FALSE}
-knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE, comment=NA)
-```
 ---
 title: 'Multiple comparisons'
 ---
