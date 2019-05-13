@@ -203,14 +203,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="summarising-data.html"><a href="summarising-data.html"><i class="fa fa-check"></i><b>4</b> Summaries</a><ul>
-<li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html"><i class="fa fa-check"></i>“Quick and dirty”</a><ul>
-<li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#frequency-tables"><i class="fa fa-check"></i>Frequency tables</a></li>
-<li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#summary-statistics"><i class="fa fa-check"></i>Summary statistics</a></li>
-<li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#creating-a-data-frame-of-summary-statistics"><i class="fa fa-check"></i>Creating a data frame of summary statistics</a></li>
-<li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#computing-statistics-by-groups"><i class="fa fa-check"></i>Computing statistics by-groups</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="a-generalised-approach.html"><a href="a-generalised-approach.html"><i class="fa fa-check"></i>A generalised approach</a><ul>
-<li class="chapter" data-level="" data-path="a-generalised-approach.html"><a href="a-generalised-approach.html#fancy-reshaping"><i class="fa fa-check"></i>Fancy reshaping</a></li>
+<li class="chapter" data-level="" data-path="dplyr-general.html"><a href="dplyr-general.html"><i class="fa fa-check"></i>A generalised approach</a><ul>
+<li class="chapter" data-level="" data-path="dplyr-general.html"><a href="dplyr-general.html#fancy-reshaping"><i class="fa fa-check"></i>Fancy reshaping</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>5</b> Graphics</a><ul>
@@ -453,7 +447,7 @@ or fix a factor loading to 1.</p></li>
 <li><p>You need ‘enough data’. Normally this will be at least 3 measured
 variables per latent. Sometimes 2 is enough, provided the errors of
 these variables are uncorrelated, but you may struggle to fit models
-because of ‘empirical under-identification’<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p></li>
+because of ‘empirical under-identification’<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p></li>
 <li><p>If a model is non-identified, it may either i) fail to run or,
 worse, ii) produce spurious results.</p></li>
 </ul>
@@ -474,10 +468,10 @@ model:</p>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="10">
-<li id="fn10"><p>Note, indicators themselves
+<ol start="9">
+<li id="fn9"><p>Note, indicators themselves
 should be correlated with one another in a bivariate correlation matrix.
-It’s only the errors which should be uncorrelated.<a href="identification.html#fnref10" class="footnote-back">↩</a></p></li>
+It’s only the errors which should be uncorrelated.<a href="identification.html#fnref9" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>

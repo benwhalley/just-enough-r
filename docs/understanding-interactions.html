@@ -203,14 +203,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="summarising-data.html"><a href="summarising-data.html"><i class="fa fa-check"></i><b>4</b> Summaries</a><ul>
-<li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html"><i class="fa fa-check"></i>“Quick and dirty”</a><ul>
-<li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#frequency-tables"><i class="fa fa-check"></i>Frequency tables</a></li>
-<li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#summary-statistics"><i class="fa fa-check"></i>Summary statistics</a></li>
-<li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#creating-a-data-frame-of-summary-statistics"><i class="fa fa-check"></i>Creating a data frame of summary statistics</a></li>
-<li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#computing-statistics-by-groups"><i class="fa fa-check"></i>Computing statistics by-groups</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="a-generalised-approach.html"><a href="a-generalised-approach.html"><i class="fa fa-check"></i>A generalised approach</a><ul>
-<li class="chapter" data-level="" data-path="a-generalised-approach.html"><a href="a-generalised-approach.html#fancy-reshaping"><i class="fa fa-check"></i>Fancy reshaping</a></li>
+<li class="chapter" data-level="" data-path="dplyr-general.html"><a href="dplyr-general.html"><i class="fa fa-check"></i>A generalised approach</a><ul>
+<li class="chapter" data-level="" data-path="dplyr-general.html"><a href="dplyr-general.html#fancy-reshaping"><i class="fa fa-check"></i>Fancy reshaping</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>5</b> Graphics</a><ul>
@@ -453,7 +447,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>An <em>outcome</em>: severity of injury in a car crash, for example.</li>
 <li>At least 2 <em>predictors</em> of that outcome: e.g. age and gender.</li>
 </ul>
-<p>Let’s think of a scenario where we’ve measured severity of injury after road accidents, along with the age and gender of the drivers involved. Let’s assume<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>:</p>
+<p>Let’s think of a scenario where we’ve measured severity of injury after road accidents, along with the age and gender of the drivers involved. Let’s assume<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>:</p>
 <ul>
 <li>Women are likely to be more seriously injured than men in a crash (a +10 point increase in severity)</li>
 <li>Drivers over 60 are more likely to injured than younger drivers (+10 point severity vs &lt;60 years)</li>
@@ -539,7 +533,7 @@ Variables<span class="op">:</span><span class="st"> </span><span class="dv">4</s
 <span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name=</span><span class="st">&quot;&quot;</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>) </code></pre>
 <p><img src="interactions_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<p>This plot doesn’t include all of the information about the distribution of effects that the density or boxplots do (for example, we can’t see any asymmetry in the distributions any more), but we still get some information about the variability of the effect of the experimental conditions on pain by plotting the SE of the mean over the top of each point<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></p>
+<p>This plot doesn’t include all of the information about the distribution of effects that the density or boxplots do (for example, we can’t see any asymmetry in the distributions any more), but we still get some information about the variability of the effect of the experimental conditions on pain by plotting the SE of the mean over the top of each point<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></p>
 <p>At this point, especially if your current data include only categorical predictors, you might want to move on to the section on <a href="predictions-and-margins.html">making predictions from models</a> and visualising these.</p>
 </div>
 <div id="continuous-predictors" class="section level3 unnumbered">
@@ -602,9 +596,9 @@ grid <span class="op">%&gt;%</span><span class="st"> </span>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="11">
-<li id="fn11"><p>This example is loosely based on figures reported by <span class="citation">@kockelman2002driver</span><a href="understanding-interactions.html#fnref11" class="footnote-back">↩</a></p></li>
-<li id="fn12"><p>We could equally well plot the 95% confidence interval for the mean, or the interquartile range)<a href="understanding-interactions.html#fnref12" class="footnote-back">↩</a></p></li>
+<ol start="10">
+<li id="fn10"><p>This example is loosely based on figures reported by <span class="citation">@kockelman2002driver</span><a href="understanding-interactions.html#fnref10" class="footnote-back">↩</a></p></li>
+<li id="fn11"><p>We could equally well plot the 95% confidence interval for the mean, or the interquartile range)<a href="understanding-interactions.html#fnref11" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>

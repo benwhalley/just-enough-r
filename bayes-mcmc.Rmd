@@ -1,8 +1,6 @@
 ---
-title: 'Bayesian linear modelling via MCMC'
-
+title: "Bayesian linear modelling via MCMC"
 ---
-
 
 ```{r, include=F}
 knitr::opts_chunk$set(echo = TRUE, collapse=TRUE, cache=TRUE, message=F, warning=F)
@@ -13,34 +11,31 @@ library(lmerTest)
 
 ```
 
-
-
 # Baysian model fitting {#bayes-mcmc}
-
 
 ### Baysian fitting of linear models via MCMC methods {-}
 
-This is a minimal guide to fitting and interpreting regression and multilevel models via MCMC. For _much_ more detail, and a much more comprehensive introduction to modern Bayesian analysis see [Jon Kruschke's *Doing Bayesian Data Analysis*](http://www.indiana.edu/~kruschke/DoingBayesianDataAnalysis/).
+This is a minimal guide to fitting and interpreting regression and multilevel models via MCMC. For _much_ more detail, and a much more comprehensive introduction to modern Bayesian analysis see [Jon Kruschke's _Doing Bayesian Data Analysis_](http://www.indiana.edu/~kruschke/DoingBayesianDataAnalysis/).
 
 Let's revisit our [previous example which investigated the effect of familiar and liked music on pain perception](#pain-music-data):
 
 ```{r}
 painmusic <- readRDS('data/painmusic.RDS')
-painmusic %>% 
-  ggplot(aes(liked, with.music - no.music, 
-             group=familiar, color=familiar)) + 
-  stat_summary(geom="pointrange", fun.data=mean_se) + 
+painmusic %>%
+  ggplot(aes(liked, with.music - no.music,
+             group=familiar, color=familiar)) +
+  stat_summary(geom="pointrange", fun.data=mean_se) +
   stat_summary(geom="line",  fun.data=mean_se) +
   ylab("Pain (VAS) with.music - no.music") +
-  scale_color_discrete(name="") + 
-  xlab("") 
+  scale_color_discrete(name="") +
+  xlab("")
 ```
 
 ```{r}
 # set sum contrasts
 options(contrasts = c("contr.sum", "contr.poly"))
-pain.model <- lm(with.music ~ 
-                   no.music + familiar * liked, 
+pain.model <- lm(with.music ~
+                   no.music + familiar * liked,
                  data=painmusic)
 summary(pain.model)
 ```
@@ -58,9 +53,7 @@ pain.model.mcmc <- stan_lm(with.music ~ no.music + familiar * liked,
 summary(pain.model.mcmc)
 ```
 
-
 ### Posterior probabilities for parameters {-}
-
 
 ```{r}
 library(bayesplot)
@@ -68,76 +61,58 @@ library(bayesplot)
 mcmc_areas(as.matrix(pain.model.mcmc), regex_pars = 'familiar|liked', prob = .9)
 ```
 
-
 ```{r}
 mcmc_intervals(as.matrix(pain.model.mcmc), regex_pars = 'familiar|liked', prob_outer = .9)
 ```
 
-
-
-
-
 ### Credible intervals {- #credible-intervals}
 
-
-Credible intervals are distinct from [confidence intervals](#intervals) 
+Credible intervals are distinct from [confidence intervals](#intervals)
 
 TODO EXPAND
 
 <!--
 Use this to explain HPI
 
- https://www.researchgate.net/post/Why_do_we_use_Highest_Posterior_Density_HPD_Interval_as_the_interval_estimator_in_Bayesian_Method 
+ https://www.researchgate.net/post/Why_do_we_use_Highest_Posterior_Density_HPD_Interval_as_the_interval_estimator_in_Bayesian_Method
 
 http://doingbayesiandataanalysis.blogspot.co.uk/2012/04/why-to-use-highest-density-intervals.html
 
 -->
 
-```{r}
-mHPDI <- function(l){
-  # median and HPDI
-  # this utility function used to return a dataframe, which is required when using 
-  # dplyr::do() below
-  ci = rethinking::HPDI(l, prob=.95)
-  data_frame(median=median(l), lower=ci[1], upper=ci[2])
-}
+```{r, eval=F}
 
-params.of.interest <- 
-  pain.model.mcmc %>% 
-  as_tibble %>% 
-  reshape2::melt() %>% 
-  filter(stringr::str_detect(variable, "famil|liked")) %>% 
+params.of.interest <-
+  pain.model.mcmc %>%
+  as_tibble %>%
+  reshape2::melt() %>%
+  filter(stringr::str_detect(variable, "famil|liked")) %>%
   group_by(variable)
 
-params.of.interest %>% 
-  do(., mHPDI(.$value)) %>% 
+params.of.interest %>%
+  do(., mHPDI(.$value)) %>%
   pander::pandoc.table(caption="Estimates and 95% credible intervals for the parameters of interest")
 ```
-
-
-
-
 
 ### Bayesian 'p values' for parameters {-}
 
 We can do simple arithmetic with the posterior draws to calculate the probability a parameter is greater than (or less than) zero:
 
 ```{r}
-params.of.interest %>%  
+params.of.interest %>%
   summarise(estimate=mean(value),
             `p (x<0)` = mean(value < 0),
             `p (x>0)` = mean(value > 0))
 ```
 
-
 Or if you'd like the Bayes Factor (evidence ratio) for one hypotheses vs another, for example comparing the hypotheses that a parameter is > vs. <= 0, then you can use the `hypothesis` function in the `brms` package:
 
 ```{r}
-pain.model.mcmc.df <- 
-  pain.model.mcmc %>% 
+pain.model.mcmc.df <-
+  pain.model.mcmc %>%
   as_tibble
 
-brms::hypothesis(pain.model.mcmc.df,  
+brms::hypothesis(pain.model.mcmc.df,
                  c("familiar1 > 0",
                    "liked1 > 0",
                    "familiar1:liked1 < 0"))
@@ -145,25 +120,17 @@ brms::hypothesis(pain.model.mcmc.df,
 
 Here although we only have a 'significant' p value for one of the parameters, we can also see there is "very strong" evidence that familiarity also influences pain, and "strong" evidence for the interaction of familiarity and liking, according to [conventional rules of thumb when interpreting Bayes Factors](https://en.wikipedia.org/wiki/Bayes_factor#Interpretation).
 
-
-
-
-TODO - add a fuller explanation of why [multiple comparisons](#mutiple-comparisons) are not an issue for Bayesian analysis [@gelman2012we], because *p* values do not have the same interpretation in terms of long run frequencies of replication; they are a representation of the weight of the evidence in favour of a hypothesis.
+TODO - add a fuller explanation of why [multiple comparisons](#mutiple-comparisons) are not an issue for Bayesian analysis [@gelman2012we], because _p_ values do not have the same interpretation in terms of long run frequencies of replication; they are a representation of the weight of the evidence in favour of a hypothesis.
 
 TODO: Also reference Zoltan Dienes Bayes paper.
 
-
-
-
-<!-- 
+<!--
 
 ## Bayesian analysis of RCT data {- #region-of-practical-importance}
 
-TODO 
+TODO
 
 - Example from FIT RCT for weight and BMI
 - Using and presenting the ROPE
 
  -->
-
-

@@ -4,7 +4,6 @@ Version: 0.2
 Imports: 
   afex,
   apa,
-  apastats,
   apaTables,
   arm,
   bayesplot,
@@ -12,7 +11,6 @@ Imports:
   brms,
   broom,
   car,
-  coef,
   coin,
   corrgram,
   DAAG,
@@ -35,15 +33,12 @@ Imports:
   mice,
   modelr,
   MuMIn,
-  mutate,
-  package,
   pander,
   psych,
   pwr,
   readr,
   readxl,
   reshape2,
-  rethinking,
   rstanarm,
   semPlot,
   simr,
@@ -52,3 +47,5 @@ Imports:
   tidyverse,
   tufte,
   waffle
+Remotes:
+  achetverikov/APAstats

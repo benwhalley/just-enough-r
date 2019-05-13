@@ -203,14 +203,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="summarising-data.html"><a href="summarising-data.html"><i class="fa fa-check"></i><b>4</b> Summaries</a><ul>
-<li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html"><i class="fa fa-check"></i>“Quick and dirty”</a><ul>
-<li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#frequency-tables"><i class="fa fa-check"></i>Frequency tables</a></li>
-<li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#summary-statistics"><i class="fa fa-check"></i>Summary statistics</a></li>
-<li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#creating-a-data-frame-of-summary-statistics"><i class="fa fa-check"></i>Creating a data frame of summary statistics</a></li>
-<li class="chapter" data-level="" data-path="quick-and-dirty.html"><a href="quick-and-dirty.html#computing-statistics-by-groups"><i class="fa fa-check"></i>Computing statistics by-groups</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="a-generalised-approach.html"><a href="a-generalised-approach.html"><i class="fa fa-check"></i>A generalised approach</a><ul>
-<li class="chapter" data-level="" data-path="a-generalised-approach.html"><a href="a-generalised-approach.html#fancy-reshaping"><i class="fa fa-check"></i>Fancy reshaping</a></li>
+<li class="chapter" data-level="" data-path="dplyr-general.html"><a href="dplyr-general.html"><i class="fa fa-check"></i>A generalised approach</a><ul>
+<li class="chapter" data-level="" data-path="dplyr-general.html"><a href="dplyr-general.html#fancy-reshaping"><i class="fa fa-check"></i>Fancy reshaping</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>5</b> Graphics</a><ul>
@@ -447,7 +441,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>Describing statistical models using formulae</h3>
 <p>R requires that you are explicit about the statistical model you want to run but provides a neat, concise way of describing models, called a <code>formula</code>. For multiple regression and simple Anova, the formulas we write map closely onto the underlying <em>linear model</em>. The formula syntax provides shortcuts to quickly describe all the models you are likely to need.</p>
 <p>Formulas have two parts: the left hand side and the right hand side, which are separated by the tilde symbol: <code>~</code>. Here, the tilde just means ‘is predicted by’.</p>
-<p>For example, this formula specifies a regression model where <code>height</code> is the <em>outcome</em>, and <code>age</code> and <code>gender</code> are the <em>predictor</em> variables.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
+<p>For example, this formula specifies a regression model where <code>height</code> is the <em>outcome</em>, and <code>age</code> and <code>gender</code> are the <em>predictor</em> variables.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
 <pre><code>height ~ age + gender</code></pre>
 <p>There are lots more useful tricks to learn when writing formulas, which are covered below. But in the interests of instant gratification let’s work through a simple example first:</p>
 </div>
@@ -567,8 +561,8 @@ Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv"
 </div>
 <div class="footnotes">
 <hr />
-<ol start="9">
-<li id="fn9"><p>I avoid the terms dependent/independent variables because they are confusing to many students, and because they are misleading when discussing non-experimental data.<a href="linear-models-simple.html#fnref9" class="footnote-back">↩</a></p></li>
+<ol start="8">
+<li id="fn8"><p>I avoid the terms dependent/independent variables because they are confusing to many students, and because they are misleading when discussing non-experimental data.<a href="linear-models-simple.html#fnref8" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
