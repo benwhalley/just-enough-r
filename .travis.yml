@@ -10,6 +10,9 @@ before_install:
   - sudo apt-get update -q
   - sudo apt-get install r-cran-rstan -y
 
+r_github_packages:
+  - achetverikov/APAstats
+
 apt_packages:
   - libxml2-dev
   - libv8-dev

@@ -47,5 +47,4 @@ Imports:
   tidyverse,
   tufte,
   waffle
-Remotes:
-  achetverikov/APAstats
+
