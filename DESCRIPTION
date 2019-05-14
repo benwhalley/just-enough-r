@@ -2,6 +2,7 @@ Package: placeholder
 Title: Just Enough R
 Version: 0.2
 Imports: 
+  rstanarm,
   afex,
   apa,
   apaTables,
@@ -46,6 +47,3 @@ Imports:
   tidyverse,
   tufte,
   waffle,  
-
-Suggests:
-  rstanarm,
