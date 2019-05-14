@@ -9,8 +9,7 @@ before_install:
     - sudo add-apt-repository -y "ppa:marutter/c2d4u"
     - sudo apt-get update -q
     - sudo apt-get install r-cran-rstan -y
-    - Rscript -e 'install.packages("devtools");
-      devtools::install_github("stan-dev/rstanarm", build_vignettes = FALSE);'
+    - Rscript -e 'install.packages("rstanarm", dependencies=FALSE)'
 
 apt_packages:
     - libxml2-dev
