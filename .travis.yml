@@ -43,7 +43,9 @@ r_github_packages:
 # CRAN: https://mran.microsoft.com/snapshot/2018-07-01
 
 script:
-    - Rscript -e 'bookdown::render_book("index.Rmd")'
+    - |
+    Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::gitbook")'
+    Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::pdf_book")'
 
 deploy:
     provider: pages
