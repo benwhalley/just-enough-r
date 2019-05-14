@@ -1,6 +1,8 @@
+dist: trusty
 language: r
-cache: packages
-sudo: required
+cache:
+    packages: yes
+
 script:
     - Rscript -e 'bookdown::render_book("index.Rmd")'
 
