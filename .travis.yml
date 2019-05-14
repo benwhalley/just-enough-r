@@ -5,13 +5,23 @@ cache:
     packages: yes
 
 before_install:
-    - mkdir -p ~/.R
-    - echo "CXX14FLAGS=-O3 -mtune=native -march=native -Wno-unused-variable -Wno-unused-function  -Wno-macro-redefined" >> ~/.R/Makevars
-    - echo "CXX14=g++ -std=c++1y" >> ~/.R/Makevars
+    - mkdir -p ~/.R/
+    - echo "CXX14 = g++-7 -fPIC -flto=2" >> ~/.R/Makevars
+    - echo "CXX14FLAGS = -mtune=native -march=native -Wno-unused-variable -Wno-unused-function -Wno-unused-local-typedefs -Wno-ignored-attributes -Wno-deprecated-declarations -Wno-attributes -O3" >> ~/.R/Makevars
+
+
+latex: true
+r_build_args: '--no-build-vignettes'
+r_check_args: '--ignore-vignettes'
+
+env:
+  global:
+    - MAKEFLAGS="-j 2"
 
 apt_packages:
     - libxml2-dev
     - libv8-dev
+    - g++-7
 
 r_github_packages:
     - achetverikov/APAstats/apastats
