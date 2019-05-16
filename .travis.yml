@@ -18,7 +18,6 @@ env:
   global:
     - MAKEFLAGS="-j 2"
 
-
 matrix:
   include:
     - os: linux
@@ -31,6 +30,33 @@ matrix:
       env:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
 
+r_binary_packages:
+    arm,
+    bayesplot,
+    brms,
+    broom,
+    car,
+    coin,
+    DAAG,
+    data.table,
+    emmeans,
+    ez,
+    GGally,
+    gridExtra,
+    knitr,
+    lavaan,
+    lme4,
+    mediation
+    mice,
+    MuMIn,
+    pander,
+    psych,
+    pwr,
+    readxl,
+    reshape2,
+    rstan,
+    rstanarm,
+    tidyverse,
 
 apt_packages:
     - libxml2-dev
