@@ -2,8 +2,8 @@
 dist: trusty
 language: r
 r: 
-    - 3.5
-    
+    - 3.4
+
 cache:
     packages: yes
 
