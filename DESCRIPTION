@@ -17,3 +17,5 @@ Imports:
   skimr,
   tufte,
   waffle,  
+  sn,
+  diagrammersvg

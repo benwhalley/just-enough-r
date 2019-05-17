@@ -52,8 +52,6 @@ r_binary_packages:
     - rstan
     - rstanarm
     - tidyverse
-    - diagrammersvg
-    - sn
 
 apt_packages:
     - libxml2-dev
