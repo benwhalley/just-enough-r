@@ -225,14 +225,13 @@ We are using a
 [@howell2012statistical, chapter 13]: an experiment which recorded `Recall`
 among young v.s. older adults (`Age`) for each of 5 conditions.
 
-```{r include=F}
+```{r include=F, eval=F}
 eysenck <- read.table('howell-data/Tab13-2.dat', header=T) %>%
   mutate(
     Condition=factor(Condition,
                      labels=c("Counting", "Rhyming", "Adjective", "Imagery", "Intention")),
     Age = factor(Age, labels=c("Young", "Older")))
 saveRDS(eysenck, file="data/eysenck.Rdata")
-
 ```
 
 These data would commonly be plotted something like this:
