@@ -41,10 +41,10 @@ variable from another:
 
 ```{r}
 tibble(
-	height_m = rnorm(10, 1.5, .2),
-	weight_kg = rnorm(10, 65, 10),
-	bmi = weight_kg / height_m ^ 2,
-	overweight = bmi > 25
+    height_m = rnorm(10, 1.5, .2),
+    weight_kg = rnorm(10, 65, 10),
+    bmi = weight_kg / height_m ^ 2,
+    overweight = bmi > 25
 )
 ```
 
