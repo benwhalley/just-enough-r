@@ -329,11 +329,11 @@ lme4::sleepstudy %>%
 If we want to test whether there are significant differences in RTs between
 `Days`, we could fit something very similar to a traditional repeat measures
 Anova using the `lme4::lmer()` function, and obtain an Anova table for the model
-using the special `lmerTest::anova()` function:
+using the special `anova()` function which is added by the lmerTest package:
 
 ```{r}
 sleep.model <- lmer(Reaction ~ factor(Days) + (1 | Subject), data=lme4::sleepstudy)
-lmerTest::anova(sleep.model)
+anova(sleep.model)
 ```
 
 ### Traditional repeated measures Anova {- #trad-rm-anova}
