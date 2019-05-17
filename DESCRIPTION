@@ -18,4 +18,5 @@ Imports:
   tufte,
   waffle,  
   sn,
+  DiagrammeR,
   DiagrammeRsvg
