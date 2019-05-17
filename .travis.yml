@@ -1,6 +1,9 @@
 # See https://docs.travis-ci.com/user/languages/r/
 dist: trusty
 language: r
+r: 
+    - 3.5
+    
 cache:
     packages: yes
 
