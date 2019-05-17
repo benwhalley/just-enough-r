@@ -4,6 +4,9 @@ language: r
 r: 
     - 3.4
 
+# R binary packages not supported with 'sudo: false' or 'dist: precise',  falling back to source install
+sudo: true
+
 cache:
     packages: yes
 
