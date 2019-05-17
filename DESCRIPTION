@@ -19,4 +19,6 @@ Imports:
   waffle,  
   sn,
   DiagrammeR,
-  DiagrammeRsvg
+  DiagrammeRsvg,
+  rsvg
+
