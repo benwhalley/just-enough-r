@@ -33,6 +33,7 @@ r_binary_packages:
     - coin
     - DAAG
     - data.table
+    - dplyr
     - emmeans
     - ez
     - GGally
