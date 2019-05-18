@@ -25,30 +25,26 @@ matrix:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
 
 r_binary_packages:
+    - AER
+    - afex
     - arm
-    - bayesplot
     - brms
-    - broom
     - car
     - coin
-    - DAAG
     - data.table
+    - devtools
     - dplyr
-    - emmeans
-    - ez
-    - GGally
-    - gridExtra
-    - knitr
     - lavaan
     - lme4
-    - mediation
     - mice
     - MuMIn
+    - nlme
     - pander
+    - png
     - psych
-    - pwr
-    - readxl
+    - Rcpp
     - reshape2
+    - rmarkdown
     - rstan
     - rstanarm
     - tidyverse
