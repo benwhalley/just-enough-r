@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Tricks with ggplot | Just Enough R</title>
+  <meta name="description" content="Tricks with ggplot | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Tricks with ggplot | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Tricks with ggplot | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="utility-plotting-functions.html">
+<link rel="next" href="exporting-graphics.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,77 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
+<div id="ggplot-details" class="section level2 unnumbered">
+<h2>Tricks with ggplot</h2>
+<div id="facetting-plots" class="section level3 unnumbered">
+<h3>More ways to facet a plot</h3>
+<p>Facets are ways to repeat a plot for each level of another variable. <code>ggplot</code>
+has two ways of defining and displaying facets:</p>
 <ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
+<li>As a list of plots, using <code>facet_wrap</code>.</li>
+<li>As a grid or matrix of plots, using <code>facet_grid()</code>.</li>
 </ul>
+<p>Examples of both are shown below, using the following plot as a starting point:</p>
+<pre class="sourceCode r"><code class="sourceCode r">base.plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(mpg, wt)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()
+base.plot</code></pre>
+<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
-
+<div id="facet_wrap" class="section level3 unnumbered">
+<h3><code>facet_wrap</code></h3>
+<p>If we want one facet we just type the tilde (<code>~</code>) symbol and then the name of
+the variable. This is like typing the right hand side of a
+<a href="formulae">formula for a regression model</a>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">base.plot <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>cyl)</code></pre>
+<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>If we want two facets we extend the formula, using the <code>+</code> sign:</p>
+<pre class="sourceCode r"><code class="sourceCode r">base.plot <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>cyl<span class="op">+</span>am)</code></pre>
+<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Note, the order of variables in the formula makes a difference:</p>
+<pre class="sourceCode r"><code class="sourceCode r">base.plot <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>am<span class="op">+</span>cyl)</code></pre>
+<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
+<div id="facet_grid" class="section level3 unnumbered">
+<h3><code>facet_grid</code></h3>
+<p>With one variable <code>facet_grid</code> produces similar output. Note the <code>.</code> (period) on
+the left hand side of the formula now to make explicit we only have one
+variable, and we want it on the x axis:</p>
+<pre class="sourceCode r"><code class="sourceCode r">base.plot <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(.<span class="op">~</span>cyl)</code></pre>
+<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>We can flip the facets around by putting the <code>cyl</code> variable on the left hand
+side of the <code>~</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">base.plot <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(cyl<span class="op">~</span>.)</code></pre>
+<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>And <code>facet_grid</code> can also create facets for two or more variables:</p>
+<pre class="sourceCode r"><code class="sourceCode r">base.plot <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(am<span class="op">~</span>cyl)</code></pre>
+<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Here the labelling and the arrangement of plots is perhaps nicer because it is
+clearer that plots for <code>cyl</code> are arrange left to right, and for <code>am</code> they are
+top to bottom.</p>
 </div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
+<div id="combining-plots" class="section level3 unnumbered">
+<h3>Combining separate plots in a grid</h3>
+<p>Note that combining separate plots in a grid is different from
+<a href="ggplot-details.html#facetting-plots">facetting</a>, and it may be you want that instead.</p>
+<p>If you really want to combine several plots, the <code>gridExtra</code> and <code>cowplot</code>
+packages can be helpful. This is the code from the
+<a href="layered-graphics.html#layered-graphics">example in the graphics section</a>, which may be a useful
+starting point:</p>
+<pre class="sourceCode r"><code class="sourceCode r">comparison &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(<span class="kw">factor</span>(cyl), mpg)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Comparison&quot;</span>)
+relationships &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(wt, mpg, <span class="dt">color=</span><span class="kw">factor</span>(gear))) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Relationship&quot;</span>)
+distributions &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(mpg, <span class="dt">color=</span><span class="kw">factor</span>(gear))) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Distribution&quot;</span>)
+composition &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(<span class="kw">factor</span>(cyl), <span class="dt">fill =</span> <span class="kw">factor</span>(gear))) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Composition&quot;</span>)
+mm &lt;-<span class="st"> </span><span class="kw">theme</span>(<span class="dt">plot.margin=</span><span class="kw">unit</span>(<span class="kw">rep</span>(<span class="fl">1.5</span>,<span class="dv">4</span>), <span class="st">&quot;line&quot;</span>))
+gridExtra<span class="op">::</span><span class="kw">grid.arrange</span>(relationships<span class="op">+</span>mm, distributions<span class="op">+</span>mm, comparison<span class="op">+</span>mm, composition<span class="op">+</span>mm, <span class="dt">ncol=</span><span class="dv">2</span>)</code></pre>
+<p><img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="utility-plotting-functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exporting-graphics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

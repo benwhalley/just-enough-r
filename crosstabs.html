@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Crosstabulations and \(\chi^2\) | Just Enough R</title>
+  <meta name="description" content="Crosstabulations and \(\chi^2\) | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Crosstabulations and \(\chi^2\) | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Crosstabulations and \(\chi^2\) | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="nonparametrics.html">
+<link rel="next" href="correlations.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,337 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
-<ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
-</ul>
-</div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+<div id="crosstabs" class="section level2 unnumbered">
+<h2>Crosstabulations and <span class="math inline">\(\chi^2\)</span></h2>
+<p>We saw in a previous section
+<a href="#frequency-tables">how to create a frequency table of one or more variables</a>.
+Using that previous example, assume we already have a crosstabulation of <code>age</code>
+and <code>prefers</code></p>
+<pre class="sourceCode r"><code class="sourceCode r">lego.table
+         prefers
+age       duplo lego
+  <span class="dv">4</span> years    <span class="dv">38</span>   <span class="dv">20</span>
+  <span class="dv">6</span> years    <span class="dv">12</span>   <span class="dv">30</span></code></pre>
+<p>We can easily run the inferential <span class="math inline">\(\chi^2\)</span> (sometimes spelled “chi”, but
+pronounced “kai”-squared) test on this table:</p>
+<pre class="sourceCode r"><code class="sourceCode r">lego.test &lt;-<span class="st"> </span><span class="kw">chisq.test</span>(lego.table)
+lego.test
+
+    Pearson<span class="st">&#39;s Chi-squared test with Yates&#39;</span> continuity correction
+
+data<span class="op">:</span><span class="st">  </span>lego.table
+X<span class="op">-</span>squared =<span class="st"> </span><span class="fl">11.864</span>, df =<span class="st"> </span><span class="dv">1</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.0005724</span></code></pre>
+<p>Note that we can access each number in this output individually because the
+<code>chisq.test</code> function returns a list. We do this by using the <code>$</code> syntax:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># access the chi2 value alone</span>
+lego.test<span class="op">$</span>statistic
+X<span class="op">-</span>squared 
+ <span class="fl">11.86371</span> </code></pre>
+<p>Even nicer, you can use an R package to write up your results for you in APA
+format!</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(apa)
+<span class="kw">apa</span>(lego.test, <span class="dt">print_n=</span>T)
+[<span class="dv">1</span>] <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">chi^2$(1, n = 100) = 11.86, *p* &lt; .001&quot;</span></code></pre>
+<p><a href="apa-output.html#apa-output">See more on automatically displaying statistics in APA format</a></p>
+<div id="three-way-tables" class="section level3 unnumbered">
+<h3>Three-way tables</h3>
+<p>You can also use <code>table()</code> or <code>xtabs()</code> to get 3-way tables of frequencies
+(<code>xtabs</code> is probably better for this than <code>table</code>).</p>
+<p>For example, using the <code>mtcars</code> dataset we create a 3-way table, and then
+convert the result to a dataframe. This means we can print the table nicely in
+RMarkdown using the <code>pander.table()</code> function, or process it further (e.g. by
+<a href="sorting.html#sorting">sorting</a> or <a href="reshaping.html#reshaping">reshaping</a> it).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xtabs</span>(<span class="op">~</span>am<span class="op">+</span>gear<span class="op">+</span>cyl, mtcars) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as_data_frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pander</span>()
+Warning<span class="op">:</span><span class="st"> `</span><span class="dt">as_data_frame()</span><span class="st">`</span> is deprecated, use <span class="st">`</span><span class="dt">as_tibble()</span><span class="st">`</span> (but mind the new semantics).
+This warning is displayed once per session.</code></pre>
+<table style="width:33%;">
+<colgroup>
+<col width="6%" />
+<col width="9%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">am</th>
+<th align="center">gear</th>
+<th align="center">cyl</th>
+<th align="center">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">3</td>
+<td align="center">4</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">4</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">4</td>
+<td align="center">4</td>
+<td align="center">2</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">4</td>
+<td align="center">4</td>
+<td align="center">6</td>
+</tr>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">5</td>
+<td align="center">4</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">5</td>
+<td align="center">4</td>
+<td align="center">2</td>
+</tr>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">3</td>
+<td align="center">6</td>
+<td align="center">2</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">6</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">4</td>
+<td align="center">6</td>
+<td align="center">2</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">4</td>
+<td align="center">6</td>
+<td align="center">2</td>
+</tr>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">5</td>
+<td align="center">6</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">5</td>
+<td align="center">6</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">3</td>
+<td align="center">8</td>
+<td align="center">12</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">8</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">4</td>
+<td align="center">8</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">4</td>
+<td align="center">8</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">5</td>
+<td align="center">8</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">5</td>
+<td align="center">8</td>
+<td align="center">2</td>
+</tr>
+</tbody>
+</table>
+<p>Often, you will want to present a table in a wider format than this, to aid
+comparisons between categories. For example, we might want our table to make it
+easy to compare between US and non-US cars for each different number of
+cylinders:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xtabs</span>(<span class="op">~</span>am<span class="op">+</span>gear<span class="op">+</span>cyl, mtcars) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as_data_frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span>reshape2<span class="op">::</span><span class="kw">dcast</span>(am<span class="op">+</span>gear<span class="op">~</span><span class="kw">paste</span>(cyl, <span class="st">&quot;Cylinders&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pander</span>()
+Using n as value column<span class="op">:</span><span class="st"> </span>use value.var to override.</code></pre>
+<table style="width:75%;">
+<colgroup>
+<col width="6%" />
+<col width="9%" />
+<col width="19%" />
+<col width="19%" />
+<col width="19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">am</th>
+<th align="center">gear</th>
+<th align="center">4 Cylinders</th>
+<th align="center">6 Cylinders</th>
+<th align="center">8 Cylinders</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">3</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">12</td>
+</tr>
+<tr class="even">
+<td align="center">0</td>
+<td align="center">4</td>
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">5</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">4</td>
+<td align="center">6</td>
+<td align="center">2</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">5</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">2</td>
+</tr>
+</tbody>
+</table>
+<p>Or our primary question might be related to the effect of <code>am</code>, in which case we
+might prefer to incude separate columns for US and non-US cars:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xtabs</span>(<span class="op">~</span>am<span class="op">+</span>gear<span class="op">+</span>cyl, mtcars) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as_data_frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span>reshape2<span class="op">::</span><span class="kw">dcast</span>(gear<span class="op">+</span>cyl<span class="op">~</span><span class="kw">paste0</span>(<span class="st">&quot;US=&quot;</span>, am)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pander</span>()
+Using n as value column<span class="op">:</span><span class="st"> </span>use value.var to override.</code></pre>
+<table style="width:38%;">
+<colgroup>
+<col width="9%" />
+<col width="8%" />
+<col width="9%" />
+<col width="9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">gear</th>
+<th align="center">cyl</th>
+<th align="center">US=0</th>
+<th align="center">US=1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">4</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">3</td>
+<td align="center">6</td>
+<td align="center">2</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">8</td>
+<td align="center">12</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">4</td>
+<td align="center">2</td>
+<td align="center">6</td>
+</tr>
+<tr class="odd">
+<td align="center">4</td>
+<td align="center">6</td>
+<td align="center">2</td>
+<td align="center">2</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">8</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">4</td>
+<td align="center">0</td>
+<td align="center">2</td>
+</tr>
+<tr class="even">
+<td align="center">5</td>
+<td align="center">6</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">8</td>
+<td align="center">0</td>
+<td align="center">2</td>
+</tr>
+</tbody>
+</table>
 
 </div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="nonparametrics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="correlations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

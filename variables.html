@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Naming things | Just Enough R</title>
+  <meta name="description" content="Naming things | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Naming things | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Naming things | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="first-commands.html">
+<link rel="next" href="vectors-and-lists.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
+<div id="variables" class="section level2 unnumbered">
+<h2>Naming things</h2>
+<p>We can assign labels to the results of calculations and other parts of our
+analyses to keep track of them.</p>
+<p>To assign labels we use the <code>&lt;-</code> symbol. The <code>&lt;-</code> symbol points from the value
+we want to store, to the name we want to use. For example:</p>
+<pre class="sourceCode r"><code class="sourceCode r">the_magic_number &lt;-<span class="st"> </span><span class="dv">3</span></code></pre>
+<p>This assigns the value <code>3</code> to the variable <code>the_magic_number</code>.</p>
+<p>This block wouldn’t display anything because assigning a variable doesn’t create
+any output.</p>
+<p>To both assign a variable <em>and</em> display it we would type:</p>
+<pre class="sourceCode r"><code class="sourceCode r">the_magic_number &lt;-<span class="st"> </span><span class="dv">3</span>
+the_magic_number
+[<span class="dv">1</span>] <span class="dv">3</span></code></pre>
+<p>Or we can use a shortcut: if we wrap the line in parentheses this both makes the
+assignment and prints the result to the console:</p>
+<pre class="sourceCode r"><code class="sourceCode r">(i_am_a_new_variable &lt;-<span class="st"> </span><span class="dv">22</span>)
+[<span class="dv">1</span>] <span class="dv">22</span></code></pre>
+<p>We can also do calculations as we assign variables:</p>
+<pre class="sourceCode r"><code class="sourceCode r">one_score &lt;-<span class="st"> </span><span class="dv">20</span>
+(four_score_years_and_ten &lt;-<span class="st"> </span>one_score <span class="op">*</span><span class="st"> </span><span class="dv">4</span> <span class="op">+</span><span class="st"> </span><span class="dv">10</span>)
+[<span class="dv">1</span>] <span class="dv">90</span></code></pre>
+<div class="tip">
+<p>We can give <em>anything</em> a label by assigning it to a variable.</p>
+<p>It doesn’t have to be a number; we can also assign letters, words, graphics, the
+results of a statistical model, or <em>lists</em> of any of these things.</p>
+<p>This will come in handy later.</p>
 </div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
-<ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
-</ul>
-</div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
-
-</div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="first-commands.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="vectors-and-lists.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Reshaping | Just Enough R</title>
+  <meta name="description" content="Reshaping | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Reshaping | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Reshaping | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="tidyingdata.html">
+<link rel="next" href="summarising-data.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,482 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
+<div id="reshaping" class="section level2 unnumbered">
+<h2>Reshaping</h2>
+<!-- <div style="width:100%;height:0;padding-bottom:75%;position:relative;"><iframe src="https://giphy.com/embed/J42u1BTrks9eU" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/funny-transformer-J42u1BTrks9eU">via GIPHY</a></p>
+ -->
+<p>This section will probably require more attention than any other in the guide,
+but will likely be one of the most useful things you learn in R.</p>
+<p>As previously discussed, most things work best in R if you have data in <em>long
+format</em>. This means we prefer data that look like this:</p>
+<table style="width:39%;">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">person</th>
+<th align="center">time</th>
+<th align="center">outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">Time 1</td>
+<td align="center">21.29</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">Time 1</td>
+<td align="center">23.83</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">Time 1</td>
+<td align="center">26.46</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">Time 2</td>
+<td align="center">22.71</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">Time 2</td>
+<td align="center">17.31</td>
+</tr>
+<tr class="even">
+<td align="center">3</td>
+<td align="center">Time 2</td>
+<td align="center">22.72</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">Time 3</td>
+<td align="center">21.46</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">Time 3</td>
+<td align="center">18.63</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">Time 3</td>
+<td align="center">18.82</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">Time 4</td>
+<td align="center">12.85</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">Time 4</td>
+<td align="center">18.43</td>
+</tr>
+<tr class="even">
+<td align="center">3</td>
+<td align="center">Time 4</td>
+<td align="center">21.7</td>
+</tr>
+</tbody>
+</table>
+<p>And NOT like this:</p>
+<table style="width:62%;">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">person</th>
+<th align="center">Time 1</th>
+<th align="center">Time 2</th>
+<th align="center">Time 3</th>
+<th align="center">Time 4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">21.29</td>
+<td align="center">22.71</td>
+<td align="center">21.46</td>
+<td align="center">12.85</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">23.83</td>
+<td align="center">17.31</td>
+<td align="center">18.63</td>
+<td align="center">18.43</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">26.46</td>
+<td align="center">22.72</td>
+<td align="center">18.82</td>
+<td align="center">21.7</td>
+</tr>
+</tbody>
+</table>
+<p>In long format data:</p>
 <ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
+<li>each row of the dataframe corresponds to a single measurement occasion</li>
+<li>each column corresponds to a variable which is measured</li>
 </ul>
+<p>Fortunately it’s fairly easy to move between the two formats, provided your
+variables are named in a consistent way.</p>
+<div id="wide-to-long" class="section level4 unnumbered">
+<h4>Wide to long format</h4>
+<p>This is the most common requirement. Often you will have several columns which
+actually measure the same thing, and you will need to convert these two two
+columns - a ‘key’, and a value.</p>
+<p>For example, let’s say we measure patients on 10 days:</p>
+<pre class="sourceCode r"><code class="sourceCode r">sleep.wide <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">4</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pander</span>(<span class="dt">caption=</span><span class="st">&quot;Data for the first 4 subjects&quot;</span>)</code></pre>
+<table>
+<caption>Data for the first 4 subjects</caption>
+<colgroup>
+<col width="11%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Subject</th>
+<th align="center">Day.0</th>
+<th align="center">Day.1</th>
+<th align="center">Day.2</th>
+<th align="center">Day.3</th>
+<th align="center">Day.4</th>
+<th align="center">Day.5</th>
+<th align="center">Day.6</th>
+<th align="center">Day.7</th>
+<th align="center">Day.8</th>
+<th align="center">Day.9</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">249.6</td>
+<td align="center">258.7</td>
+<td align="center">250.8</td>
+<td align="center">321.4</td>
+<td align="center">356.9</td>
+<td align="center">414.7</td>
+<td align="center">382.2</td>
+<td align="center">290.1</td>
+<td align="center">430.6</td>
+<td align="center">466.4</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">222.7</td>
+<td align="center">205.3</td>
+<td align="center">203</td>
+<td align="center">204.7</td>
+<td align="center">207.7</td>
+<td align="center">216</td>
+<td align="center">213.6</td>
+<td align="center">217.7</td>
+<td align="center">224.3</td>
+<td align="center">237.3</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">199.1</td>
+<td align="center">194.3</td>
+<td align="center">234.3</td>
+<td align="center">232.8</td>
+<td align="center">229.3</td>
+<td align="center">220.5</td>
+<td align="center">235.4</td>
+<td align="center">255.8</td>
+<td align="center">261</td>
+<td align="center">247.5</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">321.5</td>
+<td align="center">300.4</td>
+<td align="center">283.9</td>
+<td align="center">285.1</td>
+<td align="center">285.8</td>
+<td align="center">297.6</td>
+<td align="center">280.2</td>
+<td align="center">318.3</td>
+<td align="center">305.3</td>
+<td align="center">354</td>
+</tr>
+</tbody>
+</table>
+<p>We want to convert RT measurements on each Day to a single variable, and create
+a new variable to keep track of what <code>Day</code> the measurement was taken:</p>
+<p>The <code>melt()</code> function in the <code>reshape2::</code> package does this for us:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(reshape2)
+sleep.long &lt;-<span class="st"> </span>sleep.wide <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">melt</span>(<span class="dt">id.var=</span><span class="st">&quot;Subject&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(Subject, variable)
+
+sleep.long <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">12</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>pander</code></pre>
+<table style="width:40%;">
+<colgroup>
+<col width="13%" />
+<col width="15%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Subject</th>
+<th align="center">variable</th>
+<th align="center">value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">Day.0</td>
+<td align="center">249.6</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">Day.1</td>
+<td align="center">258.7</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">Day.2</td>
+<td align="center">250.8</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">Day.3</td>
+<td align="center">321.4</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">Day.4</td>
+<td align="center">356.9</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">Day.5</td>
+<td align="center">414.7</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">Day.6</td>
+<td align="center">382.2</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">Day.7</td>
+<td align="center">290.1</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">Day.8</td>
+<td align="center">430.6</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">Day.9</td>
+<td align="center">466.4</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">Day.0</td>
+<td align="center">222.7</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">Day.1</td>
+<td align="center">205.3</td>
+</tr>
+</tbody>
+</table>
+<p>Here melt has created two new variable: <code>variable</code>, which keeps track of what
+was measured, and <code>value</code> which contains the score. This is the format we need
+when <a href="graphics.html#graphics">plotting graphs</a> and running
+<a href="linear-models-simple.html#linear-models-simple">regression and Anova models</a>.</p>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
-
+<div id="long-to-wide" class="section level4 unnumbered">
+<h4>Long to wide format</h4>
+<p>To continue the example from above, these are long form data we just made:</p>
+<pre class="sourceCode r"><code class="sourceCode r">sleep.long <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pander</span>(<span class="dt">caption=</span><span class="st">&quot;First 3 rows in the long format dataset&quot;</span>)</code></pre>
+<table style="width:40%;">
+<caption>First 3 rows in the long format dataset</caption>
+<colgroup>
+<col width="13%" />
+<col width="15%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Subject</th>
+<th align="center">variable</th>
+<th align="center">value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">Day.0</td>
+<td align="center">249.6</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">Day.1</td>
+<td align="center">258.7</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">Day.2</td>
+<td align="center">250.8</td>
+</tr>
+</tbody>
+</table>
+<p>We can convert these back to the original wide format using <code>dcast</code>, again in
+the <code>reshape2</code> package. The name of the <code>dcast</code> function indicates we can ‘cast’
+a dataframe (the d prefix). So here, casting means the opposite of ‘melting’.</p>
+<p>Using <code>dcast</code> is a little more fiddly than <code>melt</code> because we have to say <em>how</em>
+we want the data spread wide. In this example we could either have:</p>
+<ul>
+<li>Columns for each day, with rows for each subject</li>
+<li>Columns for each subject, with rows for each day</li>
+</ul>
+<p>Although it’s obvious to <em>us</em> which format we want, we have to be explicit for R
+to get it right.</p>
+<p>We do this using a <a href="linear-models-simple.html#formulae">formula</a>, which we’ll see again in the regression
+section.</p>
+<p>Each formula has two sides, left and right, separated by the tilde (<code>~</code>) symbol.
+On the left hand side we say which variable we want to keep in rows. On the
+right hand side we say which variables to convert to columns. So, for example:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># rows per subject, columns per day</span>
+sleep.long <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">dcast</span>(Subject<span class="op">~</span>variable) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>)
+  Subject    Day<span class="fl">.0</span>    Day<span class="fl">.1</span>    Day<span class="fl">.2</span>    Day<span class="fl">.3</span>    Day<span class="fl">.4</span>    Day<span class="fl">.5</span>    Day<span class="fl">.6</span>
+<span class="dv">1</span>       <span class="dv">1</span> <span class="fl">249.5600</span> <span class="fl">258.7047</span> <span class="fl">250.8006</span> <span class="fl">321.4398</span> <span class="fl">356.8519</span> <span class="fl">414.6901</span> <span class="fl">382.2038</span>
+<span class="dv">2</span>       <span class="dv">2</span> <span class="fl">222.7339</span> <span class="fl">205.2658</span> <span class="fl">202.9778</span> <span class="fl">204.7070</span> <span class="fl">207.7161</span> <span class="fl">215.9618</span> <span class="fl">213.6303</span>
+<span class="dv">3</span>       <span class="dv">3</span> <span class="fl">199.0539</span> <span class="fl">194.3322</span> <span class="fl">234.3200</span> <span class="fl">232.8416</span> <span class="fl">229.3074</span> <span class="fl">220.4579</span> <span class="fl">235.4208</span>
+     Day<span class="fl">.7</span>    Day<span class="fl">.8</span>    Day<span class="fl">.9</span>
+<span class="dv">1</span> <span class="fl">290.1486</span> <span class="fl">430.5853</span> <span class="fl">466.3535</span>
+<span class="dv">2</span> <span class="fl">217.7272</span> <span class="fl">224.2957</span> <span class="fl">237.3142</span>
+<span class="dv">3</span> <span class="fl">255.7511</span> <span class="fl">261.0125</span> <span class="fl">247.5153</span></code></pre>
+<p>To compare, we can convert so each Subject has a column by reversing the
+formula:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># note we select only the first 7 Subjects to</span>
+<span class="co"># keep the table to a manageable size</span>
+sleep.long <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(Subject <span class="op">&lt;</span><span class="st"> </span><span class="dv">8</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">dcast</span>(variable<span class="op">~</span>Subject)
+   variable        <span class="dv">1</span>        <span class="dv">2</span>        <span class="dv">3</span>        <span class="dv">4</span>        <span class="dv">5</span>        <span class="dv">6</span>        <span class="dv">7</span>
+<span class="dv">1</span>     Day<span class="fl">.0</span> <span class="fl">249.5600</span> <span class="fl">222.7339</span> <span class="fl">199.0539</span> <span class="fl">321.5426</span> <span class="fl">287.6079</span> <span class="fl">234.8606</span> <span class="fl">283.8424</span>
+<span class="dv">2</span>     Day<span class="fl">.1</span> <span class="fl">258.7047</span> <span class="fl">205.2658</span> <span class="fl">194.3322</span> <span class="fl">300.4002</span> <span class="fl">285.0000</span> <span class="fl">242.8118</span> <span class="fl">289.5550</span>
+<span class="dv">3</span>     Day<span class="fl">.2</span> <span class="fl">250.8006</span> <span class="fl">202.9778</span> <span class="fl">234.3200</span> <span class="fl">283.8565</span> <span class="fl">301.8206</span> <span class="fl">272.9613</span> <span class="fl">276.7693</span>
+<span class="dv">4</span>     Day<span class="fl">.3</span> <span class="fl">321.4398</span> <span class="fl">204.7070</span> <span class="fl">232.8416</span> <span class="fl">285.1330</span> <span class="fl">320.1153</span> <span class="fl">309.7688</span> <span class="fl">299.8097</span>
+<span class="dv">5</span>     Day<span class="fl">.4</span> <span class="fl">356.8519</span> <span class="fl">207.7161</span> <span class="fl">229.3074</span> <span class="fl">285.7973</span> <span class="fl">316.2773</span> <span class="fl">317.4629</span> <span class="fl">297.1710</span>
+<span class="dv">6</span>     Day<span class="fl">.5</span> <span class="fl">414.6901</span> <span class="fl">215.9618</span> <span class="fl">220.4579</span> <span class="fl">297.5855</span> <span class="fl">293.3187</span> <span class="fl">309.9976</span> <span class="fl">338.1665</span>
+<span class="dv">7</span>     Day<span class="fl">.6</span> <span class="fl">382.2038</span> <span class="fl">213.6303</span> <span class="fl">235.4208</span> <span class="fl">280.2396</span> <span class="fl">290.0750</span> <span class="fl">454.1619</span> <span class="fl">332.0265</span>
+<span class="dv">8</span>     Day<span class="fl">.7</span> <span class="fl">290.1486</span> <span class="fl">217.7272</span> <span class="fl">255.7511</span> <span class="fl">318.2613</span> <span class="fl">334.8177</span> <span class="fl">346.8311</span> <span class="fl">348.8399</span>
+<span class="dv">9</span>     Day<span class="fl">.8</span> <span class="fl">430.5853</span> <span class="fl">224.2957</span> <span class="fl">261.0125</span> <span class="fl">305.3495</span> <span class="fl">293.7469</span> <span class="fl">330.3003</span> <span class="fl">333.3600</span>
+<span class="dv">10</span>    Day<span class="fl">.9</span> <span class="fl">466.3535</span> <span class="fl">237.3142</span> <span class="fl">247.5153</span> <span class="fl">354.0487</span> <span class="fl">371.5811</span> <span class="fl">253.8644</span> <span class="fl">362.0428</span></code></pre>
+<div id="section-5" class="section level6 unnumbered tip">
+<h6></h6>
+<p>One neat trick when casting is to use <code>paste</code> to give your columns nicer names.
+So for example:</p>
+<pre class="sourceCode r"><code class="sourceCode r">sleep.long <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(Subject <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">dcast</span>(variable<span class="op">~</span><span class="kw">paste0</span>(<span class="st">&quot;Person.&quot;</span>, Subject))
+   variable Person<span class="fl">.1</span> Person<span class="fl">.2</span> Person<span class="fl">.3</span>
+<span class="dv">1</span>     Day<span class="fl">.0</span> <span class="fl">249.5600</span> <span class="fl">222.7339</span> <span class="fl">199.0539</span>
+<span class="dv">2</span>     Day<span class="fl">.1</span> <span class="fl">258.7047</span> <span class="fl">205.2658</span> <span class="fl">194.3322</span>
+<span class="dv">3</span>     Day<span class="fl">.2</span> <span class="fl">250.8006</span> <span class="fl">202.9778</span> <span class="fl">234.3200</span>
+<span class="dv">4</span>     Day<span class="fl">.3</span> <span class="fl">321.4398</span> <span class="fl">204.7070</span> <span class="fl">232.8416</span>
+<span class="dv">5</span>     Day<span class="fl">.4</span> <span class="fl">356.8519</span> <span class="fl">207.7161</span> <span class="fl">229.3074</span>
+<span class="dv">6</span>     Day<span class="fl">.5</span> <span class="fl">414.6901</span> <span class="fl">215.9618</span> <span class="fl">220.4579</span>
+<span class="dv">7</span>     Day<span class="fl">.6</span> <span class="fl">382.2038</span> <span class="fl">213.6303</span> <span class="fl">235.4208</span>
+<span class="dv">8</span>     Day<span class="fl">.7</span> <span class="fl">290.1486</span> <span class="fl">217.7272</span> <span class="fl">255.7511</span>
+<span class="dv">9</span>     Day<span class="fl">.8</span> <span class="fl">430.5853</span> <span class="fl">224.2957</span> <span class="fl">261.0125</span>
+<span class="dv">10</span>    Day<span class="fl">.9</span> <span class="fl">466.3535</span> <span class="fl">237.3142</span> <span class="fl">247.5153</span></code></pre>
+<p>Notice we used <code>paste0</code> rather than <code>paste</code> to avoid spaces in variable names,
+which is allowed but can be a pain.
+<a href="string-handling.html#string-handling">See more on working with character strings in a later section</a>.</p>
+</div>
+<div id="section-6" class="section level5 unnumbered">
+<h5></h5>
+<p>For a more detailed explanation and various other methods for reshaping data,
+see: <a href="http://r4ds.had.co.nz/tidy-data.html" class="uri">http://r4ds.had.co.nz/tidy-data.html</a></p>
 </div>
 </div>
+<div id="which-reshape-package" class="section level3 unnumbered">
+<h3>Which package should you use to reshape data?</h3>
+<p>There are three main options:</p>
+<ul>
+<li><code>tidyr::</code>, which comes as part of the <code>tidyverse</code>, using <code>gather</code> and
+<code>spread()</code></li>
+<li><code>reshape2::</code> using <code>melt()</code> and <code>dcast()</code></li>
+<li><code>data.table::</code> also using functions called <code>melt()</code> and <code>dcast()</code> (but which
+are slightly different from those in <code>reshape2</code>)</li>
+</ul>
+<p>This post walks through some of the differences:
+<a href="https://www.r-bloggers.com/how-to-reshape-data-in-r-tidyr-vs-reshape2/" class="uri">https://www.r-bloggers.com/how-to-reshape-data-in-r-tidyr-vs-reshape2/</a> but the
+short answer is whichever you find simplest and easiest to remember (for me
+that’s <code>melt</code> and <code>dcast</code>).</p>
+<p>`</p>
+</div>
+<div id="aggregating-and-reshaping-at-the-same-time" class="section level3 unnumbered">
+<h3>Aggregating and reshaping at the same time</h3>
+<p>One common trick when reshaping is to convert a datafile which has multiple rows
+and columns per person to one with only a single row per person. That is, we
+aggregae by using a summary (perhaps the mean) and reshape at the same time.</p>
+<p>Although useful this isn’t covered in this section, because it is combining two
+techniques:</p>
+<ul>
+<li>Reshaping (i.e. from long to wide or back)</li>
+<li>Aggregating or summarising (converting multiple rows to one)</li>
+</ul>
+<p>In the next section we cover <a href="summarising-data.html#summarising-data">summarising data</a>, and
+introduce the ‘split-apply-combine’ method for summarising.</p>
+<p>Once you have a good grasp of this, you could check out the
+<a href="dplyr-general.html#fancy-reshaping">‘fancy reshaping’ section</a> which does provide examples of
+aggregating and reshaping simultaneously.</p>
 
-
-
-<div class="footnotes">
+<p>– title: ‘Summarising data’</p>
 <hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
 </div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tidyingdata.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="summarising-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

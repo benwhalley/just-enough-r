@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Confirmatory factor analysis (CFA) | Just Enough R</title>
+  <meta name="description" content="Confirmatory factor analysis (CFA) | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Confirmatory factor analysis (CFA) | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Confirmatory factor analysis (CFA) | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="path-models.html">
+<link rel="next" href="model-fit.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,252 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
+<div id="cfa" class="section level2 unnumbered">
+<h2>Confirmatory factor analysis (CFA)</h2>
+<p>In psychology we make observations, but we’re often interested in <em>hypothetical
+constructs</em>, e.g. Anxiety, working memory. We can’t measure these directly, but
+we assume that our observations are related to these constructs in some way.</p>
+<p>Regression and related techniques (e.g. Anova) require us to assume that our
+outcome variables are good indices of these underlying constructs, and that our
+predictor variables are measured without any error.</p>
+<p>When outcomes are straightforward observed variables like plant yield or weight
+reduction, and where predictors are experimentally manipulated, then these
+assumptions are reasonable. However in many applied fields these are not
+reasonable assumptions to make: For example, to assume that depression or
+working memory are indexed in a straightforward way by responses to a depression
+questionnaire or performance on a laboratory task is naive. Likewise, we should
+not assume that a construct like working memory is measured without error when
+we use it to predict some other outcome (e.g. exam success).</p>
+<p>Confirmatory factor analysis (CFA), structural equation models (SEM) and related
+techniques are designed to help researchers deal with these <em>imperfections in
+our observations</em>, and can help to explore the correspondence between our
+measures and the underlying constructs of interest.</p>
+<div id="latent-variables" class="section level3 unnumbered">
+<h3>Latent variables</h3>
+<p>CFA and SEM introduce the concept of a <em>latent variable</em> which is either the
+cause of, or formed by, the observations we make. Latent variables aren’t quite
+the same thing as hypothetical constructs, but they are similar many in some
+ways. The original distinction between hypothetical constructs and intervening
+variables is quite interesting in this context, see Maccorquodale and Meehl
+(1948).</p>
+<p>To achieve this, CFA requires that researchers to make predictions about the
+patterns of correlations they will observe in their observations, based on the
+process they think is generating the data. CFA provides a mechanism to test and
+compare different hypotheses about these patterns, which correspond to different
+models of the underlying process which generates the data.</p>
+<p>It is conventional within CFA and SEM to extend the graphical models used to
+describe path models (see above). In these diagrams, square edged boxes
+represent observed variables, and rounded or oval boxes represent latent
+variables, sometimes called factors:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">knit_gv</span>(<span class="st">&#39;</span>
+<span class="st">Factor -&gt; a</span>
+<span class="st">Factor -&gt; b</span>
+<span class="st">Factor -&gt; c</span>
+<span class="st">Factor -&gt; d</span>
+<span class="st">a[shape=rectangle]</span>
+<span class="st">b[shape=rectangle]</span>
+<span class="st">c[shape=rectangle]</span>
+<span class="st">d[shape=rectangle]</span>
+<span class="st">&#39;</span>)</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-12"></span>
+<img src="assets/9345411.png" alt="Example of a CFA model, including one latent variable or factor, and 4 observed variables." width="960" />
+<p class="caption">
+Figure 10.1: Example of a CFA model, including one latent variable or factor, and 4 observed variables.
+</p>
 </div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
+<p>CFA models can also include multiple latent variables, and estimate the
+covariance between them:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">knit_gv</span>(<span class="st">&#39;</span>
+<span class="st">        Affective -&gt; a</span>
+<span class="st">Affective -&gt; b</span>
+<span class="st">Affective -&gt; c</span>
+<span class="st">Cognitive -&gt; d</span>
+<span class="st">Cognitive -&gt; e</span>
+<span class="st">Cognitive -&gt; f</span>
+<span class="st">Affective -&gt; Cognitive:nw [dir=both]</span>
+
+<span class="st">a [shape=box]</span>
+<span class="st">b [shape=box]</span>
+<span class="st">c [shape=box]</span>
+<span class="st">d [shape=box]</span>
+<span class="st">e [shape=box]</span>
+<span class="st">f [shape=box]</span>
+
+<span class="st">&#39;</span>)</code></pre>
+<p><img src="assets/4653102.png" width="792" /></p>
+<p>SEM models extend this by allowing regression paths between latent variables and
+observed or other latent variables:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">knit_gv</span>(<span class="st">&#39;</span>
+<span class="st">        Affective -&gt; a</span>
+<span class="st">Affective -&gt; b</span>
+<span class="st">Affective -&gt; c</span>
+<span class="st">Cognitive -&gt; d</span>
+<span class="st">Cognitive -&gt; e</span>
+<span class="st">Cognitive -&gt; f</span>
+<span class="st">Affective -&gt; Cognitive:nw [dir=both]</span>
+
+<span class="st">a [shape=box]</span>
+<span class="st">b [shape=box]</span>
+<span class="st">c [shape=box]</span>
+<span class="st">d [shape=box]</span>
+<span class="st">e [shape=box]</span>
+<span class="st">f [shape=box]</span>
+
+
+<span class="st">Stress -&gt; g</span>
+<span class="st">Stress -&gt; h</span>
+<span class="st">Stress -&gt; i</span>
+<span class="st">g [shape=box]</span>
+<span class="st">h [shape=box]</span>
+<span class="st">i [shape=box]</span>
+
+<span class="st">Affective -&gt; Stress</span>
+
+<span class="st">        &#39;</span>)</code></pre>
+<p><img src="assets/4462595.png" width="1174" /></p>
+<p>For now though, we will focus on building a CFA model. Later we’ll show how a
+<em>well fitting</em> measurement model can be used to test hypotheses related to the
+structural relations between latent variables.</p>
+</div>
+<div id="defining-a-cfa-model" class="section level3 unnumbered">
+<h3>Defining a CFA model</h3>
+<p>First, open some data and check that all looks well. This is a classic CFA
+example — see the help file for more info.</p>
+<pre class="sourceCode r"><code class="sourceCode r">hz &lt;-<span class="st"> </span>lavaan<span class="op">::</span>HolzingerSwineford1939
+hz <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">glimpse</span>()
+Observations<span class="op">:</span><span class="st"> </span><span class="dv">301</span>
+Variables<span class="op">:</span><span class="st"> </span><span class="dv">15</span>
+<span class="op">$</span><span class="st"> </span>id     <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">15</span>, <span class="dv">16</span>, <span class="dv">17</span>, 18…
+<span class="op">$</span><span class="st"> </span>sex    <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, …
+<span class="op">$</span><span class="st"> </span>ageyr  <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">13</span>, <span class="dv">13</span>, <span class="dv">13</span>, <span class="dv">13</span>, <span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">12</span>, 1…
+<span class="op">$</span><span class="st"> </span>agemo  <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">11</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">11</span>, <span class="dv">5</span>, 8…
+<span class="op">$</span><span class="st"> </span>school <span class="op">&lt;</span>fct<span class="op">&gt;</span><span class="st"> </span>Pasteur, Pasteur, Pasteur, Pasteur, Pasteur, Pasteur, Pas…
+<span class="op">$</span><span class="st"> </span>grade  <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>, …
+<span class="op">$</span><span class="st"> </span>x1     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">3.333333</span>, <span class="fl">5.333333</span>, <span class="fl">4.500000</span>, <span class="fl">5.333333</span>, <span class="fl">4.833333</span>, <span class="fl">5.33333</span>…
+<span class="op">$</span><span class="st"> </span>x2     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">7.75</span>, <span class="fl">5.25</span>, <span class="fl">5.25</span>, <span class="fl">7.75</span>, <span class="fl">4.75</span>, <span class="fl">5.00</span>, <span class="fl">6.00</span>, <span class="fl">6.25</span>, <span class="fl">5.75</span>, <span class="fl">5.2</span>…
+<span class="op">$</span><span class="st"> </span>x3     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">0.375</span>, <span class="fl">2.125</span>, <span class="fl">1.875</span>, <span class="fl">3.000</span>, <span class="fl">0.875</span>, <span class="fl">2.250</span>, <span class="fl">1.000</span>, <span class="fl">1.875</span>, 1…
+<span class="op">$</span><span class="st"> </span>x4     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">2.333333</span>, <span class="fl">1.666667</span>, <span class="fl">1.000000</span>, <span class="fl">2.666667</span>, <span class="fl">2.666667</span>, <span class="fl">1.00000</span>…
+<span class="op">$</span><span class="st"> </span>x5     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">5.75</span>, <span class="fl">3.00</span>, <span class="fl">1.75</span>, <span class="fl">4.50</span>, <span class="fl">4.00</span>, <span class="fl">3.00</span>, <span class="fl">6.00</span>, <span class="fl">4.25</span>, <span class="fl">5.75</span>, <span class="fl">5.0</span>…
+<span class="op">$</span><span class="st"> </span>x6     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">1.2857143</span>, <span class="fl">1.2857143</span>, <span class="fl">0.4285714</span>, <span class="fl">2.4285714</span>, <span class="fl">2.5714286</span>, <span class="fl">0.</span>…
+<span class="op">$</span><span class="st"> </span>x7     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">3.391304</span>, <span class="fl">3.782609</span>, <span class="fl">3.260870</span>, <span class="fl">3.000000</span>, <span class="fl">3.695652</span>, <span class="fl">4.34782</span>…
+<span class="op">$</span><span class="st"> </span>x8     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">5.75</span>, <span class="fl">6.25</span>, <span class="fl">3.90</span>, <span class="fl">5.30</span>, <span class="fl">6.30</span>, <span class="fl">6.65</span>, <span class="fl">6.20</span>, <span class="fl">5.15</span>, <span class="fl">4.65</span>, <span class="fl">4.5</span>…
+<span class="op">$</span><span class="st"> </span>x9     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">6.361111</span>, <span class="fl">7.916667</span>, <span class="fl">4.416667</span>, <span class="fl">4.861111</span>, <span class="fl">5.916667</span>, <span class="fl">7.50000</span>…</code></pre>
+<p>As noted above, to define models in <code>lavaan</code> you must specify the relationships
+between variables in a text format. A full
+<a href="http://lavaan.ugent.be/tutorial/syntax1.html">guide to this lavaan model syntax is available on the project website</a>.</p>
+<p>For CFA models, like path models, the format is fairly simple, and resembles a
+series of linear models, written over several lines.</p>
+<p>In the model below there are three latent variables, <code>visual</code>, <code>writing</code> and
+<code>maths</code>. The latent variable names are followed by =~ which means ‘is manifested
+by’, and then the observed variables, our measures for the latent variable, are
+listed, separated by the <code>+</code> symbol.</p>
+<pre class="sourceCode r"><code class="sourceCode r">hz.model &lt;-<span class="st"> &#39;</span>
+<span class="st">visual =~ x1 + x2 + x3</span>
+<span class="st">writing =~ x4 + x5 + x6</span>
+<span class="st">maths =~ x7 + x8 + x9&#39;</span></code></pre>
+<p>Note that we have saved our model specification/syntax in a variable named
+<code>hz.model</code>.</p>
+<p>The other special symbols in the <code>lavaan</code> syntax which can be used for CFA
+models are:</p>
 <ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
+<li><p><code>a ~~ b</code>, which represents a <em>covariance</em>.</p></li>
+<li><p><code>a ~~ a</code>, which is a <em>variance</em> (you can think of this as the covariance of
+a variable with itself)</p></li>
 </ul>
-</div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+<p>To run the analysis we again pass the model specification and the data to the
+<code>cfa()</code> function:</p>
+<pre class="sourceCode r"><code class="sourceCode r">hz.fit &lt;-<span class="st"> </span><span class="kw">cfa</span>(hz.model, <span class="dt">data=</span>hz)
+<span class="kw">summary</span>(hz.fit, <span class="dt">standardized=</span><span class="ot">TRUE</span>)
+lavaan <span class="fl">0.6</span><span class="dv">-3</span> ended normally after <span class="dv">35</span> iterations
 
-</div>
-</div>
+  Optimization method                           NLMINB
+  Number of free parameters                         <span class="dv">21</span>
 
+  Number of observations                           <span class="dv">301</span>
 
+  Estimator                                         ML
+  Model Fit Test Statistic                      <span class="fl">85.306</span>
+  Degrees of freedom                                <span class="dv">24</span>
+  P<span class="op">-</span><span class="kw">value</span> (Chi<span class="op">-</span>square)                           <span class="fl">0.000</span>
 
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
+Parameter Estimates<span class="op">:</span>
+
+<span class="st">  </span>Information                                 Expected
+  Information <span class="kw">saturated</span> (h1) model          Structured
+  Standard Errors                             Standard
+
+Latent Variables<span class="op">:</span>
+<span class="st">                   </span>Estimate  Std.Err  z<span class="op">-</span>value  <span class="kw">P</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)   Std.lv  Std.all
+  visual =<span class="er">~</span><span class="st">                                                             </span>
+<span class="st">    </span>x1                <span class="fl">1.000</span>                               <span class="fl">0.900</span>    <span class="fl">0.772</span>
+    x2                <span class="fl">0.554</span>    <span class="fl">0.100</span>    <span class="fl">5.554</span>    <span class="fl">0.000</span>    <span class="fl">0.498</span>    <span class="fl">0.424</span>
+    x3                <span class="fl">0.729</span>    <span class="fl">0.109</span>    <span class="fl">6.685</span>    <span class="fl">0.000</span>    <span class="fl">0.656</span>    <span class="fl">0.581</span>
+  writing =<span class="er">~</span><span class="st">                                                            </span>
+<span class="st">    </span>x4                <span class="fl">1.000</span>                               <span class="fl">0.990</span>    <span class="fl">0.852</span>
+    x5                <span class="fl">1.113</span>    <span class="fl">0.065</span>   <span class="fl">17.014</span>    <span class="fl">0.000</span>    <span class="fl">1.102</span>    <span class="fl">0.855</span>
+    x6                <span class="fl">0.926</span>    <span class="fl">0.055</span>   <span class="fl">16.703</span>    <span class="fl">0.000</span>    <span class="fl">0.917</span>    <span class="fl">0.838</span>
+  maths =<span class="er">~</span><span class="st">                                                              </span>
+<span class="st">    </span>x7                <span class="fl">1.000</span>                               <span class="fl">0.619</span>    <span class="fl">0.570</span>
+    x8                <span class="fl">1.180</span>    <span class="fl">0.165</span>    <span class="fl">7.152</span>    <span class="fl">0.000</span>    <span class="fl">0.731</span>    <span class="fl">0.723</span>
+    x9                <span class="fl">1.082</span>    <span class="fl">0.151</span>    <span class="fl">7.155</span>    <span class="fl">0.000</span>    <span class="fl">0.670</span>    <span class="fl">0.665</span>
+
+Covariances<span class="op">:</span>
+<span class="st">                   </span>Estimate  Std.Err  z<span class="op">-</span>value  <span class="kw">P</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)   Std.lv  Std.all
+  visual <span class="op">~</span><span class="er">~</span><span class="st">                                                             </span>
+<span class="st">    </span>writing           <span class="fl">0.408</span>    <span class="fl">0.074</span>    <span class="fl">5.552</span>    <span class="fl">0.000</span>    <span class="fl">0.459</span>    <span class="fl">0.459</span>
+    maths             <span class="fl">0.262</span>    <span class="fl">0.056</span>    <span class="fl">4.660</span>    <span class="fl">0.000</span>    <span class="fl">0.471</span>    <span class="fl">0.471</span>
+  writing <span class="op">~</span><span class="er">~</span><span class="st">                                                            </span>
+<span class="st">    </span>maths             <span class="fl">0.173</span>    <span class="fl">0.049</span>    <span class="fl">3.518</span>    <span class="fl">0.000</span>    <span class="fl">0.283</span>    <span class="fl">0.283</span>
+
+Variances<span class="op">:</span>
+<span class="st">                   </span>Estimate  Std.Err  z<span class="op">-</span>value  <span class="kw">P</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)   Std.lv  Std.all
+   .x1                <span class="fl">0.549</span>    <span class="fl">0.114</span>    <span class="fl">4.833</span>    <span class="fl">0.000</span>    <span class="fl">0.549</span>    <span class="fl">0.404</span>
+   .x2                <span class="fl">1.134</span>    <span class="fl">0.102</span>   <span class="fl">11.146</span>    <span class="fl">0.000</span>    <span class="fl">1.134</span>    <span class="fl">0.821</span>
+   .x3                <span class="fl">0.844</span>    <span class="fl">0.091</span>    <span class="fl">9.317</span>    <span class="fl">0.000</span>    <span class="fl">0.844</span>    <span class="fl">0.662</span>
+   .x4                <span class="fl">0.371</span>    <span class="fl">0.048</span>    <span class="fl">7.779</span>    <span class="fl">0.000</span>    <span class="fl">0.371</span>    <span class="fl">0.275</span>
+   .x5                <span class="fl">0.446</span>    <span class="fl">0.058</span>    <span class="fl">7.642</span>    <span class="fl">0.000</span>    <span class="fl">0.446</span>    <span class="fl">0.269</span>
+   .x6                <span class="fl">0.356</span>    <span class="fl">0.043</span>    <span class="fl">8.277</span>    <span class="fl">0.000</span>    <span class="fl">0.356</span>    <span class="fl">0.298</span>
+   .x7                <span class="fl">0.799</span>    <span class="fl">0.081</span>    <span class="fl">9.823</span>    <span class="fl">0.000</span>    <span class="fl">0.799</span>    <span class="fl">0.676</span>
+   .x8                <span class="fl">0.488</span>    <span class="fl">0.074</span>    <span class="fl">6.573</span>    <span class="fl">0.000</span>    <span class="fl">0.488</span>    <span class="fl">0.477</span>
+   .x9                <span class="fl">0.566</span>    <span class="fl">0.071</span>    <span class="fl">8.003</span>    <span class="fl">0.000</span>    <span class="fl">0.566</span>    <span class="fl">0.558</span>
+    visual            <span class="fl">0.809</span>    <span class="fl">0.145</span>    <span class="fl">5.564</span>    <span class="fl">0.000</span>    <span class="fl">1.000</span>    <span class="fl">1.000</span>
+    writing           <span class="fl">0.979</span>    <span class="fl">0.112</span>    <span class="fl">8.737</span>    <span class="fl">0.000</span>    <span class="fl">1.000</span>    <span class="fl">1.000</span>
+    maths             <span class="fl">0.384</span>    <span class="fl">0.086</span>    <span class="fl">4.451</span>    <span class="fl">0.000</span>    <span class="fl">1.000</span>    <span class="fl">1.000</span></code></pre>
+<div id="lavaan-cfa-model-output" class="section level4 unnumbered">
+<h4><code>lavaan</code> CFA Model output</h4>
+<p>The output has three parts:</p>
+<ol style="list-style-type: decimal">
+<li><p>Parameter estimates. The values in the first column are the standardised
+weights from the observed variables to the latent factors.</p></li>
+<li><p>Factor covariances. The values in the first column are the covariances
+between the latent factors.</p></li>
+<li><p>Error variances. The values in the first column are the estimates of each
+observed variable’s error variance.</p></li>
 </ol>
+</div>
+<div id="plotting-models" class="section level4 unnumbered">
+<h4>Plotting models</h4>
+<p>As before, we can use the <code>semPaths()</code> function to visualise the model. This is
+an important step because it helps explain the model to others, and also gives
+you an opportunity to check you have specified your model correctly.</p>
+<pre class="sourceCode r"><code class="sourceCode r">semPlot<span class="op">::</span><span class="kw">semPaths</span>(hz.fit)</code></pre>
+<p><img src="cfa-sem_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>And for ‘final’ models we might want to overplot model parameter estimates (in
+this case, standardised):</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># std refers to standardised estimates. &quot;par&quot; would plot</span>
+<span class="co"># the unstandardised estimates</span>
+semPlot<span class="op">::</span><span class="kw">semPaths</span>(hz.fit, <span class="st">&quot;std&quot;</span>)</code></pre>
+<p><img src="cfa-sem_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="path-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="model-fit.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

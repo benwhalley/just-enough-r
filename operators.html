@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>‘Operators’ | Just Enough R</title>
+  <meta name="description" content="‘Operators’ | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="‘Operators’ | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="‘Operators’ | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="selecting-rows.html">
+<link rel="next" href="sorting.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,155 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
-<ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
-</ul>
-</div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
-
+<div id="operators" class="section level2 unnumbered">
+<h2>‘Operators’</h2>
+<!-- <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/4TYv2PhG89A?rel=0" frameborder="0" allowfullscreen></iframe>
+ -->
+<p>When selecting rows in the <a href="selecting-rows.html#selecting-rows">example above</a> we used two equals
+signs <code>==</code> to select rows where <code>cyl</code> was exactly <code>6</code>.</p>
+<p>As you might guess, there are other ‘operators’ we can use to create filters.</p>
+<p>Rather than describe them, the examples below demonstrate what each of them do.</p>
+<div id="equality-and-matching" class="section level6 unnumbered">
+<h6>Equality and matching</h6>
+<p>As above, to compare a single value we use <code>==</code></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">2</span>
+[<span class="dv">1</span>] <span class="ot">TRUE</span></code></pre>
+<p>And in a filter:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(mtcars, cyl<span class="op">==</span><span class="dv">6</span>)
+   mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+<span class="dv">1</span> <span class="fl">21.0</span>   <span class="dv">6</span> <span class="fl">160.0</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.620</span> <span class="fl">16.46</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span>
+<span class="dv">2</span> <span class="fl">21.0</span>   <span class="dv">6</span> <span class="fl">160.0</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.875</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span>
+<span class="dv">3</span> <span class="fl">21.4</span>   <span class="dv">6</span> <span class="fl">258.0</span> <span class="dv">110</span> <span class="fl">3.08</span> <span class="fl">3.215</span> <span class="fl">19.44</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span>
+<span class="dv">4</span> <span class="fl">18.1</span>   <span class="dv">6</span> <span class="fl">225.0</span> <span class="dv">105</span> <span class="fl">2.76</span> <span class="fl">3.460</span> <span class="fl">20.22</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span>
+<span class="dv">5</span> <span class="fl">19.2</span>   <span class="dv">6</span> <span class="fl">167.6</span> <span class="dv">123</span> <span class="fl">3.92</span> <span class="fl">3.440</span> <span class="fl">18.30</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">4</span>    <span class="dv">4</span>
+<span class="dv">6</span> <span class="fl">17.8</span>   <span class="dv">6</span> <span class="fl">167.6</span> <span class="dv">123</span> <span class="fl">3.92</span> <span class="fl">3.440</span> <span class="fl">18.90</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">4</span>    <span class="dv">4</span>
+<span class="dv">7</span> <span class="fl">19.7</span>   <span class="dv">6</span> <span class="fl">145.0</span> <span class="dv">175</span> <span class="fl">3.62</span> <span class="fl">2.770</span> <span class="fl">15.50</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">5</span>    <span class="dv">6</span></code></pre>
+<div class="explainer">
+<p>You might have noted above that we write <code>==</code> rather than just <code>=</code> to define the
+criteria. This is because most programming languages, including R, use two <code>=</code>
+symbols to distinguish: <em>comparison</em> from <em>assignment</em>.</p>
 </div>
 </div>
+<div id="presenceabsence" class="section level6 unnumbered">
+<h6>Presence/absence</h6>
+<p>To test if a value is in a vector of suitable matches we can use: <code>%in%</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span> <span class="op">%in%</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>
+[<span class="dv">1</span>] <span class="ot">TRUE</span></code></pre>
+<p>Or for an example which is not true:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">100</span> <span class="op">%in%</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>
+[<span class="dv">1</span>] <span class="ot">FALSE</span></code></pre>
+<p>Perhaps less obviously, we can test whether each value in a vector is <em>in</em> a
+second vector.</p>
+<p>This returns a vector of <code>TRUE/FALSE</code> values as long as the first list:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)
+[<span class="dv">1</span>] <span class="ot">FALSE</span>  <span class="ot">TRUE</span></code></pre>
+<p>This is very useful in a dataframe filter:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">filter</span>(mtcars, cyl <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">6</span>)))
+   mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+<span class="dv">1</span> <span class="fl">21.0</span>   <span class="dv">6</span> <span class="fl">160.0</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.620</span> <span class="fl">16.46</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span>
+<span class="dv">2</span> <span class="fl">21.0</span>   <span class="dv">6</span> <span class="fl">160.0</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.875</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span>
+<span class="dv">3</span> <span class="fl">22.8</span>   <span class="dv">4</span> <span class="fl">108.0</span>  <span class="dv">93</span> <span class="fl">3.85</span> <span class="fl">2.320</span> <span class="fl">18.61</span>  <span class="dv">1</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">1</span>
+<span class="dv">4</span> <span class="fl">21.4</span>   <span class="dv">6</span> <span class="fl">258.0</span> <span class="dv">110</span> <span class="fl">3.08</span> <span class="fl">3.215</span> <span class="fl">19.44</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span>
+<span class="dv">5</span> <span class="fl">18.1</span>   <span class="dv">6</span> <span class="fl">225.0</span> <span class="dv">105</span> <span class="fl">2.76</span> <span class="fl">3.460</span> <span class="fl">20.22</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">1</span>
+<span class="dv">6</span> <span class="fl">24.4</span>   <span class="dv">4</span> <span class="fl">146.7</span>  <span class="dv">62</span> <span class="fl">3.69</span> <span class="fl">3.190</span> <span class="fl">20.00</span>  <span class="dv">1</span>  <span class="dv">0</span>    <span class="dv">4</span>    <span class="dv">2</span></code></pre>
+<div class="explainer">
+<p>Here we selected all rows where <code>cyl</code> matched either <code>4</code> or <code>6</code>. That is, where
+the value of <code>cyl</code> was ‘in’ the vector <code>c(4,6)</code>.</p>
+</div>
+</div>
+<div id="greaterless-than" class="section level6 unnumbered">
+<h6>Greater/less than</h6>
+<p>The <code>&lt;</code> and <code>&gt;</code> symbols work as you’d expect:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">filter</span>(mtcars, cyl <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>))
+<span class="kw">head</span>(<span class="kw">filter</span>(mtcars, cyl <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>))</code></pre>
+<p>You can also use <code>&gt;=</code> and <code>&lt;=</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(mtcars, cyl <span class="op">&gt;=</span><span class="st"> </span><span class="dv">6</span>)
+<span class="kw">filter</span>(mtcars, cyl <span class="op">&lt;=</span><span class="st"> </span><span class="dv">4</span>)</code></pre>
+</div>
+<div id="negation-opposite-of" class="section level6 unnumbered">
+<h6>Negation (opposite of)</h6>
+<p>The <code>!</code> is very useful to tell R to reverse an expression; that is, take the
+opposite of the value. In the simplest example:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="op">!</span><span class="ot">TRUE</span>
+[<span class="dv">1</span>] <span class="ot">FALSE</span></code></pre>
+<p>This is helpful because we can reverse the meaning of other expressions:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.na</span>(<span class="ot">NA</span>)
+[<span class="dv">1</span>] <span class="ot">TRUE</span>
+<span class="op">!</span><span class="kw">is.na</span>(<span class="ot">NA</span>)
+[<span class="dv">1</span>] <span class="ot">FALSE</span></code></pre>
+<p>And we can use in dplyr filters.</p>
+<p>Here we select rows where <code>Ozone</code> is missing (<code>NA</code>):</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(airquality, <span class="kw">is.na</span>(Ozone))</code></pre>
+<p>And here we use <code>!</code> to reverse the expression and select rows which are not
+missing:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(airquality, <span class="op">!</span><span class="kw">is.na</span>(Ozone))</code></pre>
+<div class="exercise">
+<p>Try running these commands for yourself and experiment with changing the
+operators to make select different combinations of rows</p>
+</div>
+</div>
+<div id="other-logical-operators" class="section level6 unnumbered">
+<h6>Other logical operators</h6>
+<p>There are operators for ‘and’/‘or’ which can combine other filters.</p>
+<p>Using <code>&amp;</code> (and) with two condtions makes the filter more restrictive:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(mtcars, hp <span class="op">&gt;</span><span class="st"> </span><span class="dv">200</span> <span class="op">&amp;</span><span class="st"> </span>wt <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>)
+   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+<span class="dv">1</span> <span class="fl">10.4</span>   <span class="dv">8</span>  <span class="dv">472</span> <span class="dv">205</span> <span class="fl">2.93</span> <span class="fl">5.250</span> <span class="fl">17.98</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">2</span> <span class="fl">10.4</span>   <span class="dv">8</span>  <span class="dv">460</span> <span class="dv">215</span> <span class="fl">3.00</span> <span class="fl">5.424</span> <span class="fl">17.82</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">3</span> <span class="fl">14.7</span>   <span class="dv">8</span>  <span class="dv">440</span> <span class="dv">230</span> <span class="fl">3.23</span> <span class="fl">5.345</span> <span class="fl">17.42</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span></code></pre>
+<p>In contrast, the pipe symbol, <code>|</code>, means ‘or’, so we match more rows:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(mtcars, hp <span class="op">&gt;</span><span class="st"> </span><span class="dv">200</span> <span class="op">|</span><span class="st"> </span>wt <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>)
+   mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+<span class="dv">1</span> <span class="fl">14.3</span>   <span class="dv">8</span> <span class="fl">360.0</span> <span class="dv">245</span> <span class="fl">3.21</span> <span class="fl">3.570</span> <span class="fl">15.84</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">2</span> <span class="fl">16.4</span>   <span class="dv">8</span> <span class="fl">275.8</span> <span class="dv">180</span> <span class="fl">3.07</span> <span class="fl">4.070</span> <span class="fl">17.40</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">3</span>
+<span class="dv">3</span> <span class="fl">10.4</span>   <span class="dv">8</span> <span class="fl">472.0</span> <span class="dv">205</span> <span class="fl">2.93</span> <span class="fl">5.250</span> <span class="fl">17.98</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">4</span> <span class="fl">10.4</span>   <span class="dv">8</span> <span class="fl">460.0</span> <span class="dv">215</span> <span class="fl">3.00</span> <span class="fl">5.424</span> <span class="fl">17.82</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">5</span> <span class="fl">14.7</span>   <span class="dv">8</span> <span class="fl">440.0</span> <span class="dv">230</span> <span class="fl">3.23</span> <span class="fl">5.345</span> <span class="fl">17.42</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">6</span> <span class="fl">13.3</span>   <span class="dv">8</span> <span class="fl">350.0</span> <span class="dv">245</span> <span class="fl">3.73</span> <span class="fl">3.840</span> <span class="fl">15.41</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">7</span> <span class="fl">15.8</span>   <span class="dv">8</span> <span class="fl">351.0</span> <span class="dv">264</span> <span class="fl">4.22</span> <span class="fl">3.170</span> <span class="fl">14.50</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">5</span>    <span class="dv">4</span>
+<span class="dv">8</span> <span class="fl">15.0</span>   <span class="dv">8</span> <span class="fl">301.0</span> <span class="dv">335</span> <span class="fl">3.54</span> <span class="fl">3.570</span> <span class="fl">14.60</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">5</span>    <span class="dv">8</span></code></pre>
+<p>Finally, you can set the order in which operators are applied by using
+parentheses. This means these expressions are subtly different:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first</span>
+<span class="kw">filter</span>(mtcars, (hp <span class="op">&gt;</span><span class="st"> </span><span class="dv">200</span> <span class="op">&amp;</span><span class="st"> </span>wt <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>) <span class="op">|</span><span class="st"> </span>cyl<span class="op">==</span><span class="dv">8</span>)
+    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+<span class="dv">1</span>  <span class="fl">18.7</span>   <span class="dv">8</span> <span class="fl">360.0</span> <span class="dv">175</span> <span class="fl">3.15</span> <span class="fl">3.440</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">2</span>
+<span class="dv">2</span>  <span class="fl">14.3</span>   <span class="dv">8</span> <span class="fl">360.0</span> <span class="dv">245</span> <span class="fl">3.21</span> <span class="fl">3.570</span> <span class="fl">15.84</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">3</span>  <span class="fl">16.4</span>   <span class="dv">8</span> <span class="fl">275.8</span> <span class="dv">180</span> <span class="fl">3.07</span> <span class="fl">4.070</span> <span class="fl">17.40</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">3</span>
+<span class="dv">4</span>  <span class="fl">17.3</span>   <span class="dv">8</span> <span class="fl">275.8</span> <span class="dv">180</span> <span class="fl">3.07</span> <span class="fl">3.730</span> <span class="fl">17.60</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">3</span>
+<span class="dv">5</span>  <span class="fl">15.2</span>   <span class="dv">8</span> <span class="fl">275.8</span> <span class="dv">180</span> <span class="fl">3.07</span> <span class="fl">3.780</span> <span class="fl">18.00</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">3</span>
+<span class="dv">6</span>  <span class="fl">10.4</span>   <span class="dv">8</span> <span class="fl">472.0</span> <span class="dv">205</span> <span class="fl">2.93</span> <span class="fl">5.250</span> <span class="fl">17.98</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">7</span>  <span class="fl">10.4</span>   <span class="dv">8</span> <span class="fl">460.0</span> <span class="dv">215</span> <span class="fl">3.00</span> <span class="fl">5.424</span> <span class="fl">17.82</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">8</span>  <span class="fl">14.7</span>   <span class="dv">8</span> <span class="fl">440.0</span> <span class="dv">230</span> <span class="fl">3.23</span> <span class="fl">5.345</span> <span class="fl">17.42</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">9</span>  <span class="fl">15.5</span>   <span class="dv">8</span> <span class="fl">318.0</span> <span class="dv">150</span> <span class="fl">2.76</span> <span class="fl">3.520</span> <span class="fl">16.87</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">2</span>
+<span class="dv">10</span> <span class="fl">15.2</span>   <span class="dv">8</span> <span class="fl">304.0</span> <span class="dv">150</span> <span class="fl">3.15</span> <span class="fl">3.435</span> <span class="fl">17.30</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">2</span>
+<span class="dv">11</span> <span class="fl">13.3</span>   <span class="dv">8</span> <span class="fl">350.0</span> <span class="dv">245</span> <span class="fl">3.73</span> <span class="fl">3.840</span> <span class="fl">15.41</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">12</span> <span class="fl">19.2</span>   <span class="dv">8</span> <span class="fl">400.0</span> <span class="dv">175</span> <span class="fl">3.08</span> <span class="fl">3.845</span> <span class="fl">17.05</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">2</span>
+<span class="dv">13</span> <span class="fl">15.8</span>   <span class="dv">8</span> <span class="fl">351.0</span> <span class="dv">264</span> <span class="fl">4.22</span> <span class="fl">3.170</span> <span class="fl">14.50</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">5</span>    <span class="dv">4</span>
+<span class="dv">14</span> <span class="fl">15.0</span>   <span class="dv">8</span> <span class="fl">301.0</span> <span class="dv">335</span> <span class="fl">3.54</span> <span class="fl">3.570</span> <span class="fl">14.60</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">5</span>    <span class="dv">8</span>
 
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
+<span class="co"># second reordered evaluation</span>
+<span class="kw">filter</span>(mtcars, hp <span class="op">&gt;</span><span class="st"> </span><span class="dv">200</span> <span class="op">&amp;</span><span class="st"> </span>(wt <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span> <span class="op">|</span><span class="st"> </span>cyl<span class="op">==</span><span class="dv">8</span>))
+   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+<span class="dv">1</span> <span class="fl">14.3</span>   <span class="dv">8</span>  <span class="dv">360</span> <span class="dv">245</span> <span class="fl">3.21</span> <span class="fl">3.570</span> <span class="fl">15.84</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">2</span> <span class="fl">10.4</span>   <span class="dv">8</span>  <span class="dv">472</span> <span class="dv">205</span> <span class="fl">2.93</span> <span class="fl">5.250</span> <span class="fl">17.98</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">3</span> <span class="fl">10.4</span>   <span class="dv">8</span>  <span class="dv">460</span> <span class="dv">215</span> <span class="fl">3.00</span> <span class="fl">5.424</span> <span class="fl">17.82</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">4</span> <span class="fl">14.7</span>   <span class="dv">8</span>  <span class="dv">440</span> <span class="dv">230</span> <span class="fl">3.23</span> <span class="fl">5.345</span> <span class="fl">17.42</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">5</span> <span class="fl">13.3</span>   <span class="dv">8</span>  <span class="dv">350</span> <span class="dv">245</span> <span class="fl">3.73</span> <span class="fl">3.840</span> <span class="fl">15.41</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">6</span> <span class="fl">15.8</span>   <span class="dv">8</span>  <span class="dv">351</span> <span class="dv">264</span> <span class="fl">4.22</span> <span class="fl">3.170</span> <span class="fl">14.50</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">5</span>    <span class="dv">4</span>
+<span class="dv">7</span> <span class="fl">15.0</span>   <span class="dv">8</span>  <span class="dv">301</span> <span class="dv">335</span> <span class="fl">3.54</span> <span class="fl">3.570</span> <span class="fl">14.60</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">5</span>    <span class="dv">8</span></code></pre>
+<div class="exercise">
+<p>Try writing in plain English the meaning of the two filter expressions above</p>
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="selecting-rows.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sorting.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>15 Unpicking interactions | Just Enough R</title>
+  <meta name="description" content="15 Unpicking interactions | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="15 Unpicking interactions | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="15 Unpicking interactions | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="learning-key-patterns.html">
+<link rel="next" href="predictions-and-margins.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,56 +430,236 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
+<div id="understanding-interactions" class="section level1">
+<h1><span class="header-section-number">15</span> Unpicking interactions</h1>
+<p>Objectives of this section:</p>
 <ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
+<li>Clarify/recap what an interaction is</li>
+<li>Appreciate the importance of visualising interactions</li>
+<li><p>Compare different methods of plotting interactions in raw data</p></li>
+<li>Visualise interactions based on statistical model predictions</li>
+<li>Deal with cases where predictors are both categorical and continuous (or a
+<ol start="1009" style="list-style-type: lower-roman">
+<li></li>
+</ol></li>
+</ul>
+<div id="what-is-an-interaction" class="section level3 unnumbered">
+<h3>What is an interaction?</h3>
+<p>For an interaction to occur we must measure:</p>
+<ul>
+<li>An <em>outcome</em>: severity of injury in a car crash, for example.</li>
+<li>At least 2 <em>predictors</em> of that outcome: e.g. age and gender.</li>
+</ul>
+<p>Let’s think of a scenario where we’ve measured severity of injury after road
+accidents, along with the age and gender of the drivers involved. Let’s
+assume<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>:</p>
+<ul>
+<li>Women are likely to be more seriously injured than men in a crash (a +10
+point increase in severity)</li>
+<li>Drivers over 60 are more likely to injured than younger drivers (+10 point
+severity vs &lt;60 years)</li>
+</ul>
+<p>For an interaction to occur we have to show that, for example:</p>
+<ul>
+<li>If you ware old and also female then you will be more severely injured</li>
+<li>This increase in severity of injury is more than we would expect simply by
+adding the effects for being female (+10 points) and for being over 60 (+10
+points). That is, if an interaction occurs the risk of being older and
+female is &gt; a 20 point increase in severity.</li>
+</ul>
+<p><span class="exercise">Think of some other example of interactions from your own work.</span></p>
+<p><span class="admonition">Interactions capture the idea that the <em>effect</em> of one predictor changes
+depending on the value of another predictor.</span></p>
+</div>
+<div id="visualising-interactions-from-raw-data" class="section level3 unnumbered">
+<h3>Visualising interactions from raw data</h3>
+<p>In the previous section we established that interactions capture the idea that
+the <em>effect</em> of one predictor changes depending on the value of another
+predictor.</p>
+<p>We can see this illustrated in the traditional bar plot below. In the left panel
+we see a dummy dataset in which there is no interaction; in the right panel are
+data which do show evidence of an interaction:</p>
+<pre><code>Warning: `as_data_frame()` is deprecated, use `as_tibble()` (but mind the new semantics).
+This warning is displayed once per session.</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="interactions_files/figure-html/unnamed-chunk-4-1.png" alt="Bar plot of injury severity by age and gender." width="672" />
+<p class="caption">
+Figure 5.1: Bar plot of injury severity by age and gender.
+</p>
+</div>
+<p>However this bar plot might be better if it were re-drawn as a point and line
+plot:</p>
+<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<img src="interactions_files/figure-html/unnamed-chunk-5-1.png" alt="Point and line plot of injury severity by age and gender." width="672" />
+<p class="caption">
+Figure 15.1: Point and line plot of injury severity by age and gender.
+</p>
+</div>
+<p>The reason the point and line plot improves on the bars for a number of reasons:</p>
+<ul>
+<li><p>Readers tend to misinterpret bar plots by assuming that values ‘above’ the
+bar are less likely than values contained ‘within’ the bar, when this is not
+the case <span class="citation">[@newman2012bar]</span>.</p></li>
+<li><p>The main effects are easy to distinguish in the line plot: just ask yourself
+if the lines are horizontal or not, and whether they are separated
+vertically. In contrast, reading the interaction from the bar graph requires
+that we average pairs of bars (sometimes not adjacent to one another) and
+compare them - a much more difficult mental operation.</p></li>
+<li><p>The interaction is easy to spot: Ask yourself if the lines are parallel. If
+they <em>are</em> parallel then the <em>difference</em> between men and women is constant
+for individuals of different ages.</p></li>
 </ul>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+<div id="pain-music-data" class="section level3 unnumbered">
+<h3>A painful example</h3>
+<p>Before setting out to <em>test</em> for an interaction using some kind of statistical
+model, it’s always a good idea to first visualise the relationships between
+outcomes and predictors.</p>
+<p>A student dissertation project investigated the analgesic quality of music
+during an experimental pain stimulus. Music was selected to be either <em>liked</em>
+(or disliked) by participants and was either <em>familiar</em> or unfamiliar to them.
+Pain was rated without music (<code>no.music</code>) and with music (<code>with.music</code>) using a
+10cm visual analog scale anchored with the labels “no pain” and “worst pain
+ever”.</p>
+<pre class="sourceCode r"><code class="sourceCode r">painmusic &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&#39;data/painmusic.RDS&#39;</span>)
+painmusic <span class="op">%&gt;%</span><span class="st"> </span>glimpse
+Observations<span class="op">:</span><span class="st"> </span><span class="dv">112</span>
+Variables<span class="op">:</span><span class="st"> </span><span class="dv">4</span>
+<span class="op">$</span><span class="st"> </span>liked      <span class="op">&lt;</span>fct<span class="op">&gt;</span><span class="st"> </span>Disliked, Disliked, Liked, Disliked, Liked, Liked, Li…
+<span class="op">$</span><span class="st"> </span>familiar   <span class="op">&lt;</span>fct<span class="op">&gt;</span><span class="st"> </span>Familiar, Unfamiliar, Familiar, Familiar, Familiar, F…
+<span class="op">$</span><span class="st"> </span>no.music   <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">7</span>,…
+<span class="op">$</span><span class="st"> </span>with.music <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">8</span>, <span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">8</span>,…</code></pre>
+<p>Before running inferential tests, it would be helpful to see if the data are
+congruent with the study prediction that <em>liked</em> and <em>familiar</em> music would be
+more effective at reducing pain than disliked or unfamiliar music</p>
+<p>We can do this in many different ways. The most common (but not the best) choice
+would be a simple bar plot, which we can create using the <code>stat_summary()</code>
+function from <code>ggplot2</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">painmusic <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">change.in.pain =</span> with.music <span class="op">-</span><span class="st"> </span>no.music) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> familiar, <span class="dt">y=</span>change.in.pain)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>liked) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">geom=</span><span class="st">&quot;bar&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>)</code></pre>
+<p><img src="interactions_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>This gives a pretty clear indication that something is going on, but we have no
+idea about the <em>distribution</em> of the underlying data, and so how much confidence
+we should place in the finding. We are also hiding distributional information
+that could be useful to check that assumptions of models we run later are also
+met (for example of equal variances between groups).</p>
+<p>If we want to preserve more information about the underlying distribution we can
+use density plots, boxplots, or pointrange plots, among others.</p>
+<p>Here we use a grouped density plot. The <code>interaction()</code> function is used to
+automatically create a variable with the 4 possible groupings we can make when
+combining the<code>liked</code> and <code>familiar</code> variables:</p>
+<pre class="sourceCode r"><code class="sourceCode r">painmusic <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">change.in.pain =</span> with.music <span class="op">-</span><span class="st"> </span>no.music) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> change.in.pain,
+             <span class="dt">color =</span> <span class="kw">interaction</span>(familiar<span class="op">:</span>liked))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name=</span><span class="st">&quot;&quot;</span>)</code></pre>
+<p><img src="interactions_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>And here we use a boxplot to achieve similar ends:</p>
+<pre class="sourceCode r"><code class="sourceCode r">painmusic <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">change.in.pain =</span> with.music <span class="op">-</span><span class="st"> </span>no.music) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">interaction</span>(familiar<span class="op">:</span>liked),  <span class="dt">y =</span> change.in.pain)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">linetype=</span><span class="st">&quot;dotted&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>)</code></pre>
+<p><img src="interactions_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>The advantage of these last two plots is that they preserve quite a bit of
+infrmation about the variable of interest. However, they don’t make it easy to
+read the main effects and interaction as we saw for the point-line plot above.</p>
+<p>We can combine some benefits of both plots by adding an error bar to the
+point-line plot:</p>
+<pre class="sourceCode r"><code class="sourceCode r">painmusic <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(liked, with.music <span class="op">-</span><span class="st"> </span>no.music,
+             <span class="dt">group=</span>familiar, <span class="dt">color=</span>familiar)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">geom=</span><span class="st">&quot;pointrange&quot;</span>, <span class="dt">fun.data=</span>mean_se) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">geom=</span><span class="st">&quot;line&quot;</span>,  <span class="dt">fun.data=</span>mean_se) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Pain (VAS) with.music - no.music&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name=</span><span class="st">&quot;&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>)</code></pre>
+<p><img src="interactions_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>This plot doesn’t include all of the information about the distribution of
+effects that the density or boxplots do (for example, we can’t see any asymmetry
+in the distributions any more), but we still get some information about the
+variability of the effect of the experimental conditions on pain by plotting the
+SE of the mean over the top of each point<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></p>
+<p>At this point, especially if your current data include only categorical
+predictors, you might want to move on to the section on
+<a href="predictions-and-margins.html">making predictions from models</a> and visualising
+these.</p>
+</div>
+<div id="continuous-predictors" class="section level3 unnumbered">
+<h3>Continuous predictors</h3>
+<p>The <code>modelr</code> package contains useful functions which enable you to make
+predictions from models, and visualise them easily.</p>
+<p>In this example we run two models, with and without a polynomial effect for
+<code>hp</code>. The predictions from both models are then plotted against one another.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(modelr)
+m1 &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg<span class="op">~</span>hp, <span class="dt">data =</span> mtcars)
+m2 &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(hp, <span class="dv">2</span>), <span class="dt">data =</span> mtcars)
+
+mtcars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather_predictions</span>(m1, m2) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(hp, pred, <span class="dt">color=</span>model)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>()
+<span class="st">`</span><span class="dt">geom_smooth()</span><span class="st">`</span> using method =<span class="st"> &#39;loess&#39;</span> and formula <span class="st">&#39;y ~ x&#39;</span></code></pre>
+<p><img src="interactions_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>We could also plot this over the top of the original data to give an example of
+how the models fit the data.</p>
+<pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">gather_predictions</span>(m1, m2) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(hp, pred, <span class="dt">color=</span>model)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>()  <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y=</span>mpg), <span class="dt">color=</span><span class="st">&quot;grey&quot;</span>)
+<span class="st">`</span><span class="dt">geom_smooth()</span><span class="st">`</span> using method =<span class="st"> &#39;loess&#39;</span> and formula <span class="st">&#39;y ~ x&#39;</span></code></pre>
+<p><img src="interactions_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>The <code>gather_predictions</code> function can also be used to plot interactions.</p>
+<pre class="sourceCode r"><code class="sourceCode r">
+m3 &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg<span class="op">~</span>wt<span class="op">*</span>hp, <span class="dt">data=</span>mtcars)
+<span class="kw">summary</span>(m3)
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">*</span><span class="st"> </span>hp, <span class="dt">data =</span> mtcars)
+
+Residuals<span class="op">:</span>
+<span class="st">    </span>Min      1Q  Median      3Q     Max 
+<span class="fl">-3.0632</span> <span class="fl">-1.6491</span> <span class="fl">-0.7362</span>  <span class="fl">1.4211</span>  <span class="fl">4.5513</span> 
+
+Coefficients<span class="op">:</span>
+<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept) <span class="fl">49.80842</span>    <span class="fl">3.60516</span>  <span class="fl">13.816</span> <span class="fl">5.01e-14</span> <span class="op">**</span><span class="er">*</span>
+wt          <span class="fl">-8.21662</span>    <span class="fl">1.26971</span>  <span class="fl">-6.471</span> <span class="fl">5.20e-07</span> <span class="op">**</span><span class="er">*</span>
+hp          <span class="fl">-0.12010</span>    <span class="fl">0.02470</span>  <span class="fl">-4.863</span> <span class="fl">4.04e-05</span> <span class="op">**</span><span class="er">*</span>
+wt<span class="op">:</span>hp        <span class="fl">0.02785</span>    <span class="fl">0.00742</span>   <span class="fl">3.753</span> <span class="fl">0.000811</span> <span class="op">**</span><span class="er">*</span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">2.153</span> on <span class="dv">28</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.8848</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.8724</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">71.66</span> on <span class="dv">3</span> and <span class="dv">28</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">2.981e-13</span></code></pre>
+<p>By making a new grid of data, using <code>expand.grid()</code>, at values of interest to
+us, we can plot the interaction and see that the effect of <code>wt</code> is diminished as
+<code>hp</code> increases.</p>
+<pre class="sourceCode r"><code class="sourceCode r">grid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">wt =</span> <span class="kw">quantile</span>(mtcars<span class="op">$</span>wt, <span class="dt">probs=</span><span class="kw">c</span>(.<span class="dv">25</span>,.<span class="dv">5</span>,.<span class="dv">75</span>)),
+                    <span class="dt">hp =</span> <span class="kw">quantile</span>(mtcars<span class="op">$</span>hp, <span class="dt">probs=</span><span class="kw">c</span>(.<span class="dv">1</span>, <span class="fl">.25</span>,.<span class="dv">5</span>,.<span class="dv">75</span>, <span class="fl">.9</span>)))
+
+grid <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather_predictions</span>(m3) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(hp, pred, <span class="dt">color=</span><span class="kw">factor</span>(wt))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Predicted mpg&quot;</span>)</code></pre>
+<p><img src="interactions_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 
 </div>
 </div>
-
-
-
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
+<ol start="10">
+<li id="fn10"><p>This example is loosely based on figures reported by
+<span class="citation">@kockelman2002driver</span><a href="understanding-interactions.html#fnref10" class="footnote-back">↩</a></p></li>
+<li id="fn11"><p>We could equally well plot the 95%
+confidence interval for the mean, or the interquartile range)<a href="understanding-interactions.html#fnref11" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -487,8 +667,8 @@ late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="learning-key-patterns.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="predictions-and-margins.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

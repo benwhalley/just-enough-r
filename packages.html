@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Packages | Just Enough R</title>
+  <meta name="description" content="Packages | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Packages | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Packages | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="functions-to-learn-now.html">
+<link rel="next" href="datasets-dataframes.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,56 +430,68 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
+<div id="packages" class="section level2 unnumbered">
+<h2>Packages</h2>
+<p>R has been around for ages. It remains popular because it’s <em>easy for people to
+add to it</em>.</p>
+<p>You can run almost any statistical model and produce many different plots in R
+because users write ‘packages’ which extend the base language. For now we assume
+someone has helped you install all the packages you need<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.</p>
+<p>To <em>access</em> features in packages, you normally load the package with the
+<code>library()</code> function. Running <code>library(&lt;packagename&gt;)</code> loads all the new
+functions within it, and it is then possible to call them from your code. For
+example, typing:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)</code></pre>
+<p>Will load the <code>ggplot2</code> package. You can then call the <code>qplot</code> function it
+provides:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(mtcars<span class="op">$</span>mpg, <span class="dt">bins=</span><span class="dv">7</span>)</code></pre>
+<p><img src="packages_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div class="tip">
+<p>It’s good style to load packages at the top of an R script, or in the first
+chunk of an RMarkdown document. This makes it easy for others to see what
+packages they need to install, and helps avoid certain sorts of errors in your
+code.</p>
 </div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
+<div id="package-namespacing" class="section level4 unnumbered">
+<h4></h4>
+<p>You don’t strictly <em>need</em> to load packages to use their features. If a package
+is installed on your system you can also call a function it provides directly.
+In the example below we call the <code>hist.data.frame</code> from the <code>Hmisc</code> package, and
+obtain histograms of all the variables in the <code>mtcars</code> dataset:</p>
+<pre class="sourceCode r"><code class="sourceCode r">Hmisc<span class="op">::</span><span class="kw">hist.data.frame</span>(mtcars)</code></pre>
+<p><img src="packages_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>The rule is to type <code>package::function(parameters)</code>, where <code>::</code> separates the
+package and function names. Parameters are just the inputs to the function.</p>
+<p>There are two reasons not to load a package before using it:</p>
+<ol style="list-style-type: decimal">
+<li><p>Laziness: it can save typing if you just want to use one function from a
+package, and only once.</p></li>
+<li><p>Explicitness: It’s an unfortunate truth that some function names are repeated
+in different packages. This can be confusing if they work differently or do
+comepletely different things. If you don’t know which package the version you
+are using comes from. Using <code>package_name:function_name</code> can help make things
+explicit.</p></li>
+</ol>
+<div class="exercise">
+<p>Try using the <code>hist.data.frame</code> function in the <code>Hmisc</code> package on the <code>mtcars</code>
 data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
 <ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
+<li>First using the <code>::</code> syntax</li>
+<li>Then load the <code>Hmisc</code> package, and repeat without using the <code>::</code>.</li>
 </ul>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
 
 </div>
 </div>
+<!-- </div> -->
 
 
 
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
+<ol start="5">
+<li id="fn5"><p>See the
+<a href="installation.html">installation guide</a> if this isn’t the case<a href="packages.html#fnref5" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -487,8 +499,8 @@ late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="functions-to-learn-now.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="datasets-dataframes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Sorting | Just Enough R</title>
+  <meta name="description" content="Sorting | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Sorting | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Sorting | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="operators.html">
+<link rel="next" href="pipes.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,63 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
-<ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
-</ul>
-</div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
-
-</div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
+<div id="sorting" class="section level2 unnumbered">
+<h2>Sorting</h2>
+<p>Sort dataframes using <code>arrange()</code> from <code>dplyr</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(Ozone) <span class="op">%&gt;%</span>
+<span class="st">  </span>head
+  Ozone Solar.R Wind Temp Month Day
+<span class="dv">1</span>     <span class="dv">1</span>       <span class="dv">8</span>  <span class="fl">9.7</span>   <span class="dv">59</span>     <span class="dv">5</span>  <span class="dv">21</span>
+<span class="dv">2</span>     <span class="dv">4</span>      <span class="dv">25</span>  <span class="fl">9.7</span>   <span class="dv">61</span>     <span class="dv">5</span>  <span class="dv">23</span>
+<span class="dv">3</span>     <span class="dv">6</span>      <span class="dv">78</span> <span class="fl">18.4</span>   <span class="dv">57</span>     <span class="dv">5</span>  <span class="dv">18</span>
+<span class="dv">4</span>     <span class="dv">7</span>      <span class="ot">NA</span>  <span class="fl">6.9</span>   <span class="dv">74</span>     <span class="dv">5</span>  <span class="dv">11</span>
+<span class="dv">5</span>     <span class="dv">7</span>      <span class="dv">48</span> <span class="fl">14.3</span>   <span class="dv">80</span>     <span class="dv">7</span>  <span class="dv">15</span>
+<span class="dv">6</span>     <span class="dv">7</span>      <span class="dv">49</span> <span class="fl">10.3</span>   <span class="dv">69</span>     <span class="dv">9</span>  <span class="dv">24</span></code></pre>
+<p>By default sorting is ascending, but you can use a minus sign to reverse this:</p>
+<pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="op">-</span>Ozone) <span class="op">%&gt;%</span>
+<span class="st">  </span>head
+  Ozone Solar.R Wind Temp Month Day
+<span class="dv">1</span>   <span class="dv">168</span>     <span class="dv">238</span>  <span class="fl">3.4</span>   <span class="dv">81</span>     <span class="dv">8</span>  <span class="dv">25</span>
+<span class="dv">2</span>   <span class="dv">135</span>     <span class="dv">269</span>  <span class="fl">4.1</span>   <span class="dv">84</span>     <span class="dv">7</span>   <span class="dv">1</span>
+<span class="dv">3</span>   <span class="dv">122</span>     <span class="dv">255</span>  <span class="fl">4.0</span>   <span class="dv">89</span>     <span class="dv">8</span>   <span class="dv">7</span>
+<span class="dv">4</span>   <span class="dv">118</span>     <span class="dv">225</span>  <span class="fl">2.3</span>   <span class="dv">94</span>     <span class="dv">8</span>  <span class="dv">29</span>
+<span class="dv">5</span>   <span class="dv">115</span>     <span class="dv">223</span>  <span class="fl">5.7</span>   <span class="dv">79</span>     <span class="dv">5</span>  <span class="dv">30</span>
+<span class="dv">6</span>   <span class="dv">110</span>     <span class="dv">207</span>  <span class="fl">8.0</span>   <span class="dv">90</span>     <span class="dv">8</span>   <span class="dv">9</span></code></pre>
+<p>You can sort on multiple columns too, but the order of the variables makes a
+difference. This:</p>
+<pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(Month, Ozone) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(Month, <span class="op">-</span>Ozone) <span class="op">%&gt;%</span>
+<span class="st">  </span>head
+  Month Ozone
+<span class="dv">1</span>     <span class="dv">5</span>   <span class="dv">115</span>
+<span class="dv">2</span>     <span class="dv">5</span>    <span class="dv">45</span>
+<span class="dv">3</span>     <span class="dv">5</span>    <span class="dv">41</span>
+<span class="dv">4</span>     <span class="dv">5</span>    <span class="dv">37</span>
+<span class="dv">5</span>     <span class="dv">5</span>    <span class="dv">36</span>
+<span class="dv">6</span>     <span class="dv">5</span>    <span class="dv">34</span></code></pre>
+<p>Is different to this:</p>
+<pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(Month, Ozone) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="op">-</span>Ozone, Month) <span class="op">%&gt;%</span>
+<span class="st">  </span>head
+  Month Ozone
+<span class="dv">1</span>     <span class="dv">8</span>   <span class="dv">168</span>
+<span class="dv">2</span>     <span class="dv">7</span>   <span class="dv">135</span>
+<span class="dv">3</span>     <span class="dv">8</span>   <span class="dv">122</span>
+<span class="dv">4</span>     <span class="dv">8</span>   <span class="dv">118</span>
+<span class="dv">5</span>     <span class="dv">5</span>   <span class="dv">115</span>
+<span class="dv">6</span>     <span class="dv">8</span>   <span class="dv">110</span></code></pre>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="operators.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pipes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

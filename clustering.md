@@ -1,0 +1,40 @@
+
+---
+title: 'Clustered data'
+---
+
+# Non-independence {#clustering}
+
+Psychological data often contains natural _groupings_. In intervention research,
+multiple patients may be treated by individual therapists, or children taught
+within classes, which are further nested within schools; in experimental
+research participants may respond on multiple occasions to a variety of stimuli.
+
+Although disparate in nature, these groupings share a common characteristic:
+they induce _dependency_ between the observations we make. That is, our data
+points are _not independently sampled_ from one another.
+
+What this means is that observations _within_ a particular grouping will tend,
+all other things being equal, be more alike than those from a different group.
+
+#### Why does this matter? {-}
+
+Think of the last quantitative experiment you read about. If you were the author
+of that study, and were offered 10 additional datapoints for 'free', which would
+you choose:
+
+1.  10 extra datapoints from existing participants.
+2.  10 data points from 10 new participants.
+
+In general you will gain more _new information_ from data from a new
+participant. Intuitively we know this is correct because an extra observation
+from someone we have already studies is _less likely to surprise us_ or be
+different from the data we already have than an observation from a new
+participant.
+
+Most traditional statistical models assume that data _are_ sampled independently
+however. And the precision of the inferences we can draw from from statistical
+models is based on the _amount of information we have available_. This means
+that if we violate this assumption of independent sampling we will trick our
+model into thinking we have more information than we really do, and our
+inferences may be wrong.

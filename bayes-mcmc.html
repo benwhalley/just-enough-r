@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>12 Baysian model fitting | Just Enough R</title>
+  <meta name="description" content="12 Baysian model fitting | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="12 Baysian model fitting | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="12 Baysian model fitting | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="gof.html">
+<link rel="next" href="power-analysis.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,212 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
+<div id="bayes-mcmc" class="section level1">
+<h1><span class="header-section-number">12</span> Baysian model fitting</h1>
+<div id="baysian-fitting-of-linear-models-via-mcmc-methods" class="section level3 unnumbered">
+<h3>Baysian fitting of linear models via MCMC methods</h3>
+<p>This is a minimal guide to fitting and interpreting regression and multilevel
+models via MCMC. For <em>much</em> more detail, and a much more comprehensive
+introduction to modern Bayesian analysis see
+<a href="http://www.indiana.edu/~kruschke/DoingBayesianDataAnalysis/">Jon Kruschke’s <em>Doing Bayesian Data Analysis</em></a>.</p>
+<p>Let’s revisit our
+<a href="understanding-interactions.html#pain-music-data">previous example which investigated the effect of familiar and liked music on pain perception</a>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">painmusic &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&#39;data/painmusic.RDS&#39;</span>)
+painmusic <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(liked, with.music <span class="op">-</span><span class="st"> </span>no.music,
+             <span class="dt">group=</span>familiar, <span class="dt">color=</span>familiar)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">geom=</span><span class="st">&quot;pointrange&quot;</span>, <span class="dt">fun.data=</span>mean_se) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">geom=</span><span class="st">&quot;line&quot;</span>,  <span class="dt">fun.data=</span>mean_se) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Pain (VAS) with.music - no.music&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name=</span><span class="st">&quot;&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>)</code></pre>
+<p><img src="bayes-mcmc_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># set sum contrasts</span>
+<span class="kw">options</span>(<span class="dt">contrasts =</span> <span class="kw">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))
+pain.model &lt;-<span class="st"> </span><span class="kw">lm</span>(with.music <span class="op">~</span>
+<span class="st">                   </span>no.music <span class="op">+</span><span class="st"> </span>familiar <span class="op">*</span><span class="st"> </span>liked,
+                 <span class="dt">data=</span>painmusic)
+<span class="kw">summary</span>(pain.model)
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> with.music <span class="op">~</span><span class="st"> </span>no.music <span class="op">+</span><span class="st"> </span>familiar <span class="op">*</span><span class="st"> </span>liked, <span class="dt">data =</span> painmusic)
+
+Residuals<span class="op">:</span>
+<span class="st">    </span>Min      1Q  Median      3Q     Max 
+<span class="fl">-3.5397</span> <span class="fl">-1.0123</span> <span class="fl">-0.0048</span>  <span class="fl">0.9673</span>  <span class="fl">4.8882</span> 
+
+Coefficients<span class="op">:</span>
+<span class="st">                 </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept)       <span class="fl">1.55899</span>    <span class="fl">0.40126</span>   <span class="fl">3.885</span> <span class="fl">0.000177</span> <span class="op">**</span><span class="er">*</span>
+no.music          <span class="fl">0.73588</span>    <span class="fl">0.07345</span>  <span class="fl">10.019</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+familiar1         <span class="fl">0.20536</span>    <span class="fl">0.13895</span>   <span class="fl">1.478</span> <span class="fl">0.142354</span>    
+liked1            <span class="fl">0.30879</span>    <span class="fl">0.13900</span>   <span class="fl">2.222</span> <span class="fl">0.028423</span> <span class="op">*</span><span class="st">  </span>
+familiar1<span class="op">:</span>liked1 <span class="fl">-0.18447</span>    <span class="fl">0.13983</span>  <span class="fl">-1.319</span> <span class="fl">0.189909</span>    
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">1.47</span> on <span class="dv">107</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.5043</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.4858</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">27.22</span> on <span class="dv">4</span> and <span class="dv">107</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">1.378e-15</span></code></pre>
+<p>Do the same thing again, but with with MCMC using Stan:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rstanarm)
+<span class="kw">options</span>(<span class="dt">contrasts =</span> <span class="kw">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))
+pain.model.mcmc &lt;-<span class="st"> </span><span class="kw">stan_lm</span>(with.music <span class="op">~</span><span class="st"> </span>no.music <span class="op">+</span><span class="st"> </span>familiar <span class="op">*</span><span class="st"> </span>liked,
+                          <span class="dt">data=</span>painmusic, <span class="dt">prior=</span><span class="ot">NULL</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(pain.model.mcmc)
+
+Model Info<span class="op">:</span>
+
+<span class="st"> </span><span class="cf">function</span><span class="op">:</span><span class="st">     </span>stan_lm
+ family<span class="op">:</span><span class="st">       </span>gaussian [identity]
+ formula<span class="op">:</span><span class="st">      </span>with.music <span class="op">~</span><span class="st"> </span>no.music <span class="op">+</span><span class="st"> </span>familiar <span class="op">*</span><span class="st"> </span>liked
+ algorithm<span class="op">:</span><span class="st">    </span>sampling
+ priors<span class="op">:</span><span class="st">       </span>see <span class="kw">help</span>(<span class="st">&#39;prior_summary&#39;</span>)
+ sample<span class="op">:</span><span class="st">       </span><span class="dv">4000</span> (posterior sample size)
+ observations<span class="op">:</span><span class="st"> </span><span class="dv">112</span>
+ predictors<span class="op">:</span><span class="st">   </span><span class="dv">5</span>
+
+Estimates<span class="op">:</span>
+<span class="st">                   </span>mean   sd     <span class="fl">2.5</span><span class="op">%   25%</span><span class="st">    </span><span class="dv">50</span><span class="op">%    75%</span><span class="st">    </span><span class="fl">97.5</span>%
+(Intercept)         <span class="fl">1.7</span>    <span class="fl">0.4</span>    <span class="fl">0.9</span>    <span class="fl">1.4</span>    <span class="fl">1.7</span>    <span class="fl">2.0</span>    <span class="fl">2.5</span> 
+no.music            <span class="fl">0.7</span>    <span class="fl">0.1</span>    <span class="fl">0.6</span>    <span class="fl">0.7</span>    <span class="fl">0.7</span>    <span class="fl">0.8</span>    <span class="fl">0.9</span> 
+familiar1           <span class="fl">0.2</span>    <span class="fl">0.1</span>   <span class="fl">-0.1</span>    <span class="fl">0.1</span>    <span class="fl">0.2</span>    <span class="fl">0.3</span>    <span class="fl">0.5</span> 
+liked1              <span class="fl">0.3</span>    <span class="fl">0.1</span>    <span class="fl">0.0</span>    <span class="fl">0.2</span>    <span class="fl">0.3</span>    <span class="fl">0.4</span>    <span class="fl">0.6</span> 
+familiar1<span class="op">:</span>liked1   <span class="fl">-0.2</span>    <span class="fl">0.1</span>   <span class="fl">-0.5</span>   <span class="fl">-0.3</span>   <span class="fl">-0.2</span>   <span class="fl">-0.1</span>    <span class="fl">0.1</span> 
+sigma               <span class="fl">1.5</span>    <span class="fl">0.1</span>    <span class="fl">1.3</span>    <span class="fl">1.4</span>    <span class="fl">1.5</span>    <span class="fl">1.6</span>    <span class="fl">1.7</span> 
+log<span class="op">-</span>fit_ratio       <span class="fl">0.0</span>    <span class="fl">0.1</span>   <span class="fl">-0.1</span>    <span class="fl">0.0</span>    <span class="fl">0.0</span>    <span class="fl">0.0</span>    <span class="fl">0.1</span> 
+R2                  <span class="fl">0.5</span>    <span class="fl">0.1</span>    <span class="fl">0.3</span>    <span class="fl">0.4</span>    <span class="fl">0.5</span>    <span class="fl">0.5</span>    <span class="fl">0.6</span> 
+mean_PPD            <span class="fl">5.3</span>    <span class="fl">0.2</span>    <span class="fl">4.9</span>    <span class="fl">5.2</span>    <span class="fl">5.3</span>    <span class="fl">5.5</span>    <span class="fl">5.7</span> 
+log<span class="op">-</span>posterior    <span class="fl">-206.2</span>    <span class="fl">2.3</span> <span class="fl">-211.5</span> <span class="fl">-207.6</span> <span class="fl">-205.9</span> <span class="fl">-204.6</span> <span class="fl">-202.7</span> 
+
+Diagnostics<span class="op">:</span>
+<span class="st">                 </span>mcse Rhat n_eff
+(Intercept)      <span class="fl">0.0</span>  <span class="fl">1.0</span>  <span class="dv">1765</span> 
+no.music         <span class="fl">0.0</span>  <span class="fl">1.0</span>  <span class="dv">1741</span> 
+familiar1        <span class="fl">0.0</span>  <span class="fl">1.0</span>  <span class="dv">3528</span> 
+liked1           <span class="fl">0.0</span>  <span class="fl">1.0</span>  <span class="dv">4005</span> 
+familiar1<span class="op">:</span>liked1 <span class="fl">0.0</span>  <span class="fl">1.0</span>  <span class="dv">3292</span> 
+sigma            <span class="fl">0.0</span>  <span class="fl">1.0</span>  <span class="dv">2551</span> 
+log<span class="op">-</span>fit_ratio    <span class="fl">0.0</span>  <span class="fl">1.0</span>  <span class="dv">2059</span> 
+R2               <span class="fl">0.0</span>  <span class="fl">1.0</span>  <span class="dv">1878</span> 
+mean_PPD         <span class="fl">0.0</span>  <span class="fl">1.0</span>  <span class="dv">4074</span> 
+log<span class="op">-</span>posterior    <span class="fl">0.1</span>  <span class="fl">1.0</span>   <span class="dv">885</span> 
+
+For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split <span class="kw">chains</span> (at convergence <span class="dt">Rhat=</span><span class="dv">1</span>).</code></pre>
 </div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
-<ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
-</ul>
+<div id="posterior-probabilities-for-parameters" class="section level3 unnumbered">
+<h3>Posterior probabilities for parameters</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(bayesplot)
+
+<span class="kw">mcmc_areas</span>(<span class="kw">as.matrix</span>(pain.model.mcmc), <span class="dt">regex_pars =</span> <span class="st">&#39;familiar|liked&#39;</span>, <span class="dt">prob =</span> <span class="fl">.9</span>)</code></pre>
+<p><img src="bayes-mcmc_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mcmc_intervals</span>(<span class="kw">as.matrix</span>(pain.model.mcmc), <span class="dt">regex_pars =</span> <span class="st">&#39;familiar|liked&#39;</span>, <span class="dt">prob_outer =</span> <span class="fl">.9</span>)</code></pre>
+<p><img src="bayes-mcmc_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+<div id="credible-intervals" class="section level3 unnumbered">
+<h3>Credible intervals</h3>
+<p>Credible intervals are distinct from <a href="intervals.html#intervals">confidence intervals</a></p>
+<p>TODO EXPAND</p>
+<!--
+Use this to explain HPI
+
+ https://www.researchgate.net/post/Why_do_we_use_Highest_Posterior_Density_HPD_Interval_as_the_interval_estimator_in_Bayesian_Method
+
+http://doingbayesiandataanalysis.blogspot.co.uk/2012/04/why-to-use-highest-density-intervals.html
+
+-->
+<pre class="sourceCode r"><code class="sourceCode r">
+params.of.interest &lt;-
+<span class="st">  </span>pain.model.mcmc <span class="op">%&gt;%</span>
+<span class="st">  </span>as_tibble <span class="op">%&gt;%</span>
+<span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(stringr<span class="op">::</span><span class="kw">str_detect</span>(variable, <span class="st">&quot;famil|liked&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(variable)
+
+params.of.interest <span class="op">%&gt;%</span>
+<span class="st">  </span>tidybayes<span class="op">::</span><span class="kw">mean_hdi</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span>pander<span class="op">::</span><span class="kw">pandoc.table</span>(<span class="dt">caption=</span><span class="st">&quot;Estimates and 95% credible intervals for the parameters of interest&quot;</span>)
+
+<span class="op">------------------------------------------------------------------------------</span>
+<span class="st">     </span>variable        value     .lower    .upper   .width   .point   .interval 
+<span class="op">------------------</span><span class="st"> </span><span class="op">---------</span><span class="st"> </span><span class="op">----------</span><span class="st"> </span><span class="op">--------</span><span class="st"> </span><span class="op">--------</span><span class="st"> </span><span class="op">--------</span><span class="st"> </span><span class="op">-----------</span>
+<span class="st">    </span>familiar1       <span class="fl">0.2031</span>    <span class="fl">-0.06619</span>   <span class="fl">0.4764</span>    <span class="fl">0.95</span>     mean       hdi    
+
+      liked1         <span class="fl">0.295</span>    <span class="fl">0.02959</span>    <span class="fl">0.5671</span>    <span class="fl">0.95</span>     mean       hdi    
+
+ familiar1<span class="op">:</span>liked1   <span class="fl">-0.1773</span>   <span class="fl">-0.4606</span>    <span class="fl">0.0886</span>    <span class="fl">0.95</span>     mean       hdi    
+<span class="op">------------------------------------------------------------------------------</span>
+
+Table<span class="op">:</span><span class="st"> </span>Estimates and <span class="dv">95</span>% credible intervals <span class="cf">for</span> the parameters of interest</code></pre>
+</div>
+<div id="bayesian-p-values-for-parameters" class="section level3 unnumbered">
+<h3>Bayesian ‘p values’ for parameters</h3>
+<p>We can do simple arithmetic with the posterior draws to calculate the
+probability a parameter is greater than (or less than) zero:</p>
+<pre class="sourceCode r"><code class="sourceCode r">params.of.interest <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">estimate=</span><span class="kw">mean</span>(value),
+            <span class="st">`</span><span class="dt">p (x&lt;0)</span><span class="st">`</span> =<span class="st"> </span><span class="kw">mean</span>(value <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>),
+            <span class="st">`</span><span class="dt">p (x&gt;0)</span><span class="st">`</span> =<span class="st"> </span><span class="kw">mean</span>(value <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>))
+<span class="co"># A tibble: 3 x 4</span>
+  variable         estimate <span class="st">`</span><span class="dt">p (x&lt;0)</span><span class="st">`</span> <span class="st">`</span><span class="dt">p (x&gt;0)</span><span class="st">`</span>
+  <span class="op">&lt;</span>fct<span class="op">&gt;</span><span class="st">               </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span> familiar1           <span class="fl">0.203</span>    <span class="fl">0.071</span>      <span class="fl">0.929</span>
+<span class="dv">2</span> liked1              <span class="fl">0.295</span>    <span class="fl">0.0145</span>     <span class="fl">0.986</span>
+<span class="dv">3</span> familiar1<span class="op">:</span>liked1   <span class="fl">-0.177</span>    <span class="fl">0.895</span>      <span class="fl">0.105</span></code></pre>
+<p>Or if you’d like the Bayes Factor (evidence ratio) for one hypotheses vs
+another, for example comparing the hypotheses that a parameter is &gt; vs. &lt;= 0,
+then you can use the <code>hypothesis</code> function in the <code>brms</code> package:</p>
+<pre class="sourceCode r"><code class="sourceCode r">pain.model.mcmc.df &lt;-
+<span class="st">  </span>pain.model.mcmc <span class="op">%&gt;%</span>
+<span class="st">  </span>as_tibble
+
+brms<span class="op">::</span><span class="kw">hypothesis</span>(pain.model.mcmc.df,
+                 <span class="kw">c</span>(<span class="st">&quot;familiar1 &gt; 0&quot;</span>,
+                   <span class="st">&quot;liked1 &gt; 0&quot;</span>,
+                   <span class="st">&quot;familiar1:liked1 &lt; 0&quot;</span>))
+Hypothesis Tests <span class="cf">for</span> class <span class="op">:</span>
+<span class="st">              </span>Hypothesis Estimate Est.Error CI.Lower CI.Upper Evid.Ratio
+<span class="dv">1</span>        (familiar1) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>     <span class="fl">0.20</span>      <span class="fl">0.14</span>    <span class="fl">-0.02</span>      <span class="ot">Inf</span>      <span class="fl">13.08</span>
+<span class="dv">2</span>           (liked1) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>     <span class="fl">0.30</span>      <span class="fl">0.14</span>     <span class="fl">0.07</span>      <span class="ot">Inf</span>      <span class="fl">67.97</span>
+<span class="dv">3</span> (familiar1<span class="op">:</span>liked1) <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>    <span class="fl">-0.18</span>      <span class="fl">0.14</span>     <span class="op">-</span><span class="ot">Inf</span>     <span class="fl">0.06</span>       <span class="fl">8.50</span>
+  Post.Prob Star
+<span class="dv">1</span>      <span class="fl">0.93</span>     
+<span class="dv">2</span>      <span class="fl">0.99</span>    <span class="op">*</span>
+<span class="dv">3</span>      <span class="fl">0.89</span>     
+<span class="op">---</span>
+<span class="st">&#39;*&#39;</span><span class="op">:</span><span class="st"> </span>The expected value under the hypothesis lies outside the <span class="dv">95</span>%<span class="op">-</span>CI.
+Posterior probabilities of point hypotheses assume equal prior probabilities.</code></pre>
+<p>Here although we only have a ‘significant’ p value for one of the parameters, we
+can also see there is “very strong” evidence that familiarity also influences
+pain, and “strong” evidence for the interaction of familiarity and liking,
+according to
+<a href="https://en.wikipedia.org/wiki/Bayes_factor#Interpretation">conventional rules of thumb when interpreting Bayes Factors</a>.</p>
+<p>TODO - add a fuller explanation of why
+<a href="#mutiple-comparisons">multiple comparisons</a> are not an issue for Bayesian
+analysis <span class="citation">[@gelman2012we]</span>, because <em>p</em> values do not have the same interpretation
+in terms of long run frequencies of replication; they are a representation of
+the weight of the evidence in favour of a hypothesis.</p>
+<p>TODO: Also reference Zoltan Dienes Bayes paper.</p>
+<!--
+
+## Bayesian analysis of RCT data {- #region-of-practical-importance}
+
+TODO
+
+- Example from FIT RCT for weight and BMI
+- Using and presenting the ROPE
+
+ -->
 
 </div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="gof.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="power-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

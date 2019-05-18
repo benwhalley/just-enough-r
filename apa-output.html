@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>APA formatting for free | Just Enough R</title>
+  <meta name="description" content="APA formatting for free | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="APA formatting for free | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="APA formatting for free | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="output-tables.html">
+<link rel="next" href="code-reuse.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,122 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
-<ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
-</ul>
-</div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+<div id="apa-output" class="section level2 unnumbered">
+<h2>APA formatting for free</h2>
+<p>A neat trick to avoid
+<a href="https://en.wikipedia.org/wiki/Fat-finger_error">fat finger errors</a> is to use
+functions to automatically display results in APA format. Unfortunately, there
+isn’t a single package which works with all types of model, but it’s not too
+hard switch between them.</p>
+<div id="chi2" class="section level3 unnumbered">
+<h3>Chi<sup>2</sup></h3>
+<p>For basic stats the <code>apa::</code> package is simple to use. Below we use the
+<code>apa::chisq_apa()</code> function to properly format the results of our chi<sup>2</sup> test
+([see the full chi<sup>2</sup> example]#crosstabs)):</p>
+<pre class="sourceCode r"><code class="sourceCode r">lego.test &lt;-<span class="st"> </span><span class="kw">chisq.test</span>(lego.table)
+lego.test
 
+    Pearson<span class="st">&#39;s Chi-squared test with Yates&#39;</span> continuity correction
+
+data<span class="op">:</span><span class="st">  </span>lego.table
+X<span class="op">-</span>squared =<span class="st"> </span><span class="fl">11.864</span>, df =<span class="st"> </span><span class="dv">1</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.0005724</span></code></pre>
+<p>And we can format in APA like so:</p>
+<pre class="sourceCode r"><code class="sourceCode r">apa<span class="op">::</span><span class="kw">apa</span>(lego.test, <span class="dt">print_n=</span>T)
+[<span class="dv">1</span>] <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">chi^2$(1, n = 100) = 11.86, *p* &lt; .001&quot;</span></code></pre>
+<p>or using <code>apastats::</code> we also get Cramer’s V, a measure of effect size:</p>
+<pre class="sourceCode r"><code class="sourceCode r">apastats<span class="op">::</span><span class="kw">describe.chi</span>(lego.table, <span class="dt">addN=</span>T)
+[<span class="dv">1</span>] <span class="st">&quot;$</span><span class="ch">\\</span><span class="st">chi^2$(1, _N_ = 100) = 11.86, _p_ &lt; .001, _V_ = .34&quot;</span></code></pre>
+<div id="inline-apa-format" class="section level4">
+<h4><span class="header-section-number">17.0.0.1</span> Inserting results into your text</h4>
+<p>If you are using RMarkdown, you can drop formatted results into your text
+without copying and pasting. Just type the following and the chi<sup>2</sup> test result
+is automatically inserted inline in your text:</p>
+<div class="figure">
+<img src="media/inline-r-example.png" alt="Example of inline call to R functions within the text. This is shown as an image, because it would otherwise be hidden in this output (because the function is evaluated when we knit the document)" />
+<p class="caption">Example of inline call to R functions within the text. This is shown as an image, because it would otherwise be hidden in this output (because the function is evaluated when we knit the document)</p>
+</div>
+<p><span class="apa-example">Age (4 vs 6 years) was significantly associated with preference for duplo v.s.
+lego, <span class="math inline">\(\chi^2\)</span>(1, <em>N</em> = 100) = 11.86, <em>p</em> &lt; .001, <em>V</em> = .34</span></p>
 </div>
 </div>
+<div id="t-test" class="section level3 unnumbered">
+<h3>T-test</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># run the t test</span>
+cars.test &lt;-<span class="st"> </span><span class="kw">t.test</span>(wt<span class="op">~</span>am,<span class="dt">data=</span>mtcars, <span class="dt">var.equal=</span>T)
+cars.test
 
+    Two Sample t<span class="op">-</span>test
 
+data<span class="op">:</span><span class="st">  </span>wt by am
+t =<span class="st"> </span><span class="fl">5.2576</span>, df =<span class="st"> </span><span class="dv">30</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">1.125e-05</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span>
+<span class="dv">95</span> percent confidence interval<span class="op">:</span>
+<span class="st"> </span><span class="fl">0.8304317</span> <span class="fl">1.8853577</span>
+sample estimates<span class="op">:</span>
+mean <span class="cf">in</span> group <span class="dv">0</span> mean <span class="cf">in</span> group <span class="dv">1</span> 
+       <span class="fl">3.768895</span>        <span class="fl">2.411000</span> </code></pre>
+<p>And then we can format as APA</p>
+<pre class="sourceCode r"><code class="sourceCode r">apa<span class="op">::</span><span class="kw">apa</span>(cars.test)
+[<span class="dv">1</span>] <span class="st">&quot;*t*(30) = 5.26, *p* &lt; .001, *d* = 1.86&quot;</span></code></pre>
+<p><span class="apa-example">American cars were significantly heavier than foreign cars, mean
+difference=1358lbs;
+<em>t</em>(30) = 5.26, <em>p</em> &lt; .001, <em>d</em> = 1.86</span></p>
+</div>
+<div id="anova-1" class="section level3 unnumbered">
+<h3>Anova</h3>
+<pre class="sourceCode r"><code class="sourceCode r">mpg.anova &lt;-<span class="st"> </span>car<span class="op">::</span><span class="kw">Anova</span>(<span class="kw">lm</span>(mpg<span class="op">~</span>am<span class="op">*</span>cyl, <span class="dt">data=</span>mtcars))
+Registered S3 methods overwritten by <span class="st">&#39;car&#39;</span><span class="op">:</span>
+<span class="st">  </span>method                          from
+  influence.merMod                lme4
+  cooks.distance.influence.merMod lme4
+  dfbeta.influence.merMod         lme4
+  dfbetas.influence.merMod        lme4
 
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
+<span class="co"># extract and format main effect</span>
+apastats<span class="op">::</span><span class="kw">describe.Anova</span>(mpg.anova, <span class="dt">term=</span><span class="st">&quot;am&quot;</span>)
+[<span class="dv">1</span>] <span class="st">&quot;_F_(1, 28) = 4.28, _p_ = .048&quot;</span>
+
+<span class="co"># and the interaction</span>
+apastats<span class="op">::</span><span class="kw">describe.Anova</span>(mpg.anova, <span class="dt">term=</span><span class="st">&quot;am:cyl&quot;</span>)
+[<span class="dv">1</span>] <span class="st">&quot;_F_(1, 28) = 3.41, _p_ = .076&quot;</span></code></pre>
+<p><span class="apa-example">There was no interaction between location of manufacture and number of
+cylinders, <em>F</em>(1, 28) = 3.41, <em>p</em> = .076, but there was
+a main effect of location of manufacture,
+<em>F</em>(1, 28) = 3.41, <em>p</em> = .076, such that US-made cars
+had significantly higher fuel consumption than European or Japanese brands (see
+[Figure X or Table X])</span></p>
+<!--
+TODO add formatting of effect size estimates here
+
+ -->
+</div>
+<div id="multilevel-models-1" class="section level3 unnumbered">
+<h3>Multilevel models</h3>
+<p>If you have loaded the <code>lmerTest</code> package <code>apastats</code> can output either
+coefficients for single parameters, or F tests:</p>
+<pre class="sourceCode r"><code class="sourceCode r">sleep.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction<span class="op">~</span><span class="kw">factor</span>(Days)<span class="op">+</span>(<span class="dv">1</span><span class="op">|</span>Subject), <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
+
+<span class="co">#a single coefficient (this is a contrast from the reference category)</span>
+apastats<span class="op">::</span><span class="kw">describe.glm</span>(sleep.model, <span class="dt">term=</span><span class="st">&quot;factor(Days)1&quot;</span>)
+Loading required namespace<span class="op">:</span><span class="st"> </span>Hmisc
+[<span class="dv">1</span>] <span class="st">&quot;_t_ =  0.75, _p_ = .455&quot;</span>
+
+<span class="co"># or describe the F test for the overall effect of Days</span>
+apastats<span class="op">::</span><span class="kw">describe.lmtaov</span>(<span class="kw">anova</span>(sleep.model), <span class="dt">term=</span><span class="st">&#39;factor(Days)&#39;</span>)
+[<span class="dv">1</span>] <span class="st">&quot;_F_(9, 153.0) = 18.70, _p_ &lt; .001&quot;</span></code></pre>
+<p><span class="apa-example">There were significant differences in reaction times across the 10 days of the
+study, <em>F</em>(9, 153.0) = 18.70, <em>p</em> &lt; .001 such that reaction latencies tended to increase in duration
+(see [Figure X]).</span></p>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="output-tables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="code-reuse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

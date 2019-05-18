@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Functions to learn now | Just Enough R</title>
+  <meta name="description" content="Functions to learn now | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Functions to learn now | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Functions to learn now | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="working-with-vectors.html">
+<link rel="next" href="packages.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,217 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
+<div id="functions-to-learn-now" class="section level2 unnumbered">
+<h2>Functions to learn now</h2>
+<p>There are <em>thousands</em> of functions built into R. Below are just a few examples
+which are likely to be useful as you work with your data:</p>
+<div id="repetition" class="section level6 unnumbered">
+<h6>Repetition</h6>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># repeat something N times</span>
+<span class="kw">rep</span>(<span class="st">&quot;Apple pie&quot;</span>, <span class="dv">10</span>)
+ [<span class="dv">1</span>] <span class="st">&quot;Apple pie&quot;</span> <span class="st">&quot;Apple pie&quot;</span> <span class="st">&quot;Apple pie&quot;</span> <span class="st">&quot;Apple pie&quot;</span> <span class="st">&quot;Apple pie&quot;</span>
+ [<span class="dv">6</span>] <span class="st">&quot;Apple pie&quot;</span> <span class="st">&quot;Apple pie&quot;</span> <span class="st">&quot;Apple pie&quot;</span> <span class="st">&quot;Apple pie&quot;</span> <span class="st">&quot;Apple pie&quot;</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># repeat a short vector, combining into a single longer vector</span>
+<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Custard&quot;</span>, <span class="st">&quot;Gravy&quot;</span>), <span class="dv">5</span>)
+ [<span class="dv">1</span>] <span class="st">&quot;Custard&quot;</span> <span class="st">&quot;Gravy&quot;</span>   <span class="st">&quot;Custard&quot;</span> <span class="st">&quot;Gravy&quot;</span>   <span class="st">&quot;Custard&quot;</span> <span class="st">&quot;Gravy&quot;</span>   <span class="st">&quot;Custard&quot;</span>
+ [<span class="dv">8</span>] <span class="st">&quot;Gravy&quot;</span>   <span class="st">&quot;Custard&quot;</span> <span class="st">&quot;Gravy&quot;</span>  </code></pre>
 </div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
-<ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
-</ul>
+<div id="sequences" class="section level6 unnumbered">
+<h6>Sequences</h6>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># make a sequence</span>
+(countdown &lt;-<span class="st"> </span><span class="dv">100</span><span class="op">:</span><span class="dv">1</span>)
+  [<span class="dv">1</span>] <span class="dv">100</span>  <span class="dv">99</span>  <span class="dv">98</span>  <span class="dv">97</span>  <span class="dv">96</span>  <span class="dv">95</span>  <span class="dv">94</span>  <span class="dv">93</span>  <span class="dv">92</span>  <span class="dv">91</span>  <span class="dv">90</span>  <span class="dv">89</span>  <span class="dv">88</span>  <span class="dv">87</span>  <span class="dv">86</span>  <span class="dv">85</span>  <span class="dv">84</span>
+ [<span class="dv">18</span>]  <span class="dv">83</span>  <span class="dv">82</span>  <span class="dv">81</span>  <span class="dv">80</span>  <span class="dv">79</span>  <span class="dv">78</span>  <span class="dv">77</span>  <span class="dv">76</span>  <span class="dv">75</span>  <span class="dv">74</span>  <span class="dv">73</span>  <span class="dv">72</span>  <span class="dv">71</span>  <span class="dv">70</span>  <span class="dv">69</span>  <span class="dv">68</span>  <span class="dv">67</span>
+ [<span class="dv">35</span>]  <span class="dv">66</span>  <span class="dv">65</span>  <span class="dv">64</span>  <span class="dv">63</span>  <span class="dv">62</span>  <span class="dv">61</span>  <span class="dv">60</span>  <span class="dv">59</span>  <span class="dv">58</span>  <span class="dv">57</span>  <span class="dv">56</span>  <span class="dv">55</span>  <span class="dv">54</span>  <span class="dv">53</span>  <span class="dv">52</span>  <span class="dv">51</span>  <span class="dv">50</span>
+ [<span class="dv">52</span>]  <span class="dv">49</span>  <span class="dv">48</span>  <span class="dv">47</span>  <span class="dv">46</span>  <span class="dv">45</span>  <span class="dv">44</span>  <span class="dv">43</span>  <span class="dv">42</span>  <span class="dv">41</span>  <span class="dv">40</span>  <span class="dv">39</span>  <span class="dv">38</span>  <span class="dv">37</span>  <span class="dv">36</span>  <span class="dv">35</span>  <span class="dv">34</span>  <span class="dv">33</span>
+ [<span class="dv">69</span>]  <span class="dv">32</span>  <span class="dv">31</span>  <span class="dv">30</span>  <span class="dv">29</span>  <span class="dv">28</span>  <span class="dv">27</span>  <span class="dv">26</span>  <span class="dv">25</span>  <span class="dv">24</span>  <span class="dv">23</span>  <span class="dv">22</span>  <span class="dv">21</span>  <span class="dv">20</span>  <span class="dv">19</span>  <span class="dv">18</span>  <span class="dv">17</span>  <span class="dv">16</span>
+ [<span class="dv">86</span>]  <span class="dv">15</span>  <span class="dv">14</span>  <span class="dv">13</span>  <span class="dv">12</span>  <span class="dv">11</span>  <span class="dv">10</span>   <span class="dv">9</span>   <span class="dv">8</span>   <span class="dv">7</span>   <span class="dv">6</span>   <span class="dv">5</span>   <span class="dv">4</span>   <span class="dv">3</span>   <span class="dv">2</span>   <span class="dv">1</span></code></pre>
+<p>Make sequences with steps of a particular size:</p>
+<pre class="sourceCode r"><code class="sourceCode r">(tenths  &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">0</span>, <span class="dt">to=</span><span class="dv">1</span>, <span class="dt">by=</span>.<span class="dv">1</span>))
+ [<span class="dv">1</span>] <span class="fl">0.0</span> <span class="fl">0.1</span> <span class="fl">0.2</span> <span class="fl">0.3</span> <span class="fl">0.4</span> <span class="fl">0.5</span> <span class="fl">0.6</span> <span class="fl">0.7</span> <span class="fl">0.8</span> <span class="fl">0.9</span> <span class="fl">1.0</span>
+
+(twelfths &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">0</span>, <span class="dt">to=</span><span class="dv">10</span>, <span class="dt">length.out=</span><span class="dv">12</span>))
+ [<span class="dv">1</span>]  <span class="fl">0.0000000</span>  <span class="fl">0.9090909</span>  <span class="fl">1.8181818</span>  <span class="fl">2.7272727</span>  <span class="fl">3.6363636</span>  <span class="fl">4.5454545</span>
+ [<span class="dv">7</span>]  <span class="fl">5.4545455</span>  <span class="fl">6.3636364</span>  <span class="fl">7.2727273</span>  <span class="fl">8.1818182</span>  <span class="fl">9.0909091</span> <span class="fl">10.0000000</span></code></pre>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+<div id="ranking" class="section level6 unnumbered">
+<h6>Ranking</h6>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># generate some random data (here, ages in years)</span>
+ages &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dt">mean=</span><span class="dv">40</span>, <span class="dt">sd=</span><span class="dv">10</span>))
+
+<span class="co"># get the rank order of elements (i.e. what their positions would be if the vector was sorted)</span>
+ages
+ [<span class="dv">1</span>] <span class="dv">27</span> <span class="dv">20</span> <span class="dv">35</span> <span class="dv">43</span> <span class="dv">35</span> <span class="dv">36</span> <span class="dv">49</span> <span class="dv">46</span> <span class="dv">24</span> <span class="dv">48</span>
+<span class="kw">rank</span>(ages, <span class="dt">ties.method=</span><span class="st">&quot;first&quot;</span>)
+ [<span class="dv">1</span>]  <span class="dv">3</span>  <span class="dv">1</span>  <span class="dv">4</span>  <span class="dv">7</span>  <span class="dv">5</span>  <span class="dv">6</span> <span class="dv">10</span>  <span class="dv">8</span>  <span class="dv">2</span>  <span class="dv">9</span></code></pre>
+</div>
+<div id="unique-values" class="section level6 unnumbered">
+<h6>Unique values</h6>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return the unique values in a vector</span>
+<span class="kw">unique</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">100</span>))
+ [<span class="dv">1</span>]  <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">4</span>  <span class="dv">5</span>  <span class="dv">6</span>  <span class="dv">7</span>  <span class="dv">8</span>  <span class="dv">9</span> <span class="dv">10</span></code></pre>
+</div>
+<div id="lengths" class="section level6 unnumbered">
+<h6>Lengths</h6>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return the unique values in a vector</span>
+<span class="kw">length</span>(<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">100</span>, <span class="dv">2</span>))
+[<span class="dv">1</span>] <span class="dv">50</span></code></pre>
+</div>
+<div id="section-2" class="section level6 unnumbered exercise">
+<h6></h6>
+<p>Try and experiment with each of these functions. Check the output against what
+you expected to happen, and make sure you understand what they do.</p>
+<!--
+
+
+## Lists {- #lists}
+
+Try running the code below by typing it into the console:
+
+
+```r
+confusing.vector <- c(1, 2, 3, "Wibble")
+confusing.vector
+[1] "1"      "2"      "3"      "Wibble"
+```
+
+And then try this:
+
+
+```r
+first.element <- confusing.vector[1]
+sqrt(first.element)
+Error in sqrt(first.element): non-numeric argument to mathematical function
+```
+
+
+:::{.exercise}
+
+Take a minute to try and make a guess at what went wrong. Why does R complain that the `1` is non-numeric?
+
+:::
+
+
+The answer: When we built the vector we used `c` to combine the elements `1`, `2`, `3` and `"Wibble"`. Although our first three elements are numbers, `"Wibble"` is not - it's made up of letters (this is called a character string).
+
+Vectors can only contain one *type* of thing so R automatically converts all the elements to the same type, if it can.
+
+Because R can't reliably convert `"Wibble"` to a number, everything in the vector was converted to the `character` type instead. We get an error because R can't mutiply words together.
+
+
+
+#### Checking what type of thing you have... {-}
+
+
+If you're not sure what type of thing your vector contains, you can use the `typeof` function:
+
+
+```r
+typeof(1:10)
+[1] "integer"
+typeof(runif(10))
+[1] "double"
+typeof(c(1, 2, "Wibble"))
+[1] "character"
+```
+
+Here the meaning of *integer* should be self explanatory. The vector `runif(10)` has type *double*, because it contains 'double-precision' floating point numbers. For our purposes you can just think of `double` as meaning any number with decimal places.
+
+The last vector has the type `character` because it includes the character string `Wibble`, and all the other numbers in it were coerced to become character strings too.
+
+If we want to (safely) mix up different types of object without them being converted we need a proper `list`, rather than a vector. In R we would write:
+
+
+```r
+my.list <- list(2, 2, "Wibble")
+```
+
+
+We can still access elements from lists as we do for vectors, although now we need to use double square brackets, for example:
+
+
+
+```r
+my.list[[1]]
+[1] 2
+```
+
+But now our numbers haven't been converted to character strings, and we can still multiply them.
+
+
+```r
+my.list[[1]] * my.list[[2]]
+[1] 4
+```
+
+Square brackets are ugly and can be confusing though, so we often give names to the elements of our list when we create it:
+
+
+```r
+my.party <- list(number.guests=8,
+                 when="Friday",
+                 drinks = c("Juice", "Beer", "Whisky"))
+```
+
+Which means we can then access the elements *by name* later on. To do this, you write the name of the vector, then a `$` sign, and then the name of the element you want to access:
+
+
+```r
+my.party$when
+[1] "Friday"
+```
+
+You might have spotted that we included a vector inside the party list. This is not a problem, and we can still access individual elements of this vector too:
+
+
+```r
+my.party$drinks[1]
+[1] "Juice"
+```
+
+
+####  {- .exercise}
+
+1. Create a vector containing 3 numbers then:
+
+  - Access just the last number
+  - Create a new vector containing just the first and last number
+
+2. Create a list containing your address and your age in years. Then:
+
+  - Multiply your age in years by your flat or house number (by accessing the relevant elements in the list)
+
+3. Run the following R code and explain what has happened:
+
+
+```r
+sqrt(1:10) * 10
+ [1] 10.00000 14.14214 17.32051 20.00000 22.36068 24.49490 26.45751
+ [8] 28.28427 30.00000 31.62278
+```
+
+
+
+#### {- .exercise}
+
+Extended questions:
+
+- What is the average of the 9 times table, up to and including 9 x 1000?
+
+- Use the `paste` and `c(...)` functions to create a vector which contains the sequence "1 elephant", "2 elephants", ...,  "1000 elephants".
+
+
+ -->
 
 </div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="working-with-vectors.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="packages.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

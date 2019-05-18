@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Contrasts and followup tests using lmer | Just Enough R</title>
+  <meta name="description" content="Contrasts and followup tests using lmer | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Contrasts and followup tests using lmer | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Contrasts and followup tests using lmer | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="threelevel.html">
+<link rel="next" href="troubleshooting-multilevel-models.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,80 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
-<ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
-</ul>
-</div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+<div id="contrasts-lmer" class="section level2 unnumbered">
+<h2>Contrasts and followup tests using <code>lmer</code></h2>
+<p>Many of the <a href="multiple-comparisons.html#contrasts-examples">contrasts possible after lm and Anova models</a>
+are also possible using <code>lmer</code> for multilevel models.</p>
+<p>Let’s say we repeat one of the models used in a previous section, looking at the
+effect of <code>Days</code> of sleep deprivation on reaction times:</p>
+<pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction<span class="op">~</span><span class="kw">factor</span>(Days)<span class="op">+</span>(<span class="dv">1</span><span class="op">|</span>Subject), <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
+<span class="kw">anova</span>(m)
+Type III Analysis of Variance Table with Satterthwaite<span class="st">&#39;s method</span>
+<span class="st">             Sum Sq Mean Sq NumDF DenDF F value    Pr(&gt;F)    </span>
+<span class="st">factor(Days) 166235   18471     9   153  18.703 &lt; 2.2e-16 ***</span>
+<span class="st">---</span>
+<span class="st">Signif. codes:  0 &#39;</span><span class="op">**</span><span class="er">*</span><span class="st">&#39; 0.001 &#39;</span><span class="op">**</span><span class="st">&#39; 0.01 &#39;</span><span class="op">*</span><span class="st">&#39; 0.05 &#39;</span>.<span class="st">&#39; 0.1 &#39;</span> <span class="st">&#39; 1</span></code></pre>
+<div id="section-14" class="section level5 unnumbered">
+<h5></h5>
+<p>We can see a significant effect of <code>Days</code> in the Anova table, and want to
+compute followup tests.</p>
+<p>To first estimate cell means and create an <code>emmeans</code> object, you can use the
+<code>emmeans()</code> function in the <code>emmeans::</code> package:</p>
+<pre class="sourceCode r"><code class="sourceCode r">m.emm &lt;-<span class="st"> </span><span class="kw">emmeans</span>(m, <span class="st">&quot;Days&quot;</span>)
+m.emm
+ Days emmean   SE df lower.CL upper.CL
+    <span class="dv">0</span>    <span class="dv">257</span> <span class="fl">11.5</span> <span class="dv">42</span>      <span class="dv">234</span>      <span class="dv">280</span>
+    <span class="dv">1</span>    <span class="dv">264</span> <span class="fl">11.5</span> <span class="dv">42</span>      <span class="dv">241</span>      <span class="dv">288</span>
+    <span class="dv">2</span>    <span class="dv">265</span> <span class="fl">11.5</span> <span class="dv">42</span>      <span class="dv">242</span>      <span class="dv">288</span>
+    <span class="dv">3</span>    <span class="dv">283</span> <span class="fl">11.5</span> <span class="dv">42</span>      <span class="dv">260</span>      <span class="dv">306</span>
+    <span class="dv">4</span>    <span class="dv">289</span> <span class="fl">11.5</span> <span class="dv">42</span>      <span class="dv">266</span>      <span class="dv">312</span>
+    <span class="dv">5</span>    <span class="dv">309</span> <span class="fl">11.5</span> <span class="dv">42</span>      <span class="dv">285</span>      <span class="dv">332</span>
+    <span class="dv">6</span>    <span class="dv">312</span> <span class="fl">11.5</span> <span class="dv">42</span>      <span class="dv">289</span>      <span class="dv">335</span>
+    <span class="dv">7</span>    <span class="dv">319</span> <span class="fl">11.5</span> <span class="dv">42</span>      <span class="dv">296</span>      <span class="dv">342</span>
+    <span class="dv">8</span>    <span class="dv">337</span> <span class="fl">11.5</span> <span class="dv">42</span>      <span class="dv">314</span>      <span class="dv">360</span>
+    <span class="dv">9</span>    <span class="dv">351</span> <span class="fl">11.5</span> <span class="dv">42</span>      <span class="dv">328</span>      <span class="dv">374</span>
 
+Degrees<span class="op">-</span>of<span class="op">-</span>freedom method<span class="op">:</span><span class="st"> </span>kenward<span class="op">-</span>roger 
+Confidence level used<span class="op">:</span><span class="st"> </span><span class="fl">0.95</span> </code></pre>
+<p>It might be nice to extract these estimates and plot them:</p>
+<pre class="sourceCode r"><code class="sourceCode r">m.emm.df &lt;-
+<span class="st">  </span>m.emm <span class="op">%&gt;%</span>
+<span class="st">  </span>broom<span class="op">::</span><span class="kw">tidy</span>()
+
+m.emm.df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Days, estimate, <span class="dt">ymin=</span>conf.low, <span class="dt">ymax=</span>conf.high)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_pointrange</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;RT&quot;</span>)</code></pre>
+<p><img src="multilevel-models_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p>If we wanted to compare each day against every other day (i.e. all the pairwise
+comparisons) we can use <code>contrast()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># results not shown to save space</span>
+<span class="kw">contrast</span>(m.emm, <span class="st">&#39;tukey&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>broom<span class="op">::</span><span class="kw">tidy</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">6</span>)</code></pre>
+<p>Or we might want to see if there was a significant change between any specific
+day and baseline:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># results not shown to save space</span>
+<span class="kw">contrast</span>(m.emm, <span class="st">&#39;trt.vs.ctrl&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>broom<span class="op">::</span><span class="kw">tidy</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span>head <span class="op">%&gt;%</span>
+<span class="st">  </span>pander</code></pre>
+<p>Perhaps more interesting in this example is to check the polynomial contrasts,
+to see if there was a linear or quadratic change in RT over days:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># results not shown to save space</span>
+<span class="kw">contrast</span>(m.emm, <span class="st">&#39;poly&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>broom<span class="op">::</span><span class="kw">tidy</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pander</span>(<span class="dt">caption=</span><span class="st">&quot;The first three polynomial contrasts. Note you&#39;d have to have quite a fancy theory to warrant looking at any of the higher level polynomial terms.&quot;</span>)</code></pre>
 </div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="threelevel.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="troubleshooting-multilevel-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

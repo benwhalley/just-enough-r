@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>16 Making predictions | Just Enough R</title>
+  <meta name="description" content="16 Making predictions | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="16 Making predictions | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="16 Making predictions | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="understanding-interactions.html">
+<link rel="next" href="predicted-means-and-margins-using-lm.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,177 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
+<div id="predictions-and-margins" class="section level1">
+<h1><span class="header-section-number">16</span> Making predictions</h1>
+<p>Objectives of this section:</p>
 <ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
+<li>Distingish predicted means (predictions) from predicted effects (‘margins’)</li>
+<li>Calculate both predictions and marginal effects for a <code>lm()</code></li>
+<li>Plot predictions and margins</li>
+<li>Think about how to plot effects in meaningful ways</li>
 </ul>
+<div id="predictions-vs-margins" class="section level3 unnumbered">
+<h3>Predictions vs margins</h3>
+<p>Before we start, let’s consider what we’re trying to achieve in making
+predictions from our models. We need to make a distinction between:</p>
+<ul>
+<li>Predicted means</li>
+<li>Predicted effects or <em>marginal effects</em></li>
+</ul>
+<p>Consider the example used in a previous section where we measured
+<code>injury.severity</code> after road accidents, plus two predictor variables: <code>gender</code>
+and <code>age</code>.</p>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
-
+<div id="predicted-means" class="section level3 unnumbered">
+<h3>Predicted means</h3>
+<p>‘Predicted means’ (or predictions) refers to our best estimate for each category
+of person we’re interested in. For example, if <code>age</code> were categorical (
+i.e. young vs. older people) then might have 4 predictions to calculate from our
+model:</p>
+<table style="width:36%;">
+<colgroup>
+<col width="11%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Age</th>
+<th align="center">Gender</th>
+<th align="center">mean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Young</td>
+<td align="center">Male</td>
+<td align="center">?</td>
+</tr>
+<tr class="even">
+<td align="center">Old</td>
+<td align="center">Male</td>
+<td align="center">?</td>
+</tr>
+<tr class="odd">
+<td align="center">Young</td>
+<td align="center">Female</td>
+<td align="center">?</td>
+</tr>
+<tr class="even">
+<td align="center">Old</td>
+<td align="center">Female</td>
+<td align="center">?</td>
+</tr>
+</tbody>
+</table>
+<p>And as before, we might plot these data:</p>
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-4-1.png" alt="Point and line plot of injury severity by age and gender." width="672" />
+<p class="caption">
+Figure 5.1: Point and line plot of injury severity by age and gender.
+</p>
 </div>
+<p>This plot uses the raw data, but these points could equally have been estimated
+from a statistical model which adjusted for other predictors.</p>
 </div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
+<div id="effects-margins" class="section level3 unnumbered">
+<h3><em>Effects</em> (margins)</h3>
+<p>Terms like: <em>predicted effects</em>, <em>margins</em> or <em>marginal effects</em> refer, instead,
+to the effect of one predictor.</p>
+<p>There may be more than one marginal effect because <em>the effect of one predictor
+can change across the range of another predictor</em>.</p>
+<p>Extending the example above, if we take the difference between men and women for
+each category of age, we can plot these differences. The steps we need to go
+through are:</p>
+<ul>
+<li>Reshape the data to be wide, including a separate column for injury scores
+for men and women</li>
+<li>Subtract the score for men from that of women, to calculate the effect of
+being female</li>
+<li>Plot this difference score</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">margins.plot &lt;-<span class="st"> </span>inter.df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># reshape the data to a wider format</span>
+<span class="st">  </span>reshape2<span class="op">::</span><span class="kw">dcast</span>(older<span class="op">~</span>female) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># calculate the difference between men and women for each age</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">effect.of.female =</span> Female <span class="op">-</span><span class="st"> </span>Male) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># plot the difference</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(older, effect.of.female, <span class="dt">group=</span><span class="dv">1</span>)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Effect of being female&quot;</span>)  <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>)
+margins.plot</code></pre>
+<p><img src="predictions-and-margins_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>As before, these differences use the raw data, but <em>could</em> have been calculated
+from a statistical model. In the section below we do this, making predictions
+for means and marginal effects from a <code>lm()</code>.</p>
+</div>
+<div id="continuous-predictors-1" class="section level3 unnumbered">
+<h3>Continuous predictors</h3>
+<p>In the examples above, our data were all categorical, which mean that it was
+straightforward to identify categories of people for whom we might want to make
+a prediction (i.e. young men, young women, older men, older women).</p>
+<p>However, <code>age</code> is typically measured as a continuous variable, and we would want
+to use a grouped scatter plot to see this:</p>
+<pre class="sourceCode r"><code class="sourceCode r">injuries <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(age, severity.of.injury, <span class="dt">group=</span>gender, <span class="dt">color=</span>gender)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name=</span><span class="st">&quot;&quot;</span>)</code></pre>
+<p><img src="predictions-and-margins_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>But to make predictions from this continuous data we need to fit a line through
+the points (i.e. run a model). We can do this graphically by calling
+<code>geom_smooth()</code> which attempts to fit a smooth line through the data we observe:</p>
+<pre class="sourceCode r"><code class="sourceCode r">injuries <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(age, severity.of.injury, <span class="dt">group=</span>gender, <span class="dt">color=</span>gender)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span>.<span class="dv">2</span>, <span class="dt">size=</span><span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span>F)<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name=</span><span class="st">&quot;&quot;</span>)</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-8"></span>
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-8-1.png" alt="Scatter plot overlaid with smooth best-fit lines" width="672" />
+<p class="caption">
+Figure 16.1: Scatter plot overlaid with smooth best-fit lines
+</p>
+</div>
+<p>And if we are confident that the relationships between predictor and outcome are
+sufficiently <em>linear</em>, then we can ask ggplot to fit a straight line using
+linear regression:</p>
+<pre class="sourceCode r"><code class="sourceCode r">injuries <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(age, severity.of.injury, <span class="dt">group=</span>gender, <span class="dt">color=</span>gender)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">.1</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> F, <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="dt">name=</span><span class="st">&quot;&quot;</span>)</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-9"></span>
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-9-1.png" alt="Scatter plot overlaid with smoothed lines (dotted) and linear predictions (coloured)" width="672" />
+<p class="caption">
+Figure 16.2: Scatter plot overlaid with smoothed lines (dotted) and linear predictions (coloured)
+</p>
+</div>
+<p>What these plots illustrate is the steps a researcher might take <em>before</em>
+fitting a regression model. The straight lines in the final plot represent our
+best guess for a person of a given age and gender, assuming a linear regression.</p>
+<p>We can read from these lines to make a point prediction for men and women of a
+specific age, and use the information about our uncertainty in the prediction,
+captured by the model, to estimate the likely error.</p>
+<p>To make our findings simpler to communicate, we might want to make estimates at
+specific ages and plot these. These ages could be:</p>
+<ul>
+<li>Values with biological or cultural meaning: for example 18 (new driver) v.s.
+65 (retirement age)</li>
+<li>Statistical convention (e.g. median, 25th, and 75th centile, or mean +/- 1
+SD)</li>
+</ul>
+<p>We’ll see examples of both below.</p>
+</div> 
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="understanding-interactions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="predicted-means-and-margins-using-lm.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

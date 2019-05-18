@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Correlations | Just Enough R</title>
+  <meta name="description" content="Correlations | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Correlations | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Correlations | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="crosstabs.html">
+<link rel="next" href="t-tests.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,628 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
+<div id="correlations" class="section level2 unnumbered">
+<h2>Correlations</h2>
+<p>The base R <code>cor()</code> function provides a simple way to get Pearson correlations,
+but to get a correlation matrix as you might expect from SPSS or Stata it’s best
+to use the <code>corr.test()</code> function in the <code>psych</code> package.</p>
+<p>Before you start though, plotting the correlations might be the best way of
+getting to grips with the patterns of relationship in your data. A pairs plot is
+a nice way of doing this:</p>
+<pre class="sourceCode r"><code class="sourceCode r">airquality <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Month, <span class="op">-</span>Day) <span class="op">%&gt;%</span>
+<span class="st">  </span>pairs</code></pre>
+<p><img src="correlations_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>If we were satisfied the relationships were (reasonably) linear, we could also
+visualise correlations themselves with a ‘corrgram’, using the <code>corrgram</code>
+library:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;corrgram&quot;</span>)
+Registered S3 method overwritten by <span class="st">&#39;seriation&#39;</span><span class="op">:</span>
+<span class="st">  </span>method         from 
+  reorder.hclust gclus
+airquality <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Month, <span class="op">-</span>Day) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">corrgram</span>(<span class="dt">lower.panel=</span>corrgram<span class="op">::</span>panel.ellipse,
+         <span class="dt">upper.panel=</span>panel.cor,
+         <span class="dt">diag.panel=</span>panel.density)</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="correlations_files/figure-html/unnamed-chunk-4-1.png" alt="A corrgram, showing pearson correlations (above the diagonal), variable distributions (on the diagonal) and ellipses and smoothed lines of best fit (below the diagnonal). Long, narrow ellipses denote large correlations; circular ellipses indicate small correlations." width="672" />
+<p class="caption">
+Figure 5.1: A corrgram, showing pearson correlations (above the diagonal), variable distributions (on the diagonal) and ellipses and smoothed lines of best fit (below the diagnonal). Long, narrow ellipses denote large correlations; circular ellipses indicate small correlations.
+</p>
 </div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
-<ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
-</ul>
+<p>The ggpairs function from the <code>GGally</code> package is also a nice way of plotting
+relationships between a combination of categorical and continuous data - it
+packs a lot of information into a limited space:</p>
+<pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cyl =</span> <span class="kw">factor</span>(cyl)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(mpg, wt, drat, cyl) <span class="op">%&gt;%</span>
+<span class="st">  </span>GGally<span class="op">::</span><span class="kw">ggpairs</span>()</code></pre>
+<p><img src="correlations_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div id="correlation-matrix" class="section level3 unnumbered">
+<h3>Creating a correlation matrix</h3>
+<p>The <code>psych::corr.test()</code> function is a quick way to obtain a pairwise
+correlation matrix for an entire dataset, along with p values and confidence
+intervals which the base R <code>cor()</code> function will not provide:</p>
+<pre class="sourceCode r"><code class="sourceCode r">mycorrelations &lt;-<span class="st"> </span>psych<span class="op">::</span><span class="kw">corr.test</span>(airquality)
+mycorrelations
+Call<span class="op">:</span>psych<span class="op">::</span><span class="kw">corr.test</span>(<span class="dt">x =</span> airquality)
+Correlation matrix 
+        Ozone Solar.R  Wind  Temp Month   Day
+Ozone    <span class="fl">1.00</span>    <span class="fl">0.35</span> <span class="fl">-0.60</span>  <span class="fl">0.70</span>  <span class="fl">0.16</span> <span class="fl">-0.01</span>
+Solar.R  <span class="fl">0.35</span>    <span class="fl">1.00</span> <span class="fl">-0.06</span>  <span class="fl">0.28</span> <span class="fl">-0.08</span> <span class="fl">-0.15</span>
+Wind    <span class="fl">-0.60</span>   <span class="fl">-0.06</span>  <span class="fl">1.00</span> <span class="fl">-0.46</span> <span class="fl">-0.18</span>  <span class="fl">0.03</span>
+Temp     <span class="fl">0.70</span>    <span class="fl">0.28</span> <span class="fl">-0.46</span>  <span class="fl">1.00</span>  <span class="fl">0.42</span> <span class="fl">-0.13</span>
+Month    <span class="fl">0.16</span>   <span class="fl">-0.08</span> <span class="fl">-0.18</span>  <span class="fl">0.42</span>  <span class="fl">1.00</span> <span class="fl">-0.01</span>
+Day     <span class="fl">-0.01</span>   <span class="fl">-0.15</span>  <span class="fl">0.03</span> <span class="fl">-0.13</span> <span class="fl">-0.01</span>  <span class="fl">1.00</span>
+Sample Size 
+        Ozone Solar.R Wind Temp Month Day
+Ozone     <span class="dv">116</span>     <span class="dv">111</span>  <span class="dv">116</span>  <span class="dv">116</span>   <span class="dv">116</span> <span class="dv">116</span>
+Solar.R   <span class="dv">111</span>     <span class="dv">146</span>  <span class="dv">146</span>  <span class="dv">146</span>   <span class="dv">146</span> <span class="dv">146</span>
+Wind      <span class="dv">116</span>     <span class="dv">146</span>  <span class="dv">153</span>  <span class="dv">153</span>   <span class="dv">153</span> <span class="dv">153</span>
+Temp      <span class="dv">116</span>     <span class="dv">146</span>  <span class="dv">153</span>  <span class="dv">153</span>   <span class="dv">153</span> <span class="dv">153</span>
+Month     <span class="dv">116</span>     <span class="dv">146</span>  <span class="dv">153</span>  <span class="dv">153</span>   <span class="dv">153</span> <span class="dv">153</span>
+Day       <span class="dv">116</span>     <span class="dv">146</span>  <span class="dv">153</span>  <span class="dv">153</span>   <span class="dv">153</span> <span class="dv">153</span>
+Probability <span class="kw">values</span> (Entries above the diagonal are adjusted <span class="cf">for</span> multiple tests.) 
+        Ozone Solar.R Wind Temp Month  Day
+Ozone    <span class="fl">0.00</span>    <span class="fl">0.00</span> <span class="fl">0.00</span> <span class="fl">0.00</span>  <span class="fl">0.56</span> <span class="fl">1.00</span>
+Solar.R  <span class="fl">0.00</span>    <span class="fl">0.00</span> <span class="fl">1.00</span> <span class="fl">0.01</span>  <span class="fl">1.00</span> <span class="fl">0.56</span>
+Wind     <span class="fl">0.00</span>    <span class="fl">0.50</span> <span class="fl">0.00</span> <span class="fl">0.00</span>  <span class="fl">0.25</span> <span class="fl">1.00</span>
+Temp     <span class="fl">0.00</span>    <span class="fl">0.00</span> <span class="fl">0.00</span> <span class="fl">0.00</span>  <span class="fl">0.00</span> <span class="fl">0.65</span>
+Month    <span class="fl">0.08</span>    <span class="fl">0.37</span> <span class="fl">0.03</span> <span class="fl">0.00</span>  <span class="fl">0.00</span> <span class="fl">1.00</span>
+Day      <span class="fl">0.89</span>    <span class="fl">0.07</span> <span class="fl">0.74</span> <span class="fl">0.11</span>  <span class="fl">0.92</span> <span class="fl">0.00</span>
+
+ To see confidence intervals of the correlations, print with the short=<span class="ot">FALSE</span> option</code></pre>
+<p>One thing to be aware of is that by default <code>corr.test()</code> produces p values that
+are adjusted for multiple comparisons in the top right hand triangle (i.e. above
+the diagonal). If you want the uncorrected values use the values below the
+diagonal (or pass <code>adjust=FALSE</code> when calling the function).</p>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+<div id="working-with-correlation-matrices" class="section level3 unnumbered">
+<h3>Working with correlation matrices</h3>
+<p>It’s important to realise that, as with all R objects, we can work with
+correlation matrices to continue our data ananalyses.</p>
+<p>For example, as part of exploring your data, you might want to know whether
+correlations you observe in one sample are similar to those from another sample,
+when using the same questions. For example, let’s say we ran a survey measuring
+variables from the theory of planned behaviour first in students, and later in
+older adults:</p>
+<p>We could run correlations for each sample separately:</p>
+<pre class="sourceCode r"><code class="sourceCode r">corr.students &lt;-<span class="st"> </span><span class="kw">cor</span>(students)
+corr.public &lt;-<span class="st"> </span><span class="kw">cor</span>(public)</code></pre>
+<p>And we could ‘eyeball’ both of these correlation matrices and try and spot
+patterns or differences between them, but this is quite hard:</p>
+<pre class="sourceCode r"><code class="sourceCode r">corr.students <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="18%" />
+<col width="14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">behaviour</th>
+<th align="center">intention</th>
+<th align="center">control</th>
+<th align="center">social.norm</th>
+<th align="center">attitude</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>behaviour</strong></td>
+<td align="center">1.000</td>
+<td align="center">0.55</td>
+<td align="center">0.648</td>
+<td align="center">0.072</td>
+<td align="center">0.132</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>intention</strong></td>
+<td align="center">0.551</td>
+<td align="center">1.00</td>
+<td align="center">0.394</td>
+<td align="center">0.298</td>
+<td align="center">0.438</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>control</strong></td>
+<td align="center">0.648</td>
+<td align="center">0.39</td>
+<td align="center">1.000</td>
+<td align="center">0.017</td>
+<td align="center">0.014</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>social.norm</strong></td>
+<td align="center">0.072</td>
+<td align="center">0.30</td>
+<td align="center">0.017</td>
+<td align="center">1.000</td>
+<td align="center">-0.011</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>attitude</strong></td>
+<td align="center">0.132</td>
+<td align="center">0.44</td>
+<td align="center">0.014</td>
+<td align="center">-0.011</td>
+<td align="center">1.000</td>
+</tr>
+</tbody>
+</table>
+<pre class="sourceCode r"><code class="sourceCode r">corr.public <span class="op">%&gt;%</span>
+<span class="st">  </span>pander</code></pre>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="15%" />
+<col width="15%" />
+<col width="17%" />
+<col width="14%" />
+<col width="14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">behaviour</th>
+<th align="center">intention</th>
+<th align="center">social.norm</th>
+<th align="center">attitude</th>
+<th align="center">control</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>behaviour</strong></td>
+<td align="center">1.00</td>
+<td align="center">0.54</td>
+<td align="center">0.287</td>
+<td align="center">0.143</td>
+<td align="center">0.23</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>intention</strong></td>
+<td align="center">0.54</td>
+<td align="center">1.00</td>
+<td align="center">0.361</td>
+<td align="center">0.290</td>
+<td align="center">0.37</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>social.norm</strong></td>
+<td align="center">0.29</td>
+<td align="center">0.36</td>
+<td align="center">1.000</td>
+<td align="center">0.019</td>
+<td align="center">-0.08</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>attitude</strong></td>
+<td align="center">0.14</td>
+<td align="center">0.29</td>
+<td align="center">0.019</td>
+<td align="center">1.000</td>
+<td align="center">0.04</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>control</strong></td>
+<td align="center">0.23</td>
+<td align="center">0.37</td>
+<td align="center">-0.080</td>
+<td align="center">0.040</td>
+<td align="center">1.00</td>
+</tr>
+</tbody>
+</table>
+<p>But we could also simply <em>subtract</em> one matrix from the other to show the
+difference directly:</p>
+<pre class="sourceCode r"><code class="sourceCode r">(corr.students <span class="op">-</span><span class="st"> </span>corr.public) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="15%" />
+<col width="15%" />
+<col width="12%" />
+<col width="18%" />
+<col width="14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">behaviour</th>
+<th align="center">intention</th>
+<th align="center">control</th>
+<th align="center">social.norm</th>
+<th align="center">attitude</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>behaviour</strong></td>
+<td align="center">0.000</td>
+<td align="center">0.013</td>
+<td align="center">0.361</td>
+<td align="center">-0.071</td>
+<td align="center">-0.093</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>intention</strong></td>
+<td align="center">0.013</td>
+<td align="center">0.000</td>
+<td align="center">0.033</td>
+<td align="center">0.008</td>
+<td align="center">0.067</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>control</strong></td>
+<td align="center">0.361</td>
+<td align="center">0.033</td>
+<td align="center">0.000</td>
+<td align="center">-0.002</td>
+<td align="center">0.093</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>social.norm</strong></td>
+<td align="center">-0.071</td>
+<td align="center">0.008</td>
+<td align="center">-0.002</td>
+<td align="center">0.000</td>
+<td align="center">-0.050</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>attitude</strong></td>
+<td align="center">-0.093</td>
+<td align="center">0.067</td>
+<td align="center">0.093</td>
+<td align="center">-0.050</td>
+<td align="center">0.000</td>
+</tr>
+</tbody>
+</table>
+<p>Now it’s much more obvious that the behaviour/control correlation differs
+between the samples (it’s higher in the students).</p>
+<p>The point here is not that this is an analysis you are likely to actually report
+— although you might find it useful when exploring the data and interpreting
+your findings.</p>
+<p>But rather this show that a correlation matrix, in common with the results of
+all the statistical tests we run, are themselves <em>just data points</em>. We can do
+whatever we like with our results — storing them in data frames to display
+later, or process as we need.</p>
+<p>In reality, if you wanted to test the difference in correlations (slopes) in two
+groups for one outcome variable you probably want to use
+<a href="#regression">multiple regression</a>, and if you wanted to test a complex model
+like the theory of planned behaviour, you might consider <a href="cfa.html#cfa">CFA</a> and/or
+<a href="sem.html#sem">SEM</a>).</p>
+</div>
+<div id="correlation-tables-for-publication" class="section level3 unnumbered">
+<h3>Tables for publication</h3>
+<div id="using-apatables" class="section level4 unnumbered">
+<h4>Using <code>apaTables</code></h4>
+<p>If you want to produce nice correlation tables for publication the <code>apaTables</code>
+package might be useful. This block saves an APA formatted correlation table to
+an <a href="Table1_APA.doc">external Word document like this</a>.</p>
+<p>Note though, that the APA table format does encourage ‘star gazing’ to some
+degree. Try to avoid interpreting correlation tables solely based on the
+significance (or not) of the <em>r</em> values. The <code>pairs</code> or <code>corrgram</code> plots shown
+above are a much better summary of the data, and are can be just as compact.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(apaTables)
+<span class="kw">apa.cor.table</span>(airquality, <span class="dt">filename=</span><span class="st">&quot;Table1_APA.doc&quot;</span>, <span class="dt">show.conf.interval=</span>F)
+The ability to suppress reporting of reporting confidence intervals has been deprecated <span class="cf">in</span> this version.
+The <span class="cf">function</span> argument show.conf.interval will be removed <span class="cf">in</span> a later version.
+
+
+Means, standard deviations, and correlations with confidence intervals
+ 
+
+  Variable   M      SD    <span class="dv">1</span>            <span class="dv">2</span>           <span class="dv">3</span>           
+  <span class="fl">1.</span> Ozone   <span class="fl">42.13</span>  <span class="fl">32.99</span>                                      
+                                                               
+  <span class="fl">2.</span> Solar.R <span class="fl">185.93</span> <span class="fl">90.06</span> <span class="fl">.35</span><span class="op">**</span><span class="st">                                </span>
+<span class="st">                          </span>[.<span class="dv">17</span>, <span class="fl">.50</span>]                           
+                                                               
+  <span class="fl">3.</span> Wind    <span class="fl">9.96</span>   <span class="fl">3.52</span>  <span class="fl">-.60</span><span class="op">**</span><span class="st">       </span><span class="fl">-.06</span>                    
+                          [<span class="op">-</span>.<span class="dv">71</span>, <span class="fl">-.47</span>] [<span class="op">-</span>.<span class="dv">22</span>, <span class="fl">.11</span>]             
+                                                               
+  <span class="fl">4.</span> Temp    <span class="fl">77.88</span>  <span class="fl">9.47</span>  <span class="fl">.70</span><span class="op">**</span><span class="st">        </span><span class="fl">.28</span><span class="op">**</span><span class="st">       </span><span class="fl">-.46</span><span class="op">**</span><span class="st">      </span>
+<span class="st">                          </span>[.<span class="dv">59</span>, <span class="fl">.78</span>]   [.<span class="dv">12</span>, <span class="fl">.42</span>]  [<span class="op">-</span>.<span class="dv">57</span>, <span class="fl">-.32</span>]
+                                                               
+  <span class="fl">5.</span> Month   <span class="fl">6.99</span>   <span class="fl">1.42</span>  <span class="fl">.16</span>          <span class="fl">-.08</span>        <span class="fl">-.18</span><span class="op">*</span><span class="st">       </span>
+<span class="st">                          </span>[<span class="op">-</span>.<span class="dv">02</span>, <span class="fl">.34</span>]  [<span class="op">-</span>.<span class="dv">23</span>, <span class="fl">.09</span>] [<span class="op">-</span>.<span class="dv">33</span>, <span class="fl">-.02</span>]
+                                                               
+  <span class="fl">6.</span> Day     <span class="fl">15.80</span>  <span class="fl">8.86</span>  <span class="fl">-.01</span>         <span class="fl">-.15</span>        <span class="fl">.03</span>         
+                          [<span class="op">-</span>.<span class="dv">20</span>, <span class="fl">.17</span>]  [<span class="op">-</span>.<span class="dv">31</span>, <span class="fl">.01</span>] [<span class="op">-</span>.<span class="dv">13</span>, <span class="fl">.19</span>] 
+                                                               
+  <span class="dv">4</span>           <span class="dv">5</span>          
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+  <span class="fl">.42</span><span class="op">**</span><span class="st">                  </span>
+<span class="st">  </span>[.<span class="dv">28</span>, <span class="fl">.54</span>]             
+                         
+  <span class="fl">-.13</span>        <span class="fl">-.01</span>       
+  [<span class="op">-</span>.<span class="dv">28</span>, <span class="fl">.03</span>] [<span class="op">-</span>.<span class="dv">17</span>, <span class="fl">.15</span>]
+                         
+
+Note. M and SD are used to represent mean and standard deviation, respectively.
+Values <span class="cf">in</span> square brackets indicate the <span class="dv">95</span>% confidence interval.
+The confidence interval is a plausible range of population correlations 
+that could have caused the sample <span class="kw">correlation</span> (Cumming, <span class="dv">2014</span>).
+<span class="op">*</span><span class="st"> </span>indicates p <span class="op">&lt;</span><span class="st"> </span>.<span class="fl">05.</span> <span class="op">**</span><span class="st"> </span>indicates p <span class="op">&lt;</span><span class="st"> </span>.<span class="fl">01.</span>
+ </code></pre>
+</div>
+<div id="by-hand" class="section level4 unnumbered">
+<h4>By hand</h4>
+<p>If you’re not bothered about strict APA format, you might still want to extract
+<em>r</em> and <em>p</em> values as dataframes which can then be saved to a csv and opened in
+Excel, or converted to a table some other way.</p>
+<p>You can do this by storing the <code>corr.test</code> output in a variable, and the
+accessing the <code>$r</code> and <code>$p</code> values within it.</p>
+<p>First, we create the <code>corr.test</code> object:</p>
+<pre class="sourceCode r"><code class="sourceCode r">mycorrelations &lt;-<span class="st"> </span>psych<span class="op">::</span><span class="kw">corr.test</span>(airquality)</code></pre>
+<p>Then extract the <em>r</em> values as a table:</p>
+<pre class="sourceCode r"><code class="sourceCode r">mycorrelations<span class="op">$</span>r <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre>
+<table style="width:94%;">
+<colgroup>
+<col width="19%" />
+<col width="12%" />
+<col width="13%" />
+<col width="12%" />
+<col width="11%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Ozone</th>
+<th align="center">Solar.R</th>
+<th align="center">Wind</th>
+<th align="center">Temp</th>
+<th align="center">Month</th>
+<th align="center">Day</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Ozone</strong></td>
+<td align="center">1.000</td>
+<td align="center">0.348</td>
+<td align="center">-0.602</td>
+<td align="center">0.70</td>
+<td align="center">0.165</td>
+<td align="center">-0.013</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Solar.R</strong></td>
+<td align="center">0.348</td>
+<td align="center">1.000</td>
+<td align="center">-0.057</td>
+<td align="center">0.28</td>
+<td align="center">-0.075</td>
+<td align="center">-0.150</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Wind</strong></td>
+<td align="center">-0.602</td>
+<td align="center">-0.057</td>
+<td align="center">1.000</td>
+<td align="center">-0.46</td>
+<td align="center">-0.178</td>
+<td align="center">0.027</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Temp</strong></td>
+<td align="center">0.698</td>
+<td align="center">0.276</td>
+<td align="center">-0.458</td>
+<td align="center">1.00</td>
+<td align="center">0.421</td>
+<td align="center">-0.131</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Month</strong></td>
+<td align="center">0.165</td>
+<td align="center">-0.075</td>
+<td align="center">-0.178</td>
+<td align="center">0.42</td>
+<td align="center">1.000</td>
+<td align="center">-0.008</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Day</strong></td>
+<td align="center">-0.013</td>
+<td align="center">-0.150</td>
+<td align="center">0.027</td>
+<td align="center">-0.13</td>
+<td align="center">-0.008</td>
+<td align="center">1.000</td>
+</tr>
+</tbody>
+</table>
+<p>And we can also extract p values:</p>
+<pre class="sourceCode r"><code class="sourceCode r">mycorrelations<span class="op">$</span>p <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre>
+<table style="width:89%;">
+<colgroup>
+<col width="19%" />
+<col width="11%" />
+<col width="13%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Ozone</th>
+<th align="center">Solar.R</th>
+<th align="center">Wind</th>
+<th align="center">Temp</th>
+<th align="center">Month</th>
+<th align="center">Day</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Ozone</strong></td>
+<td align="center">0.000</td>
+<td align="center">0.002</td>
+<td align="center">0.000</td>
+<td align="center">0.000</td>
+<td align="center">0.56</td>
+<td align="center">1.00</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Solar.R</strong></td>
+<td align="center">0.000</td>
+<td align="center">0.000</td>
+<td align="center">1.000</td>
+<td align="center">0.008</td>
+<td align="center">1.00</td>
+<td align="center">0.56</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Wind</strong></td>
+<td align="center">0.000</td>
+<td align="center">0.496</td>
+<td align="center">0.000</td>
+<td align="center">0.000</td>
+<td align="center">0.25</td>
+<td align="center">1.00</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Temp</strong></td>
+<td align="center">0.000</td>
+<td align="center">0.001</td>
+<td align="center">0.000</td>
+<td align="center">0.000</td>
+<td align="center">0.00</td>
+<td align="center">0.65</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Month</strong></td>
+<td align="center">0.078</td>
+<td align="center">0.366</td>
+<td align="center">0.027</td>
+<td align="center">0.000</td>
+<td align="center">0.00</td>
+<td align="center">1.00</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Day</strong></td>
+<td align="center">0.888</td>
+<td align="center">0.070</td>
+<td align="center">0.739</td>
+<td align="center">0.108</td>
+<td align="center">0.92</td>
+<td align="center">0.00</td>
+</tr>
+</tbody>
+</table>
+<p>Saving as a .csv is the same as for other dataframes:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.csv</span>(mycorrelations<span class="op">$</span>r, <span class="dt">file=</span><span class="st">&quot;airquality-r-values.csv&quot;</span>)</code></pre>
+<p>And can also access the CI for each pariwise correlation as a table:</p>
+<pre class="sourceCode r"><code class="sourceCode r">mycorrelations<span class="op">$</span>ci <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pander</span>(<span class="dt">caption=</span><span class="st">&quot;First 6 rows of the table of CI&#39;s for the correlation matrix.&quot;</span>)</code></pre>
+<table style="width:72%;">
+<caption>First 6 rows of the table of CI’s for the correlation matrix.</caption>
+<colgroup>
+<col width="25%" />
+<col width="12%" />
+<col width="12%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">lower</th>
+<th align="center">r</th>
+<th align="center">upper</th>
+<th align="center">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Ozone-Slr.R</strong></td>
+<td align="center">0.173</td>
+<td align="center">0.348</td>
+<td align="center">0.50</td>
+<td align="center">0.000</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Ozone-Wind</strong></td>
+<td align="center">-0.706</td>
+<td align="center">-0.602</td>
+<td align="center">-0.47</td>
+<td align="center">0.000</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Ozone-Temp</strong></td>
+<td align="center">0.591</td>
+<td align="center">0.698</td>
+<td align="center">0.78</td>
+<td align="center">0.000</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Ozone-Month</strong></td>
+<td align="center">-0.018</td>
+<td align="center">0.165</td>
+<td align="center">0.34</td>
+<td align="center">0.078</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Ozone-Day</strong></td>
+<td align="center">-0.195</td>
+<td align="center">-0.013</td>
+<td align="center">0.17</td>
+<td align="center">0.888</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Slr.R-Wind</strong></td>
+<td align="center">-0.217</td>
+<td align="center">-0.057</td>
+<td align="center">0.11</td>
+<td align="center">0.496</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="correlation-methods" class="section level3 unnumbered">
+<h3>Other methods for correlation</h3>
+<p>By default <code>corr.test</code> produces Pearson correlations, but You can pass the
+<code>method</code> argument <code>psych::corr.test()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">corr.test</span>(airquality, <span class="dt">method=</span><span class="st">&quot;spearman&quot;</span>)
+psych<span class="op">::</span><span class="kw">corr.test</span>(airquality, <span class="dt">method=</span><span class="st">&quot;kendall&quot;</span>)</code></pre>
 
 </div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="crosstabs.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="t-tests.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

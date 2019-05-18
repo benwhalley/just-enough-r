@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Dealing with multiple files | Just Enough R</title>
+  <meta name="description" content="Dealing with multiple files | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Dealing with multiple files | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Dealing with multiple files | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="saving-and-exporting.html">
+<link rel="next" href="joining-data.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,363 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
-<ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
-</ul>
-</div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
-
-</div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
+<div id="multiple-raw-data-files" class="section level2 unnumbered">
+<h2>Dealing with multiple files</h2>
+<p>Often you will have multiple data files files - for example, those produced by
+<a href="http://www.psychopy.org">experimental software</a>.</p>
+<p>This is one of the few times when you might have to do something resembling
+‘real programming’, but it’s still fairly straightforward.</p>
+<p>In the <a href="anova-cookbook.html#trad-rm-anova">repeated measures Anova example later on in this guide</a>
+we encounter some data from an experiment where reaction times were recorded in
+25 trials (<code>Trial</code>) before and after (<code>Time</code>) one of 4 experimental
+manipulations (<code>Condition = {1,2,3,4}</code>). There were 48 participants in total:</p>
+<p>Let’s say that we have saved all the files are in a single directory, and these
+are numbered sequentially: <code>person01.csv</code>, <code>person02.csv</code> and so on.</p>
+<p>Using the <code>list.files()</code> function we can list the contents of a directory on the
+hard drive:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>(<span class="st">&#39;data/multiple-file-example/&#39;</span>)
+ [<span class="dv">1</span>] <span class="st">&quot;person1.csv&quot;</span>  <span class="st">&quot;person10.csv&quot;</span> <span class="st">&quot;person11.csv&quot;</span> <span class="st">&quot;person12.csv&quot;</span>
+ [<span class="dv">5</span>] <span class="st">&quot;person13.csv&quot;</span> <span class="st">&quot;person14.csv&quot;</span> <span class="st">&quot;person15.csv&quot;</span> <span class="st">&quot;person16.csv&quot;</span>
+ [<span class="dv">9</span>] <span class="st">&quot;person17.csv&quot;</span> <span class="st">&quot;person18.csv&quot;</span> <span class="st">&quot;person19.csv&quot;</span> <span class="st">&quot;person2.csv&quot;</span> 
+[<span class="dv">13</span>] <span class="st">&quot;person20.csv&quot;</span> <span class="st">&quot;person21.csv&quot;</span> <span class="st">&quot;person22.csv&quot;</span> <span class="st">&quot;person23.csv&quot;</span>
+[<span class="dv">17</span>] <span class="st">&quot;person24.csv&quot;</span> <span class="st">&quot;person25.csv&quot;</span> <span class="st">&quot;person26.csv&quot;</span> <span class="st">&quot;person27.csv&quot;</span>
+[<span class="dv">21</span>] <span class="st">&quot;person28.csv&quot;</span> <span class="st">&quot;person29.csv&quot;</span> <span class="st">&quot;person3.csv&quot;</span>  <span class="st">&quot;person30.csv&quot;</span>
+[<span class="dv">25</span>] <span class="st">&quot;person31.csv&quot;</span> <span class="st">&quot;person32.csv&quot;</span> <span class="st">&quot;person33.csv&quot;</span> <span class="st">&quot;person34.csv&quot;</span>
+[<span class="dv">29</span>] <span class="st">&quot;person35.csv&quot;</span> <span class="st">&quot;person36.csv&quot;</span> <span class="st">&quot;person37.csv&quot;</span> <span class="st">&quot;person38.csv&quot;</span>
+[<span class="dv">33</span>] <span class="st">&quot;person39.csv&quot;</span> <span class="st">&quot;person4.csv&quot;</span>  <span class="st">&quot;person40.csv&quot;</span> <span class="st">&quot;person41.csv&quot;</span>
+[<span class="dv">37</span>] <span class="st">&quot;person42.csv&quot;</span> <span class="st">&quot;person43.csv&quot;</span> <span class="st">&quot;person44.csv&quot;</span> <span class="st">&quot;person45.csv&quot;</span>
+[<span class="dv">41</span>] <span class="st">&quot;person46.csv&quot;</span> <span class="st">&quot;person47.csv&quot;</span> <span class="st">&quot;person48.csv&quot;</span> <span class="st">&quot;person5.csv&quot;</span> 
+[<span class="dv">45</span>] <span class="st">&quot;person6.csv&quot;</span>  <span class="st">&quot;person7.csv&quot;</span>  <span class="st">&quot;person8.csv&quot;</span>  <span class="st">&quot;person9.csv&quot;</span> </code></pre>
+<p>The <code>list.files()</code> function creates a <a href="#vectors">vector</a> of the names of all the
+files in the directory.</p>
+<p>At this point, there are many, many ways of importing the contents of these
+files, but below we use a technique which is concise, reliable, and less
+error-prone than many others. It also continues to use the <code>dplyr</code> library.</p>
+<p>This approach has 3 steps:</p>
+<ol style="list-style-type: decimal">
+<li>Put all the names of the .csv files into a dataframe.</li>
+<li>For each row in the dataframe, run a function which imports the file as a
+dataframe.</li>
+<li>Combine all these dataframes together.</li>
 </ol>
+<div id="putting-the-filenames-into-a-dataframe" class="section level6 unnumbered">
+<h6>Putting the filenames into a dataframe</h6>
+<p>Because <code>list.files</code> produces a vector, we can make them a column in a new
+dataframe:</p>
+<pre class="sourceCode r"><code class="sourceCode r">raw.files &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">filename =</span> <span class="kw">list.files</span>(<span class="st">&#39;data/multiple-file-example/&#39;</span>))</code></pre>
+<p>And we can make a new column with the complete path (i.e. including the
+directory holding the files), using the <a href="string-handling.html#paste"><code>paste0</code></a> which combines
+strings of text. We wouldn’t have to do this if the raw files were in the same
+directory as our RMarkdown file, but that would get messy.</p>
+<pre class="sourceCode r"><code class="sourceCode r">raw.file.paths &lt;-<span class="st"> </span>raw.files  <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">filepath =</span> <span class="kw">paste0</span>(<span class="st">&quot;data/multiple-file-example/&quot;</span>, filename))
+
+raw.file.paths <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>)
+<span class="co"># A tibble: 3 x 2</span>
+  filename     filepath                               
+  <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">        </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">                                  </span>
+<span class="dv">1</span> person1.csv  data<span class="op">/</span>multiple<span class="op">-</span>file<span class="op">-</span>example<span class="op">/</span>person1.csv 
+<span class="dv">2</span> person10.csv data<span class="op">/</span>multiple<span class="op">-</span>file<span class="op">-</span>example<span class="op">/</span>person10.csv
+<span class="dv">3</span> person11.csv data<span class="op">/</span>multiple<span class="op">-</span>file<span class="op">-</span>example<span class="op">/</span>person11.csv</code></pre>
+</div>
+<div id="dplyr-do" class="section level6 unnumbered">
+<h6>Using <code>do()</code></h6>
+<p>We can then use the <code>do()</code> function in <code>dplyr::</code> to import the data for each
+file and combine the results in a single dataframe.</p>
+<p>The <code>do()</code> function allows us to run any R function for each group or row in a
+dataframe.</p>
+<p>The means that our original dataframe is broken up into chunks (either groups of
+rows, if we use <code>group_by()</code>, or individual rows if we use <code>rowwise()</code>) and each
+chunk is fed to the function we specify. This function must do it’s work and
+return a new dataframe, and these are then combined into a single larger
+dataframe.</p>
+<p>So in this example, we break our dataframe of filenames up into individual rows
+using <code>rowwise</code> and then specify the <code>read_csv</code> function which takes the name of
+a csv file, and returns the content as a dataframe
+(<a href="importing-data.html#importing-data">see the importing data section</a>).</p>
+<p>For example:</p>
+<pre class="sourceCode r"><code class="sourceCode r">raw.data &lt;-<span class="st"> </span>raw.file.paths <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># &#39;do&#39; the function for each row in turn</span>
+<span class="st">  </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">do</span>(., <span class="kw">read_csv</span>(<span class="dt">file=</span>.<span class="op">$</span>filepath))</code></pre>
+<p>We can check these data look OK by sampling 10 rows at random:</p>
+<pre class="sourceCode r"><code class="sourceCode r">raw.data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">10</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre>
+<table style="width:62%;">
+<colgroup>
+<col width="16%" />
+<col width="11%" />
+<col width="9%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Condition</th>
+<th align="center">trial</th>
+<th align="center">time</th>
+<th align="center">person</th>
+<th align="center">RT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">6</td>
+<td align="center">1</td>
+<td align="center">28</td>
+<td align="center">249.4</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">371.5</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">19</td>
+<td align="center">2</td>
+<td align="center">10</td>
+<td align="center">199</td>
+</tr>
+<tr class="even">
+<td align="center">3</td>
+<td align="center">21</td>
+<td align="center">2</td>
+<td align="center">28</td>
+<td align="center">307.3</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">20</td>
+<td align="center">1</td>
+<td align="center">6</td>
+<td align="center">304.9</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">7</td>
+<td align="center">1</td>
+<td align="center">10</td>
+<td align="center">183.2</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">20</td>
+<td align="center">2</td>
+<td align="center">4</td>
+<td align="center">271.3</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">11</td>
+<td align="center">1</td>
+<td align="center">13</td>
+<td align="center">262.9</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">15</td>
+<td align="center">1</td>
+<td align="center">33</td>
+<td align="center">224.7</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">10</td>
+<td align="center">1</td>
+<td align="center">20</td>
+<td align="center">214</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="using-custom-functions-with-do" class="section level5 unnumbered">
+<h5>Using custom functions with <code>do()</code></h5>
+<p>In this example, each of the raw data files included the participant number (the
+<code>person</code> variable). However, this isn’t always the case.</p>
+<p>This isn’t a problem though, if we create our own
+<a href="code-reuse.html#helper-functions">helper function</a> to import the data. Writing small functions
+in R is very easy, and the example below wraps the <code>read.csv()</code> function and
+adds a new colum, <code>filename</code> to the imported data frame which would enable us to
+keep track of where each row in the final combined dataset came from.</p>
+<p>This is the helper function:</p>
+<pre class="sourceCode r"><code class="sourceCode r">read.csv.and.add.filename &lt;-<span class="st"> </span><span class="cf">function</span>(filepath){
+  <span class="kw">read_csv</span>(filepath) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">filepath=</span>filepath)
+}</code></pre>
+<p>In English, you should read this as:</p>
+<blockquote>
+<p>“Create a new R function called <code>read.csv.and.add.filename</code> which expects to
+be passed a path to a csv file as an input. This function reads the csv file
+at the path (converting it to a dataframe), and adds a new column containing
+the original file path it read from. It then returns this dataframe.”</p>
+</blockquote>
+<p>We can use our helper function with <code>do()</code> in place of the bare <code>read_csv</code>
+function we used before:</p>
+<pre class="sourceCode r"><code class="sourceCode r">raw.data.with.paths &lt;-<span class="st"> </span>raw.file.paths <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">do</span>(., <span class="kw">read.csv.and.add.filename</span>(.<span class="op">$</span>filepath))
+
+raw.data.with.paths <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">10</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pander</span>()</code></pre>
+<table style="width:62%;">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="16%" />
+<col width="11%" />
+<col width="9%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Condition</th>
+<th align="center">trial</th>
+<th align="center">time</th>
+<th align="center">person</th>
+<th align="center">RT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">4</td>
+<td align="center">23</td>
+<td align="center">1</td>
+<td align="center">38</td>
+<td align="center">161.1</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">16</td>
+<td align="center">1</td>
+<td align="center">9</td>
+<td align="center">230</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">25</td>
+<td align="center">2</td>
+<td align="center">17</td>
+<td align="center">90.31</td>
+</tr>
+<tr class="even">
+<td align="center">3</td>
+<td align="center">6</td>
+<td align="center">1</td>
+<td align="center">28</td>
+<td align="center">249.4</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">9</td>
+<td align="center">1</td>
+<td align="center">9</td>
+<td align="center">213.9</td>
+</tr>
+<tr class="even">
+<td align="center">3</td>
+<td align="center">20</td>
+<td align="center">1</td>
+<td align="center">29</td>
+<td align="center">354.8</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">20</td>
+<td align="center">2</td>
+<td align="center">34</td>
+<td align="center">215</td>
+</tr>
+<tr class="even">
+<td align="center">3</td>
+<td align="center">16</td>
+<td align="center">1</td>
+<td align="center">26</td>
+<td align="center">273.5</td>
+</tr>
+<tr class="odd">
+<td align="center">4</td>
+<td align="center">5</td>
+<td align="center">1</td>
+<td align="center">41</td>
+<td align="center">264.3</td>
+</tr>
+<tr class="even">
+<td align="center">3</td>
+<td align="center">21</td>
+<td align="center">2</td>
+<td align="center">36</td>
+<td align="center">308.2</td>
+</tr>
+</tbody>
+</table>
+<table style="width:58%;">
+<colgroup>
+<col width="58%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">filepath</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">data/multiple-file-example/person38.csv</td>
+</tr>
+<tr class="even">
+<td align="center">data/multiple-file-example/person9.csv</td>
+</tr>
+<tr class="odd">
+<td align="center">data/multiple-file-example/person17.csv</td>
+</tr>
+<tr class="even">
+<td align="center">data/multiple-file-example/person28.csv</td>
+</tr>
+<tr class="odd">
+<td align="center">data/multiple-file-example/person9.csv</td>
+</tr>
+<tr class="even">
+<td align="center">data/multiple-file-example/person29.csv</td>
+</tr>
+<tr class="odd">
+<td align="center">data/multiple-file-example/person34.csv</td>
+</tr>
+<tr class="even">
+<td align="center">data/multiple-file-example/person26.csv</td>
+</tr>
+<tr class="odd">
+<td align="center">data/multiple-file-example/person41.csv</td>
+</tr>
+<tr class="even">
+<td align="center">data/multiple-file-example/person36.csv</td>
+</tr>
+</tbody>
+</table>
+<p>At this point you might need to
+<a href="layered-graphics.html#extract-to-split-column-names">use the <code>extract()</code> or <code>separate()</code> functions</a>
+to post-process the filename and re-create the <code>person</code> variable from this
+(although in this case that’s already been done for us).</p>
+<!-- TODO1 -->
+<!-- - File handling and import -->
+<!-- - Writing a function for `do()` which returns a dataframe -->
+<!-- - Joins and merges -->
+<!-- ##  Error checking {-} -->
+<!-- - `999`, `666` and `*`: the marks of the beast! -->
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="saving-and-exporting.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="joining-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

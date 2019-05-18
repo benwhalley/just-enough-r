@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>7 Regression | Just Enough R</title>
+  <meta name="description" content="7 Regression | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="7 Regression | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="7 Regression | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="t-tests.html">
+<link rel="next" href="factors-and-variable-codings.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,56 +430,196 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
+<div id="linear-models-simple" class="section level1">
+<h1><span class="header-section-number">7</span> Regression</h1>
+<div id="section-8" class="section level4 unnumbered tip">
+<h4></h4>
+<p>This section assumes most readers will have done an introductory statistics
+course and had some practice running multiple regression and or Anova in SPSS or
+a similar package.</p>
+<!-- If you haven't, don't rush out to do that though XXX what should they do instead? Recommend some MOOC? XXX? -->
 </div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
+<div id="formulae" class="section level3 unnumbered">
+<h3>Describing statistical models using formulae</h3>
+<p>R requires that you are explicit about the statistical model you want to run but
+provides a neat, concise way of describing models, called a <code>formula</code>. For
+multiple regression and simple Anova, the formulas we write map closely onto the
+underlying <em>linear model</em>. The formula syntax provides shortcuts to quickly
+describe all the models you are likely to need.</p>
+<p>Formulas have two parts: the left hand side and the right hand side, which are
+separated by the tilde symbol: <code>~</code>. Here, the tilde just means ‘is predicted
+by’.</p>
+<p>For example, this formula specifies a regression model where <code>height</code> is the
+<em>outcome</em>, and <code>age</code> and <code>gender</code> are the <em>predictor</em> variables.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
+<pre><code>height ~ age + gender</code></pre>
+<p>There are lots more useful tricks to learn when writing formulas, which are
+covered below. But in the interests of instant gratification let’s work through
+a simple example first:</p>
+</div>
+<div id="running-a-linear-model" class="section level3 unnumbered">
+<h3>Running a linear model</h3>
+<p>Linear models (including Anova and multiple regression) are run using the
+<code>lm(...)</code> function, short for ‘linear model’. We will use the <code>mtcars</code> dataset,
+which is built into R, for our first example.</p>
+<p>First, we have a quick look at the data. The pairs plot suggests that <code>mpg</code>
+might be related to a number of the other variables including <code>disp</code> (engine
+size) and <code>wt</code> (car weight):</p>
+<pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">select</span>(mpg, disp, wt) <span class="op">%&gt;%</span>
+<span class="st">    </span>pairs</code></pre>
+<p><img src="linear-models_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Before running any model, we should ask outselves: “what question we are trying
+to answer?”</p>
+<p>In this instance, we can see that both weight (<code>wt</code>) and engine size (<code>disp</code>)
+are related to <code>mpg</code>, but they are also correlated with one another. We might
+want to know, then, “are weight and engine size independent predictors of
+<code>mpg</code>?” That is, if we know a car’s weight, do we gain additional information
+about it’s <code>mpg</code> by measuring engine size?</p>
+<p>To answer this, we could use multiple regression, including both <code>wt</code> and <code>disp</code>
+as predictors of <code>mpg</code>. The formula for this model would be <code>mpg ~ wt + disp</code>.
+The command below runs the model:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data=</span>mtcars)
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data =</span> mtcars)
+
+Coefficients<span class="op">:</span>
+(Intercept)           wt         disp  
+   <span class="fl">34.96055</span>     <span class="fl">-3.35083</span>     <span class="fl">-0.01772</span>  </code></pre>
+<p>For readers used to wading through reams of SPSS output R might seem concise to
+the point of rudeness. By default, the <code>lm</code> commands displays very little, only
+repeating the formula and listing the coefficients for each predictor in the
+model.</p>
+<p>So what next? Unlike SPSS, we must be explicit and tell R exactly what we want.
+The most convenient way to do this is to first store the results of the <code>lm()</code>
+function:</p>
+<pre class="sourceCode r"><code class="sourceCode r">m<span class="fl">.1</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data=</span>mtcars)</code></pre>
+<p>This stores the results of the <code>lm()</code> function in a variable named <code>m.1</code>. As an
+aside, this is a pretty terrible variable name — try to give descriptive names
+to your variables because this will prevent errors and make your code easier to
+read.</p>
+<p>We can then use other functions to get more information about the model. For
+example:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(m<span class="fl">.1</span>)
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data =</span> mtcars)
+
+Residuals<span class="op">:</span>
+<span class="st">    </span>Min      1Q  Median      3Q     Max 
+<span class="fl">-3.4087</span> <span class="fl">-2.3243</span> <span class="fl">-0.7683</span>  <span class="fl">1.7721</span>  <span class="fl">6.3484</span> 
+
+Coefficients<span class="op">:</span>
+<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept) <span class="fl">34.96055</span>    <span class="fl">2.16454</span>  <span class="fl">16.151</span> <span class="fl">4.91e-16</span> <span class="op">**</span><span class="er">*</span>
+wt          <span class="fl">-3.35082</span>    <span class="fl">1.16413</span>  <span class="fl">-2.878</span>  <span class="fl">0.00743</span> <span class="op">**</span><span class="st"> </span>
+disp        <span class="fl">-0.01773</span>    <span class="fl">0.00919</span>  <span class="fl">-1.929</span>  <span class="fl">0.06362</span> .  
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">2.917</span> on <span class="dv">29</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7809</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7658</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">51.69</span> on <span class="dv">2</span> and <span class="dv">29</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">2.744e-10</span></code></pre>
+<p>Although still compact, the <code>summary</code> function provides some familiar output,
+including the estimate, <em>SE</em>, and <em>p</em> value for each parameter.</p>
+<p>Take a moment to find the following statistics in the output above:</p>
 <ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
+<li>The coefficients and p values for each predictor</li>
+<li>The <em>R</em><sup>2</sup> for the overall model. What % of variance in <code>mpg</code> is explained?</li>
+</ul>
+<p>Answer the original question: ‘accounting for weight (<code>wt</code>), does engine size
+(<code>disp</code>) tell us anything extra about a car’s <code>mpg</code>?’</p>
+</div>
+<div id="more-on-formulas" class="section level3 unnumbered">
+<h3>More on formulas</h3>
+<p>Above we briefly introduced R’s formula syntax. Formulas for linear models have
+the following structure:</p>
+<pre><code>left_hand_side ~ right_hand_side</code></pre>
+<p>For linear models <em>the left side is our outcome</em>, which is must be a continous
+variable. For categorical or binary outcomes you need to use <code>glm()</code> function,
+rather than <code>lm()</code>. See the section on <a href="glm.html">generalised linear models</a>)
+for more details.</p>
+<p><em>The right hand side of the formula lists our predictors</em>. In the example above
+we used the <code>+</code> symbol to separate the predictors <code>wt</code> and <code>disp</code>. This told R
+to simply add each predictor to the model. However, many times we want to
+specify relationships <em>between</em> our predictors, as well as between predictors
+and outcomes.</p>
+<p>For example, we might have an experiment with 2 categorical predictors, each
+with 2 levels — that is, a 2x2 between-subjects design.</p>
+<p>Below, we define and run a linear model with both <code>vs</code> and <code>am</code> as predictors,
+along with the interaction of <code>vs:am</code>. We save this model as <code>m.2</code>, and use the
+<code>summary</code> command to print the coefficients.</p>
+<pre class="sourceCode r"><code class="sourceCode r">m<span class="fl">.2</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>vs <span class="op">+</span><span class="st"> </span>am <span class="op">+</span><span class="st"> </span>vs<span class="op">:</span>am, <span class="dt">data=</span>mtcars)
+<span class="kw">summary</span>(m<span class="fl">.2</span>)
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>vs <span class="op">+</span><span class="st"> </span>am <span class="op">+</span><span class="st"> </span>vs<span class="op">:</span>am, <span class="dt">data =</span> mtcars)
+
+Residuals<span class="op">:</span>
+<span class="st">   </span>Min     1Q Median     3Q    Max 
+<span class="fl">-6.971</span> <span class="fl">-1.973</span>  <span class="fl">0.300</span>  <span class="fl">2.036</span>  <span class="fl">6.250</span> 
+
+Coefficients<span class="op">:</span>
+<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept)   <span class="fl">15.050</span>      <span class="fl">1.002</span>  <span class="fl">15.017</span> <span class="fl">6.34e-15</span> <span class="op">**</span><span class="er">*</span>
+vs             <span class="fl">5.693</span>      <span class="fl">1.651</span>   <span class="fl">3.448</span>   <span class="fl">0.0018</span> <span class="op">**</span><span class="st"> </span>
+am             <span class="fl">4.700</span>      <span class="fl">1.736</span>   <span class="fl">2.708</span>   <span class="fl">0.0114</span> <span class="op">*</span><span class="st">  </span>
+vs<span class="op">:</span>am          <span class="fl">2.929</span>      <span class="fl">2.541</span>   <span class="fl">1.153</span>   <span class="fl">0.2589</span>    
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">3.472</span> on <span class="dv">28</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7003</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.6682</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">21.81</span> on <span class="dv">3</span> and <span class="dv">28</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">1.735e-07</span></code></pre>
+<p>We’d normally want to see the Anova table for this model, including the F-tests:</p>
+<pre class="sourceCode r"><code class="sourceCode r">car<span class="op">::</span><span class="kw">Anova</span>(m<span class="fl">.2</span>)
+Anova <span class="kw">Table</span> (Type II tests)
+
+Response<span class="op">:</span><span class="st"> </span>mpg
+          Sum Sq Df F value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    
+vs        <span class="fl">367.41</span>  <span class="dv">1</span> <span class="fl">30.4836</span> <span class="fl">6.687e-06</span> <span class="op">**</span><span class="er">*</span>
+am        <span class="fl">276.03</span>  <span class="dv">1</span> <span class="fl">22.9021</span> <span class="fl">4.984e-05</span> <span class="op">**</span><span class="er">*</span>
+vs<span class="op">:</span>am      <span class="fl">16.01</span>  <span class="dv">1</span>  <span class="fl">1.3283</span>    <span class="fl">0.2589</span>    
+Residuals <span class="fl">337.48</span> <span class="dv">28</span>                      
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre>
+<p>But before you do too much with Anova in R <a href="anova.html">read this section</a>.</p>
+<div id="other-formula-shortcuts" class="section level4 unnumbered">
+<h4>Other formula shortcuts</h4>
+<p>In addition to the <code>+</code> symbol, we can use other shortcuts to create linear
+models.</p>
+<p>As seen above, the colon (<code>:</code>) operator indicates the interaction between two
+terms. So <code>a:b</code> is equivalent to creating a new variable in the data frame where
+<code>a</code> is multiplied by <code>b</code>.</p>
+<p>The <code>*</code> symbol indicates the expansion of other terms in the model. So, <code>a*b</code> is
+the equivalent of <code>a + b + a:b</code>.</p>
+<p>Finally, it’s good to know that other functions can be used within R formulas to
+save work. For example, if you wanted to transform your dependent variable then
+<code>log(y) ~ x</code> will do what you might expect, and saves creating temporary
+variables in your dataset.</p>
+<p>The formula syntax is very powerful, and the above only shows the basics, but
+you can read the <code>formulae</code> help pages in RStudio for more details.</p>
+<div id="section-9" class="section level5 unnumbered exercise">
+<h5></h5>
+<p>Run the following models using the mtcars dataset:</p>
+<ul>
+<li><p>With <code>mpg</code> as the outcome, and with <code>cyl</code> and <code>hp</code> as predictors</p></li>
+<li><p>As above, but adding the interaction of <code>cyl</code> and <code>hp</code>.</p></li>
+<li><p>Repeat the model above, but write the formula a different way (make the
+formula either more or less explicit, but retaining the same predictors in
+the model).</p></li>
 </ul>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
-
 </div>
+</div> 
 </div>
-
-
-
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
+<ol start="8">
+<li id="fn8"><p>I avoid the
+terms dependent/independent variables because they are confusing to many
+students, and because they are misleading when discussing non-experimental
+data.<a href="linear-models-simple.html#fnref8" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -487,8 +627,8 @@ late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="t-tests.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="factors-and-variable-codings.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

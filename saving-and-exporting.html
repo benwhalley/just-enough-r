@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Saving and exporting | Just Enough R</title>
+  <meta name="description" content="Saving and exporting | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Saving and exporting | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Saving and exporting | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="importing-data.html">
+<link rel="next" href="multiple-raw-data-files.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,93 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
+<div id="saving-and-exporting" class="section level2 unnumbered">
+<h2>Saving and exporting</h2>
+<p>Before you start saving data in csv or any other format, as yourself: “Do I need
+to save <em>this</em> dataset, or should I simply save my raw data and code?”</p>
+<p>Oftentimes it’s best to keep only your raw datafiles, with the R code you used
+to process them. This keeps your disk tidier, and avoids confusion with multiple
+versions of files.</p>
+<p>If it takes a long time to process your data though you might want to save
+interim steps. And if you share your data (which you should) you might also want
+to save simplified or anonymised versions of it, in widely-accessible formats.</p>
+<div id="use-csv" class="section level3 unnumbered">
+<h3>Use CSV files</h3>
+<p>Comma-separated-values files are a plain text format which are idea for storing
+and sharing your data. They are:</p>
 <ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
+<li>Understood by almost every piece of software, ever</li>
+<li>Will be readable in future</li>
+<li>Perfect for storing 2D data (like dataframes)</li>
+<li>Readable by humans (just open them in Notepad)</li>
+</ul>
+<p>Commercial formats like Excel, SPSS (.sav) and Stata (.dta) don’t have these
+properties.</p>
+<p>Although CSV has some disadvantages, they are all easily overcome if you
+<a href="saving-and-exporting.html#save-intermediate-steps">save the steps of your data processing and analysis in your R code</a>,
+see below.</p>
+<p>Saving a dataframe to .csv is as simple as:</p>
+<pre class="sourceCode r"><code class="sourceCode r">readr<span class="op">::</span><span class="kw">write_csv</span>(mtcars, <span class="st">&#39;mtcars.csv&#39;</span>)</code></pre>
+<p>If you run this within an RMarkdown document, this will create the new csv file
+in the same directory as your <code>.Rmd</code> file.</p>
+<p><span class="tip">You can also use the <code>write.csv()</code> function in base R, but this version from
+<code>readr</code> is faster and has more sensible defalts (e.g. it doesn’t write rownames,
+but does save column names in the first row)</span></p>
+<div id="save-intermediate-steps" class="section level4 unnumbered">
+<h4>Save processes, not just outcomes</h4>
+<p>Many students (and academics) make errors in their analyses because they process
+data by hand (e.g. editing files in Excel) or use GUI tools to run analyses.</p>
+<p>In both cases these errors are hard to identify or rectify because only the
+outputs of the analysis can be saved, and <em>no record has been made of how these
+outputs were produced</em>.</p>
+<p>In contrast, if you do your data processing and analysis in R/RMarkdown you
+benefit from a concrete, repeatable series of steps which can be
+checked/verified by others. This can also save lots of time if you need to
+processing additional data later on (e.g. if you run more participants).</p>
+<p>Some principles to follow when working:</p>
+<ul>
+<li><p>Save your raw data in the simplest possible format, in CSV</p></li>
+<li><p>Always include column names in the file</p></li>
+<li><p>Use descriptive names, but with a regular strucuture.</p></li>
+<li><p>Never include spaces or special characters in the column names. Use
+underscores (<code>_</code>) if you want to make things more readable.</p></li>
+<li><p>Make names &lt;20 characters in length if possible</p></li>
 </ul>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
-
+<div id="saving-interim-steps" class="section level4 unnumbered">
+<h4>Saving interim steps</h4>
+<p>If you are saving data to use again later in R, the best format is RDS. Saving
+files to RDS <a href="#rds-files">is covered in a later section (click to see)</a>.</p>
+<p>If you are saving interim steps but think you might possibly want to access it
+from other programmes in future use csv though.</p>
+<p>To save something using RDS:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create a huge df of random numbers...</span>
+massive.df &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">nums =</span> <span class="kw">rnorm</span>(<span class="dv">1</span><span class="op">:</span><span class="fl">1e6</span>))
+<span class="kw">saveRDS</span>(massive.df, <span class="dt">file=</span><span class="st">&quot;massive.RDS&quot;</span>)</code></pre>
+<p>Then later on you can load it like this:</p>
+<pre class="sourceCode r"><code class="sourceCode r">restored.massive.df &lt;-<span class="st">  </span><span class="kw">readRDS</span>(<span class="st">&#39;massive.RDS&#39;</span>)</code></pre>
+<p><span class="tip">If you do this in RMarkdown, by default the RDS files will be saved in the same
+directory as your .Rmd file.</span></p>
 </div>
 </div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
+<div id="archiving-publication-and-sharing" class="section level3 unnumbered">
+<h3>Archiving, publication and sharing</h3>
+<p>If you want to share data with someone else, or open it in a different software
+package, using ‘.csv’ format is strongly recommended unless some other format is
+common in your field.</p>
+<p>When archiving data, or sharing with others, you must document what each column
+measures, and any processing steps used to create the file. RMarkdown is a good
+way of doing this because it can combine the processing with narrative
+explaining what is being done, and why.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="importing-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multiple-raw-data-files.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

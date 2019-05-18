@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Factors and variable codings | Just Enough R</title>
+  <meta name="description" content="Factors and variable codings | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Factors and variable codings | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Factors and variable codings | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="linear-models-simple.html">
+<link rel="next" href="parameterisation.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,63 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
+<div id="factors-and-variable-codings" class="section level2 unnumbered">
+<h2>Factors and variable codings</h2>
+<div id="factors-vs-linear-inputs" class="section level4 unnumbered">
+<h4></h4>
+<p>If you store categorical data as numbers (e.g. groups <code>1</code>, <code>2</code>, <code>3</code> …) it’s
+important to make sure your predictors are entered correctly into your models.</p>
+<p>In general, R works in a ‘regressiony’ way and will assume variables in a
+formula are linear predictors. So, a <code>group</code> variable coded <code>1</code>…<code>4</code> will be
+entered as a single parameter where 4 is considered twice as large as 2, etc.</p>
+<p>See below for example. In the first model <code>cyl</code> is entered as a ‘linear slope’;
+in the second each value of <code>cyl</code> (4,5, or 6) is treated as a separate category.
+The predictions from each model could be very different:</p>
+<pre class="sourceCode r"><code class="sourceCode r">linear.model &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>cyl, <span class="dt">data=</span>mtcars)
+categorical.model &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(cyl), <span class="dt">data=</span>mtcars)</code></pre>
+<p>In the case of different experimental groups what you would normally want is for
+<code>group</code> to be coded and entered as a number of categorical parameters in your
+model. The most common way of doing this is to use ‘dummy coding’, and this is
+what R will implement by default for
+<a href="factors-and-numerics.html#character-and-factor">character or factor variables</a>.</p>
+<p>To make sure your categorical variables are entered into your model as
+categories (and not a slope) you can either:</p>
 <ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
+<li>Convert the variable to a character or factor type in the dataframe or</li>
+<li>Specify that the variable is a factor when you run the model</li>
 </ul>
+<p>For example, here we specify <code>cyl</code> is a factor within the model formula:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(cyl), <span class="dt">data=</span>mtcars)
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(cyl), <span class="dt">data =</span> mtcars)
+
+Coefficients<span class="op">:</span>
+<span class="st"> </span>(Intercept)  <span class="kw">factor</span>(cyl)<span class="dv">6</span>  <span class="kw">factor</span>(cyl)<span class="dv">8</span>  
+      <span class="fl">26.664</span>        <span class="fl">-6.921</span>       <span class="fl">-11.564</span>  </code></pre>
+<p>Whereas here we convert to a factor in the original dataset:</p>
+<pre class="sourceCode r"><code class="sourceCode r">mtcars<span class="op">$</span>cyl.factor &lt;-<span class="st"> </span><span class="kw">factor</span>(mtcars<span class="op">$</span>cyl)
+<span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>cyl.factor, <span class="dt">data=</span>mtcars)
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>cyl.factor, <span class="dt">data =</span> mtcars)
+
+Coefficients<span class="op">:</span>
+(Intercept)  cyl.factor6  cyl.factor8  
+     <span class="fl">26.664</span>       <span class="fl">-6.921</span>      <span class="fl">-11.564</span>  </code></pre>
+<p><span class="admonition">Neither option is universally better, but if you have variables which are
+<em>definitely</em> factors (i.e. should never be used as slopes) it’s probably better
+to convert them in the original dataframe, before you start
+modelling</span></p>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
-
-</div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="linear-models-simple.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="parameterisation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

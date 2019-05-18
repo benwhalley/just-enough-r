@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Fitting multilevel models in R | Just Enough R</title>
+  <meta name="description" content="Fitting multilevel models in R | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Fitting multilevel models in R | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Fitting multilevel models in R | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="multilevel-models.html">
+<link rel="next" href="extending-traditional-rm-anova.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
+<div id="fitting-models" class="section level2 unnumbered">
+<h2>Fitting multilevel models in R</h2>
+<div id="use-lmer-and-glmer" class="section level3 unnumbered">
+<h3>Use <code>lmer</code> and <code>glmer</code></h3>
+<p>Although there are mutiple R packages which can fit mixed-effects regression
+models, the <code>lmer</code> and <code>glmer</code> functions within the <code>lme4</code> package are the most
+frequently used, for good reason, and the examples below all use these two
+functions.</p>
 </div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
-<ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
-</ul>
+<div id="p-values-in-multilevel-models" class="section level3 unnumbered">
+<h3><em>p</em> values in multilevel models</h3>
+<p>For various philosophical and statistical reasons the author of lme4, Doug
+Bates, has always refused to display <em>p</em> values in the output from lmer (his
+reasoning
+<a href="https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html">is explained here</a>).</p>
+<!-- See also http://glmm.wikidot.com/faq#df ? But outdated in places-->
+<p>That notwithstanding, many people have wanted to use the various methods to
+calculate p values for parameters in mixed models, and calculate F tests for
+effects and interactions. Various methods have been developed over the years
+which address at least some of Bates’ concerns, and these techniques have been
+implemented in R in the <code>lmerTest::</code> package. In particular, <code>lmerTest</code>
+implements an <code>anova</code> function for <code>lmer</code> models, which is very helpful.</p>
+<div id="section-13" class="section level5 unnumbered tip">
+<h5></h5>
+<p><strong>Don’t worry!</strong> All you need to do is to load the <code>lmerTest</code> package rather
+than <code>lme4</code>. This loads updated versions of <code>lmer</code>, <code>glmer</code>, and extra functions
+for things like calculating <em>F</em> tests and the Anova table.</p>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
-
+<div id="lmer-syntax" class="section level4 unnumbered">
+<h4>The <code>lmer</code> formula syntax</h4>
+<p>Specifying <code>lmer</code> models is very similar to the <a href="linear-models-simple.html#formulae">syntax for <code>lm</code></a>.
+The ‘fixed’ part of the model is exactly the same, with additional parts used to
+specify <a href="fixed-or-random.html#random-intercepts">random intercepts</a>,
+<a href="fixed-or-random.html#random-slopes">random slopes</a>, and control the covariances of these random
+effects
+(<a href="troubleshooting-multilevel-models.html#controlling-lmer-covariances">there’s more on this in the troubleshooting section</a>).</p>
+<div id="ml-random-intercepts" class="section level6 unnumbered">
+<h6>Random intercepts</h6>
+<p>The simplest model which allows a <a href="fixed-or-random.html#random-intercepts">‘random intercept’</a> for
+each level in the grouping looks like this:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lmer</span>(outcome <span class="op">~</span><span class="st"> </span>predictors <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>grouping), <span class="dt">data=</span>df)</code></pre>
+<p>Here the outcome and predictors are specified in a formula, just as we did when
+using <code>lm()</code>. The only difference is that we now add a ‘random part’ to the
+model, in this case: <code>(1|grouping)</code>.</p>
+<p>The <code>1</code> refers to an intercept, and so in English this part of the formula means
+‘add a random intercept for each level of grouping’.</p>
+</div>
+<div id="ml-random-slopes" class="section level6 unnumbered">
+<h6>Random slopes</h6>
+<p>If we want to add a <a href="fixed-or-random.html#random-slopes-intercepts">random slope</a> to the model, we
+could adjust the random part like so:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lmer</span>(outcome <span class="op">~</span><span class="st"> </span>predictor <span class="op">+</span><span class="st"> </span>(predictor <span class="op">|</span><span class="st"> </span>grouping), <span class="dt">data=</span>df)</code></pre>
+<p>This implicitly adds a random intercept too, so in English this formula says
+something like: let <code>outcome</code> be predicted by <code>predictor</code>; let variation in
+outcome to vary between levels of <code>grouping</code>, and also allow the effect of
+<code>predictor</code> to vary between levels of <code>grouping</code>.</p>
+<p>The <code>lmer</code> syntax for the random part is very powerful, and allows complex
+combinations of random intercepts and slopes and control over how these random
+effects are allowed to correlate with one another. For a detailed guide to
+fitting two and three level models, with various covariance structures, see:
+<a href="http://rpsychologist.com/r-guide-longitudinal-lme-lmer" class="uri">http://rpsychologist.com/r-guide-longitudinal-lme-lmer</a></p>
 </div>
 </div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
+<div id="are-my-effects-fixed-or-random" class="section level4 unnumbered tip">
+<h4>Are my effects fixed or random?</h4>
+<p>If you’re not sure which part of your model should be ‘fixed’ and which parts
+should be ‘random’
+<a href="fixed-or-random.html#fixed-or-random">theres a more detailed explanation in this section</a>.</p>
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="multilevel-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="extending-traditional-rm-anova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,0 +1,108 @@
+
+---
+title: 'Scaling predictors'
+---
+
+
+
+# Scaling predictor variables {#scaling-predictors}
+
+![Image: [Wikimedia][1]](media/Holding_the_eiffel_tower.jpg)
+
+[1]:
+    https://commons.wikimedia.org/wiki/File:Holding_the_eiffel_tower_(4114302348).jpg
+
+When predictors have a natural scale, interpreting them can be relatively
+straightforward. However when predictors are on an arbitrary scale, or when
+multiple predictors are on different scales, then interpreting the model (or
+comparing between models) can be hard. In these cases scaling or standardising
+predictors in the model can make it easier to interpret the coefficients that
+are estimated.
+
+### Standardising {- #standardizing}
+
+'Standardising' predictors, by subtracting the mean and dividng by the standard
+deviation, is a common way to make interpreting regression models easier, and
+particularly to make comparisons between predictors --- e.g. regarding their
+relative importance in predicting the outcome.
+
+@gelman*scaling_2008 covers in detail the advantages and disadvantages of
+standardising regression coefficients. Based on the observation that we often
+wish to compare continuous with binary predictors, they recommend
+standardisation by subtracting the mean and dividing by \_two* standard
+deviations (rather thant the normal one SD). The `arm` package implements this
+procedure, and makes it easy to automatically scale the predictors in a linear
+model.
+
+First, we run the linear model:
+
+
+```r
+m1 <- lm(mpg ~ wt + am, data=mtcars)
+m1
+
+Call:
+lm(formula = mpg ~ wt + am, data = mtcars)
+
+Coefficients:
+(Intercept)           wt           am  
+   37.32155     -5.35281     -0.02362  
+```
+
+And then use `arm::standardize` to standardize the coefficients:
+
+
+```r
+arm::standardize(m1)
+
+Call:
+lm(formula = mpg ~ z.wt + c.am, data = mtcars)
+
+Coefficients:
+(Intercept)         z.wt         c.am  
+   20.09062    -10.47500     -0.02362  
+```
+
+This automatically scales the data for `m1` and re-fits the model.
+
+An alternative is to use the `MuMIn::stdizeFit` although this applies scaling
+rules slightly differently to `arm`, in this case standardising by a single SD:
+
+
+```r
+MuMIn::stdizeFit(m1, mtcars)
+Registered S3 method overwritten by 'MuMIn':
+  method         from
+  predict.merMod lme4
+
+Call:
+lm(formula = mpg ~ wt + am, data = mtcars)
+
+Coefficients:
+(Intercept)           wt           am  
+   37.32155     -5.35281     -0.02362  
+```
+
+Check the help file for `MuMIn::stdize` for a detailed discussion of the
+differences with `arm::standardize`.
+
+### Dichotomising continuous predictors (or outcomes) {- #dichotomising}
+
+Dichotomising a continuous scale is almost always a bad idea. Although it is
+sometimes done to aid interpretation or presentation, there are better
+alternatives (for example estimating means from a model using Stata's `margins`
+command and plotting them, something we will do in the next session). As the
+Cochrane collaboration puts it:
+
+> The down side of converting other forms of data to a dichotomous form is that
+> information about the size of the effect may be lost. For example a
+> participant's blood pressure may have lowered when measured on a continuous
+> scale (mmHg), but if it has not lowered below the cut point they will still be
+> in the 'high blood pressure group' and you will not see this improvement. In
+> addition the process of dichotomising continuous data requires the setting of
+> an appropriate clinical point about which to 'split' the data, and this may
+> not be easy to determine.
+
+See <http://www.cochrane-net.org/openlearning/html/mod11-2.htm> and also
+@peacock_dichotomising_2012. Also note that trichotomising (splitting into 3) is
+likely to be a better better/more efficient approach, see @gelman2009splitting.

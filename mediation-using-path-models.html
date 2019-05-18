@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>11.1 Mediation using Path models | Just Enough R</title>
+  <meta name="description" content="11.1 Mediation using Path models | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="11.1 Mediation using Path models | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="11.1 Mediation using Path models | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="testing-the-indirect-effect.html">
+<link rel="next" href="covariance-modelling.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,170 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
-<ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
-</ul>
-</div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+<div id="mediation-using-path-models" class="section level2">
+<h2><span class="header-section-number">11.1</span> Mediation using Path models</h2>
+<p>An even more flexible approach to mediation can be taken using path models, a
+type of <a href="covariance-modelling.html#covariance-modelling">structural equation model</a> which are covered in
+more detail in the next section.</p>
+<p>Using the <code>lavaan</code> package, path/SEM models can specify multiple variables to be
+outcomes, and fit these models simultaneously. For example, we can fit both step
+2 and step 3 in a single model, as in the example below:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lavaan)
+This is lavaan <span class="fl">0.6</span><span class="dv">-3</span>
+lavaan is BETA software<span class="op">!</span><span class="st"> </span>Please report any bugs.
 
-</div>
-</div>
+smash.model &lt;-<span class="st"> &#39;</span>
+<span class="st">  crashes ~ speed + lateness</span>
+<span class="st">  speed ~ lateness</span>
+<span class="st">&#39;</span>
 
+smash.model.fit &lt;-<span class="st"> </span><span class="kw">sem</span>(smash.model, <span class="dt">data=</span>smash)
+<span class="kw">summary</span>(smash.model.fit)
+lavaan <span class="fl">0.6</span><span class="dv">-3</span> ended normally after <span class="dv">19</span> iterations
 
+  Optimization method                           NLMINB
+  Number of free parameters                          <span class="dv">5</span>
 
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
+  Number of observations                           <span class="dv">200</span>
+
+  Estimator                                         ML
+  Model Fit Test Statistic                       <span class="fl">0.000</span>
+  Degrees of freedom                                 <span class="dv">0</span>
+  Minimum Function Value               <span class="fl">0.0000000000000</span>
+
+Parameter Estimates<span class="op">:</span>
+
+<span class="st">  </span>Information                                 Expected
+  Information <span class="kw">saturated</span> (h1) model          Structured
+  Standard Errors                             Standard
+
+Regressions<span class="op">:</span>
+<span class="st">                   </span>Estimate  Std.Err  z<span class="op">-</span>value  <span class="kw">P</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)
+  crashes <span class="op">~</span><span class="st">                                           </span>
+<span class="st">    </span>speed             <span class="fl">0.288</span>    <span class="fl">0.031</span>    <span class="fl">9.152</span>    <span class="fl">0.000</span>
+    lateness          <span class="fl">0.297</span>    <span class="fl">0.095</span>    <span class="fl">3.111</span>    <span class="fl">0.002</span>
+  speed <span class="op">~</span><span class="st">                                             </span>
+<span class="st">    </span>lateness          <span class="fl">0.515</span>    <span class="fl">0.212</span>    <span class="fl">2.434</span>    <span class="fl">0.015</span>
+
+Variances<span class="op">:</span>
+<span class="st">                   </span>Estimate  Std.Err  z<span class="op">-</span>value  <span class="kw">P</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)
+   .crashes          <span class="fl">18.190</span>    <span class="fl">1.819</span>   <span class="fl">10.000</span>    <span class="fl">0.000</span>
+   .speed            <span class="fl">92.135</span>    <span class="fl">9.214</span>   <span class="fl">10.000</span>    <span class="fl">0.000</span></code></pre>
+<p>The summary output gives us coefficients which correspond to the regression
+coefficients in the step 2 and step 3 models — but this time, from a single
+model.</p>
+<p>We can also use <code>lavaan</code> to compute the indirect effects by labelling the
+relevant parameters, using the <code>*</code> and <code>:=</code> operators. See the
+<a href="http://lavaan.ugent.be/tutorial/mediation.html"><code>lavaan</code> syntax guide for mediation</a>
+for more detail.</p>
+<p>Note that the <code>*</code> operator does not have the same meaning as in formulas for
+linear models in R — in <code>lavaan</code>, it means ‘apply a constraint’.</p>
+<pre class="sourceCode r"><code class="sourceCode r">smash.model &lt;-<span class="st"> &#39;</span>
+<span class="st">  crashes ~ B*speed + C*lateness</span>
+<span class="st">  speed ~ A*lateness</span>
+
+<span class="st">  # computed parameters, see http://lavaan.ugent.be/tutorial/mediation.html</span>
+<span class="st">  indirect := A*B</span>
+<span class="st">  total := C + (A*B)</span>
+<span class="st">  proportion := indirect/total</span>
+<span class="st">&#39;</span>
+
+smash.model.fit &lt;-<span class="st"> </span><span class="kw">sem</span>(smash.model, <span class="dt">data=</span>smash)
+<span class="kw">summary</span>(smash.model.fit)
+lavaan <span class="fl">0.6</span><span class="dv">-3</span> ended normally after <span class="dv">19</span> iterations
+
+  Optimization method                           NLMINB
+  Number of free parameters                          <span class="dv">5</span>
+
+  Number of observations                           <span class="dv">200</span>
+
+  Estimator                                         ML
+  Model Fit Test Statistic                       <span class="fl">0.000</span>
+  Degrees of freedom                                 <span class="dv">0</span>
+  Minimum Function Value               <span class="fl">0.0000000000000</span>
+
+Parameter Estimates<span class="op">:</span>
+
+<span class="st">  </span>Information                                 Expected
+  Information <span class="kw">saturated</span> (h1) model          Structured
+  Standard Errors                             Standard
+
+Regressions<span class="op">:</span>
+<span class="st">                   </span>Estimate  Std.Err  z<span class="op">-</span>value  <span class="kw">P</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)
+  crashes <span class="op">~</span><span class="st">                                           </span>
+<span class="st">    </span><span class="kw">speed</span>      (B)    <span class="fl">0.288</span>    <span class="fl">0.031</span>    <span class="fl">9.152</span>    <span class="fl">0.000</span>
+    <span class="kw">lateness</span>   (C)    <span class="fl">0.297</span>    <span class="fl">0.095</span>    <span class="fl">3.111</span>    <span class="fl">0.002</span>
+  speed <span class="op">~</span><span class="st">                                             </span>
+<span class="st">    </span><span class="kw">lateness</span>   (A)    <span class="fl">0.515</span>    <span class="fl">0.212</span>    <span class="fl">2.434</span>    <span class="fl">0.015</span>
+
+Variances<span class="op">:</span>
+<span class="st">                   </span>Estimate  Std.Err  z<span class="op">-</span>value  <span class="kw">P</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)
+   .crashes          <span class="fl">18.190</span>    <span class="fl">1.819</span>   <span class="fl">10.000</span>    <span class="fl">0.000</span>
+   .speed            <span class="fl">92.135</span>    <span class="fl">9.214</span>   <span class="fl">10.000</span>    <span class="fl">0.000</span>
+
+Defined Parameters<span class="op">:</span>
+<span class="st">                   </span>Estimate  Std.Err  z<span class="op">-</span>value  <span class="kw">P</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)
+    indirect          <span class="fl">0.148</span>    <span class="fl">0.063</span>    <span class="fl">2.353</span>    <span class="fl">0.019</span>
+    total             <span class="fl">0.445</span>    <span class="fl">0.112</span>    <span class="fl">3.973</span>    <span class="fl">0.000</span>
+    proportion        <span class="fl">0.333</span>    <span class="fl">0.121</span>    <span class="fl">2.756</span>    <span class="fl">0.006</span></code></pre>
+<p>We can again get a bootstrap interval for the indirect effect, and print a table
+of just these computed effects like so:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1234</span>)
+smash.model.fit &lt;-<span class="st"> </span><span class="kw">sem</span>(smash.model, <span class="dt">data=</span>smash, <span class="dt">test=</span><span class="st">&quot;bootstrap&quot;</span>, <span class="dt">bootstrap=</span><span class="dv">100</span>)
+
+<span class="kw">parameterEstimates</span>(smash.model.fit) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(op <span class="op">==</span><span class="st"> &quot;:=&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(label, est, <span class="kw">contains</span>(<span class="st">&quot;ci&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span>pander<span class="op">::</span><span class="kw">pander</span>()</code></pre>
+<table style="width:61%;">
+<colgroup>
+<col width="18%" />
+<col width="12%" />
+<col width="15%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">label</th>
+<th align="center">est</th>
+<th align="center">ci.lower</th>
+<th align="center">ci.upper</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">indirect</td>
+<td align="center">0.1481</td>
+<td align="center">0.02472</td>
+<td align="center">0.2715</td>
+</tr>
+<tr class="even">
+<td align="center">total</td>
+<td align="center">0.4448</td>
+<td align="center">0.2254</td>
+<td align="center">0.6643</td>
+</tr>
+<tr class="odd">
+<td align="center">proportion</td>
+<td align="center">0.3329</td>
+<td align="center">0.09614</td>
+<td align="center">0.5697</td>
+</tr>
+</tbody>
+</table>
+<p>Comparing these results with the <code>mediation::mediate()</code> output, we get similar
+results. In both cases, it’s possible to increase the number of bootstrap
+resamples if needed to increase the precision of the interval (the default is
+1000, but 5000 might be a good target for publication).</p>
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="testing-the-indirect-effect.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="covariance-modelling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

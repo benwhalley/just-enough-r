@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Variance partition coefficients and intraclass correlations | Just Enough R</title>
+  <meta name="description" content="Variance partition coefficients and intraclass correlations | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Variance partition coefficients and intraclass correlations | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Variance partition coefficients and intraclass correlations | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="extending-traditional-rm-anova.html">
+<link rel="next" href="threelevel.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,73 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
-<ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
-</ul>
-</div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+<div id="icc-and-vpc" class="section level2 unnumbered">
+<h2>Variance partition coefficients and intraclass correlations</h2>
+<p>The purpose of multilevel models is to partition variance in the outcome between
+the different groupings in the data.</p>
+<p>For example, if we make multiple observations on individual participants we
+partition outcome variance between individuals, and the residual variance.</p>
+<p>We might then want to know what <em>proportion</em> of the total variance is
+attributable to variation within-groups, or how much is found between-groups.
+This statistic is termed the variance partition coefficient VPC, or intraclass
+correlation.</p>
+<p>We calculate the VPC woth some simple arithmetic on the variance estimates from
+the lmer model. We can extract the variance estimates from the VarCorr function:</p>
+<pre class="sourceCode r"><code class="sourceCode r">random.intercepts.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>Subject),  <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)
+<span class="kw">VarCorr</span>(random.intercepts.model)
+ Groups   Name        Std.Dev.
+ <span class="kw">Subject</span>  (Intercept) <span class="fl">37.124</span>  
+ Residual             <span class="fl">30.991</span>  </code></pre>
+<p>And we can test the variance parameter using the <code>rand()</code> function:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rand</span>(random.intercepts.model)
+ANOVA<span class="op">-</span>like table <span class="cf">for</span> random<span class="op">-</span>effects<span class="op">:</span><span class="st"> </span>Single term deletions
 
-</div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
+Model<span class="op">:</span>
+Reaction <span class="op">~</span><span class="st"> </span>Days <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Subject)
+              npar  logLik    AIC   LRT Df <span class="kw">Pr</span>(<span class="op">&gt;</span>Chisq)    
+<span class="op">&lt;</span>none<span class="op">&gt;</span><span class="st">           </span><span class="dv">4</span> <span class="fl">-893.23</span> <span class="fl">1794.5</span>                        
+(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Subject)    <span class="dv">3</span> <span class="fl">-946.83</span> <span class="fl">1899.7</span> <span class="fl">107.2</span>  <span class="dv">1</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre>
+<p>Helpfully, if we convert the result of <code>VarCorr</code> to a dataframe, we are provided
+with the columns <code>vcov</code> which stands for <code>variance or covariance</code>, as well as
+the <code>sdcor</code> (standard deviation or correlation) which is provided in the printed
+summary:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">VarCorr</span>(random.intercepts.model) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as_data_frame</span>()
+Warning<span class="op">:</span><span class="st"> `</span><span class="dt">as_data_frame()</span><span class="st">`</span> is deprecated, use <span class="st">`</span><span class="dt">as_tibble()</span><span class="st">`</span> (but mind the new semantics).
+This warning is displayed once per session.
+<span class="co"># A tibble: 2 x 5</span>
+  grp      var1        var2   vcov sdcor
+  <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">    </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">       </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span> <span class="kw">Subject</span>  (Intercept) <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">  </span><span class="fl">1378.</span>  <span class="fl">37.1</span>
+<span class="dv">2</span> Residual <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">        </span><span class="er">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">   </span><span class="fl">960.</span>  <span class="fl">31.0</span></code></pre>
+<p>The variance partition coefficient is simply the variance at a given level of
+the model, divided by the total variance (the sum of the variance parameters).
+So we can write:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">VarCorr</span>(random.intercepts.model) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as_data_frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">icc=</span>vcov<span class="op">/</span><span class="kw">sum</span>(vcov)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(grp, icc)
+<span class="co"># A tibble: 2 x 2</span>
+  grp        icc
+  <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">    </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span> Subject  <span class="fl">0.589</span>
+<span class="dv">2</span> Residual <span class="fl">0.411</span></code></pre>
+<p><span class="apa-example">Intraclass correlations were computed from the mixed effects mode. 59% of the
+variation in outcome was attributable to differences between subjects,
+<span class="math inline">\(\chi^2(1) = 107\)</span>, <em>p</em> &lt; .001.</span></p>
+<p>[It’s not straightforward to put an confidence interval around the VPC estimate
+from an lmer model. If this is important to you, you should explore
+<a href="bayes-mcmc.html#bayes-mcmc">re-fitting the same model in a Bayesian framework</a>]</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="extending-traditional-rm-anova.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="threelevel.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Selecting columns | Just Enough R</title>
+  <meta name="description" content="Selecting columns | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Selecting columns | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Selecting columns | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="working-with-dataframes.html">
+<link rel="next" href="selecting-rows.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,96 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
+<div id="selecting-columns" class="section level2 unnumbered">
+<h2>Selecting columns</h2>
+<p>To pick out single or multiple columns use the <code>select()</code> function.</p>
+<p>The <code>select()</code> function expects a dataframe as it’s first input (‘argument’, in
+R language), followed by the names of the columns you want to extract with a
+comma between each name.</p>
+<p>It returns a <em>new</em> dataframe with just those columns, in the order you
+specified:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(
+  <span class="kw">select</span>(mtcars, cyl, hp)
+)
+                  cyl  hp
+Mazda RX4           <span class="dv">6</span> <span class="dv">110</span>
+Mazda RX4 Wag       <span class="dv">6</span> <span class="dv">110</span>
+Datsun <span class="dv">710</span>          <span class="dv">4</span>  <span class="dv">93</span>
+Hornet <span class="dv">4</span> Drive      <span class="dv">6</span> <span class="dv">110</span>
+Hornet Sportabout   <span class="dv">8</span> <span class="dv">175</span>
+Valiant             <span class="dv">6</span> <span class="dv">105</span></code></pre>
+<div id="saving-a-subset-of-the-data" class="section level4 unnumbered">
+<h4>Saving a subset of the data</h4>
+<p>Because <code>dplyr</code> functions return a <em>new</em> dataframe, we can assign the results to
+a variable:</p>
+<pre class="sourceCode r"><code class="sourceCode r">justcylandweight &lt;-<span class="st"> </span><span class="kw">select</span>(mtcars, cyl, wt)
+<span class="kw">summary</span>(justcylandweight)
+      cyl              wt       
+ Min.   <span class="op">:</span><span class="fl">4.000</span>   Min.   <span class="op">:</span><span class="fl">1.513</span>  
+ 1st Qu.<span class="op">:</span><span class="fl">4.000</span>   1st Qu.<span class="op">:</span><span class="fl">2.581</span>  
+ Median <span class="op">:</span><span class="fl">6.000</span>   Median <span class="op">:</span><span class="fl">3.325</span>  
+ Mean   <span class="op">:</span><span class="fl">6.188</span>   Mean   <span class="op">:</span><span class="fl">3.217</span>  
+ 3rd Qu.<span class="op">:</span><span class="fl">8.000</span>   3rd Qu.<span class="op">:</span><span class="fl">3.610</span>  
+ Max.   <span class="op">:</span><span class="fl">8.000</span>   Max.   <span class="op">:</span><span class="fl">5.424</span>  </code></pre>
 </div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
+<div id="excluding-columns" class="section level4 unnumbered">
+<h4>Excluding columns</h4>
+<p>If you want to keep most of the columns — perhaps you just want to get rid of
+one and keep the rest — put a minus (<code>-</code>) sign in front of the name of the
+column to drop. This then selects everything <em>except</em> the column you named:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Note we are just dropping the Ozone column</span>
+<span class="kw">head</span>(<span class="kw">select</span>(airquality, <span class="op">-</span>Ozone))
+  Solar.R Wind Temp Month Day
+<span class="dv">1</span>     <span class="dv">190</span>  <span class="fl">7.4</span>   <span class="dv">67</span>     <span class="dv">5</span>   <span class="dv">1</span>
+<span class="dv">2</span>     <span class="dv">118</span>  <span class="fl">8.0</span>   <span class="dv">72</span>     <span class="dv">5</span>   <span class="dv">2</span>
+<span class="dv">3</span>     <span class="dv">149</span> <span class="fl">12.6</span>   <span class="dv">74</span>     <span class="dv">5</span>   <span class="dv">3</span>
+<span class="dv">4</span>     <span class="dv">313</span> <span class="fl">11.5</span>   <span class="dv">62</span>     <span class="dv">5</span>   <span class="dv">4</span>
+<span class="dv">5</span>      <span class="ot">NA</span> <span class="fl">14.3</span>   <span class="dv">56</span>     <span class="dv">5</span>   <span class="dv">5</span>
+<span class="dv">6</span>      <span class="ot">NA</span> <span class="fl">14.9</span>   <span class="dv">66</span>     <span class="dv">5</span>   <span class="dv">6</span></code></pre>
+</div>
+<div id="matching-specific-columns" class="section level4 unnumbered">
+<h4>Matching specific columns</h4>
+<p>You can use a patterns to match a subset of the columns you want. For example,
+here we select all the columns where the name contains the letter <code>d</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">select</span>(mtcars, <span class="kw">contains</span>(<span class="st">&quot;d&quot;</span>)))
+                  disp drat
+Mazda RX4          <span class="dv">160</span> <span class="fl">3.90</span>
+Mazda RX4 Wag      <span class="dv">160</span> <span class="fl">3.90</span>
+Datsun <span class="dv">710</span>         <span class="dv">108</span> <span class="fl">3.85</span>
+Hornet <span class="dv">4</span> Drive     <span class="dv">258</span> <span class="fl">3.08</span>
+Hornet Sportabout  <span class="dv">360</span> <span class="fl">3.15</span>
+Valiant            <span class="dv">225</span> <span class="fl">2.76</span></code></pre>
+<p>And you can combine these techniques to make more complex selections:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">select</span>(mtcars, <span class="kw">contains</span>(<span class="st">&quot;d&quot;</span>), <span class="op">-</span>drat))
+                  disp
+Mazda RX4          <span class="dv">160</span>
+Mazda RX4 Wag      <span class="dv">160</span>
+Datsun <span class="dv">710</span>         <span class="dv">108</span>
+Hornet <span class="dv">4</span> Drive     <span class="dv">258</span>
+Hornet Sportabout  <span class="dv">360</span>
+Valiant            <span class="dv">225</span></code></pre>
+</div>
+<div id="other-methods-of-selection" class="section level4 unnumbered">
+<h4>Other methods of selection</h4>
+<p>As a quick reference, you can use the following ‘verbs’ to select columns in
+different ways:</p>
 <ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
+<li><code>starts_with()</code></li>
+<li><code>ends_with()</code></li>
+<li><code>contains()</code></li>
+<li><code>everything()</code></li>
 </ul>
+<p>See the help files for more information (type <code>??dplyr::select</code> into the
+console).</p>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
-
-</div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="working-with-dataframes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="selecting-rows.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

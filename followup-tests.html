@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Followup tests | Just Enough R</title>
+  <meta name="description" content="Followup tests | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Followup tests | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Followup tests | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="checking-assumptions.html">
+<link rel="next" href="generalized-linear-models.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,77 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
-<ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
-</ul>
-</div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+<div id="followup-tests" class="section level2 unnumbered">
+<h2>Followup tests</h2>
+<p><span class="tip">The text below continues on from
+<a href="anova-cookbook.html#howell-factorial-example">this example of factorial Anova</a>.</span></p>
+<p>If we want to look at post-hoc pairwise tests we can use the the <code>emmeans()</code>
+function from the <code>emmeans::</code> package. By default Tukey correction is applied
+for multiple comparisons, which is a reasonable default:</p>
+<pre class="sourceCode r"><code class="sourceCode r">em &lt;-<span class="st"> </span>emmeans<span class="op">::</span><span class="kw">emmeans</span>(eysenck.model, pairwise<span class="op">~</span>Age<span class="op">:</span>Condition)
+em<span class="op">$</span>contrasts
+ contrast                          estimate   SE df t.ratio p.value
+ Young,Counting <span class="op">-</span><span class="st"> </span>Older,Counting        <span class="fl">0.5</span> <span class="fl">1.27</span> <span class="dv">90</span>   <span class="fl">0.395</span> <span class="fl">1.0000</span> 
+ Young,Counting <span class="op">-</span><span class="st"> </span>Young,Rhyming         <span class="fl">0.1</span> <span class="fl">1.27</span> <span class="dv">90</span>   <span class="fl">0.079</span> <span class="fl">1.0000</span> 
+ Young,Counting <span class="op">-</span><span class="st"> </span>Older,Rhyming        <span class="fl">-0.6</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-0.474</span> <span class="fl">1.0000</span> 
+ Young,Counting <span class="op">-</span><span class="st"> </span>Young,Adjective      <span class="fl">-4.0</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-3.157</span> <span class="fl">0.0633</span> 
+ Young,Counting <span class="op">-</span><span class="st"> </span>Older,Adjective      <span class="fl">-7.8</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-6.157</span> <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Young,Counting <span class="op">-</span><span class="st"> </span>Young,Imagery        <span class="fl">-6.4</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-5.052</span> <span class="fl">0.0001</span> 
+ Young,Counting <span class="op">-</span><span class="st"> </span>Older,Imagery       <span class="fl">-10.6</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-8.367</span> <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Young,Counting <span class="op">-</span><span class="st"> </span>Young,Intention      <span class="fl">-5.0</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-3.947</span> <span class="fl">0.0058</span> 
+ Young,Counting <span class="op">-</span><span class="st"> </span>Older,Intention     <span class="fl">-12.3</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-9.709</span> <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Older,Counting <span class="op">-</span><span class="st"> </span>Young,Rhyming        <span class="fl">-0.4</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-0.316</span> <span class="fl">1.0000</span> 
+ Older,Counting <span class="op">-</span><span class="st"> </span>Older,Rhyming        <span class="fl">-1.1</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-0.868</span> <span class="fl">0.9970</span> 
+ Older,Counting <span class="op">-</span><span class="st"> </span>Young,Adjective      <span class="fl">-4.5</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-3.552</span> <span class="fl">0.0205</span> 
+ Older,Counting <span class="op">-</span><span class="st"> </span>Older,Adjective      <span class="fl">-8.3</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-6.551</span> <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Older,Counting <span class="op">-</span><span class="st"> </span>Young,Imagery        <span class="fl">-6.9</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-5.446</span> <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Older,Counting <span class="op">-</span><span class="st"> </span>Older,Imagery       <span class="fl">-11.1</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-8.761</span> <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Older,Counting <span class="op">-</span><span class="st"> </span>Young,Intention      <span class="fl">-5.5</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-4.341</span> <span class="fl">0.0015</span> 
+ Older,Counting <span class="op">-</span><span class="st"> </span>Older,Intention     <span class="fl">-12.8</span> <span class="fl">1.27</span> <span class="dv">90</span> <span class="fl">-10.103</span> <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Young,Rhyming <span class="op">-</span><span class="st"> </span>Older,Rhyming         <span class="fl">-0.7</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-0.553</span> <span class="fl">0.9999</span> 
+ Young,Rhyming <span class="op">-</span><span class="st"> </span>Young,Adjective       <span class="fl">-4.1</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-3.236</span> <span class="fl">0.0511</span> 
+ Young,Rhyming <span class="op">-</span><span class="st"> </span>Older,Adjective       <span class="fl">-7.9</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-6.236</span> <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Young,Rhyming <span class="op">-</span><span class="st"> </span>Young,Imagery         <span class="fl">-6.5</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-5.131</span> <span class="fl">0.0001</span> 
+ Young,Rhyming <span class="op">-</span><span class="st"> </span>Older,Imagery        <span class="fl">-10.7</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-8.446</span> <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Young,Rhyming <span class="op">-</span><span class="st"> </span>Young,Intention       <span class="fl">-5.1</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-4.025</span> <span class="fl">0.0044</span> 
+ Young,Rhyming <span class="op">-</span><span class="st"> </span>Older,Intention      <span class="fl">-12.4</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-9.787</span> <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Older,Rhyming <span class="op">-</span><span class="st"> </span>Young,Adjective       <span class="fl">-3.4</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-2.684</span> <span class="fl">0.1963</span> 
+ Older,Rhyming <span class="op">-</span><span class="st"> </span>Older,Adjective       <span class="fl">-7.2</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-5.683</span> <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Older,Rhyming <span class="op">-</span><span class="st"> </span>Young,Imagery         <span class="fl">-5.8</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-4.578</span> <span class="fl">0.0006</span> 
+ Older,Rhyming <span class="op">-</span><span class="st"> </span>Older,Imagery        <span class="fl">-10.0</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-7.893</span> <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Older,Rhyming <span class="op">-</span><span class="st"> </span>Young,Intention       <span class="fl">-4.4</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-3.473</span> <span class="fl">0.0260</span> 
+ Older,Rhyming <span class="op">-</span><span class="st"> </span>Older,Intention      <span class="fl">-11.7</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-9.235</span> <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Young,Adjective <span class="op">-</span><span class="st"> </span>Older,Adjective     <span class="fl">-3.8</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-2.999</span> <span class="fl">0.0950</span> 
+ Young,Adjective <span class="op">-</span><span class="st"> </span>Young,Imagery       <span class="fl">-2.4</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-1.894</span> <span class="fl">0.6728</span> 
+ Young,Adjective <span class="op">-</span><span class="st"> </span>Older,Imagery       <span class="fl">-6.6</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-5.209</span> <span class="fl">0.0001</span> 
+ Young,Adjective <span class="op">-</span><span class="st"> </span>Young,Intention     <span class="fl">-1.0</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-0.789</span> <span class="fl">0.9986</span> 
+ Young,Adjective <span class="op">-</span><span class="st"> </span>Older,Intention     <span class="fl">-8.3</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-6.551</span> <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Older,Adjective <span class="op">-</span><span class="st"> </span>Young,Imagery        <span class="fl">1.4</span> <span class="fl">1.27</span> <span class="dv">90</span>   <span class="fl">1.105</span> <span class="fl">0.9830</span> 
+ Older,Adjective <span class="op">-</span><span class="st"> </span>Older,Imagery       <span class="fl">-2.8</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-2.210</span> <span class="fl">0.4578</span> 
+ Older,Adjective <span class="op">-</span><span class="st"> </span>Young,Intention      <span class="fl">2.8</span> <span class="fl">1.27</span> <span class="dv">90</span>   <span class="fl">2.210</span> <span class="fl">0.4578</span> 
+ Older,Adjective <span class="op">-</span><span class="st"> </span>Older,Intention     <span class="fl">-4.5</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-3.552</span> <span class="fl">0.0205</span> 
+ Young,Imagery <span class="op">-</span><span class="st"> </span>Older,Imagery         <span class="fl">-4.2</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-3.315</span> <span class="fl">0.0411</span> 
+ Young,Imagery <span class="op">-</span><span class="st"> </span>Young,Intention        <span class="fl">1.4</span> <span class="fl">1.27</span> <span class="dv">90</span>   <span class="fl">1.105</span> <span class="fl">0.9830</span> 
+ Young,Imagery <span class="op">-</span><span class="st"> </span>Older,Intention       <span class="fl">-5.9</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-4.657</span> <span class="fl">0.0005</span> 
+ Older,Imagery <span class="op">-</span><span class="st"> </span>Young,Intention        <span class="fl">5.6</span> <span class="fl">1.27</span> <span class="dv">90</span>   <span class="fl">4.420</span> <span class="fl">0.0011</span> 
+ Older,Imagery <span class="op">-</span><span class="st"> </span>Older,Intention       <span class="fl">-1.7</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-1.342</span> <span class="fl">0.9409</span> 
+ Young,Intention <span class="op">-</span><span class="st"> </span>Older,Intention     <span class="fl">-7.3</span> <span class="fl">1.27</span> <span class="dv">90</span>  <span class="fl">-5.762</span> <span class="op">&lt;</span>.<span class="dv">0001</span> 
+
+P value adjustment<span class="op">:</span><span class="st"> </span>tukey method <span class="cf">for</span> comparing a family of <span class="dv">10</span> estimates </code></pre>
+<p>Both cell means and pairwise contrasts are shown here. There is much more detail
+on computing pairwise comparisons and other types of contrasts in the section on
+<a href="multiple-comparisons.html#multiple-comparisons">multiple comparisons</a>, including ways to
+<a href="multiple-comparisons.html#extract-contrasts">extract</a> and present your comparisons in APA format.</p>
 
 </div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
-</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="checking-assumptions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="generalized-linear-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

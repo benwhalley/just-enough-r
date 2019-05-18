@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>A generalised approach | Just Enough R</title>
+  <meta name="description" content="A generalised approach | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="A generalised approach | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="A generalised approach | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="summarising-data.html">
+<link rel="next" href="graphics.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,335 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
+<div id="dplyr-general" class="section level2 unnumbered">
+<h2>A generalised approach</h2>
+<div id="split-apply-combine" class="section level4 unnumbered">
+<h4>The ‘split, apply, combine’ model</h4>
+<p>The <code>dplyr::</code> package, and especially the <code>summarise()</code> function provides a
+generalised way to create dataframes of frequencies and other summary
+statistics, grouped and sorted however we like.</p>
+<p><strong>Each of the <code>dplyr</code> ‘verbs’ acts on a dataframe in some way, and returns a
+dataframe as it’s result. This is convenient because we can chain together the
+different verbs to describe exactly the table we want.</strong></p>
+<p>For example, let’s say we want the mean of some of our variables across the
+whole dataframe:</p>
+<pre class="sourceCode r"><code class="sourceCode r">angry.moods <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(
+    <span class="dt">mean.anger.out=</span><span class="kw">mean</span>(Anger.Out),
+    <span class="dt">sd.anger.out=</span><span class="kw">sd</span>(Anger.Out)
+  )
+<span class="co"># A tibble: 1 x 2</span>
+  mean.anger.out sd.anger.out
+           <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st">        </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span>           <span class="fl">16.1</span>         <span class="fl">4.22</span></code></pre>
+<div class="explainer">
+<p>Here the <code>summarise</code> function accepts the <code>angry.moods</code> dataframe as an input,
+and has returned a dataframe containing the statistics we need. In this instance
+the result dataframe only has one row.</p>
 </div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
+<p>What if we want the numbers for men and women separately?</p>
+<p>The key is to think about what we want to achieve, and work out how to describe
+it. However, in general, we will often want to follow this pattern:</p>
 <ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
+<li><em>Split</em> our data (into men and women, or some other categorisation)</li>
+<li><em>Apply</em> some operation (function) to each group individually (e.g. calculate
+the mean)</li>
+<li><em>Combine</em> it into a single table again</li>
+</ul>
+<p>It’s helpful to think of this <em>split <span class="math inline">\(\rightarrow\)</span> apply <span class="math inline">\(\rightarrow\)</span> combine</em>
+pattern whenever we are processing data because it <em>makes explicit what we want
+to do</em>.</p>
+</div>
+<div id="split-breaking-the-data-into-groups" class="section level4 unnumbered">
+<h4>Split: breaking the data into groups</h4>
+<p>The first task is to organise our dataframe into the relevant groups. To do this
+we use <code>group_by()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">angry.moods <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(Gender) <span class="op">%&gt;%</span>
+<span class="st">  </span>glimpse
+Observations<span class="op">:</span><span class="st"> </span><span class="dv">78</span>
+Variables<span class="op">:</span><span class="st"> </span><span class="dv">7</span>
+Groups<span class="op">:</span><span class="st"> </span>Gender [<span class="dv">2</span>]
+<span class="op">$</span><span class="st"> </span>Gender           <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>,…
+<span class="op">$</span><span class="st"> </span>Sports           <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>,…
+<span class="op">$</span><span class="st"> </span>Anger.Out        <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">18</span>, <span class="dv">14</span>, <span class="dv">13</span>, <span class="dv">17</span>, <span class="dv">16</span>, <span class="dv">16</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">16</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">17</span>,…
+<span class="op">$</span><span class="st"> </span>Anger.In         <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">13</span>, <span class="dv">17</span>, <span class="dv">14</span>, <span class="dv">24</span>, <span class="dv">17</span>, <span class="dv">22</span>, <span class="dv">12</span>, <span class="dv">16</span>, <span class="dv">16</span>, <span class="dv">16</span>, <span class="dv">13</span>, <span class="dv">23</span>,…
+<span class="op">$</span><span class="st"> </span>Control.Out      <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">23</span>, <span class="dv">25</span>, <span class="dv">28</span>, <span class="dv">23</span>, <span class="dv">26</span>, <span class="dv">25</span>, <span class="dv">31</span>, <span class="dv">22</span>, <span class="dv">22</span>, <span class="dv">29</span>, <span class="dv">24</span>, <span class="dv">24</span>,…
+<span class="op">$</span><span class="st"> </span>Control.In       <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span>, <span class="dv">24</span>, <span class="dv">28</span>, <span class="dv">23</span>, <span class="dv">28</span>, <span class="dv">23</span>, <span class="dv">27</span>, <span class="dv">31</span>, <span class="dv">24</span>, <span class="dv">29</span>, <span class="dv">25</span>, <span class="dv">22</span>,…
+<span class="op">$</span><span class="st"> </span>Anger.Expression <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">36</span>, <span class="dv">30</span>, <span class="dv">19</span>, <span class="dv">43</span>, <span class="dv">27</span>, <span class="dv">38</span>, <span class="dv">14</span>, <span class="dv">24</span>, <span class="dv">34</span>, <span class="dv">18</span>, <span class="dv">24</span>, <span class="dv">42</span>,…</code></pre>
+<p>Weirdly, this doesn’t seem to have done anything. The data aren’t sorted by
+<code>Gender</code>, and there is no visible sign of the grouping, but stick with it… the
+grouping is there and the effect will be clearer in a moment.</p>
+</div>
+<div id="apply-and-combine" class="section level4 unnumbered">
+<h4>Apply and combine</h4>
+<p>Continuing the example above, once we have grouped our data we can then <em>apply</em>
+a function to it — for example, we can summarise each group by taking the mean
+of the <code>Anger.Out</code> variable:</p>
+<pre class="sourceCode r"><code class="sourceCode r">angry.moods <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(Gender) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(
+    <span class="dt">mean.anger.out=</span><span class="kw">mean</span>(Anger.Out)
+  )
+<span class="co"># A tibble: 2 x 2</span>
+  Gender mean.anger.out
+   <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st">          </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span>      <span class="dv">1</span>           <span class="fl">16.6</span>
+<span class="dv">2</span>      <span class="dv">2</span>           <span class="fl">15.8</span></code></pre>
+<p>The <strong>combine</strong> step happens automatically for us: <code>dplyr</code> has combined the
+summaries of each gender into a single dataframe for us.</p>
+<p>In summary, we:</p>
+<ul>
+<li><em>split</em> the data by <code>Gender</code>, using <code>group_by()</code></li>
+<li><em>apply</em> the <code>summarise()</code> function</li>
+<li><em>combine</em> the results into a new data frame (happens automatically)</li>
 </ul>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+<div id="a-real-example" class="section level4 unnumbered">
+<h4>A ‘real’ example</h4>
+<p>Imagine we have raw data from a study which had measured depression with the
+PHQ-9 scale.</p>
+<p>Each <code>patient</code> was measured on numerous occasions (the <code>month</code> of observation is
+recorded), and were split into treatment <code>group</code> (0=control, 1=treatment). The
+<code>phq9</code> variable is calculated as the sum of all their questionnaire responses.</p>
+<pre class="sourceCode r"><code class="sourceCode r">phq9.df <span class="op">%&gt;%</span><span class="st"> </span>glimpse
+Observations<span class="op">:</span><span class="st"> </span><span class="dv">2</span>,<span class="dv">429</span>
+Variables<span class="op">:</span><span class="st"> </span><span class="dv">4</span>
+<span class="op">$</span><span class="st"> </span>patient <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>,…
+<span class="op">$</span><span class="st"> </span>group   <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>,…
+<span class="op">$</span><span class="st"> </span>month   <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">0</span>, <span class="dv">1</span>, 2…
+<span class="op">$</span><span class="st"> </span>phq9    <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="fl">2.56</span>, <span class="fl">2.33</span>, <span class="fl">1.89</span>, <span class="fl">2.00</span>, <span class="fl">2.44</span>, <span class="fl">2.33</span>, <span class="fl">2.44</span>, <span class="fl">2.11</span>, <span class="fl">2.22</span>, <span class="fl">3.</span>…</code></pre>
+<p>If this were our data we might want to:</p>
+<ul>
+<li>Calculate the average PHQ-9 score at each month, and in each group</li>
+<li>Show these means by group for months 0, 7 and 12</li>
+</ul>
+<p>We can do this using <code>group_by</code> and <code>summarise</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">phq9.df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(group) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">average_phq9 =</span> <span class="kw">mean</span>(phq9))
+<span class="co"># A tibble: 2 x 2</span>
+  group average_phq9
+  <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st">        </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span>     <span class="dv">0</span>         <span class="fl">1.87</span>
+<span class="dv">2</span>     <span class="dv">1</span>         <span class="fl">1.60</span></code></pre>
+<div class="exercise">
+<p>You can load the PHQ9 data above by typing:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># remeber to load the tidyverse package first</span>
+phq9 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/phq-summary.csv&#39;</span>)
+Parsed with column specification<span class="op">:</span>
+<span class="kw">cols</span>(
+  <span class="dt">patient =</span> <span class="kw">col_double</span>(),
+  <span class="dt">group =</span> <span class="kw">col_double</span>(),
+  <span class="dt">month =</span> <span class="kw">col_double</span>(),
+  <span class="dt">phq9 =</span> <span class="kw">col_double</span>()
+)</code></pre>
+<p>Try to edit the code above to:</p>
+<ul>
+<li>Create summary table with the mean at each month</li>
+<li>The mean at each month, in each group</li>
+<li>The mean and SD by month and group</li>
+</ul>
+</div>
+
+</div>
+<div id="fancy-reshaping" class="section level3 unnumbered">
+<h3>Fancy reshaping</h3>
+<p>As noted above, it’s common to combine the process of reshaping and aggregating
+or summarising in the same step.</p>
+<p>For example here we have multiple rows per person, 3 trial at time 1, and 3 more
+trials at time 2:</p>
+<pre class="sourceCode r"><code class="sourceCode r">expt.data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(person, time, trial) <span class="op">%&gt;%</span>
+<span class="st">  </span>head <span class="op">%&gt;%</span>
+<span class="st">  </span>pander</code></pre>
+<table style="width:62%;">
+<colgroup>
+<col width="16%" />
+<col width="11%" />
+<col width="9%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Condition</th>
+<th align="center">trial</th>
+<th align="center">time</th>
+<th align="center">person</th>
+<th align="center">RT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">284.5</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">309.3</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">346.7</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">368</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">263.7</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">220.4</td>
+</tr>
+</tbody>
+</table>
+<p>We can reshape and aggregate this in a single step using <code>dcast</code>. Here we
+request the mean for each person at each time, with observations for each time
+split across two columns:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(reshape2)
+expt.data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">dcast</span>(person<span class="op">~</span><span class="kw">paste0</span>(<span class="st">&#39;time&#39;</span>,time),
+          <span class="dt">fun.aggregate=</span>mean) <span class="op">%&gt;%</span>
+<span class="st">  </span>head <span class="op">%&gt;%</span>
+<span class="st">  </span>pander
+Using RT as value column<span class="op">:</span><span class="st"> </span>use value.var to override.</code></pre>
+<table style="width:35%;">
+<colgroup>
+<col width="12%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">person</th>
+<th align="center">time1</th>
+<th align="center">time2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">313.5</td>
+<td align="center">284</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">252.2</td>
+<td align="center">263.3</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">263.1</td>
+<td align="center">290.4</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">271.2</td>
+<td align="center">249.4</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">274.3</td>
+<td align="center">329.9</td>
+</tr>
+<tr class="even">
+<td align="center">6</td>
+<td align="center">280.3</td>
+<td align="center">231.7</td>
+</tr>
+</tbody>
+</table>
+<p>Here <code>dcast</code> has correctly guessed that <code>RT</code> is the value we want to aggregate
+(you can specify explicitly with the <code>value.var=</code> parameter).</p>
+<p><code>dcast</code> knows to aggregate using the mean because we set this with the
+<code>agg.function</code> parameter; this just stands for ‘aggregation function’.</p>
+<p>We don’t have to request the mean though: any function will do. Here we request
+the SD instead:</p>
+<pre class="sourceCode r"><code class="sourceCode r">expt.data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">dcast</span>(person<span class="op">~</span>time,
+          <span class="dt">fun.aggregate=</span>sd) <span class="op">%&gt;%</span>
+<span class="st">  </span>head <span class="op">%&gt;%</span>
+<span class="st">  </span>pander
+Using RT as value column<span class="op">:</span><span class="st"> </span>use value.var to override.</code></pre>
+<table style="width:35%;">
+<colgroup>
+<col width="12%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">person</th>
+<th align="center">1</th>
+<th align="center">2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">31.27</td>
+<td align="center">75.85</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">15.07</td>
+<td align="center">33.98</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">88.71</td>
+<td align="center">104</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">40.42</td>
+<td align="center">3.913</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">61.34</td>
+<td align="center">52.7</td>
+</tr>
+<tr class="even">
+<td align="center">6</td>
+<td align="center">35.82</td>
+<td align="center">17.3</td>
+</tr>
+</tbody>
+</table>
 
 </div>
 </div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
-</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="summarising-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="graphics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

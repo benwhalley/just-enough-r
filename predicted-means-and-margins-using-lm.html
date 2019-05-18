@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Predicted means and margins using lm() | Just Enough R</title>
+  <meta name="description" content="Predicted means and margins using lm() | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Predicted means and margins using lm() | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Predicted means and margins using lm() | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="predictions-and-margins.html">
+<link rel="next" href="predictions-with-continuous-covariates.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,56 +430,196 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
+<div id="predicted-means-and-margins-using-lm" class="section level2 unnumbered">
+<h2>Predicted means and margins using <code>lm()</code></h2>
+<p>The section above details two types of predictions: predictions for means, and
+predictions for margins (effects). We can use the figure below as a way of
+visualising the difference:</p>
+<pre class="sourceCode r"><code class="sourceCode r">gridExtra<span class="op">::</span><span class="kw">grid.arrange</span>(means.plot<span class="op">+</span><span class="kw">ggtitle</span>(<span class="st">&quot;Means&quot;</span>), margins.plot<span class="op">+</span><span class="kw">ggtitle</span>(<span class="st">&quot;Margins&quot;</span>), <span class="dt">ncol=</span><span class="dv">2</span>)</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-10"></span>
+<img src="predictions-and-margins_files/figure-html/unnamed-chunk-10-1.png" alt="Example of predicted means vs. margins. Note, the margin plotted in the second panel is the difference between the coloured lines in the first. A horizontal line is added at zero in panel 2 by convention." width="384" />
+<p class="caption">
+Figure 2.1: Example of predicted means vs. margins. Note, the margin plotted in the second panel is the difference between the coloured lines in the first. A horizontal line is added at zero in panel 2 by convention.
+</p>
 </div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
+<div id="running-the-model" class="section level3 unnumbered">
+<h3>Running the model</h3>
+<p>Lets say we want to run a linear model predicts injury severity from gender and
+a categorical measurement of age (young v.s. old).</p>
+<p>Our model formula would be: <code>severity.of.injury ~ age.category * gender</code>. Here
+we fit it an request the Anova table which enables us to test the main effects
+and interaction<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">injurymodel &lt;-<span class="st"> </span><span class="kw">lm</span>(severity.of.injury <span class="op">~</span><span class="st"> </span>age.category <span class="op">*</span><span class="st"> </span>gender,  <span class="dt">data=</span>injuries)
+<span class="kw">anova</span>(injurymodel)
+Analysis of Variance Table
+
+Response<span class="op">:</span><span class="st"> </span>severity.of.injury
+                     Df  Sum Sq Mean Sq F value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    
+age.category          <span class="dv">1</span>  <span class="fl">3920.1</span>  <span class="fl">3920.1</span> <span class="fl">144.647</span> <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span>
+gender                <span class="dv">1</span>  <span class="fl">9380.6</span>  <span class="fl">9380.6</span> <span class="fl">346.134</span> <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span>
+age.category<span class="op">:</span>gender   <span class="dv">1</span>  <span class="fl">1148.7</span>  <span class="fl">1148.7</span>  <span class="fl">42.384</span> <span class="fl">1.187e-10</span> <span class="op">**</span><span class="er">*</span>
+Residuals           <span class="dv">996</span> <span class="fl">26992.7</span>    <span class="fl">27.1</span>                      
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre>
+<p>Having saved the regression model in the variable <code>injurymodel</code> we can use this
+to make predictions for means and estimate marginal effects:</p>
+</div>
+<div id="making-predictions-for-means" class="section level3 unnumbered">
+<h3>Making predictions for means</h3>
+<p>When making predictions, they key question to bear in mind is ‘predictions for
+what?’ That is, what values of the predictor variables are we going to use to
+estimate the outcome?</p>
+<p>It goes like this:</p>
+<ol style="list-style-type: decimal">
+<li>Create a new dataframe which contains the values of the predictors we want to
+make predictions at</li>
+<li>Make the predictions using the <code>predict()</code> function.</li>
+<li>Convert the output of <code>predict()</code> to a dataframe and plot the numbers.</li>
+</ol>
+<div id="step-1-make-a-new-dataframe" class="section level4 unnumbered">
+<h4>Step 1: Make a new dataframe</h4>
+<pre class="sourceCode r"><code class="sourceCode r">prediction.data &lt;-<span class="st"> </span><span class="kw">data_frame</span>(
+  <span class="dt">age.category =</span> <span class="kw">c</span>(<span class="st">&quot;young&quot;</span>, <span class="st">&quot;older&quot;</span>, <span class="st">&quot;young&quot;</span>, <span class="st">&quot;older&quot;</span>),
+  <span class="dt">gender =</span> <span class="kw">c</span>(<span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Male&quot;</span>, <span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Female&quot;</span>)
+)
+prediction.data
+<span class="co"># A tibble: 4 x 2</span>
+  age.category gender
+  <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">        </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st"> </span>
+<span class="dv">1</span> young        Male  
+<span class="dv">2</span> older        Male  
+<span class="dv">3</span> young        Female
+<span class="dv">4</span> older        Female</code></pre>
+</div>
+<div id="step-2-make-the-predictions" class="section level4 unnumbered">
+<h4>Step 2: Make the predictions</h4>
+<p>The R <code>predict()</code> function has two useful arguments:</p>
 <ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
+<li><code>newdata</code>, which we set to our new data frame containing the predictor
+values of interest</li>
+<li><code>interval</code> which we here set to confidence<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></li>
 </ul>
+<pre class="sourceCode r"><code class="sourceCode r">injury.predictions &lt;-<span class="st"> </span><span class="kw">predict</span>(injurymodel, <span class="dt">newdata=</span>prediction.data, <span class="dt">interval=</span><span class="st">&quot;confidence&quot;</span>)
+injury.predictions
+       fit      lwr      upr
+<span class="dv">1</span> <span class="fl">56.91198</span> <span class="fl">56.24128</span> <span class="fl">57.58267</span>
+<span class="dv">2</span> <span class="fl">58.90426</span> <span class="fl">58.27192</span> <span class="fl">59.53660</span>
+<span class="dv">3</span> <span class="fl">60.84242</span> <span class="fl">60.20394</span> <span class="fl">61.48090</span>
+<span class="dv">4</span> <span class="fl">67.12600</span> <span class="fl">66.48119</span> <span class="fl">67.77081</span></code></pre>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+</div>
+<div id="making-prdictions-for-margins-effects-of-predictors" class="section level3 unnumbered">
+<h3>Making prdictions for margins (<em>effects</em> of predictors)</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&#39;tidyverse&#39;</span>)
+m &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg<span class="op">~</span>vs<span class="op">+</span>wt, <span class="dt">data=</span>mtcars)
+m.predictions &lt;-<span class="st"> </span><span class="kw">predict</span>(m, <span class="dt">interval=</span><span class="st">&#39;confidence&#39;</span>)
 
+mtcars.plus.predictions &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(
+  mtcars,
+  m.predictions <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_data_frame</span>()
+)
+
+prediction.frame &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">vs=</span><span class="dv">0</span><span class="op">:</span><span class="dv">1</span>, <span class="dt">wt=</span><span class="dv">2</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as_data_frame</span>()
+
+prediction.frame.plus.predictions &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(
+  prediction.frame,
+  <span class="kw">predict</span>(m, <span class="dt">newdata=</span>prediction.frame, <span class="dt">interval=</span><span class="st">&#39;confidence&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_data_frame</span>()
+)
+
+
+mtcars.plus.predictions <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(vs, fit, <span class="dt">ymin=</span>lwr, <span class="dt">ymax=</span>upr)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">geom=</span><span class="st">&quot;pointrange&quot;</span>)</code></pre>
+<p><img src="predictions-and-margins_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">prediction.frame.plus.predictions <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(vs, fit, <span class="dt">ymin=</span>lwr, <span class="dt">ymax=</span>upr)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_pointrange</span>()</code></pre>
+<p><img src="predictions-and-margins_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">prediction.frame.plus.predictions
+<span class="co"># A tibble: 2 x 5</span>
+     vs    wt   fit   lwr   upr
+  <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span>     <span class="dv">0</span>     <span class="dv">2</span>  <span class="fl">24.1</span>  <span class="fl">21.6</span>  <span class="fl">26.6</span>
+<span class="dv">2</span>     <span class="dv">1</span>     <span class="dv">2</span>  <span class="fl">27.3</span>  <span class="fl">25.6</span>  <span class="fl">29.0</span>
+mtcars.plus.predictions <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(vs) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise_each</span>(<span class="kw">funs</span>(mean), fit, lwr, upr)
+<span class="co"># A tibble: 2 x 4</span>
+     vs   fit   lwr   upr
+  <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span>     <span class="dv">0</span>  <span class="fl">16.6</span>  <span class="fl">14.9</span>  <span class="fl">18.3</span>
+<span class="dv">2</span>     <span class="dv">1</span>  <span class="fl">24.6</span>  <span class="fl">22.8</span>  <span class="fl">26.3</span></code></pre>
+</div>
+<div id="marginal-effects" class="section level3 unnumbered">
+<h3>Marginal effects</h3>
+<p>What is the effect of being black or female on the chance of you getting
+diabetes?</p>
+<p>Two ways of computing, depending on which of these two you hate least:</p>
+<ul>
+<li><p>Calculate the effect of being black for someone who is 50% female (marginal
+effect at the means, MEM)</p></li>
+<li><p>Calculate the effect first pretending someone is black, then pretending they
+are white, and taking the difference between these estimate (average
+marginal effect, AME)</p></li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(margins)
+<span class="kw">margins</span>(m, <span class="dt">at =</span> <span class="kw">list</span>(<span class="dt">wt =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>))
+ <span class="kw">at</span>(wt)    vs     wt
+      <span class="dv">1</span> <span class="fl">3.154</span> <span class="fl">-4.443</span>
+      <span class="dv">2</span> <span class="fl">3.154</span> <span class="fl">-4.443</span>
+
+m2 &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg<span class="op">~</span>vs<span class="op">*</span>wt, <span class="dt">data=</span>mtcars)
+<span class="kw">summary</span>(m2)
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>vs <span class="op">*</span><span class="st"> </span>wt, <span class="dt">data =</span> mtcars)
+
+Residuals<span class="op">:</span>
+<span class="st">    </span>Min      1Q  Median      3Q     Max 
+<span class="fl">-3.9950</span> <span class="fl">-1.7881</span> <span class="fl">-0.3423</span>  <span class="fl">1.2935</span>  <span class="fl">5.2061</span> 
+
+Coefficients<span class="op">:</span>
+<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept)  <span class="fl">29.5314</span>     <span class="fl">2.6221</span>  <span class="fl">11.263</span> <span class="fl">6.55e-12</span> <span class="op">**</span><span class="er">*</span>
+vs           <span class="fl">11.7667</span>     <span class="fl">3.7638</span>   <span class="fl">3.126</span>   <span class="fl">0.0041</span> <span class="op">**</span><span class="st"> </span>
+wt           <span class="fl">-3.5013</span>     <span class="fl">0.6915</span>  <span class="fl">-5.063</span> <span class="fl">2.33e-05</span> <span class="op">**</span><span class="er">*</span>
+vs<span class="op">:</span>wt        <span class="fl">-2.9097</span>     <span class="fl">1.2157</span>  <span class="fl">-2.393</span>   <span class="fl">0.0236</span> <span class="op">*</span><span class="st">  </span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">2.578</span> on <span class="dv">28</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.8348</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.8171</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">47.16</span> on <span class="dv">3</span> and <span class="dv">28</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">4.497e-11</span>
+m2.margins &lt;-<span class="st"> </span><span class="kw">margins</span>(m2, <span class="dt">at =</span> <span class="kw">list</span>(<span class="dt">wt =</span> <span class="fl">1.5</span><span class="op">:</span><span class="fl">4.5</span>))
+
+<span class="kw">summary</span>(m2.margins)
+ factor     wt     AME     SE       z      p   lower   upper
+     vs <span class="fl">1.5000</span>  <span class="fl">7.4021</span> <span class="fl">2.0902</span>  <span class="fl">3.5414</span> <span class="fl">0.0004</span>  <span class="fl">3.3055</span> <span class="fl">11.4988</span>
+     vs <span class="fl">2.5000</span>  <span class="fl">4.4924</span> <span class="fl">1.2376</span>  <span class="fl">3.6300</span> <span class="fl">0.0003</span>  <span class="fl">2.0668</span>  <span class="fl">6.9180</span>
+     vs <span class="fl">3.5000</span>  <span class="fl">1.5827</span> <span class="fl">1.2846</span>  <span class="fl">1.2320</span> <span class="fl">0.2179</span> <span class="fl">-0.9351</span>  <span class="fl">4.1006</span>
+     vs <span class="fl">4.5000</span> <span class="fl">-1.3270</span> <span class="fl">2.1736</span> <span class="fl">-0.6105</span> <span class="fl">0.5415</span> <span class="fl">-5.5872</span>  <span class="fl">2.9333</span>
+     wt <span class="fl">1.5000</span> <span class="fl">-4.7743</span> <span class="fl">0.5854</span> <span class="fl">-8.1561</span> <span class="fl">0.0000</span> <span class="fl">-5.9216</span> <span class="fl">-3.6270</span>
+     wt <span class="fl">2.5000</span> <span class="fl">-4.7743</span> <span class="fl">0.5854</span> <span class="fl">-8.1557</span> <span class="fl">0.0000</span> <span class="fl">-5.9217</span> <span class="fl">-3.6270</span>
+     wt <span class="fl">3.5000</span> <span class="fl">-4.7743</span> <span class="fl">0.5854</span> <span class="fl">-8.1561</span> <span class="fl">0.0000</span> <span class="fl">-5.9216</span> <span class="fl">-3.6270</span>
+     wt <span class="fl">4.5000</span> <span class="fl">-4.7743</span> <span class="fl">0.5854</span> <span class="fl">-8.1561</span> <span class="fl">0.0000</span> <span class="fl">-5.9216</span> <span class="fl">-3.6270</span>
+
+<span class="kw">summary</span>(m2.margins) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_data_frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(factor<span class="op">==</span><span class="st">&quot;vs&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(wt, AME)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>()</code></pre>
+<p><img src="predictions-and-margins_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 </div>
 </div>
-
-
-
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
+<ol start="12">
+<li id="fn12"><p>Because this is simulated data, the main effects and
+interactions all have tiny p values.<a href="predicted-means-and-margins-using-lm.html#fnref12" class="footnote-back">↩</a></p></li>
+<li id="fn13"><p>This gives us the confidence
+interval for the prediction, which is the range within which we would expect
+the true value to fall, 95% of the time, if we replicated the study. We
+could ask instead for the <code>prediction</code> interval, which would be the range
+within which 95% of new observations with the same predictor values would
+fall. For more on this see the section on
+<a href="confidence-vs-prediction-intervals.html">confidence v.s. prediction intervals</a><a href="predicted-means-and-margins-using-lm.html#fnref13" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -487,8 +627,8 @@ late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="predictions-and-margins.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="predictions-with-continuous-covariates.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

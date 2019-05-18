@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>20 Confidence and Intervals | Just Enough R</title>
+  <meta name="description" content="20 Confidence and Intervals | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="20 Confidence and Intervals | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="20 Confidence and Intervals | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="getting-help.html">
+<link rel="next" href="multiple-comparisons.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,95 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
+<div id="intervals" class="section level1">
+<h1><span class="header-section-number">20</span> Confidence and Intervals</h1>
+<p>Some quick definitions to begin. Let’s say we have made an estimate from a
+model. To keep things simple, it could just be the sample mean.</p>
+<!-- TODO: EXPAND ON THESE DEFINITIONS AND USE GRAPHICS AND PLOTS TO ILLUSTRATE -->
+<p>A <em>Confidence interval</em> is the range within which we would expect the ‘true’
+value to fall, 95% of the time, if we replicated the study.</p>
+<p>A <em>Prediction interval</em> is the range within which we expect 95% of new
+observations to fall. If we’re considering the prediction interval for a
+specific point prediction (i.e. where we set predictors to specific values),
+then this interval woud be for new observations <em>with the same predictor
+values</em>.</p>
+<p>A Bayesian <em>Credible interval</em> is the range of values within which we are 95%
+sure the true value lies, based on our prior knowledge and the data we have
+collected.</p>
+<div id="the-problem-with-confidence-intervals" class="section level3 unnumbered">
+<h3>The problem with confidence intervals</h3>
+<p>Confidence intervals are helpful when we want to think about how <em>precise our
+estimate</em> is. For example, in an RCT we will want to estimate the difference
+between treatment groups, and it’s conceivable we would to want to know, for
+example, the range within which the true effect would fall 95% of the time if we
+replicated our study many times (although in reality, this isn’t a question many
+people would actually ask).</p>
+<p>If we run a study with small N, intuitively we know that we have less
+information about the difference between our RCT treatments, and so we’d like
+the CI to expand accordingly.</p>
+<p>So — all things being equal — the confidence interval reduces as we collect more
 data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
+<p>The problem with confidence intervals comes about because many researchers and
+clinicians read them incorrectly. Typically, they either:</p>
 <ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
+<li><p>Forget that the CI represents only the <em>precision of the estimate</em>. The CI
+<em>doesn’t</em> reflect how good our predictions for new observations will be.</p></li>
+<li><p>Misinterpret the CI as the range in which we are 95% sure the true value
+lies.</p></li>
 </ul>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+<div id="forgetting-that-the-ci-depends-on-sample-size." class="section level3 unnumbered">
+<h3>Forgetting that the CI depends on sample size.</h3>
+<p>By forgetting that the CI contracts as the sample size increases, researchers
+can become overconfident about their ability to predict new observations.
+Imagine that we sample data from two populations with the same mean, but
+different variability:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1234</span>)
+df &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">v=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>), <span class="dt">i=</span><span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>as_data_frame <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">rnorm</span>(<span class="kw">length</span>(.<span class="op">$</span>i), <span class="dv">100</span>, v)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">samp =</span> <span class="kw">factor</span>(v, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;Low variability&quot;</span>, <span class="st">&quot;High variability&quot;</span>)))
+Warning<span class="op">:</span><span class="st"> `</span><span class="dt">as_data_frame()</span><span class="st">`</span> is deprecated, use <span class="st">`</span><span class="dt">as_tibble()</span><span class="st">`</span> (but mind the new semantics).
+This warning is displayed once per session.</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(y)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(<span class="op">~</span>samp) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_discrete</span>(<span class="st">&quot;&quot;</span>)
+<span class="st">`</span><span class="dt">stat_bin()</span><span class="st">`</span> using <span class="st">`</span><span class="dt">bins = 30</span><span class="st">`</span>. Pick better value with <span class="st">`</span><span class="dt">binwidth</span><span class="st">`</span>.</code></pre>
+<p><img src="confidence-and-intervals_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<ul>
+<li>If we sample 100 individuals from each population the confidence interval
+around the sample mean would be wider in the high variability group.</li>
+</ul>
+<p>If we increase our sample size we would become more confident about the location
+of the mean, and this confidence interval would shrink.</p>
+<p>But imagine taking a single <em>new sample</em> from either population. These samples
+would be new grey squares, which we place on the histograms above. It does not
+matter how much extra data we have collected in group B or how sure what the
+mean of the group is: <em>We would always be less certain making predictions for
+new observations in the high variability group</em>.</p>
+<p>The important insight here is that <em>if our data are noisy and highly variable we
+can never make firm predictions for new individuals, even if we collect so much
+data that we are very certain about the location of the mean</em>.</p>
+<!--
+
+
+### But should I report the CI or not? {-}
+
+
+
+ -->
 
 </div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="getting-help.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multiple-comparisons.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

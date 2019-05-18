@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>17 Models are data | Just Enough R</title>
+  <meta name="description" content="17 Models are data | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="17 Models are data | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="17 Models are data | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="visualising-interactions.html">
+<link rel="next" href="process-model-results.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,394 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
-<ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
-</ul>
-</div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
-
-</div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
+<div id="models-are-data-too" class="section level1">
+<h1><span class="header-section-number">17</span> Models are data</h1>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/WPc-VEqBPHI?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen>
+</iframe>
+<p>You might remember the episode of the Simpsons where Homer designs a car for
+‘the average man’. It doesn’t end well. Traditional statistics packages are a
+bit like Homer’s car. They try to work for everyone, but in the process become
+bloated and difficult to use.</p>
+<p>This is particularly true of the <em>output</em> of software like SPSS, which by
+default produces multiple pages of ‘results’ for even relatively simple
+statistical models. However, the problem is not just that SPSS is incredibly
+verbose.</p>
+<p>The real issue is that SPSS views the results of a model as the <em>end</em> of a
+process, rather than the beginning. The model SPSS has is something like:</p>
+<ol style="list-style-type: decimal">
+<li>Collect data</li>
+<li>Choose analysis from GUI</li>
+<li>Select relevant figures from pages of output and publish.</li>
 </ol>
+<p>This is a problem because in real life it just doesn’t work that way. In reality
+you will want to do things like:</p>
+<ul>
+<li>Run the same model for different outcomes</li>
+<li>Re-run similar models as part of a sensitivity analysis</li>
+<li>Compare different models and produce summaries of results from multiple
+models</li>
+</ul>
+<p>All of this requires an <em>iterative process</em>, in which you may want to compare
+and visualise the results of multiple models. In a traditional GUI, this quickly
+becomes overwhelming.</p>
+<p>However, if we treat modelling as a process which <em>both consumes and produces
+data</em>, R provides many helpful tools.</p>
+<p>This is an important insight: in R, the results of analyses are not the end
+point — instead <em>model results are themselves data</em>, to be processed,
+visualised, and compared.</p>
+<div id="storing-models-in-variables" class="section level3 unnumbered">
+<h3>Storing models in variables</h3>
+<p>This may seem obvious (and we have seen many examples in the sections above),
+but because R variables can contain anything, we can use them to store the
+results of our models.</p>
+<p>This is important, because it means we can keep track of different versions of
+the models we run, and compare them.</p>
+</div>
+<div id="extract-results-from-models" class="section level3 unnumbered">
+<h3>Extracting results from models</h3>
+<p>One of the nice things about R is that the <code>summary()</code> function will almost
+always provide a concise output of whatever model you send it, showing the key
+features of an model you have run.</p>
+<p>However, this text output isn’t suitable for publication, and can even be too
+verbose for communicating with colleagues. Often, when communicating with
+others, you want to focus in on the important details from analyses and to do
+this you need to extract results from your models.</p>
+<p>Thankfully, there is almost always a method to extract results to a
+<a href="datasets-dataframes.html#datasets-dataframes"><code>dataframe</code></a>. For example, if we run a linear model:</p>
+<pre class="sourceCode r"><code class="sourceCode r">model.fit &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data=</span>mtcars)
+<span class="kw">summary</span>(model.fit)
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data =</span> mtcars)
+
+Residuals<span class="op">:</span>
+<span class="st">    </span>Min      1Q  Median      3Q     Max 
+<span class="fl">-3.4087</span> <span class="fl">-2.3243</span> <span class="fl">-0.7683</span>  <span class="fl">1.7721</span>  <span class="fl">6.3484</span> 
+
+Coefficients<span class="op">:</span>
+<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept) <span class="fl">34.96055</span>    <span class="fl">2.16454</span>  <span class="fl">16.151</span> <span class="fl">4.91e-16</span> <span class="op">**</span><span class="er">*</span>
+wt          <span class="fl">-3.35082</span>    <span class="fl">1.16413</span>  <span class="fl">-2.878</span>  <span class="fl">0.00743</span> <span class="op">**</span><span class="st"> </span>
+disp        <span class="fl">-0.01773</span>    <span class="fl">0.00919</span>  <span class="fl">-1.929</span>  <span class="fl">0.06362</span> .  
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">2.917</span> on <span class="dv">29</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7809</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7658</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">51.69</span> on <span class="dv">2</span> and <span class="dv">29</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">2.744e-10</span></code></pre>
+<p>We can extract the parameter table from this model by saving the <code>summary()</code> of
+it, and then using the <code>$</code> operator to access the <code>coefficients</code> table (actually
+a matrix), which is stored within the summary object.</p>
+<pre class="sourceCode r"><code class="sourceCode r">model.fit.summary &lt;-<span class="st"> </span><span class="kw">summary</span>(model.fit)
+model.fit.summary<span class="op">$</span>coefficients
+               Estimate  Std. Error   t value     <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)
+(Intercept) <span class="fl">34.96055404</span> <span class="fl">2.164539504</span> <span class="fl">16.151497</span> <span class="fl">4.910746e-16</span>
+wt          <span class="fl">-3.35082533</span> <span class="fl">1.164128079</span> <span class="fl">-2.878399</span> <span class="fl">7.430725e-03</span>
+disp        <span class="fl">-0.01772474</span> <span class="fl">0.009190429</span> <span class="fl">-1.928609</span> <span class="fl">6.361981e-02</span></code></pre>
+</div>
+<div id="poking-around-with-and" class="section level3 unnumbered">
+<h3>‘Poking around’ with <code>$</code> and <code>@</code></h3>
+<p>It’s a useful trick to learn how to ‘poke around’ inside R objects using the <code>$</code>
+and <code>@</code> operators (if you want the gory details
+<a href="http://adv-r.had.co.nz/OO-essentials.html">see this guide</a>).</p>
+<p>In the video below, I use RStudio’s autocomplete feature to find results buried
+within a <code>lm</code> object:</p>
+<iframe src="https://player.vimeo.com/video/225529842" width="862" height="892" frameborder="0">
+</iframe>
+<p>For example, we could write the follwing to extract a table of coefficients,
+test statistics and <em>p</em> values from an <code>lm()</code> object (this is shown in the
+video:</p>
+<pre class="sourceCode r"><code class="sourceCode r">model.fit.summary &lt;-<span class="st"> </span><span class="kw">summary</span>(model.fit)
+model.fit.summary<span class="op">$</span>coefficients <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as_data_frame</span>()
+Warning<span class="op">:</span><span class="st"> `</span><span class="dt">as_data_frame()</span><span class="st">`</span> is deprecated, use <span class="st">`</span><span class="dt">as_tibble()</span><span class="st">`</span> (but mind the new semantics).
+This warning is displayed once per session.
+<span class="co"># A tibble: 3 x 4</span>
+  Estimate <span class="st">`</span><span class="dt">Std. Error</span><span class="st">`</span> <span class="st">`</span><span class="dt">t value</span><span class="st">`</span> <span class="st">`</span><span class="dt">Pr(&gt;|t|)</span><span class="st">`</span>
+     <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st">        </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">      </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span>  <span class="fl">35.0</span>         <span class="fl">2.16</span>        <span class="fl">16.2</span>    <span class="fl">4.91e-16</span>
+<span class="dv">2</span>  <span class="fl">-3.35</span>        <span class="fl">1.16</span>        <span class="fl">-2.88</span>   <span class="fl">7.43</span>e<span class="op">-</span><span class="st"> </span><span class="dv">3</span>
+<span class="dv">3</span>  <span class="fl">-0.0177</span>      <span class="fl">0.00919</span>     <span class="fl">-1.93</span>   <span class="fl">6.36</span>e<span class="op">-</span><span class="st"> </span><span class="dv">2</span></code></pre>
+</div>
+<div id="broom" class="section level3 unnumbered">
+<h3>Save time: use a <code>broom</code></h3>
+<p>The <a href="http://varianceexplained.org/r/broom-intro/"><code>broom::</code> library</a> is worth
+learning because it makes it really easy to turn model results into dataframes,
+which is almost always what we want when working with data.</p>
+<p>It takes a slightly different approach than simply poking around with $ and @,
+because it providing general methods to ‘clean up’ the output of many older R
+functions.</p>
+<p>For example, the <code>lm()</code> or <code>car::Anova</code> functions display results in the
+console, but don’t make it easy to extract results as a dataframe. <code>broom::</code>
+provides a consistent way of extracting the key numbers from most R objects.</p>
+<p>Let’s say we have a regression model:</p>
+<pre class="sourceCode r"><code class="sourceCode r">(model<span class="fl">.1</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(cyl) <span class="op">+</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data=</span>mtcars))
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(cyl) <span class="op">+</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp, <span class="dt">data =</span> mtcars)
+
+Coefficients<span class="op">:</span>
+<span class="st"> </span>(Intercept)  <span class="kw">factor</span>(cyl)<span class="dv">6</span>  <span class="kw">factor</span>(cyl)<span class="dv">8</span>            wt          disp  
+   <span class="fl">34.041673</span>     <span class="fl">-4.305559</span>     <span class="fl">-6.322786</span>     <span class="fl">-3.306751</span>      <span class="fl">0.001715</span>  </code></pre>
+<p>We can extract model fit statistics — that is, attributes of the model as a
+whole — with <code>glance()</code>. This produces a dataframe:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glance</span>(model<span class="fl">.1</span>)
+<span class="co"># A tibble: 1 x 11</span>
+  r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+      <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st">         </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">    </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span>     <span class="fl">0.838</span>         <span class="fl">0.813</span>  <span class="fl">2.60</span>      <span class="fl">34.8</span> <span class="fl">2.73e-10</span>     <span class="dv">5</span>  <span class="fl">-73.3</span>  <span class="fl">159.</span>  <span class="fl">167.</span>
+<span class="co"># … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;</span></code></pre>
+<p>If we want to extract information about the model coefficients we can use
+<code>tidy</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tidy</span>(model<span class="fl">.1</span>, <span class="dt">conf.int =</span> T) <span class="op">%&gt;%</span>
+<span class="st">  </span>pander</code></pre>
+<table>
+<colgroup>
+<col width="17%" />
+<col width="12%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="12%" />
+<col width="14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">term</th>
+<th align="center">estimate</th>
+<th align="center">std.error</th>
+<th align="center">statistic</th>
+<th align="center">p.value</th>
+<th align="center">conf.low</th>
+<th align="center">conf.high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">(Intercept)</td>
+<td align="center">34.04</td>
+<td align="center">1.963</td>
+<td align="center">17.34</td>
+<td align="center">3.662e-16</td>
+<td align="center">30.01</td>
+<td align="center">38.07</td>
+</tr>
+<tr class="even">
+<td align="center">factor(cyl)6</td>
+<td align="center">-4.306</td>
+<td align="center">1.465</td>
+<td align="center">-2.939</td>
+<td align="center">0.006662</td>
+<td align="center">-7.311</td>
+<td align="center">-1.3</td>
+</tr>
+<tr class="odd">
+<td align="center">factor(cyl)8</td>
+<td align="center">-6.323</td>
+<td align="center">2.598</td>
+<td align="center">-2.433</td>
+<td align="center">0.02186</td>
+<td align="center">-11.65</td>
+<td align="center">-0.9913</td>
+</tr>
+<tr class="even">
+<td align="center">wt</td>
+<td align="center">-3.307</td>
+<td align="center">1.105</td>
+<td align="center">-2.992</td>
+<td align="center">0.005855</td>
+<td align="center">-5.574</td>
+<td align="center">-1.039</td>
+</tr>
+<tr class="odd">
+<td align="center">disp</td>
+<td align="center">0.001715</td>
+<td align="center">0.01348</td>
+<td align="center">0.1272</td>
+<td align="center">0.8997</td>
+<td align="center">-0.02595</td>
+<td align="center">0.02938</td>
+</tr>
+</tbody>
+</table>
+<p>Which can then be plotted easily (adding the <code>conf.int=T</code> includes 95%
+confidence intervals for each parameter, which we can pass to <code>ggplot</code>):</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tidy</span>(model<span class="fl">.1</span>, <span class="dt">conf.int =</span> T) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(term, estimate, <span class="dt">ymin=</span>conf.low, <span class="dt">ymax=</span>conf.high)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_pointrange</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>)</code></pre>
+<p><img src="models-are-data_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Finally, we can use the <code>augment</code> function to get information on individual rows
+in the modelled data: namely the fitted and residual values, plus common
+diagnostic metrics like Cooks distances:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">augment</span>(model<span class="fl">.1</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pander</span>(<span class="dt">split.tables=</span><span class="ot">Inf</span>)</code></pre>
+<table style="width:100%;">
+<colgroup>
+<col width="15%" />
+<col width="5%" />
+<col width="10%" />
+<col width="6%" />
+<col width="5%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="6%" />
+<col width="9%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">.rownames</th>
+<th align="center">mpg</th>
+<th align="center">factor.cyl.</th>
+<th align="center">wt</th>
+<th align="center">disp</th>
+<th align="center">.fitted</th>
+<th align="center">.se.fit</th>
+<th align="center">.resid</th>
+<th align="center">.hat</th>
+<th align="center">.sigma</th>
+<th align="center">.cooksd</th>
+<th align="center">.std.resid</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Mazda RX4</td>
+<td align="center">21</td>
+<td align="center">6</td>
+<td align="center">2.62</td>
+<td align="center">160</td>
+<td align="center">21.35</td>
+<td align="center">1.058</td>
+<td align="center">-0.3468</td>
+<td align="center">0.1653</td>
+<td align="center">2.652</td>
+<td align="center">0.0008423</td>
+<td align="center">-0.1458</td>
+</tr>
+<tr class="even">
+<td align="center">Mazda RX4 Wag</td>
+<td align="center">21</td>
+<td align="center">6</td>
+<td align="center">2.875</td>
+<td align="center">160</td>
+<td align="center">20.5</td>
+<td align="center">1.009</td>
+<td align="center">0.4964</td>
+<td align="center">0.1501</td>
+<td align="center">2.651</td>
+<td align="center">0.001512</td>
+<td align="center">0.2069</td>
+</tr>
+<tr class="odd">
+<td align="center">Datsun 710</td>
+<td align="center">22.8</td>
+<td align="center">4</td>
+<td align="center">2.32</td>
+<td align="center">108</td>
+<td align="center">26.56</td>
+<td align="center">0.7854</td>
+<td align="center">-3.755</td>
+<td align="center">0.09103</td>
+<td align="center">2.538</td>
+<td align="center">0.04586</td>
+<td align="center">-1.513</td>
+</tr>
+<tr class="even">
+<td align="center">Hornet 4 Drive</td>
+<td align="center">21.4</td>
+<td align="center">6</td>
+<td align="center">3.215</td>
+<td align="center">258</td>
+<td align="center">19.55</td>
+<td align="center">1.355</td>
+<td align="center">1.853</td>
+<td align="center">0.2711</td>
+<td align="center">2.618</td>
+<td align="center">0.05169</td>
+<td align="center">0.8336</td>
+</tr>
+<tr class="odd">
+<td align="center">Hornet Sportabout</td>
+<td align="center">18.7</td>
+<td align="center">8</td>
+<td align="center">3.44</td>
+<td align="center">360</td>
+<td align="center">16.96</td>
+<td align="center">0.9784</td>
+<td align="center">1.739</td>
+<td align="center">0.1413</td>
+<td align="center">2.627</td>
+<td align="center">0.0171</td>
+<td align="center">0.7209</td>
+</tr>
+<tr class="even">
+<td align="center">Valiant</td>
+<td align="center">18.1</td>
+<td align="center">6</td>
+<td align="center">3.46</td>
+<td align="center">225</td>
+<td align="center">18.68</td>
+<td align="center">1.059</td>
+<td align="center">-0.5806</td>
+<td align="center">0.1654</td>
+<td align="center">2.65</td>
+<td align="center">0.002363</td>
+<td align="center">-0.2442</td>
+</tr>
+</tbody>
+</table>
+<p>Again these can be plotted:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">augment</span>(model<span class="fl">.1</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>.fitted, <span class="dt">y=</span>.resid)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>()
+<span class="st">`</span><span class="dt">geom_smooth()</span><span class="st">`</span> using method =<span class="st"> &#39;loess&#39;</span> and formula <span class="st">&#39;y ~ x&#39;</span></code></pre>
+<p><img src="models-are-data_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Because <code>broom</code> always returns a dataframe with a consistent set of column names
+we can also combine model results into tables for comparison. In this plot we
+see what happens to the regression coefficients in model 1 when we add <code>disp</code>,
+<code>carb</code> and <code>drat</code> in model 2. We plot the coefficients side by side for ease of
+comparison, and can see that the estimates for cyl1 and wt both shrink slightly
+with the addition of these variables:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># run a new model with more predictors</span>
+(model<span class="fl">.2</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(cyl) <span class="op">+</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp <span class="op">+</span><span class="st"> </span>carb <span class="op">+</span><span class="st"> </span>drat, <span class="dt">data=</span>mtcars))
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(cyl) <span class="op">+</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>disp <span class="op">+</span><span class="st"> </span>carb <span class="op">+</span><span class="st"> </span>drat, <span class="dt">data =</span> mtcars)
+
+Coefficients<span class="op">:</span>
+<span class="st"> </span>(Intercept)  <span class="kw">factor</span>(cyl)<span class="dv">6</span>  <span class="kw">factor</span>(cyl)<span class="dv">8</span>            wt          disp  
+   <span class="fl">29.849209</span>     <span class="fl">-2.796142</span>     <span class="fl">-4.116561</span>     <span class="fl">-2.748229</span>     <span class="fl">-0.002826</span>  
+        carb          drat  
+   <span class="fl">-0.587422</span>      <span class="fl">1.056532</span>  
+
+<span class="co"># make a single dataframe from both models</span>
+<span class="co"># addin a new `model` column with mutate to</span>
+<span class="co"># identify which coefficient came from which model</span>
+combined.results &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
+  <span class="kw">tidy</span>(model<span class="fl">.1</span>, <span class="dt">conf.int =</span> T) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">model=</span><span class="st">&quot;1&quot;</span>),
+  <span class="kw">tidy</span>(model<span class="fl">.2</span>, <span class="dt">conf.int =</span> T) <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">model=</span><span class="st">&quot;2&quot;</span>))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">combined.results <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># remove the intercept to make plot scale more sane</span>
+<span class="st">  </span><span class="kw">filter</span>(term <span class="op">!=</span><span class="st"> &quot;(Intercept)&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(term, estimate, <span class="dt">ymin=</span>conf.low, <span class="dt">ymax=</span>conf.high, <span class="dt">color=</span>model)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_pointrange</span>(<span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="dt">width=</span>.<span class="dv">1</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>)</code></pre>
+<p><img src="models-are-data_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div> 
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="visualising-interactions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="process-model-results.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

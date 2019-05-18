@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Simplifying and re-using | Just Enough R</title>
+  <meta name="description" content="Simplifying and re-using | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Simplifying and re-using | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Simplifying and re-using | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="apa-output.html">
+<link rel="next" href="table1.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,76 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
+<div id="code-reuse" class="section level2 unnumbered">
+<h2>Simplifying and re-using</h2>
+<p>Complex programming is beyond the scope of this guide, but if you sometimes find
+yourself repeating the same piece of code over and over then it might be worth
+writing a simple function.</p>
+<p>The examples shown in this book are mostly very simple, and are typically not
+repetitive. However in running your own analyses you may find that you start to
+repeat chunks of code in a number of places (even across many files).</p>
+<p>Not only is this sort of copying-and-pasting tedious, it can be hard to read and
+maintain. For example, if you are repeating the same analysis for multiple
+variables and discover an error in your calculations you would have to fix this
+is in multiple places in your code. You can also introduce errors when copying
+and pasting code in this way, and these can be hard to spot.</p>
+<p>The sorts of tasks which can end up being repetitive include:</p>
 <ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
+<li>Running models</li>
+<li>Extracting results from models you run</li>
+<li>Producing tables</li>
+<li>Specifying output settings for graphs</li>
 </ul>
+<p>In these cases it might be worth writing your own function to facilitate this
+repetition, or use some other forms of code re-use (e.g. see the
+<a href="code-reuse.html#ggplot-reuse">example for <code>ggplot</code> graphics below</a>).</p>
+<div id="helper-functions" class="section level3 unnumbered">
+<h3>Writing helper functions</h3>
+<p>For example, in the section on logistic regression
+<a href="generalized-linear-models.html#helper-function-logistic">we wrote a helper function called <code>logistic()</code></a>
+which was simply a shortcut for <code>glm()</code> but with the correct ‘family’ argument
+pre-specified.</p>
+<p>For more information on writing your own R functions I recommend
+<a href="http://r4ds.had.co.nz/functions.html">Hadley Wickham’s ‘R for Data Scientists’, chapter 19</a>
+and, if necessary,
+<a href="http://adv-r.had.co.nz">‘Advanced R’: http://adv-r.had.co.nz</a>.</p>
+<p>Or you prefer a book, try <span class="citation">@grolemund2014hands</span>.</p>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+<div id="ggplot-reuse" class="section level3 unnumbered">
+<h3>Re-using code with <code>ggplot</code></h3>
+<p>Another common case where we might want to re-use code is when we produce a
+number of similar plots, and where we might want to re-use many of the same
+settings.</p>
+<p>Sometimes repeating plots is best achieved by creating a single long-form
+dataframe and <a href="ggplot-details.html#facetting-plots">facetting the plot</a>. However this may not
+always be possible or desireable. Lets say we have two plots like these:</p>
+<pre class="sourceCode r"><code class="sourceCode r">plot.mpg &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">factor</span>(cyl), mpg)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_boxplot</span>()
+
+plot.wt &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="kw">factor</span>(cyl), wt)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_boxplot</span>()</code></pre>
+<p>And we want to add consistent labels and other settings to them. We can simply
+type:</p>
+<pre class="sourceCode r"><code class="sourceCode r">myplotsettings &lt;-<span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Number of cylinders&quot;</span>)</code></pre>
+<p>And then we simply add (<code>+</code>) these settings to each plot:</p>
+<pre class="sourceCode r"><code class="sourceCode r">plot.mpg <span class="op">+</span><span class="st"> </span>myplotsettings</code></pre>
+<p><img src="simplifying-and-reusing_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>And:</p>
+<pre class="sourceCode r"><code class="sourceCode r">plot.wt <span class="op">+</span><span class="st"> </span>myplotsettings</code></pre>
+<p><img src="simplifying-and-reusing_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>This reduces typing and makes easier to produce a consistent set of plots.</p>
 
 </div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="apa-output.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="table1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

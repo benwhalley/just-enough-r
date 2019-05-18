@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>21 Multiple comparisons | Just Enough R</title>
+  <meta name="description" content="21 Multiple comparisons | Just Enough R" />
+  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="21 Multiple comparisons | Just Enough R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="21 Multiple comparisons | Just Enough R" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="intervals.html">
+<link rel="next" href="clustering.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<!-- Commenting and annotation script -->
+<script src="https://hypothes.is/embed.js" async></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118343766-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-118343766-1');
+</script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Just enough R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="part"><span><b>I Getting started</b></span></li>
+<li class="chapter" data-level="1" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>1</b> Working with R</a><ul>
+<li class="chapter" data-level="" data-path="installation-intro.html"><a href="installation-intro.html"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html"><i class="fa fa-check"></i>Workflow</a><ul>
+<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#rmarkdown"><i class="fa fa-check"></i>RMarkdown</a></li>
+<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#rstudio"><i class="fa fa-check"></i>RStudio</a></li>
+<li class="chapter" data-level="" data-path="start-here.html"><a href="start-here.html#creating-code-chunks"><i class="fa fa-check"></i>Creating code chunks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="first-commands.html"><a href="first-commands.html"><i class="fa fa-check"></i>First commands</a></li>
+<li class="chapter" data-level="" data-path="variables.html"><a href="variables.html"><i class="fa fa-check"></i>Naming things</a></li>
+<li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html"><i class="fa fa-check"></i>Vectors and lists</a><ul>
+<li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html#vector"><i class="fa fa-check"></i>Vectors</a></li>
+<li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html#access-vector-elements"><i class="fa fa-check"></i>Accessing elements</a></li>
+<li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html#selecting-more-than-one-element"><i class="fa fa-check"></i>Selecting more than one element</a></li>
+<li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html#making-sequences"><i class="fa fa-check"></i>Making and slicing with sequences</a></li>
+<li class="chapter" data-level="" data-path="vectors-and-lists.html"><a href="vectors-and-lists.html#conditional-slices"><i class="fa fa-check"></i>Conditional slicing</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="working-with-vectors.html"><a href="working-with-vectors.html"><i class="fa fa-check"></i>Working with vectors</a><ul>
+<li class="chapter" data-level="" data-path="working-with-vectors.html"><a href="working-with-vectors.html#making-new-vectors"><i class="fa fa-check"></i>Making new vectors</a></li>
+<li class="chapter" data-level="" data-path="working-with-vectors.html"><a href="working-with-vectors.html#making-up-data-new-vectors"><i class="fa fa-check"></i>Making up data (new vectors)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="functions-to-learn-now.html"><a href="functions-to-learn-now.html"><i class="fa fa-check"></i>Functions to learn now</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i>Packages</a></li>
+</ul></li>
+<li class="part"><span><b>II Data</b></span></li>
+<li class="chapter" data-level="2" data-path="datasets-dataframes.html"><a href="datasets-dataframes.html"><i class="fa fa-check"></i><b>2</b> The <code>dataframe</code></a><ul>
+<li class="chapter" data-level="" data-path="working-with-dataframes.html"><a href="working-with-dataframes.html"><i class="fa fa-check"></i>Working with dataframes</a><ul>
+<li><a href="working-with-dataframes.html#tidyverse">Introducing the <code>tidyverse</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="selecting-columns.html"><a href="selecting-columns.html"><i class="fa fa-check"></i>Selecting columns</a></li>
+<li class="chapter" data-level="" data-path="selecting-rows.html"><a href="selecting-rows.html"><i class="fa fa-check"></i>Selecting rows</a></li>
+<li class="chapter" data-level="" data-path="operators.html"><a href="operators.html"><i class="fa fa-check"></i>‘Operators’</a></li>
+<li class="chapter" data-level="" data-path="sorting.html"><a href="sorting.html"><i class="fa fa-check"></i>Sorting</a></li>
+<li class="chapter" data-level="" data-path="pipes.html"><a href="pipes.html"><i class="fa fa-check"></i>Pipes</a></li>
+<li class="chapter" data-level="" data-path="mutate.html"><a href="mutate.html"><i class="fa fa-check"></i>Modifying and creating new columns</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="real-data.html"><a href="real-data.html"><i class="fa fa-check"></i><b>3</b> ‘Real’ data</a><ul>
+<li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html"><i class="fa fa-check"></i>Importing data</a><ul>
+<li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html#importing-data-from-the-web"><i class="fa fa-check"></i>Importing data over the web</a></li>
+<li class="chapter" data-level="" data-path="importing-data.html"><a href="importing-data.html#importing-proprietary-formats"><i class="fa fa-check"></i>Importing from SPSS and other packages</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="saving-and-exporting.html"><a href="saving-and-exporting.html"><i class="fa fa-check"></i>Saving and exporting</a><ul>
+<li class="chapter" data-level="" data-path="saving-and-exporting.html"><a href="saving-and-exporting.html#use-csv"><i class="fa fa-check"></i>Use CSV files</a></li>
+<li class="chapter" data-level="" data-path="saving-and-exporting.html"><a href="saving-and-exporting.html#archiving-publication-and-sharing"><i class="fa fa-check"></i>Archiving, publication and sharing</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="multiple-raw-data-files.html"><a href="multiple-raw-data-files.html"><i class="fa fa-check"></i>Dealing with multiple files</a></li>
+<li class="chapter" data-level="" data-path="joining-data.html"><a href="joining-data.html"><i class="fa fa-check"></i>Joining different datasets</a></li>
+<li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html"><i class="fa fa-check"></i>Types of variable</a><ul>
+<li><a href="factors-and-numerics.html#diffsinquantity">Differences in <em>quantity</em>: numeric variables</a></li>
+<li><a href="factors-and-numerics.html#character-and-factor">Differences in <em>quality or kind</em></a></li>
+<li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html#facsforcategs"><i class="fa fa-check"></i>Factors for categorical data</a></li>
+<li class="chapter" data-level="" data-path="factors-and-numerics.html"><a href="factors-and-numerics.html#storingdates"><i class="fa fa-check"></i>Dates</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="missingvalues.html"><a href="missingvalues.html"><i class="fa fa-check"></i>Missing values</a></li>
+<li class="chapter" data-level="" data-path="tidyingdata.html"><a href="tidyingdata.html"><i class="fa fa-check"></i>Tidying data</a></li>
+<li class="chapter" data-level="" data-path="reshaping.html"><a href="reshaping.html"><i class="fa fa-check"></i>Reshaping</a><ul>
+<li class="chapter" data-level="" data-path="reshaping.html"><a href="reshaping.html#which-reshape-package"><i class="fa fa-check"></i>Which package should you use to reshape data?</a></li>
+<li class="chapter" data-level="" data-path="reshaping.html"><a href="reshaping.html#aggregating-and-reshaping-at-the-same-time"><i class="fa fa-check"></i>Aggregating and reshaping at the same time</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="summarising-data.html"><a href="summarising-data.html"><i class="fa fa-check"></i><b>4</b> Summaries</a><ul>
+<li class="chapter" data-level="" data-path="dplyr-general.html"><a href="dplyr-general.html"><i class="fa fa-check"></i>A generalised approach</a><ul>
+<li class="chapter" data-level="" data-path="dplyr-general.html"><a href="dplyr-general.html#fancy-reshaping"><i class="fa fa-check"></i>Fancy reshaping</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="graphics.html"><a href="graphics.html"><i class="fa fa-check"></i><b>5</b> Graphics</a><ul>
+<li class="chapter" data-level="" data-path="graphics-benefits.html"><a href="graphics-benefits.html"><i class="fa fa-check"></i>Benefits of visualising data</a></li>
+<li class="chapter" data-level="" data-path="graphics-approaches.html"><a href="graphics-approaches.html"><i class="fa fa-check"></i>Which tool to use?</a></li>
+<li><a href="layered-graphics.html#layered-graphics">Layered graphics with <code>ggplot</code></a><ul>
+<li class="chapter" data-level="" data-path="layered-graphics.html"><a href="layered-graphics.html"><i class="fa fa-check"></i>A thought on ‘chart chooser’ guides</a></li>
+<li><a href="layered-graphics.html#thinking-like-ggplot">Thinking like <code>ggplot</code></a></li>
+<li class="chapter" data-level="" data-path="layered-graphics.html"><a href="layered-graphics.html#relationships"><i class="fa fa-check"></i>‘Relationships’</a></li>
+<li class="chapter" data-level="" data-path="layered-graphics.html"><a href="layered-graphics.html#distributions"><i class="fa fa-check"></i>‘Distributions’</a></li>
+<li class="chapter" data-level="" data-path="layered-graphics.html"><a href="layered-graphics.html#comparisons"><i class="fa fa-check"></i>‘Comparisons’</a></li>
+<li class="chapter" data-level="" data-path="layered-graphics.html"><a href="layered-graphics.html#composition"><i class="fa fa-check"></i>‘Composition’</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html"><i class="fa fa-check"></i>‘Quick and dirty’ (utility) plots</a><ul>
+<li class="chapter" data-level="5.0.1" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html#distributions-1"><i class="fa fa-check"></i><b>5.0.1</b> Distributions</a></li>
+<li class="chapter" data-level="5.0.2" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html#relationships-1"><i class="fa fa-check"></i><b>5.0.2</b> Relationships</a></li>
+<li class="chapter" data-level="5.0.3" data-path="utility-plotting-functions.html"><a href="utility-plotting-functions.html#quantities"><i class="fa fa-check"></i><b>5.0.3</b> Quantities</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ggplot-details.html"><a href="ggplot-details.html"><i class="fa fa-check"></i>Tricks with ggplot</a><ul>
+<li class="chapter" data-level="" data-path="ggplot-details.html"><a href="ggplot-details.html#facetting-plots"><i class="fa fa-check"></i>More ways to facet a plot</a></li>
+<li><a href="ggplot-details.html#facet_wrap"><code>facet_wrap</code></a></li>
+<li><a href="ggplot-details.html#facet_grid"><code>facet_grid</code></a></li>
+<li class="chapter" data-level="" data-path="ggplot-details.html"><a href="ggplot-details.html#combining-plots"><i class="fa fa-check"></i>Combining separate plots in a grid</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exporting-graphics.html"><a href="exporting-graphics.html"><i class="fa fa-check"></i>Exporting for print</a></li>
+</ul></li>
+<li class="part"><span><b>III Models</b></span></li>
+<li class="chapter" data-level="6" data-path="common-stats.html"><a href="common-stats.html"><i class="fa fa-check"></i><b>6</b> Commonly used statistics</a><ul>
+<li class="chapter" data-level="6.1" data-path="nonparametrics.html"><a href="nonparametrics.html"><i class="fa fa-check"></i><b>6.1</b> Non-parametric statistics</a></li>
+<li><a href="crosstabs.html#crosstabs">Crosstabulations and <span class="math inline">\(\chi^2\)</span></a><ul>
+<li class="chapter" data-level="" data-path="crosstabs.html"><a href="crosstabs.html"><i class="fa fa-check"></i>Three-way tables</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html"><i class="fa fa-check"></i>Correlations</a><ul>
+<li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html#correlation-matrix"><i class="fa fa-check"></i>Creating a correlation matrix</a></li>
+<li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html#working-with-correlation-matrices"><i class="fa fa-check"></i>Working with correlation matrices</a></li>
+<li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html#correlation-tables-for-publication"><i class="fa fa-check"></i>Tables for publication</a></li>
+<li class="chapter" data-level="" data-path="correlations.html"><a href="correlations.html#correlation-methods"><i class="fa fa-check"></i>Other methods for correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="t-tests.html"><a href="t-tests.html"><i class="fa fa-check"></i>t-tests</a><ul>
+<li class="chapter" data-level="" data-path="t-tests.html"><a href="t-tests.html#visualising-your-data-first"><i class="fa fa-check"></i>Visualising your data first</a></li>
+<li class="chapter" data-level="" data-path="t-tests.html"><a href="t-tests.html#running-a-t-test"><i class="fa fa-check"></i>Running a t-test</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="linear-models-simple.html"><a href="linear-models-simple.html"><i class="fa fa-check"></i><b>7</b> Regression</a><ul>
+<li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#formulae"><i class="fa fa-check"></i>Describing statistical models using formulae</a></li>
+<li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#running-a-linear-model"><i class="fa fa-check"></i>Running a linear model</a></li>
+<li class="chapter" data-level="" data-path="linear-models-simple.html"><a href="linear-models-simple.html#more-on-formulas"><i class="fa fa-check"></i>More on formulas</a></li>
+<li class="chapter" data-level="" data-path="factors-and-variable-codings.html"><a href="factors-and-variable-codings.html"><i class="fa fa-check"></i>Factors and variable codings</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html"><i class="fa fa-check"></i>Model specification</a><ul>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#regression-coding"><i class="fa fa-check"></i>Effect/dummy coding and contrasts</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#centering"><i class="fa fa-check"></i>Centering (is often helpful)</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#scaling-regression-inputs"><i class="fa fa-check"></i>Scaling inputs</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#alternatives-to-rescaling"><i class="fa fa-check"></i>Alternatives to rescaling</a></li>
+<li class="chapter" data-level="" data-path="parameterisation.html"><a href="parameterisation.html#what-next"><i class="fa fa-check"></i>What next</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>8</b> Anova</a><ul>
+<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#rules-for-using-anova-in-r"><i class="fa fa-check"></i>Rules for using Anova in R</a></li>
+<li class="chapter" data-level="" data-path="anova.html"><a href="anova.html#anova-recommendations"><i class="fa fa-check"></i>Recommendations for doing Anova</a></li>
+<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html"><i class="fa fa-check"></i>Anova ‘Cookbook’</a><ul>
+<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#between-subjects-anova"><i class="fa fa-check"></i>Between-subjects Anova</a></li>
+<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#repeated-measures"><i class="fa fa-check"></i>Repeated measures or ‘split plot’ designs</a></li>
+<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#trad-rm-anova"><i class="fa fa-check"></i>Traditional repeated measures Anova</a></li>
+<li class="chapter" data-level="" data-path="anova-cookbook.html"><a href="anova-cookbook.html#comparison-with-a-multilevel-model"><i class="fa fa-check"></i>Comparison with a multilevel model</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="checking-assumptions.html"><a href="checking-assumptions.html"><i class="fa fa-check"></i>Checking assumptions</a></li>
+<li class="chapter" data-level="" data-path="followup-tests.html"><a href="followup-tests.html"><i class="fa fa-check"></i>Followup tests</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html"><i class="fa fa-check"></i><b>9</b> Generalized linear models</a><ul>
+<li class="chapter" data-level="" data-path="generalized-linear-models.html"><a href="generalized-linear-models.html#logistic-regression"><i class="fa fa-check"></i>Logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>10</b> Multilevel models</a><ul>
+<li class="chapter" data-level="" data-path="fitting-models.html"><a href="fitting-models.html"><i class="fa fa-check"></i>Fitting multilevel models in R</a><ul>
+<li><a href="fitting-models.html#use-lmer-and-glmer">Use <code>lmer</code> and <code>glmer</code></a></li>
+<li><a href="fitting-models.html#p-values-in-multilevel-models"><em>p</em> values in multilevel models</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="extending-traditional-rm-anova.html"><a href="extending-traditional-rm-anova.html"><i class="fa fa-check"></i>Extending traditional RM Anova</a><ul>
+<li><a href="extending-traditional-rm-anova.html#fit-a-simple-slope-for-days">Fit a simple slope for <code>Days</code></a></li>
+<li class="chapter" data-level="" data-path="extending-traditional-rm-anova.html"><a href="extending-traditional-rm-anova.html#allow-the-effect-of-sleep-deprivation-to-vary-for-different-participants"><i class="fa fa-check"></i>Allow the effect of sleep deprivation to vary for different participants</a></li>
+<li><a href="extending-traditional-rm-anova.html#growth-curve-sleep-example">Fitting a curve for the effect of <code>Days</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="icc-and-vpc.html"><a href="icc-and-vpc.html"><i class="fa fa-check"></i>Variance partition coefficients and intraclass correlations</a></li>
+<li class="chapter" data-level="" data-path="threelevel.html"><a href="threelevel.html"><i class="fa fa-check"></i>3 level models with ‘partially crossed’ random effects</a></li>
+<li><a href="contrasts-lmer.html#contrasts-lmer">Contrasts and followup tests using <code>lmer</code></a></li>
+<li class="chapter" data-level="" data-path="troubleshooting-multilevel-models.html"><a href="troubleshooting-multilevel-models.html"><i class="fa fa-check"></i>Troubleshooting</a><ul>
+<li class="chapter" data-level="" data-path="troubleshooting-multilevel-models.html"><a href="troubleshooting-multilevel-models.html#simplifying-mixed-models"><i class="fa fa-check"></i>Convergence problems and simplifying the random effects structure</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="multilevel-bayes-reasons.html"><a href="multilevel-bayes-reasons.html"><i class="fa fa-check"></i>Bayesian multilevel models</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="mediation-and-covariance-modelling.html"><a href="mediation-and-covariance-modelling.html"><i class="fa fa-check"></i><b>11</b> Mediation and covariance modelling</a><ul>
+<li class="chapter" data-level="" data-path="mediation.html"><a href="mediation.html"><i class="fa fa-check"></i>Mediation</a><ul>
+<li class="chapter" data-level="" data-path="mediation.html"><a href="mediation.html#mediation-with-multiple-regression"><i class="fa fa-check"></i>Mediation with multiple regression</a></li>
+<li class="chapter" data-level="" data-path="mediation.html"><a href="mediation.html#mediation-steps"><i class="fa fa-check"></i>Mediation Steps</a></li>
+<li class="chapter" data-level="" data-path="mediation.html"><a href="mediation.html#mediation-example-after-baron-and-kenny"><i class="fa fa-check"></i>Mediation example after Baron and Kenny</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="testing-the-indirect-effect.html"><a href="testing-the-indirect-effect.html"><i class="fa fa-check"></i>Testing the indirect effect</a></li>
+<li class="chapter" data-level="11.1" data-path="mediation-using-path-models.html"><a href="mediation-using-path-models.html"><i class="fa fa-check"></i><b>11.1</b> Mediation using Path models</a></li>
+<li class="chapter" data-level="" data-path="covariance-modelling.html"><a href="covariance-modelling.html"><i class="fa fa-check"></i>Covariance modelling</a></li>
+<li class="chapter" data-level="" data-path="path-models.html"><a href="path-models.html"><i class="fa fa-check"></i>Path models</a><ul>
+<li class="chapter" data-level="" data-path="path-models.html"><a href="path-models.html#defining-a-model"><i class="fa fa-check"></i>Defining a model</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="cfa.html"><a href="cfa.html"><i class="fa fa-check"></i>Confirmatory factor analysis (CFA)</a><ul>
+<li class="chapter" data-level="" data-path="cfa.html"><a href="cfa.html#latent-variables"><i class="fa fa-check"></i>Latent variables</a></li>
+<li class="chapter" data-level="" data-path="cfa.html"><a href="cfa.html#defining-a-cfa-model"><i class="fa fa-check"></i>Defining a CFA model</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="model-fit.html"><a href="model-fit.html"><i class="fa fa-check"></i>CFA model fit</a></li>
+<li class="chapter" data-level="" data-path="modification-indices.html"><a href="modification-indices.html"><i class="fa fa-check"></i>Modification indices</a></li>
+<li class="chapter" data-level="" data-path="model-improvement.html"><a href="model-improvement.html"><i class="fa fa-check"></i>Model modification and improvement</a></li>
+<li class="chapter" data-level="" data-path="sem.html"><a href="sem.html"><i class="fa fa-check"></i>Structural eqution modelling (SEM)</a></li>
+<li class="chapter" data-level="" data-path="identification.html"><a href="identification.html"><i class="fa fa-check"></i>‘Identification’ in CFA and SEM</a></li>
+<li class="chapter" data-level="" data-path="cfa-sem-missing-data.html"><a href="cfa-sem-missing-data.html"><i class="fa fa-check"></i>Missing data</a></li>
+<li class="chapter" data-level="" data-path="gof.html"><a href="gof.html"><i class="fa fa-check"></i>Goodness of fit statistics in CFA</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html"><i class="fa fa-check"></i><b>12</b> Baysian model fitting</a><ul>
+<li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#baysian-fitting-of-linear-models-via-mcmc-methods"><i class="fa fa-check"></i>Baysian fitting of linear models via MCMC methods</a></li>
+<li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#posterior-probabilities-for-parameters"><i class="fa fa-check"></i>Posterior probabilities for parameters</a></li>
+<li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#credible-intervals"><i class="fa fa-check"></i>Credible intervals</a></li>
+<li class="chapter" data-level="" data-path="bayes-mcmc.html"><a href="bayes-mcmc.html#bayesian-p-values-for-parameters"><i class="fa fa-check"></i>Bayesian ‘p values’ for parameters</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="power-analysis.html"><a href="power-analysis.html"><i class="fa fa-check"></i><b>13</b> Power analysis</a><ul>
+<li class="chapter" data-level="" data-path="power-analysis.html"><a href="power-analysis.html#for-most-inferential-statistics"><i class="fa fa-check"></i>For most inferential statistics</a></li>
+<li class="chapter" data-level="" data-path="power-analysis.html"><a href="power-analysis.html#for-multilevel-or-generalised-linear-models"><i class="fa fa-check"></i>For multilevel or generalised linear models</a></li>
+</ul></li>
+<li class="part"><span><b>IV Patterns</b></span></li>
+<li class="chapter" data-level="14" data-path="learning-key-patterns.html"><a href="learning-key-patterns.html"><i class="fa fa-check"></i><b>14</b> Learning key patterns</a></li>
+<li class="chapter" data-level="15" data-path="understanding-interactions.html"><a href="understanding-interactions.html"><i class="fa fa-check"></i><b>15</b> Unpicking interactions</a><ul>
+<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#what-is-an-interaction"><i class="fa fa-check"></i>What is an interaction?</a></li>
+<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#visualising-interactions-from-raw-data"><i class="fa fa-check"></i>Visualising interactions from raw data</a></li>
+<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#pain-music-data"><i class="fa fa-check"></i>A painful example</a></li>
+<li class="chapter" data-level="" data-path="understanding-interactions.html"><a href="understanding-interactions.html#continuous-predictors"><i class="fa fa-check"></i>Continuous predictors</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html"><i class="fa fa-check"></i><b>16</b> Making predictions</a><ul>
+<li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predictions-vs-margins"><i class="fa fa-check"></i>Predictions vs margins</a></li>
+<li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#predicted-means"><i class="fa fa-check"></i>Predicted means</a></li>
+<li><a href="predictions-and-margins.html#effects-margins"><em>Effects</em> (margins)</a></li>
+<li class="chapter" data-level="" data-path="predictions-and-margins.html"><a href="predictions-and-margins.html#continuous-predictors-1"><i class="fa fa-check"></i>Continuous predictors</a></li>
+<li><a href="predicted-means-and-margins-using-lm.html#predicted-means-and-margins-using-lm">Predicted means and margins using <code>lm()</code></a><ul>
+<li class="chapter" data-level="" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html"><i class="fa fa-check"></i>Running the model</a></li>
+<li class="chapter" data-level="" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html#making-predictions-for-means"><i class="fa fa-check"></i>Making predictions for means</a></li>
+<li><a href="predicted-means-and-margins-using-lm.html#making-prdictions-for-margins-effects-of-predictors">Making prdictions for margins (<em>effects</em> of predictors)</a></li>
+<li class="chapter" data-level="" data-path="predicted-means-and-margins-using-lm.html"><a href="predicted-means-and-margins-using-lm.html#marginal-effects"><i class="fa fa-check"></i>Marginal effects</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="predictions-with-continuous-covariates.html"><a href="predictions-with-continuous-covariates.html"><i class="fa fa-check"></i>Predictions with continuous covariates</a></li>
+<li class="chapter" data-level="" data-path="visualising-interactions.html"><a href="visualising-interactions.html"><i class="fa fa-check"></i>Visualising interactions</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="models-are-data-too.html"><a href="models-are-data-too.html"><i class="fa fa-check"></i><b>17</b> Models are data</a><ul>
+<li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#storing-models-in-variables"><i class="fa fa-check"></i>Storing models in variables</a></li>
+<li class="chapter" data-level="" data-path="models-are-data-too.html"><a href="models-are-data-too.html#extract-results-from-models"><i class="fa fa-check"></i>Extracting results from models</a></li>
+<li><a href="models-are-data-too.html#poking-around-with-and">‘Poking around’ with <code>$</code> and <code>@</code></a></li>
+<li><a href="models-are-data-too.html#broom">Save time: use a <code>broom</code></a></li>
+<li class="chapter" data-level="" data-path="process-model-results.html"><a href="process-model-results.html"><i class="fa fa-check"></i>‘Processing’ results</a></li>
+<li class="chapter" data-level="" data-path="output-tables.html"><a href="output-tables.html"><i class="fa fa-check"></i>Printing tables</a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html"><i class="fa fa-check"></i>APA formatting for free</a><ul>
+<li><a href="apa-output.html#chi2">Chi<sup>2</sup></a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#t-test"><i class="fa fa-check"></i>T-test</a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#anova-1"><i class="fa fa-check"></i>Anova</a></li>
+<li class="chapter" data-level="" data-path="apa-output.html"><a href="apa-output.html#multilevel-models-1"><i class="fa fa-check"></i>Multilevel models</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html"><i class="fa fa-check"></i>Simplifying and re-using</a><ul>
+<li class="chapter" data-level="" data-path="code-reuse.html"><a href="code-reuse.html#helper-functions"><i class="fa fa-check"></i>Writing helper functions</a></li>
+<li><a href="code-reuse.html#ggplot-reuse">Re-using code with <code>ggplot</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="table1.html"><a href="table1.html"><i class="fa fa-check"></i>“Table 1”</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="quirks.html"><a href="quirks.html"><i class="fa fa-check"></i><b>18</b> Dealing with quirks of R</a><ul>
+<li class="chapter" data-level="" data-path="rownames.html"><a href="rownames.html"><i class="fa fa-check"></i>Rownames are evil</a></li>
+<li class="chapter" data-level="" data-path="string-handling.html"><a href="string-handling.html"><i class="fa fa-check"></i>Working with character strings</a><ul>
+<li class="chapter" data-level="18.0.1" data-path="string-handling.html"><a href="string-handling.html#searching-and-replacing"><i class="fa fa-check"></i><b>18.0.1</b> Searching and replacing</a></li>
+<li><a href="string-handling.html#paste">Using <code>paste</code> to make labels</a></li>
+<li><a href="string-handling.html#separate-and-extract">Fixing up <code>variable</code> after melting</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html"><i class="fa fa-check"></i>Colours</a><ul>
+<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#picking-colours"><i class="fa fa-check"></i>Picking colours for plots</a></li>
+<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#named-colours"><i class="fa fa-check"></i>Named colours in R</a></li>
+<li class="chapter" data-level="" data-path="colours.html"><a href="colours.html#color-brewer"><i class="fa fa-check"></i>ColourBrewer with ggplot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="getting-help.html"><a href="getting-help.html"><i class="fa fa-check"></i><b>19</b> Getting help</a><ul>
+<li class="chapter" data-level="" data-path="getting-help.html"><a href="getting-help.html#backtick-location"><i class="fa fa-check"></i>Finding the backtick on your keyboard</a></li>
+</ul></li>
+<li class="part"><span><b>V Explanations</b></span></li>
+<li class="chapter" data-level="20" data-path="intervals.html"><a href="intervals.html"><i class="fa fa-check"></i><b>20</b> Confidence and Intervals</a><ul>
+<li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html#the-problem-with-confidence-intervals"><i class="fa fa-check"></i>The problem with confidence intervals</a></li>
+<li class="chapter" data-level="" data-path="intervals.html"><a href="intervals.html#forgetting-that-the-ci-depends-on-sample-size."><i class="fa fa-check"></i>Forgetting that the CI depends on sample size.</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html"><i class="fa fa-check"></i><b>21</b> Multiple comparisons</a><ul>
+<li><a href="multiple-comparisons.html#p-values-and-false-discoveries"><em>p</em> values and ‘false discoveries’</a></li>
+<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#multiple-tests-on-the-same-data"><i class="fa fa-check"></i>Multiple tests on the same data</a></li>
+<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#what-to-do-about-it"><i class="fa fa-check"></i>What to do about it?</a></li>
+<li class="chapter" data-level="" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html#contrasts-examples"><i class="fa fa-check"></i>Practical examples</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>22</b> Non-independence</a></li>
+<li class="chapter" data-level="23" data-path="fixed-or-random.html"><a href="fixed-or-random.html"><i class="fa fa-check"></i><b>23</b> Fixed and random effects</a></li>
+<li class="chapter" data-level="24" data-path="scaling-predictors.html"><a href="scaling-predictors.html"><i class="fa fa-check"></i><b>24</b> Scaling predictor variables</a><ul>
+<li class="chapter" data-level="" data-path="scaling-predictors.html"><a href="scaling-predictors.html#standardizing"><i class="fa fa-check"></i>Standardising</a></li>
+<li class="chapter" data-level="" data-path="scaling-predictors.html"><a href="scaling-predictors.html#dichotomising"><i class="fa fa-check"></i>Dichotomising continuous predictors (or outcomes)</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="non-scale-outcomes.html"><a href="non-scale-outcomes.html"><i class="fa fa-check"></i><b>25</b> Non-scale outcomes</a><ul>
+<li class="chapter" data-level="25.1" data-path="link-functions.html"><a href="link-functions.html"><i class="fa fa-check"></i><b>25.1</b> Link functions</a><ul>
+<li class="chapter" data-level="" data-path="link-functions.html"><a href="link-functions.html#logistic-link-function"><i class="fa fa-check"></i>Logistic regression</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html"><i class="fa fa-check"></i><b>26</b> Building and choosing models</a><ul>
+<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#like-maps-models-are-imperfect-but-useful"><i class="fa fa-check"></i>Like maps, models are imperfect but useful</a></li>
+<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#over-fitting"><i class="fa fa-check"></i>Overfitting/underfitting</a></li>
+<li class="chapter" data-level="" data-path="comparison-and-selection.html"><a href="comparison-and-selection.html#variable-selection"><i class="fa fa-check"></i>Choosing the ‘right variables’</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Just Enough R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="multiple-comparisons" class="section level1">
+<h1><span class="header-section-number">21</span> Multiple comparisons</h1>
+<p>People get confused about multiple comparisons and worry about ‘doing things
+right’.</p>
+<p>There are many different tests and procedures, and thousands of pages of
+tutorials and guides each of which recommends a slightly different approach.
+Textbooks typically describe the tests themselves in detail, and list the
+assumptions they make, but it sometimes feels like nobody will give a straight
+answer.</p>
+<p>The inconsistency arises because different researchers have different
+priorities. It might help to re-address what a <em>p</em> value is, and what it is
+<em>for</em>.</p>
+<div id="p-values-and-false-discoveries" class="section level3 unnumbered">
+<h3><em>p</em> values and ‘false discoveries’</h3>
+<p>In frequentist statistics, <em>p</em> values are defined as *the probability of
+obtaining a test statistic at least as large as that observed, if the null
+hypothesis is true. That is, it’s the chance that the data we have collected are
+atypical and will mislead us into thinking there is a difference, when the true
+effect is zero.</p>
+<p>Let’s pretend we are creative researchers and, over the course of our career, we
+will develop 100 hypotheses, each of which we test in an experiment, represented
+by squares in the plot below:</p>
+<p><img src="multiple-comparisons_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>We are concientious and use <a href="#power">sample size calculations</a> for our studies,
+setting our desired power = .8, and use <em>p</em> = .05 as our criterion for rejecting
+the null hypotheses. As is common, we report tests which reject the null
+hypothesis <em>as if our predictions had been supported, and the alternative
+hypotheses were true</em> (this is a bad idea, but run with it for the moment).</p>
+<p>Let’s be generous and say that, in reality, 50% of our hypotheses are true (the
+other 50% are nice ideas, but are not correct). Because we set our power to be
+.8 in our sample size calculation, this means that over the course of our career
+we will detect around 40 ‘true’ effects, and publish them. These are shown in
+blue in the figure below:</p>
+<p><img src="multiple-comparisons_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Because we set our alpha level to 0.05, we will also have some false positives,
+shown in red:</p>
+<p><img src="multiple-comparisons_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>But what that means is that <em>for the effects we publish as supporting our
+hypotheses</em> (i.e. the blue and red squares) then we will be making false claims
+5/40 = 12.5% of the time. This is obviously much higher than the nominal alpha
+level implies. What’s more, if we’re not hotshot theorists (or work in an area
+where theories are less rigorously developed) and only 20% of our hypotheses are
+in fact true then we will make even more false claims: 5/20 = 25%.</p>
+</div>
+<div id="multiple-tests-on-the-same-data" class="section level3 unnumbered">
+<h3>Multiple tests on the same data</h3>
+<p>Another problem arises when we run multiple statistical tests on the same data.</p>
+<p>The most common case is that we have multiple experimental conditions and want
+to test whether any of the differences between them are significant. If we had
+experimental 3 groups, then there are 3 possible comparisons between them, for
+example (A-B, A-C, B-C). This can be compounded if we have multiple outcome
+measurements (for example, measuring depression <em>and</em> anxiety in a clincal
+trial; see <span class="citation">@feise2002multiple</span>).</p>
+<!-- TODO Add wonka ticket image -->
+<p>This works like a lucky dip or lottery: if you buy more tickets you have a
+larger change of winning a prize. In this case, with three comparisons between
+the groups (tickets) we have a 15% chance of winning a prize, rather than the 5%
+we intended.</p>
+<p>Assuming each of our 100 experiments allows for 3 tests, any of which would be
+‘interesting’ if significant (and we would therefore publish them), then our
+plot looks like this:</p>
+<p><img src="multiple-comparisons_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>And our ‘false discovery rate’ (at the level of our published papers) is now
+over one third: 15/40 = 37.5%.</p>
+<div id="false-discovery-rates-for-single-experiments" class="section level5 unnumbered">
+<h5>False discovery rates for single experiments</h5>
+<p>We can also think about a false discovery rate for findings presented within a
+particular paper, or set of analyses. Imagine we have a 2x4 factorial design,
+and so we have 8 experimental groups, and 28 possible pairwise combinations:</p>
+<table style="width:25%;">
+<caption>8 cells in the 2x4 design</caption>
+<colgroup>
+<col width="13%" />
+<col width="5%" />
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Cell.No</th>
+<th align="center">A</th>
+<th align="center">B</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">3</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">4</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">6</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">7</td>
+<td align="center">3</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">8</td>
+<td align="center">4</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<pre><code>Warning: `as_data_frame()` is deprecated, use `as_tibble()` (but mind the new semantics).
+This warning is displayed once per session.
+Warning: funs() is soft deprecated as of dplyr 0.8.0
+please use list() instead
+
+  # Before:
+  funs(name = f(.))
+
+  # After: 
+  list(name = ~ f(.))
+This warning is displayed once per session.</code></pre>
+<table style="width:46%;">
+<caption>Pairwise comparisons</caption>
+<colgroup>
+<col width="18%" />
+<col width="11%" />
+<col width="8%" />
+<col width="8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Comparison</th>
+<th align="center">Cells</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">1</td>
+<td>vs.</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">1</td>
+<td>vs.</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">1</td>
+<td>vs.</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td align="center">…</td>
+<td align="center">…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td align="center">26</td>
+<td align="center">6</td>
+<td>vs.</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td align="center">27</td>
+<td align="center">6</td>
+<td>vs.</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td align="center">28</td>
+<td align="center">7</td>
+<td>vs.</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<p>Assuming there are ‘real’ differences between only one-third of these pairings,
+then we have the same problem as we did when considering all the experiments in
+a researchers’ career: Using <em>p</em> &lt; .05 as our criterion, and power of .8 then we
+will report around 9 significant differences, but 1 or 2 of these will false
+discoveries (16%).</p>
+</div>
+</div>
+<div id="what-to-do-about-it" class="section level3 unnumbered">
+<h3>What to do about it?</h3>
+<p>There are two decisions you need to make: First, which technique do you want to
+use to mitigate the risks of multiple comparisons? Second, what is the ‘family’
+of tests you are going to apply this to?</p>
+<p><span class="explainer">If you find the whole language around null hypothesis testing and p values
+unhelpful, and the detail of multiple comparison adjustment confusing, there is
+another way: Multiple comparison problems are largely a non-issue for Bayesian
+analyses <span class="citation">[@gelman2012we]</span>, and recent developments in the software make simple
+models like Anova and regression
+<a href="bayes-mcmc.html#bayes-mcmc">easy to implement in a Bayesian framework in R</a>.</span></p>
+<div id="which-technique" class="section level4 unnumbered">
+<h4>Which technique?</h4>
+<p>Inevitably, it depends!</p>
+<ul>
+<li><p>If your worry is ever making a type 1 error then you need to <em>control the
+familywise error rate</em>. The Bonferroni or Tukey correction are likely the
+best solutions (see details below). Both have the disadvantage of increasing
+the type 2 error rate: you will falsely accept the null more frequently, and
+so neglect findings which are ‘true’ and might be theoretically or
+clinically relevant.</p></li>
+<li><p>If your main concern is about the number of ‘false discoveries’ you make,
+and you think it’s import to you to avoid rejecting ‘good’ hypotheses, then
+you need a technique to control the <em>false discovery rate</em>. The Benjamini
+and Hochberg method, often abbreviated as BH or FDR correction, is what you
+need.</p></li>
+</ul>
+<p>Principled arguments can be made for both approaches; there is no ‘correct
+choice’. Which you pick will depend on which concerns are most pressing to you,
+and also (inevitably) what is conventional in your field.</p>
+<p><span class="explainer">It’s worth noting that in specific fields (for example neuroscience, where huge
+numbers of comparisons must be made between voxels or regions in brain imaging
+studies) more sophisticated methods to control for multiple comparisons are
+often commonplace and expected <span class="citation">[@nichols2003controlling]</span>. This guide only deals
+with some of the simpler but common cases.</span></p>
+</div>
+<div id="how-big-is-the-family" class="section level4 unnumbered">
+<h4>How big is the family?</h4>
+<p><img src="media/large-family.jpg" /></p>
+<p>Whichever technique we employ we do need to determine how many tests we want to
+correct for having run; i.e. what size the ‘family’ of tests is. Unfortuntately,
+deciding which set of tests constitutes a ‘family’ is an unresolved problem, and
+reasonable people will come up with different solutions. As <span class="citation">@feise2002multiple</span>
+put it:</p>
+<blockquote>
+<p>It is unclear how wide the operative term “family” should be […] Does
+“family” include tests that were performed, but not published? Does it include
+a meta-analysis upon those tests? Should future papers on the same data set be
+accounted for in the first publication? Should each researcher have a
+career-wise adjusted p-value, or should there be a discipline-wise adjusted
+p-value? Should we publish an issue-wise adjusted p-value and a
+year-end-journal-wise adjusted p-value? Should our studies examine only one
+association at a time, thereby wasting valuable resources? No statistical
+theory provides answers for these practical issues, because it is impossible
+to formally account for an infinite number of potential inferences.</p>
+</blockquote>
+<p>The ‘right’ answer, then, will vary from case to case, and local conventions in
+particular disciplines will dictate what is normal and expected by supervisors
+and reviewers. However, there are a few common cases for which we can make some
+recommendations on what might constitue ‘good practice’. We do not claim that
+these are the ‘correct’ answers, but if you deviate from these recommendations
+it would be worth having a reasonable justification to hand!</p>
+<div id="multiple-outcome-variables" class="section level5 unnumbered">
+<h5>Multiple outcome variables</h5>
+<p>In a clinical trial or other applied study you might want to measure more than
+one variable to detect changes across a variety of domains (e.g. both depression
+and anxiety).</p>
+<p>Although no firm consensus exists, it is common practice to:</p>
+<ul>
+<li>Analyse multiple outcomes without correction (and indicate this in the text)</li>
+<li>Designate one outcome from the study to be ‘primary’, and report this both
+in pre-trial protocols and reports of the results.</li>
+</ul>
+<p>See <span class="citation">@feise2002multiple</span> for more details.</p>
+</div>
+<div id="multiple-timepoints-for-the-outcome" class="section level5 unnumbered">
+<h5>Multiple ‘timepoints’ for the outcome</h5>
+<p>Another common case is where the same outcome variable is measured on multiple
+occasions to track progress over time. For example, an RCT might measure outcome
+at baseline, at the end of treatment, and again 12 months later.</p>
+<p>In the cases where there are only a few measurements of outcome made then you
+could choose between:</p>
+<ol style="list-style-type: decimal">
+<li>Bonferroni correction of <em>p</em> values for the between-group difference at each
+timepoint or</li>
+<li>Designating one of the timepoints as the ‘primary’ outcome.</li>
+</ol>
+<p>In practice option 2 is more common, and probably makes more sense in applied
+settings where it is the longer-term prognosis of participants wich matters
+most.</p>
+</div>
+<div id="pairwise-comparisons-in-factorial-designs" class="section level5 unnumbered">
+<h5>Pairwise comparisons in factorial designs</h5>
+<p>Let’s say you have a complex complex factorial design and so multiple pairwise
+comparisons and other contrasts are possible.</p>
+<ul>
+<li><p>If you are only interested in a small number of the possible pairwise
+comparisons or specific contrasts then specify this up front. Either report
+the comparisons without correction (noting this in the text) or use
+FDR/Bonferroni correction for this small family of tests.</p></li>
+<li><p>If you are only interested in specific main effects or interactions from the
+full factorial model, then you should specify this in advance and report
+these F-tests or t-tests and associated <em>p</em> values without correction.</p></li>
+<li><p>It is perfectly reasonable to be interested only in specific pairwise
+comparisons contained within an Anova F-test. It is normal to report the F
+from the Anova, but it is <em>not</em> necessary for the F test to be significant
+before reporting the pairwise comparison of interest (with or without
+FDR/Bonferroni correction).</p></li>
+<li><p>If you have not specified the comparisons of interest in advance, then use
+FDR or Tukey correction for the complete set of pairwise tests. If you feel
+able to claim that some of these pairwise comparisons would <em>never</em> have
+been of interest then you could reduce the family size for this correction
+accordingly, but you should make this justification in your report.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="contrasts-examples" class="section level3 unnumbered">
+<h3>Practical examples</h3>
+<div id="factorial-anova-and-pairwise-comparisons" class="section level4 unnumbered">
+<h4>Factorial Anova and pairwise comparisons</h4>
+<p>In the <a href="anova-cookbook.html#howell-factorial-example">Anova cookbook</a>, we used a dataset from
+Howell’s textbook which recorded <code>Recall</code> among young v.s. older adults (<code>Age</code>)
+for each of 5 conditions:</p>
+<p><img src="multiple-comparisons_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>In an ideal world we would have published a trial protocol before collecting
+data, or at the least
+<a href="#register-predictions">specified which comparisons were of interest to us</a>.
+However for the purposes of this example I’ll assume you didn’t do this, and
+need to address the potential for mutliple comparisons accordingly.</p>
+<p>The design of the study suggests that we were interested in the effect of the
+experimental conditions on recall, and we might have predicted that these
+experimental manipulations would affect older and younder adults differently.
+Because we didn’t pre-specify our analyses, we should acknowledge that we would
+likly report any differences between any of the 5 experimental conditions (10
+possible comparisons) and any differences between younger and older adults in
+any of those conditions (45 possible pairwise comparisons).</p>
+<p>Because replicating this experiment is relatively cheap (testing might only take
+30 minutes per participant), and we are confident that other labs would want to
+replicate any significant findings we report, we are less concerned with the
+absolute rate of type 1 errors, but would like to limit our ‘false discovery
+rate’ (we have a repututation to maintain). We set our acceptable false
+discovery rate to 5%.</p>
+<p>We run an Anova model, including main effects for <code>Age</code> and <code>Condition</code> and
+their interaction:</p>
+<pre class="sourceCode r"><code class="sourceCode r">eysenck.model &lt;-<span class="st"> </span><span class="kw">lm</span>(Recall <span class="op">~</span><span class="st"> </span>Age <span class="op">*</span><span class="st"> </span>Condition,
+                    <span class="dt">data=</span>eysenck)
+
+car<span class="op">::</span><span class="kw">Anova</span>(eysenck.model, <span class="dt">type=</span><span class="dv">3</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pander</span>()
+Registered S3 methods overwritten by <span class="st">&#39;car&#39;</span><span class="op">:</span>
+<span class="st">  </span>method                          from
+  influence.merMod                lme4
+  cooks.distance.influence.merMod lme4
+  dfbeta.influence.merMod         lme4
+  dfbetas.influence.merMod        lme4</code></pre>
+<table style="width:78%;">
+<caption>Anova Table (Type III tests)</caption>
+<colgroup>
+<col width="27%" />
+<col width="12%" />
+<col width="6%" />
+<col width="13%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Sum Sq</th>
+<th align="center">Df</th>
+<th align="center">F value</th>
+<th align="center">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>(Intercept)</strong></td>
+<td align="center">490</td>
+<td align="center">1</td>
+<td align="center">61.05</td>
+<td align="center">9.85e-12</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Age</strong></td>
+<td align="center">1.25</td>
+<td align="center">1</td>
+<td align="center">0.1558</td>
+<td align="center">0.694</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Condition</strong></td>
+<td align="center">351.5</td>
+<td align="center">4</td>
+<td align="center">10.95</td>
+<td align="center">2.8e-07</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Age:Condition</strong></td>
+<td align="center">190.3</td>
+<td align="center">4</td>
+<td align="center">5.928</td>
+<td align="center">0.0002793</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Residuals</strong></td>
+<td align="center">722.3</td>
+<td align="center">90</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+</tbody>
+</table>
+<p>We report that there is are significant main effects for Age, Condition, and a
+significant interaction for <code>Age:Condition</code>. At this point, if we hadn’t already
+plotted the raw data, we would certainly want to do that, or to
+<a href="understanding-interactions.html#understanding-interactions">make predictions for each cell in the design and plot them</a>.</p>
+<p>Because the plot of the raw data (see above) suggested that the counting and
+rhyming conditions produced lower recall rates than the other conditions, we
+might want to report the relevant pairwise tests. We can use the the <code>lsmeans()</code>
+function from the <code>lsmeans::</code> package to compute these:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># use the lsmeans function which returns an lsm.list object.</span>
+eysenck.lsm &lt;-<span class="st"> </span>lsmeans<span class="op">::</span><span class="kw">lsmeans</span>(eysenck.model, pairwise<span class="op">~</span>Condition)
+NOTE<span class="op">:</span><span class="st"> </span>Results may be misleading due to involvement <span class="cf">in</span> interactions
+
+<span class="co"># the `contrasts` element in this list is what we want for now</span>
+eysenck.lsm<span class="op">$</span>contrasts
+ contrast              estimate    SE df t.ratio p.value
+ Counting <span class="op">-</span><span class="st"> </span>Rhyming       <span class="fl">-0.50</span> <span class="fl">0.896</span> <span class="dv">90</span> <span class="fl">-0.558</span>  <span class="fl">0.9807</span> 
+ Counting <span class="op">-</span><span class="st"> </span>Adjective     <span class="fl">-6.15</span> <span class="fl">0.896</span> <span class="dv">90</span> <span class="fl">-6.865</span>  <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Counting <span class="op">-</span><span class="st"> </span>Imagery       <span class="fl">-8.75</span> <span class="fl">0.896</span> <span class="dv">90</span> <span class="fl">-9.767</span>  <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Counting <span class="op">-</span><span class="st"> </span>Intention     <span class="fl">-8.90</span> <span class="fl">0.896</span> <span class="dv">90</span> <span class="fl">-9.935</span>  <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Rhyming <span class="op">-</span><span class="st"> </span>Adjective      <span class="fl">-5.65</span> <span class="fl">0.896</span> <span class="dv">90</span> <span class="fl">-6.307</span>  <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Rhyming <span class="op">-</span><span class="st"> </span>Imagery        <span class="fl">-8.25</span> <span class="fl">0.896</span> <span class="dv">90</span> <span class="fl">-9.209</span>  <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Rhyming <span class="op">-</span><span class="st"> </span>Intention      <span class="fl">-8.40</span> <span class="fl">0.896</span> <span class="dv">90</span> <span class="fl">-9.377</span>  <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Adjective <span class="op">-</span><span class="st"> </span>Imagery      <span class="fl">-2.60</span> <span class="fl">0.896</span> <span class="dv">90</span> <span class="fl">-2.902</span>  <span class="fl">0.0367</span> 
+ Adjective <span class="op">-</span><span class="st"> </span>Intention    <span class="fl">-2.75</span> <span class="fl">0.896</span> <span class="dv">90</span> <span class="fl">-3.070</span>  <span class="fl">0.0231</span> 
+ Imagery <span class="op">-</span><span class="st"> </span>Intention      <span class="fl">-0.15</span> <span class="fl">0.896</span> <span class="dv">90</span> <span class="fl">-0.167</span>  <span class="fl">0.9998</span> 
+
+Results are averaged over the levels of<span class="op">:</span><span class="st"> </span>Age 
+P value adjustment<span class="op">:</span><span class="st"> </span>tukey method <span class="cf">for</span> comparing a family of <span class="dv">5</span> estimates </code></pre>
+<p>By default Tukey correction is applied for multiple comparisons, which is a
+reasonable choice. If you wanted to adjust for the false discovery rate instead,
+you can use the <code>adjust</code> argument:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># not run, just shown as an example</span>
+lsmeans<span class="op">::</span><span class="kw">lsmeans</span>(eysenck.model, pairwise<span class="op">~</span>Condition, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)</code></pre>
+<p>The plot also suggested that older and younger adults appeared to differ for the
+‘adjective’, ‘imagery’, and ‘intention’ conditions. We can compute these
+detailed pairwise comparisons by including the interaction term, <code>Age:Condition</code>
+in the call to <code>lsmeans()</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">eysenck.age.condition.lsm &lt;-
+<span class="st">  </span>lsmeans<span class="op">::</span><span class="kw">lsmeans</span>(eysenck.model,
+                   pairwise<span class="op">~</span>Age<span class="op">:</span>Condition,
+                   <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)
+
+eysenck.age.condition.lsm<span class="op">$</span>contrasts <span class="op">%&gt;%</span>
+<span class="st">  </span>broom<span class="op">::</span><span class="kw">tidy</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">snip.middle</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pander</span>(<span class="dt">missing=</span><span class="st">&quot;...&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;8 of the 45 possible contrasts, FDR corrected&quot;</span>, <span class="dt">split.tables=</span><span class="ot">Inf</span>)</code></pre>
+<table>
+<caption>8 of the 45 possible contrasts, FDR corrected</caption>
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="12%" />
+<col width="13%" />
+<col width="6%" />
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">level1</th>
+<th align="center">level2</th>
+<th align="center">estimate</th>
+<th align="center">std.error</th>
+<th align="center">df</th>
+<th align="center">statistic</th>
+<th align="center">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Young,Counting</td>
+<td align="center">Older,Counting</td>
+<td align="center">0.5</td>
+<td align="center">1.267</td>
+<td align="center">90</td>
+<td align="center">0.3947</td>
+<td align="center">0.7263</td>
+</tr>
+<tr class="even">
+<td align="center">Young,Counting</td>
+<td align="center">Young,Rhyming</td>
+<td align="center">0.1</td>
+<td align="center">1.267</td>
+<td align="center">90</td>
+<td align="center">0.07893</td>
+<td align="center">0.9373</td>
+</tr>
+<tr class="odd">
+<td align="center">Young,Counting</td>
+<td align="center">Older,Rhyming</td>
+<td align="center">-0.6</td>
+<td align="center">1.267</td>
+<td align="center">90</td>
+<td align="center">-0.4736</td>
+<td align="center">0.6824</td>
+</tr>
+<tr class="even">
+<td align="center">Young,Counting</td>
+<td align="center">Young,Adjective</td>
+<td align="center">-4</td>
+<td align="center">1.267</td>
+<td align="center">90</td>
+<td align="center">-3.157</td>
+<td align="center">0.003251</td>
+</tr>
+<tr class="odd">
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+</tr>
+<tr class="even">
+<td align="center">Young,Imagery</td>
+<td align="center">Older,Intention</td>
+<td align="center">-5.9</td>
+<td align="center">1.267</td>
+<td align="center">90</td>
+<td align="center">-4.657</td>
+<td align="center">2.612e-05</td>
+</tr>
+<tr class="odd">
+<td align="center">Older,Imagery</td>
+<td align="center">Young,Intention</td>
+<td align="center">5.6</td>
+<td align="center">1.267</td>
+<td align="center">90</td>
+<td align="center">4.42</td>
+<td align="center">5.888e-05</td>
+</tr>
+<tr class="even">
+<td align="center">Older,Imagery</td>
+<td align="center">Older,Intention</td>
+<td align="center">-1.7</td>
+<td align="center">1.267</td>
+<td align="center">90</td>
+<td align="center">-1.342</td>
+<td align="center">0.2288</td>
+</tr>
+<tr class="odd">
+<td align="center">Young,Intention</td>
+<td align="center">Older,Intention</td>
+<td align="center">-7.3</td>
+<td align="center">1.267</td>
+<td align="center">90</td>
+<td align="center">-5.762</td>
+<td align="center">3.972e-07</td>
+</tr>
+</tbody>
+</table>
+<p>You should note that the FDR adjusted p values do not represent probabilities in
+the normal sense. Instead, the p value now indicates the <em>false discovery rate
+at which the p value should be considered statistically significant</em>. So, for
+example, if the adjusted p value = 0.09, then this indicates the contrast
+<em>would</em> be significant if the acceptable false discovery rate is 10%.
+Researchers often set their acceptable false discovery rate to be 5% out of
+habit or confusion with conventional levels for alpha, but it would be
+reasonable to set it to 10% or even higher in some circumstances. Whatever level
+you set, you need to be able to satisfy both yourself and a reviewer that the
+result is of interest: the particular values for alpha and FDR you agree on are
+arbitrary conventions, provided you both agree the finding is worthy of
+consideration!</p>
+<div id="extract-contrasts" class="section level6 unnumbered">
+<h6>Extracting pairwise comparisons to display in your report</h6>
+<p>In the code above we request FDR-adjusted p values, and then use the
+<code>broom::tidy()</code> function to convert the table into a dataframe, and then use
+<code>pander</code> to display the results as a table. For more information on extracting
+results from models and other R objects and displaying them properly see the
+section: <a href="models-are-data-too.html#models-are-data-too">models are data too</a>.</p>
+</div>
+<div id="adjusting-for-the-fdr-by-hand" class="section level5 unnumbered">
+<h5>Adjusting for the FDR by hand</h5>
+<p>If you have a set of tests for which you want to adjust for the FDR it’s easy to
+use R’s <code>p.adjust()</code> to do this for you.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">5</span>)
+p.examples &lt;-
+<span class="st">  </span><span class="kw">data_frame</span>(<span class="dt">p =</span> <span class="kw">runif</span>(<span class="dv">4</span>, <span class="dt">min=</span>.<span class="dv">001</span>, <span class="dt">max=</span>.<span class="dv">07</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">p.fdr =</span> <span class="kw">p.adjust</span>(p, <span class="dt">method=</span><span class="st">&quot;fdr&quot;</span>),
+         <span class="dt">p.sig =</span> <span class="kw">ifelse</span>(p <span class="op">&lt;</span><span class="st"> </span><span class="fl">.05</span>, <span class="st">&quot;*&quot;</span>, <span class="st">&quot;&quot;</span>),
+         <span class="dt">p.fdr.sig =</span> <span class="kw">ifelse</span>(p.fdr <span class="op">&lt;</span><span class="st"> </span><span class="fl">.05</span>, <span class="st">&quot;*&quot;</span>, <span class="st">&quot;&quot;</span>))
+Warning<span class="op">:</span><span class="st"> `</span><span class="dt">data_frame()</span><span class="st">`</span> is deprecated, use <span class="st">`</span><span class="dt">tibble()</span><span class="st">`</span>.
+This warning is displayed once per session.
+
+p.examples <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(p) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pander</span>(<span class="dt">caption=</span><span class="st">&quot;Randomly generated &#39;p values&#39;, with and without FDR correction applied.&quot;</span>)</code></pre>
+<table style="width:56%;">
+<caption>Randomly generated ‘p values’, with and without FDR correction applied.</caption>
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="11%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">p</th>
+<th align="center">p.fdr</th>
+<th align="center">p.sig</th>
+<th align="center">p.fdr.sig</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0.01481</td>
+<td align="center">0.04125</td>
+<td align="center">*</td>
+<td align="center">*</td>
+</tr>
+<tr class="even">
+<td align="center">0.02062</td>
+<td align="center">0.04125</td>
+<td align="center">*</td>
+<td align="center">*</td>
+</tr>
+<tr class="odd">
+<td align="center">0.04828</td>
+<td align="center">0.06426</td>
+<td align="center">*</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">0.06426</td>
+<td align="center">0.06426</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p>We can plot these values to see the effect the adjustment has:</p>
+<div class="figure"><span id="fig:unnamed-chunk-15"></span>
+<img src="multiple-comparisons_files/figure-html/unnamed-chunk-15-1.png" alt="Example of the adjustments made to p values by FDR and Bonferroni methods. Unadjusted p values are shown in black. Note how conservative Bonferroni is with even this small number of comparisons to correct for." width="672" />
+<p class="caption">
+Figure 7.1: Example of the adjustments made to p values by FDR and Bonferroni methods. Unadjusted p values are shown in black. Note how conservative Bonferroni is with even this small number of comparisons to correct for.
+</p>
+</div>
+</div>
+</div>
+<div id="contrasts" class="section level4 unnumbered">
+<h4>Other contrasts</h4>
+<p>The <code>lsmeans::</code> package provides tools to compute contrasts for Anova and other
+linear models:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lsmeans)</code></pre>
+<p>We can see a number of these different contrasts below. First, we run a model
+model including the factor Days:</p>
+<pre class="sourceCode r"><code class="sourceCode r">slope.model &lt;-<span class="st"> </span><span class="kw">lmer</span>(Reaction <span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(Days) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>Subject),
+                    <span class="dt">data=</span>lme4<span class="op">::</span>sleepstudy)</code></pre>
+<p>And then we create the <code>lsmeans</code> object:</p>
+<pre class="sourceCode r"><code class="sourceCode r">slope.model.lsm &lt;-<span class="st"> </span>lsmeans<span class="op">::</span><span class="kw">lsmeans</span>(slope.model, <span class="op">~</span>Days)</code></pre>
+<p>We can use this <code>lsm</code> object to calculate various contrasts we might want to
+see. First, consecutive contrasts where each level is compared with the next:</p>
+<pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.lsm, <span class="st">&quot;consec&quot;</span>)
+ contrast estimate   SE  df t.ratio p.value
+ <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>       <span class="fl">7.844</span> <span class="fl">10.5</span> <span class="dv">153</span> <span class="fl">0.749</span>   <span class="fl">0.9887</span> 
+ <span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>       <span class="fl">0.866</span> <span class="fl">10.5</span> <span class="dv">153</span> <span class="fl">0.083</span>   <span class="fl">1.0000</span> 
+ <span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="dv">2</span>      <span class="fl">17.630</span> <span class="fl">10.5</span> <span class="dv">153</span> <span class="fl">1.683</span>   <span class="fl">0.5276</span> 
+ <span class="dv">4</span> <span class="op">-</span><span class="st"> </span><span class="dv">3</span>       <span class="fl">5.657</span> <span class="fl">10.5</span> <span class="dv">153</span> <span class="fl">0.540</span>   <span class="fl">0.9988</span> 
+ <span class="dv">5</span> <span class="op">-</span><span class="st"> </span><span class="dv">4</span>      <span class="fl">19.869</span> <span class="fl">10.5</span> <span class="dv">153</span> <span class="fl">1.897</span>   <span class="fl">0.3777</span> 
+ <span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="dv">5</span>       <span class="fl">3.660</span> <span class="fl">10.5</span> <span class="dv">153</span> <span class="fl">0.349</span>   <span class="fl">1.0000</span> 
+ <span class="dv">7</span> <span class="op">-</span><span class="st"> </span><span class="dv">6</span>       <span class="fl">6.572</span> <span class="fl">10.5</span> <span class="dv">153</span> <span class="fl">0.627</span>   <span class="fl">0.9965</span> 
+ <span class="dv">8</span> <span class="op">-</span><span class="st"> </span><span class="dv">7</span>      <span class="fl">17.879</span> <span class="fl">10.5</span> <span class="dv">153</span> <span class="fl">1.707</span>   <span class="fl">0.5102</span> 
+ <span class="dv">9</span> <span class="op">-</span><span class="st"> </span><span class="dv">8</span>      <span class="fl">14.222</span> <span class="fl">10.5</span> <span class="dv">153</span> <span class="fl">1.358</span>   <span class="fl">0.7628</span> 
+
+P value adjustment<span class="op">:</span><span class="st"> </span>mvt method <span class="cf">for</span> <span class="dv">9</span> tests </code></pre>
+<p>Polynomial contrasts allow us to test whether the increase in RT’s over the days
+is linear or curved:</p>
+<pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.lsm, <span class="st">&quot;poly&quot;</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>, <span class="dt">max.degree=</span><span class="dv">3</span>)
+ contrast  estimate    SE  df t.ratio p.value
+ linear      <span class="fl">1727.1</span> <span class="fl">134.6</span> <span class="dv">153</span> <span class="fl">12.835</span>  <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ quadratic     <span class="fl">89.0</span>  <span class="fl">85.1</span> <span class="dv">153</span>  <span class="fl">1.046</span>  <span class="fl">0.4462</span> 
+ cubic        <span class="fl">-65.3</span> <span class="fl">686.1</span> <span class="dv">153</span> <span class="fl">-0.095</span>  <span class="fl">0.9243</span> 
+
+P value adjustment<span class="op">:</span><span class="st"> </span>fdr method <span class="cf">for</span> <span class="dv">3</span> tests </code></pre>
+<p>If we don’t specify a contrasts argument, or a type of correction, we will get
+Tukey contrasts for every pairwise comparison:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 45 tests - results not shown because similar to those shown above</span>
+lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.lsm, <span class="st">&quot;tukey&quot;</span>)</code></pre>
+<p>If we want to compare particular levels of <code>Days</code> with a specific reference
+level we can use the <code>trt.vs.ctrl</code> contrast type. In this example we are
+comparing each day with day 0, because day 0 is the first in the list of days
+and we specified <code>ref=1</code> (try running the comparisons against day 5).</p>
+<pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.lsm, <span class="st">&quot;trt.vs.ctrl&quot;</span>, <span class="dt">ref=</span><span class="dv">1</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)
+ contrast estimate   SE  df t.ratio p.value
+ <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>        <span class="fl">7.84</span> <span class="fl">10.5</span> <span class="dv">153</span> <span class="fl">0.749</span>   <span class="fl">0.4551</span> 
+ <span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>        <span class="fl">8.71</span> <span class="fl">10.5</span> <span class="dv">153</span> <span class="fl">0.831</span>   <span class="fl">0.4551</span> 
+ <span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>       <span class="fl">26.34</span> <span class="fl">10.5</span> <span class="dv">153</span> <span class="fl">2.515</span>   <span class="fl">0.0167</span> 
+ <span class="dv">4</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>       <span class="fl">32.00</span> <span class="fl">10.5</span> <span class="dv">153</span> <span class="fl">3.055</span>   <span class="fl">0.0040</span> 
+ <span class="dv">5</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>       <span class="fl">51.87</span> <span class="fl">10.5</span> <span class="dv">153</span> <span class="fl">4.951</span>   <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ <span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>       <span class="fl">55.53</span> <span class="fl">10.5</span> <span class="dv">153</span> <span class="fl">5.301</span>   <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ <span class="dv">7</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>       <span class="fl">62.10</span> <span class="fl">10.5</span> <span class="dv">153</span> <span class="fl">5.928</span>   <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ <span class="dv">8</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>       <span class="fl">79.98</span> <span class="fl">10.5</span> <span class="dv">153</span> <span class="fl">7.635</span>   <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ <span class="dv">9</span> <span class="op">-</span><span class="st"> </span><span class="dv">0</span>       <span class="fl">94.20</span> <span class="fl">10.5</span> <span class="dv">153</span> <span class="fl">8.993</span>   <span class="op">&lt;</span>.<span class="dv">0001</span> 
+
+P value adjustment<span class="op">:</span><span class="st"> </span>fdr method <span class="cf">for</span> <span class="dv">9</span> tests </code></pre>
+<p>And if we want to compare each level against the grand mean of the sample, the
+<code>eff</code> contrast type is short for <code>effect</code>. A way of thinking of this (in
+English) is that we are asking ‘what is the effect of being on a particular day,
+relative the other average of all days’.</p>
+<pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(slope.model.lsm, <span class="st">&quot;eff&quot;</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)
+ contrast estimate   SE  df t.ratio p.value
+ <span class="dv">0</span> effect   <span class="fl">-41.86</span> <span class="fl">7.03</span> <span class="dv">153</span> <span class="fl">-5.956</span>  <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ <span class="dv">1</span> effect   <span class="fl">-34.01</span> <span class="fl">7.03</span> <span class="dv">153</span> <span class="fl">-4.840</span>  <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ <span class="dv">2</span> effect   <span class="fl">-33.15</span> <span class="fl">7.03</span> <span class="dv">153</span> <span class="fl">-4.717</span>  <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ <span class="dv">3</span> effect   <span class="fl">-15.52</span> <span class="fl">7.03</span> <span class="dv">153</span> <span class="fl">-2.208</span>  <span class="fl">0.0410</span> 
+ <span class="dv">4</span> effect    <span class="fl">-9.86</span> <span class="fl">7.03</span> <span class="dv">153</span> <span class="fl">-1.403</span>  <span class="fl">0.1627</span> 
+ <span class="dv">5</span> effect    <span class="fl">10.01</span> <span class="fl">7.03</span> <span class="dv">153</span>  <span class="fl">1.425</span>  <span class="fl">0.1627</span> 
+ <span class="dv">6</span> effect    <span class="fl">13.67</span> <span class="fl">7.03</span> <span class="dv">153</span>  <span class="fl">1.945</span>  <span class="fl">0.0670</span> 
+ <span class="dv">7</span> effect    <span class="fl">20.24</span> <span class="fl">7.03</span> <span class="dv">153</span>  <span class="fl">2.881</span>  <span class="fl">0.0076</span> 
+ <span class="dv">8</span> effect    <span class="fl">38.12</span> <span class="fl">7.03</span> <span class="dv">153</span>  <span class="fl">5.425</span>  <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ <span class="dv">9</span> effect    <span class="fl">52.34</span> <span class="fl">7.03</span> <span class="dv">153</span>  <span class="fl">7.449</span>  <span class="op">&lt;</span>.<span class="dv">0001</span> 
+
+P value adjustment<span class="op">:</span><span class="st"> </span>fdr method <span class="cf">for</span> <span class="dv">10</span> tests </code></pre>
+<p>To list all the availble contrast types, or see the relevant help files, you can
+type:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># help file describing all the contrasts families</span>
+<span class="kw">help</span>(pairwise.lsmc)</code></pre>
+</div>
+<div id="interaction-pairwise-contrasts" class="section level4 unnumbered">
+<h4>Contrasts for interactions</h4>
+<p>Let’s recall <a href="anova-cookbook.html#howell-factorial-example">our example of factorial Anova</a>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">car<span class="op">::</span><span class="kw">Anova</span>(eysenck.model, <span class="dt">type=</span><span class="dv">3</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>pander</code></pre>
+<table style="width:78%;">
+<caption>Anova Table (Type III tests)</caption>
+<colgroup>
+<col width="27%" />
+<col width="12%" />
+<col width="6%" />
+<col width="13%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Sum Sq</th>
+<th align="center">Df</th>
+<th align="center">F value</th>
+<th align="center">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>(Intercept)</strong></td>
+<td align="center">490</td>
+<td align="center">1</td>
+<td align="center">61.05</td>
+<td align="center">9.85e-12</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Age</strong></td>
+<td align="center">1.25</td>
+<td align="center">1</td>
+<td align="center">0.1558</td>
+<td align="center">0.694</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Condition</strong></td>
+<td align="center">351.5</td>
+<td align="center">4</td>
+<td align="center">10.95</td>
+<td align="center">2.8e-07</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Age:Condition</strong></td>
+<td align="center">190.3</td>
+<td align="center">4</td>
+<td align="center">5.928</td>
+<td align="center">0.0002793</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Residuals</strong></td>
+<td align="center">722.3</td>
+<td align="center">90</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+</tbody>
+</table>
+<p>We can compute pairwise comparisons within the interaction as follows:</p>
+<pre class="sourceCode r"><code class="sourceCode r">eysenck.lsm &lt;-<span class="st"> </span>lsmeans<span class="op">::</span><span class="kw">lsmeans</span>(eysenck.model, <span class="op">~</span>Age<span class="op">:</span>Condition)</code></pre>
+<p>And the various contrasts, here comparing each cell agains the grand mean:</p>
+<pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(eysenck.lsm, <span class="st">&quot;eff&quot;</span>, <span class="dt">adjust=</span><span class="st">&quot;fdr&quot;</span>)
+ contrast               estimate   SE df t.ratio p.value
+ Young,Counting effect     <span class="fl">-4.61</span> <span class="fl">0.85</span> <span class="dv">90</span> <span class="fl">-5.424</span>  <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Older,Counting effect     <span class="fl">-5.11</span> <span class="fl">0.85</span> <span class="dv">90</span> <span class="fl">-6.013</span>  <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Young,Rhyming effect      <span class="fl">-4.71</span> <span class="fl">0.85</span> <span class="dv">90</span> <span class="fl">-5.542</span>  <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Older,Rhyming effect      <span class="fl">-4.01</span> <span class="fl">0.85</span> <span class="dv">90</span> <span class="fl">-4.718</span>  <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Young,Adjective effect    <span class="fl">-0.61</span> <span class="fl">0.85</span> <span class="dv">90</span> <span class="fl">-0.718</span>  <span class="fl">0.5275</span> 
+ Older,Adjective effect     <span class="fl">3.19</span> <span class="fl">0.85</span> <span class="dv">90</span>  <span class="fl">3.753</span>  <span class="fl">0.0004</span> 
+ Young,Imagery effect       <span class="fl">1.79</span> <span class="fl">0.85</span> <span class="dv">90</span>  <span class="fl">2.106</span>  <span class="fl">0.0475</span> 
+ Older,Imagery effect       <span class="fl">5.99</span> <span class="fl">0.85</span> <span class="dv">90</span>  <span class="fl">7.048</span>  <span class="op">&lt;</span>.<span class="dv">0001</span> 
+ Young,Intention effect     <span class="fl">0.39</span> <span class="fl">0.85</span> <span class="dv">90</span>  <span class="fl">0.459</span>  <span class="fl">0.6474</span> 
+ Older,Intention effect     <span class="fl">7.69</span> <span class="fl">0.85</span> <span class="dv">90</span>  <span class="fl">9.048</span>  <span class="op">&lt;</span>.<span class="dv">0001</span> 
+
+P value adjustment<span class="op">:</span><span class="st"> </span>fdr method <span class="cf">for</span> <span class="dv">10</span> tests </code></pre>
+<p>Or all of the pairwise tests with Tukey adjustment:</p>
+<pre class="sourceCode r"><code class="sourceCode r">lsmeans<span class="op">::</span><span class="kw">contrast</span>(eysenck.lsm, <span class="st">&quot;tukey&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>broom<span class="op">::</span><span class="kw">tidy</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">snip.middle</span>(<span class="dv">4</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pander</span>(<span class="dt">missing=</span><span class="st">&quot;...&quot;</span>, <span class="dt">caption=</span><span class="st">&quot;Some of the Tukey corrected pairwise contrasts (table abbreviated)&quot;</span>)</code></pre>
+<table>
+<caption>Some of the Tukey corrected pairwise contrasts (table abbreviated)</caption>
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="12%" />
+<col width="13%" />
+<col width="6%" />
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">level1</th>
+<th align="center">level2</th>
+<th align="center">estimate</th>
+<th align="center">std.error</th>
+<th align="center">df</th>
+<th align="center">statistic</th>
+<th align="center">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Young,Counting</td>
+<td align="center">Older,Counting</td>
+<td align="center">0.5</td>
+<td align="center">1.267</td>
+<td align="center">90</td>
+<td align="center">0.3947</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">Young,Counting</td>
+<td align="center">Young,Rhyming</td>
+<td align="center">0.1</td>
+<td align="center">1.267</td>
+<td align="center">90</td>
+<td align="center">0.07893</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">Young,Counting</td>
+<td align="center">Older,Rhyming</td>
+<td align="center">-0.6</td>
+<td align="center">1.267</td>
+<td align="center">90</td>
+<td align="center">-0.4736</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">Young,Counting</td>
+<td align="center">Young,Adjective</td>
+<td align="center">-4</td>
+<td align="center">1.267</td>
+<td align="center">90</td>
+<td align="center">-3.157</td>
+<td align="center">0.06328</td>
+</tr>
+<tr class="odd">
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+</tr>
+<tr class="even">
+<td align="center">Young,Imagery</td>
+<td align="center">Older,Intention</td>
+<td align="center">-5.9</td>
+<td align="center">1.267</td>
+<td align="center">90</td>
+<td align="center">-4.657</td>
+<td align="center">0.0004513</td>
+</tr>
+<tr class="odd">
+<td align="center">Older,Imagery</td>
+<td align="center">Young,Intention</td>
+<td align="center">5.6</td>
+<td align="center">1.267</td>
+<td align="center">90</td>
+<td align="center">4.42</td>
+<td align="center">0.001095</td>
+</tr>
+<tr class="even">
+<td align="center">Older,Imagery</td>
+<td align="center">Older,Intention</td>
+<td align="center">-1.7</td>
+<td align="center">1.267</td>
+<td align="center">90</td>
+<td align="center">-1.342</td>
+<td align="center">0.9409</td>
+</tr>
+<tr class="odd">
+<td align="center">Young,Intention</td>
+<td align="center">Older,Intention</td>
+<td align="center">-7.3</td>
+<td align="center">1.267</td>
+<td align="center">90</td>
+<td align="center">-5.762</td>
+<td align="center">5.006e-06</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intervals.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="clustering.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

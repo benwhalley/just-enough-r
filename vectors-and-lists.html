@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Vectors and lists | Just Enough R</title>
+  <meta name="description" content="Vectors and lists | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Vectors and lists | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Vectors and lists | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="variables.html">
+<link rel="next" href="working-with-vectors.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,56 +430,121 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
+<div id="vectors-and-lists" class="section level2 unnumbered">
+<h2>Vectors and lists</h2>
+<p>When working with data, we often have lists or sequences of ‘things’. For
+example: a list of measurements we have made.</p>
 <ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
+<li><p>When all the things are of the same type, R calls this a <em>vector</em><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p></li>
+<li><p>When there is a mix of different things R calls this a <em>list</em>.</p></li>
 </ul>
+<div id="vector" class="section level3 unnumbered">
+<h3>Vectors</h3>
+<p>We can create a vector of numbers and display it like this:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># this creates a vector of heights, in cm</span>
+heights &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">203</span>, <span class="dv">148</span>, <span class="dv">156</span>, <span class="dv">158</span>, <span class="dv">167</span>,
+             <span class="dv">162</span>, <span class="dv">172</span>, <span class="dv">164</span>, <span class="dv">172</span>, <span class="dv">187</span>,
+             <span class="dv">134</span>, <span class="dv">182</span>, <span class="dv">175</span>)</code></pre>
+<p>The <code>c()</code> command is shorthand for <em>combine</em>, so the example above combines the
+individual elements (numbers) into a new vector.</p>
+<p>We can create a vector of alphanumeric names just as easily:</p>
+<pre class="sourceCode r"><code class="sourceCode r">names &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Ben&quot;</span>, <span class="st">&quot;Joe&quot;</span>, <span class="st">&quot;Sue&quot;</span>, <span class="st">&quot;Rosa&quot;</span>)</code></pre>
+<p>And we can check the values stored in these variables by printing them. You can
+either type <code>print(heights)</code>, or just write the name of the variable alone,
+which will print it by default. E.g.:</p>
+<pre class="sourceCode r"><code class="sourceCode r">heights
+ [<span class="dv">1</span>] <span class="dv">203</span> <span class="dv">148</span> <span class="dv">156</span> <span class="dv">158</span> <span class="dv">167</span> <span class="dv">162</span> <span class="dv">172</span> <span class="dv">164</span> <span class="dv">172</span> <span class="dv">187</span> <span class="dv">134</span> <span class="dv">182</span> <span class="dv">175</span></code></pre>
+<div id="section-1" class="section level4 unnumbered exercise">
+<h4></h4>
+<p>Try creating your own vector of numbers in a new code block below<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> using the <code>c(...)</code> command. Then change the name of the
+variable you assign it to.</p>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
-
+</div>
+<div id="access-vector-elements" class="section level3 unnumbered">
+<h3>Accessing elements</h3>
+<p>Once we have created a vector, we often want to access the individual elements
+again. We do this based on their <em>position</em>.</p>
+<p>Let’s say we have created a vector:</p>
+<pre class="sourceCode r"><code class="sourceCode r">my.vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>)</code></pre>
+<p>We can display the whole vector by just typing its name, as we saw above. But if
+we want to show only the <em>first</em> element of this vector, we type:</p>
+<pre class="sourceCode r"><code class="sourceCode r">my.vector[<span class="dv">1</span>]
+[<span class="dv">1</span>] <span class="dv">10</span></code></pre>
+<p>Here, the square brackets specify a <em>subset</em> of the vector we want - in this
+case, just the first element.</p>
+</div>
+<div id="selecting-more-than-one-element" class="section level3 unnumbered">
+<h3>Selecting more than one element</h3>
+<p>A neat feature of subsetting is that we can grab more than one element at a
+time.</p>
+<p>To do this, we need to tell R the <em>positions</em> of the elements we want, and so we
+provide a <em>vector of the positions of the elements we want</em>.</p>
+<p>It might seem obvious, but the first element has position 1, the second has
+position 2, and so on. So, if we wanted to extract the 4th and 5th elements from
+the vector of heights we saw above we would type:</p>
+<pre class="sourceCode r"><code class="sourceCode r">elements.to.grab &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>)
+heights[elements.to.grab]
+[<span class="dv">1</span>] <span class="dv">158</span> <span class="dv">167</span></code></pre>
+<p>We can also make a subset of the original vector and assign it to a <em>new</em>
+variable:</p>
+<pre class="sourceCode r"><code class="sourceCode r">first.two.elements &lt;-<span class="st"> </span>heights[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)]
+first.two.elements
+[<span class="dv">1</span>] <span class="dv">203</span> <span class="dv">148</span></code></pre>
+<!-- There are lots of other neat tricks you can use when subsetting, but we don't need them all right now.  -->
+<!-- If you want to know more see <http://www.statmethods.net/management/subset.html> -->
+</div>
+<div id="making-sequences" class="section level3 unnumbered">
+<h3>Making and slicing with sequences</h3>
+<p>One common task in R is to create sequences of numbers, letters or dates.</p>
+<p>The simplest way of doing this is to define a range, with the colon:</p>
+<pre class="sourceCode r"><code class="sourceCode r">onetoten &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>
+onetoten
+ [<span class="dv">1</span>]  <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">4</span>  <span class="dv">5</span>  <span class="dv">6</span>  <span class="dv">7</span>  <span class="dv">8</span>  <span class="dv">9</span> <span class="dv">10</span></code></pre>
+<p>This creates a vector which can be sliced like any other:</p>
+<pre class="sourceCode r"><code class="sourceCode r">onetoten[<span class="dv">8</span>]
+[<span class="dv">1</span>] <span class="dv">8</span></code></pre>
+<p>One common use of sequences is to slice other vectors:</p>
+<pre class="sourceCode r"><code class="sourceCode r">onetoten[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]
+[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span></code></pre>
+<p>Or the first 10 values in the <code>heights</code> vector we defined above:</p>
+<pre class="sourceCode r"><code class="sourceCode r">heights[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]
+ [<span class="dv">1</span>] <span class="dv">203</span> <span class="dv">148</span> <span class="dv">156</span> <span class="dv">158</span> <span class="dv">167</span> <span class="dv">162</span> <span class="dv">172</span> <span class="dv">164</span> <span class="dv">172</span> <span class="dv">187</span></code></pre>
+<p>This works backwards, and with negative numbers too:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span><span class="op">:-</span><span class="dv">5</span>
+ [<span class="dv">1</span>]  <span class="dv">5</span>  <span class="dv">4</span>  <span class="dv">3</span>  <span class="dv">2</span>  <span class="dv">1</span>  <span class="dv">0</span> <span class="dv">-1</span> <span class="dv">-2</span> <span class="dv">-3</span> <span class="dv">-4</span> <span class="dv">-5</span></code></pre>
+<p>When your sequence doesn’t contain only whole numbers, or non-consecutive
+numbers, you can use the <code>seq</code> function:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">10</span>,<span class="dt">by=</span><span class="dv">2</span>)
+[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">3</span> <span class="dv">5</span> <span class="dv">7</span> <span class="dv">9</span>
+<span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by=</span>.<span class="dv">2</span>)
+[<span class="dv">1</span>] <span class="fl">0.0</span> <span class="fl">0.2</span> <span class="fl">0.4</span> <span class="fl">0.6</span> <span class="fl">0.8</span> <span class="fl">1.0</span></code></pre>
+</div>
+<div id="conditional-slices" class="section level3 unnumbered">
+<h3>Conditional slicing</h3>
+<p>One neat feature of R is that you can create a sequence of <code>TRUE</code> or <code>FALSE</code>
+values, by asking whether each value in a sequence matches a particular
+condition. For example:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>
+ [<span class="dv">1</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span></code></pre>
+<p>Re-using the heights vector from above, we can then use this to select values
+that are above the average:</p>
+<pre class="sourceCode r"><code class="sourceCode r">heights <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(heights)
+ [<span class="dv">1</span>]  <span class="ot">TRUE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span>  <span class="ot">TRUE</span> <span class="ot">FALSE</span>  <span class="ot">TRUE</span>  <span class="ot">TRUE</span> <span class="ot">FALSE</span>
+[<span class="dv">12</span>]  <span class="ot">TRUE</span>  <span class="ot">TRUE</span></code></pre>
+<p>And we can use the vector of <code>TRUE</code> and <code>FALSE</code> values to select from the actual
+scores:</p>
+<pre class="sourceCode r"><code class="sourceCode r">heights[heights <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(heights)]
+[<span class="dv">1</span>] <span class="dv">203</span> <span class="dv">172</span> <span class="dv">172</span> <span class="dv">187</span> <span class="dv">182</span> <span class="dv">175</span></code></pre>
 </div>
 </div>
-
-
-
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
+<ol start="2">
+<li id="fn2"><p>It’s
+actually a matrix if has 2 dimensions, like a table, or an array if it has
+more than 2 dimensions.<a href="vectors-and-lists.html#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>i.e. edit the
+RMarkdown document<a href="vectors-and-lists.html#fnref3" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -487,8 +552,8 @@ late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="working-with-vectors.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

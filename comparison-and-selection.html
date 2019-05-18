@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>26 Building and choosing models | Just Enough R</title>
+  <meta name="description" content="26 Building and choosing models | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="26 Building and choosing models | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="26 Building and choosing models | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="link-functions.html">
+<link rel="next" href="references.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,111 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
+<div id="comparison-and-selection" class="section level1">
+<h1><span class="header-section-number">26</span> Building and choosing models</h1>
+<div id="like-maps-models-are-imperfect-but-useful" class="section level3 unnumbered">
+<h3>Like maps, models are imperfect but useful</h3>
+<p><img src="media/map_projections.png" /></p>
+<p>Maps are always imperfect, and the decisons we make as we build them entail
+different visions of how the world is.</p>
+<p>For example, when making maps cartographers must decide at what size to print
+it, and how much detail to include. The smaller the map the more convenient it
+is to carry, but a smaller map can never represent reality as accurately.
+Similarly, we must leave out details to make the map practical to use; but
+<em>what</em> we omit depends on the planned use of the map.</p>
+<p>Stretching he analogy a little, we could evaluate maps according to their
+performance: did the map help us navigate to a desired location, for example?
+This is likely to be a function of two things:</p>
 <ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
+<li><em>Veracity</em>: that is, how faithfully does the map represent the ‘reality’ of
+the terrain it covers?</li>
+<li><em>Simplicity</em>: does the map include details which are ephemeral, or irrelvant
+to the task in hand?</li>
 </ul>
+<p>At one extreme, we might take an aerial photo of a city, which would accurately
+represent the terrain, but would include many details which are ephemeral or
+transient and not necessary to the task of, for example, finding the city’s
+railway station. Indeed the photo is literally a snapshot of the city on a given
+day, and some elements might be unhelpful in navigating the city several months
+later; the photo might include temporary roadworks, for example, which could
+lead the reader to assume a street was blocked to traffic when this was not
+normally the case. At the other extreme, we might consider a highly stylised
+cartoon map of the same city, which includes onlu major roads and the station
+itself, but none of the secondary roads or other landmarks. Here the map is so
+lacking in detail that it may be hard to orient ourselves to the actual terrain.</p>
+<p>Statistical models are not exactly like maps, but we can evaluate them using
+similar criteria. A good model enables the user to make sense of the data they
+collect (i.e. navigate the city) and this involves making reliable predictions.
+Reliable predictions are possible when the model accurately represents the
+underlying reality of a phenomena, but also when the model is simple enough to
+ignore ephemeral or irrelevant information.</p>
+<p>Evaluating and selecting statistical models involves just this kind of tradeoff
+between <em>veracity</em> and <em>simplicity</em>.</p>
+<p>To stretch the analogy above, when we collect data, we are taking a photo of the
+city, making a snapshot of a given process at a particular place and time. This
+snapshot (hopefully) contains valuable information about how the process works
+in general, but it also includes noise and irrelevant information which could
+distract us, preventing us from using the data to accurately predict the future.</p>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+<div id="over-fitting" class="section level3 unnumbered">
+<h3>Overfitting/underfitting</h3>
+<p>To <del>steal</del>use a different analogy, imagine you want to predict who will win
+the next US presidential election:</p>
+<div class="figure">
+<img src="media/xkcd_presidents_overfitting.png" alt="Cartoon: xkcd.com" />
+<p class="caption">Cartoon: xkcd.com</p>
+</div>
+<p>In total there have only been 57 presidential elections and 44 presidents in the
+US, which isn’t a lot of data to learn from. The point of the cartoon is that if
+we try and include ephemeral predictors like beards and false teeth then the
+space of possible combinations becomes huge. This means that some of these
+combinations will start to fit the data because of chance variations, and not
+because they represent some fundamental aspect of the process generating the
+outcome (election wins).</p>
+<p>If you allow statistical models to expand in this way (that is, driven only by
+patterns in the data you have) then you will find that, inevitably, the model
+fits the data you have, but the you won’t be able to predict <em>new</em> data at all.</p>
+<p>This is one of the reasons why we prefer simpler models, all other things being
+equal. It also explains why practices like stepwise regression, where we add or
+remove variables depending on whether they are ‘statistically significant’,
+<a href="http://www.stata.com/support/faqs/statistics/stepwise-regression-problems/">are almost always a bad idea</a>.
+We should only accept a complex model (e.g. one including false teeth as a
+predictor of the presidency) if we have enough evidence to be confident this
+will predict new data.</p>
+</div>
+<div id="variable-selection" class="section level3 unnumbered">
+<h3>Choosing the ‘right variables’</h3>
+<p>As an aside, if you do find yourself in a situation with a large number of
+predictors and hope to build a simpler model — either with the goal of
+prediction or theory development — then it’s hopefully obvious from the
+discussion above that simply dropping or selecting predictors based on <em>p</em>
+values is unlikely to lead to good science. Not only will you tend to over-fit
+the data you have, but you may also discount valid predictor variables because
+of problems like multicollinearity (correlations between predictors).</p>
+<p>In other disciplines where inference from observational data are more common
+(e.g. ecology and biological anthropolgy) the concepts of model averaging or
+multimodal inference have gained currency, and may be be useful to applied
+psychologists. The core concept is that if we have several models, all of which
+are approximately as good as each other, then we should make predictions and
+inferences by averaging across the models, weighting each model by how well it
+fits the data: that is, we give the most weight to the best fitting model, but
+don’t completely discount other models which fit almost as well.</p>
+<p>See <span class="citation">@mcelreath2016rethinking</span>, chapter 6, for a good introduction.
+<a href="https://www.youtube.com/watch?v=LQb7l5IfS0s">This video explains the concept well</a>.
+The R package
+<a href="https://cran.r-project.org/web/packages/MuMIn/index.html">MuMln package</a>
+implements most of the methods needed. See also this
+<a href="https://www.r-bloggers.com/model-selection-and-multi-model-inference/">interesting post on model selection problems</a>.</p>
 
 </div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="link-functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

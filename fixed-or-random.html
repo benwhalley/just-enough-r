@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>23 Fixed and random effects | Just Enough R</title>
+  <meta name="description" content="23 Fixed and random effects | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="23 Fixed and random effects | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="23 Fixed and random effects | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="clustering.html">
+<link rel="next" href="scaling-predictors.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,74 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
+<div id="fixed-or-random" class="section level1">
+<h1><span class="header-section-number">23</span> Fixed and random effects</h1>
+<p>As noted by <span class="citation">@gelman_analysis_2005</span> (and
+<a href="http://andrewgelman.com/2005/01/25/why_i_dont_use/">summarised here</a>), the
+terms ‘fixed’ and ‘random’ are used very loosely in both the methodological and
+applied literature. Gelman identifies 5 different senses in which the
+distinction between fixed and random effects can be drawn, and this
+inconsistency can lead to confusion.</p>
+<div id="random-slopes-intercepts" class="section level4 unnumbered">
+<h4></h4>
+<p>For practical purposes, if you think that you have some form of grouping in your
+data and that it makes sense to think of variation in outcomes between these
+groups then you should probably include it as a random intercept in your model.</p>
+<p>Likewise, if you include a predictor in your model and it is reasonable to think
+that the effect of this predictor would vary between groups in the data (e.g.,
+between individuals) then you should include a random slope effect for this
+variable.</p>
+<div id="random-intercepts" class="section level5 unnumbered">
+<h5>Random intercepts</h5>
+<p>Some example of groupings which should be included as random intercepts:</p>
 <ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
+<li>Participants</li>
+<li>Classes and Schools</li>
+<li>Therapists or treatment providers (e.g. in cluster randomised trial)</li>
+<li>Stimuli or ‘items’</li>
+</ul>
+<p>Groupings which are not clear cut in either direction:</p>
+<ul>
+<li>A smallish number of experimental conditions which could be thought of as
+‘sampled’ from a larger population of possible groupings
+<span class="citation">[@gelman2005analysis]</span>. An example here would be groups which recieve
+different doses of a drug.</li>
+</ul>
+<p>Examples of groupings which are probably not best handled as random intercepts:</p>
+<ul>
+<li>Experimental conditions especially where the conditions are qualitatively
+different (although the interventions might warrant inclusion as a random
+slope, see below).</li>
 </ul>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+<div id="random-slopes" class="section level5 unnumbered">
+<h5>Random slopes</h5>
+<p>Where the effect of a variable might vary between individuals (or other
+grouping) should be considered for inclusion as a random slopes. Some examples
+might include:</p>
+<ul>
+<li>Time (or some function of time)</li>
+<li>An experimental intervention (e.g. in a factorial design)</li>
+</ul>
+<p>For a more in depth discussion of when to include a random slope
+<a href="http://www.bristol.ac.uk/cmm/learning/videos/random-slopes.html">this presentation and transcript from the Bristol CMM is excellent</a>.</p>
+<!--
+ ADD THIS?
+
+https://dynamicecology.wordpress.com/2015/11/04/is-it-a-fixed-or-random-effect/
+
+ -->
 
 </div>
 </div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="clustering.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="scaling-predictors.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

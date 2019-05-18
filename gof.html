@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Goodness of fit statistics in CFA | Just Enough R</title>
+  <meta name="description" content="Goodness of fit statistics in CFA | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Goodness of fit statistics in CFA | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Goodness of fit statistics in CFA | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="cfa-sem-missing-data.html">
+<link rel="next" href="bayes-mcmc.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,108 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
+<div id="gof" class="section level2 unnumbered">
+<h2>Goodness of fit statistics in CFA</h2>
+<p>It’s worth noting that many ‘goodness of fit’ statistics are misnamed and are in
+fact indexing ‘badness of fit’. This applies to RMSEA, <span class="math inline">\(\chi^2\)</span>, BIC, AIC and
+others.</p>
+<p>However all of these indices are trying to solve similar problems in subtly
+different ways. The problem is that we would like a model which:</p>
 <ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
+<li>Fits the data we have <em>and also</em></li>
+<li>Predicts new data</li>
+</ul>
+<p>You might think that these goals would be aligned and that a model which fits
+the data we have would also be good ad predicting new data, but this isn’t the
+case. In fact, if we <a href="comparison-and-selection.html#over-fitting">overfit</a> our current data we won’t be able
+to predict new observations very accurately.</p>
+<div id="how-fit-indices-work" class="section level4 unnumbered">
+<h4>How fit indices work</h4>
+<p>There is a tradeoff involved to avoid over-fitting the data, and most fit
+indices attempt to:</p>
+<ul>
+<li>Quantify how well the model fits the current data but</li>
+<li>Penalise models which use many parameters (i.e. those in danger of
+overfitting)</li>
+</ul>
+<p>Each formula for a goodness of fit statistic represents a different tradeoff
+between these goals.</p>
+</div>
+<div id="section-15" class="section level4 unnumbered tip">
+<h4></h4>
+<p>Model fit statistics are useful but can be misleading and misused. See David
+Kenny’s page on model fit for more details: <a href="http://davidakenny.net/cm/fit.htm" class="uri">http://davidakenny.net/cm/fit.htm</a></p>
+</div>
+<div id="common-fit-indices" class="section level4 unnumbered">
+<h4></h4>
+<p>Below are some of the most useful and commonly reported GOF statistics for CFA
+and SEM models:</p>
+</div>
+<div id="root-mean-square-error-of-approximation-rmsea" class="section level4 unnumbered">
+<h4>Root Mean Square Error of Approximation (RMSEA)</h4>
+<p>MacCallum, Browne and Sugawara (1996) have used 0.01, 0.05, and 0.08 to indicate
+excellent, good, and mediocre fit, respectively.</p>
+<p>RMSEA &lt; .05 often used as a cutoff for a reasonably fitting model, athough
+others suggest .1.</p>
+<p>RMSEA is also used to calculate the ‘probability of a close fit’ or pclose
+statistic — this is the probability that the RMSEA is under 0.05.</p>
+</div>
+<div id="comparative-fit-index-cfi" class="section level4 unnumbered">
+<h4>Comparative fit index (CFI)</h4>
+<p>CFI (and the related TLI) assesses the relative improvement in fit of your model
+compared with the baseline model.</p>
+<p>CFI ranges between 0 and 1.</p>
+<p>The conventional (rule of thumb) threshold for a good fitting model is for CFI
+to be &gt; .9</p>
+</div>
+<div id="akaike-information-criterion-aic-and-bayesian-information-criterion-bic" class="section level4 unnumbered">
+<h4>Akaike Information Criterion (AIC) and Bayesian Information Criterion (BIC)</h4>
+<p>The AIC and BIC are measures of comparative fit, so can be used when models are
+non-nested (and therefore otherwise not easily comparable).</p>
+<p>AIC is particularly attractive because it corresponds to a measure of
+<em>predictive</em> accuracy. That is, selecting the model with the smallest AIC is one
+way of asking: “which model is most likely to accurately predict new data?”</p>
+</div>
+<div id="factors-which-can-influence-fit-statistics" class="section level4 unnumbered">
+<h4>Factors which can influence fit statistics</h4>
+<p>All of the following can influence or bias fit statistics:</p>
+<ul>
+<li>Number of variables (although note RMSEA trends to reduce with more
+parameters included, but other fit statistics will increase).</li>
+<li>Model complexity (different statistics reward parsimony to different
+degrees).</li>
+<li>Sample size (varies by statistic: some increase and others decrease with
+sample size).</li>
+<li>Non-normality of outcome data will (tend to) worsen fit.</li>
 </ul>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+<div id="which-statistics-should-you-report" class="section level4 unnumbered">
+<h4>Which statistics should you report?</h4>
+<p>When reporting absolute model fit, RMSEA and CFI are the most widely reported,
+and are probably sufficient.</p>
+<p>However, you should almost never just report a single model, and so:</p>
+<ul>
+<li>When comparing nested models you should report the <span class="math inline">\(\chi^2\)</span> <code>lrtest</code>.</li>
+<li>When comparing non-nested models you should also report differences in BIC
+and AIC.</li>
+</ul>
+</div>
+<div id="further-reading" class="section level4 unnumbered">
+<h4>Further reading</h4>
+<p>This set of slides on model fit provides all fo the formulae and an explanation
+for many different fit indices:
+<a href="http://www.psych.umass.edu/uploads/people/79/Fit_Indices.pdf" class="uri">http://www.psych.umass.edu/uploads/people/79/Fit_Indices.pdf</a></p>
 
 </div>
 </div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
-</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="cfa-sem-missing-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="bayes-mcmc.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

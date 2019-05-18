@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>“Table 1” | Just Enough R</title>
+  <meta name="description" content="“Table 1” | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="“Table 1” | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="“Table 1” | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="code-reuse.html">
+<link rel="next" href="quirks.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,359 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
+<div id="table1" class="section level2 unnumbered">
+<h2>“Table 1”</h2>
+<p>Table 1 in reports of clinical trials and many psychological studies reports
+characteristics of the sample. Typically, you will want to present information
+collected at baseline, split by experimental groups, including:</p>
 <ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
+<li>Means, standard deviations or other descriptive statistics for continuous
+variables</li>
+<li>Frequencies of particular responses for categorical variables</li>
+<li>Some kind of inferential test for a zero-difference between the groups; this
+could be a t-test, an F-statistic where there are more than 2 groups, or a
+chi-squared test for categorical variables.</li>
 </ul>
-</div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+<!-- Make reference to this? https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3379950/ -->
+<p>Producing this table is a pain because it requires collating multiple
+statistics, calculated from different functions. Many researchers resort to
+performing all the analyses required for each part of the table, and then
+copying-and-pasting results into Word.</p>
+<p>It can be automated though! This example combines and extends many of the
+techniques we have learned using the split-apply-combine method.</p>
+<p>To begin, let’s simulate some data from a fairly standard 2-arm clinical trial
+or psychological experiment:</p>
+<p>Check our data:</p>
+<pre class="sourceCode r"><code class="sourceCode r">boring.study <span class="op">%&gt;%</span><span class="st"> </span>glimpse
+Observations<span class="op">:</span><span class="st"> </span><span class="dv">280</span>
+Variables<span class="op">:</span><span class="st"> </span><span class="dv">8</span>
+<span class="op">$</span><span class="st"> </span>person    <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">15</span>, <span class="dv">16</span>,…
+<span class="op">$</span><span class="st"> </span>time      <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, …
+<span class="op">$</span><span class="st"> </span>condition <span class="op">&lt;</span>fct<span class="op">&gt;</span><span class="st"> </span>Control, Control, Control, Control, Control, Control, …
+<span class="op">$</span><span class="st"> </span>yob       <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">1977</span>, <span class="dv">1970</span>, <span class="dv">1982</span>, <span class="dv">1982</span>, <span class="dv">1974</span>, <span class="dv">1979</span>, <span class="dv">1979</span>, <span class="dv">1975</span>, <span class="dv">1981</span>, …
+<span class="op">$</span><span class="st"> </span>WM        <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="dv">105</span>, <span class="dv">103</span>, <span class="dv">109</span>, <span class="dv">94</span>, <span class="dv">100</span>, <span class="dv">90</span>, <span class="dv">84</span>, <span class="dv">90</span>, <span class="dv">98</span>, <span class="dv">79</span>, <span class="dv">105</span>, <span class="dv">82</span>, 1…
+<span class="op">$</span><span class="st"> </span>education <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st"> &quot;Graduate&quot;</span>, <span class="st">&quot;Postgraduate&quot;</span>, <span class="st">&quot;Graduate&quot;</span>, <span class="ot">NA</span>, <span class="st">&quot;Primary&quot;</span>,…
+<span class="op">$</span><span class="st"> </span>ethnicity <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st"> &quot;Asian / Asian British&quot;</span>, <span class="st">&quot;Black / African / Caribbean …</span>
+<span class="st">$ Attitude  &lt;dbl&gt; 9, 9, 4, 3, 7, 13, 8, 5, 5, 6, 6, 1, 8, 4, 11, 7, 7, 9…</span></code></pre>
+<p>Start by making a long-form table for the categorical variables:</p>
+<pre class="sourceCode r"><code class="sourceCode r">boring.study.categorical.melted &lt;-
+<span class="st">  </span>table1.categorical.Ns &lt;-<span class="st"> </span>boring.study <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(condition, education, ethnicity) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">melt</span>(<span class="dt">id.var=</span><span class="st">&#39;condition&#39;</span>)</code></pre>
+<p>Then calculate the N’s for each response/variable in each group:</p>
+<pre class="sourceCode r"><code class="sourceCode r">(table1.categorical.Ns &lt;-
+<span class="st">  </span>boring.study.categorical.melted <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(condition, variable, value) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N=</span><span class="kw">n</span>()) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">dcast</span>(variable<span class="op">+</span>value<span class="op">~</span>condition, <span class="dt">value.var=</span><span class="st">&quot;N&quot;</span>))
+   variable                                       value Control
+<span class="dv">1</span> education                                    Graduate      <span class="dv">27</span>
+<span class="dv">2</span> education                                Postgraduate      <span class="dv">31</span>
+<span class="dv">3</span> education                                     Primary      <span class="dv">27</span>
+<span class="dv">4</span> education                                   Secondary      <span class="dv">24</span>
+<span class="dv">5</span> education                                        <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">      </span><span class="dv">31</span>
+<span class="dv">6</span> ethnicity                       Asian <span class="op">/</span><span class="st"> </span>Asian British      <span class="dv">45</span>
+<span class="dv">7</span> ethnicity Black <span class="op">/</span><span class="st"> </span>African <span class="op">/</span><span class="st"> </span>Caribbean <span class="op">/</span><span class="st"> </span>Black British      <span class="dv">28</span>
+<span class="dv">8</span> ethnicity              Mixed <span class="op">/</span><span class="st"> </span>multiple ethnic groups      <span class="dv">28</span>
+<span class="dv">9</span> ethnicity                               White British      <span class="dv">39</span>
+  Intervention
+<span class="dv">1</span>           <span class="dv">34</span>
+<span class="dv">2</span>           <span class="dv">25</span>
+<span class="dv">3</span>           <span class="dv">25</span>
+<span class="dv">4</span>           <span class="dv">26</span>
+<span class="dv">5</span>           <span class="dv">30</span>
+<span class="dv">6</span>           <span class="dv">42</span>
+<span class="dv">7</span>           <span class="dv">25</span>
+<span class="dv">8</span>           <span class="dv">36</span>
+<span class="dv">9</span>           <span class="dv">37</span></code></pre>
+<p>Then make a second table containing Chi2 test statistics for each variable:</p>
+<pre class="sourceCode r"><code class="sourceCode r">(table1.categorical.tests &lt;-
+<span class="st">  </span>boring.study.categorical.melted <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(variable) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">do</span>(., <span class="kw">chisq.test</span>(.<span class="op">$</span>value, .<span class="op">$</span>condition) <span class="op">%&gt;%</span><span class="st"> </span>tidy) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># this purely to facilitate matching rows up below</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">firstrowforvar=</span>T))
+<span class="co"># A tibble: 2 x 6</span>
+<span class="co"># Groups:   variable [2]</span>
+  variable  statistic p.value parameter method               firstrowforvar
+  <span class="op">&lt;</span>fct<span class="op">&gt;</span><span class="st">         </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">                </span><span class="er">&lt;</span>lgl<span class="op">&gt;</span><span class="st">         </span>
+<span class="dv">1</span> education      <span class="fl">1.60</span>   <span class="fl">0.660</span>         <span class="dv">3</span> Pearson<span class="st">&#39;s Chi-squar… TRUE          </span>
+<span class="st">2 ethnicity      1.33   0.723         3 Pearson&#39;</span>s Chi<span class="op">-</span>squar… <span class="ot">TRUE</span>          </code></pre>
+<p>Combine these together:</p>
+<pre class="sourceCode r"><code class="sourceCode r">(table1.categorical.both &lt;-<span class="st"> </span>table1.categorical.Ns <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(variable) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># we join on firstrowforvar to make sure we don&#39;t duplicate the tests</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">firstrowforvar=</span><span class="kw">row_number</span>()<span class="op">==</span><span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">left_join</span>(., table1.categorical.tests, <span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;variable&quot;</span>, <span class="st">&quot;firstrowforvar&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># this is gross, but we don&#39;t want to repeat the variable names in our table</span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">variable =</span> <span class="kw">ifelse</span>(firstrowforvar<span class="op">==</span>T, <span class="kw">as.character</span>(variable), <span class="ot">NA</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(variable, value, Control, Intervention, statistic, parameter, p.value))
+<span class="co"># A tibble: 9 x 7</span>
+  variable  value          Control Intervention statistic parameter p.value
+  <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">            </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">        </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>int<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span> education Graduate            <span class="dv">27</span>           <span class="dv">34</span>      <span class="fl">1.60</span>         <span class="dv">3</span>   <span class="fl">0.660</span>
+<span class="dv">2</span> <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">      </span>Postgraduate        <span class="dv">31</span>           <span class="dv">25</span>     <span class="ot">NA</span>           <span class="ot">NA</span>  <span class="ot">NA</span>    
+<span class="dv">3</span> <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">      </span>Primary             <span class="dv">27</span>           <span class="dv">25</span>     <span class="ot">NA</span>           <span class="ot">NA</span>  <span class="ot">NA</span>    
+<span class="dv">4</span> <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">      </span>Secondary           <span class="dv">24</span>           <span class="dv">26</span>     <span class="ot">NA</span>           <span class="ot">NA</span>  <span class="ot">NA</span>    
+<span class="dv">5</span> <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">      </span><span class="er">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">                </span><span class="dv">31</span>           <span class="dv">30</span>     <span class="ot">NA</span>           <span class="ot">NA</span>  <span class="ot">NA</span>    
+<span class="dv">6</span> ethnicity Asian <span class="op">/</span><span class="st"> </span>Asian…      <span class="dv">45</span>           <span class="dv">42</span>      <span class="fl">1.33</span>         <span class="dv">3</span>   <span class="fl">0.723</span>
+<span class="dv">7</span> <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">      </span>Black <span class="op">/</span><span class="st"> </span>Afric…      <span class="dv">28</span>           <span class="dv">25</span>     <span class="ot">NA</span>           <span class="ot">NA</span>  <span class="ot">NA</span>    
+<span class="dv">8</span> <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">      </span>Mixed <span class="op">/</span><span class="st"> </span>multi…      <span class="dv">28</span>           <span class="dv">36</span>     <span class="ot">NA</span>           <span class="ot">NA</span>  <span class="ot">NA</span>    
+<span class="dv">9</span> <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span><span class="st">      </span>White British       <span class="dv">39</span>           <span class="dv">37</span>     <span class="ot">NA</span>           <span class="ot">NA</span>  <span class="ot">NA</span>    </code></pre>
+<p>Now we deal with the continuous variables. First we make a ‘long’ version of the
+continuous data</p>
+<pre class="sourceCode r"><code class="sourceCode r">continuous_variables &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;yob&quot;</span>, <span class="st">&quot;WM&quot;</span>)
+boring.continuous.melted &lt;-
+<span class="st">  </span>boring.study <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(condition, continuous_variables) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">melt</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(variable)
+Using condition as id variables
+
+boring.continuous.melted <span class="op">%&gt;%</span><span class="st"> </span>head
+<span class="co"># A tibble: 6 x 3</span>
+<span class="co"># Groups:   variable [1]</span>
+  condition variable value
+  <span class="op">&lt;</span>fct<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>fct<span class="op">&gt;</span><span class="st">    </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span> Control   yob       <span class="dv">1977</span>
+<span class="dv">2</span> Control   yob       <span class="dv">1970</span>
+<span class="dv">3</span> Control   yob       <span class="dv">1982</span>
+<span class="dv">4</span> Control   yob       <span class="dv">1982</span>
+<span class="dv">5</span> Control   yob       <span class="dv">1974</span>
+<span class="dv">6</span> Control   yob       <span class="dv">1979</span></code></pre>
+<p>Then calculate separate tables of t-tests and means/SD’s:</p>
+<pre class="sourceCode r"><code class="sourceCode r">(table.continuous_variables.tests &lt;-
+<span class="st">    </span>boring.continuous.melted <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="co"># note that we pass the result of t-test to tidy, which returns a dataframe</span>
+<span class="st">    </span><span class="kw">do</span>(., <span class="kw">t.test</span>(.<span class="op">$</span>value<span class="op">~</span>.<span class="op">$</span>condition) <span class="op">%&gt;%</span><span class="st"> </span>tidy) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">select</span>(variable, statistic, parameter, p.value))
+<span class="co"># A tibble: 2 x 4</span>
+<span class="co"># Groups:   variable [2]</span>
+  variable statistic parameter p.value
+  <span class="op">&lt;</span>fct<span class="op">&gt;</span><span class="st">        </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span> yob          <span class="fl">0.825</span>      <span class="fl">275.</span>   <span class="fl">0.410</span>
+<span class="dv">2</span> WM           <span class="fl">0.825</span>      <span class="fl">277.</span>   <span class="fl">0.410</span>
+
+(table.continuous_variables.descriptives &lt;-
+<span class="st">    </span>boring.continuous.melted <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(variable, condition) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="co"># this is not needed here because we have no missing values, but if there</span>
+<span class="st">    </span><span class="co"># were missing value in this dataset then mean/sd functions would fail below,</span>
+<span class="st">    </span><span class="co">#  so best to remove rows without a response:</span>
+<span class="st">    </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(value)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="co"># note, we might also want the median/IQR</span>
+<span class="st">    </span><span class="kw">summarise</span>(<span class="dt">Mean=</span><span class="kw">mean</span>(value), <span class="dt">SD=</span><span class="kw">sd</span>(value)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(variable, condition) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="co"># we format the mean and SD into a single column using sprintf.</span>
+<span class="st">    </span><span class="co"># we don&#39;t have to do this, but it makes reshaping simpler and we probably want</span>
+<span class="st">    </span><span class="co"># to round the numbers at some point, and so may as well do this now.</span>
+<span class="st">    </span><span class="kw">transmute</span>(<span class="dt">MSD =</span> <span class="kw">sprintf</span>(<span class="st">&quot;%.2f (%.2f)&quot;</span>, Mean, SD)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">dcast</span>(variable<span class="op">~</span>condition))
+Using MSD as value column<span class="op">:</span><span class="st"> </span>use value.var to override.
+  variable        Control   Intervention
+<span class="dv">1</span>      yob <span class="fl">1979.30</span> (<span class="fl">5.54</span>) <span class="fl">1978.78</span> (<span class="fl">5.02</span>)
+<span class="dv">2</span>       WM   <span class="fl">99.98</span> (<span class="fl">9.74</span>)   <span class="fl">99.05</span> (<span class="fl">9.08</span>)</code></pre>
+<p>And combine them:</p>
+<pre class="sourceCode r"><code class="sourceCode r">(table.continuous_variables.both &lt;-
+<span class="st">  </span><span class="kw">left_join</span>(table.continuous_variables.descriptives,
+            table.continuous_variables.tests))
+Joining, by =<span class="st"> &quot;variable&quot;</span>
+  variable        Control   Intervention statistic parameter   p.value
+<span class="dv">1</span>      yob <span class="fl">1979.30</span> (<span class="fl">5.54</span>) <span class="fl">1978.78</span> (<span class="fl">5.02</span>) <span class="fl">0.8253243</span>  <span class="fl">275.3414</span> <span class="fl">0.4099020</span>
+<span class="dv">2</span>       WM   <span class="fl">99.98</span> (<span class="fl">9.74</span>)   <span class="fl">99.05</span> (<span class="fl">9.08</span>) <span class="fl">0.8247186</span>  <span class="fl">276.6422</span> <span class="fl">0.4102419</span></code></pre>
+<p>Finally put the whole thing together:</p>
+<pre class="sourceCode r"><code class="sourceCode r">(table1 &lt;-<span class="st"> </span>table1.categorical.both <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># make these variables into character format to be consistent with</span>
+<span class="st">  </span><span class="co"># the Mean (SD) column for continuus variables</span>
+<span class="st">  </span><span class="kw">mutate_each</span>(<span class="kw">funs</span>(format), Control, Intervention) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># note the &#39;.&#39; as the first argument, which is the input from the pipe</span>
+<span class="st">  </span><span class="kw">bind_rows</span>(.,
+          table.continuous_variables.both) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># prettify a few things</span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">df =</span> parameter,
+         <span class="dt">p=</span>p.value,
+         <span class="st">`</span><span class="dt">Control N/Mean (SD)</span><span class="st">`</span>=<span class="st"> </span>Control,
+         <span class="dt">Variable=</span>variable,
+         <span class="dt">Response=</span>value,
+         <span class="st">`</span><span class="dt">t/χ2</span><span class="st">`</span> =<span class="st"> </span>statistic))
+Warning<span class="op">:</span><span class="st"> </span><span class="kw">funs</span>() is soft deprecated as of dplyr <span class="dv">0</span>.<span class="fl">8.0</span>
+please use <span class="kw">list</span>() instead
+
+  <span class="co"># Before:</span>
+  <span class="kw">funs</span>(<span class="dt">name =</span> <span class="kw">f</span>(.))
+
+  <span class="co"># After: </span>
+  <span class="kw">list</span>(<span class="dt">name =</span> <span class="op">~</span><span class="st"> </span><span class="kw">f</span>(.))
+This warning is displayed once per session.
+Warning <span class="cf">in</span> <span class="kw">bind_rows_</span>(x, .id)<span class="op">:</span><span class="st"> </span>binding character and factor vector,
+coercing into character vector
+<span class="co"># A tibble: 11 x 7</span>
+   Variable  Response     <span class="st">`</span><span class="dt">Control N/Mean… Intervention </span><span class="st">`</span>t<span class="op">/</span>χ2<span class="st">`</span><span class="dt">    df      p</span>
+<span class="dt">   &lt;chr&gt;     &lt;chr&gt;        &lt;chr&gt;            &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span>
+<span class="dt"> 1 education Graduate     27               34            1.60     3   0.660</span>
+<span class="dt"> 2 &lt;NA&gt;      Postgraduate 31               25           NA       NA  NA    </span>
+<span class="dt"> 3 &lt;NA&gt;      Primary      27               25           NA       NA  NA    </span>
+<span class="dt"> 4 &lt;NA&gt;      Secondary    24               26           NA       NA  NA    </span>
+<span class="dt"> 5 &lt;NA&gt;      &lt;NA&gt;         31               30           NA       NA  NA    </span>
+<span class="dt"> 6 ethnicity Asian / Asi… 45               42            1.33     3   0.723</span>
+<span class="dt"> 7 &lt;NA&gt;      Black / Afr… 28               25           NA       NA  NA    </span>
+<span class="dt"> 8 &lt;NA&gt;      Mixed / mul… 28               36           NA       NA  NA    </span>
+<span class="dt"> 9 &lt;NA&gt;      White Briti… 39               37           NA       NA  NA    </span>
+<span class="dt">10 yob       &lt;NA&gt;         1979.30 (5.54)   1978.78 (5.…  0.825  275.  0.410</span>
+<span class="dt">11 WM        &lt;NA&gt;         99.98 (9.74)     99.05 (9.08)  0.825  277.  0.410</span></code></pre>
+<p>And we can print to markdown format for outputting. This is best done in a
+separate chunk to avoid warnings/messages appearing in the final document.</p>
+<pre class="sourceCode r"><code class="sourceCode r">table1 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># split.tables argument needed to avoid the table wrapping</span>
+<span class="st">  </span><span class="kw">pander</span>(<span class="dt">split.tables=</span><span class="ot">Inf</span>,
+         <span class="dt">missing=</span><span class="st">&quot;-&quot;</span>,
+         <span class="dt">justify=</span><span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;left&quot;</span>, <span class="kw">rep</span>(<span class="st">&quot;center&quot;</span>, <span class="dv">5</span>)),
+         <span class="dt">caption=</span><span class="st">&#39;Table presenting baseline differences between conditions. Categorical variables tested with Pearson χ2, continuous variables with two-sample t-test.&#39;</span>)</code></pre>
+<table>
+<caption>Table presenting baseline differences between conditions. Categorical variables tested with Pearson χ2, continuous variables with two-sample t-test.</caption>
+<colgroup>
+<col width="10%" />
+<col width="30%" />
+<col width="20%" />
+<col width="15%" />
+<col width="8%" />
+<col width="7%" />
+<col width="8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Response</th>
+<th align="center">Control N/Mean (SD)</th>
+<th align="center">Intervention</th>
+<th align="center">t/χ2</th>
+<th align="center">df</th>
+<th align="center">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">education</td>
+<td align="left">Graduate</td>
+<td align="center">27</td>
+<td align="center">34</td>
+<td align="center">1.599</td>
+<td align="center">3</td>
+<td align="center">0.6597</td>
+</tr>
+<tr class="even">
+<td align="left">-</td>
+<td align="left">Postgraduate</td>
+<td align="center">31</td>
+<td align="center">25</td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+<tr class="odd">
+<td align="left">-</td>
+<td align="left">Primary</td>
+<td align="center">27</td>
+<td align="center">25</td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+<tr class="even">
+<td align="left">-</td>
+<td align="left">Secondary</td>
+<td align="center">24</td>
+<td align="center">26</td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+<tr class="odd">
+<td align="left">-</td>
+<td align="left">-</td>
+<td align="center">31</td>
+<td align="center">30</td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+<tr class="even">
+<td align="left">ethnicity</td>
+<td align="left">Asian / Asian British</td>
+<td align="center">45</td>
+<td align="center">42</td>
+<td align="center">1.326</td>
+<td align="center">3</td>
+<td align="center">0.723</td>
+</tr>
+<tr class="odd">
+<td align="left">-</td>
+<td align="left">Black / African / Caribbean /
+Black British</td>
+<td align="center">28</td>
+<td align="center">25</td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+<tr class="even">
+<td align="left">-</td>
+<td align="left">Mixed / multiple ethnic groups</td>
+<td align="center">28</td>
+<td align="center">36</td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+<tr class="odd">
+<td align="left">-</td>
+<td align="left">White British</td>
+<td align="center">39</td>
+<td align="center">37</td>
+<td align="center">-</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+<tr class="even">
+<td align="left">yob</td>
+<td align="left">-</td>
+<td align="center">1979.30 (5.54)</td>
+<td align="center">1978.78 (5.02)</td>
+<td align="center">0.8253</td>
+<td align="center">275.3</td>
+<td align="center">0.4099</td>
+</tr>
+<tr class="odd">
+<td align="left">WM</td>
+<td align="left">-</td>
+<td align="center">99.98 (9.74)</td>
+<td align="center">99.05 (9.08)</td>
+<td align="center">0.8247</td>
+<td align="center">276.6</td>
+<td align="center">0.4102</td>
+</tr>
+</tbody>
+</table>
+<p>Some exercises to work on/extensions to this code you might need:</p>
+<ul>
+<li>Add a new continuous variable to the simulated dataset and include it in the
+final table</li>
+<li>Create a third experimental group and amend the code to i) include 3 columns
+for the N/Mean and ii) report the F-test from a one-way Anova as the test
+statistic.</li>
+<li>Add the within-group percentage for each response to a categorical variable.</li>
+</ul>
 
 </div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
-</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="code-reuse.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="quirks.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

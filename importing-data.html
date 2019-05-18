@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Importing data | Just Enough R</title>
+  <meta name="description" content="Importing data | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Importing data | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Importing data | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="real-data.html">
+<link rel="next" href="saving-and-exporting.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,56 +430,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
-<ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
-</ul>
-</div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+<div id="importing-data" class="section level2 unnumbered">
+<h2>Importing data</h2>
+<p>If you have data outside of R, <em>the simplest way to import it is to first save
+it as a comma or tab-separated text file</em>, normally with the file extension
+<code>.csv</code> or <code>.txt</code><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>.</p>
+<p>Let’s say we have file called <code>angry_moods.csv</code> in the same directory as our
+<code>.Rmd</code> file. We can read this data using the <code>read_csv()</code> function from the
+<code>readr</code> package<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">angry.moods &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&#39;data/angry_moods.csv&#39;</span>)
+<span class="kw">head</span>(angry.moods)
+<span class="co"># A tibble: 6 x 7</span>
+  Gender Sports Anger.Out Anger.In Control.Out Control.In Anger.Expression
+   <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">    </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">       </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">      </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">            </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span>      <span class="dv">2</span>      <span class="dv">1</span>        <span class="dv">18</span>       <span class="dv">13</span>          <span class="dv">23</span>         <span class="dv">20</span>               <span class="dv">36</span>
+<span class="dv">2</span>      <span class="dv">2</span>      <span class="dv">1</span>        <span class="dv">14</span>       <span class="dv">17</span>          <span class="dv">25</span>         <span class="dv">24</span>               <span class="dv">30</span>
+<span class="dv">3</span>      <span class="dv">2</span>      <span class="dv">1</span>        <span class="dv">13</span>       <span class="dv">14</span>          <span class="dv">28</span>         <span class="dv">28</span>               <span class="dv">19</span>
+<span class="dv">4</span>      <span class="dv">2</span>      <span class="dv">1</span>        <span class="dv">17</span>       <span class="dv">24</span>          <span class="dv">23</span>         <span class="dv">23</span>               <span class="dv">43</span>
+<span class="dv">5</span>      <span class="dv">1</span>      <span class="dv">1</span>        <span class="dv">16</span>       <span class="dv">17</span>          <span class="dv">26</span>         <span class="dv">28</span>               <span class="dv">27</span>
+<span class="dv">6</span>      <span class="dv">1</span>      <span class="dv">1</span>        <span class="dv">16</span>       <span class="dv">22</span>          <span class="dv">25</span>         <span class="dv">23</span>               <span class="dv">38</span></code></pre>
+<p>As you can see, when loading the <code>.csv</code> file the <code>read_csv()</code> makes some
+assumptions about the <em>type</em> of data the file contains. In this case, all the
+columns contain integer values. It’s worth checking this message to make sure
+that stray cells in the file you are importing don’t cause problems when
+importing. Excel won’t complain about this sort of thing, but R is more strict
+and won’t mix text and numbers in the same column.</p>
+<p>A common error is for stray notes or text values in a spreadsheet to cause a
+column which should be numeric to be converted to the <code>character</code> type.</p>
+<p>Once it’s loaded, you can use this new dataset like any other:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(angry.moods)</code></pre>
+<p><img src="import-export_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div id="importing-data-from-the-web" class="section level3 unnumbered">
+<h3>Importing data over the web</h3>
+<p>One neat feature of the <code>readr</code> package is that you can import data from the
+web, using a URL rather than a filename on your local computer. This can be
+really helpful when sharing data and code with colleagues. For example, we can
+load the <code>angry_moods.csv</code> file from a URL:</p>
+<pre class="sourceCode r"><code class="sourceCode r">angry.moods.from.url &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(
+  <span class="st">&quot;https://raw.githubusercontent.com/benwhalley/just-enough-r/master/angry_moods.csv&quot;</span>)
 
+<span class="kw">head</span>(angry.moods.from.url)</code></pre>
+</div>
+<div id="importing-proprietary-formats" class="section level3 unnumbered">
+<h3>Importing from SPSS and other packages</h3>
+<p>This is often more trouble than it’s worth. If using Excel for example, it’s
+best just to save your data a csv file first and import that.</p>
+<p>But if you really must use other formats see
+<a href="https://www.datacamp.com/community/tutorials/r-data-import-tutorial" class="uri">https://www.datacamp.com/community/tutorials/r-data-import-tutorial</a>.</p>
 </div>
 </div>
-
-
-
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
+<ol start="6">
+<li id="fn6"><p>This is easy to achieve in Excel and most other stats packages
+using the <code>Save As...</code> menu item<a href="importing-data.html#fnref6" class="footnote-back">↩</a></p></li>
+<li id="fn7"><p>There are also standard functions built into R, such as <code>read.csv()</code> or
+<code>read.table()</code> for importing data. These are fine if you can’t install the
+<code>readr</code> package for some reason, but they are quite old and the default
+behaviour is sometimes counterintuitive. I recommend using the <code>readr</code>
+equivalents: <code>read_csv()</code> or <code>read_tsv()</code>.<a href="importing-data.html#fnref7" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -487,8 +496,8 @@ late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="real-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="saving-and-exporting.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Workflow | Just Enough R</title>
+  <meta name="description" content="Workflow | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Workflow | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Workflow | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="installation-intro.html">
+<link rel="next" href="first-commands.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,159 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
+<div id="start-here" class="section level2 unnumbered">
+<h2>Workflow</h2>
+<!-- <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/k56UXc4paIM?rel=0" frameborder="0" allowfullscreen></iframe>
+ -->
+<p>One big adjustment to make when moving away tools like SPSS is to find a ‘way of
+working’ that suits you.</p>
+<p>We have often developed ways of working, saving, and communicating our work, and
+become comfortable with them. In part, these habits and routines may be attempts
+to work around limitations of these tools. But nevertheless, habits are easier
+to replace than break, so here’s an alternative model to adopt:</p>
+<ol style="list-style-type: decimal">
+<li><p>Work in <a href="start-here.html#rstudio">RStudio</a>, and use <a href="start-here.html#rmarkdown">RMarkdown</a> documents (see
+next sections).</p></li>
+<li><p>Save your raw data in <a href="saving-and-exporting.html#use-csv">.csv format</a>. Never edit data by hand unless
+absolutely necessary.</p></li>
+<li><p><a href="saving-and-exporting.html#save-intermediate-steps">Use R to process your data and RMarkdown to document the process</a>.</p></li>
+</ol>
+<div id="rmarkdown" class="section level3 unnumbered">
+<h3>RMarkdown</h3>
+<p>Conventional statistics software like SPSS lacks a simple way to document and
+share your analyses, and make repeating or editing your work later very hard.</p>
+<p>RMarkdown is a format for documenting and sharing statistical analyses.</p>
+<p>This it might seem an odd place to start: we haven’t got anything to share yet!
+But using RMarkdown in RStudio provides a really nice way to work with data
+interactively and share our results, so we start as we mean to go on.</p>
+<p>You are currently reading the output of an ‘RMarkdown’ document. An RMarkdown
+document mixes R code with Markdown:</p>
 <ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
+<li>R is a computer language designed for working with data.</li>
+<li>Markdown is a simple text-based format which can include prose, hypertext
+links, images, and code (see <a href="http://commonmark.org/help/" class="uri">http://commonmark.org/help/</a>).</li>
+</ul>
+<p>Like computer code, RMarkdown can be ‘run’ or ‘executed’. But in the language of
+RStudio, you ‘knit’ your RMarkdown to produce a finished document. This combines
+analyses, graphs, and explanatory text in a single pdf, html, or Word document
+which can be shared.</p>
+</div>
+<div id="rstudio" class="section level3 unnumbered">
+<h3>RStudio</h3>
+<p><a href="https://www.rstudio.com/products/rstudio/">RStudio</a> is a special text editor
+that has been customised to make working with R easy. It can be installed on
+your own computer, or you can login to a shared RStudio server (for example, one
+run by your university) from a web browser. Either way the interface is largely
+the same and contains 4 main panels:</p>
+<p><img src="media/rstudio-mainwindow.png" width="1495" /></p>
+<p>The figure above shows the main RStudio interface, comprising:</p>
+<ol style="list-style-type: decimal">
+<li><p>The main R-script or RMarkdown editor window. This is where you write
+commands, which can then be executed (to run the current line type ctrl-Enter
+or cmd-Enter on a Mac).</p></li>
+<li><p>The R console, into which you can type R commands directly, and see the
+output of commands run in the script editor.</p></li>
+<li><p>The ‘environment’ panel, which lists all the variables you have defined and
+currently available to use.</p></li>
+<li><p>The files and help panel. Within this panel the ‘files’ tab enables you to
+open files stored on the server, in the current project, or elsewhere on your
+hard drive.</p></li>
+</ol>
+<p>You can see a short video demonstrating the RStudio interface here:</p>
+<iframe src="https://player.vimeo.com/video/221888958" width="640" height="480" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+</iframe>
+<!--
+
+When you first open RStudio (in this case, it's the server version, so loaded in a web page) it should look something like this.
+
+There is a single window, intially split into three panels, which are:
+
+1. The console, where you can type R commands and see the output produced by them
+2. The help panel, which also has a bunch of other tabs for things like the Environment, your command history, packages you have installed, and some other stuff.
+3. In the lower right corner is a panel for your plots, which also has a tab called 'files', where you can view and open analysis and data files you save on the server.
+
+
+The first thing I'd suggest you do is to create a new RMarkdown file, by clicking on this icon here and selecting RMarkdown. The defaults are all fine, so just give it a name and click OK.
+
+You should now see a 4th panel appear in the top left of the main window, which is the Script editor. This is where you can edit and run your analyses. You can type R commands directly into the console, but it's much better to type them here first, and then run them.
+
+There is more information on RMarkdown in the guide, but you can think of it like a lab notebook: it lets you mix commands for analysis, graphs, tables and your explanatory notes all in the same document. This means it's really easy to keep track of your work, and collaborate with other people.
+
+When we're finished working, we can press 'Knit' which runs all the code, and creates a finished document containing both the results and our notes. If you are using the server edition you might see a little warning message about a popup blocker, but this is OK to ignore.
+
+In this example file we can see there is:
+
+- Some introductory text,
+- A summary of the 'cars' dataset and
+- An embedded plot
+
+This is all saved as a single html file which you can email to collaborators, put online, or submit to a journal to help reviewers understand your work.
+
+If I close this window, you can also see that if I click the arrow next to the 'knit' button we could also have created a pdf or word document, although I'd recommend sticking to HTML to begin with.
+
+
+At the top of the RMarkdown file itself, we have a title for the document, and a line which tells RStudio that we want to build and html file by default.
+
+Moving down, we have a 'code chunk', which is denoted by these three backticks, the curly brackets and the letter "R". This tells Rstduio that we're about to include some R code which it will need to run. Ignore the code in this chunk for the moment, and I'll come back to that later.
+
+Next we have some text, which is formatted with Markdown. Markdown is a simple text format which makes it easy to create structured documents with some basic markup symbols. Here, the two ## symbols just mean that this is a "second level" heading. The double asterisk symbols here mean but this word in bold text... but again, don't worry too much about this for the moment. It's just text.
+
+Next we have another code block, this time with some of the analysis we saw in the html file after we hit 'knit'. This function just produces a summary of the 'cars' dataset, which is an example file built into R and is already loaded, as soon as we start RStudio.
+
+One of the nicest things about RMarkdown documents though is that we can write and run this code interactively. So if I put my cursor on this line here, and press run, then I can see the results dropped straight into the document. I could also have just pressed Ctrl-Enter and the same thing would happen.
+
+So, if I edit the code here, I can change the analysis and see the results straight away. For example, if I add the line `pairs(cars)` we immediately see a pairs plot, which is just a bunch of scatterplots. Working interactively like this is really nice when you first start exploring a dataset and trying to make sense of it.
+
+
+
+OK - so that's it for this video. Just quickly before I go though, it's worth knowing there are lots of keyboard shortcuts available, and you can see then all from this menu. Help is F-1!
+
+-->
+<p>The video:</p>
+<ul>
+<li>Shows you how to type commands into the Console and view the results.</li>
+<li>Run a plotting function, and see the result.</li>
+<li>Create RMarkdown file, and ‘Knit’ it to produce a document containing the
+results of your code and explanatory text.</li>
+</ul>
+<div class="exercise">
+<p>Once you have watched the video:</p>
+<ul>
+<li>Open RStudio and create a new RMarkdown document.</li>
+<li>Edit some of the text, and press the <code>Knit</code> button to see the results.</li>
+<li>Edit some of the R blocks and see what happens.</li>
 </ul>
 </div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
-
+</div>
+<div id="creating-code-chunks" class="section level3 unnumbered">
+<h3>Creating code chunks</h3>
+<p>To include R code within RMarkdown we write 3 backticks (<code>```</code>), followed by
+<code>{r}</code>. We the include our R code, and close the block with 3 more backticks
+(<a href="getting-help.html#backtick-location">how to find the backtick on your keyboard</a>).</p>
+<div class="figure">
+<img src="media/r-code-chunk.png" alt="A code chunk in the RMarkdown editor" />
+<p class="caption">A code chunk in the RMarkdown editor</p>
+</div>
+<p>When a document including this chunk is run or ‘knitted’, the final result will
+include the the line <code>2+2</code> followed by the number <code>4</code> on the next line. We can
+use RMarkdown to ‘show our workings’: our analysis can be interleaved with
+narrative text to explain or interpret the calculations.</p>
+<div id="more-about-rmarkdown" class="section level5 unnumbered tip">
+<h5>More about RMarkdown</h5>
+<p>A more in depth explanation of RMarkdown is here:
+<a href="https://rmarkdown.rstudio.com" class="uri">https://rmarkdown.rstudio.com</a>, and a detailed
+user guide here:
+<a href="https://rmarkdown.rstudio.com/lesson-1.html" class="uri">https://rmarkdown.rstudio.com/lesson-1.html</a></p>
 </div>
 </div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="installation-intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="first-commands.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

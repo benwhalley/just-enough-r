@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>t-tests | Just Enough R</title>
+  <meta name="description" content="t-tests | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="t-tests | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="t-tests | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="correlations.html">
+<link rel="next" href="linear-models-simple.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,184 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
-<ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
-</ul>
-</div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+<div id="t-tests" class="section level2 unnumbered">
+<h2>t-tests</h2>
+<div id="visualising-your-data-first" class="section level3 unnumbered">
+<h3>Visualising your data first</h3>
+<p>Before you run any tests it’s worth plotting your data.</p>
+<p>Assuming you have a continuous outcome and categorical (binary) predictor (here
+we use a subset of the built in <code>chickwts</code> data), a boxplot can work well:</p>
+<pre class="sourceCode r"><code class="sourceCode r">chicks.eating.beans &lt;-<span class="st"> </span>chickwts <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(feed <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;horsebean&quot;</span>, <span class="st">&quot;soybean&quot;</span>))
 
+chicks.eating.beans <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(feed, weight)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre>
+<div class="figure"><span id="fig:boxplot"></span>
+<img src="t-tests_files/figure-html/boxplot-1.png" alt="The box in a boxplot indictes the IQR; the whisker indicates the min/max values or 1.5  imes the IQR, whichever is the smaller. If there are outliers beyond 1.5    imes the IQR then they are shown as points." width="672" />
+<p class="caption">
+Figure 6.1: The box in a boxplot indictes the IQR; the whisker indicates the min/max values or 1.5 imes the IQR, whichever is the smaller. If there are outliers beyond 1.5 imes the IQR then they are shown as points.
+</p>
 </div>
-</div>
+<p>Or a violin or bottle plot, which shows the distributions within each group and
+makes it relatively easy to check some of the main assumptions of the test:</p>
+<pre class="sourceCode r"><code class="sourceCode r">chicks.eating.beans <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(feed, weight)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_violin</span>()</code></pre>
+<p><img src="t-tests_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Layering boxes and bottles can work well too because it combines information
+about the distribution with key statistics like the median and IQR, and also
+because it scales reasonably well to multiple categories:</p>
+<pre class="sourceCode r"><code class="sourceCode r">chickwts <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(feed, weight)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_violin</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">width=</span>.<span class="dv">1</span>)</code></pre>
+<p><img src="t-tests_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<!-- Bottleplots are just density plots, turned 90 degrees. Density plots might be more familiar to some, but it's hard to show more than 2 or 3 categories:
 
 
+```r
+chicks.eating.beans %>%
+  ggplot(aes(weight, fill=feed)) +
+  geom_density(alpha=.5)
+```
 
-<div class="footnotes">
+<img src="t-tests_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+
+
+
+And density plots are just smoothed histograms (which you might prefer if you're a fan of 80's computer games):
+
+
+```r
+chicks.eating.beans %>%
+  ggplot(aes(weight)) +
+  geom_histogram(bins=7) +
+  facet_grid(feed ~ .)
+```
+
+<img src="t-tests_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+ -->
+</div>
+<div id="running-a-t-test" class="section level3 unnumbered">
+<h3>Running a t-test</h3>
+<p>Assuming you really do still want to run a null hypothesis test on one or two
+means, the <code>t.test()</code> function performs most common variants, illustrated below.</p>
+<div id="independent-groups" class="section level5 unnumbered">
+<h5>2 independent groups</h5>
+<p>Assuming your data are in long format:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(weight <span class="op">~</span><span class="st"> </span>feed, <span class="dt">data=</span>chicks.eating.beans)
+
+    Welch Two Sample t<span class="op">-</span>test
+
+data<span class="op">:</span><span class="st">  </span>weight by feed
+t =<span class="st"> </span><span class="fl">-4.5543</span>, df =<span class="st"> </span><span class="fl">21.995</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.0001559</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span>
+<span class="dv">95</span> percent confidence interval<span class="op">:</span>
+<span class="st"> </span><span class="fl">-125.49476</span>  <span class="fl">-46.96238</span>
+sample estimates<span class="op">:</span>
+mean <span class="cf">in</span> group horsebean   mean <span class="cf">in</span> group soybean 
+               <span class="fl">160.2000</span>                <span class="fl">246.4286</span> </code></pre>
+<p>Or equivalently, if your <a href="#tidying-data">data are untidy</a> and each group has
+it’s own column (e.g. chicks eating soybeans in one column and those eating
+horsebeans in another):</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(untidy.chicks, <span class="kw">t.test</span>(horsebean, soybean))
+
+    Welch Two Sample t<span class="op">-</span>test
+
+data<span class="op">:</span><span class="st">  </span>horsebean and soybean
+t =<span class="st"> </span><span class="fl">-4.5543</span>, df =<span class="st"> </span><span class="fl">21.995</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.0001559</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span>
+<span class="dv">95</span> percent confidence interval<span class="op">:</span>
+<span class="st"> </span><span class="fl">-125.49476</span>  <span class="fl">-46.96238</span>
+sample estimates<span class="op">:</span>
+mean of x mean of y 
+ <span class="fl">160.2000</span>  <span class="fl">246.4286</span> </code></pre>
+</div>
+<div id="equal-variances" class="section level5 unnumbered admonition">
+<h5>Equal or unequal variances?</h5>
+<p>By default R assumes your groups have unequal variances and applies an
+appropriate correction (you will notice the output labelled ‘Welch Two Sample
+t-test’).</p>
+<p>You can turn this correction off (for example, if you’re trying to replcate an
+analysis done using the default settings in SPSS) but you probably do want to
+assume unequal variances <span class="citation">[see @ruxton2006unequal]</span>.</p>
+</div>
+<div id="paired-samples" class="section level5 unnumbered">
+<h5>Paired samples</h5>
+<p>If you have repeated measures on a sample you need a paired samples test.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># simulate paired samples in pre-post design</span>
+<span class="kw">set.seed</span>(<span class="dv">1234</span>)
+baseline &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">50</span>, <span class="fl">2.5</span>, <span class="dv">1</span>)
+followup =<span class="st"> </span>baseline <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">50</span>, <span class="fl">.5</span>, <span class="dv">1</span>)
+
+<span class="co"># run paired samples test</span>
+<span class="kw">t.test</span>(baseline, followup, <span class="dt">paired=</span><span class="ot">TRUE</span>)
+
+    Paired t<span class="op">-</span>test
+
+data<span class="op">:</span><span class="st">  </span>baseline and followup
+t =<span class="st"> </span><span class="fl">-4.36</span>, df =<span class="st"> </span><span class="dv">49</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">6.661e-05</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span>
+<span class="dv">95</span> percent confidence interval<span class="op">:</span>
+<span class="st"> </span><span class="fl">-0.9342988</span> <span class="fl">-0.3447602</span>
+sample estimates<span class="op">:</span>
+mean of the differences 
+             <span class="fl">-0.6395295</span> </code></pre>
+<p>Note that we could also <a href="reshaping.html#wide-to-long">‘melt’ the data into long format</a> and
+use the <code>paired=TRUE</code> argument with a formula:</p>
+<pre class="sourceCode r"><code class="sourceCode r">long.form.data &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">baseline=</span>baseline, <span class="dt">follow=</span>followup) <span class="op">%&gt;%</span>
+<span class="st">  </span>reshape2<span class="op">::</span><span class="kw">melt</span>()
+Warning<span class="op">:</span><span class="st"> `</span><span class="dt">data_frame()</span><span class="st">`</span> is deprecated, use <span class="st">`</span><span class="dt">tibble()</span><span class="st">`</span>.
+This warning is displayed once per session.
+No id variables; using all as measure variables
+
+<span class="kw">with</span>(long.form.data, <span class="kw">t.test</span>(value<span class="op">~</span>variable, <span class="dt">paired=</span><span class="ot">TRUE</span>))
+
+    Paired t<span class="op">-</span>test
+
+data<span class="op">:</span><span class="st">  </span>value by variable
+t =<span class="st"> </span><span class="fl">-4.36</span>, df =<span class="st"> </span><span class="dv">49</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">6.661e-05</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span>
+<span class="dv">95</span> percent confidence interval<span class="op">:</span>
+<span class="st"> </span><span class="fl">-0.9342988</span> <span class="fl">-0.3447602</span>
+sample estimates<span class="op">:</span>
+mean of the differences 
+             <span class="fl">-0.6395295</span> </code></pre>
+</div>
+<div id="one-sample-test" class="section level5 unnumbered">
+<h5>One-sample test</h5>
+<p>Sometimes you might want to compare a sample mean with a specific value:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test if mean of `outcome` variable is different from 2</span>
+<span class="kw">set.seed</span>(<span class="dv">1234</span>)
+test.scores &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">50</span>, <span class="fl">2.5</span>, <span class="dv">1</span>)
+<span class="kw">t.test</span>(test.scores, <span class="dt">mu=</span><span class="dv">2</span>)
+
+    One Sample t<span class="op">-</span>test
+
+data<span class="op">:</span><span class="st">  </span>test.scores
+t =<span class="st"> </span><span class="fl">0.37508</span>, df =<span class="st"> </span><span class="dv">49</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.7092</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true mean is not equal to <span class="dv">2</span>
+<span class="dv">95</span> percent confidence interval<span class="op">:</span>
+<span class="st"> </span><span class="fl">1.795420</span> <span class="fl">2.298474</span>
+sample estimates<span class="op">:</span>
+mean of x 
+ <span class="fl">2.046947</span> </code></pre>
+
 <hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
+<p>title: ‘Regression in R’</p>
+<hr />
 </div>
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="correlations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linear-models-simple.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

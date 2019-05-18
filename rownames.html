@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Just Enough R</title>
-  <meta name="description" content="Just Enough R" />
+  <title>Rownames are evil | Just Enough R</title>
+  <meta name="description" content="Rownames are evil | Just Enough R" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Just Enough R" />
+  <meta property="og:title" content="Rownames are evil | Just Enough R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Just Enough R" />
+  <meta name="twitter:title" content="Rownames are evil | Just Enough R" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="r-basics.html">
+<link rel="prev" href="quirks.html">
+<link rel="next" href="string-handling.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -430,65 +430,128 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Just Enough R</h1>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><img src="media/keepcalm.png" class="cup" /></p>
-<!-- https://www.keepcalm-o-matic.co.uk/product/mug/keep-calm-and-learn-just-enough-r/ -->
-<p>R makes it easy to work with and learn from data.</p>
-<p>It also happens to be a programmming language, but if you’re reading this, that
-might not be of interest. That’s OK — the goal here is not to teach
-programming<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The goal is to teach you <em>just enough R</em> to be confident to explore your
-data.</p>
-<p>This book uses R like any other statistics software: To work-with and visualise
-data, run statistical analyses, and share our results with others. To do that
-you don’t need more than the <em>absolute basics</em> of the R language itself. The
-first chapters walk you through what you need to know to be productive.</p>
-<div id="things-to-know-before-you-start" class="section level4 unnumbered">
-<h4>Things to know Before you start</h4>
-<p>This guide is fairly opinionated, but for good reason.</p>
-<p>There are lots of ways to use R, and this has been a barrier for beginners. In
-particular base-R functions can be oddly-named, or lack a regular or predictable
-interface. For this reason we:</p>
-<ul>
-<li><p>Recommend (strongly) that you install and use ‘packages’ that extend some of
-R’s basic functionality. These packages are powerful tools in their own
-right, but also hide some of the complexities of R in a
-<a href="https://www.youtube.com/watch?v=K-ss_ag2k9E">clear and consistent way</a>. It
-might seem restrictive but, to begin with, learning <em>only</em> these packages
-will help you form a more consistent mental model and make rapid progress.
-You can learn the crufty old bits (which still have their uses) later on.</p></li>
-<li><p>Assume you are using the <a href="start-here.html#rstudio">RStudio editor</a> and working in an
-<a href="start-here.html#rmarkdown">RMarkdown document</a> (see the next section). If you don’t have
-access to RStudio yet, see the <a href="installation.html">installation guide</a>.</p></li>
-</ul>
-</div>
-<div id="license" class="section level4 unnumbered">
-<h4>License</h4>
-<p>These documents are licensed under the
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA licence</a>.</p>
+<div id="rownames" class="section level2 unnumbered">
+<h2>Rownames are evil</h2>
+<p>Historically ‘row names’ were used on R to label individual rows in a dataframe.
+It turned out that this is generally a bad idea, because sorting and some
+summary functions would get very confused and mix up row names and the data
+itself.</p>
+<p>It’s now considered best practice to avoid row names for this reason.
+Consequently, the functions in the <code>dplyr</code> library remove row names when
+processing dataframes. For example here we see the row names in the <code>mtcars</code>
+data:</p>
+<pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>)
+               mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4     <span class="fl">21.0</span>   <span class="dv">6</span>  <span class="dv">160</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.620</span> <span class="fl">16.46</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span>
+Mazda RX4 Wag <span class="fl">21.0</span>   <span class="dv">6</span>  <span class="dv">160</span> <span class="dv">110</span> <span class="fl">3.90</span> <span class="fl">2.875</span> <span class="fl">17.02</span>  <span class="dv">0</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">4</span>
+Datsun <span class="dv">710</span>    <span class="fl">22.8</span>   <span class="dv">4</span>  <span class="dv">108</span>  <span class="dv">93</span> <span class="fl">3.85</span> <span class="fl">2.320</span> <span class="fl">18.61</span>  <span class="dv">1</span>  <span class="dv">1</span>    <span class="dv">4</span>    <span class="dv">1</span></code></pre>
+<p>But here we don’t because <code>arrange</code> has stripped them:</p>
+<pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(mpg) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>)
+   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+<span class="dv">1</span> <span class="fl">10.4</span>   <span class="dv">8</span>  <span class="dv">472</span> <span class="dv">205</span> <span class="fl">2.93</span> <span class="fl">5.250</span> <span class="fl">17.98</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">2</span> <span class="fl">10.4</span>   <span class="dv">8</span>  <span class="dv">460</span> <span class="dv">215</span> <span class="fl">3.00</span> <span class="fl">5.424</span> <span class="fl">17.82</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">3</span> <span class="fl">13.3</span>   <span class="dv">8</span>  <span class="dv">350</span> <span class="dv">245</span> <span class="fl">3.73</span> <span class="fl">3.840</span> <span class="fl">15.41</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span></code></pre>
+<p>Converting the results of <code>psych::describe()</code> also returns rownames, which can
+get lots if we sort the data.</p>
+<p>We see row names here:</p>
+<pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">describe</span>(mtcars) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">as_data_frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>)
+Warning<span class="op">:</span><span class="st"> `</span><span class="dt">as_data_frame()</span><span class="st">`</span> is deprecated, use <span class="st">`</span><span class="dt">as_tibble()</span><span class="st">`</span> (but mind the new semantics).
+This warning is displayed once per session.
+<span class="co"># A tibble: 3 x 13</span>
+   vars     n   mean     sd median trimmed    mad   min   max range   skew
+  <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span>     <span class="dv">1</span>    <span class="dv">32</span>  <span class="fl">20.1</span>    <span class="fl">6.03</span>   <span class="fl">19.2</span>   <span class="fl">19.7</span>    <span class="fl">5.41</span>  <span class="fl">10.4</span>  <span class="fl">33.9</span>  <span class="fl">23.5</span>  <span class="fl">0.611</span>
+<span class="dv">2</span>     <span class="dv">2</span>    <span class="dv">32</span>   <span class="fl">6.19</span>   <span class="fl">1.79</span>    <span class="dv">6</span>      <span class="fl">6.23</span>   <span class="fl">2.97</span>   <span class="dv">4</span>     <span class="dv">8</span>     <span class="dv">4</span>   <span class="fl">-0.175</span>
+<span class="dv">3</span>     <span class="dv">3</span>    <span class="dv">32</span> <span class="fl">231.</span>   <span class="fl">124.</span>    <span class="fl">196.</span>   <span class="fl">223.</span>   <span class="fl">140.</span>    <span class="fl">71.1</span> <span class="dv">472</span>   <span class="fl">401.</span>   <span class="fl">0.382</span>
+<span class="co"># … with 2 more variables: kurtosis &lt;dbl&gt;, se &lt;dbl&gt;</span></code></pre>
+<p>But not here (just numbers in their place):</p>
+<pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">describe</span>(mtcars) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">as_data_frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(mean) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>)
+<span class="co"># A tibble: 3 x 13</span>
+   vars     n  mean    sd median trimmed   mad   min   max range  skew
+  <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span>
+<span class="dv">1</span>     <span class="dv">9</span>    <span class="dv">32</span> <span class="fl">0.406</span> <span class="fl">0.499</span>      <span class="dv">0</span>   <span class="fl">0.385</span>  <span class="dv">0</span>        <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">1</span> <span class="fl">0.364</span>
+<span class="dv">2</span>     <span class="dv">8</span>    <span class="dv">32</span> <span class="fl">0.438</span> <span class="fl">0.504</span>      <span class="dv">0</span>   <span class="fl">0.423</span>  <span class="dv">0</span>        <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">1</span> <span class="fl">0.240</span>
+<span class="dv">3</span>    <span class="dv">11</span>    <span class="dv">32</span> <span class="fl">2.81</span>  <span class="fl">1.62</span>       <span class="dv">2</span>   <span class="fl">2.65</span>   <span class="fl">1.48</span>     <span class="dv">1</span>     <span class="dv">8</span>     <span class="dv">7</span> <span class="fl">1.05</span> 
+<span class="co"># … with 2 more variables: kurtosis &lt;dbl&gt;, se &lt;dbl&gt;</span></code></pre>
+<div id="preserving-row-names" class="section level5 unnumbered">
+<h5>Preserving row names</h5>
+<p>If you want to preserve row names, it’s best to convert the names to an extra
+colum in the data. So, the example below does what we probably want:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the var=&#39;car.name&#39; argument is optional, but can be useful</span>
+mtcars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rownames_to_column</span>(<span class="dt">var=</span><span class="st">&quot;car.name&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(mpg) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>)
+             car.name  mpg cyl disp  hp drat    wt  qsec vs am gear carb
+<span class="dv">1</span>  Cadillac Fleetwood <span class="fl">10.4</span>   <span class="dv">8</span>  <span class="dv">472</span> <span class="dv">205</span> <span class="fl">2.93</span> <span class="fl">5.250</span> <span class="fl">17.98</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">2</span> Lincoln Continental <span class="fl">10.4</span>   <span class="dv">8</span>  <span class="dv">460</span> <span class="dv">215</span> <span class="fl">3.00</span> <span class="fl">5.424</span> <span class="fl">17.82</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span>
+<span class="dv">3</span>          Camaro Z28 <span class="fl">13.3</span>   <span class="dv">8</span>  <span class="dv">350</span> <span class="dv">245</span> <span class="fl">3.73</span> <span class="fl">3.840</span> <span class="fl">15.41</span>  <span class="dv">0</span>  <span class="dv">0</span>    <span class="dv">3</span>    <span class="dv">4</span></code></pre>
+<!-- TODO ADD THIS BACK WHEN THIS BUG FIXED: https://github.com/tidyverse/broom/issues/231 -->
+<!-- Another good way of preserving row names when converting R objects to dataframes is to use the `broom` library. Its `tidy()` function often does something sensible to convert an object to a dataframe, and has other benefits too, like extracting the relevant parts of the output, and naming columns consistently. -->
+<!-- Some example of `broom` in action: -->
+<!-- ```{r} -->
+<!-- psych::describe(mtcars, fast=T) %>% as_data_frame() -->
+<!--   broom::tidy() %>%  -->
+<!--   pander -->
+<!--   select(column, mean, sd, n) %>%  -->
+<!--   head(3) %>%  -->
+<!--   pander -->
+<!-- ``` -->
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(mpg<span class="op">~</span>wt, <span class="dt">data=</span>mtcars) <span class="op">%&gt;%</span>
+<span class="st">  </span>broom<span class="op">::</span><span class="kw">tidy</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span>pander</code></pre>
+<table style="width:85%;">
+<colgroup>
+<col width="19%" />
+<col width="15%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">term</th>
+<th align="center">estimate</th>
+<th align="center">std.error</th>
+<th align="center">statistic</th>
+<th align="center">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">(Intercept)</td>
+<td align="center">37.29</td>
+<td align="center">1.878</td>
+<td align="center">19.86</td>
+<td align="center">8.242e-19</td>
+</tr>
+<tr class="even">
+<td align="center">wt</td>
+<td align="center">-5.344</td>
+<td align="center">0.5591</td>
+<td align="center">-9.559</td>
+<td align="center">1.294e-10</td>
+</tr>
+</tbody>
+</table>
 
 </div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a lie, but hopefully it won’t be obvious until it’s too
-late.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="r-basics.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="quirks.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="string-handling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
