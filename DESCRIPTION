@@ -20,5 +20,6 @@ Imports:
   sn,
   DiagrammeR,
   DiagrammeRsvg,
-  rsvg
+  rsvg,
+  tidybayes,
 
