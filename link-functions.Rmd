@@ -79,10 +79,10 @@ You can think of the solution as coming in two steps:
 
 #### Step 1 {-}
 
-We can transform a probability on the 0---1 scale to a 0 \rightarrow ∞ scale by
-converting it to _odds_, which are expressed as a ratio:
+We can transform a probability on the 0---1 scale to a $0 \rightarrow ∞$ scale
+by converting it to _odds_, which are expressed as a ratio:
 
-$$\textrm{odds} = \dfrac{\textrm{probability}}{1-\textrm{probability}}$$
+$$odds = \dfrac{p}{1-p}$$
 
 Probabilities and odds ratios are two _equivalent_ ways of expressing the same
 idea.

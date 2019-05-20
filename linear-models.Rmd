@@ -61,8 +61,8 @@ size) and `wt` (car weight):
 
 ```{r}
 mtcars %>%
-	select(mpg, disp, wt) %>%
-	pairs
+  select(mpg, disp, wt) %>%
+  pairs
 ```
 
 Before running any model, we should ask outselves: "what question we are trying
@@ -579,9 +579,9 @@ inputs.
 
 However, be cautious when standardising. You will sometimes see people interpret
 standardised coefficients in terms of 'relative importance' of the predictors.
-For example, they might say that if $\beta^1 = .2$ and $\beta^2 = .4$ then
-$\beta^2$ is twice as important as $\beta^$. Although this is appealing, it's
-not always valid.
+For example, they might say that if $\beta^{1}= .2$ and $\beta^{2} = .4$ then
+$\beta^{2}$ is twice as important as $\beta^{1}$. Although this is appealing,
+it's not always valid.
 
 The main problem is that you don't always know whether you have a full range of
 values of predictors in your sample. For example, imagine a case where the a
@@ -591,9 +591,9 @@ general population.
 ```{r, include=F}
 set.seed(1234)
 incomes <- data_frame(age = round(rnorm(1000, 40, 15)),
-	gender = sample(0:1, 1000, replace=T),
-	income = round(rnorm(1000,  30000, 1000) + 30*age + 1000 * gender)) %>%
-		mutate(gender=factor(gender, labels=c("F", "M")))
+  gender = sample(0:1, 1000, replace=T),
+  income = round(rnorm(1000,  30000, 1000) + 30*age + 1000 * gender)) %>%
+    mutate(gender=factor(gender, labels=c("F", "M")))
 ```
 
 We can plot these data to show the effect of age, and gender:
@@ -627,7 +627,7 @@ constant across the range of ages:
 
 ```{r}
 younger.incomes <- incomes %>%
-	filter(age<40)
+  filter(age<40)
 
 m2 <- lm(income~age+gender, data=younger.incomes)
 coef(m2)

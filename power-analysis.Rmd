@@ -71,8 +71,11 @@ We now use the `powerSim` function to use our tweaked model to:
 -   count how many times (i.e., for what proportion) we get a significant _p_
     value
 
-```{r}
+```{r include=F, echo=T}
 power.sim <- powerSim(model.of.interest, nsim=100)
+```
+
+```{r}
 power.sim
 ```
 
@@ -82,7 +85,13 @@ to see what power we have to detect an effect of x = .8:
 
 ```{r}
 fixef(model.of.interest)['x'] <- .8
+```
+
+```{r include=F, echo=T}
 power.sim <- powerSim(model.of.interest, nsim=100)
+```
+
+```{r}
 power.sim
 ```
 
@@ -98,7 +107,13 @@ And we could simulate increasing the variance parameter for `g` to 0.5:
 
 ```{r}
 VarCorr(model.of.interest)['g'] <- .5
+```
+
+```{r include=F, echo=T}
 power.sim <- powerSim(model.of.interest, nsim=100)
+```
+
+```{r}
 power.sim
 ```
 
