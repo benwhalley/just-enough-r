@@ -54,10 +54,7 @@ titanic %>%
   xlab("Ticket class")
 ```
 
-<div class="figure">
-<img src="generalized-linear-models_files/figure-html/unnamed-chunk-3-1.png" alt="Survival probabilities by Sex and ticket class." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-3)Survival probabilities by Sex and ticket class.</p>
-</div>
+![(\#fig:unnamed-chunk-3)Survival probabilities by Sex and ticket class.](generalized-linear-models_files/figure-latex/unnamed-chunk-3-1.pdf) 
 
 Given the plot above, it seems reasonable to predict survival from `Sex` and
 `Pclass`, and also to include the interaction between these variables.
@@ -223,7 +220,7 @@ new.passengers %>%
   ylab("Probability of survival")
 ```
 
-<img src="generalized-linear-models_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+![](generalized-linear-models_files/figure-latex/unnamed-chunk-10-1.pdf)<!-- --> 
 
 #### Evaluating logistic regression models {- #glm-cross-validation}
 

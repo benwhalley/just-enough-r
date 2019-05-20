@@ -32,7 +32,7 @@ Let's pretend we are creative researchers and, over the course of our career, we
 will develop 100 hypotheses, each of which we test in an experiment, represented
 by squares in the plot below:
 
-<img src="multiple-comparisons_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+![](multiple-comparisons_files/figure-latex/unnamed-chunk-3-1.pdf)<!-- --> 
 
 We are concientious and use [sample size calculations](#power) for our studies,
 setting our desired power = .8, and use _p_ = .05 as our criterion for rejecting
@@ -46,12 +46,12 @@ other 50% are nice ideas, but are not correct). Because we set our power to be
 we will detect around 40 'true' effects, and publish them. These are shown in
 blue in the figure below:
 
-<img src="multiple-comparisons_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+![](multiple-comparisons_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
 
 Because we set our alpha level to 0.05, we will also have some false positives,
 shown in red:
 
-<img src="multiple-comparisons_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](multiple-comparisons_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
 
 But what that means is that _for the effects we publish as supporting our
 hypotheses_ (i.e. the blue and red squares) then we will be making false claims
@@ -82,7 +82,7 @@ Assuming each of our 100 experiments allows for 3 tests, any of which would be
 'interesting' if significant (and we would therefore publish them), then our
 plot looks like this:
 
-<img src="multiple-comparisons_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+![](multiple-comparisons_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
 
 And our 'false discovery rate' (at the level of our published papers) is now
 over one third: 15/40 = 37.5%.
@@ -292,7 +292,7 @@ In the [Anova cookbook](#howell-factorial-example), we used a dataset from
 Howell's textbook which recorded `Recall` among young v.s. older adults (`Age`)
 for each of 5 conditions:
 
-<img src="multiple-comparisons_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+![](multiple-comparisons_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
 
 In an ideal world we would have published a trial protocol before collecting
 data, or at the least
@@ -496,10 +496,7 @@ Table: Randomly generated 'p values', with and without FDR correction applied.
 
 We can plot these values to see the effect the adjustment has:
 
-<div class="figure">
-<img src="multiple-comparisons_files/figure-html/unnamed-chunk-15-1.png" alt="Example of the adjustments made to p values by FDR and Bonferroni methods. Unadjusted p values are shown in black. Note how conservative Bonferroni is with even this small number of comparisons to correct for." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-15)Example of the adjustments made to p values by FDR and Bonferroni methods. Unadjusted p values are shown in black. Note how conservative Bonferroni is with even this small number of comparisons to correct for.</p>
-</div>
+![(\#fig:unnamed-chunk-15)Example of the adjustments made to p values by FDR and Bonferroni methods. Unadjusted p values are shown in black. Note how conservative Bonferroni is with even this small number of comparisons to correct for.](multiple-comparisons_files/figure-latex/unnamed-chunk-15-1.pdf) 
 
 #### Other contrasts {- #contrasts}
 

@@ -209,7 +209,7 @@ lme4::sleepstudy %>%
 `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="multilevel-models_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+![](multilevel-models_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
 
 
 ```r
@@ -243,7 +243,7 @@ lme4::sleepstudy %>%
   theme_minimal()
 ```
 
-<img src="multilevel-models_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+![](multilevel-models_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
 
 If we wanted to test whether there was significant variation in the effects of
 sleep deprivation between subjects, by adding a
@@ -337,7 +337,7 @@ residual.fitted.data %>%
 `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="multilevel-models_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+![](multilevel-models_files/figure-latex/unnamed-chunk-14-1.pdf)<!-- --> 
 
 We can plot both of the random effects from this model (intercept and slope) to
 see how much the model expects individuals to deviate from the overall (mean)
@@ -359,7 +359,7 @@ ranef(random.slope.model)$Subject %>%
   scale_y_continuous(limits=c(-100, 100))
 ```
 
-<img src="multilevel-models_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+![](multilevel-models_files/figure-latex/unnamed-chunk-15-1.pdf)<!-- --> 
 
 Inspecting this plot, there doesn't seem to be any strong correlation between
 the RT value at which an individual starts (their intercept residual) and the
@@ -441,7 +441,7 @@ lme4::sleepstudy %>%
 `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="multilevel-models_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+![](multilevel-models_files/figure-latex/unnamed-chunk-19-1.pdf)<!-- --> 
 
 If we insisted on testing a curved (quadratic) function of `Days`, we could:
 
@@ -753,7 +753,7 @@ m.emm.df %>%
   ylab("RT")
 ```
 
-<img src="multilevel-models_files/figure-html/unnamed-chunk-33-1.png" width="672" />
+![](multilevel-models_files/figure-latex/unnamed-chunk-33-1.pdf)<!-- --> 
 
 If we wanted to compare each day against every other day (i.e. all the pairwise
 comparisons) we can use `contrast()`:

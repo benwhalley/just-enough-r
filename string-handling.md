@@ -49,7 +49,7 @@ mtcars %>%
   geom_boxplot() + xlab("")
 ```
 
-<img src="string-handling_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](string-handling_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
 
 ### Fixing up `variable` after melting {- #separate-and-extract}
 

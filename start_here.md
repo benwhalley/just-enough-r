@@ -98,7 +98,8 @@ your own computer, or you can login to a shared RStudio server (for example, one
 run by your university) from a web browser. Either way the interface is largely
 the same and contains 4 main panels:
 
-<img src="media/rstudio-mainwindow.png" width="1495" />
+
+\includegraphics[width=41.53in]{media/rstudio-mainwindow} 
 
 The figure above shows the main RStudio interface, comprising:
 
@@ -582,7 +583,7 @@ the `hist` function returns a histogram:
 hist(heights)
 ```
 
-<img src="start_here_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+![](start_here_files/figure-latex/unnamed-chunk-28-1.pdf)<!-- --> 
 
 We'll cover lots more plotting and visualisation later on.
 
@@ -696,21 +697,21 @@ vectors:
 ```r
 # 10 uniformly distributed random numbers between 0 and 1
 runif(10)
- [1] 0.06268614 0.43068297 0.02536761 0.93251488 0.30431507 0.09575141
- [7] 0.67592706 0.02395060 0.98127490 0.93038269
+ [1] 0.68178208 0.90411456 0.50615136 0.98745549 0.45402399 0.03190653
+ [7] 0.91578234 0.99891484 0.61407334 0.11438643
 
 # 1,000 uniformly distributed random numbers between 1 and 100
 my.numbers <- runif(1000, 1, 10)
 
 # 10 random-normal numbers with mean 10 and SD=1
 rnorm(10, mean=10)
- [1] 10.592363 12.107185  8.277359 11.624930 10.430830 10.878258 10.038941
- [8]  9.180190  9.359233  9.396876
+ [1] 10.748900 10.159444  9.888892 11.338383  7.736228  9.424838 11.330858
+ [8]  8.327885  9.348344  8.853372
 
 # 10 random-normal numbers with mean 10 and SD=5
 rnorm(10, 10, 5)
- [1] 11.279845 11.445805 11.270044  7.195771 11.447641 12.785706 20.414382
- [8] 10.932844  8.898828 11.766187
+ [1] 11.7342244  7.9680336  7.9065691  9.5719237  8.1691346 10.3218285
+ [7] 12.1666092  5.5941250 17.7576063 -0.7157989
 ```
 
 We can then use these numbers in our code, for example plotting them:
@@ -721,7 +722,7 @@ random.numbers <- rnorm(10000)
 hist(random.numbers)
 ```
 
-<img src="start_here_files/figure-html/unnamed-chunk-37-1.png" width="672" />
+![](start_here_files/figure-latex/unnamed-chunk-37-1.pdf)<!-- --> 
 
 ## Functions to learn now {- }
 
@@ -781,9 +782,9 @@ ages <- round(rnorm(10, mean=40, sd=10))
 
 # get the rank order of elements (i.e. what their positions would be if the vector was sorted)
 ages
- [1] 27 20 35 43 35 36 49 46 24 48
+ [1] 54 48 40 53 39 27 41 21 35 42
 rank(ages, ties.method="first")
- [1]  3  1  4  7  5  6 10  8  2  9
+ [1] 10  8  5  9  4  2  6  1  3  7
 ```
 
 ###### Unique values {-}

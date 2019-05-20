@@ -732,9 +732,9 @@ variables like sex (male/female) will then be on a <em>similar</em> scale to num
 inputs.</p>
 <p>However, be cautious when standardising. You will sometimes see people interpret
 standardised coefficients in terms of ‘relative importance’ of the predictors.
-For example, they might say that if <span class="math inline">\(\beta^1 = .2\)</span> and <span class="math inline">\(\beta^2 = .4\)</span> then
-<span class="math inline">\(\beta^2\)</span> is twice as important as <span class="math inline">\(\beta^\)</span>. Although this is appealing, it’s
-not always valid.</p>
+For example, they might say that if <span class="math inline">\(\beta^{1}= .2\)</span> and <span class="math inline">\(\beta^{2} = .4\)</span> then
+<span class="math inline">\(\beta^{2}\)</span> is twice as important as <span class="math inline">\(\beta^{1}\)</span>. Although this is appealing,
+it’s not always valid.</p>
 <p>The main problem is that you don’t always know whether you have a full range of
 values of predictors in your sample. For example, imagine a case where the a
 regression coefficient for <code>age</code> was linear, and = .5 in a sample from the
@@ -759,7 +759,7 @@ roughly equal importance in predicting income.</p>
 under 40, the regression coefficients won’t change much because the effect was
 constant across the range of ages:</p>
 <pre class="sourceCode r"><code class="sourceCode r">younger.incomes &lt;-<span class="st"> </span>incomes <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">filter</span>(age<span class="op">&lt;</span><span class="dv">40</span>)
+<span class="st">  </span><span class="kw">filter</span>(age<span class="op">&lt;</span><span class="dv">40</span>)
 
 m2 &lt;-<span class="st"> </span><span class="kw">lm</span>(income<span class="op">~</span>age<span class="op">+</span>gender, <span class="dt">data=</span>younger.incomes)
 <span class="kw">coef</span>(m2)

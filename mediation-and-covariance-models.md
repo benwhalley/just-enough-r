@@ -14,14 +14,14 @@ Registered S3 methods overwritten by 'ggplot2':
 Registered S3 method overwritten by 'rvest':
   method            from
   read_xml.response xml2
-── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──
-✔ ggplot2 3.1.1     ✔ purrr   0.3.2
-✔ tibble  2.1.1     ✔ dplyr   0.8.1
-✔ tidyr   0.8.3     ✔ stringr 1.4.0
-✔ readr   1.3.1     ✔ forcats 0.4.0
-── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
+-- Attaching packages ---------------------------------- tidyverse 1.2.1 --
+v ggplot2 3.1.1     v purrr   0.3.2
+v tibble  2.1.1     v dplyr   0.8.1
+v tidyr   0.8.3     v stringr 1.4.0
+v readr   1.3.1     v forcats 0.4.0
+-- Conflicts ------------------------------------- tidyverse_conflicts() --
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()
 library(broom)
 library(pander)
 source('diagram.R')
@@ -55,7 +55,7 @@ Speeding -> Crashes
 ")
 ```
 
-<img src="assets/5783718.png" width="294" />
+![](assets/5422591.pdf)<!-- --> 
 
 Baron and Kenny propose 3 steps to establishing mediation. These steps
 correspond to three separate regression models:
@@ -93,10 +93,10 @@ Using simulated data, we can work through the steps.
 smash %>% glimpse
 Observations: 200
 Variables: 4
-$ person   <int> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, …
-$ lateness <int> 11, 12, 9, 8, 11, 4, 11, 7, 8, 11, 9, 10, 9, 11, 13, 10…
-$ speed    <dbl> 48.88524, 43.07030, 33.72812, 44.17897, 51.22378, 40.86…
-$ crashes  <int> 15, 9, 12, 20, 25, 13, 22, 14, 22, 18, 11, 16, 19, 15, …
+$ person   <int> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16...
+$ lateness <int> 11, 12, 9, 8, 11, 4, 11, 7, 8, 11, 9, 10, 9, 11, 13, ...
+$ speed    <dbl> 48.88524, 43.07030, 33.72812, 44.17897, 51.22378, 40....
+$ crashes  <int> 15, 9, 12, 20, 25, 13, 22, 14, 22, 18, 11, 16, 19, 15...
 ```
 
 Step 1: does lateness predict crashes?
@@ -190,7 +190,7 @@ Speeding -> Crashes[label=b]
 ")
 ```
 
-<img src="assets/5703525.png" width="288" />
+![](assets/5703525.pdf)<!-- --> 
 
 Subsequent authors wished to provide a test for whether the path through `a` and
 `b` --- the indirect effect --- was statistically significant.

@@ -22,7 +22,7 @@ airquality %>%
   pairs
 ```
 
-<img src="correlations_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+![](correlations_files/figure-latex/unnamed-chunk-3-1.pdf)<!-- --> 
 
 If we were satisfied the relationships were (reasonably) linear, we could also
 visualise correlations themselves with a 'corrgram', using the `corrgram`
@@ -41,10 +41,7 @@ airquality %>%
          diag.panel=panel.density)
 ```
 
-<div class="figure">
-<img src="correlations_files/figure-html/unnamed-chunk-4-1.png" alt="A corrgram, showing pearson correlations (above the diagonal), variable distributions (on the diagonal) and ellipses and smoothed lines of best fit (below the diagnonal). Long, narrow ellipses denote large correlations; circular ellipses indicate small correlations." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-4)A corrgram, showing pearson correlations (above the diagonal), variable distributions (on the diagonal) and ellipses and smoothed lines of best fit (below the diagnonal). Long, narrow ellipses denote large correlations; circular ellipses indicate small correlations.</p>
-</div>
+![(\#fig:unnamed-chunk-4)A corrgram, showing pearson correlations (above the diagonal), variable distributions (on the diagonal) and ellipses and smoothed lines of best fit (below the diagnonal). Long, narrow ellipses denote large correlations; circular ellipses indicate small correlations.](correlations_files/figure-latex/unnamed-chunk-4-1.pdf) 
 
 The ggpairs function from the `GGally` package is also a nice way of plotting
 relationships between a combination of categorical and continuous data - it
@@ -58,7 +55,7 @@ mtcars %>%
   GGally::ggpairs()
 ```
 
-<img src="correlations_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](correlations_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
 
 ### Creating a correlation matrix {- #correlation-matrix}
 

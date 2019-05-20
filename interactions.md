@@ -64,18 +64,12 @@ Warning: `as_data_frame()` is deprecated, use `as_tibble()` (but mind the new se
 This warning is displayed once per session.
 ```
 
-<div class="figure">
-<img src="interactions_files/figure-html/unnamed-chunk-4-1.png" alt="Bar plot of injury severity by age and gender." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-4)Bar plot of injury severity by age and gender.</p>
-</div>
+![(\#fig:unnamed-chunk-4)Bar plot of injury severity by age and gender.](interactions_files/figure-latex/unnamed-chunk-4-1.pdf) 
 
 However this bar plot might be better if it were re-drawn as a point and line
 plot:
 
-<div class="figure">
-<img src="interactions_files/figure-html/unnamed-chunk-5-1.png" alt="Point and line plot of injury severity by age and gender." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-5)Point and line plot of injury severity by age and gender.</p>
-</div>
+![(\#fig:unnamed-chunk-5)Point and line plot of injury severity by age and gender.](interactions_files/figure-latex/unnamed-chunk-5-1.pdf) 
 
 The reason the point and line plot improves on the bars for a number of reasons:
 
@@ -114,10 +108,10 @@ painmusic <- readRDS('data/painmusic.RDS')
 painmusic %>% glimpse
 Observations: 112
 Variables: 4
-$ liked      <fct> Disliked, Disliked, Liked, Disliked, Liked, Liked, Li…
-$ familiar   <fct> Familiar, Unfamiliar, Familiar, Familiar, Familiar, F…
-$ no.music   <dbl> 4, 4, 6, 5, 3, 2, 6, 6, 7, 2, 7, 3, 5, 7, 6, 3, 7, 7,…
-$ with.music <dbl> 7, 8, 7, 3, 3, 1, 6, 8, 9, 8, 7, 5, 7, 8, 4, 5, 4, 8,…
+$ liked      <fct> Disliked, Disliked, Liked, Disliked, Liked, Liked, ...
+$ familiar   <fct> Familiar, Unfamiliar, Familiar, Familiar, Familiar,...
+$ no.music   <dbl> 4, 4, 6, 5, 3, 2, 6, 6, 7, 2, 7, 3, 5, 7, 6, 3, 7, ...
+$ with.music <dbl> 7, 8, 7, 3, 3, 1, 6, 8, 9, 8, 7, 5, 7, 8, 4, 5, 4, ...
 ```
 
 Before running inferential tests, it would be helpful to see if the data are
@@ -137,7 +131,7 @@ painmusic %>%
   stat_summary(geom="bar") + xlab("")
 ```
 
-<img src="interactions_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+![](interactions_files/figure-latex/unnamed-chunk-8-1.pdf)<!-- --> 
 
 This gives a pretty clear indication that something is going on, but we have no
 idea about the _distribution_ of the underlying data, and so how much confidence
@@ -162,7 +156,7 @@ painmusic %>%
   scale_color_discrete(name="")
 ```
 
-<img src="interactions_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+![](interactions_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
 
 And here we use a boxplot to achieve similar ends:
 
@@ -176,7 +170,7 @@ painmusic %>%
   xlab("")
 ```
 
-<img src="interactions_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+![](interactions_files/figure-latex/unnamed-chunk-10-1.pdf)<!-- --> 
 
 The advantage of these last two plots is that they preserve quite a bit of
 infrmation about the variable of interest. However, they don't make it easy to
@@ -197,7 +191,7 @@ painmusic %>%
   xlab("")
 ```
 
-<img src="interactions_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+![](interactions_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
 
 This plot doesn't include all of the information about the distribution of
 effects that the density or boxplots do (for example, we can't see any asymmetry
@@ -232,7 +226,7 @@ mtcars %>% gather_predictions(m1, m2) %>%
 `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="interactions_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+![](interactions_files/figure-latex/unnamed-chunk-12-1.pdf)<!-- --> 
 
 We could also plot this over the top of the original data to give an example of
 how the models fit the data.
@@ -246,7 +240,7 @@ mtcars %>% gather_predictions(m1, m2) %>%
 `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="interactions_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+![](interactions_files/figure-latex/unnamed-chunk-13-1.pdf)<!-- --> 
 
 The `gather_predictions` function can also be used to plot interactions.
 
@@ -293,4 +287,4 @@ grid %>%
   ylab("Predicted mpg")
 ```
 
-<img src="interactions_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+![](interactions_files/figure-latex/unnamed-chunk-15-1.pdf)<!-- --> 

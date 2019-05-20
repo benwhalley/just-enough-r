@@ -23,7 +23,7 @@ base.plot <- ggplot(mtcars, aes(mpg, wt)) + geom_point()
 base.plot
 ```
 
-<img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+![](graphics-ggplot-extras_files/figure-latex/unnamed-chunk-3-1.pdf)<!-- --> 
 
 ### `facet_wrap` {-}
 
@@ -36,7 +36,7 @@ the variable. This is like typing the right hand side of a
 base.plot + facet_wrap(~cyl)
 ```
 
-<img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+![](graphics-ggplot-extras_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
 
 If we want two facets we extend the formula, using the `+` sign:
 
@@ -45,7 +45,7 @@ If we want two facets we extend the formula, using the `+` sign:
 base.plot + facet_wrap(~cyl+am)
 ```
 
-<img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](graphics-ggplot-extras_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
 
 Note, the order of variables in the formula makes a difference:
 
@@ -54,7 +54,7 @@ Note, the order of variables in the formula makes a difference:
 base.plot + facet_wrap(~am+cyl)
 ```
 
-<img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+![](graphics-ggplot-extras_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
 
 ### `facet_grid` {-}
 
@@ -67,7 +67,7 @@ variable, and we want it on the x axis:
 base.plot + facet_grid(.~cyl)
 ```
 
-<img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+![](graphics-ggplot-extras_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
 
 We can flip the facets around by putting the `cyl` variable on the left hand
 side of the `~`:
@@ -77,7 +77,7 @@ side of the `~`:
 base.plot + facet_grid(cyl~.)
 ```
 
-<img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+![](graphics-ggplot-extras_files/figure-latex/unnamed-chunk-8-1.pdf)<!-- --> 
 
 And `facet_grid` can also create facets for two or more variables:
 
@@ -86,7 +86,7 @@ And `facet_grid` can also create facets for two or more variables:
 base.plot + facet_grid(am~cyl)
 ```
 
-<img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+![](graphics-ggplot-extras_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
 
 Here the labelling and the arrangement of plots is perhaps nicer because it is
 clearer that plots for `cyl` are arrange left to right, and for `am` they are
@@ -112,7 +112,7 @@ mm <- theme(plot.margin=unit(rep(1.5,4), "line"))
 gridExtra::grid.arrange(relationships+mm, distributions+mm, comparison+mm, composition+mm, ncol=2)
 ```
 
-<img src="graphics-ggplot-extras_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+![](graphics-ggplot-extras_files/figure-latex/unnamed-chunk-10-1.pdf)<!-- --> 
 
 ## Exporting for print {- #exporting-graphics}
 

@@ -548,21 +548,21 @@ example, if we type <code>1:10</code> then we get a vector of numbers from 1 to 
 vectors:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 10 uniformly distributed random numbers between 0 and 1</span>
 <span class="kw">runif</span>(<span class="dv">10</span>)
- [<span class="dv">1</span>] <span class="fl">0.06268614</span> <span class="fl">0.43068297</span> <span class="fl">0.02536761</span> <span class="fl">0.93251488</span> <span class="fl">0.30431507</span> <span class="fl">0.09575141</span>
- [<span class="dv">7</span>] <span class="fl">0.67592706</span> <span class="fl">0.02395060</span> <span class="fl">0.98127490</span> <span class="fl">0.93038269</span>
+ [<span class="dv">1</span>] <span class="fl">0.87168030</span> <span class="fl">0.45828409</span> <span class="fl">0.15508810</span> <span class="fl">0.38966190</span> <span class="fl">0.19589958</span> <span class="fl">0.25464771</span>
+ [<span class="dv">7</span>] <span class="fl">0.31191689</span> <span class="fl">0.55988519</span> <span class="fl">0.57941593</span> <span class="fl">0.03542701</span>
 
 <span class="co"># 1,000 uniformly distributed random numbers between 1 and 100</span>
 my.numbers &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1000</span>, <span class="dv">1</span>, <span class="dv">10</span>)
 
 <span class="co"># 10 random-normal numbers with mean 10 and SD=1</span>
 <span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dt">mean=</span><span class="dv">10</span>)
- [<span class="dv">1</span>] <span class="fl">10.592363</span> <span class="fl">12.107185</span>  <span class="fl">8.277359</span> <span class="fl">11.624930</span> <span class="fl">10.430830</span> <span class="fl">10.878258</span> <span class="fl">10.038941</span>
- [<span class="dv">8</span>]  <span class="fl">9.180190</span>  <span class="fl">9.359233</span>  <span class="fl">9.396876</span>
+ [<span class="dv">1</span>] <span class="fl">10.662969</span> <span class="fl">12.160476</span>  <span class="fl">8.229125</span> <span class="fl">10.022313</span>  <span class="fl">8.812693</span> <span class="fl">10.264308</span> <span class="fl">10.030635</span>
+ [<span class="dv">8</span>]  <span class="fl">9.424233</span> <span class="fl">10.928984</span>  <span class="fl">9.602996</span>
 
 <span class="co"># 10 random-normal numbers with mean 10 and SD=5</span>
 <span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">5</span>)
- [<span class="dv">1</span>] <span class="fl">11.279845</span> <span class="fl">11.445805</span> <span class="fl">11.270044</span>  <span class="fl">7.195771</span> <span class="fl">11.447641</span> <span class="fl">12.785706</span> <span class="fl">20.414382</span>
- [<span class="dv">8</span>] <span class="fl">10.932844</span>  <span class="fl">8.898828</span> <span class="fl">11.766187</span></code></pre>
+ [<span class="dv">1</span>] <span class="fl">10.3415063</span>  <span class="fl">5.5384192</span>  <span class="fl">0.5174545</span> <span class="fl">14.7483051</span>  <span class="fl">5.9846947</span>  <span class="fl">6.2770860</span>
+ [<span class="dv">7</span>] <span class="fl">16.5046287</span>  <span class="fl">7.9870762</span> <span class="fl">18.4745866</span> <span class="fl">12.1417264</span></code></pre>
 <p>We can then use these numbers in our code, for example plotting them:</p>
 <pre class="sourceCode r"><code class="sourceCode r">random.numbers &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10000</span>)
 <span class="kw">hist</span>(random.numbers)</code></pre>

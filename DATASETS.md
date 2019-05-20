@@ -60,16 +60,16 @@ tibble(
 # A tibble: 10 x 4
    height_m weight_kg   bmi overweight
       <dbl>     <dbl> <dbl> <lgl>     
- 1     1.64      64.6  24.0 FALSE     
- 2     1.40      61.9  31.5 TRUE      
- 3     1.64      50.0  18.6 FALSE     
- 4     1.58      54.1  21.7 FALSE     
- 5     1.31      68.5  39.8 TRUE      
- 6     1.80      60.2  18.6 FALSE     
- 7     1.79      51.8  16.2 FALSE     
- 8     1.39      64.2  33.1 TRUE      
- 9     1.33      69.4  39.5 TRUE      
-10     1.51      63.0  27.6 TRUE      
+ 1     1.18      55.8  40.2 TRUE      
+ 2     1.30      57.5  34.0 TRUE      
+ 3     1.65      74.7  27.6 TRUE      
+ 4     1.51      48.0  20.9 FALSE     
+ 5     1.61      61.2  23.7 FALSE     
+ 6     1.20      65.8  45.9 TRUE      
+ 7     1.49      52.5  23.7 FALSE     
+ 8     1.81      63.7  19.5 FALSE     
+ 9     1.55      66.0  27.6 TRUE      
+10     1.45      57.3  27.4 TRUE      
 ```
 
 #### Using 'built in' data {- #built-in-data}
@@ -152,17 +152,17 @@ are listed in the first column of the output:
 glimpse(mtcars)
 Observations: 32
 Variables: 11
-$ mpg  <dbl> 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2,…
-$ cyl  <dbl> 6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4,…
-$ disp <dbl> 160.0, 160.0, 108.0, 258.0, 360.0, 225.0, 360.0, 146.7, 140…
-$ hp   <dbl> 110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 18…
-$ drat <dbl> 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.92,…
-$ wt   <dbl> 2.620, 2.875, 2.320, 3.215, 3.440, 3.460, 3.570, 3.190, 3.1…
-$ qsec <dbl> 16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84, 20.00, 22.…
-$ vs   <dbl> 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1,…
-$ am   <dbl> 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,…
-$ gear <dbl> 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4,…
-$ carb <dbl> 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, 1,…
+$ mpg  <dbl> 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19....
+$ cyl  <dbl> 6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, ...
+$ disp <dbl> 160.0, 160.0, 108.0, 258.0, 360.0, 225.0, 360.0, 146.7, 1...
+$ hp   <dbl> 110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, ...
+$ drat <dbl> 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.9...
+$ wt   <dbl> 2.620, 2.875, 2.320, 3.215, 3.440, 3.460, 3.570, 3.190, 3...
+$ qsec <dbl> 16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84, 20.00, 2...
+$ vs   <dbl> 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, ...
+$ am   <dbl> 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, ...
+$ gear <dbl> 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, ...
+$ carb <dbl> 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, ...
 ```
 
 You can use the `pander()` function (from the `pander::` package) to format
@@ -216,20 +216,14 @@ their input:
 boxplot(airquality)
 ```
 
-<div class="figure">
-<img src="DATASETS_files/figure-html/unnamed-chunk-10-1.png" alt="Box plot of all variables in a dataset." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-10)Box plot of all variables in a dataset.</p>
-</div>
+![(\#fig:unnamed-chunk-10)Box plot of all variables in a dataset.](DATASETS_files/figure-latex/unnamed-chunk-10-1.pdf) 
 
 
 ```r
 psych::cor.plot(airquality)
 ```
 
-<div class="figure">
-<img src="DATASETS_files/figure-html/unnamed-chunk-11-1.png" alt="Correlation heatmap of all variables in a dataset. Colours indicate size of the correlation between pairs of variables." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-11)Correlation heatmap of all variables in a dataset. Colours indicate size of the correlation between pairs of variables.</p>
-</div>
+![(\#fig:unnamed-chunk-11)Correlation heatmap of all variables in a dataset. Colours indicate size of the correlation between pairs of variables.](DATASETS_files/figure-latex/unnamed-chunk-11-1.pdf) 
 
 These plots might not be worth including in a final write-up, but are very
 useful when exploring your data.

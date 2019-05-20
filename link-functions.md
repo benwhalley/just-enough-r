@@ -76,10 +76,10 @@ You can think of the solution as coming in two steps:
 
 #### Step 1 {-}
 
-We can transform a probability on the 0---1 scale to a 0 \rightarrow ∞ scale by
-converting it to _odds_, which are expressed as a ratio:
+We can transform a probability on the 0---1 scale to a $0 \rightarrow ∞$ scale
+by converting it to _odds_, which are expressed as a ratio:
 
-$$\textrm{odds} = \dfrac{\textrm{probability}}{1-\textrm{probability}}$$
+$$odds = \dfrac{p}{1-p}$$
 
 Probabilities and odds ratios are two _equivalent_ ways of expressing the same
 idea.
@@ -91,10 +91,7 @@ an odds ratio of 19 (19 to 1).
 Odds convert or _map_ probabilities from 0 to 1 onto the
 [real numbers](http://en.wikipedia.org/wiki/Real_number) from 0 to ∞.
 
-<div class="figure">
-<img src="link-functions_files/figure-html/unnamed-chunk-3-1.png" alt="Probabilities converted to the odds scale. As p approaches 1 Odds goes to infinity." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-3)Probabilities converted to the odds scale. As p approaches 1 Odds goes to infinity.</p>
-</div>
+![(\#fig:unnamed-chunk-3)Probabilities converted to the odds scale. As p approaches 1 Odds goes to infinity.](link-functions_files/figure-latex/unnamed-chunk-3-1.pdf) 
 
 We can reverse the transformation too (which is important later) because:
 
@@ -128,10 +125,7 @@ the log-odds scale. The logit has two nice properties:
 
 2.  It flattens the rather square curve for the odds in the figure above, and
 
-<div class="figure">
-<img src="link-functions_files/figure-html/unnamed-chunk-4-1.png" alt="Probabilities converted to the logit (log-odds) scale. Notice how the slope implies that as probabilities approach 0 or 1 then the logit will get very large." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-4)Probabilities converted to the logit (log-odds) scale. Notice how the slope implies that as probabilities approach 0 or 1 then the logit will get very large.</p>
-</div>
+![(\#fig:unnamed-chunk-4)Probabilities converted to the logit (log-odds) scale. Notice how the slope implies that as probabilities approach 0 or 1 then the logit will get very large.](link-functions_files/figure-latex/unnamed-chunk-4-1.pdf) 
 
 #### Reversing the process to interpret the model {-}
 

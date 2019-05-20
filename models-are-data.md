@@ -175,7 +175,7 @@ glance(model.1)
   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
       <dbl>         <dbl> <dbl>     <dbl>    <dbl> <int>  <dbl> <dbl> <dbl>
 1     0.838         0.813  2.60      34.8 2.73e-10     5  -73.3  159.  167.
-# … with 2 more variables: deviance <dbl>, df.residual <int>
+# ... with 2 more variables: deviance <dbl>, df.residual <int>
 ```
 
 If we want to extract information about the model coefficients we can use
@@ -213,7 +213,7 @@ tidy(model.1, conf.int = T) %>%
   geom_hline(yintercept = 0)
 ```
 
-<img src="models-are-data_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+![](models-are-data_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
 
 Finally, we can use the `augment` function to get information on individual rows
 in the modelled data: namely the fitted and residual values, plus common
@@ -254,7 +254,7 @@ augment(model.1) %>%
 `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="models-are-data_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+![](models-are-data_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
 
 Because `broom` always returns a dataframe with a consistent set of column names
 we can also combine model results into tables for comparison. In this plot we
@@ -295,7 +295,7 @@ combined.results %>%
   geom_hline(yintercept = 0)
 ```
 
-<img src="models-are-data_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+![](models-are-data_files/figure-latex/unnamed-chunk-13-1.pdf)<!-- --> 
 
 ## 'Processing' results {- #process-model-results}
 

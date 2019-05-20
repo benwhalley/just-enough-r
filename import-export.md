@@ -56,7 +56,7 @@ Once it's loaded, you can use this new dataset like any other:
 pairs(angry.moods)
 ```
 
-<img src="import-export_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+![](import-export_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
 
 ### Importing data over the web {- #importing-data-from-the-web}
 
@@ -316,25 +316,25 @@ raw.data %>%
 -------------------------------------------
  Condition   trial   time   person    RT   
 ----------- ------- ------ -------- -------
-     3         6      1       28     249.4 
+     3        17      2       35     360.2 
 
-     1         2      2       3      371.5 
+     1         3      2       1      220.4 
 
-     1        19      2       10      199  
+     1        15      2       7       191  
 
-     3        21      2       28     307.3 
+     4         1      2       37      361  
 
-     1        20      1       6      304.9 
+     3        19      1       28     246.8 
 
-     1         7      1       10     183.2 
+     3        16      1       30     199.6 
 
-     1        20      2       4      271.3 
+     3        15      2       30     206.2 
 
-     2        11      1       13     262.9 
+     4         5      1       39     295.5 
 
-     3        15      1       33     224.7 
+     2        22      2       15     298.7 
 
-     2        10      1       20      214  
+     1        24      1       5      237.2 
 -------------------------------------------
 
 ##### Using custom functions with `do()` {-}
@@ -383,25 +383,25 @@ raw.data.with.paths %>%
 -------------------------------------------
  Condition   trial   time   person    RT   
 ----------- ------- ------ -------- -------
-     4        23      1       38     161.1 
-
-     1        16      1       9       230  
-
      2        25      2       17     90.31 
 
-     3         6      1       28     249.4 
+     2         5      1       22     341.3 
 
-     1         9      1       9      213.9 
+     1         2      1       8      239.3 
 
-     3        20      1       29     354.8 
+     4        13      1       42     197.1 
 
-     3        20      2       34      215  
+     2        17      1       16     169.5 
 
-     3        16      1       26     273.5 
+     2         6      2       15     166.4 
 
-     4         5      1       41     264.3 
+     3        22      1       30      214  
 
-     3        21      2       36     308.2 
+     4         3      1       48     238.7 
+
+     4         6      2       48     273.5 
+
+     2         6      1       15     232.1 
 -------------------------------------------
 
 Table: Table continues below
@@ -410,25 +410,25 @@ Table: Table continues below
 -----------------------------------------
                 filepath                 
 -----------------------------------------
- data/multiple-file-example/person38.csv 
-
- data/multiple-file-example/person9.csv  
-
  data/multiple-file-example/person17.csv 
 
- data/multiple-file-example/person28.csv 
+ data/multiple-file-example/person22.csv 
 
- data/multiple-file-example/person9.csv  
+ data/multiple-file-example/person8.csv  
 
- data/multiple-file-example/person29.csv 
+ data/multiple-file-example/person42.csv 
 
- data/multiple-file-example/person34.csv 
+ data/multiple-file-example/person16.csv 
 
- data/multiple-file-example/person26.csv 
+ data/multiple-file-example/person15.csv 
 
- data/multiple-file-example/person41.csv 
+ data/multiple-file-example/person30.csv 
 
- data/multiple-file-example/person36.csv 
+ data/multiple-file-example/person48.csv 
+
+ data/multiple-file-example/person48.csv 
+
+ data/multiple-file-example/person15.csv 
 -----------------------------------------
 
 At this point you might need to

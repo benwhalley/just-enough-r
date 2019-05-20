@@ -58,11 +58,11 @@ size) and `wt` (car weight):
 
 ```r
 mtcars %>%
-	select(mpg, disp, wt) %>%
-	pairs
+  select(mpg, disp, wt) %>%
+  pairs
 ```
 
-<img src="linear-models_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+![](linear-models_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
 
 Before running any model, we should ask outselves: "what question we are trying
 to answer?"
@@ -447,10 +447,7 @@ aurora.image %>%
   geom_point(size=.5)
 ```
 
-<div class="figure">
-<img src="linear-models_files/figure-html/unnamed-chunk-15-1.png" alt="Plot of the intensity of light in the single pixel slice from the Aurora image. Intensity of 1 corresponds to white, and 0 to black in the original image." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-15)Plot of the intensity of light in the single pixel slice from the Aurora image. Intensity of 1 corresponds to white, and 0 to black in the original image.</p>
-</div>
+![(\#fig:unnamed-chunk-15)Plot of the intensity of light in the single pixel slice from the Aurora image. Intensity of 1 corresponds to white, and 0 to black in the original image.](linear-models_files/figure-latex/unnamed-chunk-15-1.pdf) 
 
 We can fit linear models to these data, just like any other. So we migth start
 by predicting intensity with a simple slope:
@@ -474,7 +471,7 @@ Warning: attributes are not identical across measure variables; they will
 be dropped
 ```
 
-<img src="linear-models_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+![](linear-models_files/figure-latex/unnamed-chunk-17-1.pdf)<!-- --> 
 
 As we can see, our predictions are pretty terrible, because the linear model
 only allows for a simple slope over the range of `x`.
@@ -507,7 +504,7 @@ Warning: attributes are not identical across measure variables; they will
 be dropped
 ```
 
-<img src="linear-models_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+![](linear-models_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
 
 That's somewhat better, although we can still see that the extremes of our
 observed data are not well predicted by either the linear model (the flat line)
@@ -544,7 +541,7 @@ Warning: attributes are not identical across measure variables; they will
 be dropped
 ```
 
-<img src="linear-models_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+![](linear-models_files/figure-latex/unnamed-chunk-19-1.pdf)<!-- --> 
 
 Or we could increase the number of parameters in our curve to allow a tighter
 fit with the raw data and plot all the models together:
@@ -568,7 +565,7 @@ all.predictions %>%
   geom_point(size=.5)
 ```
 
-<img src="linear-models_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+![](linear-models_files/figure-latex/unnamed-chunk-20-1.pdf)<!-- --> 
 
 We can see that this curved model is a better approximation to the raw data than
 our 'chunked' model in some places (e.g. x = 100), but worse in others (e.g. x =
@@ -602,7 +599,7 @@ model?]{.exercise}
 For fun, we can even plot our data back in image form and see which is closest
 to matching the original:
 
-<img src="linear-models_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+![](linear-models_files/figure-latex/unnamed-chunk-23-1.pdf)<!-- --> 
 
 [There is no 'right answer' here: each model has pros and cons. You need to
 think about what the purpose of your model is, how you want to simplify your
@@ -698,9 +695,9 @@ inputs.
 
 However, be cautious when standardising. You will sometimes see people interpret
 standardised coefficients in terms of 'relative importance' of the predictors.
-For example, they might say that if $\beta^1 = .2$ and $\beta^2 = .4$ then
-$\beta^2$ is twice as important as $\beta^$. Although this is appealing, it's
-not always valid.
+For example, they might say that if $\beta^{1}= .2$ and $\beta^{2} = .4$ then
+$\beta^{2}$ is twice as important as $\beta^{1}$. Although this is appealing,
+it's not always valid.
 
 The main problem is that you don't always know whether you have a full range of
 values of predictors in your sample. For example, imagine a case where the a
@@ -716,7 +713,7 @@ We can plot these data to show the effect of age, and gender:
 ggplot(incomes, aes(age, income, group=gender, color=gender)) + geom_point() + geom_smooth(se=F, method="lm")
 ```
 
-<img src="linear-models_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+![](linear-models_files/figure-latex/unnamed-chunk-26-1.pdf)<!-- --> 
 
 Older people earn more than younger people, and men earn slighly more than women
 (in this simulated dataset), but this gender gap doesn't change with age.
@@ -750,7 +747,7 @@ constant across the range of ages:
 
 ```r
 younger.incomes <- incomes %>%
-	filter(age<40)
+  filter(age<40)
 
 m2 <- lm(income~age+gender, data=younger.incomes)
 coef(m2)

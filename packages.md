@@ -33,7 +33,7 @@ provides:
 qplot(mtcars$mpg, bins=7)
 ```
 
-<img src="packages_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+![](packages_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
 
 :::{.tip}
 
@@ -56,7 +56,7 @@ obtain histograms of all the variables in the `mtcars` dataset:
 Hmisc::hist.data.frame(mtcars)
 ```
 
-<img src="packages_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](packages_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
 
 The rule is to type `package::function(parameters)`, where `::` separates the
 package and function names. Parameters are just the inputs to the function.

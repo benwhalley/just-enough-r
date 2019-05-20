@@ -60,7 +60,7 @@ This warning is displayed once per session.
 1     1    32  20.1    6.03   19.2   19.7    5.41  10.4  33.9  23.5  0.611
 2     2    32   6.19   1.79    6      6.23   2.97   4     8     4   -0.175
 3     3    32 231.   124.    196.   223.   140.    71.1 472   401.   0.382
-# … with 2 more variables: kurtosis <dbl>, se <dbl>
+# ... with 2 more variables: kurtosis <dbl>, se <dbl>
 ```
 
 But not here (just numbers in their place):
@@ -77,7 +77,7 @@ psych::describe(mtcars) %>%
 1     9    32 0.406 0.499      0   0.385  0        0     1     1 0.364
 2     8    32 0.438 0.504      0   0.423  0        0     1     1 0.240
 3    11    32 2.81  1.62       2   2.65   1.48     1     8     7 1.05 
-# … with 2 more variables: kurtosis <dbl>, se <dbl>
+# ... with 2 more variables: kurtosis <dbl>, se <dbl>
 ```
 
 ##### Preserving row names {-}

@@ -40,14 +40,14 @@ Check our data:
 boring.study %>% glimpse
 Observations: 280
 Variables: 8
-$ person    <int> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,…
-$ time      <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
-$ condition <fct> Control, Control, Control, Control, Control, Control, …
-$ yob       <dbl> 1977, 1970, 1982, 1982, 1974, 1979, 1979, 1975, 1981, …
-$ WM        <dbl> 105, 103, 109, 94, 100, 90, 84, 90, 98, 79, 105, 82, 1…
-$ education <chr> "Graduate", "Postgraduate", "Graduate", NA, "Primary",…
-$ ethnicity <chr> "Asian / Asian British", "Black / African / Caribbean …
-$ Attitude  <dbl> 9, 9, 4, 3, 7, 13, 8, 5, 5, 6, 6, 1, 8, 4, 11, 7, 7, 9…
+$ person    <int> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 1...
+$ time      <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1...
+$ condition <fct> Control, Control, Control, Control, Control, Control...
+$ yob       <dbl> 1969, 1978, 1969, 1989, 1975, 1975, 1989, 1983, 1978...
+$ WM        <dbl> 103, 103, 94, 96, 109, 98, 102, 93, 78, 102, 98, 91,...
+$ education <chr> "Graduate", "Secondary", "Postgraduate", "Primary", ...
+$ ethnicity <chr> "Asian / Asian British", "White British", "White Bri...
+$ Attitude  <dbl> 12, 5, 8, 6, 4, 9, 14, 12, 10, 9, 12, 14, 8, 11, 8, ...
 ```
 
 Start by making a long-form table for the categorical variables:
@@ -70,25 +70,25 @@ Then calculate the N's for each response/variable in each group:
   summarise(N=n()) %>%
   dcast(variable+value~condition, value.var="N"))
    variable                                       value Control
-1 education                                    Graduate      27
-2 education                                Postgraduate      31
-3 education                                     Primary      27
-4 education                                   Secondary      24
-5 education                                        <NA>      31
-6 ethnicity                       Asian / Asian British      45
-7 ethnicity Black / African / Caribbean / Black British      28
-8 ethnicity              Mixed / multiple ethnic groups      28
-9 ethnicity                               White British      39
+1 education                                    Graduate      39
+2 education                                Postgraduate      25
+3 education                                     Primary      21
+4 education                                   Secondary      27
+5 education                                        <NA>      28
+6 ethnicity                       Asian / Asian British      32
+7 ethnicity Black / African / Caribbean / Black British      42
+8 ethnicity              Mixed / multiple ethnic groups      33
+9 ethnicity                               White British      33
   Intervention
-1           34
+1           33
 2           25
-3           25
-4           26
-5           30
-6           42
-7           25
-8           36
-9           37
+3           24
+4           24
+5           34
+6           37
+7           35
+8           30
+9           38
 ```
 
 Then make a second table containing Chi2 test statistics for each variable:
@@ -105,8 +105,8 @@ Then make a second table containing Chi2 test statistics for each variable:
 # Groups:   variable [2]
   variable  statistic p.value parameter method               firstrowforvar
   <fct>         <dbl>   <dbl>     <int> <chr>                <lgl>         
-1 education      1.60   0.660         3 Pearson's Chi-squar… TRUE          
-2 ethnicity      1.33   0.723         3 Pearson's Chi-squar… TRUE          
+1 education     0.712   0.870         3 Pearson's Chi-squar~ TRUE          
+2 ethnicity     1.49    0.684         3 Pearson's Chi-squar~ TRUE          
 ```
 
 Combine these together:
@@ -125,15 +125,15 @@ Combine these together:
 # A tibble: 9 x 7
   variable  value          Control Intervention statistic parameter p.value
   <chr>     <chr>            <int>        <int>     <dbl>     <int>   <dbl>
-1 education Graduate            27           34      1.60         3   0.660
-2 <NA>      Postgraduate        31           25     NA           NA  NA    
-3 <NA>      Primary             27           25     NA           NA  NA    
-4 <NA>      Secondary           24           26     NA           NA  NA    
-5 <NA>      <NA>                31           30     NA           NA  NA    
-6 ethnicity Asian / Asian…      45           42      1.33         3   0.723
-7 <NA>      Black / Afric…      28           25     NA           NA  NA    
-8 <NA>      Mixed / multi…      28           36     NA           NA  NA    
-9 <NA>      White British       39           37     NA           NA  NA    
+1 education Graduate            39           33     0.712         3   0.870
+2 <NA>      Postgraduate        25           25    NA            NA  NA    
+3 <NA>      Primary             21           24    NA            NA  NA    
+4 <NA>      Secondary           27           24    NA            NA  NA    
+5 <NA>      <NA>                28           34    NA            NA  NA    
+6 ethnicity Asian / Asian~      32           37     1.49          3   0.684
+7 <NA>      Black / Afric~      42           35    NA            NA  NA    
+8 <NA>      Mixed / multi~      33           30    NA            NA  NA    
+9 <NA>      White British       33           38    NA            NA  NA    
 ```
 
 Now we deal with the continuous variables. First we make a 'long' version of the
@@ -154,12 +154,12 @@ boring.continuous.melted %>% head
 # Groups:   variable [1]
   condition variable value
   <fct>     <fct>    <dbl>
-1 Control   yob       1977
-2 Control   yob       1970
-3 Control   yob       1982
-4 Control   yob       1982
-5 Control   yob       1974
-6 Control   yob       1979
+1 Control   yob       1969
+2 Control   yob       1978
+3 Control   yob       1969
+4 Control   yob       1989
+5 Control   yob       1975
+6 Control   yob       1975
 ```
 
 Then calculate separate tables of t-tests and means/SD's:
@@ -175,8 +175,8 @@ Then calculate separate tables of t-tests and means/SD's:
 # Groups:   variable [2]
   variable statistic parameter p.value
   <fct>        <dbl>     <dbl>   <dbl>
-1 yob          0.825      275.   0.410
-2 WM           0.825      277.   0.410
+1 yob          0.941      278.   0.348
+2 WM          -0.695      278.   0.488
 
 (table.continuous_variables.descriptives <-
     boring.continuous.melted %>%
@@ -195,8 +195,8 @@ Then calculate separate tables of t-tests and means/SD's:
     dcast(variable~condition))
 Using MSD as value column: use value.var to override.
   variable        Control   Intervention
-1      yob 1979.30 (5.54) 1978.78 (5.02)
-2       WM   99.98 (9.74)   99.05 (9.08)
+1      yob 1979.51 (5.21) 1978.92 (5.21)
+2       WM  100.08 (9.18)  100.86 (9.56)
 ```
 
 And combine them:
@@ -207,9 +207,9 @@ And combine them:
   left_join(table.continuous_variables.descriptives,
             table.continuous_variables.tests))
 Joining, by = "variable"
-  variable        Control   Intervention statistic parameter   p.value
-1      yob 1979.30 (5.54) 1978.78 (5.02) 0.8253243  275.3414 0.4099020
-2       WM   99.98 (9.74)   99.05 (9.08) 0.8247186  276.6422 0.4102419
+  variable        Control   Intervention  statistic parameter   p.value
+1      yob 1979.51 (5.21) 1978.92 (5.21)  0.9407657  277.9999 0.3476417
+2       WM  100.08 (9.18)  100.86 (9.56) -0.6948592  277.5507 0.4877249
 ```
 
 Finally put the whole thing together:
@@ -242,19 +242,19 @@ This warning is displayed once per session.
 Warning in bind_rows_(x, .id): binding character and factor vector,
 coercing into character vector
 # A tibble: 11 x 7
-   Variable  Response     `Control N/Mean… Intervention `t/χ2`    df      p
+   Variable  Response     `Control N/Mean~ Intervention `t/χ2`    df      p
    <chr>     <chr>        <chr>            <chr>         <dbl> <dbl>  <dbl>
- 1 education Graduate     27               34            1.60     3   0.660
- 2 <NA>      Postgraduate 31               25           NA       NA  NA    
- 3 <NA>      Primary      27               25           NA       NA  NA    
- 4 <NA>      Secondary    24               26           NA       NA  NA    
- 5 <NA>      <NA>         31               30           NA       NA  NA    
- 6 ethnicity Asian / Asi… 45               42            1.33     3   0.723
- 7 <NA>      Black / Afr… 28               25           NA       NA  NA    
- 8 <NA>      Mixed / mul… 28               36           NA       NA  NA    
- 9 <NA>      White Briti… 39               37           NA       NA  NA    
-10 yob       <NA>         1979.30 (5.54)   1978.78 (5.…  0.825  275.  0.410
-11 WM        <NA>         99.98 (9.74)     99.05 (9.08)  0.825  277.  0.410
+ 1 education Graduate     39               33            0.712    3   0.870
+ 2 <NA>      Postgraduate 25               25           NA       NA  NA    
+ 3 <NA>      Primary      21               24           NA       NA  NA    
+ 4 <NA>      Secondary    27               24           NA       NA  NA    
+ 5 <NA>      <NA>         28               34           NA       NA  NA    
+ 6 ethnicity Asian / Asi~ 32               37            1.49     3   0.684
+ 7 <NA>      Black / Afr~ 42               35           NA       NA  NA    
+ 8 <NA>      Mixed / mul~ 33               30           NA       NA  NA    
+ 9 <NA>      White Briti~ 33               38           NA       NA  NA    
+10 yob       <NA>         1979.51 (5.21)   1978.92 (5.~  0.941  278.  0.348
+11 WM        <NA>         100.08 (9.18)    100.86 (9.5~ -0.695  278.  0.488
 ```
 
 And we can print to markdown format for outputting. This is best done in a
@@ -271,32 +271,32 @@ table1 %>%
 ```
 
 
--------------------------------------------------------------------------------------------------------------
-Variable    Response                          Control N/Mean (SD)    Intervention     t/χ2     df       p    
------------ -------------------------------- --------------------- ---------------- -------- ------- --------
-education   Graduate                                  27                  34         1.599      3     0.6597 
+--------------------------------------------------------------------------------------------------------------
+Variable    Response                          Control N/Mean (SD)    Intervention     t/χ2      df       p    
+----------- -------------------------------- --------------------- ---------------- --------- ------- --------
+education   Graduate                                  39                  33         0.7119      3     0.8704 
 
--           Postgraduate                              31                  25           -        -       -    
+-           Postgraduate                              25                  25            -        -       -    
 
--           Primary                                   27                  25           -        -       -    
+-           Primary                                   21                  24            -        -       -    
 
--           Secondary                                 24                  26           -        -       -    
+-           Secondary                                 27                  24            -        -       -    
 
--           -                                         31                  30           -        -       -    
+-           -                                         28                  34            -        -       -    
 
-ethnicity   Asian / Asian British                     45                  42         1.326      3     0.723  
+ethnicity   Asian / Asian British                     32                  37          1.494      3     0.6837 
 
--           Black / African / Caribbean /             28                  25           -        -       -    
-            Black British                                                                                    
+-           Black / African / Caribbean /             42                  35            -        -       -    
+            Black British                                                                                     
 
--           Mixed / multiple ethnic groups            28                  36           -        -       -    
+-           Mixed / multiple ethnic groups            33                  30            -        -       -    
 
--           White British                             39                  37           -        -       -    
+-           White British                             33                  38            -        -       -    
 
-yob         -                                   1979.30 (5.54)      1978.78 (5.02)   0.8253   275.3   0.4099 
+yob         -                                   1979.51 (5.21)      1978.92 (5.21)   0.9408     278    0.3476 
 
-WM          -                                    99.98 (9.74)        99.05 (9.08)    0.8247   276.6   0.4102 
--------------------------------------------------------------------------------------------------------------
+WM          -                                    100.08 (9.18)      100.86 (9.56)    -0.6949   277.6   0.4877 
+--------------------------------------------------------------------------------------------------------------
 
 Table: Table presenting baseline differences between conditions. Categorical variables tested with Pearson χ2, continuous variables with two-sample t-test.
 

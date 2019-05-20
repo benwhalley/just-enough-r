@@ -55,17 +55,17 @@ df %>%
 -------------------------------------
  person   time   predictor   outcome 
 -------- ------ ----------- ---------
-   1       1         6          9    
+   1       1         1         11    
 
-   1       2         6         20    
+   1       2         1         11    
 
-   1       3         6         10    
+   1       3         1          6    
 
-   2       1         3         14    
+   2       1         4         10    
 
-   2       2         3         11    
+   2       2         4          5    
 
-   2       3         3         11    
+   2       3         4         15    
 -------------------------------------
 
 Whereas in SPSS we might have the same data structured like this:
@@ -81,17 +81,17 @@ df.wide %>%
 -----------------------------------------------
  person   predictor   Time 1   Time 2   Time 3 
 -------- ----------- -------- -------- --------
-   1          6         9        20       10   
+   1          1         11       11       6    
 
-   2          3         14       11       11   
+   2          4         10       5        15   
 
-   3          1         11       7        6    
+   3          2         8        6        8    
 
-   4          5         6        13       9    
+   4          2         11       13       10   
 
-   5          6         13       10       8    
+   5          3         10       10       7    
 
-   6          5         10       12       14   
+   6          5         7        10       12   
 -----------------------------------------------
 
 R always uses long form data when running an Anova, but one downside is that it
@@ -196,7 +196,7 @@ If your design has more than 2 groups then you should use oneway Anova.
 Let's say we asked people to taste 1 of 4 fruit juices, and rate how tasty it
 was on a scale from 0 to 10:
 
-<img src="anova_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+![](anova_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
 
 We can run a oneway Anova with [type 3 sums of squares](#sums-squares) using the
 `Anova` function from the `car::` package:
@@ -263,7 +263,7 @@ eysenck %>%
   xlab("")
 ```
 
-<img src="anova_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+![](anova_files/figure-latex/unnamed-chunk-10-1.pdf)<!-- --> 
 
 [Visual inspection of the data (see Figure X) suggested that older adults
 recalled more words than younger adults, and that this difference was greatest
@@ -283,10 +283,7 @@ eysenck %>%
   xlab("")
 ```
 
-<div class="figure">
-<img src="anova_files/figure-html/unnamed-chunk-11-1.png" alt="Boxplot for recall in older and young adults, by condition." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-11)Boxplot for recall in older and young adults, by condition.</p>
-</div>
+![(\#fig:unnamed-chunk-11)Boxplot for recall in older and young adults, by condition.](anova_files/figure-latex/unnamed-chunk-11-1.pdf) 
 
 We can run a linear model including the effect of `Age` and `Condition` and the
 interaction of these variables, and calculate the Anova:
@@ -395,7 +392,7 @@ lme4::sleepstudy %>%
   geom_label(aes(y=450, x=9, label="imagine how bad\nyou feel by this point"), color="red")
 ```
 
-<img src="anova_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+![](anova_files/figure-latex/unnamed-chunk-14-1.pdf)<!-- --> 
 
 If we want to test whether there are significant differences in RTs between
 `Days`, we could fit something very similar to a traditional repeat measures
@@ -434,7 +431,7 @@ expt.data %>%
   facet_wrap(~paste("Time", time))
 ```
 
-<img src="anova_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+![](anova_files/figure-latex/unnamed-chunk-17-1.pdf)<!-- --> 
 
 We want to use our repeated measurements before and after the experimental
 interventions to increase the precision of our estimate of the between-condition
@@ -577,7 +574,7 @@ ggplot(expt.data,
   facet_wrap(~paste("Condition", Condition))
 ```
 
-<img src="anova_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+![](anova_files/figure-latex/unnamed-chunk-22-1.pdf)<!-- --> 
 
 If we wanted to replicate the aggregated RM Anova models shown above we could
 write:
@@ -631,7 +628,7 @@ in RTs across trial, suggesting a larger practice effect for these conditions.
 
 
 
-<img src="anova_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+![](anova_files/figure-latex/unnamed-chunk-26-1.pdf)<!-- --> 
 
 #### {-}
 
@@ -691,10 +688,7 @@ Then a QQ-plot of the model residuals to assess normality:
 car::qqPlot(eysenck.model)
 ```
 
-<div class="figure">
-<img src="anova_files/figure-html/unnamed-chunk-28-1.png" alt="QQ plot to assess normality of model residuals" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-28)QQ plot to assess normality of model residuals</p>
-</div>
+![(\#fig:unnamed-chunk-28)QQ plot to assess normality of model residuals](anova_files/figure-latex/unnamed-chunk-28-1.pdf) 
 
 ```
 [1] 36 76
@@ -714,10 +708,7 @@ data_frame(
     geom_smooth(se=F)
 ```
 
-<div class="figure">
-<img src="anova_files/figure-html/unnamed-chunk-29-1.png" alt="Residual vs fitted (spread vs. level) plot to check homogeneity of variance." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-29)Residual vs fitted (spread vs. level) plot to check homogeneity of variance.</p>
-</div>
+![(\#fig:unnamed-chunk-29)Residual vs fitted (spread vs. level) plot to check homogeneity of variance.](anova_files/figure-latex/unnamed-chunk-29-1.pdf) 
 
 For more on assumptions checks after linear models or Anova see:
 <http://www.statmethods.net/stats/anovaAssumptions.html>

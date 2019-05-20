@@ -24,10 +24,7 @@ chicks.eating.beans %>%
   geom_boxplot()
 ```
 
-<div class="figure">
-<img src="t-tests_files/figure-html/boxplot-1.png" alt="The box in a boxplot indictes the IQR; the whisker indicates the min/max values or 1.5 	imes the IQR, whichever is the smaller. If there are outliers beyond 1.5 	imes the IQR then they are shown as points." width="672" />
-<p class="caption">(\#fig:boxplot)The box in a boxplot indictes the IQR; the whisker indicates the min/max values or 1.5 	imes the IQR, whichever is the smaller. If there are outliers beyond 1.5 	imes the IQR then they are shown as points.</p>
-</div>
+![(\#fig:boxplot)The box in a boxplot indictes the IQR; the whisker indicates the min/max values or 1.5 	imes the IQR, whichever is the smaller. If there are outliers beyond 1.5 	imes the IQR then they are shown as points.](t-tests_files/figure-latex/boxplot-1.pdf) 
 
 Or a violin or bottle plot, which shows the distributions within each group and
 makes it relatively easy to check some of the main assumptions of the test:
@@ -39,7 +36,7 @@ chicks.eating.beans %>%
   geom_violin()
 ```
 
-<img src="t-tests_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+![](t-tests_files/figure-latex/unnamed-chunk-3-1.pdf)<!-- --> 
 
 Layering boxes and bottles can work well too because it combines information
 about the distribution with key statistics like the median and IQR, and also
@@ -53,7 +50,7 @@ chickwts %>%
   geom_boxplot(width=.1)
 ```
 
-<img src="t-tests_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+![](t-tests_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
 
 <!-- Bottleplots are just density plots, turned 90 degrees. Density plots might be more familiar to some, but it's hard to show more than 2 or 3 categories:
 
@@ -64,7 +61,7 @@ chicks.eating.beans %>%
   geom_density(alpha=.5)
 ```
 
-<img src="t-tests_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](t-tests_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
 
 
 
@@ -78,7 +75,7 @@ chicks.eating.beans %>%
   facet_grid(feed ~ .)
 ```
 
-<img src="t-tests_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+![](t-tests_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
  -->
 
 ### Running a t-test {-}

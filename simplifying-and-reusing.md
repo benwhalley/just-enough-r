@@ -82,7 +82,7 @@ And then we simply add (`+`) these settings to each plot:
 plot.mpg + myplotsettings
 ```
 
-<img src="simplifying-and-reusing_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](simplifying-and-reusing_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
 
 And:
 
@@ -91,6 +91,6 @@ And:
 plot.wt + myplotsettings
 ```
 
-<img src="simplifying-and-reusing_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+![](simplifying-and-reusing_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
 
 This reduces typing and makes easier to produce a consistent set of plots.

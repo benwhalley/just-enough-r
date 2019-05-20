@@ -79,7 +79,7 @@ df %>%
 `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-<img src="confidence-and-intervals_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+![](confidence-and-intervals_files/figure-latex/unnamed-chunk-4-1.pdf)<!-- --> 
 
 -   If we sample 100 individuals from each population the confidence interval
     around the sample mean would be wider in the high variability group.

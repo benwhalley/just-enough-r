@@ -39,10 +39,10 @@ lakers %>%
   glimpse()
 Observations: 34,624
 Variables: 4
-$ date     <date> 2008-10-28, 2008-10-28, 2008-10-28, 2008-10-28, 2008-1…
-$ opponent <chr> "POR", "POR", "POR", "POR", "POR", "POR", "POR", "POR",…
-$ team     <fct> OFF, LAL, LAL, LAL, LAL, LAL, POR, LAL, LAL, POR, LAL, …
-$ points   <int> 0, 0, 0, 0, 0, 2, 0, 1, 0, 2, 2, 0, 0, 2, 2, 0, 0, 2, 0…
+$ date     <date> 2008-10-28, 2008-10-28, 2008-10-28, 2008-10-28, 2008...
+$ opponent <chr> "POR", "POR", "POR", "POR", "POR", "POR", "POR", "POR...
+$ team     <fct> OFF, LAL, LAL, LAL, LAL, LAL, POR, LAL, LAL, POR, LAL...
+$ points   <int> 0, 0, 0, 0, 0, 2, 0, 1, 0, 2, 2, 0, 0, 2, 2, 0, 0, 2,...
 ```
 
 
@@ -161,7 +161,7 @@ However, R does treat dates slightly differently from other numbers, and will fo
 hist(lakers$date, breaks=7)
 ```
 
-<img src="column-types-and-missing_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+![](column-types-and-missing_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
 
 
 
@@ -506,7 +506,7 @@ The `mice` package has some nice functions to describe patterns of missingness i
 mice::md.pattern(airquality) 
 ```
 
-<img src="column-types-and-missing_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+![](column-types-and-missing_files/figure-latex/unnamed-chunk-22-1.pdf)<!-- --> 
 
 ```
     Wind Temp Month Day Solar.R Ozone   
@@ -543,7 +543,7 @@ fit.data <- readRDS("data/fit-weight.RDS") %>%
 mice::md.pattern(fit.data)
 ```
 
-<img src="column-types-and-missing_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+![](column-types-and-missing_files/figure-latex/unnamed-chunk-23-1.pdf)<!-- --> 
 
 ```
     kg1 age gqol1 kg2 kg3   
@@ -564,7 +564,7 @@ fit.data %>%
   geom_point()
 ```
 
-<img src="column-types-and-missing_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+![](column-types-and-missing_files/figure-latex/unnamed-chunk-24-1.pdf)<!-- --> 
 
 There's a clear trend here for lighter patients (at baseline) to have more missing data at followup. There's also a suggestion that younger patients are more likely to have been lost to followup.
 

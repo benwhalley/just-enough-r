@@ -261,7 +261,7 @@ semPlot::semPaths(mediation.fit, "par",
              fade=FALSE)
 ```
 
-<img src="cfa-sem_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+![](cfa-sem_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
 
 ## Confirmatory factor analysis (CFA) {- #cfa}
 
@@ -321,10 +321,7 @@ d[shape=rectangle]
 ')
 ```
 
-<div class="figure">
-<img src="assets/9345411.png" alt="Example of a CFA model, including one latent variable or factor, and 4 observed variables." width="960" />
-<p class="caption">(\#fig:unnamed-chunk-12)Example of a CFA model, including one latent variable or factor, and 4 observed variables.</p>
-</div>
+![(\#fig:unnamed-chunk-12)Example of a CFA model, including one latent variable or factor, and 4 observed variables.](assets/9345411.pdf) 
 
 CFA models can also include multiple latent variables, and estimate the
 covariance between them:
@@ -350,7 +347,7 @@ f [shape=box]
 ')
 ```
 
-<img src="assets/4653102.png" width="792" />
+![](assets/4653102.pdf)<!-- --> 
 
 SEM models extend this by allowing regression paths between latent variables and
 observed or other latent variables:
@@ -386,7 +383,7 @@ Affective -> Stress
         ')
 ```
 
-<img src="assets/4462595.png" width="1174" />
+![](assets/4462595.pdf)<!-- --> 
 
 For now though, we will focus on building a CFA model. Later we'll show how a
 _well fitting_ measurement model can be used to test hypotheses related to the
@@ -403,21 +400,21 @@ hz <- lavaan::HolzingerSwineford1939
 hz %>% glimpse()
 Observations: 301
 Variables: 15
-$ id     <int> 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18…
-$ sex    <int> 1, 2, 2, 1, 2, 2, 1, 2, 2, 2, 1, 1, 2, 2, 1, 2, 2, 1, 2, …
-$ ageyr  <int> 13, 13, 13, 13, 12, 14, 12, 12, 13, 12, 12, 12, 12, 12, 1…
-$ agemo  <int> 1, 7, 1, 2, 2, 1, 1, 2, 0, 5, 2, 11, 7, 8, 6, 1, 11, 5, 8…
-$ school <fct> Pasteur, Pasteur, Pasteur, Pasteur, Pasteur, Pasteur, Pas…
-$ grade  <int> 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, …
-$ x1     <dbl> 3.333333, 5.333333, 4.500000, 5.333333, 4.833333, 5.33333…
-$ x2     <dbl> 7.75, 5.25, 5.25, 7.75, 4.75, 5.00, 6.00, 6.25, 5.75, 5.2…
-$ x3     <dbl> 0.375, 2.125, 1.875, 3.000, 0.875, 2.250, 1.000, 1.875, 1…
-$ x4     <dbl> 2.333333, 1.666667, 1.000000, 2.666667, 2.666667, 1.00000…
-$ x5     <dbl> 5.75, 3.00, 1.75, 4.50, 4.00, 3.00, 6.00, 4.25, 5.75, 5.0…
-$ x6     <dbl> 1.2857143, 1.2857143, 0.4285714, 2.4285714, 2.5714286, 0.…
-$ x7     <dbl> 3.391304, 3.782609, 3.260870, 3.000000, 3.695652, 4.34782…
-$ x8     <dbl> 5.75, 6.25, 3.90, 5.30, 6.30, 6.65, 6.20, 5.15, 4.65, 4.5…
-$ x9     <dbl> 6.361111, 7.916667, 4.416667, 4.861111, 5.916667, 7.50000…
+$ id     <int> 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, ...
+$ sex    <int> 1, 2, 2, 1, 2, 2, 1, 2, 2, 2, 1, 1, 2, 2, 1, 2, 2, 1, 2...
+$ ageyr  <int> 13, 13, 13, 13, 12, 14, 12, 12, 13, 12, 12, 12, 12, 12,...
+$ agemo  <int> 1, 7, 1, 2, 2, 1, 1, 2, 0, 5, 2, 11, 7, 8, 6, 1, 11, 5,...
+$ school <fct> Pasteur, Pasteur, Pasteur, Pasteur, Pasteur, Pasteur, P...
+$ grade  <int> 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7...
+$ x1     <dbl> 3.333333, 5.333333, 4.500000, 5.333333, 4.833333, 5.333...
+$ x2     <dbl> 7.75, 5.25, 5.25, 7.75, 4.75, 5.00, 6.00, 6.25, 5.75, 5...
+$ x3     <dbl> 0.375, 2.125, 1.875, 3.000, 0.875, 2.250, 1.000, 1.875,...
+$ x4     <dbl> 2.333333, 1.666667, 1.000000, 2.666667, 2.666667, 1.000...
+$ x5     <dbl> 5.75, 3.00, 1.75, 4.50, 4.00, 3.00, 6.00, 4.25, 5.75, 5...
+$ x6     <dbl> 1.2857143, 1.2857143, 0.4285714, 2.4285714, 2.5714286, ...
+$ x7     <dbl> 3.391304, 3.782609, 3.260870, 3.000000, 3.695652, 4.347...
+$ x8     <dbl> 5.75, 6.25, 3.90, 5.30, 6.30, 6.65, 6.20, 5.15, 4.65, 4...
+$ x9     <dbl> 6.361111, 7.916667, 4.416667, 4.861111, 5.916667, 7.500...
 ```
 
 As noted above, to define models in `lavaan` you must specify the relationships
@@ -539,7 +536,7 @@ you an opportunity to check you have specified your model correctly.
 semPlot::semPaths(hz.fit)
 ```
 
-<img src="cfa-sem_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+![](cfa-sem_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
 
 And for 'final' models we might want to overplot model parameter estimates (in
 this case, standardised):
@@ -551,7 +548,7 @@ this case, standardised):
 semPlot::semPaths(hz.fit, "std")
 ```
 
-<img src="cfa-sem_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+![](cfa-sem_files/figure-latex/unnamed-chunk-19-1.pdf)<!-- --> 
 
 ## CFA model fit {- #model-fit}
 
@@ -762,159 +759,222 @@ measures of attitudes, social norms and percieved behavioural control.
 tpb.df %>% psych::describe(fast=T)
 ```
 
-<!--html_preserve--><table class="huxtable" style="border-collapse: collapse; margin-bottom: 2em; margin-top: 2em; width: 100%; margin-left: 0%; margin-right: auto;  ">
-<col><col><col><col><col><col><col><col><tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0.4pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">vars</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">n</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">mean</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">sd</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">min</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">max</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">range</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt; font-weight: bold;">se</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">1</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">469</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">-0.00539</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">1.61</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">-5.99</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">4.78</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">10.8&nbsp;</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">0.0745</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt;">2</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">459</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">0.117&nbsp;&nbsp;</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">1.22</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">-3.17</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">4.18</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">7.35</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;">0.057&nbsp;</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">3</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">487</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">-0.001&nbsp;&nbsp;</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">1.08</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">-3.22</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">3.13</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">6.35</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">0.0487</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt;">4</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">487</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">0.078&nbsp;&nbsp;</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">1.53</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">-5.04</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">5.43</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">10.5&nbsp;</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;">0.0695</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">5</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">487</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">0.0376&nbsp;</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">1.22</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">-3.76</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">3.61</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">7.37</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">0.0551</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt;">6</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">487</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">0.00863</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">1.11</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">-3.21</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">3.11</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">6.33</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;">0.0501</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">7</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">471</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">0.0261&nbsp;</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">1.1&nbsp;</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">-2.94</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">3.14</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">6.08</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">0.0506</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt;">8</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">487</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">-0.00329</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">1.35</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">-4.13</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">4.03</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">8.16</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;">0.061&nbsp;</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">9</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">487</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">-0.0865&nbsp;</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">1.31</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">-4.86</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">4.08</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">8.94</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">0.0593</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt;">10</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">487</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">-0.00563</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">1.19</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">-3.12</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">3.34</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">6.46</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;">0.0537</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">11</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">487</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">-0.0863&nbsp;</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">1.06</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">-3.23</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">3.34</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">6.57</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">0.0481</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt;">12</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt;">487</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">-0.0663&nbsp;</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">1.16</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">-4.11</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">3.5&nbsp;</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt;">7.61</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt;">0.0525</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">13</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">469</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">10.1&nbsp;&nbsp;&nbsp;&nbsp;</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">2.55</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">1.83</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">16.7&nbsp;</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">14.9&nbsp;</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt; padding: 4pt 4pt 4pt 4pt; background-color: rgb(242, 242, 242);">0.118&nbsp;</td>
-</tr>
-<tr>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0.4pt; padding: 4pt 4pt 4pt 4pt;">14</td>
-<td style="vertical-align: top; text-align: right; white-space: nowrap; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">487</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">80.2&nbsp;&nbsp;&nbsp;&nbsp;</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">18.8&nbsp;</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">15&nbsp;&nbsp;&nbsp;</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">138&nbsp;&nbsp;&nbsp;</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">123&nbsp;&nbsp;&nbsp;</td>
-<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0.4pt 0pt; padding: 4pt 4pt 4pt 4pt;">0.851&nbsp;</td>
-</tr>
-</table>
-<!--/html_preserve-->
+```{=latex}
+ 
+  \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
+  \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
+  \providecommand{\huxtpad}[1]{\rule{0pt}{\baselineskip+#1}}
+  \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
+
+\begin{table}[h]
+\begin{raggedright}
+\begin{threeparttable}
+\begin{tabularx}{1\textwidth}{p{0.125\textwidth} p{0.125\textwidth} p{0.125\textwidth} p{0.125\textwidth} p{0.125\textwidth} p{0.125\textwidth} p{0.125\textwidth} p{0.125\textwidth}}
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft \textbf{vars}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft \textbf{n}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft \textbf{mean}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft \textbf{sd}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft \textbf{min}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft \textbf{max}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft \textbf{range}\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0.4}}}{\huxtpad{4pt}\raggedleft \textbf{se}\huxbpad{4pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 1\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 469\huxbpad{4pt}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft -0.00539\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 1.61\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft -5.99\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 4.78\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 10.8~\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 0.0745\huxbpad{4pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 2\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 459\huxbpad{4pt}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 0.117~~\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 1.22\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft -3.17\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 4.18\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 7.35\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0.4}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 0.057~\huxbpad{4pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 3\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 487\huxbpad{4pt}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft -0.001~~\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 1.08\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft -3.22\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 3.13\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 6.35\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 0.0487\huxbpad{4pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 4\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 487\huxbpad{4pt}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 0.078~~\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 1.53\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft -5.04\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 5.43\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 10.5~\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0.4}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 0.0695\huxbpad{4pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 5\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 487\huxbpad{4pt}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 0.0376~\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 1.22\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft -3.76\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 3.61\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 7.37\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 0.0551\huxbpad{4pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 6\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 487\huxbpad{4pt}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 0.00863\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 1.11\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft -3.21\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 3.11\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 6.33\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0.4}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 0.0501\huxbpad{4pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 7\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 471\huxbpad{4pt}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 0.0261~\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 1.1~\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft -2.94\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 3.14\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 6.08\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 0.0506\huxbpad{4pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 8\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 487\huxbpad{4pt}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft -0.00329\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 1.35\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft -4.13\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 4.03\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 8.16\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0.4}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 0.061~\huxbpad{4pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 9\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 487\huxbpad{4pt}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft -0.0865~\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 1.31\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft -4.86\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 4.08\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 8.94\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 0.0593\huxbpad{4pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 10\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 487\huxbpad{4pt}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft -0.00563\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 1.19\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft -3.12\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 3.34\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 6.46\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0.4}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 0.0537\huxbpad{4pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 11\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 487\huxbpad{4pt}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft -0.0863~\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 1.06\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft -3.23\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 3.34\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 6.57\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 0.0481\huxbpad{4pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 12\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 487\huxbpad{4pt}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft -0.0663~\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 1.16\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft -4.11\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 3.5~\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 7.61\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0.4}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 0.0525\huxbpad{4pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 13\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\huxtpad{4pt}\raggedleft 469\huxbpad{4pt}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 10.1~~~~\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 2.55\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 1.83\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 16.7~\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 14.9~\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0.4}}}{\cellcolor[RGB]{242, 242, 242}\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 0.118~\huxbpad{4pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}|>{\huxb{0, 0, 0}{0.4}}|}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{0.4}}r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 14\huxbpad{4pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{4pt}\raggedleft 487\huxbpad{4pt}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 80.2~~~~\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 18.8~\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 15~~~\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 138~~~\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 123~~~\huxbpad{4pt}}} &
+\multicolumn{1}{p{0.125\textwidth}!{\huxvb{0, 0, 0}{0.4}}}{\parbox[b]{0.125\textwidth-4pt-4pt}{\huxtpad{4pt}\raggedleft 0.851~\huxbpad{4pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
+\arrayrulecolor{black}
+\end{tabularx}\end{threeparttable}
+\par\end{raggedright}
+
+\end{table}
+ 
+```
 
 There were some missing data, but nothing to suggest a systematic pattern. For
 the moment we continue with standard methods:
@@ -924,7 +984,7 @@ the moment we continue with standard methods:
 mice::md.pattern(tpb.df)
 ```
 
-<img src="cfa-sem_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+![](cfa-sem_files/figure-latex/unnamed-chunk-26-1.pdf)<!-- --> 
 
 ```
     a3 sn1 sn2 sn3 pc1 pc2 pc3 pc4 pc5 exercise sn4 a1 intention a2   
@@ -1219,7 +1279,7 @@ parameter itself:
 semPlot::semPaths(sem.mod.fit, what='std', residuals=F)
 ```
 
-<img src="cfa-sem_files/figure-html/unnamed-chunk-36-1.png" width="672" />
+![](cfa-sem_files/figure-latex/unnamed-chunk-36-1.pdf)<!-- --> 
 
 For more information on reporting SEM however, see @schreiber2006reporting.
 

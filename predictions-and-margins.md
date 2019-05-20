@@ -49,10 +49,7 @@ model:
 
 And as before, we might plot these data:
 
-<div class="figure">
-<img src="predictions-and-margins_files/figure-html/unnamed-chunk-4-1.png" alt="Point and line plot of injury severity by age and gender." width="672" />
-<p class="caption">(\#fig:unnamed-chunk-4)Point and line plot of injury severity by age and gender.</p>
-</div>
+![(\#fig:unnamed-chunk-4)Point and line plot of injury severity by age and gender.](predictions-and-margins_files/figure-latex/unnamed-chunk-4-1.pdf) 
 
 This plot uses the raw data, but these points could equally have been estimated
 from a statistical model which adjusted for other predictors.
@@ -91,7 +88,7 @@ margins.plot <- inter.df %>%
 margins.plot
 ```
 
-<img src="predictions-and-margins_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](predictions-and-margins_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
 
 As before, these differences use the raw data, but _could_ have been calculated
 from a statistical model. In the section below we do this, making predictions
@@ -116,7 +113,7 @@ injuries %>%
   scale_color_discrete(name="")
 ```
 
-<img src="predictions-and-margins_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+![](predictions-and-margins_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
 
 But to make predictions from this continuous data we need to fit a line through
 the points (i.e. run a model). We can do this graphically by calling
@@ -131,10 +128,7 @@ injuries %>%
   scale_color_discrete(name="")
 ```
 
-<div class="figure">
-<img src="predictions-and-margins_files/figure-html/unnamed-chunk-8-1.png" alt="Scatter plot overlaid with smooth best-fit lines" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-8)Scatter plot overlaid with smooth best-fit lines</p>
-</div>
+![(\#fig:unnamed-chunk-8)Scatter plot overlaid with smooth best-fit lines](predictions-and-margins_files/figure-latex/unnamed-chunk-8-1.pdf) 
 
 And if we are confident that the relationships between predictor and outcome are
 sufficiently _linear_, then we can ask ggplot to fit a straight line using
@@ -150,10 +144,7 @@ injuries %>%
   scale_color_discrete(name="")
 ```
 
-<div class="figure">
-<img src="predictions-and-margins_files/figure-html/unnamed-chunk-9-1.png" alt="Scatter plot overlaid with smoothed lines (dotted) and linear predictions (coloured)" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-9)Scatter plot overlaid with smoothed lines (dotted) and linear predictions (coloured)</p>
-</div>
+![(\#fig:unnamed-chunk-9)Scatter plot overlaid with smoothed lines (dotted) and linear predictions (coloured)](predictions-and-margins_files/figure-latex/unnamed-chunk-9-1.pdf) 
 
 What these plots illustrate is the steps a researcher might take _before_
 fitting a regression model. The straight lines in the final plot represent our
@@ -184,10 +175,7 @@ visualising the difference:
 gridExtra::grid.arrange(means.plot+ggtitle("Means"), margins.plot+ggtitle("Margins"), ncol=2)
 ```
 
-<div class="figure">
-<img src="predictions-and-margins_files/figure-html/unnamed-chunk-10-1.png" alt="Example of predicted means vs. margins. Note, the margin plotted in the second panel is the difference between the coloured lines in the first. A horizontal line is added at zero in panel 2 by convention." width="384" />
-<p class="caption">(\#fig:unnamed-chunk-10)Example of predicted means vs. margins. Note, the margin plotted in the second panel is the difference between the coloured lines in the first. A horizontal line is added at zero in panel 2 by convention.</p>
-</div>
+![(\#fig:unnamed-chunk-10)Example of predicted means vs. margins. Note, the margin plotted in the second panel is the difference between the coloured lines in the first. A horizontal line is added at zero in panel 2 by convention.](predictions-and-margins_files/figure-latex/unnamed-chunk-10-1.pdf) 
 
 ### Running the model {-}
 
@@ -301,14 +289,14 @@ mtcars.plus.predictions %>%
   stat_summary(geom="pointrange")
 ```
 
-<img src="predictions-and-margins_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+![](predictions-and-margins_files/figure-latex/unnamed-chunk-14-1.pdf)<!-- --> 
 
 
 ```r
 prediction.frame.plus.predictions %>% ggplot(aes(vs, fit, ymin=lwr, ymax=upr)) + geom_pointrange()
 ```
 
-<img src="predictions-and-margins_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+![](predictions-and-margins_files/figure-latex/unnamed-chunk-15-1.pdf)<!-- --> 
 
 
 ```r
@@ -390,7 +378,7 @@ summary(m2.margins) %>% as_data_frame() %>%
   geom_point() + geom_line()
 ```
 
-<img src="predictions-and-margins_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+![](predictions-and-margins_files/figure-latex/unnamed-chunk-17-1.pdf)<!-- --> 
 
 ## Predictions with continuous covariates {-}
 
